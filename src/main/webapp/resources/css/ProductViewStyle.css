@@ -1,0 +1,430 @@
+@charset "UTF-8";
+
+/* -----------초기화------------ */
+a{
+    text-decoration: none;
+    color: black;
+}
+
+#content{
+    width: 1250px;
+    margin: auto;
+    clear: both;
+}
+
+/* -----------헤더------------ */
+.main_header{
+    text-align: center;
+    height: 170px;
+    line-height: 100px;
+    padding-top: 20px;
+    /* background-color: bisque; */
+}
+
+/* -----------사이드------------ */
+/* 왼쪽사이드 */
+.aside2{
+    float:right;
+    width: 120px;
+    height: 700px;
+    position: relative;
+    top: 80px;
+    margin-right: 0px;
+    border: solid 2px #E5E8D3;
+    /* background-color: thistle; */
+    text-align: center;
+}
+
+ul.recentList{
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+    text-align: center;
+}
+
+h4.recentCnt{
+    margin: 0px;
+    text-align: center;
+    background-color: #ADBA85;
+    width: 24px;
+    height: 24px;
+    border-radius: 50px;
+    display: inline-block;
+    color: white;
+}
+
+li.recentImg{
+    height: 120px;
+    background-color: #E5E8D3;
+}
+
+.aside2 h3{
+    text-align: center;
+}
+
+ul.recentList li{
+    margin: 20px 10px;
+}
+
+.next{
+    color: #ADBA85;
+}
+
+.next:hover{
+    cursor: pointer;
+}
+
+/* -----------상품상세------------ */
+#main_section{
+    clear: both;
+}
+
+.detail{
+    width: 80%;
+    height: 500px;
+    margin: auto;
+}
+
+.detail table{
+    width: 90%;
+    height: 500px;
+    margin: auto;
+    background-color: white;
+}
+
+#proImg{
+    width: 50%;
+    border: solid 1px #E5E8D3;
+    padding: 50px;
+}
+
+#space{
+    width: 50px;
+}
+
+#proName{
+    height: 80px;
+    padding: 0px;
+}
+
+#proName p{
+    font-size: 25px;
+    padding-left: 5px;
+}
+
+.hrs{
+    margin-top: 15px;
+    border: solid 1px #E5E8D3;
+}
+
+.space2{
+    height: 1px;
+}
+
+.guide{
+    padding-left: 15px;
+    font-size: 15px;
+    color: #ccc;
+    width: 70px;
+    height: 60px;
+}
+
+#proPri{
+    font-size: 18px;
+    color: black;
+    font-weight: bold;
+}
+
+.numGuide{
+    text-align: center;
+    height: 50px;
+}
+
+.numGuide p{
+    display: inline-block;
+}
+
+#num{
+    font-size: 20px;
+    width: 60px;
+}
+
+.numB{
+    font-size: 19px;
+    font-weight: bold;
+    margin: 0px;
+    text-align: center;
+    background-color: #ADBA85;
+    width: 30px;
+    height: 30px;
+    border-radius: 50px;
+    color: white;
+}
+
+.numB:hover{
+    cursor: pointer;
+}
+
+.resultPG{
+    text-align: center;
+    width: 22%;
+    height: 20%;
+    border-left:solid 1px #E5E8D3;
+}
+
+.resultPG p{
+    margin: 0px;
+    margin-top: 1px;
+    font-weight: bold;
+    font-size: 25px;
+    margin-bottom: 5px;
+}
+
+.buyGuide{
+    text-align: center;
+}
+
+.buyGuide button:hover{
+    cursor: pointer;
+}
+
+.bBtn{
+    width: 180px;
+    height: 70px;
+    border:solid 1px #E5E8D3;
+    background-color: white;
+}
+
+#buyB{
+    background-color: #D5D9BA;
+}
+
+/* -----------상품설명------------ */
+.pro_content{
+    width: 80%;
+    margin: auto;
+    margin-top: 150px;
+    margin-bottom: 100px;
+}
+
+.content{
+    width: 80%;
+    margin: auto;
+    margin-bottom: 10px;
+    clear: both;0
+}
+
+.contentList{
+    height: 30px;
+    margin-bottom: 100px;
+}
+
+.contentList a{
+    text-decoration: none;
+    color: #E5E8D3;
+}
+
+.contentList li{
+    list-style: none;
+    float: left;
+    padding: 0px 100px;
+    margin-top: 6px;
+    border: solid 1px #ADBA85;
+    height: 50px;
+    line-height: 50px;
+    
+}
+
+#listFirst li:nth-child(1){
+    font-weight: bold;
+    border-right:none;
+    border-bottom: none;
+}
+
+#listFirst li:nth-child(1) a{
+    color: black;
+}
+
+#listSecond{
+    margin-top: 100px;
+}
+
+#listSecond li:nth-child(2){
+    font-weight: bold;
+    border-left:none;
+    border-bottom: none;
+}
+
+#listSecond li:nth-child(2) a{
+    color: black;
+}
+
+#listFirst li:nth-child(3){
+    width: 235px;
+    border-left:none;
+    border-right: none;
+    border-top:solid 1px white;
+}
+
+#listSecond li:nth-child(3){
+    width: 235px;
+    border-left:none;
+    border-right: none;
+    border-top:solid 1px white;
+}
+
+.contentList ul{
+    margin: 0px;
+    padding: 0px;
+}
+
+/* -----------리뷰------------ */
+/* 별점 */
+.starGuide{
+    width: 100%;
+    height: 160px;
+    border: solid 1px #ADBA85;
+}
+
+.RatingStar{
+    display: inline-block;
+    width: 34%;
+    height: 100%;
+    text-align: center;
+    border-right: dashed 1px #ADBA85;
+}
+
+.RatingStar h3{
+    font-size: 15px;
+    margin-bottom: 25px;
+}
+
+.RatingStar p{
+    margin-top: 15px;
+    font-size: 25px;
+}
+
+.RatingStar span{
+    color: #D5D9BA;
+}
+
+.starDetail{
+    display: block;
+    width: 65%;
+    height: 100%;
+    float: right;
+    text-align: center;
+}
+
+.inner-star::before{
+    color: #ADBA85;
+}
+
+.outer-star {
+    position: relative;
+    display: inline-block;
+    color: #CCCCCC;
+}
+
+.inner-star {
+    position: absolute;
+    top: 0;
+    width: 0%;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.outer-star::before, .inner-star::before {
+    content: '\f005 \f005 \f005 \f005 \f005';
+    font-family: 'Font Awesome 5 free';
+    font-weight: 900;
+    font-size: 40px;
+}
+
+.starContent span{
+    float: left;
+}
+
+/* 리뷰 */
+.reviewContent{
+    margin-top: 100px;
+    width: 100%;
+}
+
+.reviewContent h2{
+    text-align: right;
+    font-size: 30px;
+    padding-bottom: 20px;
+}
+.reviewContent table{
+    width: 100%;
+}
+
+.review hr{
+    border: solid 1px #E5E8D3;
+}
+
+.space2 td{
+    padding: 20px;
+}
+
+.reviewTitle{          
+    height: 70px; 
+    border-bottom: solid 1px #D5D9BA;
+    border-top: solid 1px #D5D9BA;
+    padding-left: 10px;
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+
+.reviewTitle .title{
+    margin-bottom: 8px;
+    font-size: 25px;
+}
+
+.reviewTitle .writer{
+    font-size: 20px;
+    color: #E5E8D3;
+}
+
+.reviewTitle .star{
+    margin: 0px;
+    height: 0px;
+    float:right;
+    color: #ADBA85;
+    font-size: 30px;
+    position: relative;
+    top: -50px;
+    left: -5px;
+}
+
+.reviewTitle .userStar::before{
+    font-family: 'Font Awesome 5 free';
+    font-weight: 900;
+    font-size: 30px;
+}
+
+.reviewTitle .test{
+    color: #E5E8D3;
+}
+
+.reviewTitle .date{
+    font-size: 15px;
+    color: #D5D9BA;
+    position: relative;
+    top: -72px;
+    left: -5px;
+}
+
+.reviewImg{
+    float: left;
+    width: 30%;
+    height: 300px;
+    border:solid 1px #ADBA85;
+    margin-right: 20px;
+    margin-top: 20px;
+}
+
+.reviewTitle:hover{
+    cursor: pointer;
+}

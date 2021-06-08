@@ -36,4 +36,47 @@ public class HomeController {
 		return "header";
 	}
 	
+	
+	//TODO 페이지 확인용 ========================================== 나중에 기능코드후 삭제
+	@RequestMapping(value = "/product", method = RequestMethod.GET)
+	public String home2(Locale locale, Model model) {
+		logger.info("Welcome home! The client locale is {}.", locale);
+		
+		Date date = new Date();
+		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
+		
+		String formattedDate = dateFormat.format(date);
+		
+		model.addAttribute("serverTime", formattedDate );
+		
+		return "Product/ProductList";
+	}
+	
+	@RequestMapping(value = "/productView", method = RequestMethod.GET)
+	public String home3(Locale locale, Model model) {
+		logger.info("Welcome home! The client locale is {}.", locale);
+		
+		Date date = new Date();
+		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
+		
+		String formattedDate = dateFormat.format(date);
+		
+		model.addAttribute("serverTime", formattedDate );
+		
+		return "Product/ProductView";
+	}
+	
+	@RequestMapping(value = "/cart", method = RequestMethod.GET)
+	public String home4(Locale locale, Model model) {
+		logger.info("Welcome home! The client locale is {}.", locale);
+		
+		Date date = new Date();
+		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
+		
+		String formattedDate = dateFormat.format(date);
+		
+		model.addAttribute("serverTime", formattedDate );
+		
+		return "Product/Cart";
+	}
 }

@@ -1,0 +1,190 @@
+@charset "UTF-8";
+
+/* -----------초기화------------ */
+#content{
+    width: 1250px;
+    margin: auto;
+    clear: both;
+}
+
+/* -----------헤더------------ */
+.main_header{
+    text-align: center;
+    height: 130px;
+    line-height: 100px;
+    padding-top: 20px;
+}
+
+/* -----------메인------------ */
+/* -----------체크박스------------ */
+.cart{
+    width: 80%;
+    height: 100%;
+    margin: auto;
+    margin-bottom: 100px;
+}
+
+.checkContain{
+    display: block;
+    width: 94%;
+    height: 35px;
+    margin: auto;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.checkContain span{
+    margin-bottom: -4px;
+}
+
+.checkContain input {   
+   opacity: 0;
+}
+
+.checkmark {
+    display: inline-block;
+    border:solid 1px #ADBA85;
+    border-radius:50px;
+    height: 20px;
+    width: 20px;
+}
+
+.checkContain:hover input ~ .checkmark,.checkContain input:checked ~ .checkmark {
+    background-color: #ADBA85;
+}
+
+.checkmark:after {
+    content: "";
+    display: none;
+}
+
+.checkContain input:checked ~ .checkmark:after {
+    display: block;
+}
+
+.checkContain .checkmark:after {
+    width: 10px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    margin-left: 3px;
+    transform: rotate(45deg);
+} 
+
+/* -----------카트리스트------------ */
+.cartList{
+    width: 100%;
+    margin: auto;
+}
+
+.cartList table{
+    width: 90%;
+    height: 100px;
+    margin: auto;
+    padding: 10px;
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.prolist{
+    border: solid 1px #ccc;
+}
+
+.proCheck{
+    text-align: center;
+    width: 50px;
+}
+
+.proCheck span{
+    position: relative;
+    left: -21px;
+    top: -110px;
+}
+
+.space{
+    width: 40px;
+}
+
+.proImg{
+    width: 30%;
+    height: 170px;
+    border: solid 1px #ADBA85;
+}
+
+.proName{
+    height: 50px;
+    border-bottom: solid 1px #ADBA85;
+}
+
+.proName p{
+    font-size: 20px;
+    padding-left: 5px;
+}
+
+.proGuide{
+    width: 28%;
+    text-align: right;
+    color: #ccc;
+}
+
+.pro{
+    text-align: left;
+    padding-left: 30px;
+}
+
+.proPri{
+    height: 60px;
+}
+
+.info{
+    color: #ccc;
+}
+
+.price{
+    margin-top: -10px;
+    font-size: 25px;
+}
+
+#delivContent{
+    margin-top: -15px;
+    margin-bottom: 25px;
+}
+
+
+#allPrice{
+    font-size: 30px;
+    font-weight: bold;
+}
+
+#plus{
+    display: inline-block;
+    font-size: 25px;
+    margin-top: -20px;
+    margin-bottom: 0px;
+    width: 40px;
+    height: 40px;
+    color: #ADBA85;
+    border: solid 1px #ADBA85;
+    border-radius: 50px;
+}
+
+.buyBG{
+    height: 100px;
+}
+
+.infoBtn{
+    width: 100%;
+    height: 85px;
+    border:solid 1px #E5E8D3;
+    background-color: white;
+    font-size: 20px;
+}
+
+#allBuy{
+    background-color: #D5D9BA;
+    font-weight: bold;
+}
+
+.infoBtn:hover{
+    cursor: pointer;
+}
