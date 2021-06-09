@@ -7,7 +7,7 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<title>Ùíì¤×ù Diary</title>
+<title>ç„¡ä»¥æž— Diary</title>
 <link href="${path}/resources/css/DiaryStyle.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/jejumyeongjo.css"/>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -16,23 +16,23 @@
 <div class="bgdiv">
 	<h3 class="title">diary</h3>
 	<br>
-	<button type="button" class="dwirte">ÀÏ±â ¾²±â</button>
+	<button type="button" class="dwirte">ì¼ê¸° ì“°ê¸°</button>
 	<br>
 	<div class="dback">
 			<div class="ddiary">
 				<table class="tdiary">
 					<tr class="ttr idtr">
-						<td class="writeid idtd" colspan="2">¾ÆÀÌµð</td>
+						<td class="writeid idtd" colspan="2">ì•„ì´ë””</td>
 					</tr>
 					<tr class="ttr imgtr">
-						<td class="diaryimg" colspan="2">ÀÌ¹ÌÁö</td>
+						<td class="diaryimg" colspan="2">ì´ë¯¸ì§€</td>
 					</tr>
 					<tr class="ttr liketr">
-						<td class="like liketd"><img src="${path }/resources/img/ÁÁ¾Æ¿ä´©¸£±âÀü±×·¹ÀÌ.png" class="like"></td>
-						<td class="liketdcnt">ÁÁ¾Æ¿ä °³</td>
+						<td class="like liketd"><img src="${path }/resources/img/ì¢‹ì•„ìš”ëˆ„ë¥´ê¸°ì „ê·¸ë ˆì´.png" class="like"></td>
+						<td class="liketdcnt">ì¢‹ì•„ìš” ê°œ</td>
 					</tr>
 					<tr class="ttr contexttd">
-						<td class="dcontext" colspan="2">³»¿ë</td>
+						<td class="dcontext" colspan="2">ë‚´ìš©</td>
 					</tr>
 				</table>
 			</div>
