@@ -7,6 +7,8 @@
 <head>
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/earlyaccess/jejumyeongjo.css" />
+<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/resources/css/login.css">
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
@@ -128,12 +130,33 @@ a {
 	<div id="fullmain">
 		<div id="main">
 			<!-- header top -->
+
 			<div id="mainTop">
 				<a href="#" class="top">cart</a> <a href="#" class="top">my</a> <a
-					href="#" class="top">login</a> <a href="#" class="top">join</a>
+					href="#" class="top" class="header-btn button" id="loginbtn">login</a>
+				<a href="<%=request.getContextPath()%>/join" class="top">join</a>
 			</div>
 
 
+			<!-- 로그인 모달창 -->
+			<div class="loginmodal">
+				<div class="form">
+					<span class=close>X</span>
+					<p class="pabouttitle">LOGIN</p>
+					<br>
+					<span class="smsg">-</span><br>
+					<br>
+					<form class="login-form" id="frm">
+						<input type="text" placeholder="id" name="id" /> <input
+							type="password" placeholder="password" name="passwd" /> <br>
+						<button class="btnsearch" id="btnLogin">login</button>
+						<p class="message">
+							<a href="<%=request.getContextPath()%>/page/member/searchIdNPw.jsp">ID/PW찾기</a>		
+						</p>
+					</form>
+				</div>
+			</div>
+			<!-- 모달 끝! -->
 
 			<!--  logo -->
 			<!--  logo 이미지 넣기 -->
@@ -171,8 +194,37 @@ a {
 
 	</div>
 
-	<script type="text/javascript">
-		
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script>
+		$(function() {
+			$("#loginbtn").click(login);
+			$(".close").click(loginclose);
+			$("#amyPage").click(function() {
+				location.href = '#';
+			});
+
+			function login() {
+				$(".loginmodal").css("display", "block");
+				$(".form").css("display", "block");
+			}
+			;
+
+			function loginclose() {
+				$(".loginmodal").css("display", "none");
+			}
+			;
+
+			$("#btnLogin").click(function() {
+				any = 1;
+				var frm = document.getElementById("frm");
+				frm.action = "#";
+				frm.method = "post";
+				frm.submit();
+			});
+
+		});
 	</script>
+
+
 </body>
 </html>

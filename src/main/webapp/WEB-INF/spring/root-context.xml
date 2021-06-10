@@ -50,6 +50,7 @@
 		<aop:advisor id="transactionAdvisor"
 			pointcut-ref="daoMethod" advice-ref="txAdvice" />
 	</aop:config>
+	
 
 
 
