@@ -1,4 +1,4 @@
-package plant.lab.com;
+package com.plant.lab;
 
 import java.text.DateFormat;
 import java.util.Date;
