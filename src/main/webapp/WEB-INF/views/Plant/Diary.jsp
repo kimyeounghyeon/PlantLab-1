@@ -13,8 +13,9 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
+<jsp:include page="../header.jsp"></jsp:include>
 <div class="bgdiv">
-	<h3 class="title">diary</h3>
+	<h3 class="subtitle">diary</h3>
 	<br>
 	<button type="button" class="dwirte">일기 쓰기</button>
 	<br>
@@ -61,7 +62,7 @@
 			});
 		
 		$(".dwirte").click(function(){
-			location.href="writediary";
+			location.href="../writediary";
 		});
 		
 		});

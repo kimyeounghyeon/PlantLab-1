@@ -10,11 +10,12 @@
    }
    
 .bgdiv {
+	clear : both;
 	width : 1250px;
 	margin: auto;
 }
 
-h3 {
+.subtitle {
 	text-align : center;
 	font-size : 20pt;
 }
@@ -42,10 +43,15 @@ h3 {
 	margin-left : 100px;
 }
 
-tr td {
+.tdiary td {
+	padding : 8px;
+}
+
+.ttr{
 	border : 1px solid gray;
 	padding : 8px;
 }
+
 
 .idtr {
 	width : 100%;
