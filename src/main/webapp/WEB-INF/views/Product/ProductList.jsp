@@ -13,6 +13,7 @@
 </head>
 
 <body>
+	<jsp:include page="header.jsp"></jsp:include>
     <div id="content" class="contents">
 		<section id="main_section">
             <!-- Store 제목 -->

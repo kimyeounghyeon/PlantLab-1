@@ -4,11 +4,27 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/jejumyeongjo.css"/>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
 
 <style type="text/css">
+
+.Tab:hover{
+color:#969592;
+}
+
+
+
+
+*{
+   font-family: 'Jeju Myeongjo';
+
+   color : #625b54;
+   line-height: 30px;
+   
+   }
 #fullmain {
 	width: 1280px;
 	margin: 0 auto;
@@ -50,6 +66,7 @@ a {
 .top{
 margin-right: 0;
 margin-left: 30px;
+font-size: 14px;
 
 }
 #logo{
@@ -78,12 +95,14 @@ clear: both;
 	list-style: none;
 	display: inline-block;
 	margin-left: 80px;
-	font-size: 25px;
+	font-size: 18px;
 	position: relative;
 	
 
 
 }
+
+
 
 #subtab{
     margin:0;
@@ -92,7 +111,7 @@ clear: both;
  	text-align: -webkit-match-parent;
 	list-style: none; 
 	position: relative;
-	font-size: 25px;
+	font-size: 18px;
 	 display: none; 
 	 z-index: 1;
 }
@@ -103,7 +122,7 @@ clear: both;
     padding-bottom:10px;
    text-align: center;
 	list-style: none; 
-	font-size: 25px;
+	font-size: 20px;
 	position: relative;
 	margin:0;
 	z-index: 1;
@@ -111,12 +130,15 @@ clear: both;
  }
 
 
-
 #plant:hover #subtab{
 display: block;
 }  
 
 
+
+.sub:hover{
+color:#969592;
+}
 
 </style>
 
@@ -145,15 +167,15 @@ display: block;
 
 			<!-- header의 tab 버튼 -->
 			<div id="tab">
-				<div class="tablinks"  id="plant" style="width: 90px; text-align: center;"><a href="#">Plant</a>
+				<div class="tablinks"  id="plant" style="width: 90px; text-align: center;"><a href="#" class="Tab">Plant</a>
 					<div id="subtab">
 				     <a href="#" id="subtabM" class="sub">Mission</a> 
 					 <a href="#" class="sub">Diary</a>
 				    </div>
 				</div>
-				<div class="tablinks"><a href="#">Class</a></div>
-				<div class="tablinks"><a href="#">Event</a></div>
-				<div class="tablinks"><a href="#">Store</a></div>
+				<div class="tablinks"><a href="#" class="Tab">Class</a></div>
+				<div class="tablinks"><a href="#" class="Tab">Event</a></div>
+				<div class="tablinks"><a href="#" class="Tab">Store</a></div>
 				</div>	
 			</div>
 			
