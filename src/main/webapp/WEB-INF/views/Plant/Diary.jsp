@@ -28,7 +28,7 @@
 						<td class="diaryimg" colspan="2">이미지</td>
 					</tr>
 					<tr class="ttr liketr">
-						<td class="like liketd"><img src="${path }/resources/img/좋아요누르기전그레이.png" class="like"></td>
+						<td class="liketd"><img src="${path }/resources/img/좋아요누르기전그레이.png" class="like"><img src="${path }/resources/img/색변경좋아요.png" class="like2"></td>
 						<td class="liketdcnt">좋아요 개</td>
 					</tr>
 					<tr class="ttr contexttd">
@@ -38,5 +38,34 @@
 			</div>
 	</div>
 </div>
+
+
+
+
+<script>
+	$(function(){
+		$(".like2").css("display", "none");
+		$(".liketd").addClass("show");
+		$(".liketd").click(function(){
+			if($(this).hasClass("show")) {
+				$(".like2").css("display", "block");
+				$(".like").css("display", "none");
+				$(this).removeClass("show");
+				console.log("show 클래스 있다");
+			} else if(!$(this).hasClass("show")) {
+				console.log("show 클래스 없다");
+				$(".like2").css("display", "none");
+				$(".like").css("display", "block");
+				$(".liketd").addClass("show");
+				}
+			});
+		
+		$(".dwirte").click(function(){
+			location.href="writediary";
+		});
+		
+		});
+
+</script>
 </body>
 </html>

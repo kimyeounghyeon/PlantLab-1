@@ -93,4 +93,8 @@ public class HomeController {
 		
 		return "Plant/Diary";
 	}
+	@RequestMapping(value = "/writediary", method = RequestMethod.GET)
+	public String home6(Locale locale, Model model) {
+		return "Plant/Writediary";
+	}
 }

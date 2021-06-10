@@ -72,13 +72,30 @@ tr td {
 	vertical-align: middle;
 }
 
+.like2 {
+	width : 30px;
+	height: 30px;
+	vertical-align: middle;
+	margin: 0px;
+}
+
+.like:hover {
+	cursor:pointer;
+	}
+	
+.like2:hover {
+	cursor:pointer;
+	}
+
 .liketd {
 	margin-top : auto;
 	border-right: none;
+	width: 30px;
 }
 
 .liketdcnt {
 	border-left : none;
+	padding: 0px;
 }
 
 
