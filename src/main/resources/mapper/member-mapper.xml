@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="Member">
+	<resultMap type="MemberVO" id="MemberMap">
+		<result column="member_id" property="memberId"/>
+		<result column="member_name" property="memberName"/>
+		<result column="member_pwd" property="memberPwd"/>
+	</resultMap>
+	
+<!-- 	<resultMap type="MemberVO" id="MemberCount">
+		<result column="count" property="count"/>
+	</resultMap> -->
+
+	<select id="countMember" resultType="MemberVO">
+		select count(*) as count from member 
+	</select>
+	
+	<select id="maxMemberId" resultType="string">
+		select nvl(max(member_id), 1) from member 
+	</select>
+	
+	<select id="getMemberName" parameterType="string" resultType="string">
+		select member_name from member where member_id=#{memberId}
+	</select>
+	
+	<select id="searchMember2" parameterType="MemberVO" resultType="MemberVO">
+		select member_id as memberId, member_name as memberName from member where id=#{memberId}
+	</select>
+	
+	<select id="searchMember" parameterType="MemberVO" resultMap="MemberMap">
+		select member_id, member_name from member where member_id=#{memberId}
+	</select>
+
+	<insert id="insertMember" parameterType="MemberVO" statementType="PREPARED">
+		insert into member values (#{memberId}, #{memberPwd}, #{memberName})
+	</insert>
+
+</mapper>
