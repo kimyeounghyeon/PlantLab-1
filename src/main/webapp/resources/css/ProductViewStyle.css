@@ -1,6 +1,11 @@
 @charset "UTF-8";
 
 /* -----------초기화------------ */
+
+*{
+    font-family: 'YESMyoungjo-Regular';
+}
+
 a{
     text-decoration: none;
     color: black;
@@ -11,6 +16,7 @@ a{
     margin: auto;
     clear: both;
 }
+
 
 /* -----------헤더------------ */
 .main_header{
@@ -23,55 +29,29 @@ a{
 
 /* -----------사이드------------ */
 /* 왼쪽사이드 */
-.aside2{
-    float:right;
-    width: 120px;
-    height: 700px;
+.aside1{
+    float:left;
+    width: 110px;
+    height: 250px;
     position: relative;
-    top: 80px;
-    margin-right: 0px;
-    border: solid 2px #E5E8D3;
-    /* background-color: thistle; */
-    text-align: center;
+    top: 25.5px;
+    margin-right: 15px;
 }
 
-ul.recentList{
+.aside1 hr{
+    border: solid 1px #625b54;
+    margin-top: -5px;
+}
+
+ul.cateList{
     list-style: none;
-    margin: 0px;
+    margin: 5px;
     padding: 0px;
-    text-align: center;
 }
 
-h4.recentCnt{
-    margin: 0px;
-    text-align: center;
-    background-color: #ADBA85;
-    width: 24px;
-    height: 24px;
-    border-radius: 50px;
-    display: inline-block;
-    color: white;
-}
-
-li.recentImg{
-    height: 120px;
-    background-color: #E5E8D3;
-}
-
-.aside2 h3{
-    text-align: center;
-}
-
-ul.recentList li{
-    margin: 20px 10px;
-}
-
-.next{
+ul.cateList li a:hover{
+    font-weight: bold;
     color: #ADBA85;
-}
-
-.next:hover{
-    cursor: pointer;
 }
 
 /* -----------상품상세------------ */
@@ -94,8 +74,10 @@ ul.recentList li{
 
 #proImg{
     width: 50%;
-    border: solid 1px #E5E8D3;
-    padding: 50px;
+}
+
+#proImg img{
+    width: 100%;
 }
 
 #space{
@@ -103,6 +85,7 @@ ul.recentList li{
 }
 
 #proName{
+    text-align: center;
     height: 80px;
     padding: 0px;
 }
@@ -114,7 +97,7 @@ ul.recentList li{
 
 .hrs{
     margin-top: 15px;
-    border: solid 1px #E5E8D3;
+    border: solid 1px #F3EFEC;
 }
 
 .space2{
@@ -145,12 +128,12 @@ ul.recentList li{
 }
 
 #num{
-    font-size: 20px;
+    font-size: 25px;
     width: 60px;
 }
 
 .numB{
-    font-size: 19px;
+    font-size: 20px;
     font-weight: bold;
     margin: 0px;
     text-align: center;
@@ -159,6 +142,7 @@ ul.recentList li{
     height: 30px;
     border-radius: 50px;
     color: white;
+    line-height: 30px;
 }
 
 .numB:hover{
@@ -169,7 +153,7 @@ ul.recentList li{
     text-align: center;
     width: 22%;
     height: 20%;
-    border-left:solid 1px #E5E8D3;
+    border-left:solid 1px #F3EFEC;
 }
 
 .resultPG p{
@@ -191,12 +175,14 @@ ul.recentList li{
 .bBtn{
     width: 180px;
     height: 70px;
-    border:solid 1px #E5E8D3;
+    border:solid 1px #625b54;
     background-color: white;
 }
 
 #buyB{
-    background-color: #D5D9BA;
+    background-color: #625b54;
+    color: white;
+    font-weight: bold;
 }
 
 /* -----------상품설명------------ */
@@ -229,7 +215,7 @@ ul.recentList li{
     float: left;
     padding: 0px 100px;
     margin-top: 6px;
-    border: solid 1px #ADBA85;
+    border: solid 1px #625b54;
     height: 50px;
     line-height: 50px;
     
@@ -283,7 +269,7 @@ ul.recentList li{
 .starGuide{
     width: 100%;
     height: 160px;
-    border: solid 1px #ADBA85;
+    border: solid 1px #625b54;
 }
 
 .RatingStar{
@@ -313,6 +299,11 @@ ul.recentList li{
     width: 65%;
     height: 100%;
     float: right;
+}
+
+.starDetail h3{
+    font-size: 15px;
+    margin-bottom: 25px;
     text-align: center;
 }
 
@@ -339,10 +330,42 @@ ul.recentList li{
     font-family: 'Font Awesome 5 free';
     font-weight: 900;
     font-size: 40px;
+} 
+
+/* 그래프 */
+.starContent{
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    margin-top: -13px;
 }
 
-.starContent span{
+.graph{
+    display: inline-block;
+    height: 12px;
+    width: 60%;
+    margin-bottom: 8px;
+    background-color: #ccc;
+    border-radius: 40px;
+}
+
+.graph .barNum{
+    display: block;
     float: left;
+    position: relative;
+    left: -30px;
+    
+}
+
+.graph .bar{
+    display: block;
+    height: 12px;
+    margin-bottom: 10px;
+    line-height: 12px;
+    text-align: right;
+    color: white;
+    background-color: #ADBA85;
+    border-radius: 40px;
 }
 
 /* 리뷰 */
@@ -365,13 +388,13 @@ ul.recentList li{
 }
 
 .space2 td{
-    padding: 20px;
+    padding: 10px;
 }
 
 .reviewTitle{          
     height: 70px; 
-    border-bottom: solid 1px #D5D9BA;
-    border-top: solid 1px #D5D9BA;
+    border-bottom: solid 1px #ccc;
+    border-top: solid 1px #625b54;
     padding-left: 10px;
     padding-bottom: 20px;
     padding-top: 20px;
@@ -394,7 +417,7 @@ ul.recentList li{
     color: #ADBA85;
     font-size: 30px;
     position: relative;
-    top: -50px;
+    top: -40px;
     left: -5px;
 }
 
@@ -416,6 +439,11 @@ ul.recentList li{
     left: -5px;
 }
 
+.reviewCon{
+    font-size: 20px;
+    line-height: 30px;
+}
+
 .reviewImg{
     float: left;
     width: 30%;
@@ -428,3 +456,26 @@ ul.recentList li{
 .reviewTitle:hover{
     cursor: pointer;
 }
+
+
+/* -----------모달------------ */
+.modal{ 
+    width:360px;
+    height:55px; 
+    background: #D5D9BA; 
+    position: relative;
+    right: -570px;
+    top: -40px;
+    border-radius: 15px;
+    text-align: center;
+    line-height: 55px;
+    font-size: 15px;
+    display: none;
+}
+
+.modal a{
+    margin-left: 15px;
+    font-weight: bold;
+    text-decoration: underline;
+}
+   

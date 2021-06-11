@@ -1,0 +1,191 @@
+@charset "UTF-8";
+
+/* -----------초기화------------ */
+*{
+    font-family: 'Jeju Myeongjo';
+}
+
+#content{
+     width: 1250px;
+     margin: auto;
+     clear: both;
+ }
+ 
+/* -----------헤더------------ */
+.main_header{
+     text-align: center;
+     height: 130px;
+     line-height: 100px;
+     padding-top: 20px;
+     /* background-color: bisque; */
+}
+
+/* -----------메인------------ */
+/* -----------상품리스트------------ */
+.order{
+    width: 80%;
+    height: 100%;
+    margin: auto;
+    margin-bottom: 100px;
+}
+
+.orderList{
+    width: 90%;
+    height: 100px;
+    margin: auto;
+    padding: 10px;
+    text-align: center;
+    margin-bottom: 5px;
+    margin-top: 25px;
+}
+
+.proImg{
+    width: 40%;
+    height: 170px;
+}
+
+.proImg img{
+   height: 80%;
+}
+
+.orderList .space{
+    width: 20%;
+}
+
+.priceGuide{
+    line-height: 0px;
+}
+
+.orderList .guide{
+    display:inline-block;
+    font-size: 18px;
+}
+
+.orderList .proName{
+    display: inline-block;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: -80px;
+    margin-top: 20px;
+}
+
+/* -----------총구매가------------ */
+.allPriceGuide{
+    margin-top: 50px;
+    width: 100%;
+    height: 100px;
+    line-height: 100px;
+    text-align: center;
+    font-size: 15px;
+    border-top: solid 1px #625b54;
+}
+
+.allPriceGuide p{
+    position: relative;
+    left: 50px;
+    margin-top: -72px;
+    font-size: 30px;
+}
+
+.allPriceGuide p span{
+    margin-right: 50px;
+}
+
+.allPriceGuide .guide span{
+    margin-left: 5px;
+    margin-right: 85px;
+}
+
+.allPriceGuide #allPrice{
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.allPriceGuide .guide{
+    color: #625b54;
+    font-size: 18px;
+    margin-top: 0px;
+}
+
+/* -----------주문자정보------------ */
+.orderer table{
+    width: 100%;
+    height: 100px;
+    
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    border-bottom: none;
+    border-collapse: collapse;
+    border-color: #ccc;
+}
+
+.orderer input{
+    margin-left: 10px;
+    width: 30%;
+    height: 20px;
+    border: solid 1px #ccc;
+}
+.orderer input:focus{
+    outline:none;
+    border: solid 1px #ccc;
+}
+
+.orderer table td:nth-child(1){
+    background-color: #F3EFEC;
+    width: 200px;
+}
+
+.orderer table td:nth-child(1) span{
+    margin-left: 30px;
+}
+
+.orderer td{
+    padding: 10px;
+    
+    border-right: 0;
+    border-left: 0;
+}
+
+.orderer .alert{
+    margin-left: 10px;
+}
+
+.checkContain{
+    display: inline-block;
+    position: relative;
+    
+    left: 800px;
+}
+
+.order2 h3:nth-of-type(2){
+    display: inline-block;
+}
+
+#checkInfo{
+    width: 100%;
+    height: 50px;
+    text-align: center;
+    margin-top: 100px;
+}
+
+#buyB{
+    width: 100%;
+    height: 50px;
+    text-align: center;
+}
+
+#buyBtn{
+    width: 100%;
+    height: 85px;
+    border: 1px solid #ccc;
+    color: black;
+    background-color: #ccc;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#buyBtn:hover{
+    cursor: pointer;
+    background-color: #D5D9BA;
+}

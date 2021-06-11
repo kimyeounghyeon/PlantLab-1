@@ -8,6 +8,7 @@
     <meta charset="UTF-8">
     <title>無以林 Store</title>
     <link href="${path}/resources/css/ProductListStyle.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/jejumyeongjo.css"/>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
@@ -34,29 +35,7 @@
             </article>
 
             <!-- Store 최근본 상품(오른쪽바) -->
-            <article class="aside2">
-                <h3>최근 본 상품</h3>
-                <h4 class="recentCnt">5</h4>
-                <ul class="recentList">
-                    <li class="recentImg">
-                        <a href="42_finalProView.html">
-                            <img src="test.jpg"/>
-                        </a>
-                    </li>
-                    <li class="recentImg">
-                        <a href="42_finalProView.html">
-                            <img src="test.jpg"/>
-                        </a>
-                    </li>
-                    <li class="recentImg">
-                        이미지
-                    </li>
-                    <li class="recentImg">
-                        이미지
-                    </li>
-                </ul>
-                <p class="next">▼</p>
-            </article>
+            <%@include file ="RightSideBar.jsp" %>
 
 			<article class="main_article">
                 <div class="orderby">
@@ -201,17 +180,27 @@
 </body>
 
 <script>
-    $(function(){
-        var search = $('#searchInput');
-        var serachBtn = $('#serachBtn');
-
-        serachBtn.click(function(){
-            console.log(search.val());
-
-            if(search.val() == ""){
-                swal("검색어를 입력해주세요!", "", "info");
-            }
-        });
-    });
+	$(function(){
+	    var search = $('#searchInput');
+	    var serachBtn = $('#serachBtn');
+	
+	    serachBtn.click(function(){
+	        if(search.val() == ""){
+	            searchNull();
+	        }
+	    });
+	
+	    search.keyup(function(event){
+	        if(event.keyCode == 13){
+	            searchNull();
+	        }
+	    });
+	
+	    function searchNull(){
+	        if(search.val() == ""){
+	            swal("검색어를 입력해주세요!", "", "info");
+	        }
+	    };
+	});
 </script>
 </html>

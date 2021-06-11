@@ -8,9 +8,11 @@
     <meta charset="UTF-8">
     <title>無以林 cart</title>
     <link href="${path}/resources/css/CartStyle.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/jejumyeongjo.css"/>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
+	<jsp:include page="../header.jsp"></jsp:include>
     <div id="content" class="contents">
         <section id="main_section">
             <!-- Store 제목 -->
@@ -109,19 +111,9 @@
                                 </tr>
                                 <tr>
                                     <td colspan="2">
-                                       <p id="plus">+</p>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2">
                                         <p class="info">배송비</p>
                                         <p id="deliv" class="price">5000원</p>
                                         <p id="delivContent">얼마이상 구매시 배송비는 0원 <br> 단 제주도 어쩌고저쩌고</p>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2">
-                                       <p id="plus">=</p>
                                     </td>
                                 </tr>
                                 <tr>
@@ -132,15 +124,15 @@
                                 </tr>
                                 <tr>
                                     <td class="buyBG">
-                                        <button class="infoBtn" id="choseDel">선택상품 삭제</button>
+                                        <button class="infoBtn infoB" id="choseDel">선택상품 삭제</button>
                                     </td>
                                     <td>
-                                        <button class="infoBtn" id="choseBuy">선택상품 구매</button>
+                                        <button class="infoBtn infoB" id="choseBuy">선택상품 구매</button>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td colspan="2" class="buyBG"> 
-                                        <button class="infoBtn" id="allBuy">전체상품구매</button>
+                                        <button type="button" class="infoBtn" id="allBuy" onClick="location.href='44_finalOrder.html'">전체상품구매</button>
                                     </td>
                                 </tr>
                             </table>
@@ -165,6 +157,17 @@
                 prock.prop('checked',false);
             }
         });
+
+        //개별체크시
+        prock.click(function(){
+            var cnt = $("input[name=prock]:checked").length;
+            console.log
+            if(prock.length == cnt){
+                allcheck.prop('checked',true);
+            }else{
+                allcheck.prop('checked',false);
+            }
+        })
     })
 </script>
 </html>

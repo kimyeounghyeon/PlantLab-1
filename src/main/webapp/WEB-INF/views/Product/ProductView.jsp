@@ -8,6 +8,7 @@
     <meta charset="UTF-8">
     <title>無以林 : 키우기쉬운 나무</title>
     <link href="${path}/resources/css/ProductViewStyle.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/jejumyeongjo.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
@@ -16,37 +17,21 @@
         <section id="main_section">
             <!-- Store 제목 -->
             <div class="main_header">
-                <h1 class="title">無以林 식물</h1>
+                <h1 class="title"></h1>
             </div>
 
-            <!-- Store 최근본 상품(오른쪽바) -->
-            <article class="aside2">
-                <h3>최근 본 상품</h3>
-                <h4 class="recentCnt">5</h4>
-                <ul class="recentList">
-                    <li class="recentImg">
-                        이미지
-                    </li>
-                    <li class="recentImg">
-                        이미지
-                    </li>
-                    <li class="recentImg">
-                        이미지
-                    </li>
-                    <li class="recentImg">
-                        이미지
-                    </li>
-                </ul>
-                <p class="next">▼</p>
-            </article>
-
+			<!-- 라이트바 -->
+			<jsp:include page="RightSideBar.jsp"></jsp:include>
+            
             <!-- 메인 -->
             <article class="main_article">
                 <!-- 상품상세 -->
                 <div class="detail">
                     <table>  
                         <tr>
-                            <td id="proImg" rowspan="6"><img src="http://leafy.kr/data/goods/20/05/22/1000000040/1000000040_main_065.jpg"/></td>
+                            <td id="proImg" rowspan="6">
+                                <img src="test.jpg"/>
+                            </td>
                             <td id="space" rowspan="6"> </td>
                             <td id="proName" colspan="4"><p>키우기쉬운 나무</p><hr class="hrs"></td>
                         </tr>
@@ -74,10 +59,18 @@
                         <tr>
                             <td colspan="4" class="buyGuide">
                                 <button id="buyB" class="bBtn">구매하기</button>
-                                <button id="basketB" class="bBtn"><a href="43_finalCart.html">장바구니</a></button>
+                                <button id="basketB" class="bBtn">장바구니</button>
                             </td>
                         </tr>
                     </table>
+                    <div class="modal">
+                        <div class="modal_content">
+                            <p>
+                                장바구니에 상품이 담겼습니다 
+                                <span><a href="43_finalCart.html">장바구니로 이동</a></span>
+                            </p>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- 상품설명 -->
@@ -173,12 +166,23 @@
                                 </div>
     
                                 <div class="starDetail">
-                                    <h4>리뷰 총 점수</h4>
+                                    <h3>리뷰 총 점수</h3>
                                     <div class="starContent">
-                                        <span class="outBar">
-                                            <span class="bar" id="star5" style="height:60%"></span>
-                                        </span>
-                                        
+                                        <div class="graph">
+                                            <span class="barNum">5점</span><span class="bar" style="width: 70%;"></span>
+                                        </div>
+                                        <div class="graph">
+                                            <span class="barNum">4점</span><span class="bar" style="width: 30%;"></span>
+                                        </div>
+                                        <div class="graph">
+                                            <span class="barNum">3점</span><span class="bar" style="width: 0%;"></span>
+                                        </div>
+                                        <div class="graph">
+                                            <span class="barNum">2점</span><span class="bar" style="width: 0%;"></span>
+                                        </div>
+                                        <div class="graph">
+                                            <span class="barNum">1점</span><span class="bar" style="width: 0%;"></span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -204,14 +208,13 @@
                                                 </div>
                                                 <div class="reviewCon">
                                                     <p>
-                                                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-                                                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-                                                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-                                                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-                                                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-                                                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-                                                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-                                                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                                                        국무총리는 대통령을 보좌하며, 행정에 관하여 대통령의 명을 받아 행정각부를 통할한다. 국회의 회의는 공개한다. 다만, 출석의원 과반수의 찬성이 있거나 의장이 국가의 안전보장을 위하여 필요하다고 인정할 때에는 공개하지 아니할 수 있다.
+
+                                                        농업생산성의 제고와 농지의 합리적인 이용을 위하거나 불가피한 사정으로 발생하는 농지의 임대차와 위탁경영은 법률이 정하는 바에 의하여 인정된다.
+                                                        
+                                                        의원을 제명하려면 국회재적의원 3분의 2 이상의 찬성이 있어야 한다. 대통령의 임기는 5년으로 하며, 중임할 수 없다. 국민의 모든 자유와 권리는 국가안전보장·질서유지 또는 공공복리를 위하여 필요한 경우에 한하여 법률로써 제한할 수 있으며, 제한하는 경우에도 자유와 권리의 본질적인 내용을 침해할 수 없다.
+                                                        
+                                                        재산권의 행사는 공공복리에 적합하도록 하여야 한다. 위원은 정당에 가입하거나 정치에 관여할 수 없다. 국회의원은 현행범인인 경우를 제외하고는 회기중 국회의 동의없이 체포 또는 구금되지 아니한다.
                                                     </p>
                                                 </div>
                                             </td>
@@ -318,7 +321,7 @@
         });
 
         //총가격
-
+        
         //리뷰
         $('.panel').hide();
 
@@ -326,6 +329,17 @@
             e.preventDefault();
             $(this).next().fadeToggle(500);
         });
+
+        //모달
+        var basketB = $('#basketB');
+
+        $("#basketB").click(function(){ 
+            $(".modal").fadeIn(); 
+            
+            setTimeout(function() { 
+                $('.modal').fadeOut();
+            }, 3000);
+        }); 
     });
 </script>
 </html>
