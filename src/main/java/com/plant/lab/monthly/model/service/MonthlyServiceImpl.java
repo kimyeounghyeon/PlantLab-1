@@ -11,27 +11,27 @@ import com.plant.lab.monthly.model.vo.Monthly;
 public class MonthlyServiceImpl implements MonthlyService {
 	
 		@Autowired
-		private MonthlyDao mDao;
+		private MonthlyDao moDao;
 		
 		@Override
 		public int totalCount() {
-			return mDao.listCount();
+			return moDao.listCount();
 		}
 		
 		@Override
 		public Monthly selectMonthly(int monthly_no) {
-			return mDao.selectOne(monthly_no);
+			return moDao.selectOne(monthly_no);
 		}
 		@Override
 		public int insertMonthly(Monthly m) {
-			return mDao.insertMonthly(m);
+			return moDao.insertMonthly(m);
 		}
 
 		@Override
 		public Monthly updateMonthly(Monthly m) {
-			int result = mDao.updateMonthly(m);
+			int result = moDao.updateMonthly(m);
 			if (result > 0) {
-				m =mDao.selectOne(m.getMonthly_no());
+				m =moDao.selectOne(m.getMonthly_no());
 			} else {
 				m = null;
 			}
@@ -40,6 +40,6 @@ public class MonthlyServiceImpl implements MonthlyService {
 
 		@Override
 		public int deleteMonthly(int monthly_no) {
-			return mDao.deleteMonthly(monthly_no);
+			return moDao.deleteMonthly(monthly_no);
 		}
 }

@@ -11,6 +11,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
+	<jsp:include page="../header.jsp"></jsp:include>
 	<table>
 		<tr>
 			<td>${event_tb.event_title}</td>

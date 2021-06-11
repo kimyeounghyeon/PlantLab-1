@@ -9,55 +9,64 @@
     <title>無以林 event</title>
     <link href="${path}/resources/css/font.css" rel="stylesheet"/>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-</head>
-
-
 
 
 <style>
 .event{
-border : 1px solid #E0DEC3;
 margin-left: auto;
 margin-right: auto;
 }
-.eventimg{
+#eventimg{
 height : 160px;
 width : 750px;
 }
-#ing{
-width : 30px;
-}
+
 #eventsub{
-width : 500px;
+width : 430px;
 }
 #period{
-width : 200px;
+width : 220px;
 }
 #viewimg{
-width : 5px;
+width : 30px;
 }
 #view{
-width :15px;
+width :50px;
+}
+.elistdiv{
+clear: both;
+}
+#ebtn{
+border : none;
+color : white;
+background: #625b54;
+margin-left : 1140px;
 }
 </style>
 </head>
+
 <body>
-<h2 align="center">event</h2>
- 	<input type="button" value="등록하기" onclick="window.location='eventWrite.do'">
+	<jsp:include page="../header.jsp"></jsp:include>
+	<div class="elistdiv">
+	<h2 align="center">event</h2>
+	<div>
+ 	<button type="button" id="ebtn" onclick="window.location='eventWrite.do'">등록하기</button>
+ 	</div>
 	<table class="event">
         
-        <tr class="eventimg">
-           	<td> ${event_tb.img}</td>
+        <tr id="eventimg">
+           	<td colspan="4">배너사진</td>
   		</tr>
   		
-        <td>
-            <tr id="ing">진행여부</tr>
-           	<tr id="eventsub">이벤트제목</tr>
-            <tr id="period"> 진행기간</tr>
-		    <tr id="viewimg"><img src="" alt="이미지"></tr>
-		    <tr id="view">조회수</tr>
-        </td>
+        <tr>
+
+           	<td id="eventsub">이벤트제목</td>
+            <td id="period"> 진행기간</td>
+		    <td id="viewimg"><img src=""></td>
+		    <td id="view">조회수</td>
+        </tr>
         
 	</table>
+	</div>
 </body>
 </html>

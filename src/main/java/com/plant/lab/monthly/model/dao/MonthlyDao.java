@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import com.plant.lab.monthly.model.vo.Monthly;
 
-@Repository("mDao")
+@Repository("moDao")
 public class MonthlyDao {
 	   @Autowired
 	   private SqlSession sqlSession;

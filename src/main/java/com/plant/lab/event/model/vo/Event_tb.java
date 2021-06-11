@@ -11,24 +11,30 @@ public class Event_tb implements java.io.Serializable {
 	
 	
 	private int event_no;
+	private int user_no;
 	private String event_title;
 	private String event_content;
 	private Date event_date;
 	private int event_views;
-	private String banner;
 	private String start_date;
 	private String end_date;
 	@Override
 	public String toString() {
-		return "Event_tb [event_no=" + event_no + ", event_title=" + event_title + ", event_content=" + event_content
-				+ ", event_date=" + event_date + ", event_views=" + event_views + ", banner=" + banner + ", start_date="
-				+ start_date + ", end_date=" + end_date + "]";
+		return "Event_tb [event_no=" + event_no + ", user_no=" + user_no + ", event_title=" + event_title
+				+ ", event_content=" + event_content + ", event_date=" + event_date + ", event_views=" + event_views
+				+ ", start_date=" + start_date + ", end_date=" + end_date + "]";
 	}
 	public int getEvent_no() {
 		return event_no;
 	}
 	public void setEvent_no(int event_no) {
 		this.event_no = event_no;
+	}
+	public int getUser_no() {
+		return user_no;
+	}
+	public void setUser_no(int user_no) {
+		this.user_no = user_no;
 	}
 	public String getEvent_title() {
 		return event_title;
@@ -54,12 +60,6 @@ public class Event_tb implements java.io.Serializable {
 	public void setEvent_views(int event_views) {
 		this.event_views = event_views;
 	}
-	public String getBanner() {
-		return banner;
-	}
-	public void setBanner(String banner) {
-		this.banner = banner;
-	}
 	public String getStart_date() {
 		return start_date;
 	}
@@ -72,5 +72,8 @@ public class Event_tb implements java.io.Serializable {
 	public void setEnd_date(String end_date) {
 		this.end_date = end_date;
 	}
-	
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
 }

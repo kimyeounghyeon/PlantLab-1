@@ -11,15 +11,25 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-<form name="modifyForm" action="eUpdate.do" method="post" enctype="multipart/form-data">
-		<input type="hidden" name="board_num" value="${board.board_num}">
+	<jsp:include page="../header.jsp"></jsp:include>
+<form name="renewForm" action="eUpdate.do" method="post" enctype="multipart/form-data">
+		<input type="hidden" name="monthly_no" value="${monthly.monthly_no}">
+		<input type="hidden" name="monthly_img" value="${monthly.monthly_img}">
 		<table>
 			<tr>
 				<td>이름</td>
-				<td><input type="text" value="monthly_name"></td>
+				<td><input type="text" name="monthly_name" value="${monthly.monthly_name}"></td>
 			</tr>
 			<tr>
-				<td>첨부파일</td>
+				<td>이전 첨부파일</td>
+				<td>
+					 <a href="${pageContext.request.contextPath}/resources/img/${monthly.monthly_img}"
+					 download>${monthly.monthly_img}</a>
+					
+				</td>
+			</tr>
+			<tr>
+				<td>변경할 첨부파일</td>
 				<td><input type="file" name="upfile"></td>
 			</tr>
 			

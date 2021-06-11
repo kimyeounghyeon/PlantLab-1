@@ -76,7 +76,7 @@ public class MonthlyController {
 	}
 
 	@RequestMapping(value = "mInsert.do", method = RequestMethod.POST)
-	public ModelAndView monthlyInsert(Monthly m, @RequestParam(name = "monthly_img", required = false) MultipartFile report,
+	public ModelAndView monthlyInsert(Monthly m, @RequestParam(name = "upfile", required = false) MultipartFile report,
 			HttpServletRequest request, ModelAndView mv) {
 		try {
 			if (report != null && !report.equals(""))
@@ -93,7 +93,7 @@ public class MonthlyController {
 
 	@RequestMapping(value = "mUpdate.do", method = RequestMethod.POST)
 	public ModelAndView monthlyUpdate(Monthly m, @RequestParam(name = "page", defaultValue = "1") int page,
-			@RequestParam("monthly_img") MultipartFile report, HttpServletRequest request, ModelAndView mv) {
+			@RequestParam("upfile") MultipartFile report, HttpServletRequest request, ModelAndView mv) {
 		try {
 			if (report != null && !report.equals("")) {
 				removeFile(m.getMonthly_img(), request);

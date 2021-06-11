@@ -32,7 +32,7 @@ text-aglin : center;
 </style>
 </head>
 <body>
-
+	<jsp:include page="../header.jsp"></jsp:include>
 
 <div id="plantimg">${monthly_tb.monthly_img}</div>
 <br>
