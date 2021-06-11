@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="Monthly">
+ 
+  	<resultMap type="Monthly" id="resultMonthly">
+	</resultMap>
+	
+	
+	<!-- 게시글 전체 개수 조회 -->
+	<select id="listCount" resultType="int">
+		SELECT count(*) FROM Monthly_tb
+	</select>
+	
+	
+	<!-- 페이지당 게시글 조회 rowbounds-->
+	<select id="selectList" resultType="arraylist" resultMap="resultBoard">
+		SELECT * FROM Monthly_tb
+	</select>
+	
+	
+	<!-- 게시글 단일 조회 -->
+	<select id="selectOne" parameterType="string" resultType="Monthly">
+		SELECT * FROM Monthly_tb
+		WHERE monthly_no = #{monthly_no}
+	</select>
+	
+	
+	
+	<!-- 게시글 삽입 -->
+	<!-- TODO parameterType="String" 에서  board-->
+	<insert id="insertMonthly" parameterType="Monthly" flushCache="true" statementType="PREPARED">
+		INSERT INTO Monthly_tb VALUES(monthly_SEQ.NEXTVAL,#{monthly_name}, SYSDATE, #{monthly_img},
+	
+	</insert>
+	
+	
+	
+	<!-- 게시글 수정 -->
+	<update id="updateMonthly" parameterType="Monthly" flushCache="true" statementType="PREPARED">
+		UPDATE Monthly_tb 
+		SET monthly_name = #{monthly_name}, 
+		monthly_date =sysdate, 
+		monthly_img = #{monthly_img} 
+		WHERE monthly_no =#{monthly_no}
+	</update>
+	
+	
+	<!-- 게시글 삭제 -->
+	<delete id="deleteMonthly" parameterType="int" flushCache="true" statementType="PREPARED">
+		DELETE FROM Monthly_tb WHERE monthly_no = #{monthly_no}
+	</delete>
+</mapper>
