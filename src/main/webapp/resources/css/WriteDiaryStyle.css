@@ -6,3 +6,23 @@
    color : #1e1e1e;
    line-height: 30px;
    }
+   
+.wrbgdiv {
+	clear:both;
+	width : 1250px;
+	margin: auto;
+}
+
+.subtitle {
+	text-align : center;
+	font-size : 20pt;
+}
+
+.writecontent {
+	verrical-align : middle;
+	text-align : center;
+}
+
+.writetext {
+	display : inline-block;
+}

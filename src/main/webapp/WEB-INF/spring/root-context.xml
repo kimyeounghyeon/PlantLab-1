@@ -30,6 +30,7 @@
 	<bean class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg ref="sqlSession" />
 	</bean>
+	<bean id = "multipartResolver" class = "org.springframework.web.multipart.commons.CommonsMultipartResolver" />
 	<!-- Transaction 시점 등록 -->
 	<tx:advice id="txAdvice"
 		transaction-manager="transactionManager">
@@ -50,7 +51,7 @@
 		<aop:advisor id="transactionAdvisor"
 			pointcut-ref="daoMethod" advice-ref="txAdvice" />
 	</aop:config>
-	
+
 
 
 
