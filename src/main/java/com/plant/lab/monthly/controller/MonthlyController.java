@@ -19,7 +19,7 @@ import com.plant.lab.monthly.model.vo.Monthly;
 public class MonthlyController {
 	
 	@Autowired
-	private MonthlyService mService;
+	private MonthlyService moService;
 
 	public static final int LIMIT = 10;
 	@RequestMapping(value = "mlist.do", method = RequestMethod.GET)
@@ -29,7 +29,7 @@ public class MonthlyController {
 
 		try {
 			int currentPage = page; // 한 페이지당 출력할 목록 갯수
-			int listCount = mService.totalCount();
+			int listCount = moService.totalCount();
 			int maxPage = (int) ((double) listCount / LIMIT + 0.9);
 				mv.addObject("currentPage", currentPage);
 				mv.addObject("maxPage", maxPage);
@@ -48,7 +48,7 @@ public class MonthlyController {
 			@RequestParam(name = "page", defaultValue = "1") int page, ModelAndView mv) {
 		try {
 			int currentPage = page; // 한 페이지당 출력할
-			mv.addObject("monthly", mService.selectMonthly(monthly_no));
+			mv.addObject("monthly", moService.selectMonthly(monthly_no));
 			mv.addObject("currentPage", currentPage);
 			mv.setViewName("Monthly/monthlyDetail");
 		} catch (Exception e) {
@@ -61,7 +61,7 @@ public class MonthlyController {
 	@RequestMapping(value = "mRenew.do", method = RequestMethod.GET)
 	public ModelAndView monthlyDetail(@RequestParam(name = "monthly_no") int monthly_no, ModelAndView mv) {
 		try {
-			mv.addObject("monthly", mService.selectMonthly(monthly_no));
+			mv.addObject("monthly", moService.selectMonthly(monthly_no));
 			mv.setViewName("Monthly/monthlyRenew");
 		} catch (Exception e) {
 			mv.addObject("msg", e.getMessage());
@@ -82,7 +82,7 @@ public class MonthlyController {
 			if (report != null && !report.equals(""))
 				saveFile(report, request);
 			m.setMonthly_img(report.getOriginalFilename());
-			mService.insertMonthly(m);
+			moService.insertMonthly(m);
 			mv.setViewName("redirect:mlist.do");
 		} catch (Exception e) {
 			mv.addObject("msg", e.getMessage());
@@ -100,7 +100,7 @@ public class MonthlyController {
 				saveFile(report, request);
 				}
 			m.setMonthly_img(report.getOriginalFilename());
-			mv.addObject("monthly_no", mService.updateMonthly(m).getMonthly_no());
+			mv.addObject("monthly_no", moService.updateMonthly(m).getMonthly_no());
 			mv.addObject("currentPage", page);
 			mv.setViewName("redirect:mDetail.do");
 		} catch (Exception e) {
@@ -114,9 +114,9 @@ public class MonthlyController {
 	public ModelAndView boardDelete(@RequestParam(name = "monthly_no") int monthly_no,
 			@RequestParam(name = "page", defaultValue = "1") int page, HttpServletRequest request, ModelAndView mv) {
 		try {
-			Monthly m = mService.selectMonthly(monthly_no);
+			Monthly m = moService.selectMonthly(monthly_no);
 			removeFile(m.getMonthly_img(), request);
-			mService.deleteMonthly(monthly_no);
+			moService.deleteMonthly(monthly_no);
 			mv.addObject("currentPage", page);
 			mv.setViewName("redirect:mlist.do");
 		} catch (Exception e) {
