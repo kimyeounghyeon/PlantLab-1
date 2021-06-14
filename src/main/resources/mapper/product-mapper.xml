@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="Product">
+	<resultMap type="Product" id="ProductMap">
+		
+	</resultMap>
+	
+	<!-- 상품 전체 개수 조회 -->
+	<select id="listCount" resultType="int">
+		SELECT count(*) from pro_tb
+	</select>
+	
+	<!-- 페이지당 상품 조회 rowbounds 사용-->
+	<select id="selectList" resultType="arraylist" resultMap="ProductMap">
+		SELECT * FROM pro_tb
+	</select>
+	
+	<select id="searchList" parameterType="string" resultType="arraylist" resultMap="ProductMap">
+		SELECT * FROM pro_tb
+		WHERE PRO_NAME LIKE '%'|| #{keyword} ||'%' 
+		ORDER BY PRO_NO
+	</select>
+</mapper>

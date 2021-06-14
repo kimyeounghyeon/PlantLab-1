@@ -48,130 +48,67 @@
                 </div>
                 
                 <div class="search">
-                    <input type="text" id="searchInput" placeholder=" 검색어">
-                    <input type="button" value="검색" id="serachBtn">
+                    <form name="proListF">
+                   		<input type="hidden" name="page" value="${currentPage}"> 
+	                    <input type="text" id="searchInput" name="keyword" placeholder=" 검색어">
+	                    <input type="button" value="검색" id="serachBtn">
+                    </form>
                 </div>
-
+				
                 <div class="pro">
-                    <div class="proList">
-                        <ul class="list">
-                            <li class="proImg">
-                                <a href="42_finalProView.html">
-                                    <img src="test.jpg"/>
-                                </a>
-                            </li>
-                            <li class="proName"><a href="42_finalProView.html">큼직하고 시원스러운 진녹빛 잎!<br>떡갈고무나무(중대형)</a></li>
-                            <li class="proPri">112000원</li>
-                        </ul>
-                    </div>
-                    <div class="proList">
-                        <ul class="list">
-                            <li class="proImg">
-                                <a href="42_finalProView.html">
-                                    <img src="test.jpg"/>
-                                </a>
-                            </li>
-                            <li class="proName"><a href="42_finalProView.html">떡갈고무나무(중대형)</a></li>
-                            <li class="proPri">112000원</li>
-                        </ul>
-                    </div>
-                    <div class="proList">
-                        <ul class="list">
-                            <li class="proImg">
-                                <a href="42_finalProView.html">
-                                    <img src="test.jpg"/>
-                                </a>
-                            </li>
-                            <li class="proName"><a href="42_finalProView.html">떡갈고무나무(중대형)</a></li>
-                            <li class="proPri">112000원</li>
-                        </ul>
-                    </div>
-                    <div class="proList">
-                        <ul class="list">
-                            <li class="proImg">
-                                <a href="42_finalProView.html">
-                                    <img src="test.jpg"/>
-                                </a>
-                            </li>
-                            <li class="proName"><a href="42_finalProView.html">떡갈고무나무(중대형)</a></li>
-                            <li class="proPri">112000원</li>
-                        </ul>
-                    </div>
-                    <div class="proList">
-                        <ul class="list">
-                            <li class="proImg">
-                                <a href="42_finalProView.html">
-                                    <img src="test.jpg"/>
-                                </a>
-                            </li>
-                            <li class="proName"><a href="42_finalProView.html">떡갈고무나무(중대형)</a></li>
-                            <li class="proPri">112000원</li>
-                        </ul>
-                    </div>
-                    <div class="proList">
-                        <ul class="list">
-                            <li class="proImg">
-                                <a href="42_finalProView.html">
-                                    <img src="test.jpg"/>
-                                </a>
-                            </li>
-                            <li class="proName"><a href="42_finalProView.html">떡갈고무나무(중대형)</a></li>
-                            <li class="proPri">112000원</li>
-                        </ul>
-                    </div>
-                    <div class="proList">
-                        <ul class="list">
-                            <li class="proImg">
-                                <a href="42_finalProView.html">
-                                    <img src="test.jpg"/>
-                                </a>
-                            </li>
-                            <li class="proName"><a href="42_finalProView.html">떡갈고무나무(중대형)</a></li>
-                            <li class="proPri">112000원</li>
-                        </ul>
-                    </div>
-                    <div class="proList">
-                        <ul class="list">
-                            <li class="proImg">
-                                <a href="42_finalProView.html">
-                                    <img src="test.jpg"/>
-                                </a>
-                            </li>
-                            <li class="proName"><a href="42_finalProView.html">떡갈고무나무(중대형)</a></li>
-                            <li class="proPri">112000원</li>
-                        </ul>
-                    </div>
-                    <div class="proList">
-                        <ul class="list">
-                            <li class="proImg">
-                                <a href="42_finalProView.html">
-                                    <img src="test.jpg"/>
-                                </a>
-                            </li>
-                            <li class="proName"><a href="42_finalProView.html">떡갈고무나무(중대형)</a></li>
-                            <li class="proPri">112000원</li>
-                        </ul>
-                    </div>
-                    <div class="proList">
-                        <ul class="list">
-                            <li class="proImg">
-                                <a href="42_finalProView.html">
-                                    <img src="test.jpg"/>
-                                </a>
-                            </li>
-                            <li class="proName"><a href="42_finalProView.html">떡갈고무나무(중대형)</a></li>
-                            <li class="proPri">112000원</li>
-                        </ul>
-                    </div>
+                	<c:if test="${empty proList}">
+                		<div class="proList"><h2>&nbsp;상품이 존재하지 않습니다.</h2></div>
+                	</c:if>
+					<c:if test="${listCount ne 0}">
+						<c:forEach var="vo" items="${proList}" varStatus="status">
+							<div class="proList">
+		                        <ul class="list">
+		                            <li class="proImg">
+		                                <a href="${path}/productView">
+		                                    <img src="${vo.pro_image}"/>
+		                                </a>
+		                            </li>
+		                            <li class="proName"><a href="${path}/productView">${vo.pro_name}</a></li>
+		                            <li class="proPri">${vo.pro_price}</li>
+		                        </ul>
+		                    </div>
+						</c:forEach> 
+					</c:if>
                 </div>
                 
                 <div class="page">
                     <ul>
-                        <li class="now"><a href="">1</a></li>
-                        <li><a href="">2</a></li>
-                        <li><a href="">3</a></li>
-                        <li><a href="">4</a></li>
-                        <li><a href="">5</a></li>
+                    	<c:if test="${currentPage <= 1}">
+                    		<li>◀</li>
+                    	</c:if>
+                    	<c:if test="${currentPage > 1}">
+                    		<c:url var="blistST" value="${path}/product">
+								<c:param name="page" value="${currentPage-1}" />
+							</c:url>
+							<li> <a href="${blistST}">◀</a></li>
+                    	</c:if>
+                    	
+                    	<c:set var="endPage" value="${maxPage}" /> 
+						<c:forEach var="p" begin="${startPage+1}" end="${endPage}">
+							<c:if test="${p eq currentPage}">
+								<li>${p}</li>
+							</c:if>
+							<c:if test="${p ne currentPage}">
+								<c:url var="blistchk" value="blist.do">
+									<c:param name="page" value="${p}" />
+								</c:url>
+								<li><a href="${blistchk}">${p}</a></li>
+							</c:if>
+						</c:forEach> 
+						<c:if test="${currentPage >= maxPage}">
+							<li>▶</li>
+						 </c:if> 
+						<c:if test="${currentPage < maxPage}">
+							<c:url var="blistEND" value="blist.do">
+								<c:param name="page" value="${currentPage+1}" />
+							</c:url>
+							<li><a href="${blistEND}">▶</a></li>
+						</c:if>
                     </ul>
                 </div>
 			</article>
@@ -183,11 +120,10 @@
 	$(function(){
 	    var search = $('#searchInput');
 	    var serachBtn = $('#serachBtn');
-	
+		var form = $('form[name=proListF]');
+		
 	    serachBtn.click(function(){
-	        if(search.val() == ""){
-	            searchNull();
-	        }
+	       searchNull();
 	    });
 	
 	    search.keyup(function(event){
@@ -199,6 +135,10 @@
 	    function searchNull(){
 	        if(search.val() == ""){
 	            swal("검색어를 입력해주세요!", "", "info");
+	        }else{
+	        	form.method = "get"
+	        	form.action = "/product";
+	        	form.submit();
 	        }
 	    };
 	});

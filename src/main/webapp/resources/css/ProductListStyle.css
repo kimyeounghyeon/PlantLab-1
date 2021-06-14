@@ -56,9 +56,8 @@ ul.cateList li a:hover{
 .aside2{
     float:right;
     width: 120px;
-    height: 700px;
     position: relative;
-    top: 112px;
+    top: 125px;
     margin-right: 0px;
     border: solid 1px #625b54;
     /* background-color: #F3EFEC; */
