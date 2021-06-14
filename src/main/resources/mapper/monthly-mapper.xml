@@ -13,7 +13,7 @@
 	
 	
 	<!-- 페이지당 게시글 조회 rowbounds-->
-	<select id="selectList" resultType="arraylist" resultMap="resultBoard">
+	<select id="selectList" resultType="arraylist" resultMap="resultMonthly">
 		SELECT * FROM Monthly_tb
 	</select>
 	
@@ -39,7 +39,7 @@
 	<update id="updateMonthly" parameterType="Monthly" flushCache="true" statementType="PREPARED">
 		UPDATE Monthly_tb 
 		SET monthly_name = #{monthly_name}, 
-		monthly_date =sysdate, 
+		monthly_date = sysdate, 
 		monthly_img = #{monthly_img} 
 		WHERE monthly_no =#{monthly_no}
 	</update>

@@ -7,7 +7,7 @@ import com.plant.lab.monthly.model.dao.MonthlyDao;
 import com.plant.lab.monthly.model.vo.Monthly;
 
 
-@Service("mService")
+@Service("moService")
 public class MonthlyServiceImpl implements MonthlyService {
 	
 		@Autowired
