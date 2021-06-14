@@ -11,18 +11,42 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 function showInsertForm() {
-	location.href = "monthlyWrite.do";
+	location.href = "mWrite.do";
 }
 </script>
+<style>
+.mlistdiv{
+  clear: both;
+  margin-left : auto;
+  margin-right : auto;
+  text-align : center;
+  
+}
+#subtn{
+  background: #625b54;
+  color : white;
+  border : none;
+  margin-left : 1140px;
+}
+.mlisttb{
+ margin-left : auto;
+  margin-right : auto;
+  width : 850px;
+  
+}
+</style>
 </head>
 <body>
-<h2>이달의 식물</h2>
+<jsp:include page="../header.jsp"></jsp:include>
 
-<input type="button" value="등록하기" onclick="window.location='monthlyWrite.do'">
-	<table>
+<div class="mlistdiv">
+
+<h2 align="center" >이달의 식물</h2>
+<button id="subtn"type="button" onclick="window.location='mWrite.do'">등록하기</button>
+	<table class="mlisttb">
 		<tr>
 			<td>No</td>
-			<td>식물이름누르면디테일</td>
+			<td>식물이름</td>
 			<td>작성일</td>
 	
 		</tr>
@@ -37,50 +61,47 @@ function showInsertForm() {
 			<c:if test="${listCount ne 0}">
 			<c:forEach var="vo" items="${list}" varStatus="status">
 				<tr>
-					<td align="center">${status.count}</td>
-					<td align="left">
-					<a href="mDetail.do?board_num=${vo.monthly_no}&page=${currentPage}">
+					<!--  <td align="center">${status.count}</td>-->
+					<td align="center">${vo.monthly_no}</td>
+					<td align="center">
+					<a href="mDetail.do?monthly_no=${vo.monthly_no}&page=${currentPage}">
 							&nbsp;${vo.monthly_name} </a></td>
-					<td align="center">${vo.board_writer}</td>
-					<td align="center">${vo.regDate}</td>
-					<td align="center">${vo.read_count}</td>
+					<td align="center">${vo.monthly_date}</td>
 				</tr>
 			</c:forEach>
 		</c:if>
 		
-		<tr>
-			<td>${monthly_tb.monthly_no}</td>
-			<td>${monthly_tb.monthly_name}</td>
-			<td>${monthly_tb.monthly_date}</td>
-		</tr>
 		<!-- 앞 페이지 번호 처리 -->
 		<tr align="center" height="20">
-			<td colspan="5"><c:if test="${currentPage <= 1}">
- [이전]&nbsp; </c:if> <c:if test="${currentPage > 1}">
-					<c:url var="blistST" value="blist.do">
+			<td colspan=3">
+			<c:if test="${currentPage <= 1}">이전&nbsp; </c:if> 
+ 				<c:if test="${currentPage > 1}">
+					<c:url var="molistST" value="mlist.do">
 						<c:param name="page" value="${currentPage-1}" />
 					</c:url>
-					<a href="${blistST}">[이전]</a>
-				</c:if> <!-- 끝 페이지 번호 처리 --> <c:set var="endPage" value="${maxPage}" /> <c:forEach
-					var="p" begin="${startPage+1}" end="${endPage}">
+					<a href="${molistST}">[이전]</a>
+				</c:if> <!-- 끝 페이지 번호 처리 --> <c:set var="endPage" value="${maxPage}" />
+				 <c:forEach var="p" begin="${startPage+1}" end="${endPage}">
 					<c:if test="${p eq currentPage}">
-						<font color="red" size="4"><b>[${p}]</b></font>
+						${p}
 					</c:if>
-					<c:if test="${p ne currentPage}">
-						<c:url var="blistchk" value="blist.do">
+				<!-- 	<c:if test="${p ne currentPage}">
+						<c:url var="blistchk" value="mlist.do">
 							<c:param name="page" value="${p}" />
 						</c:url>
 						<a href="${blistchk}">${p}</a>
-					</c:if>
-				</c:forEach> <c:if test="${currentPage >= maxPage}">[다음] </c:if> <c:if
-					test="${currentPage < maxPage}">
-					<c:url var="blistEND" value="blist.do">
+					</c:if> 
+				</c:forEach>-->
+				
+				 <c:if test="${currentPage >= maxPage}">다음 </c:if>
+				  <c:if test="${currentPage < maxPage}">
+					<c:url var="molistEND" value="mlist.do">
 						<c:param name="page" value="${currentPage+1}" />
 					</c:url>
-					<a href="${blistEND}">[다음]</a>
+					<a href="${molistEND}">[다음]</a>
 				</c:if></td>
 		</tr>
 	</table>
-
+</div>
 </body>
 </html>
