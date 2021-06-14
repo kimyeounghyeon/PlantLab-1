@@ -9,6 +9,7 @@
     <title>無以林 : 키우기쉬운 나무</title>
     <link href="${path}/resources/css/ProductViewStyle.css" rel="stylesheet"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/jejumyeongjo.css"/>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
@@ -19,21 +20,21 @@
             <div class="main_header">
                 <h1 class="title"></h1>
             </div>
-
-			<!-- 라이트바 -->
-			<jsp:include page="RightSideBar.jsp"></jsp:include>
-            
+			
             <!-- 메인 -->
             <article class="main_article">
                 <!-- 상품상세 -->
                 <div class="detail">
+					<input type="hidden" id="pro_totalStar" value="${product.pro_totalStar}">
+					<input type="hidden" id="pro_stock" value="${product.pro_stock}">
+					
                     <table>  
                         <tr>
                             <td id="proImg" rowspan="6">
-                                <img src="test.jpg"/>
+                                <img src="${product.pro_image}"/>
                             </td>
                             <td id="space" rowspan="6"> </td>
-                            <td id="proName" colspan="4"><p>키우기쉬운 나무</p><hr class="hrs"></td>
+                            <td id="proName" colspan="4"><p>${product.pro_name}</p><hr class="hrs"></td>
                         </tr>
                         <tr>
                             <td class="guide">배송비</td>
@@ -41,7 +42,7 @@
                         </tr>
                         <tr>
                             <td class="guide">판매가</td>
-                            <td id="proPri"><span id="priceV">15000</span>원</td>
+                            <td id="proPri"><span id="priceV">${product.pro_price}</span>원</td>
                         </tr>
                         <tr>
                             <td class="space2" colspan="4"><hr class="hrs hr2"></td>
@@ -53,7 +54,7 @@
                                 <p id="add" class="numB">+</p>
                             </td>
                             <td class="resultPG" colspan="2">
-                                총합금액 <p><span>15000</span>원</p>
+                                	총합금액 <p><span>15000</span>원</p>
                             </td>
                         </tr>
                         <tr>
@@ -66,7 +67,7 @@
                     <div class="modal">
                         <div class="modal_content">
                             <p>
-                                장바구니에 상품이 담겼습니다 
+                                	장바구니에 상품이 담겼습니다 
                                 <span><a href="43_finalCart.html">장바구니로 이동</a></span>
                             </p>
                         </div>
@@ -162,7 +163,7 @@
                                           <div class='inner-star'></div>
                                         </div>
                                     </div>
-                                    <p class="starNum">4.5<span> / 5</spna></p>
+                                    <p class="starNum">${product.pro_totalStar}<span> / 5</spna></p>
                                 </div>
     
                                 <div class="starDetail">
@@ -264,9 +265,14 @@
 </body>
 
 <script>
-    ratings = {RatingScore: 4.5} 
-    totalRating = 5;
-
+	var pro_totalStar = $('#pro_totalStar').val();
+	
+	
+	console.log(pro_totalStar);
+	
+	
+	ratings = {RatingScore: pro_totalStar}
+	totalRating = 5;
     table = document.querySelector('.RatingStar');
 
     function rateIt() {
@@ -288,7 +294,8 @@
         var num = $('.numGuide #num');
         var allPrice = $('.resultPG span');
         var price = $('#priceV').text();
-        console.log(price);
+        var stock = $('#pro_stock').val();
+        
         var addB = $('#add');
         var minB = $('#min');
 
@@ -296,9 +303,13 @@
             var numVal = num.text();
             var numPri = allPrice.text();
             
-            numVal = (numVal*1)+1;
-            numPri = (numPri*1)+(price*1);
-
+            if(numVal == stock){
+            	swal("최대 "+stock+"개 까지만 가능합니다!", "현재 남은수량 : " + stock+"개", "info");
+            }else{
+            	numVal = (numVal*1)+1;
+                numPri = (numPri*1)+(price*1);
+            }
+            
             num.text(numVal);
             allPrice.text(numPri);
         });
@@ -316,8 +327,6 @@
                 num.text(numVal);
                 allPrice.text(numPri);
             }
-
-        
         });
 
         //총가격

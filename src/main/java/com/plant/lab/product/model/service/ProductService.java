@@ -15,6 +15,9 @@ public interface ProductService {
 	//특정 페이지 단위의 상품 조회
 	public List<Product> selectList(int startPage, int limit);
 	
+	//상품 상세보기
+	public Product selectOne(int pro_no);
+	
 	//상품추가
 	public int insertProduct(Product product);
 	

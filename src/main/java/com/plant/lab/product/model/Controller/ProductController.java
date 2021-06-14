@@ -1,16 +1,23 @@
 package com.plant.lab.product.model.Controller;
 
 
+import java.text.DateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.plant.lab.product.model.service.ProductService;
+import com.plant.lab.product.model.vo.Product;
 
 @Controller
 public class ProductController {
@@ -22,7 +29,7 @@ public class ProductController {
 	
 //상품출력 리스트
 	@RequestMapping(value = "/product", method = RequestMethod.GET)
-	public ModelAndView boardListService(
+	public ModelAndView productListService(
 			@RequestParam(name = "page", defaultValue = "1") int page,
 			@RequestParam(name = "keyword", required = false) String keyword, ModelAndView mv) {
 		try {
@@ -52,6 +59,24 @@ public class ProductController {
 			e.printStackTrace();
 			mv.setViewName("Product/ProductList");
 		}
+		return mv;
+	}
+	
+//상품 상세보기
+	@RequestMapping(value = "/productView", method = RequestMethod.GET)
+	public ModelAndView productDetail(ModelAndView mv,
+			Product p,
+			@RequestParam(name = "proNo") int pro_no) {
+		try {
+			logger.info("===============상품상세 페이지===============");
+			
+			mv.addObject("product",proService.selectOne(pro_no));
+			mv.setViewName("Product/ProductView");
+		}catch (Exception e) {
+			logger.info("!!!!!!상품 상세 오류!!!!!!");
+			e.printStackTrace();
+		}
+		
 		return mv;
 	}
 }

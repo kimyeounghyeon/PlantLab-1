@@ -64,12 +64,12 @@
 							<div class="proList">
 		                        <ul class="list">
 		                            <li class="proImg">
-		                                <a href="${path}/productView">
+		                                <a href="${path}/productView?proNo=${vo.pro_no}">
 		                                    <img src="${vo.pro_image}"/>
 		                                </a>
 		                            </li>
 		                            <li class="proName"><a href="${path}/productView">${vo.pro_name}</a></li>
-		                            <li class="proPri">${vo.pro_price}</li>
+		                            <li class="proPri">${vo.pro_price}원</li>
 		                        </ul>
 		                    </div>
 						</c:forEach> 

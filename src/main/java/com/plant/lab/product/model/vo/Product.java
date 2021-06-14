@@ -1,5 +1,8 @@
 package com.plant.lab.product.model.vo;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class Product {
 	private int pro_no;
 	private String pro_name;
@@ -7,9 +10,9 @@ public class Product {
 	private int pro_price;
 	private String pro_content;
 	private int pro_totalStar;
-	private int pro_cnt;
 	private int pro_stock;
 	private char pro_cate;
+	
 	public int getPro_no() {
 		return pro_no;
 	}
@@ -46,12 +49,7 @@ public class Product {
 	public void setPro_totalStar(int pro_totalStar) {
 		this.pro_totalStar = pro_totalStar;
 	}
-	public int getPro_cnt() {
-		return pro_cnt;
-	}
-	public void setPro_cnt(int pro_cnt) {
-		this.pro_cnt = pro_cnt;
-	}
+	
 	public int getPro_stock() {
 		return pro_stock;
 	}

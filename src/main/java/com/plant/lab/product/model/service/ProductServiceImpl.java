@@ -31,6 +31,13 @@ public class ProductServiceImpl implements ProductService{
 	public List<Product> selectList(int startPage, int limit) {
 		return proDao.selectList(startPage,limit);
 	}
+	
+	//상품 상세보기
+	@Override
+	public Product selectOne(int pro_no) {
+		
+		return proDao.selectOne(pro_no);
+	};
 
 	@Override
 	public int insertProduct(Product product) {

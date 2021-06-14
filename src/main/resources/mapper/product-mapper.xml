@@ -15,9 +15,16 @@
 		SELECT * FROM pro_tb
 	</select>
 	
+	<!-- 상품 검색 -->
 	<select id="searchList" parameterType="string" resultType="arraylist" resultMap="ProductMap">
 		SELECT * FROM pro_tb
 		WHERE PRO_NAME LIKE '%'|| #{keyword} ||'%' 
 		ORDER BY PRO_NO
+	</select>
+	
+	<!-- 상품 상세보기 -->
+	<select id="selectOne" parameterType="int" resultMap="ProductMap">
+		SELECT * FROM pro_tb
+		WHERE pro_no = #{pro_no} 
 	</select>
 </mapper>

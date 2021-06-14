@@ -31,6 +31,11 @@ public class ProductDAO {
 		return sqlSession.selectList("Product.selectList",null,row);
 	}
 	
+	//상품 상세보기
+	public Product selectOne(int pro_no) {
+		return sqlSession.selectOne("Product.selectOne", pro_no);
+	}
+	
 	//상품추가
 	public int insertProduct(Product product) { 
 		return 1;
