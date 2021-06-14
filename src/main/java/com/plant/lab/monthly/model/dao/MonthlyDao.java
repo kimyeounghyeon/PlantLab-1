@@ -20,7 +20,7 @@ public class MonthlyDao {
 		   }
 
 		   public int insertMonthly(Monthly m) { // 글 입력
-		      return sqlSession.insert("Monthly.insertBoard", m);
+		      return sqlSession.insert("Monthly.insertMonthly", m);
 		   }
 
 		  

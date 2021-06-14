@@ -29,7 +29,7 @@
 	<!-- 게시글 삽입 -->
 	<!-- TODO parameterType="String" 에서  board-->
 	<insert id="insertMonthly" parameterType="Monthly" flushCache="true" statementType="PREPARED">
-		INSERT INTO Monthly_tb VALUES(monthly_SEQ.NEXTVAL,#{monthly_name}, SYSDATE, #{monthly_img},
+		INSERT INTO Monthly_tb VALUES(monthly_SEQ.NEXTVAL,#{monthly_name}, SYSDATE, #{monthly_img})
 	
 	</insert>
 	
