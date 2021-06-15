@@ -2,7 +2,9 @@ package com.plant.lab.product.model.Controller;
 
 
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import org.slf4j.Logger;
@@ -16,13 +18,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.plant.lab.product.model.service.ProductContentService;
 import com.plant.lab.product.model.service.ProductService;
 import com.plant.lab.product.model.vo.Product;
+import com.plant.lab.product.model.vo.ProductContnet;
 
 @Controller
 public class ProductController {
 	@Autowired
 	private ProductService proService;
+	@Autowired
+	private ProductContentService proConService;
 	
 	private static final Logger logger = LoggerFactory.getLogger(ProductController.class);
 	public static final int LIMIT = 12;
@@ -30,12 +36,14 @@ public class ProductController {
 //상품출력 리스트
 	@RequestMapping(value = "/product", method = RequestMethod.GET)
 	public ModelAndView productListService(
+			@RequestParam(name="cate", defaultValue = "p") String cate,
+			@RequestParam(name="orderby", defaultValue = "new") String orderby,
 			@RequestParam(name = "page", defaultValue = "1") int page,
 			@RequestParam(name = "keyword", required = false) String keyword, ModelAndView mv) {
 		try {
 			logger.info("===============상품리스트 페이지===============");
 			int currentPage = page; // 한 페이지당 출력할 목록 개수
-			int listCount = proService.listCount(); //전체 게시글 개수
+			int listCount = proService.listCount(cate); //전체 게시글 개수
 			int maxPage = (int) ((double) listCount / LIMIT + 0.9); //최대 페이지
 
 			
@@ -46,12 +54,14 @@ public class ProductController {
 				mv.addObject("proList", proService.searchList(keyword));				
 			}
 			else { //검색어가 없을 경우
-				mv.addObject("proList", proService.selectList(currentPage, LIMIT));				
+				mv.addObject("proList", proService.selectList(currentPage, LIMIT,cate,orderby));				
 			} 
 		
 
 			mv.addObject("currentPage", currentPage);
 			mv.addObject("maxPage", maxPage);
+			mv.addObject("nowCate",cate);
+			mv.addObject("nowOrder",orderby);
 			mv.addObject("listCount", listCount);
 			mv.setViewName("Product/ProductList");
 		} catch (Exception e) {
@@ -65,11 +75,13 @@ public class ProductController {
 //상품 상세보기
 	@RequestMapping(value = "/productView", method = RequestMethod.GET)
 	public ModelAndView productDetail(ModelAndView mv,
+			
 			Product p,
 			@RequestParam(name = "proNo") int pro_no) {
 		try {
 			logger.info("===============상품상세 페이지===============");
-			
+
+			mv.addObject("productCon",proConService.searchList(pro_no));
 			mv.addObject("product",proService.selectOne(pro_no));
 			mv.setViewName("Product/ProductView");
 		}catch (Exception e) {

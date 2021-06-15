@@ -12,8 +12,10 @@
 		<typeAlias alias="MemberVO" type="com.plant.lab.member.model.vo.MemberVO"/>
 		<typeAlias  alias="Monthly" type="com.plant.lab.monthly.model.vo.Monthly" />
 		<typeAlias alias="Product" type="com.plant.lab.product.model.vo.Product"/>
+	 	<typeAlias alias="ProductCon" type="com.plant.lab.product.model.vo.ProductContnet"/>
 		<typeAlias alias="DiaryVO" type="com.plant.lab.diary.model.vo.DiaryVO"/>
 	 	<typeAlias alias="LikeVO" type="com.plant.lab.diary.model.vo.LikeVO"/>
+	 	
 	</typeAliases>
 
 	<mappers> <!-- 사용하고자 하는 쿼리를 정의한 mapper.xml을 등록 -->
@@ -21,6 +23,7 @@
 		<mapper resource="mapper/member-mapper.xml"/>
 		<mapper resource="mapper/monthly-mapper.xml" />
 		<mapper resource="mapper/product-mapper.xml"/>
+		<mapper resource="mapper/productContent-mapper.xml"/>
 		<mapper resource="mapper/like-mapper.xml"/>
 	</mappers>
 

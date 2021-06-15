@@ -15,8 +15,8 @@ public class ProductDAO {
 	private SqlSession sqlSession;
 	
 	//상품 전체 불러오기
-	public int listCount() {
-		return sqlSession.selectOne("Product.listCount");
+	public int listCount(String cate) {
+		return sqlSession.selectOne("Product.listCount",cate);
 	}
 	
 	//상품 검색 조회
@@ -25,10 +25,10 @@ public class ProductDAO {
 	}
 	
 	//특정 페이지 단위의 상품 조회
-	public List<Product> selectList(int startPage, int limit) {
+	public List<Product> selectList(int startPage, int limit,String cate,String orderby) {
 		int startRow = (startPage - 1) * limit;
 		RowBounds row = new RowBounds(startRow, limit);
-		return sqlSession.selectList("Product.selectList",null,row);
+		return sqlSession.selectList("Product.selectList",cate,row);
 	}
 	
 	//상품 상세보기

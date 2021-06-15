@@ -7,13 +7,13 @@ import com.plant.lab.product.model.vo.Product;
 public interface ProductService {
 	
 	//상품 전체 불러오기
-	public int listCount();
+	public int listCount(String cate);
 	
 	//상품 검색 조회
 	public List<Product> searchList(String keyword);
 	
 	//특정 페이지 단위의 상품 조회
-	public List<Product> selectList(int startPage, int limit);
+	public List<Product> selectList(int startPage, int limit,String cate,String orderby);
 	
 	//상품 상세보기
 	public Product selectOne(int pro_no);

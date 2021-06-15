@@ -16,8 +16,8 @@ public class ProductServiceImpl implements ProductService{
 
 	//상품개수
 	@Override
-	public int listCount() {
-		return proDao.listCount();
+	public int listCount(String cate) {
+		return proDao.listCount(cate);
 	}
 
 	//상품검색
@@ -28,8 +28,8 @@ public class ProductServiceImpl implements ProductService{
 	
 	//상품전체리스트
 	@Override
-	public List<Product> selectList(int startPage, int limit) {
-		return proDao.selectList(startPage,limit);
+	public List<Product> selectList(int startPage, int limit,String cate,String orderby) {
+		return proDao.selectList(startPage,limit,cate,orderby);
 	}
 	
 	//상품 상세보기

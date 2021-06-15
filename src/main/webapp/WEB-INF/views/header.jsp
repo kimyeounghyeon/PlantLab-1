@@ -182,7 +182,7 @@ a {
 					<a href="#" class="Tab">Event</a>
 				</div>
 				<div class="tablinks">
-					<a href="#" class="Tab">Store</a>
+					<a href="${path}/product" class="Tab">Store</a>
 				</div>
 			</div>
 		</div>

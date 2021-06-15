@@ -28,9 +28,9 @@
                 <h3>카테고리</h3>
                 <hr>
                 <ul class="cateList">
-                    <li><a href="">식물</a></li>
-                    <li><a href="">관리제품</a></li>
-                    <li><a href="">원예용품</a></li>
+                    <li><a href="${path}/product?cate=p">식물</a></li>
+                    <li><a href="${path}/product?cate=m">관리제품</a></li>
+                    <li><a href="${path}/product?cate=g">원예용품</a></li>
                 </ul>
             </article>
 
@@ -38,12 +38,13 @@
             <%@include file ="RightSideBar.jsp" %>
 
 			<article class="main_article">
+				<input type="hidden" id="order" value="${nowOrder}">
                 <div class="orderby">
                     <ul class="orderList">
-                        <li><a href="" class="nowOrder">최신순</a></li>
-                        <li><a href="">판매량순</a></li>
-                        <li><a href="">낮은 가격순</a></li>
-                        <li><a href="">높은 가격순</a></li>
+                        <li><a id="new" href="${path}/product?cate=${nowCate}&orderby=new">최신순</a></li>
+                        <li><a id="best" href="${path}/product?cate=${nowCate}&orderby=best">판매량순</a></li>
+                        <li><a id="low" href="${path}/product?cate=${nowCate}&orderby=low">낮은 가격순</a></li>
+                        <li><a id="high" href="${path}/product?cate=${nowCate}&orderby=high">높은 가격순</a></li>
                     </ul>
                 </div>
                 
@@ -82,10 +83,10 @@
                     		<li>◀</li>
                     	</c:if>
                     	<c:if test="${currentPage > 1}">
-                    		<c:url var="blistST" value="${path}/product">
+                    		<c:url var="plistST" value="/product">
 								<c:param name="page" value="${currentPage-1}" />
 							</c:url>
-							<li> <a href="${blistST}">◀</a></li>
+							<li> <a href="${plistST}">◀</a></li>
                     	</c:if>
                     	
                     	<c:set var="endPage" value="${maxPage}" /> 
@@ -94,20 +95,20 @@
 								<li>${p}</li>
 							</c:if>
 							<c:if test="${p ne currentPage}">
-								<c:url var="blistchk" value="blist.do">
+								<c:url var="plistchk" value="/product">
 									<c:param name="page" value="${p}" />
 								</c:url>
-								<li><a href="${blistchk}">${p}</a></li>
+								<li><a href="${plistchk}">${p}</a></li>
 							</c:if>
 						</c:forEach> 
 						<c:if test="${currentPage >= maxPage}">
 							<li>▶</li>
 						 </c:if> 
 						<c:if test="${currentPage < maxPage}">
-							<c:url var="blistEND" value="blist.do">
+							<c:url var="plistEND" value="/product">
 								<c:param name="page" value="${currentPage+1}" />
 							</c:url>
-							<li><a href="${blistEND}">▶</a></li>
+							<li><a href="${plistEND}">▶</a></li>
 						</c:if>
                     </ul>
                 </div>
@@ -118,6 +119,12 @@
 
 <script>
 	$(function(){
+		//정렬 리스트에 클래스 부여
+		var order = $('#order').val();
+		var nowO = $('#'+order);
+		nowO.addClass('nowOrder');
+		
+		//검색
 	    var search = $('#searchInput');
 	    var serachBtn = $('#serachBtn');
 		var form = $('form[name=proListF]');
