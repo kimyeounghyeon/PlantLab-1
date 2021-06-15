@@ -69,7 +69,7 @@
 		                                </a>
 		                            </li>
 		                            <li class="proName"><a href="${path}/productView">${vo.pro_name}</a></li>
-		                            <li class="proPri">${vo.pro_price}원</li>
+		                            <li class="proPri">${vo.pro_price}</li>
 		                        </ul>
 		                    </div>
 						</c:forEach> 

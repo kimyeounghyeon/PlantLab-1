@@ -54,7 +54,7 @@
                                 <p id="add" class="numB">+</p>
                             </td>
                             <td class="resultPG" colspan="2">
-                                	총합금액 <p><span>15000</span>원</p>
+                                	총합금액 <p><span>${product.pro_price}</span></p>
                             </td>
                         </tr>
                         <tr>
@@ -290,46 +290,59 @@
 </script>
 <script>
     $(function(){
-        //수량
+    	//수량
         var num = $('.numGuide #num');
         var allPrice = $('.resultPG span');
         var price = $('#priceV').text();
-        var stock = $('#pro_stock').val();
+        var value;
         
+        price = numChange(price);
+
         var addB = $('#add');
         var minB = $('#min');
 
         addB.click(function(){
             var numVal = num.text();
             var numPri = allPrice.text();
+
+            numPri = numChange(numPri);
+            numPri = numPri.replace(/[^\d]+/g, "");
             
-            if(numVal == stock){
-            	swal("최대 "+stock+"개 까지만 가능합니다!", "현재 남은수량 : " + stock+"개", "info");
-            }else{
-            	numVal = (numVal*1)+1;
-                numPri = (numPri*1)+(price*1);
-            }
-            
+            numVal = (numVal*1)+1;
+            numPri = (numPri*1)+(price*1);
+
+            numPri =  numPri.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+           
             num.text(numVal);
-            allPrice.text(numPri);
+            allPrice.text(numPri+"원");
         });
 
         minB.click(function(){
             var numVal = num.text();
             var numPri = allPrice.text();
+
+            numPri = numChange(numPri);
+            numPri = numPri.replace(/[^\d]+/g, "");
+
             if(numVal == 1){
                 numVal == 1;
-                allPrice.text(price);
+                numPri =  numPri.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                allPrice.text(price+"원");
             }else{
                 numVal = (numVal*1)-1;
                 numPri = (numPri*1)-(price*1);
 
                 num.text(numVal);
-                allPrice.text(numPri);
+                numPri =  numPri.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                allPrice.text(numPri+"원");
             }
         });
 
-        //총가격
+        function numChange(value){
+            value = value.substring(0,value.indexOf('원'));
+            value = value.replace(',','');
+            return value;
+        };
         
         //리뷰
         $('.panel').hide();
