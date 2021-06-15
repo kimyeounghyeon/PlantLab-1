@@ -247,6 +247,7 @@
         var num = $('.numGuide #num');
         var allPrice = $('.resultPG span');
         var price = $('#priceV').text();
+        var stock = $('#pro_stock').val();
         var value;
         
         price = numChange(price);
@@ -258,37 +259,46 @@
             var numVal = num.text();
             var numPri = allPrice.text();
 
-            numPri = numChange(numPri);
-            numPri = numPri.replace(/[^\d]+/g, "");
-            
-            numVal = (numVal*1)+1;
-            numPri = (numPri*1)+(price*1);
-
-            numPri =  numPri.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-           
-            num.text(numVal);
-            allPrice.text(numPri+"원");
+            if(numPri !='(품절)'){
+            	 numPri = numChange(numPri);
+                 numPri = numPri.replace(/[^\d]+/g, "");
+                 
+                 if(numVal == stock){
+                 	swal("최대 "+stock+"개 까지만 가능합니다!", "현재 남은수량 : " + stock+"개", "info");
+                 }else{
+                	 numVal = (numVal*1)+1;
+                     numPri = (numPri*1)+(price*1);
+                 }
+                 
+                 numPri =  numPri.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+             
+                 num.text(numVal);
+                 allPrice.text(numPri+"원");
+            }
         });
 
         minB.click(function(){
             var numVal = num.text();
             var numPri = allPrice.text();
 
-            numPri = numChange(numPri);
-            numPri = numPri.replace(/[^\d]+/g, "");
+            if(numPri != '(품절)'){
+                numPri = numChange(numPri);
+                numPri = numPri.replace(/[^\d]+/g, "");
 
-            if(numVal == 1){
-                numVal == 1;
-                numPri =  numPri.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                allPrice.text(price+"원");
-            }else{
-                numVal = (numVal*1)-1;
-                numPri = (numPri*1)-(price*1);
+                if(numVal == 1){
+                    numVal == 1;
+                    numPri =  numPri.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                    allPrice.text(price+"원");
+                }else{
+                    numVal = (numVal*1)-1;
+                    numPri = (numPri*1)-(price*1);
 
-                num.text(numVal);
-                numPri =  numPri.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                allPrice.text(numPri+"원");
+                    num.text(numVal);
+                    numPri =  numPri.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                    allPrice.text(numPri+"원");
+                }
             }
+            
         });
 
         function numChange(value){

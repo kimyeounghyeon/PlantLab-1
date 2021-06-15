@@ -131,6 +131,7 @@ ul.orderList li{
 ul.orderList a:hover{
     font-weight: bold;
     color: #ADBA85;
+    cursor: pointer;
 }
 
 .nowOrder{
