@@ -15,6 +15,7 @@
 	 	<typeAlias alias="ProductCon" type="com.plant.lab.product.model.vo.ProductContnet"/>
 		<typeAlias alias="DiaryVO" type="com.plant.lab.diary.model.vo.DiaryVO"/>
 	 	<typeAlias alias="LikeVO" type="com.plant.lab.diary.model.vo.LikeVO"/>
+	 	<typeAlias alias="NoticeVo" type="com.plant.lab.notice.model.vo.NoticeVo"/>
 	 	
 	</typeAliases>
 
@@ -25,6 +26,9 @@
 		<mapper resource="mapper/product-mapper.xml"/>
 		<mapper resource="mapper/productContent-mapper.xml"/>
 		<mapper resource="mapper/like-mapper.xml"/>
+		<mapper resource="mapper/notice-mapper.xml"/>
 	</mappers>
+	
+	
 
 </configuration>

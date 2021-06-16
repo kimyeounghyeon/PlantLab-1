@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+
+<mapper namespace="Notice">
+
+
+<select id="NoticeList" resultType="NoticeVo" parameterType="NoticeVo">
+select notice_no,notice_title,notice_date
+from Notice_TB
+order by
+notice_no desc
+</select>
+
+
+
+<insert id="NoticeInsert" parameterType="NoticeVo" statementType="PREPARED" flushCache="true">
+INSERT INTO Notice_TB (notice_no,notice_title,notice_content,notice_date)
+VALUES  (#{notice_title},#{content_content})
+</insert>		
+</mapper>
+
+
