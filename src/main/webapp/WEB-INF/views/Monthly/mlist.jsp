@@ -85,7 +85,7 @@ width : 100px;
 						<c:param name="monthly_img" value="${vo.monthly_img}" />
 						<c:param name="monthly_name" value="${vo.monthly_name}" />
 					</c:url> 
-					<c:url var="edelete" value="mDelete.do">
+					<c:url var="mdelete" value="mDelete.do">
 						<c:param name="monthly_no" value="${vo.monthly_no}" />
 					</c:url> 
 					<a href="${mupview}"> 수정 </a> &nbsp;&nbsp; 
@@ -112,12 +112,7 @@ width : 100px;
 					<c:if test="${p eq currentPage}">
 						${p}
 					</c:if>
-					<!-- <c:if test="${p ne currentPage}">
-						<c:url var="blistchk" value="mlist.do">
-							<c:param name="page" value="${p}" />
-						</c:url>
-						<a href="${blistchk}">${p}</a>
-					</c:if> -->
+				
 				</c:forEach>
 				
 				 <c:if test="${currentPage >= maxPage}">다음 </c:if>

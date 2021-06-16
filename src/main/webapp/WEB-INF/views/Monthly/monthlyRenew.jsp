@@ -13,6 +13,16 @@
 .mupdiv{
 clear : both;
 }
+#mupform{
+
+margin-right:auto;
+margin-left: auto;
+}
+#renew{
+ background: #625b54;
+  color : white;
+  border : none;
+}
 </style>
 </head>
 <body>
@@ -21,7 +31,7 @@ clear : both;
 	<form name="renewForm" action="mUpdate.do" method="post" enctype="multipart/form-data">
 		<input type="hidden" name="monthly_no" value="${monthly.monthly_no}">
 		<input type="hidden" name="monthly_img" value="${monthly.monthly_img}">
-		<table>
+		<table id="mupform">
 			<tr>
 				<td>이름</td>
 				<td><input type="text" name="monthly_name" value="${monthly.monthly_name}"></td>
@@ -38,7 +48,10 @@ clear : both;
 			</tr>
 			
 		</table>
+		<br>
+		<div align="center">
 		<input type="submit" id="renew" value="등록하기">
+		</div>
 	</form>
 	</div>
 </body>

@@ -11,28 +11,31 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style>
 #plantimg{
-width : 800px;
+width : 600px;
 height : 700px;
 border : 1px solid black;
 margin-left: auto;
 margin-right: auto;
 }
 #plantname{
-width : 800px;
+width : 600px;
 margin-left: auto;
 margin-right: auto;
 text-aglin : center;
+}
+.mmain{
+clear : both;
 }
 
 </style>
 </head>
 <body>
 	<jsp:include page="../header.jsp"></jsp:include>
-<div>
+<div class="mmain">
 <h2 align="center">이달의 식물</h2>
 <div id="plantimg">식물이미지</div>
 <br>
-<div id= "plantname">식물이름</div>
+<div id= "plantname" align="center">식물이름</div>
 </div>
 </body>
 </html>
