@@ -13,8 +13,11 @@
 		<typeAlias  alias="Monthly" type="com.plant.lab.monthly.model.vo.Monthly" />
 		<typeAlias alias="Product" type="com.plant.lab.product.model.vo.Product"/>
 	 	<typeAlias alias="ProductCon" type="com.plant.lab.product.model.vo.ProductContnet"/>
+		<typeAlias alias="Cart" type="com.plant.lab.cart.model.vo.Cart"/>
 		<typeAlias alias="DiaryVO" type="com.plant.lab.diary.model.vo.DiaryVO"/>
 	 	<typeAlias alias="LikeVO" type="com.plant.lab.diary.model.vo.LikeVO"/>
+	 	<typeAlias alias="NoticeVo" type="com.plant.lab.notice.model.vo.NoticeVo"/>
+	 	<typeAlias alias="OnedayVo"	 type="com.plant.lab.oneday.model.vo.OnedayVo"/>
 	 	
 	</typeAliases>
 
@@ -24,7 +27,12 @@
 		<mapper resource="mapper/monthly-mapper.xml" />
 		<mapper resource="mapper/product-mapper.xml"/>
 		<mapper resource="mapper/productContent-mapper.xml"/>
+		<mapper resource="mapper/cart-mapper.xml"/>
 		<mapper resource="mapper/like-mapper.xml"/>
+		<mapper resource="mapper/notice-mapper.xml"/>
+		<mapper resource="mapper/oneday-mapper.xml" />
 	</mappers>
+	
+	
 
 </configuration>

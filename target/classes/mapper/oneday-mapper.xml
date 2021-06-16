@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="Oneday">
+
+
+
+<select id="onedayselectlist"  resultType="OnedayVo"> 
+SELECT * FROM onedayclass_tb   <![CDATA[ WHERE SYSDATE < Oneday_End]]> 
+</select>
+
+<select id="onedayselect" parameterType="OnedayVo" resultType="OnedayVo">
+SELECT * FROM onedayclass_tb  WHERE Oneday_No=#{oneday_no}
+</select>
+
+
+
+<!-- <insert id="onedayinsert" >
+INSERT INTO FROM onedayclass_tb VALUES( , , , , , , ,)  
+</insert>
+ -->
+<!-- <update id="onedayupdate">
+
+</update> -->
+
+<delete id="onedaydelete" >
+DELETE FROM onedayclass_tb WHERE  Oneday_No=#{oneday_no}
+</delete>
+</mapper>

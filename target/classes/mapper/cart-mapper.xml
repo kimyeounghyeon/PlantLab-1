@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="Cart">
+	<resultMap type="Cart" id="CartMap">
+	</resultMap>
+	
+	<!-- 장바구니 리스트 전체 조회 -->
+	<select id="selectList" parameterType="int" resultType="arraylist" resultMap="CartMap">
+		SELECT c.cart_no,c.user_no, d.pro_no,d.pro_cnt,p.pro_image,p.pro_name,p.pro_price 
+		FROM cart_tb c JOIN cart_detail_tb d
+		ON c.cart_no = d.cart_no
+		JOIN pro_tb p
+		ON d.pro_no = p.pro_no
+		WHERE c.user_no = #{user_no}
+	</select>
+</mapper>

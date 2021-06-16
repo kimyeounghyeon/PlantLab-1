@@ -1,0 +1,64 @@
+@charset "UTF-8";
+
+#fullmain {
+	text-align: center;
+	width: 1280px;
+	margin: 0 auto;
+	padding: 0;
+	clear: both;
+}
+
+#main {
+	display: inline-block;
+	text-align: center;
+	width: 1250px;
+	margin: 0 auto;
+	padding: 0;
+}
+
+.subtitle {
+	margin-top: 0;
+	font-size: 20pt;
+	text-align: center;
+}
+
+#classInto {
+	display: inline-block;
+	width: 950px;
+	height: 150px;
+	border: 1px solid black;
+	margin-bottom: 20px;
+	margin-top: 10px;
+}
+
+#classImg {
+	display: inline-block;
+	margin-right: 15;
+	width: 460px;
+	height: 550px;
+	border: 1px solid black;
+}
+
+#null {
+	display: inline-block;
+	height: 550px;
+	width: 20px;
+	border: none;
+}
+
+#classContent {
+	display: inline-block;
+	margin: 0 auto;
+	width: 460px;
+	height: 550px;
+	border: 1px solid black;
+}
+
+#clasBtn {
+	display: block;
+	width: 250px;
+	height: 80px;
+   margin-left:505px;
+   margin-top:20px;
+	border: 1px solid black;
+}

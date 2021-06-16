@@ -17,6 +17,7 @@
 		<typeAlias alias="DiaryVO" type="com.plant.lab.diary.model.vo.DiaryVO"/>
 	 	<typeAlias alias="LikeVO" type="com.plant.lab.diary.model.vo.LikeVO"/>
 	 	<typeAlias alias="NoticeVo" type="com.plant.lab.notice.model.vo.NoticeVo"/>
+	 	<typeAlias alias="OnedayVo"	 type="com.plant.lab.oneday.model.vo.OnedayVo"/>
 	 	
 	</typeAliases>
 
@@ -29,6 +30,7 @@
 		<mapper resource="mapper/cart-mapper.xml"/>
 		<mapper resource="mapper/like-mapper.xml"/>
 		<mapper resource="mapper/notice-mapper.xml"/>
+		<mapper resource="mapper/oneday-mapper.xml" />
 	</mappers>
 	
 	
