@@ -26,13 +26,6 @@
 	CKEDITOR.replace("writetext",{filebrowserUploadUrl : "${path}/imageUpload.do"});
 	
 	$(function(){
-		$("#dwritebtn").click(function(){
-			var writefrm = document.getElementById("dwritebtn");
-			writefrm.action="diaryInsert.do";
-			writefrm.method="post";
-			writefrm.submit();
-				
-			});
 		});
 	
 

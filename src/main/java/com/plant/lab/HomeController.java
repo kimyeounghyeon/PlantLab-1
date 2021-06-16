@@ -9,6 +9,7 @@ import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -105,12 +106,19 @@ public class HomeController {
 //	}
 	
 	@RequestMapping(value = "/diary", method = RequestMethod.GET)
-	public ModelAndView listdiary(ModelAndView mv) {
-		System.out.println("확인");
-		System.out.println(dService.listDiary());
-		System.out.println();
-		mv.addObject("list",dService.listDiary());
+	public ModelAndView listdiary(ModelAndView mv, HttpSession session, LikeVO lvo, DiaryVO vo) {
+		System.out.println("[영현]diary 진입");
+
+		// 로그인 전에 임시 테스트 코드입니다.
+		//TODO: session 
+		LikeVO sessionVO = new LikeVO();
+		sessionVO.setUser_no(122);   // session.getAtt....
+		
+		mv.addObject("listDiary", dService.listDiary());
+		mv.addObject("likeList", dService.likeList(sessionVO));
+		
 		mv.setViewName("Plant/Diary");
+		System.out.println("[영현]diary view 페이지 이동");
 		return mv;
 	}
 	
@@ -119,10 +127,10 @@ public class HomeController {
 		return "Plant/Writediary";
 	}
 	
-	@RequestMapping(value = "diaryInsert.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/diaryInsert.do", method = RequestMethod.POST)
 	public ModelAndView boardInsert(DiaryVO vo, @RequestParam(name = "upfile", required = false) MultipartFile report,
 			HttpServletRequest request, ModelAndView mv) {
-		
+			System.out.println("인서트하러왔어요");
 		try {
 				int result=0;
 				if(report != null && !report.equals(""))
@@ -149,12 +157,12 @@ public class HomeController {
 			lvo.setDiary_no(diary_no);
 			System.out.println(lvo);
 			
-			
-			result = dService.like(lvo);
-			System.out.println("result는 " + result);
-			likecnt = dService.likecnt();
-			System.out.println("좋아요 개수는 " + likecnt);
-			mv.addObject("likecnt",dService.likecnt());
+			result = dService.insertLike(lvo);
+			System.out.println("like.do에서 result는 " + result);
+			//위 insertLike에서 함께 처리함. 
+			//likecnt = dService.likeCnt(lvo);
+			System.out.println("좋아요 개수는 " + result);
+			mv.addObject("likecnt",result);
 			mv.setViewName("redirect:diary");
 		} catch (Exception e) {
 			mv.addObject("msg", e.getMessage());
@@ -162,16 +170,42 @@ public class HomeController {
 		}
 		return mv;
 	}
+	@RequestMapping(value = "/likecnt.do", method = RequestMethod.POST)
+	@ResponseBody
+	public String likecnt(HttpServletRequest request, 
+			@RequestParam(name = "user_no") int user_no, 
+			@RequestParam(name = "diary_no") int diary_no) {
+		System.out.println("카운트 들어왔다");
+		int likecnt = 0;
+		LikeVO lvo = new LikeVO();
+		try {
+			System.out.println("11111숫자 like: " + user_no);
+			System.out.println("11111숫자 like2 diary: " + diary_no);
+			lvo.setUser_no(user_no);
+			lvo.setDiary_no(diary_no);
+			likecnt = dService.likeCnt(lvo);
+			System.out.println("11111좋아요 개수는 " + likecnt);
+		} catch (Exception e) {
+
+		}
+		return String.valueOf(likecnt);
+	}
 	
 	@RequestMapping(value = "deletelike.do", method = RequestMethod.POST)
-	public ModelAndView like(ModelAndView mv, @RequestParam(name = "diary_no") int diary_no) {
+	public ModelAndView like(ModelAndView mv, @RequestParam(name = "diary_no") int diary_no, @RequestParam(name = "user_no") int user_no, LikeVO lvo) {
 		System.out.println("딜리트 들어왔어용");
 		try {
 			int result = 0;
 			int likecnt = 0;
-			result = dService.deletelike(diary_no);
-			likecnt = dService.likecnt();
-			mv.addObject("like",dService.likecnt());
+			System.out.println("딜리트 유저 " + user_no);
+			System.out.println("딜리트 게시판 " + diary_no);
+			lvo.setUser_no(user_no);
+			lvo.setDiary_no(diary_no);
+			result = dService.deleteLike(lvo);
+			System.out.println("딜리트 result는 " + result);
+//			likecnt = dService.likecnt(lvo);
+//			System.out.println("딜리트 좋아요 갯수는 " + likecnt);
+			mv.addObject("likecnt", result);
 			mv.setViewName("redirect:diary");
 		} catch (Exception e) {
 			mv.addObject("msg", e.getMessage());

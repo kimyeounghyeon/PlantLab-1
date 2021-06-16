@@ -12,7 +12,6 @@ public class LikeVO {
 
 
 	public LikeVO(int diary_no, int user_no) {
-		super();
 		this.diary_no = diary_no;
 		this.user_no = user_no;
 	}

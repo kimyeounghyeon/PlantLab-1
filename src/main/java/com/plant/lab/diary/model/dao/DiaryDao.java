@@ -14,9 +14,13 @@ public class DiaryDao {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	public List<String> listDiary() {
+	public List<DiaryVO> listDiary() {
 		return sqlSession.selectList("Diary.listDiary");
 	}
+	public List<Integer> likeList(LikeVO lvo) {
+		return sqlSession.selectList("Diary.likeList", lvo);
+	}
+	
 	
 	public int writeDiary(DiaryVO vo) {
 		int result = 0;
@@ -24,18 +28,18 @@ public class DiaryDao {
 		return result;
 	}
 	
-	public int like(LikeVO lvo) {
+	public int insertLike(LikeVO lvo) {
 		System.out.println("dao" + lvo);
-		int abc = sqlSession.insert("Like.like", lvo);
-		System.out.println("abc¸¦ Ã£¾Æ¼­" + abc);
+		int abc = sqlSession.insert("Diary.insertLike", lvo);
+		System.out.println("abcëŠ”" + abc);
 		return abc;
 	}
-	
-	public int likecnt() {
-		return sqlSession.selectOne("Like.likecnt");
+	public int deleteLike(LikeVO lvo) {
+		return sqlSession.delete("Diary.deleteLike", lvo);
 	}
-	
-	public int deletelike(int diary_no) {
-		return sqlSession.delete("Like.deletelike", diary_no);
+	public int likeCnt(LikeVO lvo) {
+		return sqlSession.delete("Diary.likeCnt", lvo);
 	}
+
+	
 }
