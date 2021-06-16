@@ -103,7 +103,7 @@
 .proCheck span{
     position: relative;
     left: -22px;
-    top: -95px;
+    top: -130px;
 }
 
 .space{
@@ -113,7 +113,11 @@
 .proImg{
     width: 30%;
     height: 170px;
-    border: solid 1px #ADBA85;
+    line-height: 30%;
+}
+
+.proImg img{
+    width: 70%;
 }
 
 .proName{
@@ -128,6 +132,7 @@
 }
 
 .proGuide{
+	font-size:18px;
     width: 28%;
     text-align: right;
     color: #ccc;

@@ -31,82 +31,56 @@
 
                     <div class="cartList">  
                         <form>
-                            <table class="prolist">
-                                <tr>
-                                    <td class="proCheck" rowspan="3">
-                                        <label class="checkContain">
-                                            <input type="checkbox" name="prock">
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </td>
-                                    <td class="proImg" rowspan="3">
-                                        이미지
-                                    </td>
-                                    <td class="space" rowspan="3"></td>
-                                    <td class="proName" colspan="3">
-                                        <p>키우기쉬운 나무</p>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="proGuide" colspan="2">
-                                        <p>수량</p>
-                                    </td>
-                                    <td class="proCnt pro" colspan="2">
-                                        <span>1개</span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="proGuide" colspan="2">
-                                        <p>가격</p>
-                                    </td>
-                                    <td class="proPri pro" colspan="2">
-                                        <p><span>15000</span>원</p>
-                                    </td>
-
-                                    
-                                </tr>
-                            </table>
-                            <table class="prolist">
-                                <tr>
-                                    <td class="proCheck" rowspan="3">
-                                        <label class="checkContain">
-                                            <input type="checkbox" name="prock">
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </td>
-                                    <td class="proImg" rowspan="3">
-                                        이미지
-                                    </td>
-                                    <td class="space" rowspan="3"></td>
-                                    <td class="proName" colspan="3">
-                                        <p>키우기쉬운 나무</p>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="proGuide" colspan="2">
-                                        <p>수량</p>
-                                    </td>
-                                    <td class="proCnt pro" colspan="2">
-                                        <span>1개</span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="proGuide" colspan="2">
-                                        <p>가격</p>
-                                    </td>
-                                    <td class="proPri pro" colspan="2">
-                                        <p><span>15000</span>원</p>
-                                    </td>
-                                </tr>
-                            </table>
-
-                            <hr>
-
+                        	<c:if test="${empty cartList}">
+                        		<h3>상품이 존재하지 않습니다.</h3>
+                        	</c:if>
+                        	<c:if test="${not empty cartList}">
+                        		<c:forEach  var="vo" items="${cartList}" varStatus="status">
+                        			<table class="prolist">
+		                                <tr>
+		                                    <td class="proCheck" rowspan="3">
+		                                        <label class="checkContain">
+		                                            <input type="checkbox" name="prock">
+		                                            <span class="checkmark"></span>
+		                                        </label>
+		                                    </td>
+		                                    <td class="proImg" rowspan="3">
+		                                        <img src="${vo.pro_image}">
+		                                    </td>
+		                                    <td class="space" rowspan="3"></td>
+		                                    <td class="proName" colspan="3">
+		                                        <p>${vo.pro_name}</p>
+		                                    </td>
+		                                </tr>
+		                                <tr>
+		                                    <td class="proGuide" colspan="2">
+		                                        <p>수량</p>
+		                                    </td>
+		                                    <td class="proCnt pro" colspan="2">
+		                                        <span>${vo.pro_cnt}</span>
+		                                    </td>
+		                                </tr>
+		                                <tr>
+		                                    <td class="proGuide" colspan="2">
+		                                        <p>가격</p>
+		                                    </td>
+		                                    <td class="proPri pro" colspan="2">
+		                                        <p><span>${vo.pro_price}</span></p>
+		                                        <input type="hidden" value="${vo.pro_price}" class="voPrice">
+		                                    </td>
+		                                </tr>
+		                            </table>	
+		                            
+                        		</c:forEach>
+                        	</c:if>
+                        	
+                        	<hr>
+                        	
                             <table class="infoT">
                                 <tr>
                                     <td colspan="2">
                                         <p class="info">총 상품 가격</p>
-                                        <p id="proAllP" class="price">30000원</p>
+                                        <p id="proAllP" class="price">0원</p>
                                     </td>
                                 </tr>
                                 <tr>
@@ -119,7 +93,7 @@
                                 <tr>
                                     <td colspan="2">
                                         <p class="info">최종 결제 금액</p>
-                                        <p id="allPrice" class="price">5000원</p>
+                                        <p id="allPrice" class="price">0원</p>
                                     </td>
                                 </tr>
                                 <tr>
@@ -145,6 +119,39 @@
 </body>
 <script>
     $(function(){
+    	//금액 계산
+    	var voPrice = $('voPrice').val();
+		
+        for(var i = 0; i<voPrice.size(); i++){
+	    	voPrice[i] = value.substring(0,value.indexOf('원'));
+	    	voPrice[i] = value.replace(',','');
+        	cosole.log(i+"번 : "+voPrice);
+        }
+    	
+       /*  addB.click(function(){
+            var numVal = num.text();
+            var numPri = allPrice.text();
+
+            if(numPri !='(품절)'){
+            	 numPri = numChange(numPri);
+                 numPri = numPri.replace(/[^\d]+/g, "");
+                 
+                 if(numVal == stock){
+                 	swal("최대 "+stock+"개 까지만 가능합니다!", "현재 남은수량 : " + stock+"개", "info");
+                 }else{
+                	 numVal = (numVal*1)+1;
+                     numPri = (numPri*1)+(price*1);
+                 }
+                 
+                 numPri =  numPri.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+             
+                 num.text(numVal);
+                 allPrice.text(numPri+"원");
+            }
+        });*/
+    	
+    	
+    	 
         // 체크박스
         var allcheck = $('#allcheck');
         var prock = $('input[name=prock]');

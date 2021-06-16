@@ -5,7 +5,6 @@
 		
 	</resultMap>
 	
-	<!-- 상품 전체 개수 조회 -->
 	<select id="selectList" parameterType="int" resultType="arraylist" resultMap="ProductConMap">
 		SELECT d.pro_detail 
 		FROM pro_tb p join pro_dtail_tb d

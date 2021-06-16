@@ -90,19 +90,19 @@ public class HomeController {
 //		return "Product/ProductView";
 //	}
 	
-	@RequestMapping(value = "/cart", method = RequestMethod.GET)
-	public String home4(Locale locale, Model model) {
-		logger.info("Welcome home! The client locale is {}.", locale);
-		
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		
-		String formattedDate = dateFormat.format(date);
-		
-		model.addAttribute("serverTime", formattedDate );
-		
-		return "Product/Cart";
-	}
+//	@RequestMapping(value = "/cart", method = RequestMethod.GET)
+//	public String home4(Locale locale, Model model) {
+//		logger.info("Welcome home! The client locale is {}.", locale);
+//		
+//		Date date = new Date();
+//		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
+//		
+//		String formattedDate = dateFormat.format(date);
+//		
+//		model.addAttribute("serverTime", formattedDate );
+//		
+//		return "Product/Cart";
+//	}
 	
 	@RequestMapping(value = "/diary", method = RequestMethod.GET)
 	public ModelAndView listdiary(ModelAndView mv) {
