@@ -81,12 +81,12 @@ width : 100px;
 					
 					<td class="mupde">
 					<c:url var="mupview" value="mRenew.do">
-						<c:param name="monthly_no" value="${monthly.monthly_no}" />
-						<c:param name="monthly_img" value="${monthly.monthly_img}" />
-						<c:param name="monthly_name" value="${monthly.monthly_name}" />
+						<c:param name="monthly_no" value="${vo.monthly_no}" />
+						<c:param name="monthly_img" value="${vo.monthly_img}" />
+						<c:param name="monthly_name" value="${vo.monthly_name}" />
 					</c:url> 
 					<c:url var="edelete" value="mDelete.do">
-						<c:param name="monthly_no" value="${monthly.monthly_no}" />
+						<c:param name="monthly_no" value="${vo.monthly_no}" />
 					</c:url> 
 					<a href="${mupview}"> 수정 </a> &nbsp;&nbsp; 
 					<a href="${mdelete}"> 삭제 </a>
