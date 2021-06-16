@@ -6,13 +6,19 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>無以林  event detail</title>
+    <title>無以林  monthly update </title>
     <link href="${path}/resources/css/font.css" rel="stylesheet"/>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<style>
+.mupdiv{
+clear : both;
+}
+</style>
 </head>
 <body>
 	<jsp:include page="../header.jsp"></jsp:include>
-<form name="renewForm" action="eUpdate.do" method="post" enctype="multipart/form-data">
+	<div class="mupdiv">
+	<form name="renewForm" action="mUpdate.do" method="post" enctype="multipart/form-data">
 		<input type="hidden" name="monthly_no" value="${monthly.monthly_no}">
 		<input type="hidden" name="monthly_img" value="${monthly.monthly_img}">
 		<table>
@@ -23,9 +29,7 @@
 			<tr>
 				<td>이전 첨부파일</td>
 				<td>
-					 <a href="${pageContext.request.contextPath}/resources/img/${monthly.monthly_img}"
-					 download>${monthly.monthly_img}</a>
-					
+					 ${monthly.monthly_img}
 				</td>
 			</tr>
 			<tr>
@@ -34,7 +38,8 @@
 			</tr>
 			
 		</table>
-		<input type="submit" value="등록하기">
+		<input type="submit" id="renew" value="등록하기">
 	</form>
+	</div>
 </body>
 </html>

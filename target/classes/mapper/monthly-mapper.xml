@@ -19,7 +19,7 @@
 	
 	
 	<!-- 게시글 단일 조회 -->
-	<select id="selectOne" parameterType="string" resultType="Monthly">
+	<select id="selectOne" parameterType="Monthly" resultType="Monthly">
 		SELECT * FROM Monthly_tb
 		WHERE monthly_no = #{monthly_no}
 	</select>
@@ -38,10 +38,10 @@
 	<!-- 게시글 수정 -->
 	<update id="updateMonthly" parameterType="Monthly" flushCache="true" statementType="PREPARED">
 		UPDATE Monthly_tb 
-		SET monthly_name = #{monthly_name}, 
-		monthly_date = sysdate, 
-		monthly_img = #{monthly_img} 
-		WHERE monthly_no =#{monthly_no}
+		SET monthly_name=#{monthly_name}, 
+		monthly_date=sysdate, 
+		monthly_img=#{monthly_img} 
+		WHERE monthly_no=#{monthly_no}
 	</update>
 	
 	

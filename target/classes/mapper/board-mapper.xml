@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="Diary">
-  <!--  <resultMap type="" id=""></resultMap>-->
-  
-  
-  <!--게시판 sql문 작성 -->
-  
+ 	<select id="listDiary" resultType="DiaryVO">
+	select * from Diary_Img_TB it, (select * from diary_tb dt, user_tb ut where dt.diary_write = ut.user_no) udt where it.diary_no = udt.diary_no order by diary_date desc
+	</select>
+ 	<insert id="writeDiary" parameterType="DiaryVO" flushCache="true" statementType="PREPARED">
+ 		insert into diary_tb values(Diary_SEQ.nextVal, #{diary_write}, #{diary_content}, sysdate, #{diary_views})
+ 	</insert>
+ 	<insert id="writeImg" parameterType="DiaryVO" flushCache="true" statementType="PREPARED">
+ 		insert into Diary_Img_TB values(Diary_SEQ.currentVal, img_SEQ.nextVal)
+ 	</insert>
   
 </mapper>

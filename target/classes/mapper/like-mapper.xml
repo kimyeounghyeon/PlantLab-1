@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="Like">
+	<insert id="like" parameterType="LikeVO" flushCache="true" statementType="PREPARED">
+		insert into like_tb values(#{diary_no}, #{user_no})
+	</insert>
+	
+	<select id="likecnt" resultType="int">
+		select count(*) as cnt from diary_img_tb where diary_no = #{diary_no}
+	</select>
+	
+	<delete id="deletelike" flushCache="true" statementType="PREPARED">
+		delete from like_tb where diary_no = #{diary_no}
+	</delete>
+</mapper>

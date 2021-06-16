@@ -1,5 +1,7 @@
 package com.plant.lab.monthly.model.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,21 +14,28 @@ public class MonthlyServiceImpl implements MonthlyService {
 	
 		@Autowired
 		private MonthlyDao moDao;
-		
+		//이달의 식물 전체 개수
 		@Override
-		public int totalCount() {
+		public int listCount() {
 			return moDao.listCount();
 		}
-		
+		//특정 페이지 단위의 상품 조회
+		public List<Monthly> selectList(int startPage, int limit){
+		return moDao.selectList(startPage,limit);
+		}
+
+		//이달의 식물 상세보기
 		@Override
-		public Monthly selectMonthly(int monthly_no) {
+		public Monthly selectOne(int monthly_no) {
 			return moDao.selectOne(monthly_no);
 		}
+		
+		//이달의 식물 추가
 		@Override
 		public int insertMonthly(Monthly m) {
 			return moDao.insertMonthly(m);
 		}
-
+		//이달의 식물 수정
 		@Override
 		public Monthly updateMonthly(Monthly m) {
 			int result = moDao.updateMonthly(m);
@@ -37,7 +46,7 @@ public class MonthlyServiceImpl implements MonthlyService {
 			}
 			return m;
 		}
-
+		//이달의 식물 삭제
 		@Override
 		public int deleteMonthly(int monthly_no) {
 			return moDao.deleteMonthly(monthly_no);

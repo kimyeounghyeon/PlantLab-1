@@ -6,13 +6,13 @@
 	</resultMap>
 	
 	<!-- 상품 전체 개수 조회 -->
-	<select id="listCount" resultType="int">
-		SELECT count(*) from pro_tb
+	<select id="listCount" parameterType="string" resultType="int">
+		SELECT count(*) from pro_tb where pro_cate = #{cate}
 	</select>
 	
 	<!-- 페이지당 상품 조회 rowbounds 사용-->
-	<select id="selectList" resultType="arraylist" resultMap="ProductMap">
-		SELECT * FROM pro_tb
+	<select id="selectList" resultType="arraylist" parameterType="string" resultMap="ProductMap">
+		SELECT * FROM pro_tb where pro_cate = #{cate}
 	</select>
 	
 	<!-- 상품 검색 -->

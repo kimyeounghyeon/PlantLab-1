@@ -13,10 +13,11 @@ public class Monthly implements java.io.Serializable {
 	private Date monthly_date;
 	private String monthly_img;
 	
+	
 	@Override
 	public String toString() {
-		return "Monthly_tb [monthly_no=" + monthly_no + ", monthly_name=" + monthly_name + ", monthly_date="
-				+ monthly_date + ", monthly_img=" + monthly_img + "]";
+		return "Monthly [monthly_no=" + monthly_no + ", monthly_name=" + monthly_name + ", monthly_date=" + monthly_date
+				+ ", monthly_img=" + monthly_img + "]";
 	}
 	public int getMonthly_no() {
 		return monthly_no;
