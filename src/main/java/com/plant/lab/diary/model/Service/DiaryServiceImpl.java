@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.plant.lab.diary.model.dao.DiaryDao;
 import com.plant.lab.diary.model.vo.DiaryVO;
@@ -11,7 +12,7 @@ import com.plant.lab.diary.model.vo.LikeVO;
 
 @Service("dService")
 public class DiaryServiceImpl implements DiaryService {
-
+	
 	@Autowired
 	private DiaryDao dDao;
 
@@ -26,6 +27,7 @@ public class DiaryServiceImpl implements DiaryService {
 		System.out.println("[영현]listDiary() list중 1개:" + list.get(0).toString());
 		return list;
 	}
+	
 	@Override
 	public List<Integer> likeList(LikeVO lvo) {
 		List<Integer> list = null;
@@ -38,6 +40,7 @@ public class DiaryServiceImpl implements DiaryService {
 		return list;
 	}
 	
+	//@Transactional
 	@Override
 	public int insertLike(LikeVO lvo) {
 		int result = -1;
@@ -67,6 +70,7 @@ public class DiaryServiceImpl implements DiaryService {
 		}
 		return result;
 	}
+	
 	@Override
 	public int likeCnt(LikeVO lvo) {
 		int result = -1;

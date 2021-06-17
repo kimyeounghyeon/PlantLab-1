@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.plant.lab.product.model.dao.ProductDAO;
 import com.plant.lab.product.model.vo.Product;
@@ -39,16 +40,19 @@ public class ProductServiceImpl implements ProductService{
 		return proDao.selectOne(pro_no);
 	};
 
+	@Transactional
 	@Override
 	public int insertProduct(Product product) {
 		return 0;
 	}
 
+	@Transactional
 	@Override
 	public int updateProduct(Product product) {
 		return 0;
 	}
 
+	@Transactional
 	@Override
 	public int deleteProduct(int pro_no) {
 		return 0;

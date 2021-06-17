@@ -4,6 +4,8 @@ import java.util.List;
 import javax.inject.Inject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.plant.lab.member.model.dao.MemberDAO;
 import com.plant.lab.member.model.vo.MemberVO;
 
@@ -12,6 +14,7 @@ public class MemberServiceImpl implements MemberService {
 	@Autowired
 	private MemberDAO mDao;
 
+	@Transactional
 	@Override
 	public int insertMember(MemberVO vo)  {
 		int result = 0;

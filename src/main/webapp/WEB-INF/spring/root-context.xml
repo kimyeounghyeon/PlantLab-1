@@ -17,10 +17,7 @@
 		<property name="username" value="PlantLab" />
 		<property name="password" value="551235" />
 	</bean>
-	<bean id="transactionManager"
-		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-		<property name="dataSource" ref="dataSource" />
-	</bean>
+	
 	<bean id="sqlSession"
 		class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="configLocation"
@@ -31,7 +28,13 @@
 		<constructor-arg ref="sqlSession" />
 	</bean>
 	<bean id = "multipartResolver" class = "org.springframework.web.multipart.commons.CommonsMultipartResolver" />
-	<!-- Transaction 시점 등록 -->
+	
+	<!-- Transaction -->
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
 	<tx:advice id="txAdvice"
 		transaction-manager="transactionManager">
 		<tx:attributes>
@@ -42,7 +45,7 @@
 			<tx:method name="delete*" rollback-for="Exception" />
 		</tx:attributes>
 	</tx:advice>
-	<tx:annotation-driven />
+	<tx:annotation-driven/>
 
 	<!-- Transaction 관련된 AOP 설정 -->
 	<aop:config proxy-target-class="true">

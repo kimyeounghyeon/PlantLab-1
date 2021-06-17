@@ -3,6 +3,7 @@ package com.plant.lab.notice.model.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.plant.lab.notice.model.dao.NoticeDao;
 import com.plant.lab.notice.model.vo.NoticeVo;
@@ -21,6 +22,7 @@ public class NoticeServiceimpl implements NoticeService{
 		
 	}
 
+	@Transactional
 	@Override
 	public int NoticeInsert(NoticeVo vo) {
 		return nDao.NoticeInsert(vo);

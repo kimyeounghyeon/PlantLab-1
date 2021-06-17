@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.plant.lab.monthly.model.dao.MonthlyDao;
 import com.plant.lab.monthly.model.vo.Monthly;
@@ -31,11 +32,13 @@ public class MonthlyServiceImpl implements MonthlyService {
 		}
 		
 		//이달의 식물 추가
+		@Transactional
 		@Override
 		public int insertMonthly(Monthly m) {
 			return moDao.insertMonthly(m);
 		}
 		//이달의 식물 수정
+		@Transactional
 		@Override
 		public Monthly updateMonthly(Monthly m) {
 			int result = moDao.updateMonthly(m);
@@ -47,6 +50,7 @@ public class MonthlyServiceImpl implements MonthlyService {
 			return m;
 		}
 		//이달의 식물 삭제
+		@Transactional
 		@Override
 		public int deleteMonthly(int monthly_no) {
 			return moDao.deleteMonthly(monthly_no);
