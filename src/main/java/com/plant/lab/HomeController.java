@@ -260,13 +260,16 @@ public class HomeController {
 		}
 	}
 	
-	@RequestMapping(value="/join", method = RequestMethod.GET)
+	@RequestMapping(value="/join", method = {RequestMethod.POST, RequestMethod.GET})
 	public String joinMember() {
 		return "join";
 	}
+	@RequestMapping(value="header",method = {RequestMethod.POST, RequestMethod.GET})
+	public String header() {
+		return "header";
+	}
 	
-	// ajax
-	@RequestMapping(value="doJoin", method=RequestMethod.POST)
+	@RequestMapping(value="doJoin", method = {RequestMethod.POST, RequestMethod.GET})
 	public void doJoinMember(
 			MemberVO vo	
 			, HttpServletResponse response
@@ -289,8 +292,38 @@ public class HomeController {
 		}
 	}
 	
-	@RequestMapping(value="login", method = RequestMethod.GET)
-	public String login() {
+	@RequestMapping(value="login", method = {RequestMethod.POST, RequestMethod.GET})
+	public String memberLogin(MemberVO vo, Model model, HttpServletRequest request, @RequestParam(name="id", required=false) String userId, @RequestParam(name="passwd", required=false) String userPwd) {
+		
+		vo.setUserId(userId);
+		vo.setUserPwd(userPwd);
+		System.out.println(userId);
+		System.out.println(userPwd);
+		MemberVO login = mService.loginMember(vo);
+		System.out.println(vo);
+		System.out.println("jsp페이지 : " + login);
+
+		if (login == null) {
+			model.addAttribute("msg", "로그인 실패");
+			return "errorPage";
+		} else {
+
+			HttpSession session = request.getSession();
+
+			session.setAttribute("loginMember", vo);
+
+		}
+
 		return "login";
+
 	}
+	
+@RequestMapping(value = "logout", method = {RequestMethod.POST, RequestMethod.GET})
+public String memberOut(Model model, HttpServletRequest request) {
+	HttpSession session = request.getSession();
+	session.removeAttribute("loginMember");
+	
+
+	return "logOut";
+}
 }

@@ -13,8 +13,11 @@ public interface MemberService {
 	
 	public String maxMemberId();
 	
-	public List<String> getMemberName(String memberId);
+	public List<String> getMemberName(String userId);
 
-	public String getMemberName2(String memberId);
+	public String getMemberName2(String userId);
+	
+    public MemberVO loginMember(MemberVO vo);
+
 }
 
