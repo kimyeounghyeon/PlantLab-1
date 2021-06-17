@@ -26,49 +26,63 @@
             <article class="main_article">
                 <!-- 상품상세 -->
                 <div class="detail">
-					<input type="hidden" id="pro_totalStar" value="${product.pro_totalStar}">
-					<input type="hidden" id="pro_stock" value="${product.pro_stock}">
-					
-                    <table>  
-                        <tr>
-                            <td id="proImg" rowspan="6">
-                                <img src="${product.pro_image}"/>
-                            </td>
-                            <td id="space" rowspan="6"> </td>
-                            <td id="proName" colspan="4"><p>${product.pro_name}</p><hr class="hrs"></td>
-                        </tr>
-                        <tr>
-                            <td class="guide">배송비</td>
-                            <td id="deliv">5000원</td>
-                        </tr>
-                        <tr>
-                            <td class="guide">판매가</td>
-                            <td id="proPri"><span id="priceV">${product.pro_price}</span></td>
-                        </tr>
-                        <tr>
-                            <td class="space2" colspan="4"><hr class="hrs hr2"></td>
-                        </tr>
-                        <tr>
-                            <td class="numGuide" colspan="2">
-                                <p id="min" class="numB">-</p>
-                                <p id="num">1</p>
-                                <p id="add" class="numB">+</p>
-                            </td>
-                            <td class="resultPG" colspan="2">
-                                	총합금액 <p><span>${product.pro_price}</span></p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="4" class="buyGuide">
-                                <button id="buyB" class="bBtn">구매하기</button>
-                                <button id="basketB" class="bBtn">장바구니</button>
-                            </td>
-                        </tr>
-                    </table>
-                    <div class="modal">
+						<input type="hidden" id="pro_totalStar" name="pro_totalStar" value="${product.pro_totalStar}">
+					<form id="cartF">
+						<input type="hidden" id="pro_stock" name="pro_stock" value="${product.pro_stock}">
+						<input type="hidden" id="pro_no" name="pro_no" value="${product.pro_no}">
+						<input type="hidden" id="pro_image" name="pro_image" value="${product.pro_image}">
+						<input type="hidden" name="pro_cnt" id="pro_cnt" value="1">
+						<input type="hidden" id="pro_name" name="pro_name" value="${product.pro_name}">
+						<input type="hidden" id="pro_price" name="pro_price" value="${product.pro_price}">
+					</form>
+	                    <table>  
+	                        <tr>
+	                            <td id="proImg" rowspan="6">
+	                                <img src="${product.pro_image}"/>
+	                            </td>
+	                            <td id="space" rowspan="6"> </td>
+	                            <td id="proName" colspan="4"><p>${product.pro_name}</p><hr class="hrs"></td>
+	                        </tr>
+	                        <tr>
+	                            <td class="guide">배송비</td>
+	                            <td id="deliv">5000원</td>
+	                        </tr>
+	                        <tr>
+	                            <td class="guide">판매가</td>
+	                            <td id="proPri"><span id="priceV">${product.pro_price}</span></td>
+	                        </tr>
+	                        <tr>
+	                            <td class="space2" colspan="4"><hr class="hrs hr2"></td>
+	                        </tr>
+	                        <tr>
+	                            <td class="numGuide" colspan="2">
+	                                <p id="min" class="numB">-</p>
+	                                <p id="num" >1</p>
+	                                <p id="add" class="numB">+</p>
+	                            </td>
+	                            <td class="resultPG" colspan="2">
+	                                	총합금액 <p><span>${product.pro_price}</span></p>
+	                            </td>
+	                        </tr>
+	                        <tr>
+	                            <td colspan="4" class="buyGuide">
+	                                <button id="buyB" class="bBtn">구매하기</button>
+	                                <button id="basketB" class="bBtn">장바구니</button>
+	                            </td>
+	                        </tr>
+	                    </table>
+                    <div class="modal" id="cartInsert">
                         <div class="modal_content">
                             <p>
-                                	장바구니에 상품이 담겼습니다 
+                                장바구니에 상품이 담겼습니다 
+                                <span><a href="43_finalCart.html">장바구니로 이동</a></span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="modal" id="cartNo">
+                        <div class="modal_content">
+                            <p>
+                                장바구니에 이미 상품이 있습니다
                                 <span><a href="43_finalCart.html">장바구니로 이동</a></span>
                             </p>
                         </div>
@@ -245,6 +259,7 @@
     $(function(){
     	//수량
         var num = $('.numGuide #num');
+    	var pro_cnt = $('#pro_cnt');
         var allPrice = $('.resultPG span');
         var price = $('#priceV').text();
         var stock = $('#pro_stock').val();
@@ -267,6 +282,7 @@
                  	swal("최대 "+stock+"개 까지만 가능합니다!", "현재 남은수량 : " + stock+"개", "info");
                  }else{
                 	 numVal = (numVal*1)+1;
+                	 pro_cnt.val(numVal);
                      numPri = (numPri*1)+(price*1);
                  }
                  
@@ -291,6 +307,7 @@
                     allPrice.text(price+"원");
                 }else{
                     numVal = (numVal*1)-1;
+                    pro_cnt.val(numVal);
                     numPri = (numPri*1)-(price*1);
 
                     num.text(numVal);
@@ -314,16 +331,49 @@
             e.preventDefault();
             $(this).next().fadeToggle(500);
         });
+        
+        var re = 0;
+        function modal(re) {
+        	if(re == 1){ //카트에 상품이 없을 경우
+        		$("#cartInsert").fadeIn(); 
+                
+                setTimeout(function() { 
+                    $('#cartInsert').fadeOut();
+                }, 3000);
+        	}else if(re == 2){ //카트에 상품이 있을 경우
+				$("#cartNo").fadeIn(); 
+                
+                setTimeout(function() { 
+                    $('#cartNo').fadeOut();
+                }, 3000);
+        	}
+		}
 
-        //모달
+        //카트 이동 및 모달
         var basketB = $('#basketB');
-
+		var pro_no = $('#pro_no').val();
+    	console.log("확인:"+pro_no);
+    	
         $("#basketB").click(function(){ 
-            $(".modal").fadeIn(); 
-            
-            setTimeout(function() { 
-                $('.modal').fadeOut();
-            }, 3000);
+        	//카트에 상품이 있는지 조회하는 ajax
+        	$.ajax({
+				url:"cartSearch",
+				data : {pro_no : pro_no},
+				type:"post",
+				success:function(result){
+					if(result == "ok"){ 
+						modal(2);
+					}else if(result=="no"){
+						modal(1);
+						
+					}
+				},
+				error : function(request, status, errorData){ 
+					alert("error code : " + request.status + "\n"
+						 + "message : " + request.responseText + "\n"
+						 + "error : " + errorData); 
+				}
+			});//ajax
         }); 
     });
 </script>

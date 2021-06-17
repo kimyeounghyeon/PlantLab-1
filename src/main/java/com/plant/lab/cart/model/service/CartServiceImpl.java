@@ -16,9 +16,14 @@ public class CartServiceImpl implements CartService{
 	private CartDAO cartDao;
 	
 	//카트 전체 리스트
-	@Transactional
 	@Override
 	public List<Cart> serchList(int user_no){
 		return cartDao.searchList(user_no);
+	}
+	
+	@Transactional
+	@Override
+	public int cartInsert(Cart cart) {
+		return cartDao.cartInsert(cart);
 	}
 }

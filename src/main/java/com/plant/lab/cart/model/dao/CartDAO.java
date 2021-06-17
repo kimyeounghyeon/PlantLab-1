@@ -18,7 +18,15 @@ public class CartDAO {
 		return sqlSession.selectList("Cart.selectList",user_no);
 	}
 	
-	//장바구니 검색
 	//장바구니 추가
+	public int cartInsert(Cart cart) {
+		int result = -1;
+		
+
+		result = sqlSession.insert("Cart.insertCart",cart);
+		result = sqlSession.insert("Cart.insertCartDetail",cart);
+		
+		return result;
+	}
 	//장바구니 삭제
 }
