@@ -36,7 +36,7 @@
                         	</c:if>
                         	<c:if test="${not empty cartList}">
                         		<c:forEach  var="vo" items="${cartList}" varStatus="status">
-                        			<table class="prolist">
+                        			<table class="prolist" id="${status.index}">
 		                                <tr>
 		                                    <td class="proCheck" rowspan="3">
 		                                        <label class="checkContain">
@@ -57,7 +57,7 @@
 		                                        <p>수량</p>
 		                                    </td>
 		                                    <td class="proCnt pro" colspan="2">
-		                                        <span>${vo.pro_cnt}</span>
+		                                        <span class="cntValue">${vo.pro_cnt}</span>
 		                                    </td>
 		                                </tr>
 		                                <tr>
@@ -65,7 +65,7 @@
 		                                        <p>가격</p>
 		                                    </td>
 		                                    <td class="proPri pro" colspan="2">
-		                                        <p><span>${vo.pro_price}</span></p>
+		                                        <p><span class="priceValue"></span></p>
 		                                        <input type="hidden" value="${vo.pro_price}" class="voPrice">
 		                                    </td>
 		                                </tr>
@@ -119,39 +119,35 @@
 </body>
 <script>
     $(function(){
-    	//금액 계산
-    	var voPrice = $('voPrice').val();
-		
-        for(var i = 0; i<voPrice.size(); i++){
-	    	voPrice[i] = value.substring(0,value.indexOf('원'));
-	    	voPrice[i] = value.replace(',','');
-        	cosole.log(i+"번 : "+voPrice);
-        }
-    	
-       /*  addB.click(function(){
-            var numVal = num.text();
-            var numPri = allPrice.text();
+    	//금액표시
+        var proAllP = $('#proAllP');
+        var allPrice = $('#allPrice');
+        var valSave = 0; //개별체크 금액 세이브용
+        var allSave = 0; //전체체크 금액 세이브용
+        var valAllSave = []; //모든 금액 세이브용
+        
+        //금액계산
+        var voPrice = $('.voPrice');
+		var proPri  = $('.priceValue');
+        var cntValue = $('.cntValue');
+        var all = 0; 
 
-            if(numPri !='(품절)'){
-            	 numPri = numChange(numPri);
-                 numPri = numPri.replace(/[^\d]+/g, "");
-                 
-                 if(numVal == stock){
-                 	swal("최대 "+stock+"개 까지만 가능합니다!", "현재 남은수량 : " + stock+"개", "info");
-                 }else{
-                	 numVal = (numVal*1)+1;
-                     numPri = (numPri*1)+(price*1);
-                 }
-                 
-                 numPri =  numPri.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        for(var i = 0; i < voPrice.length; i++){
+            var val = voPrice[i].value;
+            val = val.substring(0,val.indexOf('원'));
+	    	val = val.replace(',','');
+          
+            var num = cntValue[i].textContent
+
+            val = val*num;
+            valAllSave[i] = val;
+            allSave += val;
+            
+            val =  val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
              
-                 num.text(numVal);
-                 allPrice.text(numPri+"원");
-            }
-        });*/
-    	
-    	
-    	 
+            proPri[i].append(val);
+        }
+
         // 체크박스
         var allcheck = $('#allcheck');
         var prock = $('input[name=prock]');
@@ -160,19 +156,57 @@
         allcheck.click(function(){
             if($(this).prop('checked')){
                 prock.prop('checked',true);
+
+                all = allSave;
+                
+                var allSaveT =  allSave.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                allPrice.text(allSaveT+"원");
+                proAllP.text(allSaveT+"원");
             }else{
                 prock.prop('checked',false);
+                all = 0;
+                proAllP.text(0+"원");
+                allPrice.text(0+"원");
             }
         });
 
         //개별체크시
         prock.click(function(){
+            //체크개수
             var cnt = $("input[name=prock]:checked").length;
-            console.log
+            
+            //전체체크유무
             if(prock.length == cnt){
                 allcheck.prop('checked',true);
             }else{
                 allcheck.prop('checked',false);
+            }
+
+            //총금액 계산
+            
+            if($(this).is(":checked") == true){
+                var table = $(this).parents('table').attr('id');
+                
+                all += (valAllSave[table]);
+                valSave = all;
+                valSave =  valSave.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                allPrice.text(valSave+"원");
+                proAllP.text(valSave+"원");
+            }else{
+                var table = $(this).parents('table').attr('id');
+                
+                var allValue = proAllP.text();
+                allValue = allValue.substring(0,allValue.indexOf('원'));
+	    	    allValue = allValue.replace(',','');
+
+                all -= (valAllSave[table]);
+
+                allValue -= (valAllSave[table]);
+                valSave = allValue;
+                
+                valSave =  valSave.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                allPrice.text(valSave+"원");
+                proAllP.text(valSave+"원");
             }
         })
     })

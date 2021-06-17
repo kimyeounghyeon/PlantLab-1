@@ -1,14 +1,21 @@
 package com.plant.lab.cart.model.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.plant.lab.cart.model.service.CartService;
@@ -27,7 +34,8 @@ public class CartController {
 	public ModelAndView cartListService(ModelAndView mv) {
 		try{
 			logger.info("===============카트 페이지===============");
-			//테스트용 나중에 삭제
+			
+			//TODO 테스트용 나중에 삭제
 			int user_no = 1;
 			
 			List<Cart> cart = new ArrayList<Cart>();
@@ -43,5 +51,49 @@ public class CartController {
 		}
 		
 		return mv;
+	}
+
+//카트 상품 서치 AJAX
+	@RequestMapping(value="/cartSearch", method=RequestMethod.POST)
+	public void cartSearch(@RequestParam(name = "pro_no") int pro_no,
+			HttpServletResponse response) throws IOException{
+		try {
+			//TODO 테스트용 나중에 삭제
+			int user_no = 1;
+			
+			PrintWriter out = response.getWriter();
+			List<Cart> cartL = cartService.serchList(user_no);
+			
+			for(int i = 0; i<cartL.size(); i++){
+				if(cartL.get(i).getCart_no() == pro_no) {
+					logger.info(pro_no+"는 카트에 존재함");
+					out.print("ok");
+					out.flush();
+					out.close();
+					break;
+				}
+			}
+			
+			logger.info(pro_no+"는 카트에 없음");
+			out.print("no");
+			
+			out.close();
+		}catch (Exception e) {
+			logger.info("!!!!!!카트 AJAX 오류!!!!!!");
+			e.printStackTrace();
+		}
+	}
+	
+	
+//카트 상품 등록 AJAX
+	public void cartInsert(Cart cart,HttpServletResponse response)throws IOException{
+		try {
+			//TODO 테스트용 나중에 삭제
+			cart.setUser_no(1);
+			
+		}catch (Exception e) {
+			logger.info("!!!!!!카트 AJAX 등록 오류!!!!!!");
+			e.printStackTrace();
+		}
 	}
 }

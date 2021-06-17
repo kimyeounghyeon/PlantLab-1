@@ -13,4 +13,12 @@
 		ON d.pro_no = p.pro_no
 		WHERE c.user_no = #{user_no}
 	</select>
+	
+	<insert id="insertCart" parameterType="Cart" flushCache="true" statementType="PREPARED">
+		INSERT INTO cart_tb VALUES(Cart_SEQ.NEXTVAL,#{user_no})
+	</insert>
+	
+	<insert id="insertCartDetail" parameterType="Cart" flushCache="true" statementType="PREPARED">
+		INSERT INTO cart_detail_tb VALUES((select max(cart_no) from cart_tb),#{pro_no},#{pro_cnt})
+	</insert>
 </mapper>
