@@ -37,9 +37,7 @@
 	</select>
 	
 	<select id="loginMember" parameterType="MemberVO" resultMap="MemberMap">
-
-		select * from user_tb where user_id=#{userId} and user_pwd=#{userPwd}
-
+		SELECT * FROM USER_TB WHERE USER_ID =#{userId} AND USER_PWD = #{userPwd} 
 	</select>
 
 	<insert id="insertMember" parameterType="MemberVO" statementType="PREPARED" >

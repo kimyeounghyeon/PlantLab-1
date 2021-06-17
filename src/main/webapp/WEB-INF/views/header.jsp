@@ -10,12 +10,12 @@
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/resources/css/login.css">
 <meta charset="UTF-8">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <title>Insert title here</title>
 
 
 <style type="text/css">
 * {
-	font-family: 'Jeju Myeongjo';
 	color: #625b54;
 	line-height: 30px;
 }
@@ -146,9 +146,9 @@ a {
 					<br>
 					<span class="smsg">-</span><br>
 					<br>
-					<form class="login-form" id="frm">
-						<input type="text" placeholder="id" name="id" /> <input
-							type="password" placeholder="password" name="passwd" /> <br>
+					<form class="login-form" id="frmLogin">
+						<input type="text" placeholder="id" name="userId" /> <input
+							type="password" placeholder="password" name="userPwd" /> <br>
 						<button class="btnsearch" id="btnLogin">login</button>
 						<p class="message">
 							<a href="<%=request.getContextPath()%>/page/member/searchIdNPw.jsp">ID/PW찾기</a>		
@@ -192,36 +192,55 @@ a {
 
 
 
-	</div>
 
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 	<script>
 		$(function() {
+			// 모달창 열기 버튼
 			$("#loginbtn").click(login);
+			// 모달창 닫기 버튼
 			$(".close").click(loginclose);
-			$("#amyPage").click(function() {
-				location.href = '#';
+			// 모달창 위 로그인 버튼 
+			$("#btnLogin").click(function() {
+				any = 1;
+				var frm = document.getElementById("frmLogin");
+				frm.action = "login";
+				frm.method = "post";
+				frm.submit();
+				
+				$.ajax({
+					url : "login",
+					type : "post",
+					data : {
+						diary_no : index
+					},
+					success : function(data) {
+						console.log("show 클래스 없다");
+						console.log("delete : " + $(".liketd#"+index+" .user_name").val());
+						console.log("delete : " + $(".liketd#"+index+" .diary_no").val());
+						$("#"+index+" .login").css("display", "none");
+						$("#"+index+" .like").css("display", "block");
+						$("#"+index+" .liketd").addClass("show");
+					},
+					error : function() {
+						alert("잘못 된 접근입니다.");
+					}
+				});
+				
+				
+				
 			});
-
+			
+			// 모달창 열기
 			function login() {
 				$(".loginmodal").css("display", "block");
 				$(".form").css("display", "block");
 			}
-			;
 
+			// 모달창 닫기
 			function loginclose() {
 				$(".loginmodal").css("display", "none");
 			}
-			;
-
-			$("#btnLogin").click(function() {
-				any = 1;
-				var frm = document.getElementById("frm");
-				frm.action = "#";
-				frm.method = "post";
-				frm.submit();
-			});
-
 		});
 	</script>
 

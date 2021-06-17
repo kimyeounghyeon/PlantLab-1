@@ -5,11 +5,11 @@
 		insert into like_tb values(#{diary_no}, #{user_no})
 	</insert>
 	
-	<select id="likecnt" resultType="int">
-		select count(*) as cnt from diary_img_tb where diary_no = #{diary_no}
+	<select id="likecnt" parameterType="int" resultType="int">
+		select count(*) as like_cnt from like_tb where diary_no = #{diary_no} and user_no = #{user_no}
 	</select>
 	
-	<delete id="deletelike" flushCache="true" statementType="PREPARED">
-		delete from like_tb where diary_no = #{diary_no}
+	<delete id="deletelike" parameterType="LikeVO" flushCache="true" statementType="PREPARED">
+		delete from like_tb where diary_no = #{diary_no} and user_no = #{user_no}
 	</delete>
 </mapper>

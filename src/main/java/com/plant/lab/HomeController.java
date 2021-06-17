@@ -274,6 +274,7 @@ public class HomeController {
 			MemberVO vo	
 			, HttpServletResponse response
 			) {
+		
 		logger.info(vo.toString());
 		int result = 0;
 			result = mService.insertMember(vo);
@@ -292,29 +293,23 @@ public class HomeController {
 		}
 	}
 	
-	@RequestMapping(value="login", method = {RequestMethod.POST, RequestMethod.GET})
-	public String memberLogin(MemberVO vo, Model model, HttpServletRequest request, @RequestParam(name="id", required=false) String userId, @RequestParam(name="passwd", required=false) String userPwd) {
+
+
+
+	@RequestMapping(value="login")
+	public String memberLogin(MemberVO vo, Model model, HttpSession session) {
 		
-		vo.setUserId(userId);
-		vo.setUserPwd(userPwd);
-		System.out.println(userId);
-		System.out.println(userPwd);
-		MemberVO login = mService.loginMember(vo);
-		System.out.println(vo);
-		System.out.println("jsp페이지 : " + login);
+		System.out.println("[계원] id와 pwd 정보 들어있음을 확인" +vo.toString());  
+		
+		MemberVO login = mService.loginMember(vo);   // 로그인 성공시 vo에 정보가 들어있고. 실패시 null
 
 		if (login == null) {
 			model.addAttribute("msg", "로그인 실패");
-			return "errorPage";
 		} else {
-
-			HttpSession session = request.getSession();
-
 			session.setAttribute("loginMember", vo);
-
 		}
 
-		return "login";
+		return "logIn";
 
 	}
 	
