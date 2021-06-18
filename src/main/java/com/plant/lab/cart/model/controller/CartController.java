@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -64,18 +65,22 @@ public class CartController {
 			PrintWriter out = response.getWriter();
 			List<Cart> cartL = cartService.serchList(user_no);
 			
+			int result = 0;
 			for(int i = 0; i<cartL.size(); i++){
-				if(cartL.get(i).getCart_no() == pro_no) {
-					logger.info(pro_no+"는 카트에 존재함");
-					out.print("ok");
-					out.flush();
-					out.close();
+				if(cartL.get(i).getPro_no() == pro_no) {
+					result = 1;
 					break;
 				}
 			}
 			
-			logger.info(pro_no+"는 카트에 없음");
-			out.print("no");
+			
+			if(result == 1) {
+				logger.info(pro_no+"는 카트에 존재함");
+				out.print("ok");
+			}else {
+				logger.info(pro_no+"는 카트에 없음!!");
+				out.print("no");
+			}
 			
 			out.close();
 		}catch (Exception e) {
@@ -92,11 +97,25 @@ public class CartController {
 			//TODO 테스트용 나중에 삭제
 			cart.setUser_no(1);
 			
+			//장바구니가 있는지 확인
+			Cart cartCk = cartService.searchHasCart(cart.getUser_no());
 			
-			int result = cartService.cartInsert(cart);
-			System.out.println("no확인:"+cart.getPro_no());
+			if(cartCk==null) {
+				logger.info("카트없음!!!");
+				//카트가 없을경우 카트 생성
+				int cartRe = cartService.cartInsert(cart);
+				if(cartRe==1) {
+					logger.info("카트생성완료");
+				}else{
+					logger.info("카트생성오류");
+				}
+			}else {
+				logger.info("카트있음!!!");
+			}
 			
-			//int result = 1;
+			int result = cartService.cartDetailInsert(cart);
+			logger.info("no확인:"+cart.getPro_no());
+			
 			if(result == 0) {
 				logger.info("!!!!!!카트 인서트 오류!!!!!!");
 			}else {
@@ -108,6 +127,33 @@ public class CartController {
 			
 		}catch (Exception e) {
 			logger.info("!!!!!!카트 AJAX2 등록 오류!!!!!!");
+			e.printStackTrace();
+		}
+	}
+	
+//카트 상품 삭제 AJAX
+	@RequestMapping(value="/cartDel", method=RequestMethod.POST)
+	public void cartDel(Cart cart,HttpServletResponse response,HttpServletRequest request)throws IOException{
+		try {
+			//TODO 테스트용 나중에 삭제
+			
+			cart.setUser_no(1);
+			cart.setPro_no(Integer.parseInt(request.getParameter("pro_no")));
+			System.out.println("상품번호확인삭제:"+cart.getPro_cnt());
+			
+			int result = cartService.cartDetailDel(cart);
+			
+			PrintWriter out = response.getWriter();
+			if(result == 1) {
+				out.print("del");
+				out.flush();
+				out.close();
+			}else {
+				logger.info("!!!!!!카트 딜리트 오류!!!!!!");
+			}
+			
+		}catch (Exception e) {
+			logger.info("!!!!!!카트 AJAX 삭제 오류!!!!!!");
 			e.printStackTrace();
 		}
 	}

@@ -23,94 +23,93 @@
 
             <article class="main_article">
                 <div class="cart">
-                    <label class="checkContain">
-                        <input type="checkbox" id="allcheck">
-                        <span class="checkmark"></span>
-                        
-                    </label>
-
                     <div class="cartList">  
-                        <form>
-                        	<c:if test="${empty cartList}">
-                        		<h3>상품이 존재하지 않습니다.</h3>
-                        	</c:if>
-                        	<c:if test="${not empty cartList}">
-                        		<c:forEach  var="vo" items="${cartList}" varStatus="status">
-                        			<table class="prolist" id="${status.index}">
-		                                <tr>
-		                                    <td class="proCheck" rowspan="3">
-		                                        <label class="checkContain">
-		                                            <input type="checkbox" name="prock">
-		                                            <span class="checkmark"></span>
-		                                        </label>
-		                                    </td>
-		                                    <td class="proImg" rowspan="3">
-		                                        <img src="${vo.pro_image}">
-		                                    </td>
-		                                    <td class="space" rowspan="3"></td>
-		                                    <td class="proName" colspan="3">
-		                                        <p>${vo.pro_name}</p>
-		                                    </td>
-		                                </tr>
-		                                <tr>
-		                                    <td class="proGuide" colspan="2">
-		                                        <p>수량</p>
-		                                    </td>
-		                                    <td class="proCnt pro" colspan="2">
-		                                        <span class="cntValue">${vo.pro_cnt}</span>
-		                                    </td>
-		                                </tr>
-		                                <tr>
-		                                    <td class="proGuide" colspan="2">
-		                                        <p>가격</p>
-		                                    </td>
-		                                    <td class="proPri pro" colspan="2">
-		                                        <p><span class="priceValue"></span></p>
-		                                        <input type="hidden" value="${vo.pro_price}" class="voPrice">
-		                                    </td>
-		                                </tr>
-		                            </table>	
-		                            
-                        		</c:forEach>
-                        	</c:if>
-                        	
-                        	<hr>
-                        	
-                            <table class="infoT">
-                                <tr>
-                                    <td colspan="2">
-                                        <p class="info">총 상품 가격</p>
-                                        <p id="proAllP" class="price">0원</p>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2">
-                                        <p class="info">배송비</p>
-                                        <p id="deliv" class="price">5000원</p>
-                                        <p id="delivContent">얼마이상 구매시 배송비는 0원 <br> 단 제주도 어쩌고저쩌고</p>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2">
-                                        <p class="info">최종 결제 금액</p>
-                                        <p id="allPrice" class="price">0원</p>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="buyBG">
-                                        <button class="infoBtn infoB" id="choseDel">선택상품 삭제</button>
-                                    </td>
-                                    <td>
-                                        <button class="infoBtn infoB" id="choseBuy">선택상품 구매</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2" class="buyBG"> 
-                                        <button type="button" class="infoBtn" id="allBuy" onClick="location.href='44_finalOrder.html'">전체상품구매</button>
-                                    </td>
-                                </tr>
-                            </table>
-                        </form>
+                       	<c:if test="${empty cartList}">
+                       		<h3>상품이 존재하지 않습니다.</h3>
+                       	</c:if>
+                       	
+                       	<c:if test="${not empty cartList}">
+                       	<label class="checkContain">
+	                        <input type="checkbox" id="allcheck">
+	                        <span class="checkmark"></span>
+	                    </label>
+	                    
+                       		<c:forEach  var="vo" items="${cartList}" varStatus="status">
+                       			<input type="hidden" class="pro_no" name="pro_no" value="${vo.pro_no}">
+                       			<table class="prolist" id="${status.index}">
+	                                <tr>
+	                                    <td class="proCheck" rowspan="3">
+	                                        <label class="checkContain">
+	                                            <input type="checkbox" name="prock">
+	                                            <span class="checkmark"></span>
+	                                        </label>
+	                                    </td>
+	                                    <td class="proImg" rowspan="3">
+	                                        <img src="${vo.pro_image}">
+	                                    </td>
+	                                    <td class="space" rowspan="3"></td>
+	                                    <td class="proName" colspan="3">
+	                                        <p>${vo.pro_name}</p>
+	                                    </td>
+	                                </tr>
+	                                <tr>
+	                                    <td class="proGuide" colspan="2">
+	                                        <p>수량</p>
+	                                    </td>
+	                                    <td class="proCnt pro" colspan="2">
+	                                        <span class="cntValue">${vo.pro_cnt}</span>
+	                                    </td>
+	                                </tr>
+	                                <tr>
+	                                    <td class="proGuide" colspan="2">
+	                                        <p>가격</p>
+	                                    </td>
+	                                    <td class="proPri pro" colspan="2">
+	                                        <p><span class="priceValue"></span></p>
+	                                        <input type="hidden" value="${vo.pro_price}" class="voPrice">
+	                                    </td>
+	                                </tr>
+	                            </table>	
+	                            
+                       		</c:forEach>
+                       	</c:if>
+                       	
+                       	<hr>
+                       	
+                           <table class="infoT">
+                               <tr>
+                                   <td colspan="2">
+                                       <p class="info">총 상품 가격</p>
+                                       <p id="proAllP" class="price">0원</p>
+                                   </td>
+                               </tr>
+                               <tr>
+                                   <td colspan="2">
+                                       <p class="info">배송비</p>
+                                       <p id="deliv" class="price">5000원</p>
+                                       <p id="delivContent">얼마이상 구매시 배송비는 0원 <br> 단 제주도 어쩌고저쩌고</p>
+                                   </td>
+                               </tr>
+                               <tr>
+                                   <td colspan="2">
+                                       <p class="info">최종 결제 금액</p>
+                                       <p id="allPrice" class="price">0원</p>
+                                   </td>
+                               </tr>
+                               <tr>
+                                   <td class="buyBG">
+                                       <button class="infoBtn infoB" id="choseDel">선택상품 삭제</button>
+                                   </td>
+                                   <td>
+                                       <button class="infoBtn infoB" id="choseBuy">선택상품 구매</button>
+                                   </td>
+                               </tr>
+                               <tr>
+                                   <td colspan="2" class="buyBG"> 
+                                       <button type="button" class="infoBtn" id="allBuy" onClick="location.href='44_finalOrder.html'">전체상품구매</button>
+                                   </td>
+                               </tr>
+                           </table>
                     </div>
                 </div>
             </article>
@@ -119,6 +118,11 @@
 </body>
 <script>
     $(function(){
+    	//pro_no 보관용
+    	var pro_no = $('.pro_no');
+        var proNo = [];
+    	
+    	
     	//금액표시
         var proAllP = $('#proAllP');
         var allPrice = $('#allPrice');
@@ -162,11 +166,19 @@
                 var allSaveT =  allSave.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                 allPrice.text(allSaveT+"원");
                 proAllP.text(allSaveT+"원");
+                
+                for(var a=0; a<pro_no.length;a++){
+                    proNo[a] = pro_no[a].value;
+                }
             }else{
                 prock.prop('checked',false);
                 all = 0;
                 proAllP.text(0+"원");
                 allPrice.text(0+"원");
+                
+                for(var a=0; a<pro_no.length;a++){
+                    proNo[a].pop();
+                }
             }
         });
 
@@ -189,12 +201,16 @@
                 
                 all += (valAllSave[table]);
                 valSave = all;
+                
                 valSave =  valSave.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                 allPrice.text(valSave+"원");
                 proAllP.text(valSave+"원");
+                
+                proNo[proNo.length] = pro_no[table].value;
             }else{
                 var table = $(this).parents('table').attr('id');
-                
+                var proTV = $(this).parents('table').children('input[name=pro_no]');
+
                 var allValue = proAllP.text();
                 allValue = allValue.substring(0,allValue.indexOf('원'));
 	    	    allValue = allValue.replace(',','');
@@ -207,8 +223,48 @@
                 valSave =  valSave.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                 allPrice.text(valSave+"원");
                 proAllP.text(valSave+"원");
+                
+                for(var a=0; a<proNo.length;a++){
+                    if(proNo[a] == proTV.val()){
+                        proNo.splice(a,1);
+                        
+                        a--;
+                    }
+                }
+                
+                for(var a=0; a<proNo.length;a++){
+                    console.log("삭제확인"+proNo[a]);
+                }
             }
-        })
-    })
+        });
+        
+       //삭제B
+       var choseDel = $('#choseDel');
+
+        choseDel.click(function(){
+            for(var a=0; a<proNo.length; a++){
+            	console.log(proNo[a]);
+            	$.ajax({
+					url:"cartDel",
+					data : {pro_no:proNo[a]},
+    				type:"post",
+    				success:function(result){
+    					if(result == "del"){ //삭제 성공시
+    						setTimeout(function(){
+    							location.reload();
+    						},1000); // 3000밀리초 = 3초
+    					}else{
+    						swal("오류","다시 시도해주세요.", "info");
+    					}
+    				},
+    				error : function(request, status, errorData){ 
+    					alert("error code : " + request.status + "\n"
+    						 + "message : " + request.responseText + "\n"
+    						 + "error : " + errorData); 
+    				}
+				});//등록ajax
+            }
+        });
+    });
 </script>
 </html>

@@ -370,6 +370,7 @@
     					}else if(result=="no"){ //카트에 상품이 없을 경우
     						//카트등록 ajax
     						var numVal = num.text();
+    						
     						$.ajax({
     							url:"cartInsert",
     							data : {pro_no : pro_no,
@@ -386,7 +387,7 @@
     		    					alert("error code : " + request.status + "\n"
     		    						 + "message : " + request.responseText + "\n"
     		    						 + "error : " + errorData); 
-    		    				}
+    		    				} 
     						});//등록ajax
     					}
     				},
