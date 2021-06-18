@@ -7,8 +7,9 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<title>無以林 Diary</title>
-<link href="${path}/resources/css/Oneday/OnedayMain.css" rel="stylesheet" />
+<title>無以林 OnedayClass</title>
+<link href="${path}/resources/css/Oneday/OnedayMain.css"
+	rel="stylesheet" />
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/earlyaccess/jejumyeongjo.css" />
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -19,23 +20,26 @@
 		<h3 class="subtitle">oneday class</h3>
 		<div class="dback">
 			<c:forEach var="o" items="${one}" varStatus="status">
-					
-					<div class="onediv" >
+
+				<div class="onediv">
+					<a	href="${path}/onedayDetail?onedayNo=${o.oneday_no}">
 						<table class="onecontent">
 							<tr class="on omgtr">
-								<td class="oneimg" id=${status.index } colspan="2"><img src="${o.oneday_img }" class="oneimg"></td>
-								
+								<td class="oneimg" id=${status.index } colspan="2"><img
+									src="${o.oneday_img }" class="oneimg"></td>
+
 							</tr>
-			
+
 							<tr class="on contextone">
 								<td class="ocontext" colspan="2">${o.oneday_title }</td>
-								<input type="hidden" name="oneday_no" >
-								
+								<input type="hidden" name="oneday_no">
+
 							</tr>
-							
+
 						</table>
-					</div>
-				</c:forEach>
+					</a>
+				</div>
+			</c:forEach>
 		</div>
 	</div>
 
@@ -43,7 +47,7 @@
 
 
 	<script>
-		$(function(){
+<%-- 		$(function(){
 				var index;
 			$(".oneimg").click(function(){
 				
@@ -56,7 +60,7 @@
 				location.href="<%=request.getContextPath()%>/com.plant.lab.oneday.controller/OnedayDController" ;
 				
 				
-			})
+			}) --%>
 			
 			
 			

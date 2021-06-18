@@ -1,0 +1,42 @@
+@charset "UTF-8";@charset "UTF-8";*{
+   font-family: 'Jeju Myeongjo';
+   font-size: 13pt;
+   color : #1e1e1e;
+   line-height: 30px;
+   
+   }
+   
+   
+#calendar{
+	float:left;
+	width:400px;
+	height:500px;
+}
+#oneContent{
+		clear:both;
+	float:right;
+	display:inline-block;
+		width:400px;
+	height:200px;
+}
+#oneName{
+	clear:both;
+	float:right;
+		display:inline-block;
+		width:400px;
+	height:100px;
+}
+#onePhone{
+		clear:both;
+	float:right;
+		display:inline-block;
+		width:400px;
+	height:100px;
+}
+#oneRequest{
+		clear:both;
+	float:right;
+		display:inline-block;
+		width:400px;
+	height:100px;
+}

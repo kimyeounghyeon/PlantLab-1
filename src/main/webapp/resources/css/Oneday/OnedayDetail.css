@@ -1,0 +1,105 @@
+@charset "UTF-8";
+
+@charset "UTF-8";@charset "UTF-8";*{
+   font-family: 'Jeju Myeongjo';
+   font-size: 13pt;
+   color : #1e1e1e;
+   line-height: 30px;
+   
+   }
+   
+#fullmain {
+	text-align: center;
+	width: 1280px;
+	margin: 0 auto;
+	padding: 0;
+	clear: both;
+}
+
+#main {
+	display: inline-block;
+	text-align: center;
+	width: 1250px;
+	margin: 0 auto;
+	padding: 0;
+}
+
+.subtitle {
+	margin-top: 0;
+	font-size: 20pt;
+	text-align: center;
+}
+
+#classInto {
+	line-height:100px;
+	text-align: center;
+	vertical-align: middle;
+	display: inline-block;
+	width: 960px;
+	height: 100px;
+	border: 1px solid black;
+	margin-bottom: 30px;
+	margin-top: 10px;
+}
+
+#classImg {
+	line-height: 550px;
+	text-align: center;
+	vertical-align: middle;
+	display: inline-block;
+	margin-left: 60px; 
+	width : 425px;
+	height: 550px;
+	display: inline-block;
+	width: 455px;
+}
+
+#null {
+	vertical-align: middle;
+	text-align: center;
+	display: inline-block;
+	height: 550px;
+	width: 40px;
+	border: none;
+}
+
+#classContent {
+	line-height:50px;
+	vertical-align: middle;
+	text-align: center;
+	display: inline-block;
+	margin-right: 60px;
+	height: 550px;
+	width: 455px;
+	
+}
+
+#classText{
+	
+	background-color:white;
+	width: 455px;
+	height: 550px;
+	text-align:center;
+	vertical-align: middle;
+	z-index: 1;
+	
+}
+#classBtn {
+	clear: both;
+	display: block;
+	width: 450px;
+	height: 80px;
+	margin-left: 505px;
+	margin-top: 20px;
+	border: 1px solid black;
+	width: 250px;
+}
+
+#classImg>img {
+	text-align: center;
+	vertical-align: middle;
+	width: 455px;
+	height: 553px;
+	margin: 0 auto;
+	padding: 0;
+}

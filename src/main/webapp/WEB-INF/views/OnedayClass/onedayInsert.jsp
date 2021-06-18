@@ -10,7 +10,7 @@
 
 
 <meta charset="UTF-8">
-<title>無以林 class submit</title>
+<title>無以林 class insert</title>
 <style type="text/css">
 </style>
 </head>

@@ -59,7 +59,7 @@ a {
 
 .top {
 	margin-right: 0;
-	margin-left: 30px;
+	margin-left: 48px;
 	font-size: 14px;
 }
 

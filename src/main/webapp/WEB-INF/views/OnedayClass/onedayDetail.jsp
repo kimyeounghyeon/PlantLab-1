@@ -1,4 +1,3 @@
-<link href="${path}/resources/css/font.css" rel="stylesheet" />
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -6,10 +5,11 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<link href="${path}/resources/css/Oneday/OnedayAply.css" rel="stylesheet" />
+<link href="${path}/resources/css/font.css" rel="stylesheet" />
+<link href="${path}/resources/css/Oneday/OnedayDetail.css" rel="stylesheet" />
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <meta charset="UTF-8">
-<title>無以林 class apply</title>
+<title>無以林 classDtail</title>
 </head>
 
 <body>
@@ -22,35 +22,36 @@
 
 
 <h3 class="subtitle">class</h3>
-<%-- <c:forEach var="o" items="${one}" varStatus="status"> --%>
 	
 <div id ="classInto">
-${one.oneday_title}
+${oneVo.oneday_title}
 </div>
 
 <div id="classImg"> 
-<img src= "${one.oneday_img }" alt="img">
+<img src= "${oneVo.oneday_img }" alt="img">
 </div>
 <div id="null" ></div>  <!--classImg 와 classContent 사이를 띄어놓는 div-->
 <div id="classContent">
-${one.oneday_content}
-<br>
-정원: ${one.oneday_maxPerson }
-<br>
-신청기간: ${one.oneday_start } ~ ${one.oneday_end }
+<textarea id="classText" style="resize: none; " disabled readonly="readonly">
+
+${oneVo.oneday_content}
+
+신청기간: ${oneVo.oneday_start } ~ ${oneVo.oneday_end }
+
+</textarea>
 </div>
+<br>
 
 <button id="classBtn" type="button" >신청</button>
 
 
-<%-- </c:forEach> --%>
-
 
 </div>
+
 </div>
 
 <script type="text/javascript">
-/* $(function(){
+/*  $(function(){
 	$("#classBtn").clik(function(){
 		location.href = "onedaySubmit";
 		
@@ -60,7 +61,7 @@ ${one.oneday_content}
 	
 	
 	
-}) */
+})  */
 </script>
 
 

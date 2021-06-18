@@ -21,7 +21,7 @@ public class OnedayController {
 	private OnedayServiceImpl oService ;
 	
 	
-	@RequestMapping(value = "onedayMain" , method = RequestMethod.GET)
+	@RequestMapping(value = "onedayMain" , method = RequestMethod.GET)  //selectlist
 	public ModelAndView onedayMain(ModelAndView mv) {
 
 		List<OnedayVo > one = new ArrayList<OnedayVo>();
@@ -38,11 +38,12 @@ public class OnedayController {
 	}
 
 	
-	@RequestMapping(value ="onedayDetail" , method = RequestMethod.GET)
-	public ModelAndView onedayDetail(ModelAndView mv , OnedayVo oneVo , @RequestParam("oneday_no") OnedayVo oneday_no) {
-		/* oneVo.setOneday_no(oneday_no); */
-		
-		 oneVo = oService.onedayselect(oneVo);
+	@RequestMapping(value ="/onedayDetail" , method = RequestMethod.GET)   //selectone
+	public ModelAndView onedayDetail(ModelAndView mv, @RequestParam(name= "onedayNo") int oneday_no) {
+		 OnedayVo one = new OnedayVo();
+		 one.setOneday_no(oneday_no);
+		 OnedayVo oneVo = oService.onedayselect(one);       //selectone 메소드 실행
+		 
 		 if (oneVo==null) {
 			 mv.addObject("msg", "이미 마감된 클래스 입니다.");
 			 mv.setViewName("<script>history.back();</script>");
@@ -53,5 +54,39 @@ public class OnedayController {
 		 mv.setViewName("OnedayClass/onedayDetail");
 			return mv;
 	}
-		
+	
+	/*
+	 * @RequestMapping(value = "/onedayReserve" , method = RequestMethod.GET) // 클래스 예약  rs에 insert
+	 * public ModelAndView onedayReserve() {
+	 * 
+	 * }
+	 */
+	
+	
+	/*
+	 * @RequestMapping(value = "/onedayCancle" , method = RequestMethod.GET) // 클래스
+	 * 예약 취소 delete public ModelAndView onedayCancle() {
+	 * 
+	 * }
+	 */
+	
+	 
+	
+	
+//	 @RequestMapping(value = "/onedayInsert" , method = RequestMethod.GET) //  클래스 등록  oneday 에 insert
+//	 public ModelAndView onedayInsert() {
+//		 
+//	 }
+	 
+	 
+//	 @RequestMapping(value = "/onedayUpdate" , method = RequestMethod.GET) //  클래스 수정  oneday 에 update
+//	 public ModelAndView onedayUpdate() {
+//		 
+//	 }
+	 
+	 
+//	 @RequestMapping(value = "/onedayDelete" , method = RequestMethod.GET) //  클래스 삭제  oneday 에 delete
+//	 public ModelAndView onedayDelete() {
+//		 
+//	 }
 }
