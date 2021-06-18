@@ -79,20 +79,35 @@ public class CartController {
 			
 			out.close();
 		}catch (Exception e) {
-			logger.info("!!!!!!카트 AJAX 오류!!!!!!");
+			logger.info("!!!!!!카트 AJAX1 오류!!!!!!");
 			e.printStackTrace();
 		}
 	}
 	
 	
 //카트 상품 등록 AJAX
+	@RequestMapping(value="/cartInsert", method=RequestMethod.POST)
 	public void cartInsert(Cart cart,HttpServletResponse response)throws IOException{
 		try {
 			//TODO 테스트용 나중에 삭제
 			cart.setUser_no(1);
 			
+			
+			int result = cartService.cartInsert(cart);
+			System.out.println("no확인:"+cart.getPro_no());
+			
+			//int result = 1;
+			if(result == 0) {
+				logger.info("!!!!!!카트 인서트 오류!!!!!!");
+			}else {
+				PrintWriter out = response.getWriter();
+				out.print("insert");
+				out.flush();
+				out.close();
+			}
+			
 		}catch (Exception e) {
-			logger.info("!!!!!!카트 AJAX 등록 오류!!!!!!");
+			logger.info("!!!!!!카트 AJAX2 등록 오류!!!!!!");
 			e.printStackTrace();
 		}
 	}

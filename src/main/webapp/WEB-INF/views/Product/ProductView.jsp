@@ -75,7 +75,7 @@
                         <div class="modal_content">
                             <p>
                                 장바구니에 상품이 담겼습니다 
-                                <span><a href="43_finalCart.html">장바구니로 이동</a></span>
+                                <span><a href="${path}/cart">장바구니로 이동</a></span>
                             </p>
                         </div>
                     </div>
@@ -83,7 +83,7 @@
                         <div class="modal_content">
                             <p>
                                 장바구니에 이미 상품이 있습니다
-                                <span><a href="43_finalCart.html">장바구니로 이동</a></span>
+                                <span><a href="${path}/cart">장바구니로 이동</a></span>
                             </p>
                         </div>
                     </div>
@@ -355,25 +355,48 @@
     	console.log("확인:"+pro_no);
     	
         $("#basketB").click(function(){ 
-        	//카트에 상품이 있는지 조회하는 ajax
-        	$.ajax({
-				url:"cartSearch",
-				data : {pro_no : pro_no},
-				type:"post",
-				success:function(result){
-					if(result == "ok"){ 
-						modal(2);
-					}else if(result=="no"){
-						modal(1);
-						
-					}
-				},
-				error : function(request, status, errorData){ 
-					alert("error code : " + request.status + "\n"
-						 + "message : " + request.responseText + "\n"
-						 + "error : " + errorData); 
-				}
-			});//ajax
+        	var numPri = allPrice.text();
+        	if(numPri == '(품절)'){
+        		swal("상품이 품절되었습니다.","", "info");
+        	}else{
+        		//카트에 상품이 있는지 조회하는 ajax
+            	$.ajax({
+    				url:"cartSearch",
+    				data : {pro_no : pro_no},
+    				type:"post",
+    				success:function(result){
+    					if(result == "ok"){ //상품이 있을 경우
+    						modal(2);
+    					}else if(result=="no"){ //카트에 상품이 없을 경우
+    						//카트등록 ajax
+    						var numVal = num.text();
+    						$.ajax({
+    							url:"cartInsert",
+    							data : {pro_no : pro_no,
+    									pro_cnt : numVal},
+    		    				type:"post",
+    		    				success:function(result){
+    		    					if(result == "insert"){ //등록했을경우
+    		    						modal(1);
+    		    					}else{
+    		    						swal("오류","다시 시도해주세요.", "info");
+    		    					}
+    		    				},
+    		    				error : function(request, status, errorData){ 
+    		    					alert("error code : " + request.status + "\n"
+    		    						 + "message : " + request.responseText + "\n"
+    		    						 + "error : " + errorData); 
+    		    				}
+    						});//등록ajax
+    					}
+    				},
+    				error : function(request, status, errorData){ 
+    					alert("error code : " + request.status + "\n"
+    						 + "message : " + request.responseText + "\n"
+    						 + "error : " + errorData); 
+    				}
+    			});//ajax
+        	}
         }); 
     });
 </script>
