@@ -1,10 +1,12 @@
 package com.plant.lab;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,6 +25,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.plant.lab.diary.model.Service.DiaryService;
 import com.plant.lab.diary.model.Service.DiaryServiceImpl;
 import com.plant.lab.diary.model.vo.DiaryVO;
@@ -42,7 +48,7 @@ public class HomeController {
 	private MemberService mService;
 	
 	@Autowired
-	private DiaryServiceImpl dService;
+	private DiaryService dService;
 	
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -111,11 +117,11 @@ public class HomeController {
 
 		// 로그인 전에 임시 테스트 코드입니다.
 		//TODO: session 
-		LikeVO sessionVO = new LikeVO();
-		sessionVO.setUser_no(122);   // session.getAtt....
-		
-		mv.addObject("listDiary", dService.listDiary());
-		mv.addObject("likeList", dService.likeList(sessionVO));
+//		LikeVO sessionVO = new LikeVO();
+//		sessionVO.setUser_no(122);   // session.getAtt....
+//		
+//		mv.addObject("listDiary", dService.listDiary());
+//		mv.addObject("likeList", dService.likeList(sessionVO));
 		
 		mv.setViewName("Plant/Diary");
 		System.out.println("[영현]diary view 페이지 이동");
@@ -145,31 +151,129 @@ public class HomeController {
 		return mv;
 	}
 	
-	@RequestMapping(value = "like.do", method = RequestMethod.POST)
-	public ModelAndView like(ModelAndView mv, HttpServletRequest request, LikeVO lvo, @RequestParam(name = "user_no") int user_no, @RequestParam(name = "diary_no") int diary_no) {
+	
+	@RequestMapping(value = "/diary.do", method = RequestMethod.POST, produces = "application/text; charset=UTF-8")
+	@ResponseBody
+	public void getDiary(HttpSession session, HttpServletResponse response) {
+		System.out.println("[영현]diary.do 진입");
+
+		// 로그인 전에 임시 테스트 코드입니다.
+		//TODO: session 
+		LikeVO sessionVO = new LikeVO();
+		sessionVO.setUser_no(122);   // session.getAtt....
+		List<DiaryVO> listDiary = dService.listDiary();
+		List<Integer> likeList = dService.likeList(sessionVO);
+		JsonArray jArray = new JsonArray();
+		response.setCharacterEncoding("UTF-8");
+	      // JsonObject 생성
+	      JsonObject jsonObject = new JsonObject();
+	      try {
+	         for(int i=0; i<listDiary.size(); i++) {
+	            JsonObject jobj = new JsonObject();
+	            jobj.addProperty("diary_no", listDiary.get(i).getDiary_no());
+	            jobj.addProperty("diary_write", listDiary.get(i).getDiary_write());
+	            jobj.addProperty("diary_content", listDiary.get(i).getDiary_content());
+	            jobj.addProperty("diary_date", String.valueOf(listDiary.get(i).getDiary_date()));            
+	            jobj.addProperty("diary_views", listDiary.get(i).getDiary_views());
+	            jobj.addProperty("diary_img_num", listDiary.get(i).getDiary_img_num());
+	            jobj.addProperty("diary_img_src", listDiary.get(i).getDiary_img_src());
+	            jobj.addProperty("user_id", listDiary.get(i).getUser_id().toString());
+	            jobj.addProperty("user_name", listDiary.get(i).getUser_name().toString());
+	            jobj.addProperty("like_cnt", listDiary.get(i).getLike_cnt());
+//	            jobj.addProperty("diary, value);
+	            jArray.add(jobj);
+	         }
+//	         for(int j=0; j<likeList.size(); j++) {
+//	        	 JsonObject jobj2 = new JsonObject();
+//	        	 jobj2.addProperty("diary_no", likeList.get(j).getDiary_no());
+//	        	 
+//	         }
+
+
+	         jsonObject.add("listDiary", jArray);
+	         System.out.println("제이슨으로 넘긴 데이터" + jArray);
+	      } catch (NullPointerException e) {
+	         System.out.println("값이 없습니다.");
+	      } catch (Exception e) {
+	         e.printStackTrace();
+	      }
+	      Gson gson = new GsonBuilder().setPrettyPrinting().create();
+	      String jsonOutput = gson.toJson(jsonObject);
+	      
+	      try {
+	    	  response.getWriter().write(jsonOutput.toString());
+			System.out.println("데이터 잘 갔나 확인 좀 " + jsonOutput);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		System.out.println("[영현]diary view 페이지 이동");
+	}
+	
+	
+	
+	@RequestMapping(value = "insertlike.do", method = RequestMethod.POST)
+	@ResponseBody
+	public String insertlike(HttpSession session, ModelAndView mv, Model model, @RequestParam(name = "diary_no") int diary_no) {
 		System.out.println("들어왔다");
+		int result = -1;
+
+		System.out.println(mv.getModel());
+		System.out.println(model.containsAttribute("likeList"));
 		try {
-			int result = 0;
-			int likecnt = 0;
+			// 로그인 전에 임시 테스트 코드입니다.
+			//TODO: session 
+			int user_no = 122;  // 로그인 전에 임시 테스트 코드입니다.  // session.getAtt....
 			System.out.println("숫자: " + user_no);
 			System.out.println("숫자: " + diary_no);
+			
+			LikeVO lvo = new LikeVO();
 			lvo.setUser_no(user_no);
 			lvo.setDiary_no(diary_no);
-			System.out.println(lvo);
 			
-			result = dService.insertLike(lvo);
-			System.out.println("like.do에서 result는 " + result);
-			//위 insertLike에서 함께 처리함. 
-			//likecnt = dService.likeCnt(lvo);
-			System.out.println("좋아요 개수는 " + result);
-			mv.addObject("likecnt",result);
-			mv.setViewName("redirect:diary");
+			System.out.println(lvo.toString());
+
+			// likeCnt 함께 처리함. 
+			result = dService.insertLike(lvo);// dService.likeCnt(lvo); 포함
+			System.out.println("like.do에서 result = 좋아요는 " + result);
 		} catch (Exception e) {
-			mv.addObject("msg", e.getMessage());
-			mv.setViewName("errorPage");
+			e.printStackTrace();
 		}
-		return mv;
+		return String.valueOf(result);
 	}
+	
+	@RequestMapping(value = "deletelike.do", method = RequestMethod.POST)
+	@ResponseBody
+	public String deletelike(HttpSession session, ModelAndView mv, Model model, @RequestParam(name = "diary_no") int diary_no) {
+		System.out.println("딜리트 들어왔어용");
+		int result = -1;
+
+		System.out.println(mv.getModel());
+		System.out.println(model.containsAttribute("likeList"));
+		try {
+			// 로그인 전에 임시 테스트 코드입니다.
+			//TODO: session 
+			int user_no = 122;  // 로그인 전에 임시 테스트 코드입니다.  // session.getAtt....
+			System.out.println("숫자: " + user_no);
+			System.out.println("숫자: " + diary_no);
+			
+			LikeVO lvo = new LikeVO();
+			lvo.setUser_no(user_no);
+			lvo.setDiary_no(diary_no);
+			
+			System.out.println(lvo.toString());
+
+			// likeCnt 함께 처리함. 
+			result = dService.deleteLike(lvo);// dService.likeCnt(lvo); 포함
+			System.out.println("like.do에서 result = 좋아요 " + result);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return String.valueOf(result);
+	}
+
+	
+	
 	@RequestMapping(value = "/likecnt.do", method = RequestMethod.POST)
 	@ResponseBody
 	public String likecnt(HttpServletRequest request, 
@@ -189,29 +293,6 @@ public class HomeController {
 
 		}
 		return String.valueOf(likecnt);
-	}
-	
-	@RequestMapping(value = "deletelike.do", method = RequestMethod.POST)
-	public ModelAndView like(ModelAndView mv, @RequestParam(name = "diary_no") int diary_no, @RequestParam(name = "user_no") int user_no, LikeVO lvo) {
-		System.out.println("딜리트 들어왔어용");
-		try {
-			int result = 0;
-			int likecnt = 0;
-			System.out.println("딜리트 유저 " + user_no);
-			System.out.println("딜리트 게시판 " + diary_no);
-			lvo.setUser_no(user_no);
-			lvo.setDiary_no(diary_no);
-			result = dService.deleteLike(lvo);
-			System.out.println("딜리트 result는 " + result);
-//			likecnt = dService.likecnt(lvo);
-//			System.out.println("딜리트 좋아요 갯수는 " + likecnt);
-			mv.addObject("likecnt", result);
-			mv.setViewName("redirect:diary");
-		} catch (Exception e) {
-			mv.addObject("msg", e.getMessage());
-			mv.setViewName("errorPage");
-		}
-		return mv;
 	}
 	
 	private void saveFile(MultipartFile report, HttpServletRequest request) {
