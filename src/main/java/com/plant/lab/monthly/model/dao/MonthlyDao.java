@@ -23,8 +23,6 @@ public class MonthlyDao {
 		      return sqlSession.selectOne("Monthly.selectOne", monthly_no);
 		   }
 		
-		
-		 
 		//특정 페이지 단위의 이달의 식물 조회
 		public List<Monthly> selectList(int startPage, int limit) {
 				int startRow = (startPage - 1) * limit;

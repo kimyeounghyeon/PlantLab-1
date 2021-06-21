@@ -12,7 +12,7 @@
 <style>
 #plantimg{
 width : 600px;
-height : 700px;
+height : 850px;
 margin-left: auto;
 margin-right: auto;
 }

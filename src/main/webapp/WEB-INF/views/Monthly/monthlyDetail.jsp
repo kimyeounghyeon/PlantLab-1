@@ -11,9 +11,9 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style>
 	
-	#plantimg{
+	.plantimg{
 	width : 600px;
-	height : 700px;
+	height : 850px;
 	margin-left: auto;
 	margin-right: auto;
 	}
@@ -31,7 +31,7 @@
 <body>
 	<jsp:include page="../header.jsp"></jsp:include>
 <div class="mdediv">
-<div id="plantimg">${monthly.monthly_img}</div>
+<div class="plantimg"><img class="plantimg" src="<%=request.getContextPath() %>/resources/img/${monthly.monthly_img}"></div>
 
 
 <div id= "plantname" align="center">${monthly.monthly_name}</div>

@@ -23,6 +23,10 @@ margin-left: auto;
   color : white;
   border : none;
 }
+.mwn{
+width : 400px;
+border : 1px solid #625b54;
+}
 </style>
 </head>
 <body>
@@ -31,20 +35,28 @@ margin-left: auto;
 	<form name="renewForm" action="mUpdate.do" method="post" enctype="multipart/form-data">
 		<input type="hidden" name="monthly_no" value="${monthly.monthly_no}">
 		<input type="hidden" name="monthly_img" value="${monthly.monthly_img}">
+	
+	
 		<table id="mupform">
 			<tr>
-				<td>이름</td>
-				<td><input type="text" name="monthly_name" value="${monthly.monthly_name}"></td>
+				<td>식물 이름</td>
 			</tr>
 			<tr>
-				<td>이전 첨부파일</td>
-				<td>
+				<td><input type="text" class="mwn" name="monthly_name" value="${monthly.monthly_name}"></td>
+			</tr>
+			<tr>
+				<td>현재 식물 이미지</td>
+			</tr>
+			<tr>
+				<td class="mwn">
 					 ${monthly.monthly_img}
 				</td>
 			</tr>
 			<tr>
-				<td>변경할 첨부파일</td>
-				<td><input type="file" name="upfile"></td>
+				<td>식물 이미지</td>
+			</tr>
+			<tr>
+				<td class="mwn"><input type="file" name="upfile"></td>
 			</tr>
 			
 		</table>

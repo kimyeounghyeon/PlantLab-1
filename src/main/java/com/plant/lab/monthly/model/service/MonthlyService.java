@@ -12,9 +12,10 @@ public interface MonthlyService {
 	//특정 페이지 단위의 이달의 식물 조회
 	public List<Monthly> selectList(int startPage, int limit);
 	
-	//상품상세보기 monthly->one??
+	//이달의 식물  monthly->one??
 	public Monthly selectOne(int monthly_no);
 	
+	//
 
 	
 	//이달의 식물 추가

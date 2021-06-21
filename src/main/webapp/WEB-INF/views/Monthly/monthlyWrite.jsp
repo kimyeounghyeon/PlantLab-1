@@ -25,6 +25,10 @@
   margin-right : auto;
  
 }
+.mwn{
+width : 400px;
+border : 1px solid #625b54;
+}
    </style>
 </head>
 
@@ -35,12 +39,16 @@
 			<h3 align="center">이달의 식물 등록하기</h3>
 			<table class="writeform">
 				<tr>
-					<td>식물 이미지</td>
-					<td><input type="file" name="upfile"></td>
+					<td>식물 이름</td>
+				<tr>
+				</tr>
+					<td><input type="text" class="mwn" name="monthly_name" placeholder="이름을 입력해주세요"></td>
 				</tr>
 				<tr>
-					<td>식물 이름</td>
-					<td><input type="text" name="monthly_name"></td>
+					<td>식물 이미지</td>
+				</tr>
+				<tr>
+					<td class="mwn"><input type="file" name="upfile"></td>
 				</tr>
 			</table>
 			<br>

@@ -30,7 +30,8 @@
 			<td>${event_tb.start_date}~${event_tb.end_date}</td>
 		</tr>
 		<tr>
-			<td>${event_tb.event_content}</td>
+			<td><img class="mimg" src="<%=request.getContextPath() %>/resources/img/${event_tb.event_content}"></td>
+			
 		</tr>
 		<tr>
 			<td>

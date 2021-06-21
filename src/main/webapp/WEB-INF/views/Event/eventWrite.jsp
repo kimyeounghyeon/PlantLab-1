@@ -25,6 +25,10 @@
   margin-right : auto;
  
 }
+.mwn{
+width : 400px;
+border : 1px solid #625b54;
+}
 </style>
 </head>
 <body>
@@ -35,23 +39,33 @@
 			<table class="ewriteform">
 				<tr>
 					<td>이벤트 제목</td>
-					<td><input type="text" name="event_title"></td>
+				</tr>
+				<tr>
+					<td><input type="text" class="mwn" name="event_title"></td>
 				</tr>
 				<tr>
 					<td>배너 이미지</td>
-					<td><input type="file" name="upfile1"></td>
+				</tr>
+				<tr>
+					<td class="mwn"><input type="file"  name="upfile1"></td>
 				</tr>
 				<tr>
 					<td>이벤트 내용</td>
-					<td><input type="file" name="upfile2"></td>
+				</tr>
+				<tr>
+					<td class="mwn"><input type="file"  name="upfile2"></td>
 				</tr>
 				<tr>
 					<td>이벤트 시작일</td>
-					<td><input type="text" name="start_date" placeholder="yyyy.mm.dd"></td>
+				</tr>
+				<tr>
+					<td ><input type="text"  class="mwn" name="start_date" placeholder="yyyy.mm.dd"></td>
 				</tr>
 				<tr>
 					<td>이벤트 종료일</td>
-					<td><input type="text" name="end_date" placeholder="yyyy.mm.dd"></td>
+				</tr>
+				<tr>
+					<td><input type="text"  class="mwn" name="end_date" placeholder="yyyy.mm.dd"></td>
 				</tr>
 			</table>
 			<br>

@@ -16,9 +16,11 @@
 margin-left: auto;
 margin-right: auto;
 }
-#eventbanner{
-height : 160px;
+.eventbanner{
+height : 200px;
 width : 750px;
+margin : 1.5px;
+border-radius : 30px;
 }
 
 #eventsub{
@@ -29,6 +31,12 @@ width : 200px;
 }
 #viewimg{
 width : 30px;
+}
+#eimg{
+height : 20px;
+margin : 2px;
+width : 20px;
+
 }
 #view{
 width :50px;
@@ -56,13 +64,20 @@ margin-left : 1140px;
          <c:forEach var="vo" items="${list}">
   		
         <tr>
-        <tr id="eventbanner">
-           	<td colspan="4"><a href="eDetail.do?event_no=${vo.event_no}">${vo.banner}</a></td>
+        <tr>
+           	<td colspan="4">
+           	<a href="eDetail.do?event_no=${vo.event_no}">
+           	<img class="eventbanner" src="<%=request.getContextPath() %>/resources/img/${vo.banner}">
+           	</a></td>
+           	
+           	
+           	
+           	
   		</tr>
 
-           	<td id="eventsub">${vo.event_title}</td>
+           	<td id="eventsub"><a href="eDetail.do?event_no=${vo.event_no}">&nbsp;&nbsp;${vo.event_title}</a></td>
             <td id="period">${vo.start_date}~${vo.end_date}</td>
-		    <td id="viewimg"><img src=""></td>
+		    <td id="viewimg"><img id="eimg" src="${path}/resources/img/eye.png"></td>
 		    <td id="view">${vo.event_views}</td>
         </tr>
         </c:forEach>

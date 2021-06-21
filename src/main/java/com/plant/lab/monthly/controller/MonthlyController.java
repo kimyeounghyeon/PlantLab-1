@@ -70,6 +70,24 @@ public class MonthlyController {
 		return mv;
 	}
 
+//	@RequestMapping(value = "mMain.do", method = RequestMethod.GET)
+//	public ModelAndView monthlyMain(@RequestParam(name = "monthly_no") int monthly_no,
+//			@RequestParam(name = "page", defaultValue = "1") int page, ModelAndView mv) {
+//		try {
+//			logger.info("===============이달의 식물 메인 페이지===============");
+//			int currentPage = page; // 한 페이지당 출력할
+//			
+//			logger.info("currentPage :" + currentPage );
+//			mv.addObject("monthly", moService.selectMain(monthly_no));
+//			mv.addObject("currentPage", currentPage);
+//			mv.setViewName("Monthly/monthlyMain");
+//		} catch (Exception e) {
+//			logger.info("!!!!!!이달의 식물 메인 오류!!!!!!");
+//			mv.addObject("msg", e.getMessage());
+//			mv.setViewName("errorPage");
+//		}
+//		return mv;
+//	}
 	
 	@RequestMapping(value = "mRenew.do", method = RequestMethod.GET)
 	public ModelAndView monthlyUpdateForm(@RequestParam(name = "monthly_no") int monthly_no, ModelAndView mv) {

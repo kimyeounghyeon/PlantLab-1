@@ -171,15 +171,15 @@ a {
 				<div class="tablinks" id="plant">
 					<a href="#" class="Tab">Plant</a>
 					<div id="subtab">
-						<a href="#" id="subtabM" class="sub">Mission</a> <a href="#"
-							class="sub">Diary</a>
+						<a href="#" id="subtabM" class="sub">Mission</a> 
+						<a href="#" class="sub">Diary</a>
 					</div>
 				</div>
 				<div class="tablinks">
 					<a href="#" class="Tab">Class</a>
 				</div>
 				<div class="tablinks">
-					<a href="#" class="Tab">Event</a>
+					<a href="${path}/elist.do" class="Tab">Event</a>
 				</div>
 				<div class="tablinks">
 					<a href="${path}/product" class="Tab">Store</a>

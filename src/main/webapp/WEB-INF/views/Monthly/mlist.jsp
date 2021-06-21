@@ -34,9 +34,9 @@ function showInsertForm() {
  width : 800px;
   
 }
-#mimg{
+.mimg{
 width : 150px;
-height : 150px;
+height : 170px;
 padding : 3px;
 }
 #mdate{
@@ -76,13 +76,17 @@ width : 100px;
 				<tr>
 					<td align="center">${vo.monthly_no}</td>
 					<td><a href="mDetail.do?monthly_no=${vo.monthly_no}">${vo.monthly_name}</a></td>
-					<td id="mimg" align="center">${vo.monthly_img}</td>
+					<td class="mimg" align="center"><a href="mDetail.do?monthly_no=${vo.monthly_no}">
+					<img class="mimg" src="<%=request.getContextPath() %>/resources/img/${vo.monthly_img}">
+					</a>
+					</td>
 					<td id="mdate" align="center">${vo.monthly_date}</td>
 					
 					<td class="mupde">
+					
 					<c:url var="mupview" value="mRenew.do">
 						<c:param name="monthly_no" value="${vo.monthly_no}" />
-						<c:param name="monthly_img" value="${vo.monthly_img}" />
+						<c:param name="monthly_img" value="${pageContext.request.contextPath}/resources/img/${vo.monthly_img}" />
 						<c:param name="monthly_name" value="${vo.monthly_name}" />
 					</c:url> 
 					<c:url var="mdelete" value="mDelete.do">
