@@ -9,10 +9,20 @@
     <title>無以林  event detail</title>
     <link href="${path}/resources/css/font.css" rel="stylesheet"/>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+    .edetaildiv{
+    clear: both;
+    }
+    .edetailtb{
+    margin-left : auto;
+    margin-right : auto;
+    }
+    </style>
 </head>
 <body>
 	<jsp:include page="../header.jsp"></jsp:include>
-	<table>
+	<div class="edetaildiv">
+	<table class="edetailtb">
 		<tr>
 			<td>${event_tb.event_title}</td>
 		</tr>
@@ -41,5 +51,6 @@
 			</td>
 		</tr>
 	</table>
+	</div>
 </body>
 </html>

@@ -10,7 +10,8 @@
 		<!-- 	<typeAlias type="plant.lab.com.board.model.vo.Board" alias="Board" />
 		 -->
 		<typeAlias alias="MemberVO" type="com.plant.lab.member.model.vo.MemberVO"/>
-		<typeAlias  alias="Monthly" type="com.plant.lab.monthly.model.vo.Monthly" />
+		<typeAlias alias="Monthly" type="com.plant.lab.monthly.model.vo.Monthly" />
+		<typeAlias alias="Event_tb" type="com.plant.lab.event.model.vo.Event_tb"/>
 		<typeAlias alias="Product" type="com.plant.lab.product.model.vo.Product"/>
 	 	<typeAlias alias="ProductCon" type="com.plant.lab.product.model.vo.ProductContnet"/>
 		<typeAlias alias="Cart" type="com.plant.lab.cart.model.vo.Cart"/>

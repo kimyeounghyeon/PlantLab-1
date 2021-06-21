@@ -16,16 +16,16 @@
 margin-left: auto;
 margin-right: auto;
 }
-#eventimg{
+#eventbanner{
 height : 160px;
 width : 750px;
 }
 
 #eventsub{
-width : 430px;
+width : 470px;
 }
 #period{
-width : 220px;
+width : 200px;
 }
 #viewimg{
 width : 30px;
@@ -50,23 +50,25 @@ margin-left : 1140px;
 	<div class="elistdiv">
 	<h2 align="center">event</h2>
 	<div>
- 	<button type="button" id="ebtn" onclick="window.location='eventWrite.do'">등록하기</button>
+ 	<button type="button" id="ebtn" onclick="window.location='eWrite.do'">등록하기</button>
  	</div>
 	<table class="event">
-        
-        <tr id="eventimg">
-           	<td colspan="4">배너사진</td>
-  		</tr>
+         <c:forEach var="vo" items="${list}">
   		
         <tr>
+        <tr id="eventbanner">
+           	<td colspan="4"><a href="eDetail.do?event_no=${vo.event_no}">${vo.banner}</a></td>
+  		</tr>
 
-           	<td id="eventsub">이벤트제목</td>
-            <td id="period"> 진행기간</td>
+           	<td id="eventsub">${vo.event_title}</td>
+            <td id="period">${vo.start_date}~${vo.end_date}</td>
 		    <td id="viewimg"><img src=""></td>
-		    <td id="view">조회수</td>
+		    <td id="view">${vo.event_views}</td>
         </tr>
-        
+        </c:forEach>
 	</table>
 	</div>
 </body>
 </html>
+
+

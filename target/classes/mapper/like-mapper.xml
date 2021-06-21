@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="Like">
-	<insert id="like" parameterType="LikeVO" flushCache="true" statementType="PREPARED">
+	<insert id="insertLike" parameterType="LikeVO" flushCache="true" statementType="PREPARED">
 		insert into like_tb values(#{diary_no}, #{user_no})
 	</insert>
 	

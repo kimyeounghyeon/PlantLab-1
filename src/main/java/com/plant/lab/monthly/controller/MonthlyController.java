@@ -24,7 +24,7 @@ public class MonthlyController {
 	private MonthlyService moService;
 
 	private static final Logger logger = LoggerFactory.getLogger(MonthlyController.class);
-	public static final int LIMIT = 2;
+	public static final int LIMIT = 5;
 	
 	@RequestMapping(value = "mlist.do", method = RequestMethod.GET)
 	public ModelAndView monthlyListService( // 오류가 발생해도 오류메세지 뜨지않는다는 단점..
@@ -70,6 +70,7 @@ public class MonthlyController {
 		return mv;
 	}
 
+	
 	@RequestMapping(value = "mRenew.do", method = RequestMethod.GET)
 	public ModelAndView monthlyUpdateForm(@RequestParam(name = "monthly_no") int monthly_no, ModelAndView mv) {
 		try {

@@ -15,6 +15,8 @@ public interface MonthlyService {
 	//상품상세보기 monthly->one??
 	public Monthly selectOne(int monthly_no);
 	
+
+	
 	//이달의 식물 추가
 	public int insertMonthly(Monthly m);
 	

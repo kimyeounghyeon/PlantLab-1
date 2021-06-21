@@ -13,7 +13,6 @@
 #plantimg{
 width : 600px;
 height : 700px;
-border : 1px solid black;
 margin-left: auto;
 margin-right: auto;
 }
