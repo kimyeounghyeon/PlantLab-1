@@ -26,6 +26,7 @@
 		<mapper resource="mapper/board-mapper.xml" />
 		<mapper resource="mapper/member-mapper.xml"/>
 		<mapper resource="mapper/monthly-mapper.xml" />
+		<mapper resource="mapper/event-mapper.xml" />
 		<mapper resource="mapper/product-mapper.xml"/>
 		<mapper resource="mapper/productContent-mapper.xml"/>
 		<mapper resource="mapper/cart-mapper.xml"/>
