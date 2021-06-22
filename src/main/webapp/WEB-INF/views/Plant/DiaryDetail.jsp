@@ -98,8 +98,8 @@
 				 	$(".liketd.dno_"+index).removeClass("unlike");
 					$(".liketd.dno_"+index).addClass("liked");
 					thisElementJQ.children('.like').attr("src", "${path }/resources/img/색변경좋아요.png");
-<%--  					location.href="detaildiary?diary_no=<%=index%>";
- --%>					},
+  					location.href="detaildiary?diary_no="+index
+  					},
 				error : function() {
 					alert("잘못 된 접근입니다.");
 				}
@@ -117,7 +117,7 @@
 				 	$(".liketd.dno_"+index).removeClass("liked");
 					$(".liketd.dno_"+index).addClass("unlike");
 					thisElementJQ.children('.like').attr("src", "${path }/resources/img/좋아요누르기전그레이.png");
-					location.href="detaildiary"; 
+  					location.href="detaildiary?diary_no="+index
  			},
 				error : function() {
 					alert("잘못 된 접근입니다.");
