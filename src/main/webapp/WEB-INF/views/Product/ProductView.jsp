@@ -27,10 +27,12 @@
                 <!-- 상품상세 -->
                 <div class="detail">
 						<input type="hidden" id="pro_totalStar" name="pro_totalStar" value="${product.pro_totalStar}">
-					<form id="cartF">
 						<input type="hidden" id="pro_stock" name="pro_stock" value="${product.pro_stock}">
+					<form id="cartF">
+						<input type="hidden" name="user_no" value="${user}">
+						<input type="hidden" name="buy_totalprice" value="">
+                        <input type="hidden" name="deliv" value="5000">
 						<input type="hidden" id="pro_no" name="pro_no" value="${product.pro_no}">
-						<input type="hidden" id="pro_image" name="pro_image" value="${product.pro_image}">
 						<input type="hidden" name="pro_cnt" id="pro_cnt" value="1">
 						<input type="hidden" id="pro_name" name="pro_name" value="${product.pro_name}">
 						<input type="hidden" id="pro_price" name="pro_price" value="${product.pro_price}">
@@ -257,6 +259,12 @@
 </script>
 <script>
     $(function(){
+    	//로그인여부
+    	var user_no = $('input[name=user_no]').val();
+    	
+    	//금액
+    	var buy_totalprice = $('#cartF input[name=buy_totalprice]');
+    	
     	//수량
         var num = $('.numGuide #num');
     	var pro_cnt = $('#pro_cnt');
@@ -266,6 +274,8 @@
         var value;
         
         price = numChange(price);
+        
+        buy_totalprice.val(price);
 
         var addB = $('#add');
         var minB = $('#min');
@@ -284,6 +294,7 @@
                 	 numVal = (numVal*1)+1;
                 	 pro_cnt.val(numVal);
                      numPri = (numPri*1)+(price*1);
+                     buy_totalprice.val(numPri);
                  }
                  
                  numPri =  numPri.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -303,13 +314,14 @@
 
                 if(numVal == 1){
                     numVal == 1;
+                    
                     numPri =  numPri.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                     allPrice.text(price+"원");
                 }else{
                     numVal = (numVal*1)-1;
                     pro_cnt.val(numVal);
                     numPri = (numPri*1)-(price*1);
-
+                    buy_totalprice.val(numPri);
                     num.text(numVal);
                     numPri =  numPri.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                     allPrice.text(numPri+"원");
@@ -349,6 +361,24 @@
         	}
 		}
 
+        //구매
+        var buyB = $("#buyB");
+        var form = $('#cartF');
+        
+        buyB.click(function(){
+        	var numPri = allPrice.text();
+        	
+        	if(numPri == '(품절)'){
+        		swal("상품이 품절되었습니다.","", "info");
+        	}else if(user_no == 0){   		
+        		swal("로그인 후 이용해 주세요.","", "info");
+        	}else{
+	        	form.attr("method","post");
+	        	form.attr("action","order");
+	        	form.submit();     
+        	}
+        });
+        
         //카트 이동 및 모달
         var basketB = $('#basketB');
 		var pro_no = $('#pro_no').val();
@@ -358,6 +388,8 @@
         	var numPri = allPrice.text();
         	if(numPri == '(품절)'){
         		swal("상품이 품절되었습니다.","", "info");
+        	}else if(user_no == 0){   		
+        		swal("로그인 후 이용해 주세요.","", "info");
         	}else{
         		//카트에 상품이 있는지 조회하는 ajax
             	$.ajax({

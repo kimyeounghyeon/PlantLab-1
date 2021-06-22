@@ -9,7 +9,9 @@
 	<title>無以林 주문</title>
 	<link href="${path}/resources/css/OrderStyle.css" rel="stylesheet"/>
 	<link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/jejumyeongjo.css"/>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 </head>
 <body>
 	<%-- <jsp:include page="../header.jsp"></jsp:include> --%>
@@ -24,6 +26,7 @@
                 <div class="order">
                     <h3>주문상세내역</h3>
                     <table class="orderList">
+                    	<c:if test="${not empty cartList }">
                     	<c:forEach  var="vo" items="${cartList}" varStatus="status">
                     		 <tr>
 	                            <td class="proImg" rowspan="2">
@@ -42,6 +45,26 @@
 	                            </td>
 	                        </tr>
                     	</c:forEach>
+                    	</c:if>
+                    	
+                    	<c:if test="${cartList eq null}">
+                    		<tr>
+	                            <td class="proImg" rowspan="2">
+	                                <img src="${proList.pro_image}">
+	                            </td>
+	                            <td class="space" rowspan="2"></td>
+	                            <td class="proName">
+	                                <p>${proList.pro_name}</p>
+	                            </td>
+	                        </tr>
+	                        <tr>
+	                            <td class="priceGuide">
+	                                <p class="proNum guide">${cart.pro_cnt}</p>개 /
+	                                <p class="proPri guide"></p>
+	                                <input type="hidden" value="${proList.pro_price}" class="voPrice">
+	                            </td>
+	                        </tr>
+                    	</c:if>
                     </table>
                     
                     <div class="allPriceGuide">
@@ -70,18 +93,19 @@
                         <table border="1">
                             <tr>
                                 <td><span>주문하시는 분</span></td>
-                                <td><input type="text" readonly></td>
+                                <td><input type="text" value="${user.userName}" readonly></td>
+                                <input type="hidden" name="user_no" value="${user.userNo}" readonly>
                             </tr>
                             <tr>
                                 <td><span>연락처</span></td>
                                 <td>
-                                    <input type="text">
+                                    <input type="text" name="phone" value="${user.phone}">
                                     <span class="alert">숫자만 입력해주세요.</span>
                                 </td>
                             </tr>
                             <tr>
                                 <td><span>이메일</span></td>
-                                <td><input type="text"></td>
+                                <td><input type="text" name="buy_email" value="${user.email}"></td>
                             </tr>
                         </table>
                     </form>
@@ -125,17 +149,17 @@
                         <table border="1">
                             <tr>
                                 <td><span>상품합계</span></td>
-                                <td><input type="text" readonly></td>
+                                <td><input type="text" class="proInfo" readonly></td>
                             </tr>
                             <tr>
                                 <td><span>배송비</span></td>
                                 <td>
-                                    <input type="text" readonly>
+                                    <input type="text" class="proInfo" readonly>
                                 </td>
                             </tr>
                             <tr>
                                 <td><span>결제금액</span></td>
-                                <td><input type="text" readonly></td>
+                                <td><input type="text" class="proInfo" readonly></td>
                             </tr>
                         </table>
                     </form>
@@ -182,10 +206,30 @@
 </body>
 <script>
 	$(function(){
+		//버튼 클릭시 체크박스 여부
+		var buyBtn = $('#buyBtn');
+		var infock = $('#infock');
+		var orderer = $('.orderer');
+		var saveTotal;
+		
+		buyBtn.click(function(){
+			if(!infock.prop('checked')){
+				swal("구매진행에 동의해주세요","", "info");
+			}else{
+				iamport();
+			}
+			
+			//if(orderer.children("input").val() == null){
+				//swal("빈칸없이 값을 입력해주세요","", "info");
+			//}
+		});
+		
+		
 		//상품목록 금액계산
 		var voPrice = $('.voPrice');
 		var proNum = $(".proNum");
 		var proPri = $(".proPri");
+		var proInfo = $(".proInfo");
 		
 		for(var i = 0; i < voPrice.length; i++){
 	        var val = voPrice[i].value;
@@ -198,6 +242,7 @@
 	        
 	        val =  val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 	         
+	        
 	        proPri[i].append(val+"원");
 	    }//금액계산
 	    
@@ -206,18 +251,64 @@
 	    var prSpan = $('.prSpan');
 	    var allPrice = $('#allPrice');
 	    
+		
 	    var val = (inputV[0].value*1) + (inputV[1].value*1);
+	    saveTotal = val;
 	    val =  val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	   
+	    proInfo[2].value = val+"원";
     	allPrice.append(val+"원");
 	    
 	    for(var i=0; i<inputV.length; i++){
 	    	var val = inputV[i].value;
 	    	
 	    	val =  val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-	    	console.log("val확인:"+val);
-	    	 
+	    	
+	    	proInfo[i].value = val+"원";
 	    	prSpan[i].append(val+"원");
 	    }
+	    
+	    
+	    //결제API
+	    var proName = $(".proName p");
+	    var proNameR;
+	    
+	    if(proName.length>1){
+	    	proNameR = proName[0].innerHTML + " 외 " + proName.length ;
+	    }else{
+	    	proNameR = proName.text();
+	    }
+	    
+	    
+	    function iamport(){
+	    	//가맹점 식별코드
+			IMP.init('imp77086696');
+			IMP.request_pay({
+			    pg : '이니시스',
+			    pay_method : 'card',
+			    merchant_uid : 'merchant_' + new Date().getTime(),
+			    name : proNameR, //결제창에서 보여질 이름
+			    amount : saveTotal, //실제 결제되는 가격
+			    buyer_email : 'iamport@siot.do',
+			    buyer_name : '구매자이름',
+			    buyer_tel : '010-1234-5678',
+			    buyer_addr : '서울 강남구 도곡동',
+			    buyer_postcode : '123-456'
+			}, function(rsp) {
+				console.log(rsp);
+			    if ( rsp.success ) {
+			    	var msg = '결제가 완료되었습니다.';
+			        msg += '고유ID : ' + rsp.imp_uid;
+			        msg += '상점 거래ID : ' + rsp.merchant_uid;
+			        msg += '결제 금액 : ' + rsp.paid_amount;
+			        msg += '카드 승인번호 : ' + rsp.apply_num;
+			    } else {
+			    	 var msg = '결제에 실패하였습니다.';
+			         msg += '에러내용 : ' + rsp.error_msg;
+			    }
+			    alert(msg);
+			});
+		} 
 	});
 </script>
 </html>

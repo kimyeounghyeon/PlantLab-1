@@ -103,14 +103,13 @@
                                    	   <form id="orderF">
                                    	   		<input type="hidden" name="buy_totalprice"  value="">
                                    	   		<input type="hidden" name="deliv"    		value="5000">
-                                   	   		<input type="hidden" name="allPrice" 		value="">
 	                                        <button type="button" class="infoBtn infoB" id="choseBuy">선택상품 구매</button>
                                    	   </form>
                                    </td>
                                </tr>
                                <tr>
                                    <td colspan="2" class="buyBG"> 
-                                       <button type="button" class="infoBtn" id="allBuy" onClick="location.href='44_finalOrder.html'">전체상품구매</button>
+                                       <button type="button" class="infoBtn" id="allBuy">전체상품구매</button>
                                    </td>
                                </tr>
                            </table>
@@ -155,7 +154,7 @@
             
             val =  val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
              
-            proPri[i].append(val);
+            proPri[i].append(val+"원");
         }//금액계산
 
         // 체크박스
@@ -295,13 +294,32 @@
         		swal("상품을 선택해주세요","", "info");
         	}else{
         		for(var a=0; a<proNo.length; a++){
-	        		form.prepend("<input type='text' name='pro_no' value='"+proNo[a]+"'>");
+	        		form.prepend("<input type='hidden' name='pro_no' value='"+proNo[a]+"'>");
 	        	}
 	        	form.attr("method","post");
-	        	form.attr("action","order");
+	        	form.attr("action","orders");
 	        	form.submit();
            	}
     	});//구매 이벤트
+    	
+    	//전체구매B ==========================================================
+        var allBuy = $('#allBuy');	
+    	
+        allBuy.click(function(){
+        	
+        	allcheck.click();
+        	
+        	for(var a=0; a<prock.length;a++){
+                proNo[a] = pro_no[a].value;
+            }
+        	
+        	for(var a=0; a<proNo.length; a++){
+        		form.prepend("<input type='hidden' name='pro_no' value='"+proNo[a]+"'>");
+        	}
+        	form.attr("method","post");
+        	form.attr("action","orders");
+        	form.submit();
+        });//전체 구매
     });
 </script>
 </html>

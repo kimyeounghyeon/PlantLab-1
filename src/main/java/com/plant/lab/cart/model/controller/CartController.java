@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.plant.lab.cart.model.service.CartService;
 import com.plant.lab.cart.model.vo.Cart;
+import com.plant.lab.member.model.vo.MemberVO;
 import com.plant.lab.product.model.Controller.ProductController;
 
 @Controller
@@ -32,19 +33,19 @@ public class CartController {
 	
 //장바구니로 이동 및 카트 리스트 출력
 	@RequestMapping(value = "/cart", method = RequestMethod.GET)
-	public ModelAndView cartListService(ModelAndView mv) {
+	public ModelAndView cartListService(ModelAndView mv,HttpSession session) {
 		try{
 			logger.info("===============카트 페이지===============");
 			
-			//TODO 테스트용 나중에 삭제
-			int user_no = 1;
+			MemberVO member = (MemberVO) session.getAttribute("loginMember");
 			
 			List<Cart> cart = new ArrayList<Cart>();
-			cart = cartService.serchList(user_no);
+			cart = cartService.serchList(Integer.parseInt(member.getUserNo()));
 			
-			System.out.println("cart확인 : " + cart.size());
+			logger.info("user확인 : " + member.getUserNo());
+			logger.info("cart확인 : " + cart.size());
 			
-			mv.addObject("cartList",cartService.serchList(user_no));
+			mv.addObject("cartList",cartService.serchList(Integer.parseInt(member.getUserNo())));
 			mv.setViewName("Product/Cart");
 		}catch (Exception e) {
 			logger.info("!!!!!!카트 리스트 오류!!!!!!");
@@ -56,14 +57,14 @@ public class CartController {
 
 //카트 상품 서치 AJAX
 	@RequestMapping(value="/cartSearch", method=RequestMethod.POST)
-	public void cartSearch(@RequestParam(name = "pro_no") int pro_no,
+	public void cartSearch(@RequestParam(name = "pro_no") int pro_no,HttpSession session,
 			HttpServletResponse response) throws IOException{
 		try {
-			//TODO 테스트용 나중에 삭제
-			int user_no = 1;
+		
+			MemberVO member = (MemberVO) session.getAttribute("loginMember");
 			
 			PrintWriter out = response.getWriter();
-			List<Cart> cartL = cartService.serchList(user_no);
+			List<Cart> cartL = cartService.serchList(Integer.parseInt(member.getUserNo()));
 			
 			int result = 0;
 			for(int i = 0; i<cartL.size(); i++){
@@ -92,13 +93,14 @@ public class CartController {
 	
 //카트 상품 등록 AJAX
 	@RequestMapping(value="/cartInsert", method=RequestMethod.POST)
-	public void cartInsert(Cart cart,HttpServletResponse response)throws IOException{
+	public void cartInsert(Cart cart,HttpServletResponse response,HttpSession session)throws IOException{
 		try {
-			//TODO 테스트용 나중에 삭제
-			cart.setUser_no(1);
+			
+			MemberVO member = (MemberVO) session.getAttribute("loginMember");
 			
 			//장바구니가 있는지 확인
-			Cart cartCk = cartService.searchHasCart(cart.getUser_no());
+			Cart cartCk = cartService.searchHasCart(Integer.parseInt(member.getUserNo()));
+			cart.setUser_no(Integer.parseInt(member.getUserNo()));
 			
 			if(cartCk==null) {
 				logger.info("카트없음!!!");
@@ -137,7 +139,6 @@ public class CartController {
 		try {
 			//TODO 테스트용 나중에 삭제
 			
-			cart.setUser_no(1);
 			cart.setPro_no(Integer.parseInt(request.getParameter("pro_no")));
 			System.out.println("상품번호확인삭제:"+cart.getPro_cnt());
 			

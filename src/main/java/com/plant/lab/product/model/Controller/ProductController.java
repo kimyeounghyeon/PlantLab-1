@@ -12,6 +12,7 @@ import java.util.Locale;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.annotations.Insert;
 import org.slf4j.Logger;
@@ -26,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.plant.lab.member.model.vo.MemberVO;
 import com.plant.lab.product.model.service.ProductContentService;
 import com.plant.lab.product.model.service.ProductService;
 import com.plant.lab.product.model.vo.Product;
@@ -91,18 +93,19 @@ public class ProductController {
 	
 //상품 상세보기
 	@RequestMapping(value = "/productView", method = RequestMethod.GET)
-	public ModelAndView productDetail(ModelAndView mv, HttpServletResponse response,
+	public ModelAndView productDetail(ModelAndView mv, HttpServletResponse response,HttpServletRequest req,
 			@CookieValue(name = "proView") String cookie,
 			@RequestParam(name = "proNo") int pro_no) {
 		try {
 			logger.info("===============상품상세 페이지===============");
-
-//			//쿠키추가
-//			if (!(cookie.contains(String.valueOf(pro_no)))) {
-//				cookie += pro_no + "/";
-//			}
 			
-			response.addCookie(new Cookie("view", cookie));
+			HttpSession session = req.getSession();
+			MemberVO member = (MemberVO) session.getAttribute("loginMember");
+			if(member!=null) {
+				mv.addObject("user",member.getUserNo());				
+			}else {
+				mv.addObject("user",0);
+			}
 			
 			mv.addObject("productCon",proConService.searchList(pro_no));
 			mv.addObject("product",proService.selectOne(pro_no));
