@@ -4,10 +4,11 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.DateFormat;
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -30,7 +31,6 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.plant.lab.diary.model.Service.DiaryService;
-import com.plant.lab.diary.model.Service.DiaryServiceImpl;
 import com.plant.lab.diary.model.vo.DiaryVO;
 import com.plant.lab.diary.model.vo.LikeVO;
 import com.plant.lab.member.model.service.MemberService;
@@ -68,53 +68,53 @@ public class HomeController {
 	}
 	
 	
-	//TODO 페이지 확인용 ========================================== 나중에 기능코드후 삭제
-//	@RequestMapping(value = "/product", method = RequestMethod.GET)
-//	public String home2(Locale locale, Model model) {
-//		logger.info("Welcome home! The client locale is {}.", locale);
-//		
-//		Date date = new Date();
-//		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-//		
-//		String formattedDate = dateFormat.format(date);
-//		
-//		model.addAttribute("serverTime", formattedDate );
-//		
-//		return "Product/ProductList";
-//	}
-	
-//	@RequestMapping(value = "/productView", method = RequestMethod.GET)
-//	public String home3(Locale locale, Model model) {
-//		logger.info("Welcome home! The client locale is {}.", locale);
-//		
-//		Date date = new Date();
-//		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-//		
-//		String formattedDate = dateFormat.format(date);
-//		
-//		model.addAttribute("serverTime", formattedDate );
-//		
-//		return "Product/ProductView";
-//	}
-	
-//	@RequestMapping(value = "/cart", method = RequestMethod.GET)
-//	public String home4(Locale locale, Model model) {
-//		logger.info("Welcome home! The client locale is {}.", locale);
-//		
-//		Date date = new Date();
-//		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-//		
-//		String formattedDate = dateFormat.format(date);
-//		
-//		model.addAttribute("serverTime", formattedDate );
-//		
-//		return "Product/Cart";
-//	}
-	
 	@RequestMapping(value = "/diary", method = RequestMethod.GET)
 	public ModelAndView listdiary(ModelAndView mv, HttpSession session, LikeVO lvo, DiaryVO vo) {
 		System.out.println("[영현]diary 진입");
 
+		
+		mv.setViewName("Plant/Diary");
+		System.out.println("[영현]diary view 페이지 이동");
+		return mv;
+	}
+
+	
+
+	   @RequestMapping(value = "/diary.do", method = RequestMethod.POST)
+	   @ResponseBody
+	   public void getDiary(HttpSession session, HttpServletResponse response) {
+	      System.out.println("[영현]diary.do 진입");
+			response.setCharacterEncoding("UTF-8");
+
+	      // 로그인 전에 임시 테스트 코드입니다.
+	      // TODO: session
+	      LikeVO sessionVO = new LikeVO();
+	      sessionVO.setUser_no(122); // session.getAtt....
+	      List<DiaryVO> listDiary = dService.listDiary();
+	      List<Integer> likeList = dService.likeList(sessionVO);
+	      
+	      Map<String, Object> map = new HashMap<String, Object>();
+	      map.put("listDiary", listDiary);
+	      map.put("likeList", likeList);
+
+	      Gson gson = new GsonBuilder().setPrettyPrinting().create();
+	      String jsonOutput = gson.toJson(map);
+
+	      try {
+	         response.getWriter().write(jsonOutput);
+	         System.out.println("데이터 잘 갔나 확인 좀 " + jsonOutput);
+	      } catch (IOException e) {
+	         e.printStackTrace();
+	      }
+
+	      System.out.println("[영현]diary view 페이지 이동");
+	   }
+	
+	
+	@RequestMapping(value = "/detaildiary", method = RequestMethod.GET)
+	public ModelAndView detaildiary(ModelAndView mv, HttpSession session, @RequestParam(name = "diary_no") int diary_no,  LikeVO lvo, DiaryVO vo) {
+		System.out.println("[영현]Detail diary 진입");
+		System.out.println("diary_no값 url로 잘 가져왔나용?" + diary_no);
 		// 로그인 전에 임시 테스트 코드입니다.
 		//TODO: session 
 //		LikeVO sessionVO = new LikeVO();
@@ -122,11 +122,53 @@ public class HomeController {
 //		
 //		mv.addObject("listDiary", dService.listDiary());
 //		mv.addObject("likeList", dService.likeList(sessionVO));
-		
-		mv.setViewName("Plant/Diary");
-		System.out.println("[영현]diary view 페이지 이동");
+		mv.addObject("diary_no", diary_no);
+		mv.setViewName("Plant/DiaryDetail");
+		System.out.println("[영현]diary detail view 페이지 이동");
 		return mv;
 	}
+	
+	
+	
+	@RequestMapping(value = "/detaildiary.do", method = RequestMethod.GET,  produces = "application/text; charset=UTF-8")
+	@ResponseBody
+	public void diaryDetail(ModelAndView mv, HttpSession session, @RequestParam(name = "diary_no") int diary_no, HttpServletResponse response) {
+		response.setCharacterEncoding("UTF-8");
+
+		System.out.println("[영현]detailDiary 진입");
+		System.out.println("diary_no값 url로 잘 가져왔나용?" + diary_no);
+
+		// 로그인 전 코드
+		LikeVO sessionVO = new LikeVO();
+		sessionVO.setUser_no(122);   // session.getAtt....
+
+		List<DiaryVO> detailList = dService.detailDiary(diary_no);
+	    List<Integer> likeList = dService.likeList(sessionVO);
+	    
+	    Map<String, Object> map = new HashMap<String, Object>();
+	    map.put("likeList", likeList);
+	    map.put("detailList", detailList);
+
+
+	    
+		System.out.println("세부리스트 : " + detailList);
+		
+
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+	      String jsonOutput = gson.toJson(map);
+
+	      
+	      try {
+	    	  response.getWriter().write(jsonOutput.toString());
+			System.out.println("데이터 잘 갔나 확인 좀 " + jsonOutput);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		
+		System.out.println("[영현]diary detail jsp 페이지 이동");
+	}
+	
 	
 	@RequestMapping(value = "/writediary", method = RequestMethod.GET)
 	public String writediary() {
@@ -152,73 +194,15 @@ public class HomeController {
 	}
 	
 	
-	@RequestMapping(value = "/diary.do", method = RequestMethod.POST, produces = "application/text; charset=UTF-8")
-	@ResponseBody
-	public void getDiary(HttpSession session, HttpServletResponse response) {
-		System.out.println("[영현]diary.do 진입");
-
-		// 로그인 전에 임시 테스트 코드입니다.
-		//TODO: session 
-		LikeVO sessionVO = new LikeVO();
-		sessionVO.setUser_no(122);   // session.getAtt....
-		List<DiaryVO> listDiary = dService.listDiary();
-		List<Integer> likeList = dService.likeList(sessionVO);
-		JsonArray jArray = new JsonArray();
-		response.setCharacterEncoding("UTF-8");
-	      // JsonObject 생성
-	      JsonObject jsonObject = new JsonObject();
-	      try {
-	         for(int i=0; i<listDiary.size(); i++) {
-	            JsonObject jobj = new JsonObject();
-	            jobj.addProperty("diary_no", listDiary.get(i).getDiary_no());
-	            jobj.addProperty("diary_write", listDiary.get(i).getDiary_write());
-	            jobj.addProperty("diary_content", listDiary.get(i).getDiary_content());
-	            jobj.addProperty("diary_date", String.valueOf(listDiary.get(i).getDiary_date()));            
-	            jobj.addProperty("diary_views", listDiary.get(i).getDiary_views());
-	            jobj.addProperty("diary_img_num", listDiary.get(i).getDiary_img_num());
-	            jobj.addProperty("diary_img_src", listDiary.get(i).getDiary_img_src());
-	            jobj.addProperty("user_id", listDiary.get(i).getUser_id().toString());
-	            jobj.addProperty("user_name", listDiary.get(i).getUser_name().toString());
-	            jobj.addProperty("like_cnt", listDiary.get(i).getLike_cnt());
-//	            jobj.addProperty("diary, value);
-	            jArray.add(jobj);
-	         }
-//	         for(int j=0; j<likeList.size(); j++) {
-//	        	 JsonObject jobj2 = new JsonObject();
-//	        	 jobj2.addProperty("diary_no", likeList.get(j).getDiary_no());
-//	        	 
-//	         }
-
-
-	         jsonObject.add("listDiary", jArray);
-	         System.out.println("제이슨으로 넘긴 데이터" + jArray);
-	      } catch (NullPointerException e) {
-	         System.out.println("값이 없습니다.");
-	      } catch (Exception e) {
-	         e.printStackTrace();
-	      }
-	      Gson gson = new GsonBuilder().setPrettyPrinting().create();
-	      String jsonOutput = gson.toJson(jsonObject);
-	      
-	      try {
-	    	  response.getWriter().write(jsonOutput.toString());
-			System.out.println("데이터 잘 갔나 확인 좀 " + jsonOutput);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		System.out.println("[영현]diary view 페이지 이동");
-	}
 	
-	
-	
-	@RequestMapping(value = "insertlike.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/insertlike.do", method = RequestMethod.POST)
 	@ResponseBody
 	public String insertlike(HttpSession session, ModelAndView mv, Model model, @RequestParam(name = "diary_no") int diary_no) {
+
+		System.out.println("insert_diary_no" + diary_no);
 		System.out.println("들어왔다");
 		int result = -1;
 
-		System.out.println(mv.getModel());
 		System.out.println(model.containsAttribute("likeList"));
 		try {
 			// 로그인 전에 임시 테스트 코드입니다.

@@ -1,6 +1,8 @@
 package com.plant.lab.diary.model.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,6 +41,31 @@ public class DiaryServiceImpl implements DiaryService {
 		System.out.println("[영현]likeList() :" + list);
 		return list;
 	}
+	
+	@Override
+	public List<DiaryVO> detailDiary(int diary_no) {
+		List<DiaryVO> list = null;
+		
+		try {
+			list = dDao.detailDiary(diary_no);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+//	@Override
+//	public List<DiaryVO> detailDiary(Map<String, Integer> map) {
+//		List<DiaryVO> list = null;
+//		
+//		try {
+//			list = dDao.detailDiary(map);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		return list;
+//	}
+
 	
 	//@Transactional
 	@Override
@@ -88,6 +115,7 @@ public class DiaryServiceImpl implements DiaryService {
 	public int writeDiary(DiaryVO vo) {
 		return dDao.writeDiary(vo);
 	}
+
 
 
 }

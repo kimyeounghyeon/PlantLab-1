@@ -1,0 +1,63 @@
+@charset "UTF-8";
+.dback {
+	clear : both;
+}
+.dtliketdcnt {
+	border-left : none;
+	height : 45px;
+}
+
+.dtdiarytb {
+	border : 1px solid gray;
+	margin : auto;
+	width : 800px;
+	border-collapse: collapse;
+	
+}
+
+.declaration {
+	float : right;
+}
+
+.dmodify {
+	float : right;
+}
+
+.ddelete {
+	float : right;
+	
+}
+
+.dtdiarytb tr {
+	border : 1px solid gray;
+}
+
+
+.liketd {
+	border-right: none;
+}
+
+.dtbtn {
+	border : none;
+	background-color : white;
+	font-weight:bold;
+	display: inline-block;
+	font-size : 17px;
+}
+
+.dtbtn:hover {
+	cursor:pointer;
+}
+
+.dtidtr {
+	height : 50px;
+}
+
+.dtimgtr {
+	height : 450px;
+}
+
+.dtcontenttd {
+	height : 100px;
+}
+

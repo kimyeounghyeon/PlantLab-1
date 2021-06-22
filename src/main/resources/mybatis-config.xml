@@ -16,6 +16,7 @@
 		<typeAlias alias="Cart" type="com.plant.lab.cart.model.vo.Cart"/>
 		<typeAlias alias="Order" type="com.plant.lab.order.model.vo.Order"/>
 		<typeAlias alias="DiaryVO" type="com.plant.lab.diary.model.vo.DiaryVO"/>
+		<typeAlias alias="CommentVO" type="com.plant.lab.diary.model.vo.CommentVO"/>
 	 	<typeAlias alias="LikeVO" type="com.plant.lab.diary.model.vo.LikeVO"/>
 	 	<typeAlias alias="NoticeVo" type="com.plant.lab.notice.model.vo.NoticeVo"/>
 	 	<typeAlias alias="OnedayVo"	 type="com.plant.lab.oneday.model.vo.OnedayVo"/>
