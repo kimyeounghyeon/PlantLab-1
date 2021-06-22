@@ -9,6 +9,7 @@
     <title>無以林 cart</title>
     <link href="${path}/resources/css/CartStyle.css" rel="stylesheet"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/jejumyeongjo.css"/>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
@@ -27,13 +28,11 @@
                        	<c:if test="${empty cartList}">
                        		<h3>상품이 존재하지 않습니다.</h3>
                        	</c:if>
-                       	
                        	<c:if test="${not empty cartList}">
                        	<label class="checkContain">
 	                        <input type="checkbox" id="allcheck">
 	                        <span class="checkmark"></span>
 	                    </label>
-	                    
                        		<c:forEach  var="vo" items="${cartList}" varStatus="status">
                        			<input type="hidden" class="pro_no" name="pro_no" value="${vo.pro_no}">
                        			<table class="prolist" id="${status.index}">
@@ -101,7 +100,12 @@
                                        <button class="infoBtn infoB" id="choseDel">선택상품 삭제</button>
                                    </td>
                                    <td>
-                                       <button class="infoBtn infoB" id="choseBuy">선택상품 구매</button>
+                                   	   <form id="orderF">
+                                   	   		<input type="hidden" name="buy_totalprice"  value="">
+                                   	   		<input type="hidden" name="deliv"    		value="5000">
+                                   	   		<input type="hidden" name="allPrice" 		value="">
+	                                        <button type="button" class="infoBtn infoB" id="choseBuy">선택상품 구매</button>
+                                   	   </form>
                                    </td>
                                </tr>
                                <tr>
@@ -118,10 +122,12 @@
 </body>
 <script>
     $(function(){
+    	//금액 전달용
+    	var form = $('#orderF');
+    	
     	//pro_no 보관용
     	var pro_no = $('.pro_no');
         var proNo = [];
-    	
     	
     	//금액표시
         var proAllP = $('#proAllP');
@@ -141,7 +147,7 @@
             val = val.substring(0,val.indexOf('원'));
 	    	val = val.replace(',','');
           
-            var num = cntValue[i].textContent
+            var num = cntValue[i].textContent;
 
             val = val*num;
             valAllSave[i] = val;
@@ -150,24 +156,31 @@
             val =  val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
              
             proPri[i].append(val);
-        }
+        }//금액계산
 
         // 체크박스
         var allcheck = $('#allcheck');
         var prock = $('input[name=prock]');
 
-        //전체체크 선택시
+        //전체체크 선택시 ==========================================================
         allcheck.click(function(){
             if($(this).prop('checked')){
                 prock.prop('checked',true);
 
                 all = allSave;
-                
+                var total = all + 5000;
+               
+                form.children("input[name=buy_totalprice]").val(allSave);
                 var allSaveT =  allSave.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                allPrice.text(allSaveT+"원");
+                form.children("input[name=proAllP]").val(total);
+                total = total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                
+                allPrice.text(total+"원");
                 proAllP.text(allSaveT+"원");
                 
-                for(var a=0; a<pro_no.length;a++){
+                pro_no.length = 0;
+                
+                for(var a=0; a<prock.length;a++){
                     proNo[a] = pro_no[a].value;
                 }
             }else{
@@ -176,13 +189,16 @@
                 proAllP.text(0+"원");
                 allPrice.text(0+"원");
                 
+                form.children("input[name=buy_totalprice]").val(0);
+                form.children("input[name=proAllP]").val(0);
+                
                 for(var a=0; a<pro_no.length;a++){
-                    proNo[a].pop();
+                	proNo[a] = pro_no[table].value;
                 }
             }
-        });
+        }); //전체체크 이벤트
 
-        //개별체크시
+        //개별체크시 ==========================================================
         prock.click(function(){
             //체크개수
             var cnt = $("input[name=prock]:checked").length;
@@ -201,9 +217,14 @@
                 
                 all += (valAllSave[table]);
                 valSave = all;
+                var total = all + 5000;                
                 
+                form.children("input[name=buy_totalprice]").val(valSave);
                 valSave =  valSave.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                allPrice.text(valSave+"원");
+                form.children("input[name=proAllP]").val(total);
+                total = total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                
+                allPrice.text(total+"원");
                 proAllP.text(valSave+"원");
                 
                 proNo[proNo.length] = pro_no[table].value;
@@ -216,29 +237,29 @@
 	    	    allValue = allValue.replace(',','');
 
                 all -= (valAllSave[table]);
+                var total = all + 5000;          
 
                 allValue -= (valAllSave[table]);
                 valSave = allValue;
                 
+                form.children("input[name=buy_totalprice]").val(valSave);
                 valSave =  valSave.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                allPrice.text(valSave+"원");
+                form.children("input[name=proAllP]").val(total);
+                total = total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                
+                allPrice.text(total+"원");
                 proAllP.text(valSave+"원");
                 
-                for(var a=0; a<proNo.length;a++){
-                    if(proNo[a] == proTV.val()){
-                        proNo.splice(a,1);
-                        
-                        a--;
-                    }
-                }
+                
+                proNo.splice(proNo.indexOf("proTV.val()"),1);
                 
                 for(var a=0; a<proNo.length;a++){
                     console.log("삭제확인"+proNo[a]);
                 }
             }
-        });
+        });//체크 이벤트
         
-       //삭제B
+       //삭제B ==========================================================
        var choseDel = $('#choseDel');
 
         choseDel.click(function(){
@@ -264,7 +285,23 @@
     				}
 				});//등록ajax
             }
-        });
+        });//삭제 이벤트
+        
+        //선택구매B ==========================================================
+        var choseBuy = $('#choseBuy');
+
+        choseBuy.click(function(){
+        	if(proNo.length == 0){
+        		swal("상품을 선택해주세요","", "info");
+        	}else{
+        		for(var a=0; a<proNo.length; a++){
+	        		form.prepend("<input type='text' name='pro_no' value='"+proNo[a]+"'>");
+	        	}
+	        	form.attr("method","post");
+	        	form.attr("action","order");
+	        	form.submit();
+           	}
+    	});//구매 이벤트
     });
 </script>
 </html>

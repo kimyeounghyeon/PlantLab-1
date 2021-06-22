@@ -6,10 +6,10 @@
 }
 
 #content{
-     width: 1250px;
-     margin: auto;
-     clear: both;
- }
+    width: 1250px;
+    margin: auto;
+    clear: both;
+}
  
 /* -----------헤더------------ */
 .main_header{
@@ -120,7 +120,7 @@
     border-color: #ccc;
 }
 
-.orderer input{
+.orderer input[type=text]{
     margin-left: 10px;
     width: 30%;
     height: 20px;
@@ -188,4 +188,27 @@
 #buyBtn:hover{
     cursor: pointer;
     background-color: #D5D9BA;
+}
+
+#paymentMethod{
+    height: 100px;
+}
+
+#paymentMethod input{
+    margin-bottom: 20px;
+}
+
+#paymentMethod label{
+    font-size: 17px;
+    margin-left: 5px;
+}
+
+#paymentMethod div:nth-child(1){
+    width: 200px;
+    height: 100px;
+    float: left;
+}
+
+#paymentMethod div:nth-child(2){
+    float: left;
 }

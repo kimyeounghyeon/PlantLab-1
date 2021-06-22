@@ -12,7 +12,7 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-	<jsp:include page="../header.jsp"></jsp:include>
+	<%-- <jsp:include page="../header.jsp"></jsp:include> --%>
     <div id="content" class="contents">
         <section id="main_section">
             <!-- Store 제목 -->
@@ -24,37 +24,24 @@
                 <div class="order">
                     <h3>주문상세내역</h3>
                     <table class="orderList">
-                        <tr>
-                            <td class="proImg" rowspan="2">
-                                <img src="test.jpg">
-                            </td>
-                            <td class="space" rowspan="2"></td>
-                            <td class="proName">
-                                <p>키우기쉬운 나무</p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="priceGuide">
-                                <p class="proNum guide">1개 / </p>
-                                <p class="proPri guide">15000원</p>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td class="proImg" rowspan="2">
-                                <img src="test.jpg">
-                            </td>
-                            <td class="space" rowspan="2"></td>
-                            <td class="proName">
-                                <p>키우기쉬운 나무</p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="priceGuide">
-                                <p class="proNum guide">1개 / </p>
-                                <p class="proPri guide">15000원</p>
-                            </td>
-                        </tr>
+                    	<c:forEach  var="vo" items="${cartList}" varStatus="status">
+                    		 <tr>
+	                            <td class="proImg" rowspan="2">
+	                                <img src="${vo.pro_image}">
+	                            </td>
+	                            <td class="space" rowspan="2"></td>
+	                            <td class="proName">
+	                                <p>${vo.pro_name}</p>
+	                            </td>
+	                        </tr>
+	                        <tr>
+	                            <td class="priceGuide">
+	                                <p class="proNum guide">${vo.pro_cnt} </p>개 /
+	                                <p class="proPri guide"></p>
+	                                <input type="hidden" value="${vo.pro_price}" class="voPrice">
+	                            </td>
+	                        </tr>
+                    	</c:forEach>
                     </table>
                     
                     <div class="allPriceGuide">
@@ -66,11 +53,13 @@
                             <span>총금액</span>
                         </p>
                        <p>
-                           <span id="price">30000 원</span> 
+                           <span id="price" class="prSpan"></span> 
                            <span>+</span> 
-                           <span id="deliv">5000 원</span> 
+                           <span id="deliv" class="prSpan"></span> 
                            <span>=</span> 
-                           <span id="allPrice">35000 원</span>
+                           <span id="allPrice"></span>
+                           <input type="hidden" class="inputV" id="priceIn" value="${total}">
+                           <input type="hidden" class="inputV" id="delivIn" value="${deliv}">
                         </p>
                     </div>
                 </div>
@@ -158,17 +147,30 @@
                             <tr>
                                 <td><span>결제방법</span></td>
                                 <td id="paymentMethod">
-                                    <input type="radio" name="payment" var="card" checked>
-                                    <input type="radio" name="payment" var="bank">계좌이체
-                                    <input type="radio" name="payment" var="deposit">무통장입금
-                                    <input type="radio" name="payment" var="virtual">가상계좌
-                                    <input type="radio" name="payment" var="phone">휴대폰결제
+                                    <div>
+                                        <input type="radio" name="payment" var="card" id="card" checked>
+                                        <label for="card">신용/체크카드</label>
+                                        <br>
+                                        <input type="radio" name="payment" var="deposit" id="deposit">
+                                        <label for="deposit">무통장입금</label>
+                                        <br>
+                                        <input type="radio" name="payment" var="phone" id="phone">
+                                        <label for="phone">휴대폰결제</label>
+                                    </div>
+                                    <div>
+                                        <input type="radio" name="payment" var="bank" id="bank">
+                                        <label for="bank">계좌이체</label>
+                                        <br>
+                                        <input type="radio" name="payment" var="virtual" id="virtual">
+                                        <label for="virtual">가상계좌</label>
+                                    </div>
                                 </td>
                             </tr>
                         </table>
                     </form>
                     <div id="checkInfo">
-                        <input type="checkbox" >상기 결제정보를 확인하였으며, 구매진행에 동의합니다.
+                        <input type="checkbox" id="infock" >
+                        <label for="infock">상기 결제정보를 확인하였으며, 구매진행에 동의합니다.</label>
                     </div>
                     <div id="buyB">
                         <button type="button" id="buyBtn">결제하기</button>
@@ -178,4 +180,44 @@
         </section>
     </div>
 </body>
+<script>
+	$(function(){
+		//상품목록 금액계산
+		var voPrice = $('.voPrice');
+		var proNum = $(".proNum");
+		var proPri = $(".proPri");
+		
+		for(var i = 0; i < voPrice.length; i++){
+	        var val = voPrice[i].value;
+	        
+	        val = val.substring(0,val.indexOf('원'));
+	    	val = val.replace(',','');
+	      
+	        var num = proNum[i].textContent;
+	        val = val*num;
+	        
+	        val =  val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	         
+	        proPri[i].append(val+"원");
+	    }//금액계산
+	    
+	    //총금액 계산
+		var inputV = $('.inputV');
+	    var prSpan = $('.prSpan');
+	    var allPrice = $('#allPrice');
+	    
+	    var val = (inputV[0].value*1) + (inputV[1].value*1);
+	    val =  val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    	allPrice.append(val+"원");
+	    
+	    for(var i=0; i<inputV.length; i++){
+	    	var val = inputV[i].value;
+	    	
+	    	val =  val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	    	console.log("val확인:"+val);
+	    	 
+	    	prSpan[i].append(val+"원");
+	    }
+	});
+</script>
 </html>

@@ -88,7 +88,7 @@ public class CartController {
 			e.printStackTrace();
 		}
 	}
-	
+
 	
 //카트 상품 등록 AJAX
 	@RequestMapping(value="/cartInsert", method=RequestMethod.POST)
