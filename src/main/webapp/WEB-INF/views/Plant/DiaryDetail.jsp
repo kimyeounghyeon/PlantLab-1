@@ -46,7 +46,7 @@
 
 				var dnotice = "";
 				$.each(detailList, function(i, item){
-                    dnotice += "<div class = 'dtdiary'>";
+                    dnotice += "<div class = 'dtdiary' id='dno_"+item.diary_no+"'>";
                     dnotice += "<table class='dtdiarytb'><tr class='dttr dtidtr'>";
                     dnotice += "<td class='dtwriteid dtidtd' colspan='2'>"+item.user_id+"</td></tr>";
                     dnotice += "<tr class='dttr dtimgtr'><td class='dtdiaryimg' colspan='2'><img src='"+item.diary_img_src+"' class='dtdiaryimg'></td></tr>";
@@ -79,10 +79,13 @@
 		
 		$(document).on("click", ".liketd", function(){
 			let thisElementJQ = $(this);
-			console.log("this는 뭐게" + thisElementJQ);
-			var classValue = thisElementJQ.attr("class");
-			console.log("클래스 밸류 " + classValue);
-			let index = classValue.substring(classValue.lastIndexOf('_') + 1);
+			let thisNextJQ = $(this).next();
+			var dnoDiv = thisElementJQ.parents(".dtdiary");
+			
+			var idValue = dnoDiv.attr("id");
+			
+			console.log("아이디 밸류 " + idValue);
+			let index = idValue.substring(idValue.lastIndexOf('_') + 1);
 			console.log("인덱스 : " + index);
 				
 			
@@ -98,8 +101,9 @@
 				 	$(".liketd.dno_"+index).removeClass("unlike");
 					$(".liketd.dno_"+index).addClass("liked");
 					thisElementJQ.children('.like').attr("src", "${path }/resources/img/색변경좋아요.png");
-  					location.href="detaildiary?diary_no="+index
-  					},
+					thisNextJQ.html("좋아요 "+data+"개");
+ 			
+					},
 				error : function() {
 					alert("잘못 된 접근입니다.");
 				}
@@ -117,8 +121,8 @@
 				 	$(".liketd.dno_"+index).removeClass("liked");
 					$(".liketd.dno_"+index).addClass("unlike");
 					thisElementJQ.children('.like').attr("src", "${path }/resources/img/좋아요누르기전그레이.png");
-  					location.href="detaildiary?diary_no="+index
- 			},
+					thisNextJQ.html("좋아요 "+data+"개");
+					},
 				error : function() {
 					alert("잘못 된 접근입니다.");
 				}
