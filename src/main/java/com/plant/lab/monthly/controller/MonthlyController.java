@@ -146,7 +146,7 @@ public class MonthlyController {
 	}
 
 	@RequestMapping(value = "mDelete.do", method = RequestMethod.GET)
-	public ModelAndView boardDelete(@RequestParam(name = "monthly_no") int monthly_no,
+	public ModelAndView monthlyDelete(@RequestParam(name = "monthly_no") int monthly_no,
 			@RequestParam(name = "page", defaultValue = "1") int page, HttpServletRequest request, ModelAndView mv) {
 		try {
 			logger.info("===============이달의 식물 삭제 ===============");
