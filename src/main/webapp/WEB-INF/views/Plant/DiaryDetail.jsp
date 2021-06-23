@@ -21,14 +21,17 @@
 
 		<button type="button" class="dtbtn declaration">신고하기</button>
 		&nbsp;&nbsp; <br>
-		<button type="button" class="dtbtn ddelete">삭제</button>
+<!-- 		<button type="button" class="dtbtn ddelete">삭제</button>
 		<button type="button" class="dtbtn dmodify">수정</button>
-		<br> <br>
+		<br> <br> -->
 		<div class="dback"></div>
 	</div>
 </body>
 <script>
 	$(function(){
+		// 게시글 불러오기
+		let dnoKnow = $(".knowdno").val();
+
 		$.ajax({
 			url : "detaildiary.do",
 			type : "GET",
@@ -42,13 +45,16 @@
 				
 	            var likeList = data.likeList;
 				console.log(likeList);
+				
+				var listComment = data.listComment;
+				console.log(listComment);
 
 
 				var dnotice = "";
 				$.each(detailList, function(i, item){
-                    dnotice += "<div class = 'dtdiary' id='dno_"+item.diary_no+"'>";
+                    dnotice += "<div class = 'dtdiary' id='dno_"+item.diary_no+"'><input type='hidden' class='knowdno' value='"+item.diary_no+"'>";
                     dnotice += "<table class='dtdiarytb'><tr class='dttr dtidtr'>";
-                    dnotice += "<td class='dtwriteid dtidtd' colspan='2'>"+item.user_id+"</td></tr>";
+                    dnotice += "<td class='dtwriteid dtidtd' colspan='2'>"+item.user_id+"<button type='button' class='dtbtn ddelete'>삭제</button><button type='button' class='dtbtn dmodify'>수정</button></td></tr>";
                     dnotice += "<tr class='dttr dtimgtr'><td class='dtdiaryimg' colspan='2'><img src='"+item.diary_img_src+"' class='dtdiaryimg'></td></tr>";
                     dnotice += "<tr class='dttr dtliketr'>"
                     var loop_flag = false;
@@ -65,10 +71,28 @@
                        dnotice += "<td class='liketd unlike dno_"+item.diary_no+"'><img src='${path }/resources/img/좋아요누르기전그레이.png' class='like'>";
                     }
                     dnotice += "<td class='dtliketdcnt'>좋아요 "+item.like_cnt+"개</td></tr>";
-                    dnotice += "<tr class='dttr dtcontenttd'><td class='dtdcontent' colspan='2'>"+item.diary_content+"</td></tr></table></div>";
+                    dnotice += "<tr class='dttr dtcontenttr'><td class='dtdcontent' colspan='2'>"+item.diary_content+"</td></tr>";
                  });
-             $(".dback").append(dnotice);
-             },
+				
+				if(listComment != null) {
+				$.each(listComment, function(i, item){
+                    dnotice += "<tr class='dttr dtinsertcommtr'><td class='dtinsertcommwriter'>"+item.user_id+"</td><td class='dtinsertcommcontent'><input type='text' class='writecomment' placeholder='댓글을 입력해주세요.'><button type='button' class='dtbtn insertcomm'>등록</button></td></tr>";
+      
+                    for(var k=0; k < listComment.length; k++) {
+                    dnotice += "<tr class='dttr dtlistcommtr'><td class='dtlistcomm' colspan='2'>"+item.comm_comment+"<button type='button' class='dtbtn commdelete'> &#10005 </button><button type='button' class='dtbtn commmodify'>수정</button></td></tr>";
+                    }
+           			dnotice += "</table></div>";
+				});
+				
+				} else if(listComment==null){
+					$.each(detailList, function(i, item){
+	                    dnotice += "<tr class='dttr dtinsertcommtr'><td class='dtinsertcommwriter'>"+item.user_id+"</td><td class='dtinsertcommcontent'><input type='text' class='writecomment' placeholder='댓글을 입력해주세요.'><button type='button' class='dtbtn insertcomm'>등록</button></td></tr>";
+               			dnotice += "</table></div>";
+				});
+                    
+             }
+        	   	  $(".dback").append(dnotice);
+			},
 
 			error : function(data) {
 				console.log("에러일 때 데이터" + data);
@@ -77,6 +101,7 @@
 		});
 		
 		
+		// 좋아요
 		$(document).on("click", ".liketd", function(){
 			let thisElementJQ = $(this);
 			let thisNextJQ = $(this).next();
@@ -109,6 +134,8 @@
 				}
 
 			});
+			
+		// 좋아요 해제
 		} else if ($(".liketd").hasClass("liked")) {
 			console.log("딜리트 시작");
 			$.ajax({
@@ -125,11 +152,34 @@
 					},
 				error : function() {
 					alert("잘못 된 접근입니다.");
-				}
+				},
 			});
 		} 
 	});
-
+	
+	// 수정 페이지
+	$(".dmodify").click(function(){
+		location.href="modifydiary?diary_no="+dnoKnow;
+	});
+	
+	
+	// 댓글 등록
+		$(document).on("click", ".insertcomm", function(){
+		$.ajax({
+			url : "insertComment.do",
+			type : "POST",
+			data : {diary_no : dnoKnow,
+					comm_comment : $(".writecomment").val()
+					},
+			success : function(data) {
+				console.log("댓글 등록 성공~" + data);
+			},
+			error : function(data) {
+				console.log("댓글 등록 실패~" + data)
+			}
+		});
+	});
+		
 	
 	});
 </script>

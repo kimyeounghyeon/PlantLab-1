@@ -73,6 +73,10 @@
  	</select>
  	 
  	 
+ 	<!-- 댓글 조회 -->
+	<select id="selectComment" parameterType="int" resultType="CommentVO">
+		select * from (select * from comment_tb ct, user_tb ut where ct.writer=ut.user_no) where diary_no=#{diary_no}
+	</select> 
 
  	 
  	<!-- 댓글 등록  -->
@@ -80,10 +84,6 @@
  		insert into comment_tb values(COMMENT_SEQ.nextVal, #{diary_no}, #{writer}, #{comm_commnet}, sysdate, #{comm_root}, default, default}
  	</insert>
  	
- 	<!-- 댓글 조회 -->
-	<select id="selectComment" parameterType="DiaryVO" resultType="CommentVO">
-		select * from comment_tb where diary_no=#{diary_no}
-	</select> 
  	
  	
  	

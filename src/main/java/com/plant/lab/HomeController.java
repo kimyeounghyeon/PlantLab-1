@@ -31,6 +31,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.plant.lab.diary.model.Service.DiaryService;
+import com.plant.lab.diary.model.vo.CommentVO;
 import com.plant.lab.diary.model.vo.DiaryVO;
 import com.plant.lab.diary.model.vo.LikeVO;
 import com.plant.lab.member.model.service.MemberService;
@@ -144,10 +145,14 @@ public class HomeController {
 
 		List<DiaryVO> detailList = dService.detailDiary(diary_no);
 	    List<Integer> likeList = dService.likeList(sessionVO);
+	    List<CommentVO> listComment = dService.selectComment(diary_no);
+	    System.out.println("댓글 확인하기" + listComment);
+
 	    
 	    Map<String, Object> map = new HashMap<String, Object>();
 	    map.put("likeList", likeList);
 	    map.put("detailList", detailList);
+	    map.put("listComment", listComment);
 
 
 	    
@@ -193,6 +198,12 @@ public class HomeController {
 		return mv;
 	}
 	
+	
+	@RequestMapping(value = "/modifydiary")
+	public String modifyDiary() {
+		System.out.println("수정페이지 들어왔고요~");
+		return "Plant/modifyDiary";
+	}
 	
 	
 	@RequestMapping(value = "/insertlike.do", method = RequestMethod.POST)
@@ -279,6 +290,30 @@ public class HomeController {
 		return String.valueOf(likecnt);
 	}
 	
+	@RequestMapping(value="/insertComment.do", method=RequestMethod.POST) 
+		public String Insertcomment(HttpServletRequest request, CommentVO cvo, @RequestParam(name="diary_no") int diary_no) {
+		System.out.println(diary_no);
+		int result = -1;
+		System.out.println("댓글 페이지 진입 성공~");
+		
+		int user_no = 122;  // 로그인 전에 임시 테스트 코드입니다.  // session.getAtt....
+		cvo.setWriter(user_no);
+		cvo.setDiary_no(diary_no);
+		result = dService.Insertcomment(cvo);
+		System.out.println("댓글 입력 했어용" + dService.Insertcomment(cvo));
+		
+			return String.valueOf(result);
+			
+		}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	private void saveFile(MultipartFile report, HttpServletRequest request) {
 		String root = request.getSession().getServletContext().getRealPath("resources");
 		String savePath = root + "\\uploadFiles";
@@ -358,7 +393,7 @@ public class HomeController {
 		}
 	}
 	
-
+	
 
 
 	@RequestMapping(value="login")

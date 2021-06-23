@@ -8,33 +8,40 @@
 }
 
 .dtdiarytb {
-	border : 1px solid gray;
+	border : 1px solid #e2e2e2;
 	margin : auto;
 	width : 800px;
 	border-collapse: collapse;
+	border-left : none;
+	border-right : none;
 	
 }
 
 .declaration {
 	float : right;
+	margin : 0;
 }
 
 .dmodify {
 	float : right;
+	margin : 0 5px;
 }
 
 .ddelete {
 	float : right;
-	
+	margin : 0 8px 0 5px;
 }
 
 .dtdiarytb tr {
-	border : 1px solid gray;
+	border : 1px solid #e2e2e2;
+	border-left : none;
+	border-right : none;
 }
 
 
 .liketd {
 	border-right: none;
+	padding : 7px;
 }
 
 .dtbtn {
@@ -43,6 +50,7 @@
 	font-weight:bold;
 	display: inline-block;
 	font-size : 17px;
+	padding : 0;
 }
 
 .dtbtn:hover {
@@ -57,7 +65,63 @@
 	height : 450px;
 }
 
-.dtcontenttd {
+.dtdcontent {
 	height : 100px;
+	padding : 0 0 0 7px;
 }
 
+.dtidtd {
+	padding : 0 0 0 7px;
+	
+}
+.commdelete {
+	float : right;
+	margin : 0 10px 0 8px;
+	
+}
+
+.commmodify {
+	float : right;
+}
+
+.dtinsertcommwriter {
+	padding : 0 0 0 7px;
+}
+
+.writecomment {
+	border : none;
+	width : 88%;
+}
+
+.writecomment:focus {
+	outline : none;
+}
+
+.dtinsertcommtr {
+	margin-left : 8px;
+	height : 50px;
+}
+
+.dtinsertcommwriter {
+	width : 100px;
+	margin-left : 8px;
+	font-weight : bold;
+	text-align : center;
+}
+
+.dtlistcommtr {
+	height : 50px;
+}
+
+.dtlistcomm {
+	padding : 0 0 0 8px;
+}
+
+.insertcomm {
+	float : right;
+	margin-right : 7px;
+}
+
+.dtdiaryimg {
+	text-align : center;
+}

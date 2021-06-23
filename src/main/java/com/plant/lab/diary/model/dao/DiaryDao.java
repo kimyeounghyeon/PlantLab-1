@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.plant.lab.diary.model.vo.CommentVO;
 import com.plant.lab.diary.model.vo.DiaryVO;
 import com.plant.lab.diary.model.vo.LikeVO;
 
@@ -58,6 +59,17 @@ public class DiaryDao {
 	// 좋아요 갯수
 	public int likeCnt(LikeVO lvo) {
 		return sqlSession.selectOne("Diary.likeCnt", lvo);
+	}
+	
+	// 댓글 조회
+	public List<CommentVO> selectComment(int diary_no) {
+		return sqlSession.selectList("Diary.selectComment", diary_no);
+	}
+	
+	// 댓글 등록
+	public int insertComment(CommentVO cvo) {
+		return sqlSession.selectOne("Diary.Insertcomment");
+		
 	}
 
 

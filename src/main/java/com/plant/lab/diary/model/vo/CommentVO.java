@@ -6,6 +6,7 @@ public class CommentVO {
 	private int comm_no;
 	private int diary_no;
 	private int writer;
+	private String user_id;
 	private String comm_comment;
 	private Date comm_date;
 	private int comm_root;
@@ -13,28 +14,21 @@ public class CommentVO {
 	private int comm_level;
 	
 	
-	
 	public CommentVO() {}
-	public CommentVO(int comm_no, int diary_no, int writer, String comm_comment, Date comm_date, int comm_root,
-			int comm_step, int comm_level) {
+	
+	public CommentVO(int comm_no, int diary_no, int writer, String user_id, String comm_comment, Date comm_date,
+			int comm_root, int comm_step, int comm_level) {
 		super();
 		this.comm_no = comm_no;
 		this.diary_no = diary_no;
 		this.writer = writer;
+		this.user_id = user_id;
 		this.comm_comment = comm_comment;
 		this.comm_date = comm_date;
 		this.comm_root = comm_root;
 		this.comm_step = comm_step;
 		this.comm_level = comm_level;
 	}
-	
-	@Override
-	public String toString() {
-		return "CommentVO [comm_no=" + comm_no + ", diary_no=" + diary_no + ", writer=" + writer + ", comm_comment="
-				+ comm_comment + ", comm_date=" + comm_date + ", comm_root=" + comm_root + ", comm_step=" + comm_step
-				+ ", comm_level=" + comm_level + "]";
-	}
-	
 	public int getComm_no() {
 		return comm_no;
 	}
@@ -52,6 +46,12 @@ public class CommentVO {
 	}
 	public void setWriter(int writer) {
 		this.writer = writer;
+	}
+	public String getUser_id() {
+		return user_id;
+	}
+	public void setUser_id(String user_id) {
+		this.user_id = user_id;
 	}
 	public String getComm_comment() {
 		return comm_comment;
@@ -82,6 +82,13 @@ public class CommentVO {
 	}
 	public void setComm_level(int comm_level) {
 		this.comm_level = comm_level;
+	}
+
+	@Override
+	public String toString() {
+		return "CommentVO [comm_no=" + comm_no + ", diary_no=" + diary_no + ", writer=" + writer + ", user_id="
+				+ user_id + ", comm_comment=" + comm_comment + ", comm_date=" + comm_date + ", comm_root=" + comm_root
+				+ ", comm_step=" + comm_step + ", comm_level=" + comm_level + "]";
 	}
 	
 	

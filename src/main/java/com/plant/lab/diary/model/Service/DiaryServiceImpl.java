@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.plant.lab.diary.model.dao.DiaryDao;
+import com.plant.lab.diary.model.vo.CommentVO;
 import com.plant.lab.diary.model.vo.DiaryVO;
 import com.plant.lab.diary.model.vo.LikeVO;
 
@@ -53,18 +54,6 @@ public class DiaryServiceImpl implements DiaryService {
 		}
 		return list;
 	}
-	
-//	@Override
-//	public List<DiaryVO> detailDiary(Map<String, Integer> map) {
-//		List<DiaryVO> list = null;
-//		
-//		try {
-//			list = dDao.detailDiary(map);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		return list;
-//	}
 
 	
 	//@Transactional
@@ -114,6 +103,29 @@ public class DiaryServiceImpl implements DiaryService {
 	@Override
 	public int writeDiary(DiaryVO vo) {
 		return dDao.writeDiary(vo);
+	}
+
+	@Override
+	public List<CommentVO> selectComment(int diary_no) {
+		List<CommentVO> list = null;
+		try {
+			list = dDao.selectComment(diary_no);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		System.out.println("댓글 시작" + list);
+		return list;
+	}
+
+	@Override
+	public int Insertcomment(CommentVO cvo) {
+		int result = -1;
+		try {
+		result = dDao.insertComment(cvo);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 
 
