@@ -74,7 +74,16 @@
 	
 }
 
-#classText{
+.classText{
+	
+	background-color:white;
+	margin-top:60px;
+	text-align:left;
+	vertical-align: middle;
+	z-index: 1;
+	
+}
+/* #classText{
 	
 	background-color:white;
 	width: 455px;
@@ -83,8 +92,18 @@
 	vertical-align: middle;
 	z-index: 1;
 	
-}
+} */
 #classBtn {
+	clear: both;
+	display: inline-block;
+	width: 450px;
+	height: 80px;
+	margin-top: 50px;
+	border: 1px solid black;
+	width: 250px;
+	cursor: pointer;
+}
+/* #classBtn {
 	clear: both;
 	display: block;
 	width: 450px;
@@ -93,7 +112,8 @@
 	margin-top: 20px;
 	border: 1px solid black;
 	width: 250px;
-}
+		cursor: pointer;
+} */
 
 #classImg>img {
 	text-align: center;

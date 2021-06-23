@@ -1,0 +1,89 @@
+@charset "UTF-8";
+
+* {
+	font-family: 'Jeju Myeongjo';
+	font-size: 13pt;
+	color: #1e1e1e;
+	line-height: 30px;
+}
+
+#fullmain {
+	text-align: center;
+	width: 1280px;
+	margin: 0 auto;
+	padding: 0;
+	clear: both;
+}
+
+#main {
+	display: inline-block;
+	text-align: center;
+	width: 1250px;
+	margin: 0 auto;
+	padding: 0;
+	vertical-align: middle;
+}
+
+.subtitle {
+	text-align: center;
+	margin-top: 0;
+	font-size: 20pt;
+}
+
+
+#some {
+	clear: both;
+	float: right;
+	display: inline-block;
+	border: 1px soild black;
+	width: 300px;
+	margin-right:475px;
+	height: 300px;
+}
+
+.inserttag {
+	margin-right:375px;
+	margin-bottom: 10px;
+	clear: both;
+	float: right;
+	text-align: left;
+	width: 500px;
+	height: 20px;
+	display: inline-block;
+	float: right;
+}
+
+.oneinsert {
+	margin-right:375px;
+	margin-bottom: 20px;
+	outline: none;
+	clear: both;
+	float: right;
+	display: inline-block;
+	clear: both;
+	width: 500px;
+	height: 20px;
+	display: inline-block;
+}
+
+#oneinsertT {
+	margin-right:375px;
+	float: right;
+	display: inline-block;
+	clear: both;
+	width: 500px;
+	height: 250px;
+	outline: none;
+}
+
+#oneIbtn {
+	margin-right:375px;
+	cursor: pointer; margin-top : 30px;
+	float: right;
+	display: inline-block;
+	clear: both;
+	width: 500px;
+	height: 50px;
+	float: right;
+	margin-top: 30px;
+}

@@ -1,42 +1,96 @@
-@charset "UTF-8";@charset "UTF-8";*{
-   font-family: 'Jeju Myeongjo';
-   font-size: 13pt;
-   color : #1e1e1e;
-   line-height: 30px;
-   
-   }
-   
-   
-#calendar{
-	float:left;
-	width:400px;
-	height:500px;
+@charset "UTF-8";
+
+
+* {
+	font-family: 'Jeju Myeongjo';
+	font-size: 13pt;
+	color: #1e1e1e;
+	line-height: 30px;
 }
-#oneContent{
-		clear:both;
-	float:right;
-	display:inline-block;
-		width:400px;
-	height:200px;
+
+#fullmain {
+	text-align: center;
+	width: 1280px;
+	margin: 0 auto;
+	padding: 0;
+	clear: both;
 }
-#oneName{
-	clear:both;
-	float:right;
-		display:inline-block;
-		width:400px;
-	height:100px;
+
+#main {
+	display: inline-block;
+	text-align: center;
+	width: 1250px;
+	margin: 0 auto;
+	padding: 0;
 }
-#onePhone{
-		clear:both;
-	float:right;
-		display:inline-block;
-		width:400px;
-	height:100px;
+
+.subtitle {
+	text-align: center;
+	margin-top: 0;
+	font-size: 20pt;
 }
-#oneRequest{
-		clear:both;
-	float:right;
-		display:inline-block;
-		width:400px;
-	height:100px;
+
+#calendar {
+	margin-top: 30px;
+	margin-left: 60px;
+	border: 1px solid black;
+	display: inline-block;
+	float: left;
+	width: 600px;
+	height: 500px;
+	float: left;
+}
+
+.onedayinput {
+	display: inline-block;
+	text-align: left;
+	float: right;
+	margin-right: 45px;
+	margin-bottom: 10px;
+	width: 400px;
+	height: 5px;
+}
+/* #oneContent {
+	margin-top:10px;
+	border: 1px solid black;
+	display: inline-block;
+	float: right;
+	display: inline-block;
+	width: 400px;
+	height: 200px;
+	margin-right: 45px;
+} */
+.onedaybox {
+	outline:none;
+	margin-top: 20px;
+	float: right;
+	display: inline-block;
+	width: 400px;
+	height: 50px;
+	margin-right: 45px;
+	z-index: 1
+}
+
+#oneRequest {
+	outline:none;
+	margin-top: 20px;
+	float: right;
+	display: inline-block;
+	width: 400px;
+	height: 200px;
+	margin-right: 45px;
+}
+
+
+
+/* 예약버튼 */
+#onedayp {
+	cursor:pointer;
+	margin-top: 20px;
+	float: right;
+	display: inline-block;
+	width: 400px;
+	height: 73px;
+	margin-right: 45px;
+	z-index: 1
 }

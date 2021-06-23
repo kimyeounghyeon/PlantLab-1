@@ -7,8 +7,8 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<title>無以林 OnedayClass</title>
-<link href="${path}/resources/css/Oneday/OnedayMain.css"
+<title>無以林 Admin OnedayClass</title>
+<link href="${path}/resources/css/Oneday/OnedayAdmin.css"
 	rel="stylesheet" />
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/earlyaccess/jejumyeongjo.css" />
@@ -17,7 +17,8 @@
 <body>
 	<jsp:include page="../header.jsp"></jsp:include>
 	<div class="bgdiv">
-		<h3 class="subtitle">oneday class</h3>
+		<h3 class="subtitle">Admin oneday class</h3>
+		<button id="oneAdBtn">클래스 등록</button>
 		<div class="dback">
 			<c:forEach var="o" items="${one}" varStatus="status">
 
@@ -42,7 +43,28 @@
 			</c:forEach>
 		</div>
 	</div>
+<script type="text/javascript">
+$(function(){
+	$("#oneAdBtn").click(function(){
+		location.href="${path}/onedayInsert"
+	})
+	
+	console.log("${oneIVo}");
+	
+	if ("${oneIVo}"  ==null) {       //~~~~~~~~~~~~~~~~~~~~~~~조건식 이어서 쓰기
+		location.href="historyback(-1);"
+	}else{
+		alert("${msg}");
+	}
+	
 
+	
+})
+
+
+	
+
+</script>
 
 </body>
 </html>
