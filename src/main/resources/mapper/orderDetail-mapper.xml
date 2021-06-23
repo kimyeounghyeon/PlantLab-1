@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="OrderDetail">
+	<resultMap type="OrderDetail" id="OrderDetailMap">
+	</resultMap>
+	
+	<!-- 구매 테이블 추가 -->
+	<!-- 구매 상세 추가 -->
+	<insert id="insertOrderDetail" parameterType="OrderDetail" flushCache="true" statementType="PREPARED">
+		INSERT INTO purchase_list_tb VALUES(
+			PURCHASE_SEQ.CURRVAL,
+			#{pro_no},
+			null,
+			#{pro_num}
+		)
+	</insert>
+</mapper>

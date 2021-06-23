@@ -12,9 +12,10 @@
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
 <body>
-	<%-- <jsp:include page="../header.jsp"></jsp:include> --%>
+	<jsp:include page="../header.jsp"></jsp:include><%--  --%>
     <div id="content" class="contents">
         <section id="main_section">
             <!-- Store 제목 -->
@@ -23,6 +24,7 @@
             </div>
 
             <article class="main_article">
+            <form class="orderer">        	
                 <div class="order">
                     <h3>주문상세내역</h3>
                     <table class="orderList">
@@ -35,12 +37,14 @@
 	                            <td class="space" rowspan="2"></td>
 	                            <td class="proName">
 	                                <p>${vo.pro_name}</p>
+	                                <input type="text" name="pro_no" value="${vo.pro_no}">
 	                            </td>
 	                        </tr>
 	                        <tr>
 	                            <td class="priceGuide">
 	                                <p class="proNum guide">${vo.pro_cnt} </p>개 /
 	                                <p class="proPri guide"></p>
+	                                <input type="hidden" value="${vo.pro_cnt}" name="pro_num">
 	                                <input type="hidden" value="${vo.pro_price}" class="voPrice">
 	                            </td>
 	                        </tr>
@@ -89,26 +93,27 @@
 
                 <div class="order order2">
                     <h3>주문자 정보</h3>
-                    <form class="orderer ord1">
-                        <table border="1">
+                        <table border="1" class="orderT">
                             <tr>
                                 <td><span>주문하시는 분</span></td>
-                                <td><input type="text" value="${user.userName}" readonly></td>
-                                <input type="hidden" name="user_no" value="${user.userNo}" readonly>
+                                <td>
+                                	<input type="text" class="info" name="user_name" value="${user.userName}" readonly>
+                                	<input type="hidden" name="user_no" value="${user.userNo}" readonly>
+                                </td>
+                                
                             </tr>
                             <tr>
                                 <td><span>연락처</span></td>
                                 <td>
-                                    <input type="text" name="phone" value="${user.phone}">
+                                    <input type="text" class="info" name="phone" value="${user.phone}">
                                     <span class="alert">숫자만 입력해주세요.</span>
                                 </td>
                             </tr>
                             <tr>
                                 <td><span>이메일</span></td>
-                                <td><input type="text" name="buy_email" value="${user.email}"></td>
+                                <td><input type="text" class="info" name="buy_email" value="${user.email}"></td>
                             </tr>
                         </table>
-                    </form>
                     <br><br>
                     
                     <h3>배송정보</h3>
@@ -117,36 +122,38 @@
                         <span class="checkmark"></span>
                         <span>주문자와 동일</span>
                     </label>
-                    <form class="orderer ord2">
-                        <table border="1">
+                        <table border="1" class="orderT">
                             <tr>
                                 <td><span>받는분</span></td>
-                                <td><input type="text"></td>
+                                <td><input type="text" class="info" name="buy_rc_name"></td>
                             </tr>
                             <tr>
                                 <td><span>주소</span></td>
                                 <td>
-                                    <input type="text">
+                                	<input type="text" class="info" id="sample6_postcode" placeholder="우편번호">
+                                    <button type="button"id="addB">우편번호 찾기</button><br>
+                                    <input type="text" class="info" id="sample6_address" placeholder="주소"><br>
+                                    <input type="text" class="info"  id="sample6_detailAddress" placeholder="상세주소">
+                                    <input type="text" class="info" id="sample6_extraAddress" placeholder="참고항목">
+                                    <br><input type="hidden" name="buy_rc_address" value="">
                                 </td>
                             </tr>
                             <tr>
                                 <td><span>연락처</span></td>
                                 <td>
-                                    <input type="text">
+                                    <input type="text" class="info" name="buy_rc_phone">
                                     <span class="alert">숫자만 입력해주세요.</span>
                                 </td>
                             </tr>
                             <tr>
                                 <td><span>배송 시 요청사항</span></td>
-                                <td><input type="text"></td>
+                                <td><input type="text" class="info" name="buy_requests" value="없음"></td>
                             </tr>
                         </table>
-                    </form>
                     <br><br>
 
                     <h3>결제정보</h3>
-                    <form class="orderer ord3">
-                        <table border="1">
+                        <table border="1" class="orderT">
                             <tr>
                                 <td><span>상품합계</span></td>
                                 <td><input type="text" class="proInfo" readonly></td>
@@ -162,36 +169,34 @@
                                 <td><input type="text" class="proInfo" readonly></td>
                             </tr>
                         </table>
-                    </form>
                     <br><br>
 
                     <h3>결제수단/결제</h3>
-                    <form class="orderer ord4">
-                        <table border="1">
+                    
+                        <table border="1" class="orderT">
                             <tr>
                                 <td><span>결제방법</span></td>
                                 <td id="paymentMethod">
                                     <div>
-                                        <input type="radio" name="payment" var="card" id="card" checked>
+                                        <input type="radio" name=buy_paymentmethod value="card" id="card" checked>
                                         <label for="card">신용/체크카드</label>
                                         <br>
-                                        <input type="radio" name="payment" var="deposit" id="deposit">
+                                        <input type="radio" name="pabuy_paymentmethodyment" value="deposit" id="deposit">
                                         <label for="deposit">무통장입금</label>
                                         <br>
-                                        <input type="radio" name="payment" var="phone" id="phone">
+                                        <input type="radio" name="buy_paymentmethod" value="phone" id="phone">
                                         <label for="phone">휴대폰결제</label>
                                     </div>
                                     <div>
-                                        <input type="radio" name="payment" var="bank" id="bank">
+                                        <input type="radio" name="buy_paymentmethod" value="bank" id="bank">
                                         <label for="bank">계좌이체</label>
                                         <br>
-                                        <input type="radio" name="payment" var="virtual" id="virtual">
+                                        <input type="radio" name="buy_paymentmethod" value="virtual" id="virtual">
                                         <label for="virtual">가상계좌</label>
                                     </div>
                                 </td>
                             </tr>
                         </table>
-                    </form>
                     <div id="checkInfo">
                         <input type="checkbox" id="infock" >
                         <label for="infock">상기 결제정보를 확인하였으며, 구매진행에 동의합니다.</label>
@@ -200,28 +205,57 @@
                         <button type="button" id="buyBtn">결제하기</button>
                     </div>
                 </div>
+                </form>
             </article>
         </section>
     </div>
 </body>
 <script>
 	$(function(){
+		//주문자 체크박스
+		var prock = $('input[name=prock]');
+		prock.click(function(){
+			if(prock.prop('checked')){
+				$('input[name=buy_rc_name]').val($('input[name=user_name]').val());
+				$('input[name=buy_rc_phone]').val($('input[name=phone]').val());
+			}			
+		})
+		
 		//버튼 클릭시 체크박스 여부
 		var buyBtn = $('#buyBtn');
 		var infock = $('#infock');
 		var orderer = $('.orderer');
 		var saveTotal;
+		var buy_rc_address = $('input[name=buy_rc_address]');
+		var payCheck = false;
 		
 		buyBtn.click(function(){
 			if(!infock.prop('checked')){
 				swal("구매진행에 동의해주세요","", "info");
 			}else{
-				iamport();
+				var check = false;
+				
+				for(var i=0; i<$('.info').length;i++){
+					console.log("사이즈:"+$('.info').length);
+					
+					if($('.info')[i].value == ""){
+						//console.log(i+"번 빈칸ㅇㅇ");
+						check = false; break;
+					}else{
+						//console.log(i+"번 빈칸ㄴ");
+						check = true;
+					} 
+				}
+				
+				if(!check){
+					swal("빈칸없이 값을 입력해주세요","", "info");
+				} else{
+					var saveA = buy_rc_address.val();
+					saveA += " "+$('#sample6_detailAddress').val();
+					buy_rc_address.val(saveA);
+					iamport();
+				}
 			}
-			
-			//if(orderer.children("input").val() == null){
-				//swal("빈칸없이 값을 입력해주세요","", "info");
-			//}
 		});
 		
 		
@@ -268,13 +302,65 @@
 	    	prSpan[i].append(val+"원");
 	    }
 	    
+	    //주소API
+	    var addB = $('#addB');
+	    addB.click(function(){
+	    	new daum.Postcode({
+	            oncomplete: function(data) {
+	            	// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+	                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+	                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+	                var addr = ''; // 주소 변수
+	                var extraAddr = ''; // 참고항목 변수
+
+	                //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+	                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+	                    addr = data.roadAddress;
+	                } else { // 사용자가 지번 주소를 선택했을 경우(J)
+	                    addr = data.jibunAddress;
+	                }
+
+	                // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+	                if(data.userSelectedType === 'R'){
+	                    // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+	                    // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+	                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+	                        extraAddr += data.bname;
+	                    }
+	                    // 건물명이 있고, 공동주택일 경우 추가한다.
+	                    if(data.buildingName !== '' && data.apartment === 'Y'){
+	                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+	                    }
+	                    // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+	                    if(extraAddr !== ''){
+	                        extraAddr = ' (' + extraAddr + ')';
+	                    }
+	                    // 조합된 참고항목을 해당 필드에 넣는다.
+	                    document.getElementById("sample6_extraAddress").value = extraAddr;
+	                
+	                } else {
+	                    document.getElementById("sample6_extraAddress").value = '';
+	                }
+
+	                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+	                document.getElementById('sample6_postcode').value = data.zonecode;
+	                document.getElementById("sample6_address").value = addr;
+	                // 커서를 상세주소 필드로 이동한다.
+	                document.getElementById("sample6_detailAddress").focus();
+	                
+	                buy_rc_address.val("("+data.zonecode+")"+addr);
+	            }
+	        }).open();
+	    });
+	    
 	    
 	    //결제API
 	    var proName = $(".proName p");
 	    var proNameR;
 	    
 	    if(proName.length>1){
-	    	proNameR = proName[0].innerHTML + " 외 " + proName.length ;
+	    	proNameR = proName[0].innerHTML + " 외 " + (proName.length-1) ;
 	    }else{
 	    	proNameR = proName.text();
 	    }
@@ -289,24 +375,38 @@
 			    merchant_uid : 'merchant_' + new Date().getTime(),
 			    name : proNameR, //결제창에서 보여질 이름
 			    amount : saveTotal, //실제 결제되는 가격
-			    buyer_email : 'iamport@siot.do',
-			    buyer_name : '구매자이름',
-			    buyer_tel : '010-1234-5678',
-			    buyer_addr : '서울 강남구 도곡동',
-			    buyer_postcode : '123-456'
+			    buyer_email : $('input[name=buy_email]').val(),
+			    buyer_name : $('input[name=user_name]').val(),
+			    buyer_tel : $('input[name= phone]').val(),
+			    buyer_addr : $('input[name=buy_rc_address]').val().substring(1,$('input[name=buy_rc_address]').val().lastIndexOf(")")),
+			    buyer_postcode : $('input[name=buy_rc_address]').val().substring($('input[name=buy_rc_address]').val().lastIndexOf(")")+1)
 			}, function(rsp) {
 				console.log(rsp);
 			    if ( rsp.success ) {
-			    	var msg = '결제가 완료되었습니다.';
-			        msg += '고유ID : ' + rsp.imp_uid;
-			        msg += '상점 거래ID : ' + rsp.merchant_uid;
-			        msg += '결제 금액 : ' + rsp.paid_amount;
-			        msg += '카드 승인번호 : ' + rsp.apply_num;
+			    	
 			    } else {
 			    	 var msg = '결제에 실패하였습니다.';
 			         msg += '에러내용 : ' + rsp.error_msg;
+			         
+			        swal({
+				        title: "오류!",
+				        text: msg,
+				        icon: "info",
+				        buttons: "확인"
+					}).then(function(){
+						  payCheck = true;
+					});
 			    }
-			    alert(msg);
+			    
+
+				
+				if(payCheck = true){
+					console.log("진입~");
+					var form = $('.orderer');
+					form.attr("method","post");
+		        	form.attr("action","orderInsert");
+		        	form.submit();
+				};
 			});
 		} 
 	});

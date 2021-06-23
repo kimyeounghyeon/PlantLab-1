@@ -135,12 +135,12 @@ public class CartController {
 	
 //카트 상품 삭제 AJAX
 	@RequestMapping(value="/cartDel", method=RequestMethod.POST)
-	public void cartDel(Cart cart,HttpServletResponse response,HttpServletRequest request)throws IOException{
+	public void cartDel(Cart cart,HttpServletResponse response,HttpServletRequest request,HttpSession session)throws IOException{
 		try {
 			//TODO 테스트용 나중에 삭제
-			
+			MemberVO member = (MemberVO) session.getAttribute("loginMember");
+			cart.setUser_no(Integer.parseInt(member.getUserNo()));
 			cart.setPro_no(Integer.parseInt(request.getParameter("pro_no")));
-			System.out.println("상품번호확인삭제:"+cart.getPro_cnt());
 			
 			int result = cartService.cartDetailDel(cart);
 			

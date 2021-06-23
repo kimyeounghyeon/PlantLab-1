@@ -13,7 +13,6 @@ public class Order {
 	private String buy_paymentmethod;
 	private int phone;
 	private String buy_email;
-	private String buy_address;
 	private String buy_requests;
 	private String buy_rc_name;
 	private String buy_rc_address;
@@ -66,12 +65,6 @@ public class Order {
 	}
 	public void setBuy_email(String buy_email) {
 		this.buy_email = buy_email;
-	}
-	public String getBuy_address() {
-		return buy_address;
-	}
-	public void setBuy_address(String buy_address) {
-		this.buy_address = buy_address;
 	}
 	public String getBuy_requests() {
 		return buy_requests;

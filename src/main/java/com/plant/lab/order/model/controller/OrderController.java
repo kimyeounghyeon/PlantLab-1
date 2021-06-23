@@ -20,7 +20,9 @@ import com.plant.lab.cart.model.service.CartService;
 import com.plant.lab.cart.model.vo.Cart;
 import com.plant.lab.member.model.service.MemberService;
 import com.plant.lab.member.model.vo.MemberVO;
+import com.plant.lab.order.model.service.OrderService;
 import com.plant.lab.order.model.vo.Order;
+import com.plant.lab.order.model.vo.OrderDetail;
 import com.plant.lab.product.model.service.ProductContentService;
 import com.plant.lab.product.model.service.ProductService;
 import com.plant.lab.product.model.vo.Product;
@@ -33,6 +35,8 @@ public class OrderController {
 	private ProductService proService;
 	@Autowired
 	private MemberService mService;
+	@Autowired
+	private OrderService orderService;
 	
 	private static final Logger logger = LoggerFactory.getLogger(CartController.class);
 	
@@ -71,6 +75,7 @@ public class OrderController {
 		return mv;
 	}
 	
+//상품 주문페이지 이동 2	
 	@RequestMapping(value="/order", method=RequestMethod.POST)
 	public ModelAndView orderPro(ModelAndView mv,Product product,Cart cart,HttpSession session,
 			Order order,@RequestParam(name = "pro_no") int pro_no,HttpServletRequest req) {
@@ -86,6 +91,37 @@ public class OrderController {
 		mv.addObject("total",order.getBuy_totalprice());
 		mv.addObject("deliv",req.getParameter("deliv"));
 		mv.setViewName("Product/Order");
+		return mv;
+	}
+	
+//주문 추가
+	@RequestMapping(value="/orderInsert", method=RequestMethod.POST)
+	public ModelAndView orderInsert(ModelAndView mv,Product product,Cart cart,HttpSession session,OrderDetail orderD,
+			Order order,
+			@RequestParam(name = "pro_no") List<Integer> pro_no,
+			@RequestParam(name="pro_num")  List<Integer> pro_num,HttpServletRequest req) {
+		logger.info("===============주문추가===============");
+		logger.info("상품사이즈 체크:"+pro_no.size());
+		
+		MemberVO member = (MemberVO) session.getAttribute("loginMember");
+		order.setUser_no(Integer.parseInt(member.getUserNo()));
+		
+		List<Cart> carts = new ArrayList<Cart>();
+		carts = cartService.serchList(order.getUser_no());
+		
+		logger.info("상품번호 체크:"+pro_no.get(1));
+		logger.info("상품번호 체크:"+pro_no.get(0));
+		
+		//구매 테이블 추가
+		int result = orderService.orderInsert(order,pro_no,pro_num,carts);
+		
+		if(result == 0) {
+			logger.info("구매성공");
+		}else{
+			logger.info("구매실패");
+		}
+			
+		mv.setViewName("Product/ProductList");
 		return mv;
 	}
 }
