@@ -1,4 +1,4 @@
-=]<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
@@ -25,16 +25,26 @@ text-aglin : center;
 .mmain{
 clear : both;
 }
-
+	.plantimg{
+	width : 600px;
+	height : 850px;
+	margin-left: auto;
+	margin-right: auto;
+	}
+	#plantname{
+	width : 600px;
+	margin-left: auto;
+	margin-right: auto;
+	text-aglin : center;
+	}
 </style>
 </head>
 <body>
 	<jsp:include page="../header.jsp"></jsp:include>
 <div class="mmain">
-<h2 align="center">이달의 식물</h2>
-<div id="plantimg">식물이미지</div>
-<br>
-<div id= "plantname" align="center">식물이름</div>
+<div class="plantimg"><img class="plantimg" src="<%=request.getContextPath() %>/resources/img/${monthly.monthly_img}"></div>
+
+<div id= "plantname" align="center">${monthly.monthly_name}</div>
 </div>
 </body>
 </html>

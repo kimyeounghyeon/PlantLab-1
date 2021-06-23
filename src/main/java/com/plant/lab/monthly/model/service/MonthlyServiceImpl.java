@@ -29,10 +29,11 @@ public class MonthlyServiceImpl implements MonthlyService {
 		public Monthly selectOne(int monthly_no) {
 			return moDao.selectOne(monthly_no);
 		}
-		
-	
-		
-		
+		//이달의 식물 상세보기
+		@Override
+		public Monthly selectMain() {
+			return moDao.selectMain();
+				}
 		//이달의 식물 추가
 		@Override
 		public int insertMonthly(Monthly m) {

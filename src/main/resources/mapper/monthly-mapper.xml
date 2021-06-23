@@ -15,6 +15,7 @@
 	<!-- 페이지당 게시글 조회 rowbounds-->
 	<select id="selectList" resultType="arraylist" resultMap="resultMonthly">
 		SELECT * FROM Monthly_tb
+		order by monthly_no desc
 	</select>
 	
 	
