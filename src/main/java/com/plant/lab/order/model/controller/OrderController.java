@@ -52,7 +52,7 @@ public class OrderController {
 		List<Cart> carts = new ArrayList<Cart>();
 		List<Cart> orders = new ArrayList<Cart>();
 		//TODO 테스트용 나중에 삭제
-		order.setUser_no(Integer.parseInt(member.getUserNo()));
+		order.setUser_no(member.getUserNo());
 		
 		carts = cartService.serchList(order.getUser_no());
 		
@@ -104,7 +104,7 @@ public class OrderController {
 		logger.info("상품사이즈 체크:"+pro_no.size());
 		
 		MemberVO member = (MemberVO) session.getAttribute("loginMember");
-		order.setUser_no(Integer.parseInt(member.getUserNo()));
+		order.setUser_no(member.getUserNo());
 		
 		List<Cart> carts = new ArrayList<Cart>();
 		carts = cartService.serchList(order.getUser_no());

@@ -40,12 +40,12 @@ public class CartController {
 			MemberVO member = (MemberVO) session.getAttribute("loginMember");
 			
 			List<Cart> cart = new ArrayList<Cart>();
-			cart = cartService.serchList(Integer.parseInt(member.getUserNo()));
+			cart = cartService.serchList(member.getUserNo());
 			
 			logger.info("user확인 : " + member.getUserNo());
 			logger.info("cart확인 : " + cart.size());
 			
-			mv.addObject("cartList",cartService.serchList(Integer.parseInt(member.getUserNo())));
+			mv.addObject("cartList",cartService.serchList(member.getUserNo()));
 			mv.setViewName("Product/Cart");
 		}catch (Exception e) {
 			logger.info("!!!!!!카트 리스트 오류!!!!!!");
@@ -64,7 +64,7 @@ public class CartController {
 			MemberVO member = (MemberVO) session.getAttribute("loginMember");
 			
 			PrintWriter out = response.getWriter();
-			List<Cart> cartL = cartService.serchList(Integer.parseInt(member.getUserNo()));
+			List<Cart> cartL = cartService.serchList(member.getUserNo());
 			
 			int result = 0;
 			for(int i = 0; i<cartL.size(); i++){
@@ -99,8 +99,8 @@ public class CartController {
 			MemberVO member = (MemberVO) session.getAttribute("loginMember");
 			
 			//장바구니가 있는지 확인
-			Cart cartCk = cartService.searchHasCart(Integer.parseInt(member.getUserNo()));
-			cart.setUser_no(Integer.parseInt(member.getUserNo()));
+			Cart cartCk = cartService.searchHasCart(member.getUserNo());
+			cart.setUser_no(member.getUserNo());
 			
 			if(cartCk==null) {
 				logger.info("카트없음!!!");
@@ -139,7 +139,7 @@ public class CartController {
 		try {
 			//TODO 테스트용 나중에 삭제
 			MemberVO member = (MemberVO) session.getAttribute("loginMember");
-			cart.setUser_no(Integer.parseInt(member.getUserNo()));
+			cart.setUser_no(member.getUserNo());
 			cart.setPro_no(Integer.parseInt(request.getParameter("pro_no")));
 			
 			int result = cartService.cartDetailDel(cart);
