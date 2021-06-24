@@ -103,7 +103,7 @@ public class OnedayController {
 		MemberVO member = (MemberVO) session.getAttribute("loginMember"); 
 		System.out.println("oneday_no:"+onedayNo);
 		System.out.println("member.getUserNo()입니다.~~~"+member.getUserNo());
-//		oneVo.setUser_no(Integer.parseInt(member.getUserNo()));   //int 로 꾸면 partseint 지우기
+		oneVo.setUser_no(member.getUserNo());   //int 로 꾸면 partseint 지우기
 		oneVo.setOneday_no(onedayNo);
 		oneVo.setOneday_request(oneRequest);
 		System.out.println("결과 는~~~~~~~~~"+oneVo);
