@@ -26,13 +26,13 @@ text-aglin : center;
 clear : both;
 }
 	.plantimg{
-	width : 600px;
-	height : 850px;
+	width : 500px;
+	height : 650px;
 	margin-left: auto;
 	margin-right: auto;
 	}
 	#plantname{
-	width : 600px;
+	width : 500px;
 	margin-left: auto;
 	margin-right: auto;
 	text-aglin : center;

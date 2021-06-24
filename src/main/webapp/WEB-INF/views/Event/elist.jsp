@@ -31,12 +31,12 @@ width : 200px;
 }
 #viewimg{
 width : 30px;
+line-height : 100%;
 }
 #eimg{
 height : 20px;
 margin : 2px;
 width : 20px;
-
 }
 #view{
 width :50px;
@@ -48,7 +48,10 @@ clear: both;
 border : none;
 color : white;
 background: #625b54;
-margin-left : 1140px;
+}
+#etd{
+text-align : right;
+width : 750px;
 }
 </style>
 </head>
@@ -58,23 +61,23 @@ margin-left : 1140px;
 	<div class="elistdiv">
 	<h2 align="center">event</h2>
 	<div>
- 	<button type="button" id="ebtn" onclick="window.location='eWrite.do'">등록하기</button>
  	</div>
 	<table class="event">
-         <c:forEach var="vo" items="${list}">
-  		
-        <tr>
+  		<tr>
+  			<td id="etd"  colspan="4">
+ 				<button type="button" id="ebtn" onclick="window.location='eWrite.do'">등록하기</button>
+       		</td>
+       	</tr>
+         
+        <c:forEach var="vo" items="${list}">
         <tr>
            	<td colspan="4">
-           	<a href="eDetail.do?event_no=${vo.event_no}">
-           	<img class="eventbanner" src="<%=request.getContextPath() %>/resources/img/${vo.banner}">
-           	</a></td>
-           	
-           	
-           	
-           	
+	           	<a href="eDetail.do?event_no=${vo.event_no}">
+	           		<img class="eventbanner" src="<%=request.getContextPath() %>/resources/img/${vo.banner}">
+	           	</a>
+           	</td>
   		</tr>
-
+		<tr>
            	<td id="eventsub"><a href="eDetail.do?event_no=${vo.event_no}">&nbsp;&nbsp;${vo.event_title}</a></td>
             <td id="period">${vo.start_date}~${vo.end_date}</td>
 		    <td id="viewimg"><img id="eimg" src="${path}/resources/img/eye.png"></td>
