@@ -37,7 +37,7 @@
 	                            <td class="space" rowspan="2"></td>
 	                            <td class="proName">
 	                                <p>${vo.pro_name}</p>
-	                                <input type="text" name="pro_no" value="${vo.pro_no}">
+	                                <input type="hidden" name="pro_no" value="${vo.pro_no}">
 	                            </td>
 	                        </tr>
 	                        <tr>
@@ -181,17 +181,15 @@
                                         <input type="radio" name=buy_paymentmethod value="card" id="card" checked>
                                         <label for="card">신용/체크카드</label>
                                         <br>
-                                        <input type="radio" name="pabuy_paymentmethodyment" value="deposit" id="deposit">
-                                        <label for="deposit">무통장입금</label>
-                                        <br>
+                                       
                                         <input type="radio" name="buy_paymentmethod" value="phone" id="phone">
                                         <label for="phone">휴대폰결제</label>
                                     </div>
                                     <div>
-                                        <input type="radio" name="buy_paymentmethod" value="bank" id="bank">
+                                        <input type="radio" name="buy_paymentmethod" value="trans" id="bank">
                                         <label for="bank">계좌이체</label>
                                         <br>
-                                        <input type="radio" name="buy_paymentmethod" value="virtual" id="virtual">
+                                        <input type="radio" name="buy_paymentmethod" value="vbank" id="virtual">
                                         <label for="virtual">가상계좌</label>
                                     </div>
                                 </td>
@@ -253,7 +251,14 @@
 					var saveA = buy_rc_address.val();
 					saveA += " "+$('#sample6_detailAddress').val();
 					buy_rc_address.val(saveA);
-					iamport();
+					
+					var method=$("input:radio[name='buy_paymentmethod']:checked").val();
+					
+					if(method == 'deposit'){
+						
+					}else{
+						iamport(method);
+					}
 				}
 			}
 		});
@@ -366,12 +371,12 @@
 	    }
 	    
 	    
-	    function iamport(){
+	    function iamport(method){
 	    	//가맹점 식별코드
 			IMP.init('imp77086696');
 			IMP.request_pay({
 			    pg : '이니시스',
-			    pay_method : 'card',
+			    pay_method : method,
 			    merchant_uid : 'merchant_' + new Date().getTime(),
 			    name : proNameR, //결제창에서 보여질 이름
 			    amount : saveTotal, //실제 결제되는 가격
