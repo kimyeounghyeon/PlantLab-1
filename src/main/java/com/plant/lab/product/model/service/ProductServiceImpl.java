@@ -30,7 +30,16 @@ public class ProductServiceImpl implements ProductService{
 	//상품전체리스트
 	@Override
 	public List<Product> selectList(int startPage, int limit,String cate,String orderby) {
-		return proDao.selectList(startPage,limit,cate,orderby);
+		
+		if(orderby.equals("new")) {
+			return proDao.selectList(startPage,limit,cate,orderby);
+		}else if(orderby.equals("low")) {
+			return proDao.selectListOrderLow(startPage,limit,cate,orderby);
+		}else if(orderby.equals("high")) {
+			return proDao.selectListOrderHigh(startPage,limit,cate,orderby);
+		}else {
+			return proDao.selectListOrderBest(startPage, limit, cate, orderby);
+		}
 	}
 	
 	//상품 상세보기
@@ -52,6 +61,12 @@ public class ProductServiceImpl implements ProductService{
 		return 0;
 	}
 
+	@Transactional
+	@Override
+	public int updateStock(Product product) {
+		return proDao.updateStock(product);
+	}
+	
 	@Transactional
 	@Override
 	public int deleteProduct(int pro_no) {

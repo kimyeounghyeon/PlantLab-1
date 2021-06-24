@@ -24,6 +24,9 @@ public interface ProductService {
 	//상품수정
 	public int updateProduct(Product product);
 	
+	//상품제고 수정
+	public int updateStock(Product product);
+	
 	//상품삭제
 	public int deleteProduct(int pro_no);
 }

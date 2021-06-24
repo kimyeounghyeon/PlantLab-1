@@ -11,6 +11,8 @@ import com.plant.lab.cart.model.vo.Cart;
 import com.plant.lab.order.model.dao.OrderDAO;
 import com.plant.lab.order.model.vo.Order;
 import com.plant.lab.order.model.vo.OrderDetail;
+import com.plant.lab.product.model.dao.ProductDAO;
+import com.plant.lab.product.model.vo.Product;
 
 import sun.util.logging.resources.logging;
 
@@ -20,6 +22,8 @@ public class OrderServiceImpl implements OrderService{
 	private OrderDAO orderDao;
 	@Autowired
 	private CartDAO cartDao;
+	@Autowired
+	private ProductDAO productDao;
 	
 	//주문 테이블 추가
 	@Transactional
@@ -35,6 +39,7 @@ public class OrderServiceImpl implements OrderService{
 				orderD.setPro_num(pro_num.get(i));
 				result = orderDao.orderDetailInsert(orderD);
 		}
+		
 		 
 		for(int i = 0; i<cart.size(); i++){
 			for(int j=0; j<pro_no.size(); j++) {
@@ -46,7 +51,15 @@ public class OrderServiceImpl implements OrderService{
 				}
 			}
 		}
-		 
+		
+		Product pro = new Product();
+		for(int i = 0; i<pro_no.size(); i++){
+			 pro = productDao.selectOne(pro_no.get(i));
+			 pro.setPro_stock(pro.getPro_stock() - pro_num.get(i));
+			 
+			 result = productDao.updateStock(pro);
+		}
+		
 		 return result;
 	}
 

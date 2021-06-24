@@ -284,7 +284,7 @@
             var numVal = num.text();
             var numPri = allPrice.text();
 
-            if(numPri !='(품절)'){
+            if(stock >= 0){
             	 numPri = numChange(numPri);
                  numPri = numPri.replace(/[^\d]+/g, "");
                  
@@ -308,7 +308,7 @@
             var numVal = num.text();
             var numPri = allPrice.text();
 
-            if(numPri != '(품절)'){
+            if(stock >= 0){
                 numPri = numChange(numPri);
                 numPri = numPri.replace(/[^\d]+/g, "");
 
@@ -368,7 +368,7 @@
         buyB.click(function(){
         	var numPri = allPrice.text();
         	
-        	if(numPri == '(품절)'){
+        	if(stock <= 0){
         		swal("상품이 품절되었습니다.","", "info");
         	}else if(user_no == 0){   		
         		swal("로그인 후 이용해 주세요.","", "info");
@@ -386,7 +386,7 @@
     	
         $("#basketB").click(function(){ 
         	var numPri = allPrice.text();
-        	if(numPri == '(품절)'){
+        	if(stock <= 0){
         		swal("상품이 품절되었습니다.","", "info");
         	}else if(user_no == 0){   		
         		swal("로그인 후 이용해 주세요.","", "info");

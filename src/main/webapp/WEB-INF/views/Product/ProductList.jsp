@@ -77,43 +77,49 @@
 					</c:if>
                 </div>
                 
-                <div class="page">
-                    <ul>
-                    	<c:if test="${currentPage <= 1}">
-                    		<li>◀</li>
-                    	</c:if>
-                    	<c:if test="${currentPage > 1}">
-                    		<c:url var="plistST" value="/product">
-								<c:param name="page" value="${currentPage-1}" />
-							</c:url>
-							<li> <a href="${plistST}">◀</a></li>
-                    	</c:if>
-                    	
-                    	<c:set var="endPage" value="${maxPage}" /> 
-						<c:forEach var="p" begin="${startPage+1}" end="${endPage}">
-							<c:if test="${p eq currentPage}">
-								<li>${p}</li>
-							</c:if>
-							<c:if test="${p ne currentPage}">
-								<c:url var="plistchk" value="/product">
-									<c:param name="page" value="${p}" />
+                <c:if test="${not empty currentPage}">
+                	<div class="page">
+	                    <ul>
+	                    	<c:if test="${currentPage <= 1}">
+	                    		<li>◀</li>
+	                    	</c:if>
+	                    	<c:if test="${currentPage > 1}">
+	                    		<c:url var="plistST" value="/product?cate=${nowCate}&orderby=${nowOrder}">
+									<c:param name="page" value="${currentPage-1}" />
 								</c:url>
-								<li><a href="${plistchk}">${p}</a></li>
+								<li> <a href="${plistST}">◀</a></li>
+	                    	</c:if>
+	                    	
+	                    	<c:set var="endPage" value="${maxPage}" /> 
+							<c:forEach var="p" begin="${startPage+1}" end="${endPage}">
+								<c:if test="${p eq currentPage}">
+									<li>${p}</li>
+								</c:if>
+								<c:if test="${p ne currentPage}">
+									<c:url var="plistchk" value="/product?cate=${nowCate}&orderby=${nowOrder}">
+										<c:param name="page" value="${p}" />
+									</c:url>
+									<li><a href="${plistchk}">${p}</a></li>
+								</c:if>
+							</c:forEach> 
+							<c:if test="${currentPage >= maxPage}">
+								<li>▶</li>
+							 </c:if> 
+							<c:if test="${currentPage < maxPage}">
+								<c:url var="plistEND" value="/product?cate=${nowCate}&orderby=${nowOrder}">
+									<c:param name="page" value="${currentPage+1}" />
+								</c:url>
+								<li><a href="${plistEND}">▶</a></li>
 							</c:if>
-						</c:forEach> 
-						<c:if test="${currentPage >= maxPage}">
-							<li>▶</li>
-						 </c:if> 
-						<c:if test="${currentPage < maxPage}">
-							<c:url var="plistEND" value="/product">
-								<c:param name="page" value="${currentPage+1}" />
-							</c:url>
-							<li><a href="${plistEND}">▶</a></li>
-						</c:if>
-                    </ul>
-                </div>
+	                    </ul>
+	                </div>
+                </c:if>
+               
 			</article>
 		</section>
+	</div>
+	<div>
+	<jsp:include page="../footer.jsp"></jsp:include>
 	</div>
 </body>
 

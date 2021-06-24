@@ -109,16 +109,13 @@ public class OrderController {
 		List<Cart> carts = new ArrayList<Cart>();
 		carts = cartService.serchList(order.getUser_no());
 		
-		logger.info("상품번호 체크:"+pro_no.get(1));
-		logger.info("상품번호 체크:"+pro_no.get(0));
-		
 		//구매 테이블 추가
 		int result = orderService.orderInsert(order,pro_no,pro_num,carts);
 		
 		if(result == 0) {
-			logger.info("구매성공");
-		}else{
 			logger.info("구매실패");
+		}else{
+			logger.info("구매성공");
 		}
 			
 		mv.setViewName("Product/ProductList");

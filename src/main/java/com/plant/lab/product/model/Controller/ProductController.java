@@ -56,11 +56,11 @@ public class ProductController {
 			logger.info("===============상품리스트 페이지===============");
 			
 			//쿠키생성
-			Cookie[] cookies = req.getCookies();
-			Cookie proCookie = new Cookie("proView", null);
-			proCookie.setComment("최근 본 상품 확인");
-			proCookie.setMaxAge(60*60*24*365);	
-			response.addCookie(proCookie);	
+//			Cookie[] cookies = req.getCookies();
+//			Cookie proCookie = new Cookie("proView", null);
+//			proCookie.setComment("최근 본 상품 확인");
+//			proCookie.setMaxAge(60*60*24*365);	
+//			response.addCookie(proCookie);	
 			
 			//페이지처리
 			int currentPage = page; // 한 페이지당 출력할 목록 개수
@@ -71,13 +71,15 @@ public class ProductController {
 			
 			//검색어가 있을 경우
 			if (keyword != null && !keyword.equals("")) {
+				mv.addObject("currentPage", null);
 				mv.addObject("proList", proService.searchList(keyword));				
 			}
 			else { //검색어가 없을 경우
+				mv.addObject("currentPage", currentPage);
 				mv.addObject("proList", proService.selectList(currentPage, LIMIT,cate,orderby));				
 			} 
 		
-			mv.addObject("currentPage", currentPage);
+			
 			mv.addObject("maxPage", maxPage);
 			mv.addObject("nowCate",cate);
 			mv.addObject("nowOrder",orderby);

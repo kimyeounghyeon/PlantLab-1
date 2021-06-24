@@ -31,6 +31,29 @@ public class ProductDAO {
 		return sqlSession.selectList("Product.selectList",cate,row);
 	}
 	
+	//판매량순 조회(재고순)
+	public List<Product> selectListOrderBest(int startPage, int limit,String cate,String orderby) {
+		int startRow = (startPage - 1) * limit;
+		RowBounds row = new RowBounds(startRow, limit);
+		return sqlSession.selectList("Product.selectListOrderBest",cate,row);
+	}
+
+	//가격낮은순 조회
+	public List<Product> selectListOrderLow(int startPage, int limit,String cate,String orderby) {
+		int startRow = (startPage - 1) * limit;
+		RowBounds row = new RowBounds(startRow, limit);
+		return sqlSession.selectList("Product.selectListOrderLow",cate,row);
+	}
+	
+	//가격높은순 조회
+	public List<Product> selectListOrderHigh(int startPage, int limit,String cate,String orderby) {
+		int startRow = (startPage - 1) * limit;
+		RowBounds row = new RowBounds(startRow, limit);
+		return sqlSession.selectList("Product.selectListOrderHigh",cate,row);
+	}
+	
+	
+	
 	//상품 상세보기
 	public Product selectOne(int pro_no) {
 		return sqlSession.selectOne("Product.selectOne", pro_no);
@@ -44,6 +67,12 @@ public class ProductDAO {
 	//상품수정
 	public int updateProduct(Product product) { 
 		return 1;
+	}
+	
+	//상품제고수정
+	public int updateStock(Product product) {
+		return sqlSession.update("Product.updateStock",product);
+		//return sqlSession.update("Product.updateStock",product);
 	}
 	
 	//상품삭제
