@@ -32,7 +32,7 @@
 	<jsp:include page="../header.jsp"></jsp:include>
 	<div class="eReDiv">
 	
-<form action="eInsert.do" method="post" enctype="multipart/form-data">
+<form action="eInsert" method="post" enctype="multipart/form-data">
 
 	<input type="hidden">
 		<table class="eretb">

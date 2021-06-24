@@ -26,7 +26,7 @@ public class EventController {
 	private static final Logger logger = LoggerFactory.getLogger(EventController.class);
 	public static final int LIMIT = 5;
 	
-	@RequestMapping(value = "elist.do", method = RequestMethod.GET)
+	@RequestMapping(value = "elist", method = RequestMethod.GET)
 	public ModelAndView eventListService( // 오류가 발생해도 오류메세지 뜨지않는다는 단점..
 			//@RequestParam(name = "event_no") int event_no,
 			@RequestParam(name = "page", defaultValue = "1") int page,
@@ -53,7 +53,7 @@ public class EventController {
 		return mv;
 	}
 
-	@RequestMapping(value = "eDetail.do", method = RequestMethod.GET)
+	@RequestMapping(value = "eDetail", method = RequestMethod.GET)
 	public ModelAndView eventDetail(@RequestParam(name = "event_no") int event_no,
 			@RequestParam(name = "page", defaultValue = "1") int page, ModelAndView mv) {
 		try {
@@ -73,12 +73,12 @@ public class EventController {
 	}
 
 
-	@RequestMapping(value = "eWrite.do", method = RequestMethod.GET)
+	@RequestMapping(value = "eWrite", method = RequestMethod.GET)
 	public String eventInsertForm(ModelAndView mv) {
 		return "Event/eventWrite";
 	}
 
-	@RequestMapping(value = "eInsert.do", method = RequestMethod.POST)
+	@RequestMapping(value = "eInsert", method = RequestMethod.POST)
 	public ModelAndView monthlyInsert(Event_tb e, 
 			@RequestParam(name = "upfile1", required = false) MultipartFile report1,
 			@RequestParam(name = "upfile2", required = false) MultipartFile report2,
@@ -90,7 +90,7 @@ public class EventController {
 			e.setBanner(report1.getOriginalFilename());
 			e.setEvent_content(report2.getOriginalFilename());
 			eService.insertEvent(e);
-			mv.setViewName("redirect:elist.do");
+			mv.setViewName("redirect:elist");
 		} catch (Exception e1) {
 			mv.addObject("msg", e1.getMessage());
 			mv.setViewName("errorPage");
@@ -142,7 +142,7 @@ public class EventController {
 //			System.out.println("파일 전송 에러 : " + e.getMessage());
 //		}
 //	}
-	@RequestMapping(value = "eRenew.do", method = RequestMethod.GET)
+	@RequestMapping(value = "eRenew", method = RequestMethod.GET)
 	public ModelAndView eventUpdateForm(@RequestParam(name = "event_no") int event_no, ModelAndView mv) {
 		try {
 			logger.info("===============이벤트 수정 페이지 진입 ===============");
@@ -155,7 +155,7 @@ public class EventController {
 		}
 		return mv;
 	}
-	@RequestMapping(value = "eUpdate.do", method = RequestMethod.POST)
+	@RequestMapping(value = "eUpdate", method = RequestMethod.POST)
 	public ModelAndView eventUpdate(Event_tb e, @RequestParam(name = "page", defaultValue = "1") int page,
 			@RequestParam("upfile1") MultipartFile report1,
 			@RequestParam("upfile2") MultipartFile report2,
@@ -171,7 +171,7 @@ public class EventController {
 			e.setEvent_content(report2.getOriginalFilename());
 			mv.addObject("event_tb", eService.updateEvent(e).getEvent_no());
 			mv.addObject("currentPage", page);
-			mv.setViewName("redirect:elist.do");
+			mv.setViewName("redirect:elist");
 		} catch (Exception e1) {
 			logger.info("===============이벤트 수정 실패===============");
 			mv.addObject("msg", e1.getMessage());
@@ -179,7 +179,7 @@ public class EventController {
 		}
 		return mv;
 	}
-	@RequestMapping(value = "eDelete.do", method = RequestMethod.GET)
+	@RequestMapping(value = "eDelete", method = RequestMethod.GET)
 	public ModelAndView eventDelete(@RequestParam(name = "event_no") int event_no,
 			@RequestParam(name = "page", defaultValue = "1") int page, HttpServletRequest request, ModelAndView mv) {
 		try {
@@ -190,7 +190,7 @@ public class EventController {
 			eService.deleteEvent(event_no); //여기서 막히는중 
 			logger.info("===============게시글삭제도 성공===============");
 			mv.addObject("currentPage", page);
-			mv.setViewName("redirect:elist.do");
+			mv.setViewName("redirect:elist");
 		} catch (Exception e1) {
 			logger.info("===============이벤트 삭제 실패===============");
 			mv.addObject("msg", e1.getMessage());

@@ -33,7 +33,7 @@ border : 1px solid #625b54;
 </head>
 <body>
 	<jsp:include page="../header.jsp"></jsp:include>
-	<form action="eInsert.do" method="post" enctype="multipart/form-data">
+	<form action="eInsert" method="post" enctype="multipart/form-data">
 		<div id="ediv">
 			<h3 align="center">이벤트 등록하기</h3>
 			<table class="ewriteform">

@@ -65,20 +65,20 @@ width : 750px;
 	<table class="event">
   		<tr>
   			<td id="etd"  colspan="4">
- 				<button type="button" id="ebtn" onclick="window.location='eWrite.do'">등록하기</button>
+ 				<button type="button" id="ebtn" onclick="window.location='eWrite'">등록하기</button>
        		</td>
        	</tr>
          
         <c:forEach var="vo" items="${list}">
         <tr>
            	<td colspan="4">
-	           	<a href="eDetail.do?event_no=${vo.event_no}">
+	           	<a href="eDetail?event_no=${vo.event_no}">
 	           		<img class="eventbanner" src="<%=request.getContextPath() %>/resources/img/${vo.banner}">
 	           	</a>
            	</td>
   		</tr>
 		<tr>
-           	<td id="eventsub"><a href="eDetail.do?event_no=${vo.event_no}">&nbsp;&nbsp;${vo.event_title}</a></td>
+           	<td id="eventsub"><a href="eDetail?event_no=${vo.event_no}">&nbsp;&nbsp;${vo.event_title}</a></td>
             <td id="period">${vo.start_date}~${vo.end_date}</td>
 		    <td id="viewimg"><img id="eimg" src="${path}/resources/img/eye.png"></td>
 		    <td id="view">${vo.event_views}</td>

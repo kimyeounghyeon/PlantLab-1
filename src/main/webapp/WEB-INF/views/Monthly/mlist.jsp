@@ -11,7 +11,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 function showInsertForm() {
-	location.href = "mWrite.do";
+	location.href = "mWrite";
 }
 </script>
 <style>
@@ -53,7 +53,7 @@ width : 100px;
 <div class="mlistdiv">
 
 <h2 align="center" >이달의 식물</h2>
-<button id="subtn"type="button" onclick="window.location='mWrite.do'">등록하기</button>
+<button id="subtn"type="button" onclick="window.location='mWrite'">등록하기</button>
 	<table class="mlisttb">
 		<tr>
 			<td>No</td>
@@ -75,8 +75,8 @@ width : 100px;
 			 <c:forEach var="vo" items="${list}">
 				<tr>
 					<td align="center">${vo.monthly_no}</td>
-					<td><a href="mDetail.do?monthly_no=${vo.monthly_no}">${vo.monthly_name}</a></td>
-					<td class="mimg" align="center"><a href="mDetail.do?monthly_no=${vo.monthly_no}">
+					<td><a href="mDetail?monthly_no=${vo.monthly_no}">${vo.monthly_name}</a></td>
+					<td class="mimg" align="center"><a href="mDetail?monthly_no=${vo.monthly_no}">
 					<img class="mimg" src="<%=request.getContextPath() %>/resources/img/${vo.monthly_img}">
 					</a>
 					</td>
@@ -84,12 +84,12 @@ width : 100px;
 					
 					<td class="mupde">
 					
-					<c:url var="mupview" value="mRenew.do">
+					<c:url var="mupview" value="mRenew">
 						<c:param name="monthly_no" value="${vo.monthly_no}" />
 						<c:param name="monthly_img" value="${pageContext.request.contextPath}/resources/img/${vo.monthly_img}" />
 						<c:param name="monthly_name" value="${vo.monthly_name}" />
 					</c:url> 
-					<c:url var="mdelete" value="mDelete.do">
+					<c:url var="mdelete" value="mDelete">
 						<c:param name="monthly_no" value="${vo.monthly_no}" />
 					</c:url> 
 					<a href="${mupview}"> 수정 </a> &nbsp;&nbsp; 
@@ -105,7 +105,7 @@ width : 100px;
 			<c:if test="${currentPage <= 1}">이전&nbsp; </c:if> 
 			
  				<c:if test="${currentPage > 1}">
-					<c:url var="molistST" value="mlist.do">
+					<c:url var="molistST" value="mlist">
 						<c:param name="page" value="${currentPage-1}" />
 					</c:url>
 					<a href="${molistST}">이전</a>
@@ -121,7 +121,7 @@ width : 100px;
 				
 				 <c:if test="${currentPage >= maxPage}">다음 </c:if>
 				 <c:if test="${currentPage < maxPage}">
-					<c:url var="molistEND" value="mlist.do">
+					<c:url var="molistEND" value="mlist">
 						<c:param name="page" value="${currentPage+1}" />
 					</c:url>
 					<a href="${molistEND}">다음</a>	

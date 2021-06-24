@@ -26,7 +26,7 @@ public class MonthlyController {
 	private static final Logger logger = LoggerFactory.getLogger(MonthlyController.class);
 	public static final int LIMIT = 5;
 	
-	@RequestMapping(value = "mlist.do", method = RequestMethod.GET)
+	@RequestMapping(value = "mlist", method = RequestMethod.GET)
 	public ModelAndView monthlyListService( // 오류가 발생해도 오류메세지 뜨지않는다는 단점..
 			@RequestParam(name = "page", defaultValue = "1") int page,
 			ModelAndView mv) {
@@ -51,7 +51,7 @@ public class MonthlyController {
 		return mv;
 	}
 
-	@RequestMapping(value = "mDetail.do", method = RequestMethod.GET)
+	@RequestMapping(value = "mDetail", method = RequestMethod.GET)
 	public ModelAndView monthlyDetail(@RequestParam(name = "monthly_no") int monthly_no,
 			@RequestParam(name = "page", defaultValue = "1") int page, ModelAndView mv) {
 		try {
@@ -70,7 +70,7 @@ public class MonthlyController {
 		return mv;
 	}
 
-	@RequestMapping(value = "mMain.do", method = RequestMethod.GET)
+	@RequestMapping(value = "mMain", method = RequestMethod.GET)
 	public ModelAndView monthlyMain(
 			ModelAndView mv) {
 		try {
@@ -85,7 +85,7 @@ public class MonthlyController {
 		return mv;
 	}
 	
-	@RequestMapping(value = "mRenew.do", method = RequestMethod.GET)
+	@RequestMapping(value = "mRenew", method = RequestMethod.GET)
 	public ModelAndView monthlyUpdateForm(@RequestParam(name = "monthly_no") int monthly_no, ModelAndView mv) {
 		try {
 			logger.info("===============이달의 식물 수정 페이지 진입 ===============");
@@ -99,12 +99,12 @@ public class MonthlyController {
 		return mv;
 	}
 
-	@RequestMapping(value = "mWrite.do", method = RequestMethod.GET)
+	@RequestMapping(value = "mWrite", method = RequestMethod.GET)
 	public String monthlyInsertForm(ModelAndView mv) {
 		return "Monthly/monthlyWrite";
 	}
 
-	@RequestMapping(value = "mInsert.do", method = RequestMethod.POST)
+	@RequestMapping(value = "mInsert", method = RequestMethod.POST)
 	public ModelAndView monthlyInsert(Monthly m, @RequestParam(name = "upfile", required = false) MultipartFile report,
 			HttpServletRequest request, ModelAndView mv) {
 		try {
@@ -112,7 +112,7 @@ public class MonthlyController {
 				saveFile(report, request);
 			m.setMonthly_img(report.getOriginalFilename());
 			moService.insertMonthly(m);
-			mv.setViewName("redirect:mlist.do");
+			mv.setViewName("redirect:mlist");
 		} catch (Exception e) {
 			mv.addObject("msg", e.getMessage());
 			mv.setViewName("errorPage");
@@ -120,7 +120,7 @@ public class MonthlyController {
 		return mv;
 	}
 
-	@RequestMapping(value = "mUpdate.do", method = RequestMethod.POST)
+	@RequestMapping(value = "mUpdate", method = RequestMethod.POST)
 	public ModelAndView monthlyUpdate(Monthly m, @RequestParam(name = "page", defaultValue = "1") int page,
 			@RequestParam("upfile") MultipartFile report, HttpServletRequest request, ModelAndView mv) {
 		try {
@@ -132,7 +132,7 @@ public class MonthlyController {
 			m.setMonthly_img(report.getOriginalFilename());
 			mv.addObject("monthly", moService.updateMonthly(m).getMonthly_no());
 			mv.addObject("currentPage", page);
-			mv.setViewName("redirect:mlist.do");
+			mv.setViewName("redirect:mlist");
 		} catch (Exception e) {
 			logger.info("===============이달의 식물 수정 실패===============");
 			mv.addObject("msg", e.getMessage());
@@ -141,7 +141,7 @@ public class MonthlyController {
 		return mv;
 	}
 
-	@RequestMapping(value = "mDelete.do", method = RequestMethod.GET)
+	@RequestMapping(value = "mDelete", method = RequestMethod.GET)
 	public ModelAndView monthlyDelete(@RequestParam(name = "monthly_no") int monthly_no,
 			@RequestParam(name = "page", defaultValue = "1") int page, HttpServletRequest request, ModelAndView mv) {
 		try {
@@ -150,7 +150,7 @@ public class MonthlyController {
 			removeFile(m.getMonthly_img(), request);
 			moService.deleteMonthly(monthly_no);
 			mv.addObject("currentPage", page);
-			mv.setViewName("redirect:mlist.do");
+			mv.setViewName("redirect:mlist");
 		} catch (Exception e) {
 			logger.info("===============이달의 식물 삭제 실패===============");
 			mv.addObject("msg", e.getMessage());

@@ -36,7 +36,7 @@
 		</tr>
 		<tr>
 			<td>
-			<c:url var="eupview" value="eRenew.do">
+			<c:url var="eupview" value="eRenew">
 					<c:param name="event_no" value="${event_tb.event_no}" />
 					<c:param name="event_title" value="${event_tb.event_title}" />
 					<c:param name="start_date" value="${event_tb.start_date}" />
@@ -45,7 +45,7 @@
 					<c:param name="banner" value="${event_tb.banner}" />
 						
 				</c:url> 
-				<c:url var="edelete" value="eDelete.do">
+				<c:url var="edelete" value="eDelete">
 					<c:param name="event_no" value="${event_tb.event_no}" />
 				</c:url> 
 				<a href="${eupview}"> 수정 </a> &nbsp;&nbsp; 
