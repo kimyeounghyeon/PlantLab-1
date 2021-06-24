@@ -28,6 +28,7 @@ public class EventController {
 	
 	@RequestMapping(value = "elist.do", method = RequestMethod.GET)
 	public ModelAndView eventListService( // 오류가 발생해도 오류메세지 뜨지않는다는 단점..
+			//@RequestParam(name = "event_no") int event_no,
 			@RequestParam(name = "page", defaultValue = "1") int page,
 			ModelAndView mv) {
 		
@@ -38,6 +39,7 @@ public class EventController {
 			
 			logger.info("이벤트 게시글 개수 확인하기 : " + listCount);
 			mv.addObject("list",eService.selectList(currentPage, LIMIT));
+			//mv.addObject("event_views",eService.addReadCount(event_no));
 			mv.addObject("currentPage", currentPage);
 			mv.addObject("maxPage", maxPage);
 			mv.addObject("listCount", listCount);
@@ -57,9 +59,9 @@ public class EventController {
 		try {
 			logger.info("===============이벤트 상세 페이지===============");
 			int currentPage = page; // 한 페이지당 출력할
-			
 			logger.info("currentPage :" + currentPage );
 			mv.addObject("event_tb", eService.selectOne(event_no));
+			mv.addObject("event_views",eService.addReadCount(event_no));
 			mv.addObject("currentPage", currentPage);
 			mv.setViewName("Event/eventDetail");
 		} catch (Exception e) {

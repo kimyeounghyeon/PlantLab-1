@@ -22,5 +22,8 @@ public interface EventService {
 		
 	//이벤트 삭제
 	public int deleteEvent(int event_no);
+	
+	//이벤트 조회수 증가
+	public int addReadCount(int event_no);
 }
 

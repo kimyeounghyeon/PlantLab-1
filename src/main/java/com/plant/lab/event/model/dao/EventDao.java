@@ -30,18 +30,22 @@ public class EventDao {
 				return sqlSession.selectList("Event_tb.selectList",null,row);
 			}
 		//이벤트 추가
-		  public int insertEvent(Event_tb e) { // 글 입력
+		  public int insertEvent(Event_tb e) { 
 		      return sqlSession.insert("Event_tb.insertEvent", e);
 		   }
 
 		//이벤트 수정
-		  public int updateEvent(Event_tb e) { // 글 수정
+		  public int updateEvent(Event_tb e) { 
 		      return sqlSession.update("Event_tb.updateEvent", e);
 		   }
 		//이벤트 삭제
-		  public int deleteEvent(int event_no) { // 글 삭제
+		  public int deleteEvent(int event_no) {
 		      return sqlSession.delete("Event_tb.deleteEvent", event_no);
-		   }	   
+		   }	
+		 // 이벤트 조회 수 증가
+		  public int addReadCount(int event_no) { // 글 조회 수 증가
+		      return sqlSession.update("Event_tb.addReadCount", event_no);
+		   }
 }
 		
 

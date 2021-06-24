@@ -23,6 +23,7 @@
 	<jsp:include page="../header.jsp"></jsp:include>
 	<div class="edetaildiv">
 	<table class="edetailtb">
+	<input type="hidden" name="event_views" value="${event_views}">
 		<tr>
 			<td>${event_tb.event_title}</td>
 		</tr>

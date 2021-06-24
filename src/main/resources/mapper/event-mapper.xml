@@ -51,4 +51,9 @@
 		DELETE FROM event_tb WHERE event_no = #{event_no}
 	</delete>
 
+	<!-- 게시글 조회 수 증가  int형인데 string ㄱㅊ?-->
+	<update id="addReadCount" parameterType="int" flushCache="true" statementType="PREPARED">
+		UPDATE event_tb SET event_views = event_views+1
+		WHERE event_no = #{event_no}
+	</update>
 </mapper>
