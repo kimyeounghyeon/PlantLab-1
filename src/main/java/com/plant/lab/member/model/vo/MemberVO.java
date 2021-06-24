@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class MemberVO {
-	private String userNo;
+	private int userNo;
 	private String userId;
 	private String userName;
     private String userPwd;
@@ -16,7 +16,7 @@ public class MemberVO {
     
     
     
- 	public MemberVO(String userNo, String userId, String userName, String userPwd, String email, int phone, int grade,
+ 	public MemberVO(int userNo, String userId, String userName, String userPwd, String email, int phone, int grade,
 			String address) {
 		this.userNo = userNo;
 		this.userId = userId;
@@ -40,11 +40,11 @@ public class MemberVO {
 		return "MemberVO [userNo=" + userNo + ", userId=" + userId + ", userName=" + userName + " , userPwd=" + userPwd + ", email=" + email + ", phone=" + phone + ", grade=" + grade + ", address=" + address + "]";
 	}
 
-	public String getUserNo() {
+	public int getUserNo() {
 		return userNo;
 	}
 
-	public void setUserNo(String userNo) {
+	public void setUserNo(int userNo) {
 		this.userNo = userNo;
 	}
 
@@ -107,6 +107,7 @@ public class MemberVO {
  	
  	
 }
+
 
 
 

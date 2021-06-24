@@ -40,7 +40,7 @@ public class MemberController {
 		System.out.println("왜 자꾸 말썽이니..");
 		mService.insertMember(vo);
 
-		 return "header";
+		 return "Main";
 		 
 }
 
@@ -53,23 +53,19 @@ public class MemberController {
 		System.out.println("[계원] id와 pwd 정보 들어있음을 확인 : " + vo.toString());
 
 		MemberVO login = mService.loginMember(vo); // 로그인 성공시 vo에 정보가 들어있고. 실패시 null
-		System.out.println(login.toString());
-		
-		Gson gson = new GsonBuilder().create();
-		result = gson.toJson(login);
 				
 				
 		session.setAttribute("loginMember", login);
 		result = "로그인 성공";
 		System.out.println("aaa" +result);
 		
-		return result;
+		return "Main";
 	}
 
 	@RequestMapping(value = "logout")
 	public String memberOut(Model model, HttpSession session) {
 		session.removeAttribute("loginMember");
-		return "header";
+		return "Main";
 	}
 
 }
