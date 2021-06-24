@@ -55,12 +55,6 @@ public class ProductController {
 		try {
 			logger.info("===============상품리스트 페이지===============");
 			
-			//쿠키생성
-//			Cookie[] cookies = req.getCookies();
-//			Cookie proCookie = new Cookie("proView", null);
-//			proCookie.setComment("최근 본 상품 확인");
-//			proCookie.setMaxAge(60*60*24*365);	
-//			response.addCookie(proCookie);	
 			
 			//페이지처리
 			int currentPage = page; // 한 페이지당 출력할 목록 개수
@@ -79,7 +73,6 @@ public class ProductController {
 				mv.addObject("proList", proService.selectList(currentPage, LIMIT,cate,orderby));				
 			} 
 		
-			
 			mv.addObject("maxPage", maxPage);
 			mv.addObject("nowCate",cate);
 			mv.addObject("nowOrder",orderby);
@@ -96,18 +89,23 @@ public class ProductController {
 //상품 상세보기
 	@RequestMapping(value = "/productView", method = RequestMethod.GET)
 	public ModelAndView productDetail(ModelAndView mv, HttpServletResponse response,HttpServletRequest req,
-			@CookieValue(name = "proView") String cookie,
 			@RequestParam(name = "proNo") int pro_no) {
 		try {
 			logger.info("===============상품상세 페이지===============");
 			
 			HttpSession session = req.getSession();
 			MemberVO member = (MemberVO) session.getAttribute("loginMember");
-			if(member!=null) {
-				mv.addObject("user",member.getUserNo());				
-			}else {
-				mv.addObject("user",0);
+			
+			List<Product> viewPro = (ArrayList<Product>)(session.getAttribute("viewPro"));
+			
+			if(session.getAttribute("viewPro") == null) {
+				viewPro = new ArrayList<Product>();				
 			}
+			
+			viewPro.add(proService.selectOne(pro_no));
+			session.setAttribute("viewPro", viewPro);
+			
+			logger.info("세션확인:::"+(ArrayList<Product>)session.getAttribute("viewPro"));
 			
 			mv.addObject("productCon",proConService.searchList(pro_no));
 			mv.addObject("product",proService.selectOne(pro_no));
