@@ -52,4 +52,10 @@ public class EventServiceImpl implements EventService {
 		public int deleteEvent(int event_no) {
 			return eDao.deleteEvent(event_no);
 		}
+		
+		//이벤트 조회 수 증가
+		@Override
+		public int addReadCount(int event_no) {
+			return eDao.addReadCount(event_no);
+		}
 	}
