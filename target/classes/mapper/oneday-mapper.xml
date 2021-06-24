@@ -4,25 +4,36 @@
 
 
 
-<select id="onedayselectlist"  resultType="OnedayVo"> 
+<select id="onedayselectlist"  resultType="OnedayVo">   <!-- 클래스 전체 목록 보기(회원 , 관리자) -->
 SELECT * FROM onedayclass_tb   <![CDATA[ WHERE SYSDATE < Oneday_End]]> 
 </select>
 
-<select id="onedayselect" parameterType="OnedayVo" resultType="OnedayVo">
+<select id="onedayselect" parameterType="OnedayVo" resultType="OnedayVo">   <!-- 클래스 상세보기 (회원, 관리자)-->
 SELECT * FROM onedayclass_tb  WHERE Oneday_No=#{oneday_no}
 </select>
 
-
-
-<!-- <insert id="onedayinsert" >
-INSERT INTO FROM onedayclass_tb VALUES( , , , , , , ,)  
+<insert id="onedayreserve" parameterType="OnedayRsVo"  >    <!-- 클래스 예약하기 -->
+insert into onedayclassrs_tb (RESERV_NO,  USER_NO ,ONEDAY_NO )
+VALUES (OnedayRs_SEQ.nextval ,#{user_no},#{oneday_no})
 </insert>
- -->
-<!-- <update id="onedayupdate">
 
-</update> -->
+<delete id="onedaycancel" parameterType="OnedayRsVo">    <!-- 클래스 예약 취소 -->
+DELETE FROM ONEDAYCLASSRS_TB WHERE Oneday_No=#{oneday_no} , USER_NO=#{user_no}
+</delete>
 
-<delete id="onedaydelete" >
+
+
+<insert id="onedayinsert" parameterType="OnedayVo" >   <!-- 관리자 클래스 등록 -->
+<!-- INSERT INTO  onedayclass_tb VALUES( =Oneday_SEQ.nextval, ONEDAY_TITLE=#{oneday_title} , ONEDAY_IMG=#{oneday_img}, ONEDAY_CONTENT=#{oneday_content}, ONEDAY_MAXPERSON=#{oneday_maxPerson}, ONEDAY_START=#{oneday_start},ONEDAY_END=#{oneday_end} ,ONEDAY_PRICE=#{oneday_price},ONEDAY_PLACE=#{oneday_place})   -->
+INSERT INTO  onedayclass_tb VALUES( Oneday_SEQ.nextval, #{oneday_title} , #{oneday_img} , #{oneday_content} , #{oneday_maxPerson} , #{oneday_start}, #{oneday_end} , #{oneday_price},  #{oneday_place})  
+</insert>
+
+
+<update id="onedayupdate" parameterType="OnedayVo">     <!-- 관리자 클래스  수정-->
+UPDATE  onedayclass_tb  SET ONEDAY_TITLE=#{oneday_title}, ONEDAY_IMG=#{oneday_img}, ONEDAY_CONTENT=#{oneday_content}, ONEDAY_MAXPERSON=#{oneday_maxPerson}, ONEDAY_START=#{oneday_start},ONEDAY_END=#{oneday_end} ,ONEDAY_PRICE=#{oneday_price},ONEDAY_PLACE=#{oneday_place})  WHERE ONEDAY_NO=#{oneday_no}
+</update> 
+
+<delete id="onedaydelete" parameterType="OnedayVo" >   <!-- 관리자 클래스  삭제-->
 DELETE FROM onedayclass_tb WHERE  Oneday_No=#{oneday_no}
 </delete>
 </mapper>

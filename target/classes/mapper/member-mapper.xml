@@ -41,7 +41,11 @@
 	</select>
 
 	<insert id="insertMember" parameterType="MemberVO" statementType="PREPARED" >
-		insert into user_tb values (#{userNo}, #{userId}, #{userName}, #{userPwd}, #{email}, #{phone}, #{grade}, #{address})
+		insert into user_tb values (user_seq.nextVal, #{userId}, #{userName}, #{userPwd}, #{email}, #{phone}, 0, #{address})
 	</insert>
+	
+	<select id="idcheck" parameterType="String" resultType="Integer">
+      SELECT COUNT(*) FROM tbl_member WHERE userId = #{userId}
+</select>
 
 </mapper>

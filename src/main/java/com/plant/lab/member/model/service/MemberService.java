@@ -18,6 +18,8 @@ public interface MemberService {
 	public String getMemberName2(String userId);
 	
     public MemberVO loginMember(MemberVO vo);
+    
+    public String idCheckMember(MemberVO vo);
 
 }
 

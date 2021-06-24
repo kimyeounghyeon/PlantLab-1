@@ -15,6 +15,7 @@
 	<!-- 페이지당 게시글 조회 rowbounds-->
 	<select id="selectList" resultType="arraylist" resultMap="resultMonthly">
 		SELECT * FROM Monthly_tb
+		order by monthly_no desc
 	</select>
 	
 	
@@ -25,9 +26,10 @@
 	</select>
 	
 	<!-- 이달의 식물 메인 조회 -->
-	<select id="selectForMain" parameterType="Monthly" resultType="Monthly">
-		SELECT * FROM Monthly_tb
-		order by monthly_no desc limit 1;
+	<select id="selectMain" parameterType="int" resultType="Monthly">
+		SELECT * FROM ( select * from Monthly_tb
+		order by monthly_no desc)
+        where rownum =1
 	</select>
 	
 	
