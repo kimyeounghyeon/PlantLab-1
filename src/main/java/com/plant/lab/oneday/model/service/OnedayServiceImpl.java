@@ -5,42 +5,49 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.plant.lab.member.model.vo.MemberVO;
 import com.plant.lab.oneday.model.dao.OnedayDao;
-import com.plant.lab.oneday.model.vo.OnedayRsVo;
 import com.plant.lab.oneday.model.vo.OnedayVo;
 @Service("oService")
 public class OnedayServiceImpl implements OnedayService{
 @Autowired
 private OnedayDao oDao;
 	@Override
-	public List<OnedayVo> onedayselectlist() {  //¿øµ¥ÀÌÅ¬·¡½º ÀüÃ¼¸ñ·Ï º¸¿©ÁÖ±â
+	public List<OnedayVo> onedayselectlist() {  //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å¬ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½
 		 return oDao.onedayselectlist();
 		
 	}
 	@Override
-	public OnedayVo onedayselect(OnedayVo oneVo) {  //¿øµ¥ÀÌÅ¬·¡½º  »ó¼¼ º¸±â
+	public OnedayVo onedayselect(OnedayVo oneVo) {  //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å¬ï¿½ï¿½ï¿½ï¿½  ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		return oDao.onedayselect(oneVo);
 	}
+//	@Override
+//	public int onedayreserve(int user_no , int oneday_no) {  //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½  ï¿½ï¿½ï¿½ï¿½
+//		return oDao.onedayreserve(user_no, oneday_no);
+//	}
+	
 	@Override
-	public int onedayreserve(int user_no , int oneday_no) {  //¿øµ¥ÀÌ Å¬·¡½º  ¿¹¾à
-		return oDao.onedayreserve(user_no, oneday_no);
+	public int onedayreserve(OnedayVo oneVo) {
+		return oDao.onedayreserve(oneVo);
 	}
+	
 	@Override
-	public int onedaycancel(OnedayVo oneVo) {   //¿øµ¥ÀÌ Å¬·¡½º   ¿¹¾à Ãë¼Ò
+	public int onedaycancel(OnedayVo oneVo) {   //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½   ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 		return oDao.onedaycancel(oneVo);
 	}
 	@Override
-	public int onedayinsert(OnedayVo oneVo) {  //¿øµ¥ÀÌ Å¬·¡½º   µî·Ï
+	public int onedayinsert(OnedayVo oneVo) {  //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½   ï¿½ï¿½ï¿½
 		return oDao.onedayinsert(oneVo);
 	}
 	@Override
-	public int onedayupdate(OnedayVo oneVo) {  //¿øµ¥ÀÌ Å¬·¡½º   ¼öÁ¤
+	public int onedayupdate(OnedayVo oneVo) {  //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½   ï¿½ï¿½ï¿½ï¿½
 		return oDao.onedayupdate(oneVo);
 	}
 	@Override
-	public int onedaydelete(OnedayVo oneVo) {   //¿øµ¥ÀÌ Å¬·¡½º   »èÁ¦
+	public int onedaydelete(OnedayVo oneVo) {   //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½   ï¿½ï¿½ï¿½ï¿½
 		return oDao.onedaydelete(oneVo);
 	}
+
 	
 
 }

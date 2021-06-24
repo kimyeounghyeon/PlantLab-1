@@ -176,7 +176,7 @@ a {
 					</div>
 				</div>
 				<div class="tablinks">
-					<a href="#" class="Tab">Class</a>
+					<a href="${path}/onedayMain" class="Tab">Class</a>
 				</div>
 				<div class="tablinks">
 					<a href="${path}/elist.do" class="Tab">Event</a>

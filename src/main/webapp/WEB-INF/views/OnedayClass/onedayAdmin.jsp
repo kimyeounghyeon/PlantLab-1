@@ -27,7 +27,7 @@
 						<table class="onecontent">
 							<tr class="on omgtr">
 								<td class="oneimg" id=${status.index } colspan="2"><img
-									src="${o.oneday_img }" class="oneimg"></td>
+									src="${pageContext.request.contextPath}/resources/img/${o.oneday_img }" class="oneimg"></td>
 
 							</tr>
 
@@ -49,7 +49,7 @@ $(function(){
 		location.href="${path}/onedayInsert"
 	})
 	
-	console.log("${oneIVo}");
+/* 
 	
 	if ("${oneIVo}"  ==null) {       //~~~~~~~~~~~~~~~~~~~~~~~조건식 이어서 쓰기
 		location.href="historyback(-1);"
@@ -58,7 +58,7 @@ $(function(){
 	}
 	
 
-	
+	 */
 })
 
 

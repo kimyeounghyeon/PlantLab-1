@@ -55,7 +55,7 @@
 <br/>
 
 
-<span class="inserttag">클래스 가격 \</span>
+<span class="inserttag" style="margin-top: 20px;">클래스 가격 \</span>
 <br/>
 
 

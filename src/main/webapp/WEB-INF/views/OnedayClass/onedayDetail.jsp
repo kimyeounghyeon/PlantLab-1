@@ -25,22 +25,23 @@
 
 <h3 class="subtitle">class</h3>
 	
-<%-- <div id ="classInto">
-${oneVo.oneday_title}
-</div> --%>
 
 <div id="classImg"> 
-<img src= "${oneVo.oneday_img }" alt="img">
+<img src= "${pageContext.request.contextPath}/resources/img/${oneVo.oneday_img }" alt="img" id="oneimg">
 </div>
+<form action="onedayReserve" method="post">   
+
 <div id="null" ></div>  <!--classImg 와 classContent 사이를 띄어놓는 div-->
 <div id="classContent">
-<p>${oneVo.oneday_title} </p>
+
+<p class="classText">${oneVo.oneday_title} </p>
 <p class="classText" > 가격: ${oneVo.oneday_price}원</p>
 <p class="classText">신청 인원: ${oneVo.oneday_maxPerson} </p>
-<p  class="classText">장소 :    ${oneVo.oneday_place} </p>
-<p  class="classText">신청기간: ${oneVo.oneday_start } ~ ${oneVo.oneday_end }</p>
-<button id="classBtn" type="button" >신청</button>
-</p>
+<p id="onePl" >장소 :    ${oneVo.oneday_place} </p>
+<p  id="oneDate">신청기간: ${oneVo.oneday_start } ~ ${oneVo.oneday_end }</p>
+<button id="classBtn" type="submit" >신청</button>
+<input type="hidden" name="onedayNo" value="${ oneVo.oneday_no}">
+</form>
 </div>
 <br>
 <br>

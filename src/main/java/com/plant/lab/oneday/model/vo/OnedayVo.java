@@ -16,18 +16,17 @@ public class OnedayVo {
 	private int oneday_price ;
 	private String oneday_place;
 	
+	
+	//
+	
+	private int   reserv_no;
+	private int    user_no;
+	private String oneday_request;
 	public OnedayVo() {}
-
-	@Override
-	public String toString() {
-		return "OnedayVo [oneday_no=" + oneday_no + ", oneday_title=" + oneday_title + ", oneday_img=" + oneday_img
-				+ ", oneday_content=" + oneday_content + ", oneday_maxPerson=" + oneday_maxPerson + ", oneday_start="
-				+ oneday_start + ", oneday_end=" + oneday_end + ", oneday_price=" + oneday_price + ", oneday_place="
-				+ oneday_place + "]";
-	}
-
+	
 	public OnedayVo(int oneday_no, String oneday_title, String oneday_img, String oneday_content, int oneday_maxPerson,
-			String oneday_start, String oneday_end, int oneday_price, String oneday_place) {
+			String oneday_start, String oneday_end, int oneday_price, String oneday_place, int reserv_no, int user_no,
+			String oneday_request) {
 		super();
 		this.oneday_no = oneday_no;
 		this.oneday_title = oneday_title;
@@ -38,6 +37,17 @@ public class OnedayVo {
 		this.oneday_end = oneday_end;
 		this.oneday_price = oneday_price;
 		this.oneday_place = oneday_place;
+		this.reserv_no = reserv_no;
+		this.user_no = user_no;
+		this.oneday_request = oneday_request;
+	}
+	@Override
+	public String toString() {
+		return "OnedayVo [oneday_no=" + oneday_no + ", oneday_title=" + oneday_title + ", oneday_img=" + oneday_img
+				+ ", oneday_content=" + oneday_content + ", oneday_maxPerson=" + oneday_maxPerson + ", oneday_start="
+				+ oneday_start + ", oneday_end=" + oneday_end + ", oneday_price=" + oneday_price + ", oneday_place="
+				+ oneday_place + ", reserv_no=" + reserv_no + ", user_no=" + user_no + ", oneday_request="
+				+ oneday_request + "]";
 	}
 
 	public int getOneday_no() {
@@ -112,9 +122,33 @@ public class OnedayVo {
 		this.oneday_place = oneday_place;
 	}
 
+	public int getReserv_no() {
+		return reserv_no;
+	}
 
+	public void setReserv_no(int reserv_no) {
+		this.reserv_no = reserv_no;
+	}
+
+	public int getUser_no() {
+		return user_no;
+	}
+
+	public void setUser_no(int user_no) {
+		this.user_no = user_no;
+	}
+
+	public String getOneday_request() {
+		return oneday_request;
+	}
+
+	public void setOneday_request(String oneday_request) {
+		this.oneday_request = oneday_request;
+	}
 	
 	
+	
+
 	
 	
 }

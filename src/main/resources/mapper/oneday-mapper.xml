@@ -12,12 +12,11 @@ SELECT * FROM onedayclass_tb   <![CDATA[ WHERE SYSDATE < Oneday_End]]>
 SELECT * FROM onedayclass_tb  WHERE Oneday_No=#{oneday_no}
 </select>
 
-<insert id="onedayreserve" parameterType="OnedayRsVo"  >    <!-- 클래스 예약하기 -->
-insert into onedayclassrs_tb (RESERV_NO,  USER_NO ,ONEDAY_NO )
-VALUES (OnedayRs_SEQ.nextval ,#{user_no},#{oneday_no})
+<insert id="onedayreserve" parameterType="OnedayVo"  >    <!-- 클래스 예약하기 -->
+insert into onedayclassrs_tb VALUES (OnedayRs_SEQ.nextval ,#{oneday_no} ,#{user_no} ,#{oneday_request})
 </insert>
 
-<delete id="onedaycancel" parameterType="OnedayRsVo">    <!-- 클래스 예약 취소 -->
+<delete id="onedaycancel" parameterType="OnedayVo">    <!-- 클래스 예약 취소 -->
 DELETE FROM ONEDAYCLASSRS_TB WHERE Oneday_No=#{oneday_no} , USER_NO=#{user_no}
 </delete>
 

@@ -1,6 +1,6 @@
 package com.plant.lab.oneday.model.dao;
 
-import java.util.ArrayList;
+import java.util.ArrayList; 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.plant.lab.member.model.vo.MemberVO;
-import com.plant.lab.oneday.model.vo.OnedayRsVo;
 import com.plant.lab.oneday.model.vo.OnedayVo;
 
 @Repository("oDao")
@@ -32,32 +31,28 @@ public class OnedayDao {
 		return sqlSession.selectOne("Oneday.onedayselect", oneVo);
 	}
 
-	public int onedayreserve(int user_no, int oneday_no) { // Å¬·¡½º ¿¹¾à
-		Map<String, Integer> param = new HashMap<String, Integer>(); /* MAP »ç¿ëÇÑ °­»ç´Ô ÄÚµå */
-		param.put("user_no", user_no);
-		param.put("oneday_no", oneday_no);
-		return sqlSession.insert("Oneday.onedayreserve", param);
+	public int onedayreserve(OnedayVo oneVo ) {
+		return sqlSession.insert("Oneday.onedayreserve", oneVo);
 
-//		return sqlSession.insert("Oneday.onedayreserve",user_no , oneday_no);  
-//return sqlSession.insert("Oneday.onedayreserve", oneRs);  vo·Î ÇÒ °æ¿ì
+
 
 	}
 
-	public int onedaycancel(OnedayVo oneVo) { //  È¸¿ø Å¬·¡½º ¿¹¾à Ãë¼Ò
+	public int onedaycancel(OnedayVo oneVo) { //  È¸ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 		return sqlSession.insert("Oneday.onedaycancel", oneVo);
 
 	}
 
-	public int onedayinsert(OnedayVo oneVo) { // °ü¸®ÀÚ Å¬·¡½º µî·Ï
+	public int onedayinsert(OnedayVo oneVo) { // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 		return sqlSession.insert("Oneday.onedayinsert", oneVo);
 
 	}
 
-	public int onedayupdate(OnedayVo oneVo) { // °ü¸®ÀÚ Å¬·¡½º ¼öÁ¤
+	public int onedayupdate(OnedayVo oneVo) { // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		return sqlSession.insert("Oneday.onedayupdate", oneVo);
 	}
 
-	public int onedaydelete(OnedayVo oneVo) { // °ü¸®ÀÚ Å¬·¡½º »èÁ¦
+	public int onedaydelete(OnedayVo oneVo) { // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		return sqlSession.insert("Oneday.onedaydelete", oneVo);
 	}
 

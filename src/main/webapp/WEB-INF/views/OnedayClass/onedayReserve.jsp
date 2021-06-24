@@ -29,7 +29,11 @@
 
 <span></span>
 <!-- <div id="oneContent"></div> -->
-<!-- <input type="hidden" id="oneday_no" name="oneday_no">  --> <!-- insert하기 위한 oneday_no box -->
+
+<form action="onedayReserveRS" method="post">
+
+<!-- d -->
+<input type="hidden"  name="onedayNo" value="${OneR} " > <!-- insert하기 위한 oneday_no box -->
 <p class="onedayinput" >이름</p>
 <input type="text" class="onedaybox" name="oneName"  >   <!-- value값 넣기 --> 
 <span class="onedayinput">전화번호</span>
@@ -37,23 +41,13 @@
 <span class="onedayinput">요구사항</span>
 <textarea id="oneRequest" name="oneRequest"  style="resize: none; ">
 </textarea>
-<button id="onedayp" type="button">결제하기</button>
+<button id="onedayp" type="submit">결제하기</button>
+</form>
 </div>
 </div>
 
 <script type="text/javascript">
-$(function(){
-	$("#onedayp").click(function(){
-		
-		location.href ="${path}/Order/* ?onedayNo=${oneVo.oneday_no}?} */";
-		
-	})
-	
-	
-	
-	
-	
-})
+
 
 
 </script>

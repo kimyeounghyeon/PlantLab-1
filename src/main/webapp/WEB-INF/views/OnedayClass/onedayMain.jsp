@@ -19,30 +19,48 @@
 	<div class="bgdiv">
 		<h3 class="subtitle">oneday class</h3>
 		<div class="dback">
+		
+		<form id="onefrm" action="onedayDetail" method="post">
+		
 			<c:forEach var="o" items="${one}" varStatus="status">
 
-				<div class="onediv">
-					<a	href="${path}/onedayDetail?onedayNo=${o.oneday_no}">
+				<div id="onediv" class="onediv">
+					<%-- <a	 href="${path}/onedayDetail?oneday_no=${o.oneday_no}"> --%>
 						<table class="onecontent">
 							<tr class="on omgtr">
 								<td class="oneimg" id=${status.index } colspan="2"><img
-									src="${o.oneday_img }" class="oneimg"></td>
+									src="${pageContext.request.contextPath}/resources/img/${o.oneday_img }" class="oneimg"></td>
 
-							</tr>
+							</tr> 
 
 							<tr class="on contextone">
 								<td class="ocontext" colspan="2">${o.oneday_title }</td>
-								<input type="hidden" name="oneday_no">
+								<input type="hidden" name="oneday_no" value="${o.oneday_no}">
 
 							</tr>
 
 						</table>
-					</a>
+					<!-- </a> -->
 				</div>
 			</c:forEach>
+			</form>
 		</div>
 	</div>
+<script type="text/javascript">
+$(function(){
+	$("#onediv").click(function(){
+		
+		/* location.href("${path}/onedayDetail"); */
+		$("form").submit();
+		
+		
+		
+	})
+	
+	
+});
 
+</script>
 
 </body>
 </html>

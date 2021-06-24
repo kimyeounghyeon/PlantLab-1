@@ -22,7 +22,6 @@
 		<typeAlias alias="LikeVO"     type="com.plant.lab.diary.model.vo.LikeVO" />
 		<typeAlias alias="NoticeVo"	  type="com.plant.lab.notice.model.vo.NoticeVo" />
 		<typeAlias alias="OnedayVo"   type="com.plant.lab.oneday.model.vo.OnedayVo" />
-		<typeAlias alias="OnedayRsVo" type="com.plant.lab.oneday.model.vo.OnedayRsVo" />
 		<typeAlias alias="Att_tb" type="com.plant.lab.att.model.vo.Att_tb" />
 
 	</typeAliases>

@@ -2,7 +2,7 @@ package com.plant.lab.oneday.model.service;
 
 import java.util.List;
 
-import com.plant.lab.oneday.model.vo.OnedayRsVo;
+import com.plant.lab.member.model.vo.MemberVO;
 import com.plant.lab.oneday.model.vo.OnedayVo;
 
 public interface OnedayService {
@@ -10,7 +10,7 @@ public interface OnedayService {
 	
     public OnedayVo onedayselect(OnedayVo oneVo);
 
-    public int onedayreserve(int user_no , int oneday_no);
+    public int onedayreserve(OnedayVo oneVo );
     
     public int onedaycancel(OnedayVo oneVo);
     
