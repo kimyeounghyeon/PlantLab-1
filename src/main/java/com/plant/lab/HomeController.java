@@ -45,6 +45,8 @@ public class HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
+	@Autowired
+	private MemberService mService;
 	
 	@Autowired
 	private DiaryService dService;
@@ -289,18 +291,51 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value="/insertComment.do", method=RequestMethod.POST) 
-		public String Insertcomment(HttpServletRequest request, CommentVO cvo, @RequestParam(name="diary_no") int diary_no) {
-		System.out.println(diary_no);
+	@ResponseBody
+	public String Insertcomment(HttpServletRequest request, CommentVO cvo, HttpSession session,
+			HttpServletResponse response, @RequestParam(name = "diary_no") int diary_no,
+			@RequestParam(name = "comm_comment") String comm_comment /*, @RequestParam(name="comm_no") int comm_no */) {
+		System.out.println("다이어리 번호는? " + diary_no);
 		int result = -1;
 		System.out.println("댓글 페이지 진입 성공~");
+		Map<String, Object> map = new HashMap<String, Object>();
+
+		/*
+		 * System.out.println("comm_no는 뭘까용" + comm_no);
+		 */
+		int writer = 122;  // 로그인 전에 임시 테스트 코드입니다.  // session.getAtt....
+		String user_id = "adsf";
 		
-		int user_no = 122;  // 로그인 전에 임시 테스트 코드입니다.  // session.getAtt....
-		cvo.setWriter(user_no);
 		cvo.setDiary_no(diary_no);
-		result = dService.Insertcomment(cvo);
-		System.out.println("댓글 입력 했어용" + dService.Insertcomment(cvo));
+		cvo.setWriter(writer);
+		cvo.setUser_id(user_id);
+		cvo.setComm_comment(comm_comment);
 		
-			return String.valueOf(result);
+		System.out.println("cvo에 뭐 들어있음?" + cvo);
+		int insertComment = dService.insertComment(cvo);
+		
+		/*
+		 * if(insertComment > 0) { List<CommentVO> comment =
+		 * dService.currentComment(comm_no);
+		 * 
+		 * map.put("comment", comment);
+		 * 
+		 * 
+		 * 
+		 * Gson gson = new GsonBuilder().setPrettyPrinting().create(); String jsonOutput
+		 * = gson.toJson(map);
+		 * 
+		 * try { response.getWriter().write(jsonOutput.toString());
+		 * System.out.println("데이터 잘 갔나 확인 좀 " + jsonOutput); } catch (IOException e) {
+		 * e.printStackTrace(); }
+		 * 
+		 * 
+		 * System.out.println("댓글 입력 했어용" + result);
+		 * 
+		 * 
+		 * } else { System.out.println("댓글 조회 오류~~~~"); }
+		 */
+			return String.valueOf(insertComment);
 			
 		}
 	
@@ -358,9 +393,65 @@ public class HomeController {
 		}
 	}
 	
+	@RequestMapping(value="/join", method = {RequestMethod.POST, RequestMethod.GET})
+	public String joinMember() {
+		return "join";
+	}
+	@RequestMapping(value="header",method = {RequestMethod.POST, RequestMethod.GET})
+	public String header() {
+		return "header";
+	}
+	
+	@RequestMapping(value="doJoin", method = {RequestMethod.POST, RequestMethod.GET})
+	public void doJoinMember(
+			MemberVO vo	
+			, HttpServletResponse response
+			) {
+		
+		logger.info(vo.toString());
+		int result = 0;
+			result = mService.insertMember(vo);
+
+		PrintWriter out = null;
+		try {
+			out = response.getWriter();
+			out.println(result);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			if(out != null) {
+				out.flush();
+				out.close();
+			}			
+		}
+	}
+	
 	
 
+
+	@RequestMapping(value="login")
+	public String memberLogin(MemberVO vo, Model model, HttpSession session) {
+		
+		System.out.println("[계원] id와 pwd 정보 들어있음을 확인" +vo.toString());  
+		
+		MemberVO login = mService.loginMember(vo);   // 로그인 성공시 vo에 정보가 들어있고. 실패시 null
+
+		if (login == null) {
+			model.addAttribute("msg", "로그인 실패");
+		} else {
+			session.setAttribute("loginMember", vo);
+		}
+
+		return "logIn";
+
+	}
+	
+@RequestMapping(value = "logout", method = {RequestMethod.POST, RequestMethod.GET})
+public String memberOut(Model model, HttpServletRequest request) {
+	HttpSession session = request.getSession();
+	session.removeAttribute("loginMember");
 	
 
-
+	return "logOut";
+}
 }

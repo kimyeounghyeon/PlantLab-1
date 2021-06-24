@@ -1,0 +1,27 @@
+@charset "UTF-8";
+*{
+   font-family: 'Jeju Myeongjo';
+   font-size: 13pt;
+   color : #1e1e1e;
+   line-height: 30px;
+   }
+   
+.mdbgdiv {
+	clear:both;
+	width : 1250px;
+	margin: auto;
+}
+
+.subtitle {
+	text-align : center;
+	font-size : 20pt;
+}
+
+.modifycontent {
+	verrical-align : middle;
+	text-align : center;
+}
+
+.modifytext {
+	display : inline-block;
+}

@@ -10,6 +10,7 @@
 		<!-- <typeAlias type="plant.lab.com.board.model.vo.Board" alias="Board" 
 			/> -->
 		<typeAlias alias="MemberVO"   type="com.plant.lab.member.model.vo.MemberVO" />
+		<typeAlias alias="CommentVO"  type="com.plant.lab.diary.model.vo.CommentVO" /> 
 		<typeAlias alias="Monthly"    type="com.plant.lab.monthly.model.vo.Monthly" />
 		<typeAlias alias="Event_tb"    type="com.plant.lab.event.model.vo.Event_tb" />
 		<typeAlias alias="Product"    type="com.plant.lab.product.model.vo.Product" />
@@ -18,12 +19,11 @@
 		<typeAlias alias="Order"	  type="com.plant.lab.order.model.vo.Order" />
 		<typeAlias alias="OrderDetail" type="com.plant.lab.order.model.vo.Order"/>
 		<typeAlias alias="DiaryVO"	  type="com.plant.lab.diary.model.vo.DiaryVO" />
-		<typeAlias alias="CommentVO"  type="com.plant.lab.diary.model.vo.CommentVO" />
 		<typeAlias alias="LikeVO"     type="com.plant.lab.diary.model.vo.LikeVO" />
 		<typeAlias alias="NoticeVo"	  type="com.plant.lab.notice.model.vo.NoticeVo" />
 		<typeAlias alias="OnedayVo"   type="com.plant.lab.oneday.model.vo.OnedayVo" />
+		<typeAlias alias="OnedayRsVo" type="com.plant.lab.oneday.model.vo.OnedayRsVo" />
 		<typeAlias alias="Att_tb" type="com.plant.lab.att.model.vo.Att_tb" />
-
 	</typeAliases>
 
 	<mappers> <!-- 사용하고자 하는 쿼리를 정의한 mapper.xml을 등록 -->

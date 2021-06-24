@@ -78,10 +78,16 @@
 		select * from (select * from comment_tb ct, user_tb ut where ct.writer=ut.user_no) where diary_no=#{diary_no}
 	</select> 
 
- 	 
+	
+	<!-- 최근 댓글 조회 -->
+<!--  	<select id="currentComment" parameterType="int" resultType="CommnetVO">
+		select * from (select * from comment_tb ct, user_tb ut where ct.writer=ut.user_no) where comm_no=#{comm_no}
+	</select>  -->
+
+
  	<!-- 댓글 등록  -->
- 	<insert id="Insertcomment" parameterType="CommentVO">
- 		insert into comment_tb values(COMMENT_SEQ.nextVal, #{diary_no}, #{writer}, #{comm_commnet}, sysdate, #{comm_root}, default, default}
+ 	<insert id="insertComment" parameterType="CommentVO">
+ 		insert into comment_tb values(COMMENT_SEQ.nextVal, #{diary_no}, #{writer}, #{comm_comment}, sysdate, COMMENT_SEQ.nextVal, default, default)
  	</insert>
  	
  	

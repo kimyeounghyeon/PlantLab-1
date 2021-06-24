@@ -66,9 +66,15 @@ public class DiaryDao {
 		return sqlSession.selectList("Diary.selectComment", diary_no);
 	}
 	
+	// 최근 댓글 조회
+	 public List<CommentVO> currentComment(int comm_no) {
+		 return sqlSession.selectList("Diary.currentComment", comm_no);
+	 }
+	
+	
 	// 댓글 등록
 	public int insertComment(CommentVO cvo) {
-		return sqlSession.selectOne("Diary.Insertcomment");
+		return sqlSession.insert("Diary.insertComment", cvo);
 		
 	}
 

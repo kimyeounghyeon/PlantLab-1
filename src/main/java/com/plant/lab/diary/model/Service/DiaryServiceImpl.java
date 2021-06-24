@@ -62,10 +62,8 @@ public class DiaryServiceImpl implements DiaryService {
 		int result = -1;
 		try {
 			result = dDao.insertLike(lvo);
-			System.out.println("[영현]insertLike 결과:"+ result);
 			//if(result>0)
 			result = dDao.likeCnt(lvo);
-			System.out.println("[영현]likeCnt 결과:"+ result);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -77,10 +75,8 @@ public class DiaryServiceImpl implements DiaryService {
 		int result = -1;
 		try {
 			result = dDao.deleteLike(lvo);
-			System.out.println("[영현]deleteLike 결과:"+ result);
 			//if(result>0)
 			result = dDao.likeCnt(lvo);
-			System.out.println("[영현]likeCnt 결과:"+ result);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -91,9 +87,7 @@ public class DiaryServiceImpl implements DiaryService {
 	public int likeCnt(LikeVO lvo) {
 		int result = -1;
 		try {
-			System.out.println("[영현]likeCnt 진입:");
 			result = dDao.likeCnt(lvo);
-			System.out.println("[영현]likeCnt 결과:"+ result);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -118,7 +112,18 @@ public class DiaryServiceImpl implements DiaryService {
 	}
 
 	@Override
-	public int Insertcomment(CommentVO cvo) {
+	public List<CommentVO> currentComment(int comm_no) {
+		List<CommentVO> list = null;
+		try {
+			list = dDao.currentComment(comm_no);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	@Override
+	public int insertComment(CommentVO cvo) {
 		int result = -1;
 		try {
 		result = dDao.insertComment(cvo);
@@ -127,6 +132,7 @@ public class DiaryServiceImpl implements DiaryService {
 		}
 		return result;
 	}
+
 
 
 

@@ -122,6 +122,15 @@
 	margin-right : 7px;
 }
 
+.dtdiaryimgtd {
+	text-align : center;
+	margin : 0;
+}
+
 .dtdiaryimg {
+	margin : 20px;
+}
+
+.commwriter {
 	text-align : center;
 }
