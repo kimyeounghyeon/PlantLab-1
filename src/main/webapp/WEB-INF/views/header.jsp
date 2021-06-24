@@ -169,7 +169,7 @@ a {
 			<!-- header의 tab 버튼 -->
 			<div id="tab">
 				<div class="tablinks" id="plant">
-					<a href="${path}/mMain" class="Tab">Plant</a>
+					<a href="${path}/mMain.do" class="Tab">Plant</a>
 					<div id="subtab">
 						<a href="#" id="subtabM" class="sub">Mission</a> 
 						<a href="#" class="sub">Diary</a>
@@ -179,7 +179,7 @@ a {
 					<a href="#" class="Tab">Class</a>
 				</div>
 				<div class="tablinks">
-					<a href="${path}/elist" class="Tab">Event</a>
+					<a href="${path}/elist.do" class="Tab">Event</a>
 				</div>
 				<div class="tablinks">
 					<a href="${path}/product" class="Tab">Store</a>
@@ -204,7 +204,7 @@ a {
 			$("#btnLogin").click(function() {
 				any = 1;
 				var frm = document.getElementById("frmLogin");
-				frm.action = "login";
+				frm.action = "doLogin";
 				frm.method = "post";
 				frm.submit();
 				
