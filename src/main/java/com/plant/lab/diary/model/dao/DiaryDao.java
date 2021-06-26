@@ -33,17 +33,23 @@ public class DiaryDao {
 		return sqlSession.selectList("Diary.detailDiary", diary_no);
 	}
 	
-	
-//	// 게시글 세부 내용 조회 map 사용
-//	public List<DiaryVO> detailDiary(Map<String, Integer> map) {
-//		return sqlSession.selectList("Diary.detailDiary", map);
-//	}
-	
+
 	// 글 작성
 	public int writeDiary(DiaryVO vo) {
 		int result = 0;
 		result = sqlSession.insert("Diary.writeDiary", vo);
 		return result;
+	}
+	
+	// 글 삭제
+	public int deleteDiary(DiaryVO vo) {
+		return sqlSession.delete("Diary.deleteDiary", vo);
+	}
+	
+	// 이미지 첨부
+	public int writeImg(DiaryVO vo) {
+		return sqlSession.insert("Diary.writeImg", vo);
+		
 	}
 	
 	// 좋아요 클릭

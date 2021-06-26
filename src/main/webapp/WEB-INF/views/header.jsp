@@ -172,7 +172,7 @@ a {
 					<a href="${path}/mMain.do" class="Tab">Plant</a>
 					<div id="subtab">
 						<a href="#" id="subtabM" class="sub">Mission</a> 
-						<a href="#" class="sub">Diary</a>
+						<a href="${path }/diary" class="sub">Diary</a>
 					</div>
 				</div>
 				<div class="tablinks">

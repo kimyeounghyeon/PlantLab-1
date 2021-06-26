@@ -17,22 +17,21 @@
 <div class="wrbgdiv">
 	<h3 class="subtitle">Write diary</h3>
 	<div class="writecontent">
-	<form action="diaryInsert.do" method="post" enctype="multipart/form-data">
-	<textarea name="writetext" rows="30" cols="80" id="writetext"></textarea>
+	<form id="diaryfrm" action="diaryInsert.do" method="post">
+	<textarea name="writetext" rows="30" cols="80" id="writetext" placeholder="내용을 입력하세요"></textarea>
 	<br><br><br><br>
-	<button type="button" id="dwritebtn">등록하기</button>
+		<button type="submit" id="dwritebtn">등록하기</button>
 	</form>
-	<script>
-	CKEDITOR.replace("writetext",{filebrowserUploadUrl : "${path}/imageUpload.do"});
-	
-	$(function(){
-		});
-	
-
-	</script>
 	</div>
 </div>
 
 
+	<script>
+	CKEDITOR.replace("writetext",{filebrowserUploadUrl : "${path}/imageUpload.do"});
+	
+
+	</script>
+
+	
 </body>
 </html>

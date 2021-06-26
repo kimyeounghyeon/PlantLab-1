@@ -42,15 +42,19 @@
 
 	<!-- 글 등록 -->
  	<insert id="writeDiary" parameterType="DiaryVO" flushCache="true" statementType="PREPARED">
- 		insert into diary_tb values(Diary_SEQ.nextVal, #{diary_write}, #{diary_content}, sysdate, #{diary_views})
+ 		insert into diary_tb values(Diary_SEQ.nextVal, #{diary_write}, #{diary_content}, sysdate, default)
  	</insert>
  	
  	
  	<!-- 이미지 등록 -->
  	<insert id="writeImg" parameterType="DiaryVO" flushCache="true" statementType="PREPARED">
- 		insert into Diary_Img_TB values(Diary_SEQ.currentVal, img_SEQ.nextVal)
+ 		insert into Diary_Img_TB values(Diary_SEQ.currentVal, img_SEQ.nextVal, #{diary_img_src})
  	</insert>
  	
+ 	<!-- 글 삭제 -->
+ 	<delete id="deleteDiary" parameterType="DiaryVO" flushCache="true" statementType="PREPARED">
+ 		delete from diary_tb where diary_no = #{diary_no}
+ 	</delete>
  
  	
  	
@@ -75,13 +79,13 @@
  	 
  	<!-- 댓글 조회 -->
 	<select id="selectComment" parameterType="int" resultType="CommentVO">
-		select * from (select * from comment_tb ct, user_tb ut where ct.writer=ut.user_no) where diary_no=#{diary_no}
+		select * from (select * from comment_tb ct, user_tb ut where ct.writer=ut.user_no) where diary_no=#{diary_no} order by comm_date desc
 	</select> 
 
 	
 	<!-- 최근 댓글 조회 -->
-<!--  	<select id="currentComment" parameterType="int" resultType="CommnetVO">
-		select * from (select * from comment_tb ct, user_tb ut where ct.writer=ut.user_no) where comm_no=#{comm_no}
+<!-- 	<select id="currentComment" resultType="CommnetVO">
+		select top 1 * from (select * from comment_tb ct, user_tb ut where ct.writer=ut.user_no) order by comm_date desc
 	</select>  -->
 
 

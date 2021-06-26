@@ -82,6 +82,7 @@
 				}
                	 dnotice += "</table></div>";
         	   	  $(".dback").append(dnotice);
+			console.log("문제 없어요~");
 			},
 
 			error : function(data) {
@@ -178,6 +179,27 @@
 				console.log("댓글 등록 실패~" + data);
 
 			}
+		});
+	});
+	
+	
+	// 글 삭제
+		$(document).on("click", ".ddelete", function(){
+		console.log("딜리트 할거야 글삭제!!");
+		let dnoKnow = $(".knowdno").val();
+		$.ajax({
+			url : "deletediary.do",
+			type : "post",
+			data : {diary_no : dnoKnow	
+			},
+			success : function(){
+				alert("글 삭제가 완료되었습니다.");
+				location.href="diary";
+			},
+			error : function(){
+				alert("글 삭제에 실패했습니다. <br> 관리자에게 문의해주시기 바랍니다.");
+			}
+
 		});
 	});
 		

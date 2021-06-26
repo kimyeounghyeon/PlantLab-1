@@ -98,6 +98,28 @@ public class DiaryServiceImpl implements DiaryService {
 	public int writeDiary(DiaryVO vo) {
 		return dDao.writeDiary(vo);
 	}
+	
+	@Override
+	public int writeImg(DiaryVO vo) {
+		int result = -1;
+		try {
+			result = dDao.writeImg(vo);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	@Override
+	public int deleteDiary(DiaryVO vo) {
+		int result = -2;
+		try {
+			result = dDao.deleteDiary(vo);
+		} catch(Exception e) {
+			e.printStackTrace();
+		} 
+		return result;
+	}
 
 	@Override
 	public List<CommentVO> selectComment(int diary_no) {
@@ -132,6 +154,8 @@ public class DiaryServiceImpl implements DiaryService {
 		}
 		return result;
 	}
+
+
 
 
 

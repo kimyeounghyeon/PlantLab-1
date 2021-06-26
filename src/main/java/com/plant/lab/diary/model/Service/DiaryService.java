@@ -22,6 +22,8 @@ public interface DiaryService {
 	
 	// 글쓰기
 	public int writeDiary(DiaryVO vo);
+	public int writeImg(DiaryVO vo);
+	public int deleteDiary(DiaryVO vo);
 
 	// 댓글
 	public List<CommentVO> selectComment(int diary_no);
