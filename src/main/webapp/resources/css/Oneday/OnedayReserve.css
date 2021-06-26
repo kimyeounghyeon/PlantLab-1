@@ -25,9 +25,11 @@
 }
 
 .subtitle {
-	text-align: center;
 	margin-top: 0;
 	font-size: 20pt;
+	text-align: center;
+	padding-top: 20px;
+	height: 130px;
 }
 
 #calendar {
@@ -84,7 +86,7 @@
 
 
 
-/* ¿¹¾à¹öÆ° */
+/* ï¿½ï¿½ï¿½ï¿½ï¿½Æ° */
 #onedayp {
 	cursor:pointer;
 	margin-top: 20px;

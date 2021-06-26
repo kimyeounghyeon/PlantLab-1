@@ -25,9 +25,11 @@
 }
 
 .subtitle {
-	text-align: center;
 	margin-top: 0;
 	font-size: 20pt;
+	text-align: center;
+	padding-top: 20px;
+	height: 130px;
 }
 
 

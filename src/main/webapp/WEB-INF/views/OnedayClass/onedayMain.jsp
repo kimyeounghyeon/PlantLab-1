@@ -19,48 +19,94 @@
 	<div class="bgdiv">
 		<h3 class="subtitle">oneday class</h3>
 		<div class="dback">
-		
-		<form id="onefrm" action="onedayDetail" method="post">
-		
-			<c:forEach var="o" items="${one}" varStatus="status">
 
-				<div id="onediv" class="onediv">
-					<%-- <a	 href="${path}/onedayDetail?oneday_no=${o.oneday_no}"> --%>
+			<c:forEach var="o" items="${one}" varStatus="status">
+			
+	<!-- 			<form class="onefrm" action="onedayDetail" method="post"> -->
+
+					<div id="onediv" class="onediv">
+						 <a	 href="${path}/onedayDetail?oneday_no=${o.oneday_no}"> 
 						<table class="onecontent">
 							<tr class="on omgtr">
 								<td class="oneimg" id=${status.index } colspan="2"><img
-									src="${pageContext.request.contextPath}/resources/img/${o.oneday_img }" class="oneimg"></td>
+									src="${pageContext.request.contextPath}/resources/img/${o.oneday_img }"
+									class="oneimg"></td>
 
-							</tr> 
+							</tr>
 
 							<tr class="on contextone">
 								<td class="ocontext" colspan="2">${o.oneday_title }</td>
-								<input type="hidden" name="oneday_no" value="${o.oneday_no}">
+								 <input type="hidden" name="oneday_no" value="${o.oneday_no}"> 
 
 							</tr>
 
 						</table>
-					<!-- </a> -->
-				</div>
+						 </a>
+					</div>
+			<!-- 	</form> -->
+
+
+
 			</c:forEach>
-			</form>
+
 		</div>
 	</div>
-<script type="text/javascript">
-$(function(){
-	$("#onediv").click(function(){
-		
-		/* location.href("${path}/onedayDetail"); */
-		$("form").submit();
-		
-		
-		
-	})
-	
-	
-});
+ 	<script type="text/javascript">
+/*  		$(function() {
+ 			$.ajax({
+ 				url : "onedayDetail",
+ 				type : "GET",
+ 				data : {oneday_no : '${one}.oneday_no' },
+ 				dataType : "json",
+ 				contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+ 				success : function(data){
+ 					console.log("원데이 main 성공했어용~");
+ 					var one = data.one;
+ 					console.log(one);
+ 						}
+ 					error : function(data) {
+ 						console.log("원데이 main 실패~");
+ 					}
+ 					
+ 		
+ 			}); */
+ 			
+ 				
+ 				
+ 				
+ 			//}
+ 			
+ 			
+ 			
+ 			
+ 			
+ 			
+ 			
+ 			
+ 			
+ 			
+ 			
+ 			
+/* 			var onediv = $(".onediv");
+			var onefrm = $(".onefrm"); 
+			for (var i = 0; i < onediv.length; i++) {
+				$(onediv[i]).click(function() {
+			$(onefrm[i]).submit();	
 
-</script>
+				})
+			} */
+	
+/* 	 $(function(){
+		 $("#onediv").click(function(){
+		 $("form").submit();
+
+		 })
+		 }); */
+		 
+ 		}); 
+ 
+		 
+	</script> 
 
 </body>
 </html>
