@@ -111,4 +111,12 @@ public String memberOut(Model model, HttpServletRequest request) {
 
 	return "logOut";
 }
+
+@RequestMapping(value = "mypage", method = {RequestMethod.POST, RequestMethod.GET})
+public String mypage(Model model) {
+
+	return "mypage";
+}
+
+
 }
