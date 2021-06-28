@@ -1,6 +1,10 @@
 package com.plant.lab.member.model.service;
 
+import java.io.IOException;
 import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -49,14 +53,6 @@ public class MemberServiceImpl implements MemberService {
 		return mDao.loginMember(vo);
 
 	}
-	@Override
-	public String idCheckMember(MemberVO vo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	/*
-	 * @Override public String idCheckMember(MemberVO vo) { return
-	 * mDao.idCheckMember(vo); }
-	 */
+
+	 
 }

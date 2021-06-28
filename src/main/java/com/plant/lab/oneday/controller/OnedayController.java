@@ -1,14 +1,10 @@
 package com.plant.lab.oneday.controller;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -34,8 +30,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.plant.lab.member.model.vo.MemberVO;
 import com.plant.lab.oneday.model.service.OnedayServiceImpl;
 import com.plant.lab.oneday.model.vo.OnedayVo;
-
-import oracle.sql.DATE;
 
 @Controller
 //@SessionAttributes("user")
@@ -75,7 +69,7 @@ public class OnedayController {
 				out = response.getWriter();
 				mv.setViewName("redirect:logIn");
 				out.println("<script>alert('로그인 해주세요'); </script>");
-				out.println("<script> history.back(-1);</script>");       //redirect 불가능  로그인안하면  back 
+				out.println("<script> history.back(-1);</script>"); // redirect 불가능 로그인안하면 back
 				out.flush();
 
 			} catch (IOException e) {
@@ -86,7 +80,7 @@ public class OnedayController {
 		OnedayVo one = new OnedayVo();
 		System.out.println("oneday_no:" + oneday_no);
 		one.setOneday_no(oneday_no);
-		OnedayVo oneVo = oService.onedayselect(one); //        selectone 메소드 실행
+		OnedayVo oneVo = oService.onedayselect(one); // selectone 메소드 실행
 
 		if (oneVo == null) {
 			mv.addObject("msg", "이미 마감된 클래스 입니다.");
@@ -157,17 +151,17 @@ public class OnedayController {
 	}
 
 	@RequestMapping(value = "/onedayAdmin", method = RequestMethod.GET) // 원데이클래스 관리자 페이지 oneday 에 select
-	public ModelAndView onedayadmin(ModelAndView mv ,HttpSession session , HttpServletResponse response){
+	public ModelAndView onedayadmin(ModelAndView mv, HttpSession session, HttpServletResponse response) {
 		MemberVO member = (MemberVO) session.getAttribute("loginMember"); // 로그인된 사람만 들어오기
 //		if(grade == null || !(grade.equals(1))){
-			if(member == null || !(member.getUserId().equals("jjr"))){     // login담당자  mapper 변경 요청 후 변경 시 getUserGrade로 변경  
+		if (member == null || !(member.getUserId().equals("jjr"))) { // login담당자 mapper 변경 요청 후 변경 시 getUserGrade로 변경
 			log.info("C: 관리자아닌 접근 ID - ");
 			response.setContentType("text/html; charset=euc-kr");
 			PrintWriter out;
 			try {
 				out = response.getWriter();
 				out.println("<script> alert('관리자 페이지 입니다.');</script>");
-				out.println("<script> history.back(-1);</script>");   //redirect 불가능 
+				out.println("<script> history.back(-1);</script>"); // redirect 불가능
 				out.flush();
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -200,18 +194,13 @@ public class OnedayController {
 		mv.setViewName("OnedayClass/onedayAd_Detail");
 		return mv;
 	}
-	
-	
-	
-	
-	
-	
+
 	@RequestMapping(value = "/onedaydelete", method = RequestMethod.GET) // 원데이클래스 관리자 삭제하기 기능 넣기
 	@ResponseBody
-	public void onedaydelete( HttpServletRequest request, HttpServletResponse response, 
+	public void onedaydelete(HttpServletRequest request, HttpServletResponse response,
 			@RequestParam(value = "checkArray[]") List<Object> checkArr) {
 		log.info("valueArr값은" + checkArr); // 들어온 값 확인
-		
+
 		try {
 			for (Object ob : checkArr) {
 				OnedayVo oneVo = new OnedayVo();
@@ -223,9 +212,9 @@ public class OnedayController {
 		} catch (Exception e) {
 			log.info("클래스 삭제 실패");
 			e.printStackTrace();
-		
+
 		}
-	
+
 	}
 
 	@RequestMapping(value = "/onedayInsertResult", method = RequestMethod.POST, headers = ("content-type=multipart/*")) // 클래스
@@ -233,7 +222,7 @@ public class OnedayController {
 																														// oneday
 																														// 에
 																														// insert
-	public ModelAndView onedayInsertResult(ModelAndView mv, HttpServletRequest request, 
+	public ModelAndView onedayInsertResult(ModelAndView mv, HttpServletRequest request,
 			@RequestParam(name = "oneinsertS", required = false) MultipartFile report) throws Exception {
 		System.out.println("여기로 들어오나요?~");
 		OnedayVo oneIVo = new OnedayVo();
@@ -277,73 +266,63 @@ public class OnedayController {
 
 	}
 
-	// 다른 방법2
-//@RequestMapping(value = "/onedayInsertResult", method = RequestMethod.POST) // 클래스 등록 oneday 에 insert
-//public ModelAndView onedayInsertResult(ModelAndView mv  ,HttpServletRequest request, @RequestParam(name = "oneinsertS", required = false) MultipartFile report)throws Exception {
-//		OnedayVo oneIVo = new OnedayVo();
-//		String oneinsertN =request.getParameter("oneinsertN");	
-//		System.out.println("oneinsertN:"+oneinsertN);
-//		oneIVo.setOneday_title(oneinsertN);
-//		MultipartHttpServletRequest multi = (MultipartHttpServletRequest) request;
-//		String oneinsertS =request.getParameter("oneinsertS");		
-//		report.getOriginalFilename();
-//		 MultipartFile file = multi.getFile("oneinsertS");
-//		 String path="";
-//		 UUID randomeUUID = UUID.randomUUID();
-//		 
-//		  if(file!=null){
-//		 System.out.println("파라미터명" + file.getName());
-//         System.out.println("파일크기" + file.getSize());
-//         System.out.println("파일 존재" + file.isEmpty());
-//         System.out.println("오리지날 파일 이름" + file.getOriginalFilename());
-//		
-//         path = "c:/upload/";
-//         InputStream inputStream = null;
-//         OutputStream outputStream = null;
-//         String organizedfilePath="";
-//		System.out.println("여기3");
-//		  try {
-//              
-//			  
-//              if (file.getSize() > 0) {
-//                  inputStream = file.getInputStream();
-//                  File realUploadDir = new File(path);
-//                  
-//                  if (!realUploadDir.exists()) {
-//                      realUploadDir.mkdirs();//폴더생성.
-//                  }
-//                  
-//                  
-//                  organizedfilePath = path + randomeUUID + "_" + file.getOriginalFilename();
-//                  System.out.println(organizedfilePath);//파일이 저장된경로 + 파일 명
-//                  
-//                  outputStream = new FileOutputStream(organizedfilePath);
-// 
-//                  int readByte = 0;
-//                  byte[] buffer = new byte[8192];
-// 
-//                  while ((readByte = inputStream.read(buffer, 0, 8120)) != -1) {
-//                      outputStream.write(buffer, 0, readByte); //파일 생성 ! 
-//                      
-//                  }
-//            
-//                  
-//              }
-//              
-//          } catch (Exception e) {
-//              // TODO: handle exception
-//              e.printStackTrace();
-// 
-//          } finally {
-// 
-//              outputStream.close();
-//              inputStream.close();
-//          }
-//          
 
-//		oneIVo.setOneday_img(file.getOriginalFilename());
 
-//}	
+	@RequestMapping(value = "/onedayupdate", method = RequestMethod.GET) // 클래스 수정 oneday 에 update
+//	@ResponseBody
+	public ModelAndView onedayupdate(ModelAndView mv, @RequestParam(name = "onedayNo") String oneday_no) {
+		OnedayVo onevo = new OnedayVo();
+		onevo.setOneday_no(Integer.parseInt(oneday_no));
+		OnedayVo one = oService.onedayselect(onevo);
+		System.out.println("onedayno 값 확인" + onevo.getOneday_no());
+		mv.addObject("one", one);
+		mv.setViewName("OnedayClass/onedayUpdate");
+		System.out.println("이동안하니?1");
+		return mv;
+	}
+
+	@RequestMapping(value = "/onedayUpdateRs", method = RequestMethod.POST) // 클래스 수정 oneday 에 update
+	public ModelAndView onedayUpdateRs(ModelAndView mv , OnedayVo oneUVo ,HttpServletResponse response , HttpServletRequest request ,
+			@RequestParam(name = "oneinsertS", required = false) MultipartFile report) throws Exception {
+		//
+		String oneupNo = request.getParameter("oneno");
+		oneUVo.setOneday_no(Integer.parseInt(oneupNo));
+		
+		String oneinsertN = request.getParameter("oneinsertN");
+		System.out.println("oneinsertN:" + oneinsertN);
+		oneUVo.setOneday_title(oneinsertN);
+		System.out.println("여기2");
+		try {
+			if (report != null && !report.equals(""))
+				saveFile(report, request);
+			oneUVo.setOneday_img(report.getOriginalFilename());
+		} catch (Exception e) {
+			mv.addObject("msg", "파일 업로드가 실패했습니다.");
+			mv.setViewName("errorPage");
+		}
+
+		String oneinsertPR = request.getParameter("oneinsertPR");
+		oneUVo.setOneday_price(Integer.parseInt(oneinsertPR));
+
+		String oneinsertM = request.getParameter("oneinsertM");
+		oneUVo.setOneday_maxPerson(Integer.parseInt(oneinsertM));
+
+		String oneinsertC = request.getParameter("oneinsertC");
+		oneUVo.setOneday_content(oneinsertC);
+
+		String oneinsertP = request.getParameter("oneinsertP");
+		oneUVo.setOneday_place(oneinsertP);
+
+		String oneinsertDS = request.getParameter("oneinsertDS");
+		oneUVo.setOneday_start(oneinsertDS);
+
+		String oneinsertDE = request.getParameter("oneinsertDE");
+		oneUVo.setOneday_end(oneinsertDE);
+
+		oService.onedayupdate(oneUVo);
+		mv.setViewName("redirect:/onedayAdmin");
+		return mv;
+	}
 
 	@RequestMapping(value = "/onedayInsert", method = RequestMethod.GET) // 클래스 등록 oneday 에 insert 입력하는곳으로 이동
 	public ModelAndView onedayInsert(ModelAndView mv, HttpServletRequest request) {
@@ -375,7 +354,7 @@ public class OnedayController {
 		}
 	}
 
-	private void removeFile(String monthly_img, HttpServletRequest request) {     //사용안함 나중에 삭제하기
+	private void removeFile(String monthly_img, HttpServletRequest request) { // 사용안함 나중에 삭제하기
 		String root = request.getSession().getServletContext().getRealPath("resources");
 		String savePath = root + "\\img";
 
@@ -389,13 +368,6 @@ public class OnedayController {
 		} catch (Exception e) {
 			System.out.println("파일 삭제 에러 : " + e.getMessage());
 		}
-	}
-
-	@RequestMapping(value = "/onedayUpdate", method = RequestMethod.GET) // 클래스 수정 oneday 에 update
-	public ModelAndView onedayUpdate(ModelAndView mv) {
-		mv.setViewName("OnedayClass/onedayUpdate");
-
-		return mv;
 	}
 
 }

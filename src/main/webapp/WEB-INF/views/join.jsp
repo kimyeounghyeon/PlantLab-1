@@ -26,8 +26,8 @@
 					<div class="form-group">
 						<h3 class="join_title">
 							<label for="userId">아이디</label> 
-						<!-- 	<input class="id_chk_re"
-								type="button" value="중복확인" onclick="idCheck()"> -->
+		<!-- 	<input id="idckeck" class="id_chk_re"
+								type="button" value="중복확인" ">  -->
 						</h3>
 						<span class="box int_id"> <input type="text" id="userId"
 							name="userId" class="int" maxlength="20">
@@ -115,6 +115,12 @@
 						</h3>		
 							 <input type="text" id="address2"
 							name="address" class="int" maxlength="16">
+							<h3 class="join_title">
+							<label for="address">상세주소</label>
+						</h3>		
+							 <input type="text" id="address3"
+							name="address" class="int" maxlength="16" placeholder="정확히 입력해주세요 ">
+							
 					</div>
 					<!-- 가입 버튼  -->
 					<button type="submit" value="회원가입" id="btn">회원가입</button>
@@ -240,48 +246,8 @@
 			}
 		});
 
-	/* 	var idck = 0;
-		$(function() {
-			//idck 버튼을 클릭했을 때 
-			$("#id_check").click(function() {
 
-				//userid 를 param.
-				var userid = $("#userId").val();
 
-				$.ajax({
-					async : true,
-					type : 'POST',
-					data : userId,
-					url : "idcheck.do",
-					dataType : "json",
-					contentType : "application/json; charset=UTF-8",
-					success : function(data) {
-						if (data.cnt > 0) {
-
-							alert("아이디가 존재합니다. 다른 아이디를 입력해주세요.");
-							//아이디가 존제할 경우 빨깡으로 , 아니면 파랑으로 처리하는 디자인
-							$("#divInputId").addClass("has-error")
-							$("#divInputId").removeClass("has-success")
-							$("#userid").focus();
-
-						} else {
-							alert("사용가능한 아이디입니다.");
-							//아이디가 존제할 경우 빨깡으로 , 아니면 파랑으로 처리하는 디자인
-							$("#divInputId").addClass("has-success")
-							$("#divInputId").removeClass("has-error")
-							$("#userpwd").focus();
-							//아이디가 중복하지 않으면  idck = 1 
-							idck = 1;
-
-						}
-					},
-					error : function(error) {
-
-						alert("error : " + error);
-					}
-				});
-			});
-		}); */
 
 		$(function() {
 

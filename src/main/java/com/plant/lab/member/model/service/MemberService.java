@@ -19,7 +19,5 @@ public interface MemberService {
 	
     public MemberVO loginMember(MemberVO vo);
     
-    public String idCheckMember(MemberVO vo);
 
 }
-

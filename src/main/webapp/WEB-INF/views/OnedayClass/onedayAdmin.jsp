@@ -26,9 +26,9 @@
 				<div class="onediv">
 					<input type="checkbox" name="test_check" value="${o.oneday_no }" />
 
-					<!-- 				<a	href="${path}/onedayDetail?onedayNo=${o.oneday_no}"> -->
-					<a href="${path}/onedayAd_Detail">
-						<table class="onecontent">
+				<!-- <form action="${path}/onedayUpdate"> -->
+					<a href="${path}/onedayupdate?onedayNo=${o.oneday_no }">
+					<table class="onecontent">
 							<tr class="on omgtr">
 								<td class="oneimg" id=${status.index } colspan="2"><img
 									src="${pageContext.request.contextPath}/resources/img/${o.oneday_img }"
@@ -38,18 +38,20 @@
 
 							<tr class="on contextone">
 								<td class="ocontext" colspan="2">${o.oneday_title }</td>
-								<input type="hidden" name="oneday_no" value="${o.oneday_no }">
 
 							</tr>
-
-						</table>
-					</a>
+					</table>
+								<input type="hidden" name="onedayNo" value="${o.oneday_no }">
+							</a>
+							<!-- </form> -->
 				</div>
 			</c:forEach>
 		</div>
 	</div>
 	<script type="text/javascript">
 		$(function() {
+			//등록
+			
 			$("#oneAdBtn").click(function() {
 				location.href = "${path}/onedayInsert"
 			});
@@ -65,7 +67,7 @@
 				var obj = new Object(); //check box  type 알기
 				ch = Object.prototype.toString.call(checkArr);
 				console.log(ch);
-				var name = $("input[name=test_check]").val(); //최초의 값만 나옴
+				var name = $("input[name=test_check]").val(); 
 
 				var allData = {
 					'checkArray' : checkArr
@@ -82,8 +84,9 @@
 						location.reload();
 					},
 					error : function(request){
+						
 						alert("이미 예약된 클래스입니다\n삭제할 수 없습니다.");
-					}
+						}
  /* 												error : function(request, status, error) {
 					 alert("code = " + request.status
 					 + " message = " + request.responseText
@@ -94,7 +97,35 @@
 
 				});
 
-			})
+			});
+			
+/* 	$(".onecontent").click(function() {
+				var onedayno = "";
+				onedayno = $("input[name='onedayNo']").val();
+				console.log(onedayno)
+				var obj = new Object(); //check box  type 알기
+				ch = Object.prototype.toString.call(onedayno);
+				console.log(ch);
+
+				var allData = { 'onedayNo' :  onedayno};
+				
+				$.ajax({
+					url : "${path}/onedayupdate",
+					type : "GET",
+					data : allData,
+				success : function(data) {
+						console.log('return onedayNo value는  : ' + data);
+						location.replace('${path}/onedayUpdate');
+				 		
+					},
+				error : function(request, status, error) {
+						 alert("code = " + request.status
+					 + " message = " + request.responseText
+						 + " error = " + error); //  error 이유를 알 수 있는 코드  
+						 }  
+					
+		});
+	}) */
 
 		});
 	</script>

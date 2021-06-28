@@ -96,6 +96,12 @@ public class ProductController {
 			HttpSession session = req.getSession();
 			MemberVO member = (MemberVO) session.getAttribute("loginMember");
 			
+			if(member!=null) {
+				mv.addObject("user",member.getUserNo());				
+			}else {
+				mv.addObject("user",0);
+			}
+			
 			List<Product> viewPro = (ArrayList<Product>)(session.getAttribute("viewPro"));
 			
 			if(session.getAttribute("viewPro") == null) {
