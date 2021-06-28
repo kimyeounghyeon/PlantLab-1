@@ -13,8 +13,8 @@
 #ft{
 width: 100%;
 height: 100;
-position: absolute;
-bottom:0;
+position: relative;
+top:100px;
 text-align: center;
 font-family: 'Jeju Myeongjo';
 color: #625b54;
