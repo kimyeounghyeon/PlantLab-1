@@ -191,6 +191,7 @@ public class PlantHomeController {
 
 	// 일기 등록
 	@RequestMapping(value = "diaryInsert.do", method = RequestMethod.POST)
+	@ResponseBody
 	public String boardInsert(DiaryVO vo, HttpServletResponse response, MultipartHttpServletRequest multiFile,
 			HttpSession session, HttpServletRequest request, @RequestParam(name = "writetext") String diary_content,
 			ModelAndView mv) {
@@ -199,35 +200,23 @@ public class PlantHomeController {
 
 		System.out.println("인서트하러왔어요");
 		System.out.println("글 내용 봅시당" + diary_content);
+		int result = -1;
 		
-		/*
-		 * CommonController cc = new CommonController(); try { String img =
-		 * cc.fileUpload(request, response, multiFile);
-		 */
+		
 			vo.setDiary_content(diary_content);
 			vo.setDiary_write(member.getUserNo());
 			vo.setUser_id(member.getUserId());
-			/*
-			 * } catch (Exception e2) { e2.printStackTrace(); }
-			 */
-		
-
+			
 
 		System.out.println("vo가 문제지..?" + vo);
 
 		try {
-			int result = -1;
-			int result2 = -1;
-
-			result = dService.writeDiary(vo);
-			result2 = dService.writeImg(vo);
+			result = dService.insertDiary(vo);
 			System.out.println("글쓰기 성공 했나용?" + result);
-			System.out.println("이미지 성공 했나용?" + result2);
-/*			mv.setViewName("redirect:diary");
-*/		} catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 }
-		return null;
+		return String.valueOf(result);
 	}
 	
 	
