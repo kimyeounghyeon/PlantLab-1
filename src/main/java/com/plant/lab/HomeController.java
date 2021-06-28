@@ -112,11 +112,12 @@ public String memberOut(Model model, HttpServletRequest request) {
 	return "logOut";
 }
 
-@RequestMapping(value = "mypage", method = {RequestMethod.POST, RequestMethod.GET})
-public String mypage(Model model) {
 
+
+@RequestMapping(value = "mypage", method = {RequestMethod.POST, RequestMethod.GET})
+public String mypage( HttpServletRequest request,HttpSession session,MemberVO vo,Model model) {
+	MemberVO name =(MemberVO)session.getAttribute("loginMember");
+	model.addAttribute("loginMember",name);
 	return "mypage";
 }
-
-
 }
