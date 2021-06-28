@@ -17,19 +17,43 @@
 <div class="wrbgdiv">
 	<h3 class="subtitle">Write diary</h3>
 	<div class="writecontent">
-	<form id="diaryfrm" action="diaryInsert.do" method="post">
-	<textarea name="writetext" rows="30" cols="80" id="writetext" placeholder="내용을 입력하세요"></textarea>
+	<form id="diaryfrm" action="diaryInsert.do" method="POST" enctype="multipart/form-data">
+	<textarea name="writetext" rows="30" cols="80" id="writetext" placeholder="내용을 입력하세요" >
+	</textarea>
 	<br><br><br><br>
-		<button type="submit" id="dwritebtn">등록하기</button>
+		<button type="button" id="dwritebtn">등록하기</button>
 	</form>
 	</div>
 </div>
 
-
 	<script>
-	CKEDITOR.replace("writetext",{filebrowserUploadUrl : "${path}/imageUpload.do"});
+	      var ckeditor_config = {
+	      resize_enaleb : false,
+	      height : "400px",
+	      enterMode : CKEDITOR.ENTER_BR,
+	      shiftEnterMode : CKEDITOR.ENTER_P,
+		  filebrowserUploadUrl : "${path}/fileupload"
+	      };			
+	</script>
+	<script>
+	CKEDITOR.replace("writetext", ckeditor_config);
 	
-
+	$(document).on("click", "#dwritebtn", function(){
+	var cv = CKEDITOR.instances.writetext.getData();
+/*  	$.ajax({
+		url : "diaryInsert.do",
+		type : "post",
+		data : { writetext : $("#writetext").val() },
+		dataType : "json",
+		success : function(){
+			
+		}; */
+		
+		
+/* 	}); 
+	console.log(cv);
+	console.log(cv.src()); */
+	});
 	</script>
 
 	

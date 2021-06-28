@@ -21,13 +21,13 @@
 	<h3 class="subtitle">Modify diary</h3>
 	<div class="modifycontent">
 	<!-- TODO : form 태그 주소 변경  -->
-	<form action="diarymodify.do" method="post" enctype="multipart/form-data">
+	<form action="diarymodify.do" method="GET" enctype="multipart/form-data">
 	<textarea name="modifytext" rows="30" cols="80" id="modifytext"></textarea>
 	<br><br><br><br>
 	<button type="button" id="dmodifybtn">등록하기</button>
 	</form>
 	<script>
-	CKEDITOR.replace("modifytext",{filebrowserUploadUrl : "${path}/imageUpload.do"});
+	CKEDITOR.replace("modifytext",{filebrowserUploadUrl : "${path}/comm/ckUpload"});
 	
 	$(function(){
 		});

@@ -34,10 +34,17 @@ public class DiaryDao {
 	}
 	
 
-	// 글 작성
+	// 임시글 작성
 	public int writeDiary(DiaryVO vo) {
 		int result = 0;
 		result = sqlSession.insert("Diary.writeDiary", vo);
+		return result;
+	}
+	
+	// 찐 글 작성
+	public int insertDiary(DiaryVO vo) {
+		int result = -1;
+		result = sqlSession.insert("Diary.insertDiary", vo);
 		return result;
 	}
 	
