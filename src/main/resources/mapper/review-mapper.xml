@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="Review">
+	<resultMap type="Review" id="ReviewMap">
+		
+	</resultMap>
+	
+	<!-- 리뷰 전체 불러오기 -->
+	<select id="selectList" resultType="arraylist" parameterType="int" resultMap="ReviewMap">
+		SELECT r.*,u.user_name FROM rv_tb r
+        JOIN user_tb u
+        ON u.user_no = r.user_no
+    	WHERE pro_no = #{pro_no}
+		ORDER BY rv_no desc
+	</select>
+	
+	<!-- 리뷰 이미지 불러오기 -->
+	<select id="selectImgList" resultType="arraylist" parameterType="int" resultMap="ReviewMap">
+		SELECT i.rv_img_src FROM rv_tb r
+		JOIN rv_img_tb i
+		ON r.rv_no = i.rv_no
+		WHERE r.pro_no = #{pro_no}
+		AND r.user_no = #{user_no}
+	</select>
+</mapper>
