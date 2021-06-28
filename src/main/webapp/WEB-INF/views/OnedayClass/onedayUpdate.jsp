@@ -24,42 +24,32 @@
 <div id="fullmain">
 <div id="main">
 
-<h5 class="subtitle">無以林class insert</h5>
-
-
-<form action="${path}/onedayInsertResult"  enctype="multipart/form-data" method="post">
+<h5 class="subtitle">AD Class Update</h5>
+<form action="${path}/onedayUpdateRs"  enctype="multipart/form-data" method="post"> 
 <br/>
+<input type="text"  name="oneno"  class="oneinsert"  value="${one.oneday_no}"/>
 <span class="inserttag">클래스명</span>
 <br/> 
 
-<input type="text"  name="oneinsertN"  class="oneinsert"/>
+<input type="text"  name="oneinsertN"  class="oneinsert"  value="${one.oneday_title}"/>
 
 <br/>
 <span class="inserttag">클래스 썸네일</span>
 <br/>
 
 <div id="some" style="border: 1px solid black; display: inline-block;" >
-<input type="file"    name="oneinsertS"    style="display: inline-block;" />
+<input type="file"    name="oneinsertS"    style="display: inline-block;"/>
+${one.oneday_img}
 </div>
 
-
-<!-- <span class="inserttag">클래스 이미지</span>
 <br/>
 
 
-<div style="border: 1px solid black; height: 30px; padding-left:5px;  "  class="oneinsert">
-<input type="file"    name="oneinsertI"     />
-</div> -->
-
-
+<span class="inserttag" style="margin-top: 20px;">클래스 가격 </span>
 <br/>
 
 
-<span class="inserttag" style="margin-top: 20px;">클래스 가격 \</span>
-<br/>
-
-
-<input type="text" class="oneinsert"   name="oneinsertPR" />
+<input type="text" class="oneinsert"   name="oneinsertPR" value="${one.oneday_price}" />
 <br/>
 
 
@@ -67,13 +57,13 @@
 <br/>
 
 
-<input type="number" class="oneinsert"    name="oneinsertM" />
+<input type="number" class="oneinsert"    name="oneinsertM"  value="${one.oneday_maxPerson}"/>
 <br/>
 
 <span class="inserttag" >클래스 장소</span>
 <br/>
 
-<input type="text" class="oneinsert"    name="oneinsertP" />
+<input type="text" class="oneinsert"    name="oneinsertP"  value="${one.oneday_place}"/>
 <br/>
 
 
@@ -81,11 +71,11 @@
 <br/>
 
 
-<input type="date" class="oneinsert"    name="oneinsertDS" />
+<input type="date" class="oneinsert"    name="oneinsertDS"  value="${one.oneday_start}"/>
 
 <span class="inserttag" >클래스  마감일</span>
 <br/>
-<input type="date" class="oneinsert"    name="oneinsertDE" />
+<input type="date" class="oneinsert"    name="oneinsertDE" value="${one.oneday_end}" />
 <br/>
 
 
@@ -93,12 +83,12 @@
 <br/>
 
 
-<textarea type="text" id="oneinsertT"   style="resize:none;"  name="oneinsertC"   ></textarea>
+<textarea type="text" id="oneinsertT"   style="resize:none;"  name="oneinsertC"   >${one.oneday_content}</textarea>
 <br/>
 
 
 <button id="oneIbtn" type="submit">수정</button>
-</form>
+</form> 
 
 
 
