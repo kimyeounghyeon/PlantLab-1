@@ -3,7 +3,7 @@
 /* -----------초기화------------ */
 
 *{
-    font-family: 'YESMyoungjo-Regular';
+   font-family: 'YESMyoungjo-Regular';
 }
 
 a{
@@ -324,7 +324,7 @@ ul.cateList li a:hover{
 
 .inner-star {
     position: absolute;
-    top: 0;
+    top: 0px;
     width: 0%;
     overflow: hidden;
     white-space: nowrap;
@@ -332,9 +332,10 @@ ul.cateList li a:hover{
 
 .outer-star::before, .inner-star::before {
     content: '\f005 \f005 \f005 \f005 \f005';
+    font: FontAwesome !important;
     font-family: 'Font Awesome 5 free';
     font-weight: 900;
-    font-size: 40px;
+    font-size: 30px;
 } 
 
 /* 그래프 */
@@ -453,9 +454,14 @@ ul.cateList li a:hover{
     float: left;
     width: 30%;
     height: 300px;
-    border:solid 1px #ADBA85;
     margin-right: 20px;
     margin-top: 20px;
+}
+
+.reviewImg img{
+    margin-left: 12px;
+    width: 90%;
+    height: 100%;
 }
 
 .reviewTitle:hover{
