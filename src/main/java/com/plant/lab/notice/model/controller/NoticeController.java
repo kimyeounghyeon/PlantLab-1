@@ -32,15 +32,12 @@ public class NoticeController {
 
 
 	@RequestMapping(value="nlist.do" ,method=RequestMethod.GET)
-	public ModelAndView noticeList(NoticeVo voo,Model model, ModelAndView mav,HttpServletRequest request,MemberVO kk){
+	public ModelAndView noticeList(NoticeVo voo,Model model, HttpSession session,ModelAndView mav,HttpServletRequest request,MemberVO kk){
 	try {
-//		 HttpSession session = request.getSession();
-//		 MemberVO member=(MemberVO)session.getAttribute("loginMember");
-//		 kk.setUserNo(member.getUserNo());
-		 
+
+	
 	List<NoticeVo> list = nService.getNoticeList(voo);
 	int noticecnt= nService.NoticeCnt();
-	mav.addObject("member",kk);
 	mav.addObject("list",list);
 	mav.addObject("noticecnt", noticecnt);
 	mav.setViewName("Notice/Noticelist");
@@ -58,16 +55,18 @@ public class NoticeController {
 
 
 	@RequestMapping(value="nwrite.do", method=RequestMethod.GET)
-    public  String write() {
-		
+    public  String write( ModelAndView mav,Model model,NoticeVo vo) {
+	
+	
 		return "Notice/Noticewrite";
     }
     
 	
 	
 	@RequestMapping(value="ninsert.do", method=RequestMethod.POST)
-    public String insert(@ModelAttribute NoticeVo vo) throws Exception{
+    public String insert( ModelAndView mav,Model model,NoticeVo vo) throws Exception{
 		nService.NoticeInsert(vo);
+		
 		return "redirect:nlist.do";
 		
        
