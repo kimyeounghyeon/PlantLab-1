@@ -56,7 +56,7 @@ public class CartController {
 	}
 
 //카트 상품 서치 AJAX
-	@RequestMapping(value="/cartSearch", method=RequestMethod.POST)
+	@RequestMapping(value="/cartSearch.do", method=RequestMethod.POST)
 	public void cartSearch(@RequestParam(name = "pro_no") int pro_no,HttpSession session,
 			HttpServletResponse response) throws IOException{
 		try {
@@ -92,7 +92,7 @@ public class CartController {
 
 	
 //카트 상품 등록 AJAX
-	@RequestMapping(value="/cartInsert", method=RequestMethod.POST)
+	@RequestMapping(value="/cartInsert.do", method=RequestMethod.POST)
 	public void cartInsert(Cart cart,HttpServletResponse response,HttpSession session)throws IOException{
 		try {
 			
@@ -134,7 +134,7 @@ public class CartController {
 	}
 	
 //카트 상품 삭제 AJAX
-	@RequestMapping(value="/cartDel", method=RequestMethod.POST)
+	@RequestMapping(value="/cartDel.do", method=RequestMethod.POST)
 	public void cartDel(Cart cart,HttpServletResponse response,HttpServletRequest request,HttpSession session)throws IOException{
 		try {
 			//TODO 테스트용 나중에 삭제

@@ -1,16 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <title>無以林 : 키우기쉬운 나무</title>
-    <link href="${path}/resources/css/ProductViewStyle.css" rel="stylesheet"/>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/jejumyeongjo.css"/>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/jejumyeongjo.css"/>
+    <link href="${path}/resources/css/header.css" rel="stylesheet"/>
+    <link href="${path}/resources/css/ProductViewStyle.css" rel="stylesheet"/>
+    
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
@@ -47,7 +50,7 @@
 	                        </tr>
 	                        <tr>
 	                            <td class="guide">배송비</td>
-	                            <td id="deliv">5000원</td>
+	                            <td id="deliv">5,000원</td>
 	                        </tr>
 	                        <tr>
 	                            <td class="guide">판매가</td>
@@ -138,31 +141,48 @@
                                 <div class="starDetail">
                                     <h3>리뷰 총 점수</h3>
                                     <div class="starContent">
-                                        <div class="graph">
-                                            <span class="barNum">5점</span><span class="bar" style="width: 70%;"></span>
-                                        </div>
-                                        <div class="graph">
-                                            <span class="barNum">4점</span><span class="bar" style="width: 30%;"></span>
-                                        </div>
-                                        <div class="graph">
-                                            <span class="barNum">3점</span><span class="bar" style="width: 0%;"></span>
-                                        </div>
-                                        <div class="graph">
-                                            <span class="barNum">2점</span><span class="bar" style="width: 0%;"></span>
-                                        </div>
-                                        <div class="graph">
-                                            <span class="barNum">1점</span><span class="bar" style="width: 0%;"></span>
-                                        </div>
+                                    	<c:if test="${not empty percent }">
+                                    	<c:forEach var="vo" items="${percent}" varStatus="status">
+	                                        <div class="graph">
+	                                            <span class="barNum">${fn:length(percent)-status.index}점</span><span class="bar" style="width: ${vo}%;"></span>
+	                                        </div>
+                                        </c:forEach>
+                                        </c:if>
+                                        
+                                        <c:if test="${empty percent }">
+                                        	<div class="graph">
+	                                            <span class="barNum">5점</span><span class="bar" style="width: 0%;"></span>
+	                                        </div>
+	                                        <div class="graph">
+	                                            <span class="barNum">4점</span><span class="bar" style="width: 0%;"></span>
+	                                        </div>
+	                                        <div class="graph">
+	                                            <span class="barNum">3점</span><span class="bar" style="width: 0%;"></span>
+	                                        </div>
+	                                        <div class="graph">
+	                                            <span class="barNum">2점</span><span class="bar" style="width: 0%;"></span>
+	                                        </div>
+	                                        <div class="graph">
+	                                            <span class="barNum">1점</span><span class="bar" style="width: 0%;"></span>
+	                                        </div>
+                                        </c:if>
                                     </div>
                                 </div>
                             </div>
                             
                             <!-- 리뷰표시 -->
                             <div class="reviewContent">
-                                <h2>리뷰 2개</h2>
+                                <h2>리뷰  ${fn:length(reviewList)}개</h2>
                                 <div class="review">
                                     <table>
                                         <!-- 한개의 리뷰 시작 -->
+                                        <c:if test="${empty reviewList}">
+                                        	<tr class="accordian">
+                                            	<td class="reviewTitle">
+                                               		<div><h3>아직 작성된 리뷰가 없습니다!</h3></div>
+                                           		</td>
+                                       		</tr>
+                                        </c:if>
                                         <c:if test="${not empty reviewList}">
                                         	<c:forEach var="vo" items="${reviewList}" varStatus="status">
                                         		 <tr class="accordian">
@@ -214,16 +234,6 @@
 	ratings = {RatingScore: pro_totalStar}
 	totalRating = 5;
     table = document.querySelector('.RatingStar');
-
-    
-	/* function rateIt() {
-		for (rating in ratings) {
-			ratingPercentage = ratings[rating] / totalRating * 100;
-			ratingRounded = Math.round(ratingPercentage / 10) * 10 + '%';
-			star = table.querySelector('.${rating} .inner-star');
-			numberRating = table.querySelector('.${rating} .numberRating');
-			star.style.width = ratingRounded;numberRating.innerText = ratings[rating];}
-	} */
 	
     function rateIt() {
         for (rating in ratings) {
@@ -329,7 +339,7 @@
             var reviewImg = $(this).next().find('.reviewImg');
             
             $.ajax({
-				url:"imgSearch",
+				url:"imgSearch.do",
 				data : {pro_no : pro_no,
 						user_no : user_no},
 				type:"post",
@@ -412,7 +422,7 @@
         	}else{
         		//카트에 상품이 있는지 조회하는 ajax
             	$.ajax({
-    				url:"cartSearch",
+    				url:"cartSearch.do",
     				data : {pro_no : pro_no},
     				type:"post",
     				success:function(result){
@@ -423,7 +433,7 @@
     						var numVal = num.text();
     						
     						$.ajax({
-    							url:"cartInsert",
+    							url:"cartInsert.do",
     							data : {pro_no : pro_no,
     									pro_cnt : numVal},
     		    				type:"post",

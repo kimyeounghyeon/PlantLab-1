@@ -2,131 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
-<!DOCTYPE html>
-<html>
-<head>
-<link rel="stylesheet"
-	href="https://fonts.googleapis.com/earlyaccess/jejumyeongjo.css" />
-<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/resources/css/login.css">
-<meta charset="UTF-8">
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<title>Insert title here</title>
-
-
-<style type="text/css">
-* {
-	color: #625b54;
-	line-height: 30px;
-}
-
-#fullmain {
-	width: 1280px;
-	margin: 0 auto;
-	padding: 0;
-	clear: both;
-}
-
-#main {
-	width: 1250px;
-	margin: 0 auto;
-	padding: 0;
-}
-
-#mainTop {
-	margin-top: 30px;
-	padding: 0;
-	margin-left: 40px;
-	margin-right: 0;
-	float: right;
-}
-
-#logo {
-	clear: both;
-	float: left;
-}
-
-#mainTab {
-	float: right;
-	margin-right: 0;
-	padding: 0;
-	font-size: 20px;
-}
-
-a {
-	text-decoration: none;
-}
-
-.top {
-	margin-right: 0;
-	margin-left: 48px;
-	font-size: 14px;
-}
-
-#logo {
-	margin-top: 10px;
-	float: left;
-	display: inline;
-}
-
-#tab {
-	height: 100px;
-	margin-top: 30px;
-	float: right;
-	display: inline;
-}
-
-.tablinks {
-	float: left;
-	list-style: none;
-	display: inline-block;
-	margin-left: 80px;
-	font-size: 18px;
-	position: relative;
-	width: 60px;
-	text-align: right;
-}
-
-#subtab {
-	padding-top: 10px;
-	padding-bottom: 10px;
-	width: 70px;
-	text-align: center;
-	list-style: none;
-	position: relative;
-	font-size: 18px;
-	display: none;
-	z-index: 1;
-}
-
-#subtab a {
-	margin-left: 10px;
-	padding-top: 10px;
-	padding-bottom: 10px;
-	text-align: center;
-	list-style: none;
-	position: relative;
-	font-size: 18px;
-	z-index: 1;
-	display: block;
-}
-
-#plant:hover #subtab {
-	display: block;
-}
-
-.Tab:hover {
-	color: #969592;
-}
-
-.sub:hover {
-	color: #969592;
-}
-</style>
-
-
-</head>
-<body>
 	<div id="fullmain">
 		<div id="main">
 			<!-- header top -->
@@ -136,9 +11,6 @@ a {
 					href="<%=request.getContextPath()%>/login" class="top">login</a>
 				<a href="<%=request.getContextPath()%>/join" class="top">join</a>
 			</div>
-
-
-
 
 			<!--  logo -->
 			<!--  logo 이미지 넣기 -->
@@ -168,15 +40,6 @@ a {
 				</div>
 			</div>
 		</div>
-
-
 	</div>
-
-
-
-
-
-
-
 </body>
 </html>

@@ -7,8 +7,10 @@
 <head>
 	<meta charset="UTF-8">
 	<title>無以林 주문</title>
-	<link href="${path}/resources/css/OrderStyle.css" rel="stylesheet"/>
 	<link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/jejumyeongjo.css"/>
+	<link href="${path}/resources/css/header.css" rel="stylesheet"/>
+	<link href="${path}/resources/css/OrderStyle.css" rel="stylesheet"/>
+
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
@@ -28,6 +30,26 @@
                 <div class="order">
                     <h3>주문상세내역</h3>
                     <table class="orderList">
+                    	<c:if test="${not empty oneRsVo}">
+                    		<tr>
+	                            <td class="proImg" rowspan="2">
+	                                <img src="${pageContext.request.contextPath}/resources/img/${onedayImg}">
+	                            </td>
+	                            <td class="space" rowspan="2"></td>
+	                            <td class="proName">
+	                                <p>${oneRsVo.oneday_title}</p>
+	                                <input type="hidden" name="pro_no" value="${oneRsVo.oneday_no}">
+	                            </td>
+	                        </tr>
+	                        <tr>
+	                            <td class="priceGuide">
+	                                <p class="proNum guide">1 </p>개 /
+	                                <p class="proPri guide"></p>
+	                                <input type="hidden" value="${oneRsVo.oneday_price}" class="voPrice">
+	                            </td>
+	                        </tr>
+                    	</c:if>
+                    	
                     	<c:if test="${not empty cartList }">
                     	<c:forEach  var="vo" items="${cartList}" varStatus="status">
                     		 <tr>

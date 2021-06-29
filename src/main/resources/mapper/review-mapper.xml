@@ -21,5 +21,16 @@
 		ON r.rv_no = i.rv_no
 		WHERE r.pro_no = #{pro_no}
 		AND r.user_no = #{user_no}
+		ORDER BY i.rv_img_num
+	</select>
+	
+	<!-- 상품별 총 리뷰수 -->
+	<select id="listCount" parameterType="int" resultType="int">
+		SELECT count(rv_star) FROM rv_tb WHERE pro_no = #{pro_no}
+	</select>
+	
+	<!-- 상품별 별점 수 -->
+	<select id="starCount" resultType="int" parameterType="HashMap">
+		SELECT count(rv_star) FROM rv_tb WHERE pro_no = #{pro_no} and rv_star = #{star}
 	</select>
 </mapper>

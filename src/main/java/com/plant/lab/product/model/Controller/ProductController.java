@@ -7,6 +7,7 @@ import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
@@ -140,10 +141,33 @@ public class ProductController {
 			
 			
 			session.setAttribute("viewPro", viewPro); 
-			
 			Collections.reverse(viewPro);
 			
+			
+			//리뷰 퍼센트 계산
+			int count = reviewService.listCount(pro_no);
+			logger.info("개수확인:::"+count);
+			
+			List<Double> percent = new ArrayList<Double>();
+			HashMap<String, Integer> map = new HashMap<String, Integer>();
+			
+			map.put("pro_no", pro_no);
+			map.put("star", 0);
+			
+			for(int i=5; i>=1; i--) {
+				map.remove("star");
+				map.put("star", i);
+				int test = reviewService.starCount(map);
+				logger.info("test:::"+test);
+				if(test == 0) {
+					percent.add(0.0);
+				}else {
+					percent.add(reviewService.starCount(map) / (count*1.0) * 100);					
+				}
+			}
+			
 			mv.addObject("viewPro",viewPro);
+			mv.addObject("percent",percent);
 			mv.addObject("productCon",proConService.searchList(pro_no));
 			mv.addObject("reviewList",reviewService.searchList(pro_no));
 			mv.addObject("product",proService.selectOne(pro_no));
@@ -154,18 +178,5 @@ public class ProductController {
 		}
 		
 		return mv;
-	}
-	
-//최근본 상품 목록 쿠키 등록
-	public void proView(@CookieValue(name = "proView") String cookie, 
-			@RequestParam(name = "proNo") int pro_no,
-			HttpServletResponse response,Model model) throws ClassNotFoundException, SQLException{
-		
-		if (!(cookie.contains(String.valueOf(pro_no)))) {
-			cookie += "/" + pro_no;
-		}
-		
-		System.out.println("쿠키확인~~~~~~:"+cookie);
-		response.addCookie(new Cookie("proView", cookie));
 	}
 }

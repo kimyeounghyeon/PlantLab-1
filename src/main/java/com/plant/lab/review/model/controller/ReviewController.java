@@ -33,7 +33,7 @@ public class ReviewController {
 	private static final Logger logger = LoggerFactory.getLogger(CartController.class);
 	
 	//imgSearch
-	@RequestMapping(value="/imgSearch", method=RequestMethod.POST)
+	@RequestMapping(value="/imgSearch.do", method=RequestMethod.POST)
 	public void cartSearch(Review review,
 			HttpSession session,
 			HttpServletResponse response) throws IOException{

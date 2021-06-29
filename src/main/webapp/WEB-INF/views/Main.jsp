@@ -7,8 +7,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<script src="${path}/resources/js/rainyday.js"></script>
+	<link href="${path}/resources/css/header.css" rel="stylesheet"/>
 	<style>
 		#content{
 		    width: 1250px;
@@ -23,8 +22,12 @@
 		
 		#main_section img{
 			width: 100%;
+			margin-top: 50px;
 		}
 	</style>
+	
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="${path}/resources/js/rainyday.js"></script>
 </head>
 <body>
 	<jsp:include page="header.jsp"></jsp:include>

@@ -7,8 +7,10 @@
 <head>
     <meta charset="UTF-8">
     <title>無以林 cart</title>
-    <link href="${path}/resources/css/CartStyle.css" rel="stylesheet"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/jejumyeongjo.css"/>
+    <link href="${path}/resources/css/header.css" rel="stylesheet"/>
+    <link href="${path}/resources/css/CartStyle.css" rel="stylesheet"/>
+
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
@@ -265,7 +267,7 @@
             for(var a=0; a<proNo.length; a++){
             	console.log(proNo[a]);
             	$.ajax({
-					url:"cartDel",
+					url:"cartDel.do",
 					data : {pro_no:proNo[a]},
     				type:"post",
     				success:function(result){

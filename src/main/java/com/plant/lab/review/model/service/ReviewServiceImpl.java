@@ -1,5 +1,6 @@
 package com.plant.lab.review.model.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,5 +23,14 @@ public class ReviewServiceImpl implements ReviewService{
 	public List<Review> selectImgList(Review review){
 		return reviewDao.selectImgList(review);
 	}
-		
+
+	@Override
+	public int listCount(int pro_no) {
+		return reviewDao.listCount(pro_no);
+	}
+
+	@Override
+	public int starCount(HashMap<String, Integer> map) {
+		return reviewDao.starCount(map);
+	}
 }

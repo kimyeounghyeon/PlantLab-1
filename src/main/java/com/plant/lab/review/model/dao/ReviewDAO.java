@@ -1,5 +1,6 @@
 package com.plant.lab.review.model.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -22,5 +23,15 @@ public class ReviewDAO {
 	//리뷰 사진 가져오기
 	public List<Review> selectImgList(Review review) {
 		return sqlSession.selectList("Review.selectImgList",review);
+	}
+	
+	//상품별 총 리뷰수 
+	public int listCount(int pro_no) {
+		return sqlSession.selectOne("Review.listCount",pro_no);
+	}
+	
+	//상품별 별점 수
+	public int starCount(HashMap<String, Integer> map) {
+		return sqlSession.selectOne("Review.starCount",map);
 	}
 }
