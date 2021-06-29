@@ -26,11 +26,9 @@
 					<div class="form-group">
 						<h3 class="join_title">
 							<label for="userId">아이디</label>
-							<!-- 	<input id="idckeck" class="id_chk_re"
-								type="button" value="중복확인" ">  -->
 						</h3>
 						<span class="box int_id"> <input type="text" id="userId"
-							name="userId" class="int" maxlength="20">
+							name="userId" class="int" maxlength="20" onblur="onBlurId()">
 						</span> <span class="error_next_box"></span>
 
 						<div class="check_font" id="id_check"></div>
@@ -55,11 +53,10 @@
 						</h3>
 						<span class="box int_pass_check"> <input type="password"
 							id="userPwd2" name="userPwd2" class="int" maxlength="20">
-						</span> <span class="error_next_box"></span>
-						 <span id="alert-success"
-						style="display: none; color: blue;">비밀번호가 일치합니다.</span> <span
-						id="alert-danger" style="display: none; color: red;">비밀번호가
-						일치하지 않습니다.</span>
+						</span> <span class="error_next_box"></span> <span id="alert-success"
+							style="display: none; color: blue;">비밀번호가 일치합니다.</span> <span
+							id="alert-danger" style="display: none; color: red;">비밀번호가
+							일치하지 않습니다.</span>
 						<div class="check_font" id="passre_check"></div>
 					</div>
 					<!-- NAME -->
@@ -72,23 +69,13 @@
 						</span> <span class="error_next_box"></span>
 						<div class="check_font" id="name_check"></div>
 					</div>
-					<!-- GENDER -->
-					<!-- 			<div>
-						<h3 class="join_title">
-							<label for="grade">성별</label>
-						</h3>
-						<span class="box gender_code"> <input id="grade"
-							name="grade" class="sel">
 
-						</span> <span class="error_next_box">필수 정보입니다.</span>
-						<div class="check_font" id="gender_check"></div>
-					</div> -->
+					<input type="hidden" id="isValidIdCheck" value="false">
 					<!-- EMAIL -->
+
 					<div>
 						<h3 class="join_title_email">
 							<label for="email">본인 확인 이메일<span class="optional"></span></label>
-							<!-- 						<input class="mail_chk_re" type="button" value="중복확인"
-								onclick="mailCheck()"> -->
 						</h3>
 						<span class="box int_email"> <input type="text" id="email"
 							name="email" class="int" maxlength="100" placeholder="이메일 ">
@@ -136,11 +123,11 @@
 		</div>
 
 
-
 	</div>
 	<script
 		src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script>
+		var afterValidIdCheck = "";
 		function execDaumPostcode() {
 			new daum.Postcode({
 				oncomplete : function(data) {
@@ -189,7 +176,7 @@
 		// 이름 정규식
 		var nameJ = /^[가-힣]{2,6}$/; // 가~힣, 2-6 자리 한글로만 이루어진 문자
 		// 휴대폰 번호 정규식
-		var phoneJ = /^01([0|1|6|7|8|9]?)-?([0-9]{3,4})-?([0-9]{4})$/; 
+		var phoneJ = /^[0-9]{9,11}$/;
 
 		// 아이디
 		$('#userId').blur(function() {
@@ -282,16 +269,22 @@
 					} else {
 						inval_Arr[2] = false;
 					}
-					
+
 					var validAll = true;
-					for(var i = 0; i < inval_Arr.length; i++){
-						
-						if(inval_Arr[i] == false){
+					for (var i = 0; i < inval_Arr.length; i++) {
+
+						if (inval_Arr[i] == false) {
 							validAll = false;
 						}
 					}
+					var curUserId = $("#userId").val();
+					if (afterValidIdCheck != curUserId) {
+						alert("아이디를 확인해주세요.");
+						$("#userId").focus();
+						return false;
+					}
 
-					if (validAll) { 
+					if (validAll) {
 						alert('무이림 가입을 축하드립니다!');
 
 						var frm = document.getElementById("frmEmp");
@@ -304,12 +297,30 @@
 					}
 
 				});
+
+		function onBlurId() {
+			$.ajax({
+				url : 'isValidId',
+				type : 'POST',
+				data : {
+					userId : $("#userId").val()
+				},
+				success : function(result) {
+					if (result == "true") {
+						// 아이디가 중복됩니다. 출력
+						$("#id_check").text("아이디가 중복됩니다.");
+						afterValidIdCheck = "";
+					} else {
+						$("#id_check").text("사용가능한 아이디입니다.");
+						$('#id_check').css('color', 'blue');
+						$("#isValidIdCheck").val("true");
+						afterValidIdCheck = $("#userId").val();
+					}
+				}
+			});
+
+		}
 	</script>
-
-
-
-
-
 
 </body>
 </html>

@@ -44,8 +44,8 @@
 		insert into user_tb values (user_seq.nextVal, #{userId}, #{userName}, #{userPwd}, #{email}, #{phone}, 0, #{address})
 	</insert>
 	
-	<select id="idcheck" parameterType="String" resultType="Integer">
-      SELECT COUNT(*) FROM tbl_member WHERE userId = #{userId}
-</select>
+	<select id="isValidId"  parameterType="string" resultType="Integer">
+		SELECT COUNT(*) FROM user_tb WHERE USER_ID = #{userId}
+	</select>
 
 </mapper>

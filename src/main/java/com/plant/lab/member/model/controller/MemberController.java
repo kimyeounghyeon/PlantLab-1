@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.plant.lab.member.model.service.MemberService;
 import com.plant.lab.member.model.vo.MemberVO;
@@ -40,7 +41,7 @@ public class MemberController {
 
 	@RequestMapping(value = "login", method = RequestMethod.GET)
 	public String loginMember() {
-		return "login";
+		return "logIn";
 	}
 
 	@RequestMapping(value = "loginPostNaver", method = RequestMethod.GET)
@@ -48,44 +49,42 @@ public class MemberController {
 
 		return "loginPostNaver";
 	}
-
+	@ResponseBody
 	@RequestMapping(value = "doLogin")
 	public String memberLogin(MemberVO vo, HttpSession session, HttpServletRequest request
-            , HttpServletResponse response,
-			@RequestParam(name = "userId") String userId, @RequestParam(name = "userPwd") String userPwd) throws IOException {
-
-		vo.setUserId(userId);
-		vo.setUserPwd(userPwd);
-		System.out.println("[계원] id와 pwd 정보 들어있음을 확인 : " + vo.toString());
-        
-		MemberVO login = mService.loginMember(vo);
+            , HttpServletResponse response, Model model) throws IOException {
 		
 
-		if (login != null) {
+		System.out.println("[계원] id와 pwd 정보 들어있음을 확인 : " + vo.toString());
+		String getUser =vo.getUserId();
+		MemberVO login = mService.loginMember(vo);
+		if(login !=null) {
 			session.setAttribute("loginMember", login);
-			System.out.println("로그인 성공");
-			response.setContentType("text/html; charset=UTF-8");
-			PrintWriter out = response.getWriter();
-			out.println("<script>alert('무이림에 오신걸 환영합니다!'); </script>");
-			out.flush();
-
-		} else {
-			System.out.println("로그인 실패");
-			response.setContentType("text/html; charset=UTF-8");
-			PrintWriter out = response.getWriter();
-			out.println("<script>alert('아이디, 비밀번호를 확인해주세요.'); history.go(-1);</script>");
-			out.flush();
-
+			model.addAttribute("isLogin","true");
+			return "true";
 		}
-		System.out.println("전계원" + login);
+		
+		return "false";
 
-		return "Main";
 	}
 
 	@RequestMapping(value = "logout")
 	public String memberOut(Model model, HttpSession session) {
 		session.removeAttribute("loginMember");
+		System.out.println("전계원" + session);
 		return "Main";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "isValidId")
+	public String isValidId(
+		 @RequestParam(value = "userId") String userId) {
+		System.out.println(userId);
+		int isValidId = mService.isValidId(userId);
+		if(isValidId>0){
+			return "true";
+		}
+		return "false";
 	}
 	
 

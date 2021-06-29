@@ -41,5 +41,9 @@ public class MemberDAO {
 		return sqlSession.selectOne("member.loginMember", vo);
 
 	}
+	
+	public int isValidId(String userId) {
+		return sqlSession.selectOne("member.isValidId",userId);
+	}
 
 }

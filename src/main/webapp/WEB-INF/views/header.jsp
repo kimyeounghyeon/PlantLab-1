@@ -1,19 +1,30 @@
+<%@page import="com.plant.lab.member.model.vo.MemberVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<div id="fullmain">
 		<div id="main">
 			<!-- header top -->
-
-			<div id="mainTop">
-				<a href="#" class="top">cart</a> <a href=""${path}/mypage.do" class="top">my</a> <a
-					href="<%=request.getContextPath()%>/login" class="top">login</a>
+             <div id="mainTop">
+				<a href="#" class="top">cart</a> 
+				<a href="${path}/mypage.do" class="top">my</a>
+				<c:choose>
+					<c:when test="${sessionScope.loginMember!=null}">
+						<a href="${path}/logout" class="top">logout</a> 
+					</c:when>
+					<c:otherwise>
+						<a href="<%=request.getContextPath()%>/login" class="top">login</a>  
+					</c:otherwise> 
+				</c:choose>
+		
+       
 				<a href="<%=request.getContextPath()%>/join" class="top">join</a>
 			</div>
 
 			<!--  logo -->
-			<!--  logo 이미지 넣기 -->
 
 			<div id="logo">
 				<img alt="logo" src="${path }/resources/img/logo.png" />
@@ -22,6 +33,7 @@
 
 			<!-- header의 tab 버튼 -->
 			<div id="tab">
+				
 				<div class="tablinks" id="plant">
 					<a href="${path}/mMain.do" class="Tab">Plant</a>
 					<div id="subtab">

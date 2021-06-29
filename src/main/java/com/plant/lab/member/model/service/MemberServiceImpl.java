@@ -53,6 +53,11 @@ public class MemberServiceImpl implements MemberService {
 		return mDao.loginMember(vo);
 
 	}
+	@Override
+	public int isValidId(String userId) {
+		// TODO Auto-generated method stub
+		return mDao.isValidId(userId);
+	}
 
 	 
 }

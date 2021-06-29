@@ -40,7 +40,7 @@
 					name="userPwd"></input>
 			</div>
 			<div class="login-btn-wrap">
-				<button class="login-btn" id="loingbtn">로그인</button>
+				<button type="button" class="login-btn" id="loingbtn">로그인</button>
 			</div>
 
 
@@ -101,12 +101,20 @@
 
 <script>
 	$("#loingbtn").click(function() {
-		var frm = document.getElementById("loginFrm");
-		frm.action = "doLogin";
-		frm.method = "post";
-		frm.submit();
-
-	
+		
+		$.ajax({
+            url:'doLogin',
+            type:'POST',
+            data:$("#loginFrm").serialize(),
+            success:function(result){
+               if(result=="true"){
+            	   alert("무이림에 오신것을 환영합니다.")
+            	   window.location="/lab";
+               }else{
+            	   alert("로그인에 실패하셨습니다.");
+               }
+            }
+        });
 
 	});
 </script>
