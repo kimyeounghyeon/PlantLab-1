@@ -18,9 +18,12 @@
 	<h3 class="subtitle">Write diary</h3>
 	<div class="writecontent">
 	<form id="diaryfrm" action="diaryInsert.do" method="POST" enctype="multipart/form-data">
+ 	<input type="file"  name="diaryUpload"  style= "display: inline-block;" />
 	<textarea name="writetext" rows="30" cols="80" id="writetext" placeholder="내용을 입력하세요" >
 	</textarea>
-	<br><br><br><br>
+<%-- 	<input type="hidden" class="writeDno" value="${diary_no }">
+ --%>	<br><br><br><br>
+ 
 		<button type="button" id="dwritebtn">등록하기</button>
 	</form>
 	</div>
@@ -32,7 +35,6 @@
 	      height : "400px",
 	      enterMode : CKEDITOR.ENTER_BR,
 	      shiftEnterMode : CKEDITOR.ENTER_P,
-		  filebrowserUploadUrl : "${path}/fileupload"
 	      };			
 	</script>
 	<script>
@@ -40,19 +42,11 @@
 	
 	$(document).on("click", "#dwritebtn", function(){
 	var cv = CKEDITOR.instances.writetext.getData();
-/*  	$.ajax({
-		url : "diaryInsert.do",
-		type : "post",
-		data : { writetext : $("#writetext").val() },
-		dataType : "json",
-		success : function(){
-			
-		}; */
-		
-		
-/* 	}); 
 	console.log(cv);
-	console.log(cv.src()); */
+	var frm = $("#diaryfrm");
+	
+	frm.submit();
+
 	});
 	</script>
 

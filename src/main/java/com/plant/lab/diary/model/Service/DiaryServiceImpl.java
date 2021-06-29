@@ -30,6 +30,7 @@ public class DiaryServiceImpl implements DiaryService {
 		System.out.println("[영현]listDiary() list중 1개:" + list.get(0).toString());
 		return list;
 	}
+
 	
 	@Override
 	public List<Integer> likeList(LikeVO lvo) {
@@ -53,6 +54,17 @@ public class DiaryServiceImpl implements DiaryService {
 			e.printStackTrace();
 		}
 		return list;
+	}
+	
+	public int getSequence() {
+		int diaryNo = -1;
+		
+		try {
+			diaryNo = dDao.getSequence();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return diaryNo;
 	}
 
 	

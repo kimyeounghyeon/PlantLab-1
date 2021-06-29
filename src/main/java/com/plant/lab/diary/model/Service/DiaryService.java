@@ -29,5 +29,8 @@ public interface DiaryService {
 	// 댓글
 	public List<CommentVO> selectComment(int diary_no);
 	public int insertComment(CommentVO cvo);
-//	public List<DiaryVO> detailDiary(Map<String, Integer> map);
+	
+	
+	// 게시글 번호 불러오기
+	public int getSequence();
 }

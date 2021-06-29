@@ -1,23 +1,12 @@
 package com.plant.lab.diary.comtroller;
 
-import java.io.ByteArrayOutputStream;
-import java.io.Console;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.io.PrintWriter;
-import java.text.DateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
-import java.util.UUID;
 
-import javax.servlet.ServletException;
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -27,28 +16,21 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-import com.plant.lab.HomeController;
 import com.plant.lab.diary.model.Service.DiaryService;
 import com.plant.lab.diary.model.vo.CommentVO;
 import com.plant.lab.diary.model.vo.DiaryVO;
 import com.plant.lab.diary.model.vo.LikeVO;
-import com.plant.lab.fileController.CommonController;
 import com.plant.lab.member.model.vo.MemberVO;
 
-import net.sf.json.JSON;
 
 /**
  * Handles requests for the application home page.
@@ -61,23 +43,9 @@ public class PlantHomeController {
 	@Autowired
 	private DiaryService dService;
 
-
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
-		logger.info("Welcome home! The client locale is {}.", locale);
-
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-
-		String formattedDate = dateFormat.format(date);
-
-		model.addAttribute("serverTime", formattedDate);
-
-		return "header";
-	}
 
 	// 일기 메인페이지
 	@RequestMapping(value = "/diary", method = RequestMethod.GET)
@@ -96,9 +64,6 @@ public class PlantHomeController {
 		System.out.println("[영현]diary.do 진입");
 		response.setCharacterEncoding("UTF-8");
 
-		// 로그인 전에 임시 테스트 코드입니다.
-		// TODO: session
-
 		LikeVO sessionVO = new LikeVO();
 		MemberVO member = (MemberVO) session.getAttribute("loginMember");
 		sessionVO.setUser_no(member.getUserNo());
@@ -115,7 +80,7 @@ public class PlantHomeController {
 
 		try {
 			response.getWriter().write(jsonOutput);
-			System.out.println("데이터 잘 갔나 확인 좀 " + jsonOutput);
+//			System.out.println("데이터 잘 갔나 확인 좀 " + jsonOutput);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -129,13 +94,7 @@ public class PlantHomeController {
 			LikeVO lvo, DiaryVO vo) {
 		System.out.println("[영현]Detail diary 진입");
 		System.out.println("diary_no값 url로 잘 가져왔나용?" + diary_no);
-		// 로그인 전에 임시 테스트 코드입니다.
-		// TODO: session
-//		LikeVO sessionVO = new LikeVO();
-//		sessionVO.setUser_no(122);  xz  // session.getAtt....
-//		
-//		mv.addObject("listDiary", dService.listDiary());
-//		mv.addObject("likeList", dService.likeList(sessionVO));
+
 		mv.addObject("diary_no", diary_no);
 		mv.setViewName("Plant/DiaryDetail");
 		System.out.println("[영현]diary detail view 페이지 이동");
@@ -161,14 +120,12 @@ public class PlantHomeController {
 		List<DiaryVO> detailList = dService.detailDiary(diary_no);
 		List<Integer> likeList = dService.likeList(sessionVO);
 		List<CommentVO> listComment = dService.selectComment(diary_no);
-		System.out.println("댓글 확인하기" + listComment);
 
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("likeList", likeList);
 		map.put("detailList", detailList);
 		map.put("listComment", listComment);
 
-		System.out.println("세부리스트 : " + detailList);
 
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		String jsonOutput = gson.toJson(map);
@@ -191,35 +148,56 @@ public class PlantHomeController {
 
 	// 일기 등록
 	@RequestMapping(value = "diaryInsert.do", method = RequestMethod.POST)
-	@ResponseBody
-	public String boardInsert(DiaryVO vo, HttpServletResponse response, MultipartHttpServletRequest multiFile,
+	public String boardInsert(DiaryVO vo, HttpServletResponse response, @RequestParam(name = "diaryUpload", required = false) MultipartFile multiFile,
 			HttpSession session, HttpServletRequest request, @RequestParam(name = "writetext") String diary_content,
 			ModelAndView mv) {
 
 		MemberVO member = (MemberVO) session.getAttribute("loginMember");
 
-		System.out.println("인서트하러왔어요");
-		System.out.println("글 내용 봅시당" + diary_content);
-		int result = -1;
-		
-		
+
 			vo.setDiary_content(diary_content);
 			vo.setDiary_write(member.getUserNo());
 			vo.setUser_id(member.getUserId());
 			
 
 		System.out.println("vo가 문제지..?" + vo);
+			
+		
+			int result = -1;
+			int resultSeq = 0;
+			int diary_no = 0;
 
-		try {
-			result = dService.insertDiary(vo);
+			try {
+				if (multiFile != null && !multiFile.equals(""))
+					saveFile(multiFile, request);
+				String path = "\\lab\\resources\\diaryImg\\";
+				vo.setDiary_img_src(path+multiFile.getOriginalFilename());
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println("이미지 저장에 실패했습니다~");
+			}
+			
+			
+			try {
+			resultSeq = dService.getSequence();
+			diary_no = resultSeq;
+			vo.setDiary_no(diary_no);
+			System.out.println(vo);
+			
+			System.out.println("시퀀스 번호~ " + resultSeq);
+			
+			result = dService.writeDiary(vo);
 			System.out.println("글쓰기 성공 했나용?" + result);
+			
+			 int resultImg = dService.writeImg(vo);
+			 System.out.println(resultImg + " : 이거맞지~");
+			 
+			 
 		} catch (Exception e) {
 			e.printStackTrace();
 }
-		return String.valueOf(result);
+		return "Plant/Diary";
 	}
-	
-	
 
 	// 일기 수정
 	@RequestMapping(value = "/modifydiary")
@@ -230,12 +208,12 @@ public class PlantHomeController {
 
 	// 일기 삭제
 	@RequestMapping(value = "/deletediary.do")
-	public void deleteDiary(HttpServletResponse response, DiaryVO vo, @RequestParam(name = "diary_no") int diary_no) {
+	public void deleteDiary(HttpServletResponse response, HttpSession session, DiaryVO vo, @RequestParam(name = "diary_no") int diary_no) {
 		System.out.println("게시글 삭제 페이지 진입");
-		/*
-		 * MemberVO member = (MemberVO) session.getAttribute("loginMember");
-		 * vo.setUser_no(member.getUser_no());
-		 */
+		
+		MemberVO member = (MemberVO) session.getAttribute("loginMember");
+		vo.setDiary_write(member.getUserNo());
+
 
 		response.setContentType("text/html; charset=euc-kr");
 		PrintWriter out = null;
@@ -267,7 +245,7 @@ public class PlantHomeController {
 		System.out.println(model.containsAttribute("likeList"));
 		try {
 
-			 LikeVO lvo = new LikeVO();
+			LikeVO lvo = new LikeVO();
 
 			MemberVO member = (MemberVO) session.getAttribute("loginMember");
 			int user_no = member.getUserNo();
@@ -299,12 +277,12 @@ public class PlantHomeController {
 
 		System.out.println(mv.getModel());
 		System.out.println(model.containsAttribute("likeList"));
+		
 		LikeVO lvo = new LikeVO();
 		MemberVO member = (MemberVO) session.getAttribute("loginMember");
 
 		try {
-			// 로그인 전에 임시 테스트 코드입니다.
-			// TODO: session
+
 			int user_no = member.getUserNo(); // 로그인 전에 임시 테스트 코드입니다. // session.getAtt....
 			System.out.println("숫자: " + user_no);
 			System.out.println("숫자: " + diary_no);
@@ -312,7 +290,6 @@ public class PlantHomeController {
 			lvo.setUser_no(user_no);
 			lvo.setDiary_no(diary_no);
 
-			System.out.println(lvo.toString());
 
 			// likeCnt 함께 처리함.
 			result = dService.deleteLike(lvo);// dService.likeCnt(lvo); 포함
@@ -332,12 +309,9 @@ public class PlantHomeController {
 		int likecnt = 0;
 		LikeVO lvo = new LikeVO();
 		try {
-			System.out.println("11111숫자 like: " + user_no);
-			System.out.println("11111숫자 like2 diary: " + diary_no);
 			lvo.setUser_no(user_no);
 			lvo.setDiary_no(diary_no);
 			likecnt = dService.likeCnt(lvo);
-			System.out.println("11111좋아요 개수는 " + likecnt);
 		} catch (Exception e) {
 
 		}
@@ -354,12 +328,9 @@ public class PlantHomeController {
 		int result = -1;
 		System.out.println("댓글 페이지 진입 성공~");
 
-		
-		 MemberVO member = (MemberVO) session.getAttribute("loginMember");
-		 String user_id = member.getUserId();
-		 int writer = member.getUserNo();
-		
-
+		MemberVO member = (MemberVO) session.getAttribute("loginMember");
+		String user_id = member.getUserId();
+		int writer = member.getUserNo();
 
 		cvo.setDiary_no(diary_no);
 		cvo.setWriter(writer);
@@ -377,13 +348,12 @@ public class PlantHomeController {
 
 		return jsonOutput;
 
-
 	}
 
 	// 파일 저장
 	private void saveFile(MultipartFile report, HttpServletRequest request) {
 		String root = request.getSession().getServletContext().getRealPath("resources");
-		String savePath = root + "\\uploadFiles";
+		String savePath = root + "\\diaryImg";
 		File folder = new File(savePath);
 
 		if (!folder.exists()) {
@@ -410,7 +380,7 @@ public class PlantHomeController {
 	// 파일 삭제
 	private void removeFile(String board_file, HttpServletRequest request) {
 		String root = request.getSession().getServletContext().getRealPath("resources");
-		String savePath = root + "\\uploadFiles";
+		String savePath = root + "\\diaryImg";
 
 		String filePath = savePath + "\\" + board_file;
 

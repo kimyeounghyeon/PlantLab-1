@@ -91,7 +91,9 @@ public class DiaryDao {
 		
 	}
 
-
-
+	// 시퀀스 번호 알아오기
+	public int getSequence() {
+		return sqlSession.selectOne("Diary.getSequence");
+	}
 	
 }

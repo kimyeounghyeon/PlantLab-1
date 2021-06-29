@@ -40,20 +40,27 @@
 		select count(*) as like_cnt from like_tb where diary_no = #{diary_no} 
 	</select>
 
-	<!-- 임시 글 등록 -->
+
+	
+	<!-- 글 등록 -->
  	<insert id="writeDiary" parameterType="DiaryVO" flushCache="true" statementType="PREPARED">
- 		insert into diary_tb values(Diary_SEQ.nextVal, #{diary_write}, '임시글' , sysdate, default)
+ 		insert into diary_tb values(#{diary_no}, #{diary_write}, #{diary_content} , sysdate, default)
  	</insert>
  	
- 	<!-- 정말 글 등록 -->
- 	<update id="insertDiary" parameterType="DiaryVO" flushCache="true" statementType="PREPARED">
- 		update diary_tb set diary_content = #{diary_content} where diary_no = #{diary_no} and user_no = #{user_no}
+ 	<!-- 글 수정 -->
+ 	<update id="modifyDiary" parameterType="DiaryVO" flushCache="true" statementType="PREPARED">
+ 		update diary_tb set diary_content = #{diary_content} where diary_no = #{diary_no} and diary_write = #{user_no}
  	</update>
+ 	
+ 	<!-- 시퀀스 번호 알아오기 -->
+ 	<select id="getSequence" resultType="int">
+ 		   select Diary_SEQ.nextVal from dual
+ 	</select>
  	
  	
  	<!-- 이미지 등록 -->
  	<insert id="writeImg" parameterType="DiaryVO" flushCache="true" statementType="PREPARED">
- 		insert into Diary_Img_TB values(Diary_SEQ.currVal, img_SEQ.nextVal, #{diary_img_src})
+ 		insert into Diary_Img_TB values(#{diary_no}, img_SEQ.nextVal, #{diary_img_src})
  	</insert>
  	
  	<!-- 글 삭제 -->
