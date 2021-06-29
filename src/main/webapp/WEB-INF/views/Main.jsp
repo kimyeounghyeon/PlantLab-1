@@ -39,7 +39,35 @@
 	<jsp:include page="footer.jsp"></jsp:include>
 </body>
 <script>
-    function rain(){
+	var city = "Seoul";
+	var api = "https://api.openweathermap.org/data/2.5/weather?q="+city+"&appid=6eeeca0f172d44be534f5fbeb8d3d809";
+
+	
+	$.ajax({
+	    url: api,
+	    dataType: "json",
+	    type: "GET",
+	    async: "false",
+	    success: function(resp) {
+	        console.log(resp);
+	        console.log("현재온도 : "+ (resp.main.temp- 273.15) );
+	        console.log("현재습도 : "+ resp.main.humidity);
+	        console.log("날씨 : "+ resp.weather[0].main );
+	        console.log("상세날씨설명 : "+ resp.weather[0].description );
+	        console.log("날씨 이미지 : "+ resp.weather[0].icon );
+	        console.log("바람   : "+ resp.wind.speed );
+	        console.log("나라   : "+ resp.sys.country );
+	        console.log("도시이름  : "+ resp.name );
+	        console.log("구름  : "+ (resp.clouds.all) +"%" );      
+	        
+	        if(resp.weather[0].description == 'Clouds'){
+	        	rain();
+	        }
+	    }
+	});
+
+
+	function rain(){
         var image = document.getElementById('mainImg');
         
         image.onload = function() {
@@ -50,6 +78,7 @@
                 [8,55,2]
             ],100);
         }
+        
     }
 
     //rain();
