@@ -7,7 +7,7 @@
 			<!-- header top -->
 
 			<div id="mainTop">
-				<a href="#" class="top">cart</a> <a href="#" class="top">my</a> <a
+				<a href="#" class="top">cart</a> <a href=""${path}/mypage.do" class="top">my</a> <a
 					href="<%=request.getContextPath()%>/login" class="top">login</a>
 				<a href="<%=request.getContextPath()%>/join" class="top">join</a>
 			</div>
