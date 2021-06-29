@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.plant.lab.member.model.vo.MemberVO;
 
@@ -16,6 +17,12 @@ import com.plant.lab.member.model.vo.MemberVO;
 @Controller
 public class HomeController {
 
+	@RequestMapping(value= "/" , method=RequestMethod.GET )
+	public ModelAndView home(ModelAndView mv) {
+		mv.setViewName("Main");
+		return mv;
+	}
+	
 	@RequestMapping(value = "header", method = { RequestMethod.POST, RequestMethod.GET })
 	public String header() {
 		return "/";

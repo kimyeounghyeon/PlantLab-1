@@ -1,16 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <title>無以林 : 키우기쉬운 나무</title>
-    <link href="${path}/resources/css/ProductViewStyle.css" rel="stylesheet"/>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/jejumyeongjo.css"/>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/jejumyeongjo.css"/>
+    <link href="${path}/resources/css/header.css" rel="stylesheet"/>
+    <link href="${path}/resources/css/ProductViewStyle.css" rel="stylesheet"/>
+    
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
@@ -47,7 +50,7 @@
 	                        </tr>
 	                        <tr>
 	                            <td class="guide">배송비</td>
-	                            <td id="deliv">5000원</td>
+	                            <td id="deliv">5,000원</td>
 	                        </tr>
 	                        <tr>
 	                            <td class="guide">판매가</td>
@@ -138,90 +141,78 @@
                                 <div class="starDetail">
                                     <h3>리뷰 총 점수</h3>
                                     <div class="starContent">
-                                        <div class="graph">
-                                            <span class="barNum">5점</span><span class="bar" style="width: 70%;"></span>
-                                        </div>
-                                        <div class="graph">
-                                            <span class="barNum">4점</span><span class="bar" style="width: 30%;"></span>
-                                        </div>
-                                        <div class="graph">
-                                            <span class="barNum">3점</span><span class="bar" style="width: 0%;"></span>
-                                        </div>
-                                        <div class="graph">
-                                            <span class="barNum">2점</span><span class="bar" style="width: 0%;"></span>
-                                        </div>
-                                        <div class="graph">
-                                            <span class="barNum">1점</span><span class="bar" style="width: 0%;"></span>
-                                        </div>
+                                    	<c:if test="${not empty percent }">
+                                    	<c:forEach var="vo" items="${percent}" varStatus="status">
+	                                        <div class="graph">
+	                                            <span class="barNum">${fn:length(percent)-status.index}점</span><span class="bar" style="width: ${vo}%;"></span>
+	                                        </div>
+                                        </c:forEach>
+                                        </c:if>
+                                        
+                                        <c:if test="${empty percent }">
+                                        	<div class="graph">
+	                                            <span class="barNum">5점</span><span class="bar" style="width: 0%;"></span>
+	                                        </div>
+	                                        <div class="graph">
+	                                            <span class="barNum">4점</span><span class="bar" style="width: 0%;"></span>
+	                                        </div>
+	                                        <div class="graph">
+	                                            <span class="barNum">3점</span><span class="bar" style="width: 0%;"></span>
+	                                        </div>
+	                                        <div class="graph">
+	                                            <span class="barNum">2점</span><span class="bar" style="width: 0%;"></span>
+	                                        </div>
+	                                        <div class="graph">
+	                                            <span class="barNum">1점</span><span class="bar" style="width: 0%;"></span>
+	                                        </div>
+                                        </c:if>
                                     </div>
                                 </div>
                             </div>
                             
                             <!-- 리뷰표시 -->
                             <div class="reviewContent">
-                                <h2>리뷰 2개</h2>
+                                <h2>리뷰  ${fn:length(reviewList)}개</h2>
                                 <div class="review">
                                     <table>
                                         <!-- 한개의 리뷰 시작 -->
-                                        <tr class="accordian">
-                                            <td class="reviewTitle">
-                                                <div class="title">리뷰 제목2222222</div>
-                                                <div class="writer">작성자</div>
-                                                <div class="star userStar">★★★★★</div>
-                                                <div class="star date">2021-01-01</div>
-                                            </td>
-                                        </tr>
-                                        <tr class="panel">
-                                            <td>
-                                                <div class="reviewImg">
-                                                    이미지
-                                                </div>
-                                                <div class="reviewCon">
-                                                    <p>
-                                                        국무총리는 대통령을 보좌하며, 행정에 관하여 대통령의 명을 받아 행정각부를 통할한다. 국회의 회의는 공개한다. 다만, 출석의원 과반수의 찬성이 있거나 의장이 국가의 안전보장을 위하여 필요하다고 인정할 때에는 공개하지 아니할 수 있다.
-
-                                                        농업생산성의 제고와 농지의 합리적인 이용을 위하거나 불가피한 사정으로 발생하는 농지의 임대차와 위탁경영은 법률이 정하는 바에 의하여 인정된다.
-                                                        
-                                                        의원을 제명하려면 국회재적의원 3분의 2 이상의 찬성이 있어야 한다. 대통령의 임기는 5년으로 하며, 중임할 수 없다. 국민의 모든 자유와 권리는 국가안전보장·질서유지 또는 공공복리를 위하여 필요한 경우에 한하여 법률로써 제한할 수 있으며, 제한하는 경우에도 자유와 권리의 본질적인 내용을 침해할 수 없다.
-                                                        
-                                                        재산권의 행사는 공공복리에 적합하도록 하여야 한다. 위원은 정당에 가입하거나 정치에 관여할 수 없다. 국회의원은 현행범인인 경우를 제외하고는 회기중 국회의 동의없이 체포 또는 구금되지 아니한다.
-                                                    </p>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr class="space2"><td></td></tr>
-                                        <!-- 한개의 리뷰 끝 -->
-
-                                         <!-- 한개의 리뷰 시작 -->
-                                         <tr class="accordian">
-                                            <td class="reviewTitle">
-                                                <div class="title">리뷰 제목2222222</div>
-                                                <div class="writer">작성자</div>
-                                                <div class="star userStar">★★★★★</div>
-                                                <div class="star date">2021-01-01</div>
-                                            </td>
-                                        </tr>
-                                        <tr class="panel">
-                                            <td>
-                                                <div class="reviewImg">
-                                                    이미지
-                                                </div>
-                                                <div class="reviewCon">
-                                                    <p>
-                                                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-                                                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-                                                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-                                                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-                                                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-                                                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-                                                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-                                                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-                                                    </p>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr class="space2"><td></td></tr>
-                                        <!-- 한개의 리뷰 끝 -->
+                                        <c:if test="${empty reviewList}">
+                                        	<tr class="accordian">
+                                            	<td class="reviewTitle">
+                                               		<div><h3>아직 작성된 리뷰가 없습니다!</h3></div>
+                                           		</td>
+                                       		</tr>
+                                        </c:if>
+                                        <c:if test="${not empty reviewList}">
+                                        	<c:forEach var="vo" items="${reviewList}" varStatus="status">
+                                        		 <tr class="accordian">
+		                                            	<td class="reviewTitle">
+		                                                <div class="title">${vo.rv_title}</div>
+		                                                <div class="writer">
+		                                                	${vo.user_name}
+		                                                	<input type="hidden" name="user_no2" value="${vo.user_no}">
+		                                                </div>
+		                                                <div class="star userStar">
+		                                                	<c:forEach var="i" begin="1" end="${vo.rv_star}">
+		                                                	★
+		                                                	</c:forEach>
+														</div>
+		                                                <div class="star date">${vo.rv_date}</div>
+	                                            	</td>
+                                        		</tr>
+		                                        <tr class="panel">
+		                                            <td>
+		                                                <div class="reviewImg" style="max-width:800px;position:relative">
+		                                                </div>
+		                                                <div class="reviewCon">
+		                                                	<p>${vo.rv_content}</p>
+		                                                </div>
+		                                            </td>
+		                                        </tr>
+		                                        <tr class="space2"><td></td></tr>
+		                                        <!-- 한개의 리뷰 끝 -->
+                                        	</c:forEach>
+                                        </c:if>
                                     </table>
                                 </div>
                             </div>
@@ -243,13 +234,13 @@
 	ratings = {RatingScore: pro_totalStar}
 	totalRating = 5;
     table = document.querySelector('.RatingStar');
-
+	
     function rateIt() {
         for (rating in ratings) {
             ratingPercentage = ratings[rating] / totalRating * 100;
             ratingRounded = Math.round(ratingPercentage / 10) * 10 + '%';
-            star = table.querySelector('<c:out value="${rating}"/> .inner-star');
-            numberRating = table.querySelector('<c:out value="${rating}"/> .numberRating');
+            star = table.querySelector('.inner-star');
+            numberRating = table.querySelector('.numberRating');
             star.style.width = ratingRounded;
             numberRating.innerText = ratings[rating];
         }
@@ -340,10 +331,48 @@
         $('.panel').hide();
 
         $('.accordian').on('click',function(e){
-            e.preventDefault();
+            //e.preventDefault();
             $(this).next().fadeToggle(500);
+            
+            var pro_no = $('#pro_no').val();
+            var user_no = $(this).find('input').val();
+            var reviewImg = $(this).next().find('.reviewImg');
+            
+            $.ajax({
+				url:"imgSearch.do",
+				data : {pro_no : pro_no,
+						user_no : user_no},
+				type:"post",
+				dataType : "json",
+				success:function(data){
+					reviewImg.empty("");
+					var html=""
+					if(data.length<=1){
+						html += "<img src='"+data+"'/>";
+						
+					}else{
+						$.each(data,function(index,e){
+							html += "<img src='"+e+"' class=\"mySlides\"/>";
+							
+						});
+						
+						html += "<a class='w3-btn-floating' style='position:absolute; top:45%; left:0;' onclick='plusDivs(-1)'>❮ </a>";
+                        html += "<a class='w3-btn-floating' style='position:absolute;top:45%;right:0;' onclick='plusDivs(1)'>❯ </a>";
+					}
+					
+					reviewImg.append(html);
+					
+					showDivs(slideIndex);
+				},
+				error : function(request, status, errorData){ 
+					alert("error code : " + request.status + "\n"
+   						 + "message : " + request.responseText + "\n"
+   						 + "error : " + errorData); 
+				}
+			});
         });
         
+        //장바구니
         var re = 0;
         function modal(re) {
         	if(re == 1){ //카트에 상품이 없을 경우
@@ -393,7 +422,7 @@
         	}else{
         		//카트에 상품이 있는지 조회하는 ajax
             	$.ajax({
-    				url:"cartSearch",
+    				url:"cartSearch.do",
     				data : {pro_no : pro_no},
     				type:"post",
     				success:function(result){
@@ -404,7 +433,7 @@
     						var numVal = num.text();
     						
     						$.ajax({
-    							url:"cartInsert",
+    							url:"cartInsert.do",
     							data : {pro_no : pro_no,
     									pro_cnt : numVal},
     		    				type:"post",
@@ -432,5 +461,24 @@
         	}
         }); 
     });
+</script>
+<script>
+var slideIndex = 1;
+
+
+function plusDivs(n) {
+    showDivs(slideIndex += n);
+};
+
+function showDivs(n) {
+    var i;
+    var x = document.getElementsByClassName("mySlides");
+    if (n > x.length) {slideIndex = 1}
+    if (n < 1) {slideIndex = x.length} ;
+    for (i = 0; i < x.length; i++) {
+        x[i].style.display = "none";
+    }
+    x[slideIndex-1].style.display = "block";
+};
 </script>
 </html>

@@ -10,6 +10,8 @@ public interface OnedayService {
 	
     public OnedayVo onedayselect(OnedayVo oneVo);
 
+    public List<OnedayVo> onedayMy(OnedayVo oneVo );
+    
     public int onedayreserve(OnedayVo oneVo );
     
     public int onedaycancel(OnedayVo oneVo);

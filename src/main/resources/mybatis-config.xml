@@ -15,6 +15,7 @@
 		<typeAlias alias="Event_tb"    type="com.plant.lab.event.model.vo.Event_tb" />
 		<typeAlias alias="Product"    type="com.plant.lab.product.model.vo.Product" />
 		<typeAlias alias="ProductCon" type="com.plant.lab.product.model.vo.ProductContnet" />
+		<typeAlias alias="Review" 	  type="com.plant.lab.review.model.vo.Review" />
 		<typeAlias alias="Cart"  	  type="com.plant.lab.cart.model.vo.Cart" />
 		<typeAlias alias="Order"	  type="com.plant.lab.order.model.vo.Order" />
 		<typeAlias alias="OrderDetail" type="com.plant.lab.order.model.vo.Order"/>
@@ -32,6 +33,7 @@
 		<mapper resource="mapper/monthly-mapper.xml" />
 		<mapper resource="mapper/product-mapper.xml" />
 		<mapper resource="mapper/productContent-mapper.xml" />
+		<mapper resource="mapper/review-mapper.xml" />
 		<mapper resource="mapper/cart-mapper.xml" />
 		<mapper resource="mapper/order-mapper.xml"/>
 		<mapper resource="mapper/orderDetail-mapper.xml"/>

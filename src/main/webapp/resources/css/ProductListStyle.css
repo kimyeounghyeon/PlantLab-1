@@ -12,7 +12,7 @@ a{
  
  #content{
     width: 1250px;
-    height: 1900px;
+    overflow:hidden;
     margin: auto;
     clear: both;
 }

@@ -1,38 +1,61 @@
-@charset "UTF-8";*{
-   font-family: 'Jeju Myeongjo';
-   font-size: 13pt;
-   color : #1e1e1e;
-   line-height: 30px;
-   
-   }
+@charset "UTF-8"; 
 
-#oneAdBtn{
-	float:right;
-	font-size:10pt;
-	display:block;
-	width:120px;
-	height: 50px;
-	cursor: pointer;
-	margin-right: 40px;
+* {
+	font-family: 'Jeju Myeongjo';
+	font-size: 13pt;
+	color: #1e1e1e;
+	line-height: 30px;
 }
-   
-   #oneArBtn{
-   	float:right;
-	font-size:10pt;
-	display:block;
-	width:120px;
+
+#oneAdBtn {
+	float: right;
+	font-size: 10pt;
+	display: block;
+	width: 120px;
 	height: 50px;
 	cursor: pointer;
 	margin-right: 40px;
-   }
-   
-.dback{
+	margin-bottom: 15px;
+	border: 1px solid #ccc;
+	color: black;
+	background-color: #ccc;
+	font-size: 15px;
+	font-weight: bold;
+}
+
+#oneArBtn {
+	float: right;
+	font-size: 10pt;
+	display: block;
+	width: 120px;
+	height: 50px;
+	cursor: pointer;
+	margin-right: 40px;
+	margin-bottom: 15px;
+	border: 1px solid #ccc;
+	color: black;
+	background-color: #ccc;
+	font-size: 15px;
+	font-weight: bold;
+}
+
+#oneAdBtn:hover {
+	background-color: #625b54;
+	color: white;
+}
+
+#oneArBtn:hover {
+	background-color: #625b54;
+	color: white;
+}
+
+.dback {
 	clear: both;
-	
-}   
+}
+
 .bgdiv {
-	clear : both;
-	width : 1250px;
+	clear: both;
+	width: 1250px;
 	margin: auto;
 }
 
@@ -44,57 +67,102 @@
 	height: 130px;
 }
 
-
 .onediv {
-	float : left;
-	width : 400px;
+	float: left;
+	width: 400px;
 	margin-top: 20px;
 	margin-bottom: 200px;
-	
 }
 
 .onecontent {
-	clear : both;
-	width : 350px;
-	height : 500px;
-	border : 1px solid gray;
+	clear: both;
+	width: 350px;
+	height: 500px;
+	border: 1px solid gray;
 	border-collapse: collapse;
-	float : left;
-	margin-left : 60px;
+	float: left;
+	margin-left: 60px;
 }
 
 .onecontent td {
-	padding : 8px;
+	padding: 8px;
 	text-align: center;
 }
 
 .on {
-	border : 1px solid gray;
-	padding : 8px;
+	border: 1px solid gray;
+	padding: 8px;
 }
 
 .oneimg {
-	width : 100%;
-	height : 400px;
+	width: 100%;
+	height: 400px;
 }
 
-
 .odtr {
-	width : 100%;
-	height : 35px;
-	padding : 5px;
+	width: 100%;
+	height: 35px;
+	padding: 5px;
 }
 
 .omgtr {
-	width : 100%;
-	height : 400px;
-	margin-top:auto;
-	
+	width: 100%;
+	height: 400px;
+	margin-top: auto;
 }
 
 .contextone {
-	width : 100%;
-	height : 100px;
-	padding : 0;
+	width: 100%;
+	height: 100px;
+	padding: 0;
 }
 
+<!--CHECK BOX-->
+.checkContain {
+	display: block;
+	width: 94%;
+	height: 35px;
+	margin: auto;
+	cursor: pointer;
+	font-size: 18px;
+}
+
+.checkContain span {
+	margin-bottom: -4px;
+}
+
+.checkContain input {
+	opacity: 0;
+}
+
+.checkmark {
+	display: inline-block;
+	border: solid 1px #ADBA85;
+	border-radius: 50px;
+	height: 20px;
+	width: 20px;
+	margin-left: 40px;
+}
+
+.checkContain:hover input ~ .checkmark, .checkContain input:checked ~
+	.checkmark {
+	background-color: #ADBA85;
+}
+
+.checkmark:after {
+	content: "";
+	display: none;
+}
+
+.checkContain input:checked ~ .checkmark:after {
+	display: block;
+}
+
+.checkContain .checkmark:after {
+	width: 10px;
+	height: 10px;
+	border: solid white;
+	border-width: 0 3px 3px 0;
+	margin-left: 3px;
+	transform: rotate(45deg);
+}

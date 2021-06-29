@@ -27,7 +27,7 @@
 <h5 class="subtitle">AD Class Update</h5>
 <form action="${path}/onedayUpdateRs"  enctype="multipart/form-data" method="post"> 
 <br/>
-<input type="text"  name="oneno"  class="oneinsert"  value="${one.oneday_no}"/>
+<input type="hidden"  name="oneno"  class="oneinsert"  value="${one.oneday_no}"/>
 <span class="inserttag">클래스명</span>
 <br/> 
 
@@ -36,10 +36,10 @@
 <br/>
 <span class="inserttag">클래스 썸네일</span>
 <br/>
+<input type="file"  id="updateInput"  name="oneinsertS"  />
 
 <div id="some" style="border: 1px solid black; display: inline-block;" >
-<input type="file"    name="oneinsertS"    style="display: inline-block;"/>
-${one.oneday_img}
+<img src= "${pageContext.request.contextPath}/resources/img/${one.oneday_img }" alt="img" id="some_IMG">
 </div>
 
 <br/>
@@ -57,7 +57,7 @@ ${one.oneday_img}
 <br/>
 
 
-<input type="number" class="oneinsert"    name="oneinsertM"  value="${one.oneday_maxPerson}"/>
+<input type="number" class="oneinsert"    name="oneinsertM"  value=  "${one.oneday_maxPerson}"/>
 <br/>
 
 <span class="inserttag" >클래스 장소</span>

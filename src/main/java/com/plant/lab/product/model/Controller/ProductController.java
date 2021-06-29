@@ -5,7 +5,9 @@ import java.net.CookieStore;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
@@ -32,6 +34,7 @@ import com.plant.lab.product.model.service.ProductContentService;
 import com.plant.lab.product.model.service.ProductService;
 import com.plant.lab.product.model.vo.Product;
 import com.plant.lab.product.model.vo.ProductContnet;
+import com.plant.lab.review.model.service.ReviewService;
 
 @Controller
 public class ProductController {
@@ -39,6 +42,9 @@ public class ProductController {
 	private ProductService proService;
 	@Autowired
 	private ProductContentService proConService;
+	@Autowired
+	private ReviewService reviewService;
+	
 	
 	private static final Logger logger = LoggerFactory.getLogger(ProductController.class);
 	public static final int LIMIT = 12;
@@ -96,24 +102,74 @@ public class ProductController {
 			HttpSession session = req.getSession();
 			MemberVO member = (MemberVO) session.getAttribute("loginMember");
 			
+			//로그인 확인
 			if(member!=null) {
 				mv.addObject("user",member.getUserNo());				
 			}else {
 				mv.addObject("user",0);
 			}
 			
+			//최근본 상품 등록
 			List<Product> viewPro = (ArrayList<Product>)(session.getAttribute("viewPro"));
 			
 			if(session.getAttribute("viewPro") == null) {
 				viewPro = new ArrayList<Product>();				
 			}
 			
-			viewPro.add(proService.selectOne(pro_no));
-			session.setAttribute("viewPro", viewPro);
+			int searchRe = 0;
 			
-			logger.info("세션확인:::"+(ArrayList<Product>)session.getAttribute("viewPro"));
+			if(viewPro.size() != 0) { //최근본 상품 목록이 있을경우
+				Collections.reverse(viewPro);
+				
+				for(int i=0; i<viewPro.size(); i++) { //이미 등록된 경우
+					if(viewPro.get(i).getPro_no() == pro_no) {
+						logger.info("이미있음");
+						viewPro.remove(i);
+						viewPro.add(proService.selectOne(pro_no));
+						searchRe = 1;
+						break;
+					}
+				}
+				
+				if(searchRe == 0) { //아니면 새로 추가
+					logger.info("새로추가");
+					viewPro.add(proService.selectOne(pro_no));
+				}
+			}else { //처음일 경우
+				viewPro.add(proService.selectOne(pro_no));
+			}
 			
+			
+			session.setAttribute("viewPro", viewPro); 
+			Collections.reverse(viewPro);
+			
+			
+			//리뷰 퍼센트 계산
+			int count = reviewService.listCount(pro_no);
+			logger.info("개수확인:::"+count);
+			
+			List<Double> percent = new ArrayList<Double>();
+			HashMap<String, Integer> map = new HashMap<String, Integer>();
+			
+			map.put("pro_no", pro_no);
+			map.put("star", 0);
+			
+			for(int i=5; i>=1; i--) {
+				map.remove("star");
+				map.put("star", i);
+				int test = reviewService.starCount(map);
+				logger.info("test:::"+test);
+				if(test == 0) {
+					percent.add(0.0);
+				}else {
+					percent.add(reviewService.starCount(map) / (count*1.0) * 100);					
+				}
+			}
+			
+			mv.addObject("viewPro",viewPro);
+			mv.addObject("percent",percent);
 			mv.addObject("productCon",proConService.searchList(pro_no));
+			mv.addObject("reviewList",reviewService.searchList(pro_no));
 			mv.addObject("product",proService.selectOne(pro_no));
 			mv.setViewName("Product/ProductView");
 		}catch (Exception e) {
@@ -122,18 +178,5 @@ public class ProductController {
 		}
 		
 		return mv;
-	}
-	
-//최근본 상품 목록 쿠키 등록
-	public void proView(@CookieValue(name = "proView") String cookie, 
-			@RequestParam(name = "proNo") int pro_no,
-			HttpServletResponse response,Model model) throws ClassNotFoundException, SQLException{
-		
-		if (!(cookie.contains(String.valueOf(pro_no)))) {
-			cookie += "/" + pro_no;
-		}
-		
-		System.out.println("쿠키확인~~~~~~:"+cookie);
-		response.addCookie(new Cookie("proView", cookie));
 	}
 }

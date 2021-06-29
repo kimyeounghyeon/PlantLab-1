@@ -111,6 +111,17 @@ public class DiaryServiceImpl implements DiaryService {
 	}
 	
 	@Override
+	public int insertDiary(DiaryVO vo) {
+		int result = -1;
+		try {
+			result = dDao.insertDiary(vo);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	@Override
 	public int deleteDiary(DiaryVO vo) {
 		int result = -2;
 		try {
@@ -133,16 +144,7 @@ public class DiaryServiceImpl implements DiaryService {
 		return list;
 	}
 
-	@Override
-	public List<CommentVO> currentComment(int comm_no) {
-		List<CommentVO> list = null;
-		try {
-			list = dDao.currentComment(comm_no);
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-		return list;
-	}
+
 	
 	@Override
 	public int insertComment(CommentVO cvo) {
@@ -154,10 +156,6 @@ public class DiaryServiceImpl implements DiaryService {
 		}
 		return result;
 	}
-
-
-
-
 
 
 }

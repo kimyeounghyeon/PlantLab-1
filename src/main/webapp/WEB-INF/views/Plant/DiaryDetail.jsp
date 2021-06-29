@@ -165,13 +165,16 @@
 					comm_comment : $(".writecomment").val(),
  					comm_no : $(".comm_no").val()
 					},
-/* 			dataType : "json",
- */			success : function(data) {
+ 			dataType : "json",
+		success : function(data) {
 /* 				var comment = data.comment;
  */
 				console.log("댓글 번호~" + $(".comm_no").val());
-/* 				$.each(comment, function(i, item){
- */				$(".dtinsertcommtr").after("<tr class='dttr dtlistcommtr'><td class='commwriter'>"+data.writer+"</td><td class='dtlistcomm'>"+data.comm_content+"<button type='button' class='dtbtn commdelete'> &#10005 </button><button type='button' class='dtbtn commmodify'>수정</button></td></tr>");
+				console.log(data);
+				data = data[0];
+				console.log("data" + data);
+ 				//$.each(comment, function(i, item){
+				$(".dtinsertcommtr").after("<tr class='dttr dtlistcommtr'><td class='commwriter'>"+data.user_id+"</td><td class='dtlistcomm'>"+data.comm_comment+"<button type='button' class='dtbtn commdelete'> &#10005 </button><button type='button' class='dtbtn commmodify'>수정</button></td></tr>");
 
 				/* }); */
 			},

@@ -7,3 +7,129 @@
 	padding-top: 20px;
 	height: 130px;
 }
+
+* {
+	font-family: 'Jeju Myeongjo';
+	font-size: 13pt;
+	color: #1e1e1e;
+	line-height: 30px;
+}
+
+#fullmain {
+	text-align: center;
+	width: 1280px;
+	margin: 0 auto;
+	padding: 0;
+	clear: both;
+}
+
+#main {
+	display: inline-block;
+	text-align: center;
+	width: 1250px;
+	margin: 0 auto;
+	padding: 0;
+	vertical-align: middle;
+}
+#myOneTabel {
+	clear:both;
+	margin: auto;
+	border: 1px solid black;
+	border-collapse: collapse;
+}
+
+
+.oneimg{
+	width: 100%;
+	height: 100%;
+}
+
+.oTD {
+	width: 600px;
+	height: 80px;
+}
+
+#myImg {
+	width: 300px;
+	height: 150px;
+	padding: 0;
+}
+
+.oTD, #myImg {
+	border: 1px solid black;
+	border-collapse: collapse;
+}
+
+#oneCancel {
+	float: right;
+	font-size: 10pt;
+ 	display: block;
+	width: 200px;
+	height: 50px;
+	cursor: pointer;
+	margin-right: 170px;
+	margin-bottom: 10px;
+	border: 1px solid #ccc;
+	color: black;
+	background-color: #ccc;
+	font-size: 15px;
+	font-weight: bold;
+}
+#oneCancel:hover {
+	background-color: #625b54;
+	color: white;
+}
+
+
+ 
+<!--CHECK BOX-->
+.checkContain {
+/* 	display: block; */
+	display:inline-block;
+	width: 94%;
+	height: 35px;
+	margin: auto;
+	cursor: pointer;
+	font-size: 18px;
+}
+
+.checkContain span {
+	margin-bottom: -4px;
+}
+
+.checkContain input {
+	opacity: 0;
+}
+
+.checkmark {
+	display: inline-block;
+	border: solid 1px #ADBA85;
+	border-radius: 50px;
+	height: 20px;
+	width: 20px;
+	float: left;
+	margin-left: 170px;
+}
+
+.checkContain:hover input ~ .checkmark, .checkContain input:checked ~
+	.checkmark {
+	background-color: #ADBA85;
+}
+
+.checkmark:after {
+	content: "";
+	display: none;
+}
+
+.checkContain input:checked ~ .checkmark:after {
+	display: block;
+}
+
+.checkContain .checkmark:after {
+	width: 10px;
+	height: 10px;
+	border: solid white;
+	border-width: 0 3px 3px 0;
+	margin-left: 3px;
+	transform: rotate(45deg);
+}

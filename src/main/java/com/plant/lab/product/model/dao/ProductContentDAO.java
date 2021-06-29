@@ -18,4 +18,6 @@ public class ProductContentDAO {
 	public List<ProductContnet> searchList(int pro_no) {
 		return sqlSession.selectList("ProductCon.selectList",pro_no);
 	}
+	
+	//상품 이미지 가져오기
 }

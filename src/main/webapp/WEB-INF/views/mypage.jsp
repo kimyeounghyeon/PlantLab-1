@@ -12,10 +12,12 @@
 <title>Insert title here</title>
 
 </head>
-<body><jsp:include page="header.jsp"></jsp:include>
+<body>
 <jsp:include page="mypagemenu.jsp"></jsp:include>
 <c:if test="${!empty loginMember}">
 		<h3>${loginMember.userName}님, 안녕하세요.</h3>
 		</c:if>
+		
+		<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>

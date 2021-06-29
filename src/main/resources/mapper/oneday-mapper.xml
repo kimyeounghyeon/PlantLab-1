@@ -12,12 +12,17 @@ SELECT * FROM onedayclass_tb   <![CDATA[ WHERE SYSDATE < Oneday_End]]>
 SELECT * FROM onedayclass_tb  WHERE Oneday_No=#{oneday_no}
 </select>
 
+<select id="onedayMyselect" parameterType="OnedayVo" resultType="OnedayVo">   <!--예약한 클래스 보기  (회원, 관리자)-->
+<!-- SELECT * FROM onedayclass_tb  WHERE  USER_NO=#{user_no} -->
+SELECT * FROM ONEDAYCLASS_TB c right join ONEDAYCLASSRS_TB r on c.oneday_no = r.oneday_no WHERE  USER_NO=#{user_no}
+</select>
+
 <insert id="onedayreserve" parameterType="OnedayVo"  >    <!-- 클래스 예약하기 -->
-insert into onedayclassrs_tb VALUES (OnedayRs_SEQ.nextval ,#{oneday_no} ,#{user_no} ,#{oneday_request})
+insert into onedayclassrs_tb (RESERV_NO , ONEDAY_NO , USER_NO , ONEDAY_REQUEST ) VALUES (OnedayRs_SEQ.nextval ,#{oneday_no} ,#{user_no} ,#{oneday_request}  )
 </insert>
 
 <delete id="onedaycancel" parameterType="OnedayVo">    <!-- 클래스 예약 취소 -->
-DELETE FROM ONEDAYCLASSRS_TB WHERE Oneday_No=#{oneday_no} , USER_NO=#{user_no}
+<![CDATA[ DELETE FROM ONEDAYCLASSRS_TB   WHERE Oneday_No=#{oneday_no} and USER_NO=#{user_no} and SYSDATE > RESERV_DATE]]> 
 </delete>
 
 

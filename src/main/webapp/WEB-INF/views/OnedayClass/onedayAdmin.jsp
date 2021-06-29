@@ -24,9 +24,12 @@
 			<c:forEach var="o" items="${one}" varStatus="status">
 
 				<div class="onediv">
-					<input type="checkbox" name="test_check" value="${o.oneday_no }" />
+					<%-- <input type="checkbox" name="test_check" value="${o.oneday_no }" /> --%>
+					  <label class="checkContain">
+	                                            <input type="checkbox" name="test_check" value="${o.oneday_no }">
+	                                            <span class="checkmark"></span>
+	                                        </label>
 
-				<!-- <form action="${path}/onedayUpdate"> -->
 					<a href="${path}/onedayupdate?onedayNo=${o.oneday_no }">
 					<table class="onecontent">
 							<tr class="on omgtr">
@@ -61,10 +64,10 @@
 			$("#oneArBtn").click(function() {
 				var checkArr = []; // 배열 초기화
 				$("input[name='test_check']:checked").each(function(i) {
-					checkArr.push($(this).val()); // 체크된 것만 값을 뽑아서 배열에 push
-					console.log(checkArr);   //check box 값 알기
+					checkArr.push($(this).val());						 // 체크된 것만 값을 뽑아서 배열에 push
+					console.log(checkArr);   							 //check box 값 알기
 				});
-				var obj = new Object(); //check box  type 알기
+				var obj = new Object(); 								 //check box  type 알기
 				ch = Object.prototype.toString.call(checkArr);
 				console.log(ch);
 				var name = $("input[name=test_check]").val(); 
@@ -90,7 +93,7 @@
  /* 												error : function(request, status, error) {
 					 alert("code = " + request.status
 					 + " message = " + request.responseText
-					 + " error = " + error); //  error 이유를 알 수 있는 코드  
+					 + " error = " + error); 								//  error 이유를 알 수 있는 코드  
 					 }  */
 					 
 
@@ -98,34 +101,7 @@
 				});
 
 			});
-			
-/* 	$(".onecontent").click(function() {
-				var onedayno = "";
-				onedayno = $("input[name='onedayNo']").val();
-				console.log(onedayno)
-				var obj = new Object(); //check box  type 알기
-				ch = Object.prototype.toString.call(onedayno);
-				console.log(ch);
 
-				var allData = { 'onedayNo' :  onedayno};
-				
-				$.ajax({
-					url : "${path}/onedayupdate",
-					type : "GET",
-					data : allData,
-				success : function(data) {
-						console.log('return onedayNo value는  : ' + data);
-						location.replace('${path}/onedayUpdate');
-				 		
-					},
-				error : function(request, status, error) {
-						 alert("code = " + request.status
-					 + " message = " + request.responseText
-						 + " error = " + error); //  error 이유를 알 수 있는 코드  
-						 }  
-					
-		});
-	}) */
 
 		});
 	</script>

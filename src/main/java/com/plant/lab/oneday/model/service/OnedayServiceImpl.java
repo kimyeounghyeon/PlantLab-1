@@ -21,10 +21,7 @@ private OnedayDao oDao;
 	public OnedayVo onedayselect(OnedayVo oneVo) {  //������Ŭ����  �� ����
 		return oDao.onedayselect(oneVo);
 	}
-//	@Override
-//	public int onedayreserve(int user_no , int oneday_no) {  //������ Ŭ����  ����
-//		return oDao.onedayreserve(user_no, oneday_no);
-//	}
+
 	
 	@Override
 	public int onedayreserve(OnedayVo oneVo) {
@@ -46,6 +43,10 @@ private OnedayDao oDao;
 	@Override
 	public int onedaydelete(OnedayVo oneVo) {   //������ Ŭ����   ����
 		return oDao.onedaydelete(oneVo);
+	}
+	@Override
+	public List<OnedayVo> onedayMy(OnedayVo oneVo) {
+		return oDao.onedayMy(oneVo);
 	}
 
 	

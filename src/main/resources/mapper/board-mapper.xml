@@ -37,18 +37,23 @@
 	
 	<!-- 좋아요 갯수 -->
   	<select id="likeCnt" parameterType="LikeVO" resultType="int">
-		select count(*) as like_cnt from like_tb where diary_no = #{diary_no}
+		select count(*) as like_cnt from like_tb where diary_no = #{diary_no} 
 	</select>
 
-	<!-- 글 등록 -->
+	<!-- 임시 글 등록 -->
  	<insert id="writeDiary" parameterType="DiaryVO" flushCache="true" statementType="PREPARED">
- 		insert into diary_tb values(Diary_SEQ.nextVal, #{diary_write}, #{diary_content}, sysdate, default)
+ 		insert into diary_tb values(Diary_SEQ.nextVal, #{diary_write}, '임시글' , sysdate, default)
  	</insert>
+ 	
+ 	<!-- 정말 글 등록 -->
+ 	<update id="insertDiary" parameterType="DiaryVO" flushCache="true" statementType="PREPARED">
+ 		update diary_tb set diary_content = #{diary_content} where diary_no = #{diary_no} and user_no = #{user_no}
+ 	</update>
  	
  	
  	<!-- 이미지 등록 -->
  	<insert id="writeImg" parameterType="DiaryVO" flushCache="true" statementType="PREPARED">
- 		insert into Diary_Img_TB values(Diary_SEQ.currentVal, img_SEQ.nextVal, #{diary_img_src})
+ 		insert into Diary_Img_TB values(Diary_SEQ.currVal, img_SEQ.nextVal, #{diary_img_src})
  	</insert>
  	
  	<!-- 글 삭제 -->
