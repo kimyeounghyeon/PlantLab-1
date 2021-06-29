@@ -31,14 +31,16 @@
                     <h3>주문상세내역</h3>
                     <table class="orderList">
                     	<c:if test="${not empty oneRsVo}">
+                    		<input type="hidden" name="rsCheck" value="rs">
                     		<tr>
 	                            <td class="proImg" rowspan="2">
-	                                <img src="${pageContext.request.contextPath}/resources/img/${onedayImg}">
+	                                <img src="${pageContext.request.contextPath}/resources/img/${oneRsVo.oneday_img}">
 	                            </td>
 	                            <td class="space" rowspan="2"></td>
 	                            <td class="proName">
 	                                <p>${oneRsVo.oneday_title}</p>
-	                                <input type="hidden" name="pro_no" value="${oneRsVo.oneday_no}">
+	                                <input type="hidden" name="oneday_no" value="${oneRsVo.oneday_no}">
+	                                <input type="hidden" name="oneday_request" value="${oneRsVo.oneday_request}">
 	                            </td>
 	                        </tr>
 	                        <tr>
@@ -50,7 +52,9 @@
 	                        </tr>
                     	</c:if>
                     	
-                    	<c:if test="${not empty cartList }">
+                    	
+                    	<c:if test="${not empty cartList and empty oneRsVo}">
+                    	<input type="hidden" name="rsCheck" value="ca">
                     	<c:forEach  var="vo" items="${cartList}" varStatus="status">
                     		 <tr>
 	                            <td class="proImg" rowspan="2">
@@ -73,7 +77,8 @@
                     	</c:forEach>
                     	</c:if>
                     	
-                    	<c:if test="${cartList eq null}">
+                    	<c:if test="${cartList eq null and empty oneRsVo}">
+                    	<input type="hidden" name="rsCheck" value="ca">
                     		<tr>
 	                            <td class="proImg" rowspan="2">
 	                                <img src="${proList.pro_image}">
@@ -81,18 +86,22 @@
 	                            <td class="space" rowspan="2"></td>
 	                            <td class="proName">
 	                                <p>${proList.pro_name}</p>
+	                                <input type="hidden" name="pro_no" value="${proList.pro_no}">
 	                            </td>
 	                        </tr>
 	                        <tr>
 	                            <td class="priceGuide">
 	                                <p class="proNum guide">${cart.pro_cnt}</p>개 /
 	                                <p class="proPri guide"></p>
+	                                <input type="hidden" value="${cart.pro_cnt}" name="pro_num">
 	                                <input type="hidden" value="${proList.pro_price}" class="voPrice">
 	                            </td>
 	                        </tr>
                     	</c:if>
                     </table>
                     
+                    
+                    <c:if test="${empty oneRsVo }">
                     <div class="allPriceGuide">
                         <p class="guide">
                             <span>상품총가</span> 
@@ -111,6 +120,28 @@
                            <input type="hidden" class="inputV" id="delivIn" value="${deliv}">
                         </p>
                     </div>
+                    </c:if>
+                    
+                    <c:if test="${not empty oneRsVo }">
+                    <div class="allPriceGuide">
+                        <p class="guide">
+                            <span>상품총가</span> 
+                            <span></span>
+                            <span>배송비</span> 
+                            <span></span>
+                            <span>총금액</span>
+                        </p>
+                       <p>
+                           <span id="price" class="prSpan"></span> 
+                           <span>+</span> 
+                           <span id="deliv" class="prSpan"></span> 
+                           <span>=</span> 
+                           <span id="allPrice"></span>
+                           <input type="hidden" class="inputV" id="priceIn" value="${oneRsVo.oneday_price}">
+                           <input type="hidden" class="inputV" id="delivIn" value="0">
+                        </p>
+                    </div>
+                    </c:if>
                 </div>
 
                 <div class="order order2">
@@ -225,6 +256,7 @@
                         <button type="button" id="buyBtn">결제하기</button>
                     </div>
                 </div>
+                
                 </form>
             </article>
         </section>
@@ -292,20 +324,30 @@
 		var proPri = $(".proPri");
 		var proInfo = $(".proInfo");
 		
-		for(var i = 0; i < voPrice.length; i++){
-	        var val = voPrice[i].value;
-	        
-	        val = val.substring(0,val.indexOf('원'));
-	    	val = val.replace(',','');
-	      
-	        var num = proNum[i].textContent;
-	        val = val*num;
-	        
-	        val =  val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-	         
-	        
-	        proPri[i].append(val+"원");
-	    }//금액계산
+		
+		if(voPrice.val().indexOf('원') != -1){
+			console.log("숫자아님~");
+			for(var i = 0; i < voPrice.length; i++){
+		        var val = voPrice[i].value;
+		        
+		        val = val.substring(0,val.indexOf('원'));
+		    	val = val.replace(',','');
+		    	
+		        var num = proNum[i].textContent;
+		        val = val*num;
+		        
+		        val =  val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+		         
+		        
+		        proPri[i].append(val+"원");
+		    }//금액계산
+		}else{
+			console.log("숫자임~");
+			var text = voPrice.val();
+			text =  text.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+			proPri[0].append(text+"원");
+		}
+		
 	    
 	    //총금액 계산
 		var inputV = $('.inputV');
@@ -383,6 +425,7 @@
 	    
 	    
 	    //결제API
+	    var rsCheck = $("input[name=rsCheck]").val();
 	    var proName = $(".proName p");
 	    var proNameR;
 	    
@@ -430,9 +473,16 @@
 				if(payCheck = true){
 					console.log("진입~");
 					var form = $('.orderer');
-					form.attr("method","post");
-		        	form.attr("action","orderInsert");
-		        	form.submit();
+					if(rsCheck == 'ca'){
+						form.attr("method","post");
+			        	form.attr("action","orderInsert");
+			        	form.submit();
+					}else{
+						form.attr("method","post");
+			        	form.attr("action","onedayReserveF");
+			        	form.submit();
+					}
+					
 				};
 			});
 		} 

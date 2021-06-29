@@ -117,20 +117,17 @@ public class OnedayController {
 		oneVo.setUser_no(member.getUserNo());
 		oneVo.setOneday_no(onedayNo);
 		oneVo.setOneday_request(oneRequest);
-		oneVo= oService.onedayselect(oneVo);
-		
+		oneVo = oService.onedayselect(oneVo);
 		System.out.println("결과 는~~~~~~~~~" + oneVo);
-		try {
-			int result = oService.onedayreserve(oneVo);
-			
-			System.out.println(result);
-			mv.addObject("oneRsVo", result);
-			mv.setViewName("Product/Order");
-		} catch (Exception e) {
-			mv.addObject("msg", "이미 예약한 클래스 입니다.");
-			mv.setViewName("errorPage");
-			return mv;
-		}
+		
+		//int result = oService.onedayreserve(oneVo);
+//		System.out.println(result);
+//		mv.addObject("oneRsVo", result);
+		mv.addObject("user",member);
+		mv.addObject("oneRsVo",oneVo);
+		mv.setViewName("Product/Order");
+	
+		
 		return mv;
 	}
 

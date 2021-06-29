@@ -83,8 +83,9 @@ public class OrderController {
 		logger.info("바로확인:"+order.getBuy_totalprice());
 		
 		MemberVO member = (MemberVO) session.getAttribute("loginMember");
+		order.setUser_no(member.getUserNo());
 		
-		mv.addObject("member",member);
+		mv.addObject("user",member);
 		mv.addObject("cart",cart);
 		mv.addObject("cartList",null);
 		mv.addObject("proList",proService.selectOne(pro_no));
@@ -118,7 +119,7 @@ public class OrderController {
 			logger.info("구매성공");
 		}
 			
-		mv.setViewName("Product/ProductList");
+		mv.setViewName("Main");
 		return mv;
 	}
 }
