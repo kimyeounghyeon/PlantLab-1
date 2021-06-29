@@ -21,22 +21,27 @@ public class OnedayDao {
 	@Autowired
 	private SqlSession sqlSession;
 
-	public List<OnedayVo> onedayselectlist() {
+	public List<OnedayVo> onedayselectlist() {		//예약가능한 클래스 리스트
 
 		return sqlSession.selectList("Oneday.onedayselectlist");
 
 	}
 
-	public OnedayVo onedayselect(OnedayVo oneVo) {
+	public OnedayVo onedayselect(OnedayVo oneVo) {	//클래스 상세페이지
 		return sqlSession.selectOne("Oneday.onedayselect", oneVo);
 	}
 
-	public int onedayreserve(OnedayVo oneVo ) {
+	public int onedayreserve(OnedayVo oneVo ) {		//클래스 예약하기
 		return sqlSession.insert("Oneday.onedayreserve", oneVo);
 
 
 
 	}
+	public List<OnedayVo> onedayMy(OnedayVo oneVo) {           //예약한 클래스 보여주는 마이페이지
+		return sqlSession.selectList("Oneday.onedayMyselect", oneVo);
+		
+	}
+	
 
 	public int onedaycancel(OnedayVo oneVo) { //  ȸ�� Ŭ���� ���� ���
 		return sqlSession.insert("Oneday.onedaycancel", oneVo);

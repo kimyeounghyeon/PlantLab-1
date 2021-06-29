@@ -37,10 +37,19 @@
 	clear: both;
 	float: right;
 	display: inline-block;
-	border: 1px soild black;
 	width: 300px;
 	margin-right:475px;
 	height: 300px;
+	border: none;
+}
+
+#some_IMG{
+		width: 300px;
+		height: 300px;
+		border: none;
+		z-index: 1;
+	
+	
 }
 
 .inserttag {
@@ -65,7 +74,6 @@
 	clear: both;
 	width: 500px;
 	height: 20px;
-	display: inline-block;
 }
 
 #oneinsertT {
@@ -88,4 +96,13 @@
 	height: 50px;
 	float: right;
 	margin-top: 30px;
+}
+
+#updateInput{
+	clear:both;
+	margin-bottom: 20px;
+	outline: none;
+	display: inline-block;
+	width: 500px;
+	height: 40px;
 }
