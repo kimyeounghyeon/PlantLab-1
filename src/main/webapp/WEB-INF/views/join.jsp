@@ -25,8 +25,8 @@
 					<!-- ID -->
 					<div class="form-group">
 						<h3 class="join_title">
-							<label for="userId">아이디</label> 
-		<!-- 	<input id="idckeck" class="id_chk_re"
+							<label for="userId">아이디</label>
+							<!-- 	<input id="idckeck" class="id_chk_re"
 								type="button" value="중복확인" ">  -->
 						</h3>
 						<span class="box int_id"> <input type="text" id="userId"
@@ -56,6 +56,10 @@
 						<span class="box int_pass_check"> <input type="password"
 							id="userPwd2" name="userPwd2" class="int" maxlength="20">
 						</span> <span class="error_next_box"></span>
+						 <span id="alert-success"
+						style="display: none; color: blue;">비밀번호가 일치합니다.</span> <span
+						id="alert-danger" style="display: none; color: red;">비밀번호가
+						일치하지 않습니다.</span>
 						<div class="check_font" id="passre_check"></div>
 					</div>
 					<!-- NAME -->
@@ -69,7 +73,7 @@
 						<div class="check_font" id="name_check"></div>
 					</div>
 					<!-- GENDER -->
-		<!-- 			<div>
+					<!-- 			<div>
 						<h3 class="join_title">
 							<label for="grade">성별</label>
 						</h3>
@@ -104,77 +108,76 @@
 					<!-- address -->
 					<div>
 						<h3 class="join_title">
-							<label for="address">우편번호</label>
-					<input class="add_chk_re" type="button" value="우편번호찾기"
-								id="add" onclick="execDaumPostcode();"> 
+							<label for="address">우편번호</label> <input class="add_chk_re"
+								type="button" value="우편번호찾기" id="add"
+								onclick="execDaumPostcode();">
 						</h3>
-						 <input type="text" id="address"
-							name="address" class="int" maxlength="16">
-							<h3 class="join_title">
+						<span class="box int_address"> <input type="number"
+							id="address" name="address" class="int" maxlength="8">
+						</span>
+						<h3 class="join_title">
 							<label for="address">주소</label>
-						</h3>		
-							 <input type="text" id="address2"
-							name="address" class="int" maxlength="16">
-							<h3 class="join_title">
+						</h3>
+						<span class="box int_address"> <input type="text"
+							id="address2" name="address" class="int" maxlength="16">
+						</span>
+						<h3 class="join_title">
 							<label for="address">상세주소</label>
-						</h3>		
-							 <input type="text" id="address3"
-							name="address" class="int" maxlength="16" placeholder="정확히 입력해주세요 ">
-							
+						</h3>
+						<span class="box int_address"> <input type="text"
+							id="address3" name="address" class="int" maxlength="16"
+							placeholder="정확히 입력해주세요 ">
+						</span>
 					</div>
 					<!-- 가입 버튼  -->
 					<button type="submit" value="회원가입" id="btn">회원가입</button>
 				</form>
 			</div>
 		</div>
-	   
-	    	
-	    
+
+
+
 	</div>
-	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script>
-    function execDaumPostcode() {
-        new daum.Postcode({
-            oncomplete: function(data) {
-                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
- 
-                // 도로명 주소의 노출 규칙에 따라 주소를 조합한다.
-                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-                var fullRoadAddr = data.roadAddress; // 도로명 주소 변수
-                var extraRoadAddr = ''; // 도로명 조합형 주소 변수
- 
-                // 법정동명이 있을 경우 추가한다. (법정리는 제외)
-                // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
-                if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
-                    extraRoadAddr += data.bname;
-                }
-                // 건물명이 있고, 공동주택일 경우 추가한다.
-                if(data.buildingName !== '' && data.apartment === 'Y'){
-                   extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-                }
-                // 도로명, 지번 조합형 주소가 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
-                if(extraRoadAddr !== ''){
-                    extraRoadAddr = ' (' + extraRoadAddr + ')';
-                }
-                // 도로명, 지번 주소의 유무에 따라 해당 조합형 주소를 추가한다.
-                if(fullRoadAddr !== ''){
-                    fullRoadAddr += extraRoadAddr;
-                }
- 
-                // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                document.getElementById('address').value = data.zonecode; //5자리 새우편번호 사용
-                document.getElementById('address2').value = fullRoadAddr;
-                document.getElementById('address2').focus();
-            }
-        }).open();
-    }
-</script>
-
-
-
-
+	<script
+		src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script>
-	
+		function execDaumPostcode() {
+			new daum.Postcode({
+				oncomplete : function(data) {
+					// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+					// 도로명 주소의 노출 규칙에 따라 주소를 조합한다.
+					// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+					var fullRoadAddr = data.roadAddress; // 도로명 주소 변수
+					var extraRoadAddr = ''; // 도로명 조합형 주소 변수
+
+					// 법정동명이 있을 경우 추가한다. (법정리는 제외)
+					// 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+					if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
+						extraRoadAddr += data.bname;
+					}
+					// 건물명이 있고, 공동주택일 경우 추가한다.
+					if (data.buildingName !== '' && data.apartment === 'Y') {
+						extraRoadAddr += (extraRoadAddr !== '' ? ', '
+								+ data.buildingName : data.buildingName);
+					}
+					// 도로명, 지번 조합형 주소가 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+					if (extraRoadAddr !== '') {
+						extraRoadAddr = ' (' + extraRoadAddr + ')';
+					}
+					// 도로명, 지번 주소의 유무에 따라 해당 조합형 주소를 추가한다.
+					if (fullRoadAddr !== '') {
+						fullRoadAddr += extraRoadAddr;
+					}
+
+					// 우편번호와 주소 정보를 해당 필드에 넣는다.
+					document.getElementById('address').value = data.zonecode; //5자리 새우편번호 사용
+					document.getElementById('address2').value = fullRoadAddr;
+					document.getElementById('address2').focus();
+				}
+			}).open();
+		}
+
 		// 모든 공백 체크
 		var empJ = /\s/g;
 		// 아이디 정규식
@@ -185,10 +188,8 @@
 		var pwreJ = /^[A-Za-z0-9]{4,12}$/; // A~Z, a~z, 0~9로 시작하는 4~12자리 비밀번호
 		// 이름 정규식
 		var nameJ = /^[가-힣]{2,6}$/; // 가~힣, 2-6 자리 한글로만 이루어진 문자
-		// 이메일 검사 정규식
-		var mailJ = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i; // 가운데 @ 무조건 들어가야댐
 		// 휴대폰 번호 정규식
-		var phoneJ = /^01([0|1|6|7|8|9]?)?([0-9]{3,4})?([0-9]{4})$/; // 
+		var phoneJ = /^01([0|1|6|7|8|9]?)-?([0-9]{3,4})-?([0-9]{4})$/; 
 
 		// 아이디
 		$('#userId').blur(function() {
@@ -213,6 +214,25 @@
 			}
 		});
 
+		// 비밀번호 확인
+		$('#userPwd2').focusout(function() {
+			var pwd1 = $("#userPwd").val();
+			var pwd2 = $("#userPwd2").val();
+
+			if (pwd1 != '' && pwd2 == '') {
+				null;
+			} else if (pwd1 != "" || pwd2 != "") {
+				if (pwd1 == pwd2) {
+					$("#alert-success").css('display', 'inline-block');
+					$("#alert-danger").css('display', 'none');
+				} else {
+					alert("비밀번호가 일치하지 않습니다. 비밀번호를 재확인해주세요.");
+					$("#alert-success").css('display', 'none');
+					$("#alert-danger").css('display', 'inline-block', 'red');
+				}
+			}
+		});
+
 		// 이름에 특수문자 들어가지 않도록 설정
 		$("#userName").blur(function() {
 			if (nameJ.test($(this).val())) {
@@ -230,78 +250,66 @@
 				console.log(phoneJ.test($(this).val()));
 				$("#pnum_check").text('');
 			} else {
-				$('#pnum_check').text('휴대폰번호를 확인해주세요');
+				$('#pnum_check').text('휴대폰번호를 확인해주세요.');
 				$('#pnum_check').css('color', 'red');
 			}
 		});
 
-		// 이메일
-		$('#email').blur(function() {
-			if (mailJ.test($(this).val())) {
-				console.log(mailJ.test($(this).val()));
-				$("#mail_check").text('');
-			} else {
-				$('#mail_check').text('이메일주소를 확인해주세요');
-				$('#mail_check').css('color', 'red');
-			}
-		});
+		// 회원가입 버튼클릭시 이벤트
+		$("#btn").click(
+				function() {
 
+					var inval_Arr = new Array(3).fill(false);
 
+					// 비밀번호가 같은 경우 && 비밀번호 정규식
+					if (($('#userPwd').val() == ($('#userPwd2').val()))
+							&& pwJ.test($('#userPwd').val())) {
+						inval_Arr[0] = true;
+					} else {
+						inval_Arr[0] = false;
+					}
+					// 이름 정규식
+					if (nameJ.test($('#userName').val())) {
+						inval_Arr[1] = true;
+					} else {
+						inval_Arr[1] = false;
+					}
 
+					// 휴대폰번호 정규식
+					if (phoneJ.test($('#phone').val())) {
+						console.log(phoneJ.test($('#phone').val()));
+						inval_Arr[2] = true;
+					} else {
+						inval_Arr[2] = false;
+					}
+					
+					var validAll = true;
+					for(var i = 0; i < inval_Arr.length; i++){
+						
+						if(inval_Arr[i] == false){
+							validAll = false;
+						}
+					}
 
-		$(function() {
+					if (validAll) { 
+						alert('무이림 가입을 축하드립니다!');
 
-			$('#btn').click(function() {
+						var frm = document.getElementById("frmEmp");
+						frm.action = "doJoin";
+						frm.method = "post";
+						frm.submit();
 
-				var check = DosignUp();
-				if (check == true) {
-					var frm = document.getElementById("frmEmp");
-					frm.action = "doJoin";
-					frm.method = "post";
-					frm.submit();
+					} else {
+						alert('입력한 정보들을 다시 한번 확인해주세요. ')
+					}
 
-				}
-			});
-
-			function DosignUp() {
-
-				var userId = $("#userId").val();
-				var userPwd = $("#userPwd").val();
-				var userPwd2 = $("#userPwd2").val();
-				var userName = $("#userName").val();
-
-				if (userId.length == 0) {
-					alert("아이디를 입력해 주세요");
-					$("#userId").focus();
-					return false;
-				}
-
-				if (userPwd.length == 0) {
-					alert("비밀번호를 입력해 주세요");
-					$("#userPwd").focus();
-					return false;
-				}
-
-				if (userPwd != userPwd2) {
-					alert("비밀번호가 서로 다릅니다. 비밀번호를 확인해 주세요.");
-					$("#userPwd2").focus();
-					return false;
-				}
-
-				if (userName.length == 0) {
-					alert("이름을 입력해주세요");
-					$("#userName").focus();
-					return false;
-				}
-				if (confirm("회원가입을 하시겠습니까?")) {
-					alert("회원가입을 축하합니다");
-					return true;
-
-				}
-
-			}
-		});
+				});
 	</script>
+
+
+
+
+
 
 </body>
 </html>

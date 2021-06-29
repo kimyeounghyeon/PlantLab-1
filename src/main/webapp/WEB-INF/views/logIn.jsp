@@ -21,11 +21,14 @@
 	<header>
 
 		<div id="logo">
-			<img alt="logo" src="${path }/resources/img/logo.png" />
+
+			<a href="<%=request.getContextPath()%>/"> <img alt="logo"
+				src="${path }/resources/img/logo.png" />
+			</a>
 		</div>
 
 	</header>
-	<form id="frmEmp">
+	<form id="loginFrm">
 		<!--로그인 부분-->
 		<section class="login-wrap">
 
@@ -39,7 +42,7 @@
 			<div class="login-btn-wrap">
 				<button class="login-btn" id="loingbtn">로그인</button>
 			</div>
-			
+
 
 
 
@@ -95,17 +98,18 @@
 </div>
 
 </body>
+
 <script>
 	$("#loingbtn").click(function() {
-		var frm = document.getElementById("frmEmp");
+		var frm = document.getElementById("loginFrm");
 		frm.action = "doLogin";
 		frm.method = "post";
 		frm.submit();
 
-	});
-	
-	
 	
 
+	});
 </script>
+			
+
 </html>
