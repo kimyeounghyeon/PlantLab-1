@@ -20,7 +20,6 @@ width: 1280px;
  height: 100px; 
  padding-top:210px;
 	position:static;
-
 	
  }
                 #mypagemenu ul li {     

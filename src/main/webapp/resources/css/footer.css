@@ -1,0 +1,13 @@
+@charset "UTF-8";
+
+#ft {
+	 font-family: 'Jeju Myeongjo';
+	 position:relative;
+margin-top:50px;
+width:auto;
+	height: 100px;
+	font-size: 11px;
+
+	text-align: center;
+	clear:both;
+}

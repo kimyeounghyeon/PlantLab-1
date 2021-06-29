@@ -12,9 +12,9 @@ a{
  
  #content{
     width: 1250px;
-    height: 1900px;
     margin: auto;
     clear: both;
+    overflow: hidden;
 }
 
 /* -----------헤더------------ */
