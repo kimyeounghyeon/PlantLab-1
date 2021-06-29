@@ -9,10 +9,24 @@ public class NoticeVo {
 	private String notice_title;
 	private String notice_content;
 	private String notice_date;
+	private int grade;
 	
 	
 	
-	
+	public int getGrade() {
+		return grade;
+	}
+
+
+
+
+	public void setGrade(int grade) {
+		this.grade = grade;
+	}
+
+
+
+
 	public int getNotice_no() {
 		return notice_no;
 	}

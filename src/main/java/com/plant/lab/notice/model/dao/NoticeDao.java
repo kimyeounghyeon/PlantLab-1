@@ -14,13 +14,32 @@ public class NoticeDao {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	public List<NoticeVo> getNoticeList() {
-		return sqlSession.selectList("Notice.NoticeList");
+	public List<NoticeVo> getNoticeList(NoticeVo vo) {
+		return sqlSession.selectList("Notice.NoticeList",vo);
 	}
+	
+	public int NoticeCnt() { 
+	      return sqlSession.selectOne("Notice.NoticeCnt");
+	   }
+	
+	
+	
+	
 	  public int NoticeInsert(NoticeVo vo) {
 		  		return sqlSession.insert("Notice.NoticeInsert", vo);
-		  		
 			
 	    }
-
+	  public NoticeVo NoticeRead(int notice_no) {
+		  return sqlSession.selectOne("Notice.NoticeRead",notice_no);
+	  }
+	  
+	
+	
+	  public int NoticeUpdate(NoticeVo n) { 
+	      return sqlSession.update("Notice.NoticeUpdate",n);
+	   }
+	
+	  public int NoticeDel(int vo) { 
+	      return sqlSession.delete("Notice.NoticeDel",vo);
+	   }	   
 }
