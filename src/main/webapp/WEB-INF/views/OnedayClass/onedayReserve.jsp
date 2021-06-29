@@ -35,9 +35,9 @@
 <!-- d -->
 <input type="hidden"  name="onedayNo" value="${OneR} " > <!-- insert하기 위한 oneday_no box -->
 <p class="onedayinput" >이름</p>
-<input type="text" class="onedaybox" name="oneName"  >   <!-- value값 넣기 --> 
+<input type="text" class="onedaybox"  id="oneName" name="oneName"  >   <!-- value값 넣기 --> 
 <span class="onedayinput">전화번호</span>
-<input type="text" class="onedaybox" name="onePhone">
+<input type="text" class="onedaybox" id="onePhone" name="onePhone">
 <span class="onedayinput">요구사항</span>
 <textarea id="oneRequest" name="oneRequest"  style="resize: none; ">
 </textarea>
@@ -48,6 +48,14 @@
 
 <script type="text/javascript">
 
+
+$(function(){								//공백체크
+$("#onedayp").click(function(){
+  if($("#oneName").val().length ==0 ) {alert("이름을 입력해주세요"); $("#oneName").focus();	return false;}
+  else if($("#onePhone").val().length ==0 )  {alert("연락처를 입력해주세요"); $("#onePhone").focus();	return false;}
+
+});
+})
 
 
 </script>
