@@ -26,8 +26,8 @@
 
 			<!--  logo -->
 
-			<div id="logo">
-				<img alt="logo" src="${path }/resources/img/logo.png" />
+			<div id="logo"><a href="${path }/Main">
+				<img alt="logo" src="${path }/resources/img/logo.png" /></a>
 			</div>
 
 

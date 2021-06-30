@@ -5,7 +5,9 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<link href="${path}/resources/css/font.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/jejumyeongjo.css"/>
+<link href="${path}/resources/css/header.css" rel="stylesheet" />
+<link href="${path}/resources/css/footer.css" rel="stylesheet" />
 <link href="${path}/resources/css/Oneday/OnedayInsert.css" rel="stylesheet" />
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
@@ -60,10 +62,11 @@
 <input type="number" class="oneinsert"    name="oneinsertM"  value=  "${one.oneday_maxPerson}"/>
 <br/>
 
-<span class="inserttag" >클래스 장소</span>
+<span class="inserttag" >클래스 주소</span>
 <br/>
-
 <input type="text" class="oneinsert"    name="oneinsertP"  value="${one.oneday_place}"/>
+<span class="inserttag" >클래스 상세주소</span>
+<input type="text" class="oneinsert"    name="oneinsertP"  value="${one.oneday_dtailPlace}"/>
 <br/>
 
 
@@ -95,6 +98,6 @@
 </div>
 </div>
 
-
+<jsp:include page="../footer.jsp"></jsp:include>
 </body>
 </html>

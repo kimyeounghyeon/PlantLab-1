@@ -12,6 +12,8 @@
 	rel="stylesheet" />
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/earlyaccess/jejumyeongjo.css" />
+	<link href="${path}/resources/css/header.css" rel="stylesheet" />
+<link href="${path}/resources/css/footer.css" rel="stylesheet" />
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
@@ -70,22 +72,7 @@
  					
  		
  			}); */
- 			
- 				
- 				
- 				
  			//}
- 			
- 			
- 			
- 			
- 			
- 			
- 			
- 			
- 			
- 			
- 			
  			
 /* 			var onediv = $(".onediv");
 			var onefrm = $(".onefrm"); 
@@ -101,12 +88,14 @@
 		 $("form").submit();
 
 		 })
-		 }); */
-		 
+		 }); 
  		}); 
- 
+			
+			*/
 		 
+ 
 	</script> 
+<jsp:include page="../footer.jsp"></jsp:include>
 
 </body>
 </html>

@@ -291,6 +291,9 @@ public class OnedayController {
 
 		String oneinsertP = request.getParameter("oneinsertP");
 		oneIVo.setOneday_place(oneinsertP);
+		
+		String oneinsertPD = request.getParameter("oneinsertPD");
+		oneIVo.setOneday_dtailPlace(oneinsertPD);
 
 		String oneinsertDS = request.getParameter("oneinsertDS");
 		oneIVo.setOneday_start(oneinsertDS);
@@ -352,6 +355,9 @@ public class OnedayController {
 
 		String oneinsertP = request.getParameter("oneinsertP");
 		oneUVo.setOneday_place(oneinsertP);
+
+		String oneinsertPD = request.getParameter("oneinsertPD");
+		oneUVo.setOneday_dtailPlace(oneinsertPD);
 
 		String oneinsertDS = request.getParameter("oneinsertDS");
 		oneUVo.setOneday_start(oneinsertDS);

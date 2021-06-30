@@ -29,12 +29,12 @@ insert into onedayclassrs_tb (RESERV_NO , ONEDAY_NO , USER_NO , ONEDAY_REQUEST )
 
 <insert id="onedayinsert" parameterType="OnedayVo" >   <!-- 관리자 클래스 등록 -->
 <!-- INSERT INTO  onedayclass_tb VALUES( =Oneday_SEQ.nextval, ONEDAY_TITLE=#{oneday_title} , ONEDAY_IMG=#{oneday_img}, ONEDAY_CONTENT=#{oneday_content}, ONEDAY_MAXPERSON=#{oneday_maxPerson}, ONEDAY_START=#{oneday_start},ONEDAY_END=#{oneday_end} ,ONEDAY_PRICE=#{oneday_price},ONEDAY_PLACE=#{oneday_place})   -->
-INSERT INTO  onedayclass_tb VALUES( Oneday_SEQ.nextval, #{oneday_title} , #{oneday_img} , #{oneday_content} , #{oneday_maxPerson} , #{oneday_start}, #{oneday_end} , #{oneday_price},  #{oneday_place})  
+INSERT INTO  onedayclass_tb VALUES( Oneday_SEQ.nextval, #{oneday_title} , #{oneday_img} , #{oneday_content} , #{oneday_maxPerson} , #{oneday_start}, #{oneday_end} , #{oneday_price},  #{oneday_place} ,#{oneday_dtailPlace})  
 </insert>
 
 
 <update id="onedayupdate" parameterType="OnedayVo">     <!-- 관리자 클래스  수정-->
-UPDATE  onedayclass_tb  SET ONEDAY_TITLE=#{oneday_title} , ONEDAY_IMG=#{oneday_img} , ONEDAY_CONTENT=#{oneday_content} , ONEDAY_MAXPERSON=#{oneday_maxPerson} , ONEDAY_START=#{oneday_start} , ONEDAY_END=#{oneday_end} , ONEDAY_PRICE=#{oneday_price} , ONEDAY_PLACE=#{oneday_place}  WHERE ONEDAY_NO=#{oneday_no}
+UPDATE  onedayclass_tb  SET ONEDAY_TITLE=#{oneday_title} , ONEDAY_IMG=#{oneday_img} , ONEDAY_CONTENT=#{oneday_content} , ONEDAY_MAXPERSON=#{oneday_maxPerson} , ONEDAY_START=#{oneday_start} , ONEDAY_END=#{oneday_end} , ONEDAY_PRICE=#{oneday_price} , ONEDAY_PLACE=#{oneday_place} ,  ONEDAY_DTAILPLACE=#{oneday_dtailPlace} WHERE ONEDAY_NO=#{oneday_no}
 </update> 
 
 <delete id="onedaydelete" parameterType="OnedayVo" >   <!-- 관리자 클래스  삭제-->
