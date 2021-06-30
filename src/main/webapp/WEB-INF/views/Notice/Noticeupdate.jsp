@@ -6,10 +6,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>수정</title>
 </head>
 <body>
+
 	<jsp:include page="../header.jsp"></jsp:include>
+	
+	글 수정할꺼야....
 	<c:if test="${empty loginMember.userName}">
 <div id="mem">회원이 아닙니다.</div></c:if>
 <c:if test="${empty loginMember.userName}">

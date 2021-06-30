@@ -47,7 +47,7 @@ margin:auto;
  <c:if test="${!empty loginMember}">
 		<jsp:include page="../mypagemenu.jsp"></jsp:include>
 <div>
-	<table border="1" >
+	<table border="0" >
     <tr>
         <th>글번호</th>
         <th>제목</th>

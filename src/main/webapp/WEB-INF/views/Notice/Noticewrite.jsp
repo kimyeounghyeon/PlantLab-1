@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>게시글 작성</title>
+<title>게시글작성</title>
 <head>
 
 </head>
@@ -20,7 +20,7 @@
 <!-- 파일 2 적용하기!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
         제목<input type="hidden" name="user_no" id="user_no" value="${loginMember.userNo}">
       
-        <input name="notice_title" id="notice_title" size="80" placeholder="제목을 입력해주세요">
+        <input name="notice_title" id="notice_title" size="80" placeholder="제목을 입력해">
     </div>
     <div>
         내용

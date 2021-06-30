@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.plant.lab.member.model.vo.MemberVO;
-import com.plant.lab.notice.model.service.FnaService;
+
 import com.plant.lab.notice.model.service.NoticeService;
 import com.plant.lab.notice.model.vo.NoticeVo;
 
