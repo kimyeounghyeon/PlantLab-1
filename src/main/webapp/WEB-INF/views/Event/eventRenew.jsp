@@ -32,7 +32,7 @@
 	<jsp:include page="../header.jsp"></jsp:include>
 	<div class="eReDiv">
 	
-<form action="eInsert" method="post" enctype="multipart/form-data">
+<form action="eUpdate" method="post" enctype="multipart/form-data">
 
 	<input type="hidden">
 		<table class="eretb">
@@ -46,13 +46,13 @@
 				<td>배너 이미지</td>
 			</tr>
 			<tr>
-				<td class="mwn"><input type="file" name="upfile1" value="${event_tb.banner}"></td>
+				<td class="mwn"><input type="file" name="upfile1" ></td>
 			</tr>
 			<tr>
 				<td>이벤트 내용</td>
 			</tr>
 			<tr>
-				<td class="mwn"><input type="file" name="upfile2" value="${event_tb.event_content}"></td>
+				<td class="mwn"><input type="file" name="upfile2" ></td>
 			</tr>
 			<tr>
 				<td>이벤트 시작일</td>

@@ -15,6 +15,7 @@
 	<!-- 페이지당 게시글 조회 rowbounds-->
 	<select id="selectList" resultType="arraylist" resultMap="resultEvent">
 		SELECT * FROM Event_tb
+		order by event_no desc
 	</select>
 	
 	
@@ -36,12 +37,11 @@
 	<update id="updateEvent" parameterType="Event_tb" flushCache="true" statementType="PREPARED">
 		UPDATE event_tb 
 		SET event_title= #{event_title}, 
-		SET event_content= #{event_content}, 
-		SET event_date= sysdate, 
-		event_views= #{event_views}, 
-		start_date=#{start_date},
-		end_date=#{end_date},
+		event_content= #{event_content}, 
 		banner=#{banner},
+		event_date= sysdate, 
+		start_date=#{start_date},
+		end_date=#{end_date}
 		WHERE event_no=#{event_no}
 	</update>
 	

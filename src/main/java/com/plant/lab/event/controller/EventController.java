@@ -117,9 +117,10 @@ public class EventController {
 		try { // 파일 저장
 			filePath1 = folder1 + "\\" + report1.getOriginalFilename();
 			report1.transferTo(new File(filePath1)); // 파일을 저장한다
-
+			logger.info("===============사진1 저장 ===============");
 			filePath2 = folder2 + "\\" + report2.getOriginalFilename();
 			report2.transferTo(new File(filePath2)); // 파일을 저장한다
+			logger.info("===============사진2 저장 ===============");
 		} catch (Exception e) {
 			System.out.println("파일 전송 에러 : " + e.getMessage());
 		}
@@ -157,19 +158,26 @@ public class EventController {
 	}
 	@RequestMapping(value = "eUpdate", method = RequestMethod.POST)
 	public ModelAndView eventUpdate(Event_tb e, @RequestParam(name = "page", defaultValue = "1") int page,
+			//@RequestParam(name = "event_no") int event_no,
 			@RequestParam("upfile1") MultipartFile report1,
 			@RequestParam("upfile2") MultipartFile report2,
 			HttpServletRequest request, ModelAndView mv) {
 		try {
 			logger.info("===============이벤트 수정 ===============");
 			if (report1 != null && !report1.equals("") || report2 != null && !report2.equals("")) {
+				logger.info("==============1 ===============");
 				removeFile(e.getBanner(),e.getEvent_content(),request);
+				logger.info("==============2 ===============");
 				saveFile(report1, report2, request);
+				logger.info("==============3 ===============");
 				}
 
 			e.setBanner(report1.getOriginalFilename());
+			logger.info("==============4 ===============");
 			e.setEvent_content(report2.getOriginalFilename());
+			logger.info("==============5 ===============");
 			mv.addObject("event_tb", eService.updateEvent(e).getEvent_no());
+			logger.info("==============6 ===============");
 			mv.addObject("currentPage", page);
 			mv.setViewName("redirect:elist");
 		} catch (Exception e1) {
