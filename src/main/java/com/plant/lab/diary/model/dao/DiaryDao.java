@@ -79,16 +79,16 @@ public class DiaryDao {
 		return sqlSession.selectList("Diary.selectComment", diary_no);
 	}
 	
-	// 최근 댓글 조회
-	 public List<CommentVO> currentComment(int comm_no) {
-		 return sqlSession.selectList("Diary.currentComment", comm_no);
-	 }
-	
 	
 	// 댓글 등록
 	public int insertComment(CommentVO cvo) {
 		return sqlSession.insert("Diary.insertComment", cvo);
 		
+	}
+	
+	// 댓글 삭제
+	public int deleteComment(CommentVO cvo) {
+		return sqlSession.delete("Diary.deleteComment", cvo);
 	}
 
 	// 시퀀스 번호 알아오기

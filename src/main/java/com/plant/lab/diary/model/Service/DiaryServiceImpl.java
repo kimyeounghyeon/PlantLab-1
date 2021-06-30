@@ -170,4 +170,14 @@ public class DiaryServiceImpl implements DiaryService {
 	}
 
 
+	@Override
+	public int deleteComment(CommentVO cvo) {
+		int result = -1;
+		try {
+			result = dDao.deleteComment(cvo);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		  return result;
+	}
 }

@@ -29,6 +29,7 @@ public interface DiaryService {
 	// 댓글
 	public List<CommentVO> selectComment(int diary_no);
 	public int insertComment(CommentVO cvo);
+	public int deleteComment(CommentVO cvo);
 	
 	
 	// 게시글 번호 불러오기

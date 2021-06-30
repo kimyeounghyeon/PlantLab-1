@@ -30,6 +30,7 @@
 	</form>
 	</div>
 </div>
+<jsp:include page="../footer.jsp"></jsp:include>
 
 	<script>
 	      var ckeditor_config = {

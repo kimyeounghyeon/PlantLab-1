@@ -23,6 +23,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.plant.lab.diary.model.Service.DiaryService;
@@ -71,6 +73,8 @@ public class PlantHomeController {
 		List<DiaryVO> listDiary = dService.listDiary();
 		List<Integer> likeList = dService.likeList(sessionVO);
 
+		
+		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("listDiary", listDiary);
 		map.put("likeList", likeList);
@@ -101,11 +105,12 @@ public class PlantHomeController {
 		return mv;
 	}
 
+	
 	// 일기 상세 페이지 가져오기
 	@RequestMapping(value = "/detaildiary.do", method = RequestMethod.GET, produces = "application/text; charset=UTF-8")
 	@ResponseBody
 	public void diaryDetail(ModelAndView mv, HttpSession session, @RequestParam(name = "diary_no") int diary_no,
-			HttpServletResponse response) {
+			HttpServletResponse response, HttpServletRequest request) {
 		response.setCharacterEncoding("UTF-8");
 
 		System.out.println("[영현]detailDiary 진입");
@@ -114,9 +119,15 @@ public class PlantHomeController {
 		LikeVO sessionVO = new LikeVO();
 
 		MemberVO member = (MemberVO) session.getAttribute("loginMember");
+		
 		sessionVO.setUser_no(member.getUserNo());
 		sessionVO.setDiary_no(diary_no);
 
+		String user_id = member.getUserId();
+		System.out.println("로그인 한 아이디 " + user_id);
+		
+		
+		
 		List<DiaryVO> detailList = dService.detailDiary(diary_no);
 		List<Integer> likeList = dService.likeList(sessionVO);
 		List<CommentVO> listComment = dService.selectComment(diary_no);
@@ -125,6 +136,7 @@ public class PlantHomeController {
 		map.put("likeList", likeList);
 		map.put("detailList", detailList);
 		map.put("listComment", listComment);
+		map.put("user_id", user_id);
 
 
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -161,6 +173,7 @@ public class PlantHomeController {
 			
 
 		System.out.println("vo가 문제지..?" + vo);
+		
 			
 		
 			int result = -1;
@@ -168,14 +181,18 @@ public class PlantHomeController {
 			int diary_no = 0;
 
 			try {
-				if (multiFile != null && !multiFile.equals(""))
-					saveFile(multiFile, request);
-				String path = "\\lab\\resources\\diaryImg\\";
-				vo.setDiary_img_src(path+multiFile.getOriginalFilename());
+				if (multiFile != null && !multiFile.equals("")) {
+					String url = saveFile(multiFile, request);
+					vo.setDiary_img_src(url);					
+				}
+				
+				
+				
 			} catch (Exception e) {
 				e.printStackTrace();
 				System.out.println("이미지 저장에 실패했습니다~");
 			}
+			
 			
 			
 			try {
@@ -349,13 +366,33 @@ public class PlantHomeController {
 		return jsonOutput;
 
 	}
+	
+	
+	// 댓글 삭제
+	@RequestMapping(value="deleteComment.do", method = RequestMethod.POST)
+	@ResponseBody
+	public String deleteComment(HttpServletRequest request, CommentVO cvo, @RequestParam(name="diary_no") int diary_no, @RequestParam(name="comm_no") int comm_no) {
+		System.out.println("댓글 삭제 페이지 진입~");
+		System.out.println("게시글 번호 가져와용~ " + diary_no);
+		System.out.println("댓글 번호 가져와용~ " + comm_no);
+		
+		int result = -1;
+		
+		cvo.setComm_no(comm_no);
+		cvo.setDiary_no(diary_no);
+		
+		result = dService.deleteComment(cvo);
+		System.out.println("댓글 삭제 결과는~?" + result);
+		
+		return null;
+	}
 
 	// 파일 저장
-	private void saveFile(MultipartFile report, HttpServletRequest request) {
+	private String saveFile(MultipartFile report, HttpServletRequest request) {
 		String root = request.getSession().getServletContext().getRealPath("resources");
 		String savePath = root + "\\diaryImg";
 		File folder = new File(savePath);
-
+		String url = "";
 		if (!folder.exists()) {
 			folder.mkdir(); // 폴더가 없다면 생성한다.
 		}
@@ -369,12 +406,32 @@ public class PlantHomeController {
 			filePath = folder + "\\" + report.getOriginalFilename();
 
 			report.transferTo(new File(filePath)); // 파일을 저장한다
+			
+			
+			
+			// cloudinary.uploader().upload(Object file, Map options);
+			Map config = new HashMap();
+			config.put("cloud_name", "djdjsp7t1");
+			config.put("api_key", "862183527995216");
+			config.put("api_secret", "TBR2K0Q2UcJ3BbbFG0JdWxVjXXI");
+			Cloudinary cloudinary = new Cloudinary(config);
+			
+			Map res = cloudinary.uploader().upload(new File(filePath), ObjectUtils.emptyMap()); 
+			url = res.get("url") == null ? "" : res.get("url").toString(); 
+			System.out.println("::::"+url);
+
+			
+			
+			
 			System.out.println("파일 명 : " + report.getOriginalFilename());
 			System.out.println("파일 경로 : " + filePath);
 			System.out.println("파일 전송이 완료되었습니다.");
+
 		} catch (Exception e) {
 			System.out.println("파일 전송 에러 : " + e.getMessage());
 		}
+
+		return url;
 	}
 
 	// 파일 삭제
