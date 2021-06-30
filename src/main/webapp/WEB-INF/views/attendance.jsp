@@ -7,7 +7,9 @@
 <head>
 <meta charset="UTF-8">
 <title>無以林 출석 이벤트 </title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/jejumyeongjo.css" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/jejumyeongjo.css"/>
+<link href="${path}/resources/css/header.css" rel="stylesheet" />
+<link href="${path}/resources/css/footer.css" rel="stylesheet" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <style>
 .adiv{
@@ -31,6 +33,7 @@ background : none;
 <div class="aimg"></div>
 <div><button type="button" class="abtn">출석 완료</button></div>
 </div>
+<jsp:include page="./footer.jsp"></jsp:include>
 </body>
 <script type="text/javascript">
 

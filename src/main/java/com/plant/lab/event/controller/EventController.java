@@ -216,10 +216,10 @@ public class EventController {
 
 		File delFile1 = new File(filePath1);
 		delFile1.delete();
-		System.out.println("파일1 삭제가 완료되었습니다.");
+		logger.info("파일1 삭제가 완료되었습니다.");
 		File delFile2 = new File(filePath2);
 		delFile2.delete();
-		System.out.println("파일2 삭제가 완료되었습니다.");
+		logger.info("파일2 삭제가 완료되었습니다.");
 	}catch(Exception e1) {
 		System.out.println("파일 삭제 에러 : " + e1.getMessage());
 	}
