@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.plant.lab.member.model.vo.MemberVO;
+import com.plant.lab.notice.model.service.FnaService;
 import com.plant.lab.notice.model.service.NoticeService;
 import com.plant.lab.notice.model.vo.NoticeVo;
 
@@ -32,7 +33,7 @@ public class NoticeController {
 
 
 	@RequestMapping(value="nlist.do" ,method=RequestMethod.GET)
-	public ModelAndView noticeList(NoticeVo voo,Model model, HttpSession session,ModelAndView mav,HttpServletRequest request,MemberVO kk){
+	public ModelAndView noticeList(NoticeVo voo,Model model,ModelAndView mav){
 	try {
 
 	
@@ -107,6 +108,11 @@ public String delete(@RequestParam(name="notice_no")int notice_no,Model mo)throw
 nService.NoticeDel(notice_no);
 return "redirect:nlist.do";
 }
+
+
+
+	
 }
+
 
 
