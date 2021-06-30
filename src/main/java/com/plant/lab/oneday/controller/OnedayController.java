@@ -36,12 +36,14 @@ import com.plant.lab.oneday.model.service.OnedayServiceImpl;
 import com.plant.lab.oneday.model.vo.OnedayVo;
 
 @Controller
-//@SessionAttributes("user")
 public class OnedayController {
 	@Autowired
 	private OnedayServiceImpl oService;
 	private static final Logger log = LoggerFactory.getLogger(OnedayController.class);
 
+	
+	
+	//onedayclass Main page (등록돼있는 클래스 list)
 	@RequestMapping(value = "onedayMain", method = RequestMethod.GET) // oneday class 메인 페이지
 	public ModelAndView onedayMain(ModelAndView mv) {
 
@@ -60,7 +62,10 @@ public class OnedayController {
 		return mv;
 	}
 
-	@RequestMapping(value = "/onedayDetail", method = RequestMethod.GET) // 원데이 클래스 상세 페이지
+	
+	
+	// 원데이 클래스 상세 페이지
+	@RequestMapping(value = "/onedayDetail", method = RequestMethod.GET) 
 	public ModelAndView onedayDetail(ModelAndView mv, @RequestParam(name = "oneday_no") int oneday_no,
 			HttpServletResponse response, HttpSession session) {
 		response.setContentType("text/html; charset=euc-kr");
@@ -97,6 +102,10 @@ public class OnedayController {
 		return mv;
 	}
 
+	
+	
+	
+	
 	// 원데이 클래스 예약하는 페이지 넘어가는 컨트롤러
 	@RequestMapping(value = "/onedayReserve", method = RequestMethod.POST) // 클래스 예약 rs에 insert 세션필요
 	public ModelAndView onedayReserve(ModelAndView mv, @RequestParam(name = "onedayNo") int oneday_no,
@@ -107,7 +116,11 @@ public class OnedayController {
 		return mv;
 	}
 
-	// 원데이 클래스 insert 예약 controller
+	
+	
+	
+	
+	//회원 원데이 클래스  예약 
 	@RequestMapping(value = "/onedayReserveRS", method = RequestMethod.POST) // 클래스 예약 rs에 insert 세션필요
 	public ModelAndView onedayReserveRS(ModelAndView mv, @RequestParam(name = "onedayNo") int onedayNo, 
 	@RequestParam(name = "oneRequest") String oneRequest, HttpServletRequest request, HttpSession session) {
@@ -124,7 +137,7 @@ public class OnedayController {
 		oneVo = oService.onedayselect(oneVo);
 		System.out.println("결과 는~~~~~~~~~" + oneVo);
 		
-		//int result = oService.onedayreserve(oneVo);
+		//int result = oService.onedayreserve(oneVo);    //구매하면 예약됨
 //		System.out.println(result);
 //		mv.addObject("oneRsVo", result);
 		mv.addObject("user",member);
@@ -135,7 +148,11 @@ public class OnedayController {
 		return mv;
 	}
 
-	@RequestMapping(value = "/onedayMy", method = RequestMethod.GET) // 원데이클래스 마이페이지 oneday 에 select , 취소하기 기능 넣기
+	
+	
+	
+	//회원 마이페이지    예약한  원데이클래스 list
+	@RequestMapping(value = "/onedayMy", method = RequestMethod.GET) 
 	public ModelAndView onedayMy(ModelAndView mv, HttpSession session, HttpServletResponse response) {
 		OnedayVo oneVo = new OnedayVo();
 		MemberVO member = (MemberVO) session.getAttribute("loginMember");
@@ -168,6 +185,9 @@ public class OnedayController {
 		return mv;
 	}
 
+	
+	
+	//회원 원데이 클래스 예약 취소
 	@RequestMapping(value = "onedayCancle", method = RequestMethod.GET) // 클래스 예약 취소 delete 세션필요
 	@ResponseBody
 	public void onedayCancle(ModelAndView mv, HttpServletResponse response, HttpSession session,
@@ -194,11 +214,14 @@ public class OnedayController {
 
 	}
 
-	@RequestMapping(value = "/onedayAdmin", method = RequestMethod.GET) // 원데이클래스 관리자 페이지 oneday 에 select
+	
+	
+	
+	// 관리자  원데이클래스  Main
+	@RequestMapping(value = "/onedayAdmin", method = RequestMethod.GET) 
 	public ModelAndView onedayadmin(ModelAndView mv, HttpSession session, HttpServletResponse response) {
 		MemberVO member = (MemberVO) session.getAttribute("loginMember"); // 로그인된 사람만 들어오기
-//		if(grade == null || !(grade.equals(1))){
-		if (member == null || !(member.getUserId().equals("jjr"))) { // login담당자 mapper 변경 요청 후 변경 시 getUserGrade로 변경
+		if(member == null || member.getGrade() != 1 ){  //관리자만 가능
 			log.info("C: 관리자아닌 접근 ID - ");
 			response.setContentType("text/html; charset=euc-kr");
 			PrintWriter out;
@@ -223,24 +246,11 @@ public class OnedayController {
 		return mv;
 	}
 
-	/*
-	 * @RequestMapping(value = "/onedayAd_Detail", method = RequestMethod.GET) //
-	 * 원데이클래스 관리자 상세 페이지 oneday 에 selectone ,수정하기 public ModelAndView
-	 * onedayAd_Detail(ModelAndView mv , @RequestParam(name = "onedayNo") int
-	 * oneday_no ) {
-	 * 
-	 * OnedayVo one = new OnedayVo(); one.setOneday_no(oneday_no); OnedayVo oneVo =
-	 * oService.onedayselect(one); // selectone 메소드 실행
-	 * 
-	 * if (oneVo == null) { mv.addObject("msg", "이미 마감된 클래스 입니다.");
-	 * mv.setViewName("<script>history.back();</script>"); return mv; }
-	 * 
-	 * mv.addObject("oneVo", oneVo);
-	 * 
-	 * mv.setViewName("OnedayClass/onedayAd_Detail"); return mv; }
-	 */
 
-	@RequestMapping(value = "/onedaydelete", method = RequestMethod.GET) // 원데이클래스 관리자 삭제하기 기능 넣기
+	
+	
+	// 관리자 원데이클래스 삭제
+	@RequestMapping(value = "/onedaydelete", method = RequestMethod.GET) 
 	@ResponseBody
 	public void onedaydelete(HttpServletRequest request, HttpServletResponse response,
 			@RequestParam(value = "checkArray[]") List<Object> checkArr) {
@@ -262,6 +272,19 @@ public class OnedayController {
 
 	}
 
+	
+	
+	
+	
+	 //관리자 원데이 클래스 등록하는 곳으로 이동
+	@RequestMapping(value = "/onedayInsert", method = RequestMethod.GET)
+	public ModelAndView onedayInsert(ModelAndView mv, HttpServletRequest request) {
+		mv.setViewName("OnedayClass/onedayInsert");
+		return mv;
+	}
+	
+	
+	//관리자 원데이 클래스 등록 
 	@RequestMapping(value = "/onedayInsertResult", method = RequestMethod.POST, headers = ("content-type=multipart/*")) 
 	public ModelAndView onedayInsertResult(ModelAndView mv, HttpServletRequest request,
 			@RequestParam(name = "oneinsertS", required = false) MultipartFile report) throws Exception {
@@ -314,6 +337,10 @@ public class OnedayController {
 
 	}
 
+	
+	
+	
+	//관리자 원데이 클래스 수정페이지 이동
 	@RequestMapping(value = "/onedayupdate", method = RequestMethod.GET) // 클래스 수정 oneday 에 update
 //	@ResponseBody
 	public ModelAndView onedayupdate(ModelAndView mv, @RequestParam(name = "onedayNo") String oneday_no) {
@@ -327,6 +354,12 @@ public class OnedayController {
 		return mv;
 	}
 
+	
+	
+	
+	
+	
+	//관리자 원데이 클래스 수정
 	@RequestMapping(value = "/onedayUpdateRs", method = RequestMethod.POST) // 클래스 수정 oneday 에 update
 	public ModelAndView onedayUpdateRs(ModelAndView mv, OnedayVo oneUVo, HttpServletResponse response,
 			HttpServletRequest request, @RequestParam(name = "oneinsertS", required = false) MultipartFile report)
@@ -375,12 +408,12 @@ public class OnedayController {
 		return mv;
 	}
 
-	@RequestMapping(value = "/onedayInsert", method = RequestMethod.GET) // 클래스 등록 oneday 에 insert 입력하는곳으로 이동
-	public ModelAndView onedayInsert(ModelAndView mv, HttpServletRequest request) {
-		mv.setViewName("OnedayClass/onedayInsert");
-		return mv;
-	}
+	
+	
+	
+	
 
+	//이미지 저장 메소드  (외부 서버 연결)
 	private String saveFile(MultipartFile report, HttpServletRequest request) {
 		String root = request.getSession().getServletContext().getRealPath("resources");
 		String savePath = root + "\\img";
@@ -419,8 +452,12 @@ public class OnedayController {
 		
 		return url;
 	}
-
-	private void removeFile(String monthly_img, HttpServletRequest request) { // 사용안함 나중에 삭제하기
+	
+	
+	
+	
+ // 사용안함 나중에 삭제하기
+	private void removeFile(String monthly_img, HttpServletRequest request) {
 		String root = request.getSession().getServletContext().getRealPath("resources");
 		String savePath = root + "\\img";
 
@@ -437,15 +474,3 @@ public class OnedayController {
 	}
 
 }
-
-// ????????????????????????????????????????????강사님이 해주심???????????????????   
-//	@RequestMapping(value = "/onedayReserve", method = RequestMethod.GET) // 클래스 예약 rs에 insert
-//	public ModelAndView onedayReserve(ModelAndView mv, @RequestParam(name = "onedayNo") int oneday_no) {
-//		OnedayVo one = new OnedayVo();
-//		one.setOneday_no(oneday_no);
-//		OnedayVo oneVo = oService.onedayselect(one); // selectone 메소드 실행
-//		
-//		mv.addObject("oneVo", oneVo);
-//		mv.setViewName("OnedayClass/onedayRegister");
-//		return mv;
-//	}

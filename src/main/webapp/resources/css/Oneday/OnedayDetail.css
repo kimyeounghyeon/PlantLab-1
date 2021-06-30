@@ -31,7 +31,12 @@
 	height: 130px;
 }
 
-
+#detailTitle{
+	font-size: 20pt;
+	font-weight: bold;
+	
+	
+}
 #classImg {
 	line-height: 550px;
 	text-align: center;
@@ -106,6 +111,18 @@
 	border: 1px solid black;
 	width: 250px;
 	cursor: pointer;
+	border: 1px solid #ccc;
+	color: black;
+	background-color: #ccc;
+	font-size: 15px;
+	font-weight: bold;
+	
+}
+
+
+#classBtn:hover {
+	background-color: #625b54;
+	color: white;
 }
 /* #classBtn {
 	clear: both;
@@ -126,4 +143,20 @@
 	height: 553px;
 	margin: 0 auto;
 	padding: 0;
+}
+
+#map{
+	margin-left: auto;
+	margin-right: auto;
+	position:relative; 
+	width: 600px; 
+	height: 500px;
+	margin-top: 20px;
+	
+}
+
+.infodetail{
+	clear:both;
+	display: block;
+	margin-right: 1060px;
 }

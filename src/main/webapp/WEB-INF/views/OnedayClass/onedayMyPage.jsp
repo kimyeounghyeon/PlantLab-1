@@ -9,7 +9,9 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<link href="${path}/resources/css/font.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/jejumyeongjo.css"/>
+<link href="${path}/resources/css/header.css" rel="stylesheet" />
+<link href="${path}/resources/css/footer.css" rel="stylesheet" />
 <link href="${path}/resources/css/Oneday/OnedayMyPage.css"
 	rel="stylesheet" />
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -32,7 +34,7 @@
 				<table id ="myOneTabel" >
 				<tr>
 				<td rowspan="3"  id="myImg">
-				<div class="oneimg"><img src= "${pageContext.request.contextPath}/resources/img/${one.oneday_img }" alt="img" class="oneimg"></div>
+				<div class="oneimg"><img src="${one.oneday_img }"  alt="img" class="oneimg"></div>
 				</td>
 				<td  class="oTD" id="myOne">${one.oneday_title}</td>
 				</tr>
@@ -89,5 +91,6 @@
 				})
 			})
 					</script>
+<jsp:include page="../footer.jsp"></jsp:include>
 </body>
 </html>
