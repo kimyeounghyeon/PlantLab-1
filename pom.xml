@@ -195,6 +195,12 @@
 			<version>2.8.5</version>
 		</dependency>
 
+		<!-- 외부서버로 이미지 저장 -->
+		<dependency>
+			<groupId>com.cloudinary</groupId>
+			<artifactId>cloudinary-http44</artifactId>
+			<version>1.27.0</version>
+		</dependency>
 
 
 		<!-- @Inject -->
@@ -222,6 +228,7 @@
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
 		</dependency>
+<<<<<<< HEAD
 		<!-- https://mvnrepository.com/artifact/javax.mail/mail -->
 		<dependency>
 			<groupId>javax.mail</groupId>
@@ -236,6 +243,8 @@
 			<version>${org.springframework-version}</version>
 		</dependency>
 
+=======
+>>>>>>> e6749bb45a70a6466a557fb924b383d7cbfd97e3
 
 		<!-- Test -->
 		<dependency>
