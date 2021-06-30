@@ -14,8 +14,11 @@
 </head>
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
+
 	<div id="content" class="contents">
 		<section id="main_section">
+			<div class="main_header">
+		    </div>
 			<div class="rain front-row"></div>
 	      		<img src="${path}/resources/img/mainImg.png" id="mainImg">
 	    	<div class="rain back-row"></div>

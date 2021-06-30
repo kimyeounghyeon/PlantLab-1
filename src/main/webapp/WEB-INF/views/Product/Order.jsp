@@ -158,8 +158,8 @@
                             <tr>
                                 <td><span>연락처</span></td>
                                 <td>
-                                    <input type="text" class="info" name="phone" value="${user.phone}">
-                                    <span class="alert">숫자만 입력해주세요.</span>
+                                    <input type="text" class="info phone"   name="phone" value="${user.phone}">
+                                    <span class="alert"><p>숫자만 입력해주세요.<p></span>
                                 </td>
                             </tr>
                             <tr>
@@ -194,8 +194,8 @@
                             <tr>
                                 <td><span>연락처</span></td>
                                 <td>
-                                    <input type="text" class="info" name="buy_rc_phone">
-                                    <span class="alert">숫자만 입력해주세요.</span>
+                                    <input type="text" class="info phone" name="buy_rc_phone">
+                                    <span class="alert"><p>숫자만 입력해주세요.<p></span>
                                 </td>
                             </tr>
                             <tr>
@@ -237,11 +237,12 @@
                                        
                                         <input type="radio" name="buy_paymentmethod" value="phone" id="phone">
                                         <label for="phone">휴대폰결제</label>
-                                    </div>
-                                    <div>
+                                        <br>
+                                         
                                         <input type="radio" name="buy_paymentmethod" value="trans" id="bank">
                                         <label for="bank">계좌이체</label>
-                                        <br>
+                                    </div>
+                                    <div>
                                         <input type="radio" name="buy_paymentmethod" value="vbank" id="virtual">
                                         <label for="virtual">가상계좌</label>
                                     </div>
@@ -264,6 +265,27 @@
 </body>
 <script>
 	$(function(){
+		//유효성검사
+		var phoneJ = /^[0-9]{9,11}$/;
+		
+		var phoneInput = $(".phone");
+		phoneInput.focusout(function(){
+			 if(!phoneJ.test($(this).val())){
+                 console.log('형식에 맞지 않습니다.');
+                 var text = $(this).next().find('p');
+                 text.css("color","red");
+                 $(this).focus();
+                 console.log("3::"+text.css("color"));
+             }else{
+                 console.log('사용가능합니다.');
+             }
+             
+			console.log(phoneJ.test($('#phone').val()));
+			
+		});
+		
+		
+		
 		//주문자 체크박스
 		var prock = $('input[name=prock]');
 		prock.click(function(){

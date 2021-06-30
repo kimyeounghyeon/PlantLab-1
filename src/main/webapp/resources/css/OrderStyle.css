@@ -163,8 +163,9 @@
 	cursor: pointer;
 }
 
-.orderer .alert{
+.orderer .alert p{
     margin-left: 10px;
+    display: inline-block;
 }
 
 .checkContain{
