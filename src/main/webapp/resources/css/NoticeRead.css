@@ -4,7 +4,16 @@
 }
 
 
-
+.btnsave {
+	width: 140px;
+	background-color: #e0e0e0;
+	border: none;
+	text-align:center;
+	padding:5px;
+	margin:5px;
+	cursor: pointer;
+	font-weight: bold;
+}
 
 .maintb {
 	position: relative;

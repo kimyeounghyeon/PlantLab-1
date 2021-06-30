@@ -61,9 +61,10 @@
 </c:if></tr>
 
 <tr><td colspan="4" class="content">${read.notice_content}</td></tr>
-
+<tr><td colspan="4" class="btn"><button type ="button" class="btnsave" onclick="location.href='nwrite.do'">목록으로 돌아가기</button></td></tr>
 
 </table>
+
 
 </c:if>
 	<jsp:include page="../footer.jsp"></jsp:include>

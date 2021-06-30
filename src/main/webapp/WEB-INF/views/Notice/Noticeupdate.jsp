@@ -59,7 +59,7 @@
 <div><input name="notice_title" size="81" value="${data.notice_title}" type="text"/></div></td></tr>
 <tr><td><textarea name="notice_content" id="notice_content" rows="8"
 							cols="80">${data.notice_content}</textarea></td></tr>
-<tr><td class="wbtn"><button type="submit">수정</button></td></tr>
+<tr><td class="wbtn"><button class="btnsave" type="submit">수정</button></td></tr>
 </form></table>
 
 </c:if>
