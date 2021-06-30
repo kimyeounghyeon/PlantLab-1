@@ -4,7 +4,9 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -27,6 +29,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import com.plant.lab.member.model.vo.MemberVO;
 import com.plant.lab.oneday.model.service.OnedayServiceImpl;
 import com.plant.lab.oneday.model.vo.OnedayVo;
@@ -258,11 +262,7 @@ public class OnedayController {
 
 	}
 
-	@RequestMapping(value = "/onedayInsertResult", method = RequestMethod.POST, headers = ("content-type=multipart/*")) // 클래스
-																														// 등록
-																														// oneday
-																														// 에
-																														// insert
+	@RequestMapping(value = "/onedayInsertResult", method = RequestMethod.POST, headers = ("content-type=multipart/*")) 
 	public ModelAndView onedayInsertResult(ModelAndView mv, HttpServletRequest request,
 			@RequestParam(name = "oneinsertS", required = false) MultipartFile report) throws Exception {
 		System.out.println("여기로 들어오나요?~");
@@ -272,9 +272,10 @@ public class OnedayController {
 		oneIVo.setOneday_title(oneinsertN);
 		System.out.println("여기2");
 		try {
-			if (report != null && !report.equals(""))
-				saveFile(report, request);
-			oneIVo.setOneday_img(report.getOriginalFilename());
+			if (report != null && !report.equals("")) {
+				String url = saveFile(report, request);
+				oneIVo.setOneday_img(url);
+			}
 		} catch (Exception e) {
 			mv.addObject("msg", "파일 업로드가 실패했습니다.");
 			mv.setViewName("errorPage");
@@ -300,11 +301,14 @@ public class OnedayController {
 
 		String oneinsertDE = request.getParameter("oneinsertDE");
 		oneIVo.setOneday_end(oneinsertDE);
+		
+		System.out.println("vo체크::::"+oneIVo);
 		oService.onedayinsert(oneIVo);
+		
 		mv.addObject("oneIVo", oneIVo);
 		System.out.println("oneIvVo입니당:" + oneIVo);
 		mv.addObject("oneIVo", oneIVo);
-//			mv.addObject("msg", "클래스 등록에 성공했습니다.");
+		mv.addObject("msg", "클래스 등록에 성공했습니다.");
 		mv.setViewName("redirect:/onedayAdmin");
 		return mv;
 
@@ -336,9 +340,10 @@ public class OnedayController {
 		oneUVo.setOneday_title(oneinsertN);
 		System.out.println("여기2");
 		try {
-			if (report != null && !report.equals(""))
-				saveFile(report, request);
-			oneUVo.setOneday_img(report.getOriginalFilename());
+			if (report != null && !report.equals("")) {
+				String url = saveFile(report, request);
+				oneUVo.setOneday_img(url);
+			}
 		} catch (Exception e) {
 			mv.addObject("msg", "파일 업로드가 실패했습니다.");
 			mv.setViewName("errorPage");
@@ -376,28 +381,43 @@ public class OnedayController {
 		return mv;
 	}
 
-	private void saveFile(MultipartFile report, HttpServletRequest request) {
+	private String saveFile(MultipartFile report, HttpServletRequest request) {
 		String root = request.getSession().getServletContext().getRealPath("resources");
-//		String root = request.getSession().getServletContext().getRealPath("/");
-
-		String savePath = root + "resources\\img";
-		System.out.println();
+		String savePath = root + "\\img";
 		File folder = new File(savePath);
+		String url = "";
 		if (!folder.exists()) {
 			folder.mkdir(); // 폴더가 없다면 생성한다.
 		}
+		
 		String filePath = null;
+		
 		try { // 파일 저장
 			System.out.println(report.getOriginalFilename() + "을 저장합니다.");
 			System.out.println("저장 경로 : " + savePath);
+			
 			filePath = folder + "\\" + report.getOriginalFilename();
+			
 			report.transferTo(new File(filePath)); // 파일을 저장한다
+			
+			Map config = new HashMap();
+			config.put("cloud_name", "djdjsp7t1");
+			config.put("api_key", "862183527995216");
+			config.put("api_secret", "TBR2K0Q2UcJ3BbbFG0JdWxVjXXI");
+			Cloudinary cloudinary = new Cloudinary(config);
+			
+			Map res = cloudinary.uploader().upload(new File(filePath), ObjectUtils.emptyMap()); 
+			url = res.get("url") == null ? "" : res.get("url").toString(); 
+			System.out.println("::::"+url);
+
 			System.out.println("파일 명 : " + report.getOriginalFilename());
 			System.out.println("파일 경로 : " + filePath);
 			System.out.println("파일 전송이 완료되었습니다.");
 		} catch (Exception e) {
 			System.out.println("파일 전송 에러 : " + e.getMessage());
 		}
+		
+		return url;
 	}
 
 	private void removeFile(String monthly_img, HttpServletRequest request) { // 사용안함 나중에 삭제하기
