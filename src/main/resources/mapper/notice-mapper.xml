@@ -5,19 +5,47 @@
 <mapper namespace="Notice">
 
 
-<select id="NoticeList" resultType="NoticeVo" parameterType="NoticeVo">
+
+
+
+ <select id="NoticeList" resultType="arrylist" parameterType="String">
 select notice_no,notice_title,notice_date
 from Notice_TB
-order by
-notice_no desc
+ ORDER BY 
+notice_no desc,
+notice_date desc
+
+</select>
+	<select id="NoticeCnt" resultType="int">
+		SELECT count(*) FROM Notice_TB
+	</select>
+
+	<insert id="NoticeInsert" parameterType="NoticeVo" statementType="PREPARED" flushCache="true">
+	INSERT INTO Notice_TB (notice_no,notice_title,notice_content,notice_date,user_no) values(Notice_SEQ.nextVal, #{notice_title}, #{notice_content}, sysdate,#{user_no})
+	</insert>		
+
+
+
+<select id="NoticeRead" resultType="NoticeVo" parameterType="NoticeVo">
+select * from Notice_TB
+where notice_no= #{notice_no}
 </select>
 
 
+  <update id="NoticeUpdate" parameterType="NoticeVo" flushCache="true" statementType="PREPARED" >
+  update Notice_TB
+  set notice_title =#{notice_title},notice_content =#{notice_content}
+  where notice_no =#{notice_no}
+  </update>
+	
 
-<insert id="NoticeInsert" parameterType="NoticeVo" statementType="PREPARED" flushCache="true">
-INSERT INTO Notice_TB (notice_no,notice_title,notice_content,notice_date)
-VALUES  (#{notice_title},#{content_content})
-</insert>		
+	
+	<delete id="NoticeDel" parameterType="int" flushCache="true" statementType="PREPARED">
+	delete from Notice_TB
+	 WHERE notice_no = #{notice_no}
+	</delete>
+
+
 </mapper>
 
 
