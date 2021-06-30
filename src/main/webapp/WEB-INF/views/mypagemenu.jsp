@@ -57,7 +57,7 @@ width: 1280px;
                         <li><a class="linkmenu" href="#">내가 쓴 게시글</a></li>
                         <li><a class="linkmenu" href="<%=request.getContextPath()%>/nlist.do">문의하기</a></li>
                         <li><a class="linkmenu" href="#">구매후기</a></li>
-                        <li><a class="linkmenu" href="#">개인 정보 수정</a></li>
+                        <li><a class="linkmenu" href="<%=request.getContextPath()%>/update">개인 정보 수정</a></li>
                          <li><a class="linkmenu" href="#">회원탈퇴</a></li>
                 </ul>
         </nav>

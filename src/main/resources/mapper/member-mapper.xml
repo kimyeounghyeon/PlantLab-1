@@ -19,14 +19,7 @@
 	<select id="countMember" resultType="MemberVO">
 		select count(*) as count from user_tb 
 	</select>
-	
-	<select id="maxMemberId" resultType="string">
-		select nvl(max(user_id), 1) from user_tb 
-	</select>
-	
-	<select id="getMemberName" parameterType="string" resultType="string">
-		select user_name from member where user_id=#{userId}
-	</select>
+
 	
 	<select id="searchMember2" parameterType="MemberVO" resultType="MemberVO">
 		select user_id as userId, user_name as userName from user_tb where id=#{userId}
@@ -47,5 +40,9 @@
 	<select id="isValidId"  parameterType="string" resultType="Integer">
 		SELECT COUNT(*) FROM user_tb WHERE USER_ID = #{userId}
 	</select>
+	
+	<update id="memberUpdate" parameterType="MemberVO" >
+		UPDATE USER_TB SET user_pwd = #{userPwd}, phone = #{phone}, address = #{address} WHERE USER_ID = #{userId}
+	</update>
 
 </mapper>
