@@ -1,0 +1,51 @@
+@charset "UTF-8";
+
+
+* {
+	font-family: 'Jeju Myeongjo';
+}
+
+
+a {
+	text-decoration: none;
+	color: black;
+}
+
+
+.tbb {
+
+	width: 150px;
+	height: 250px;
+	position: relative;
+	margin-left:50px;
+	color: black;
+	float: left;
+	font-weight: bold;
+}
+.btnsave {
+	width: 140px;
+	background-color: #e0e0e0;
+	border: none;
+	text-align:center;
+	cursor: pointer;
+	font-weight: bold;
+}
+.wr{height:0px;
+text-align:left;
+padding-left:5px;
+font-weight:bold;}
+
+.wbtn {
+	text-align: center;
+}
+button {
+	width: 140px;
+	background-color: #e0e0e0;
+	border: none;
+}
+textarea {
+	border-left: none;
+	border-right: none;
+}input {
+	border: none;
+}

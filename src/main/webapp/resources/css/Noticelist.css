@@ -1,0 +1,61 @@
+@charset "UTF-8";
+
+
+
+* {
+	font-family: 'Jeju Myeongjo';
+}
+
+
+
+.bo {
+	text-align: left;
+	padding-left: 50px;
+}
+.wr{height:0px;}
+.maintb {
+	position: relative;
+	float: right;
+	margin: auto;
+	border-collapse: collapse;
+	border: 0px;
+	height: 200px;
+	width: 60%;
+	margin-right:200px;
+}
+
+.no {
+	padding-right: 200px;
+	padding-left: 200px;
+	text-align: center;
+}
+
+.sub {
+	border-bottom: 1px solid #BDBDBD;
+	border-top: 1px solid #BDBDBD;
+	background: #e0e0e0;
+}
+
+.tbb {
+font-weight:bold;
+	width: 150px;
+	height: 250px;
+	position: relative;
+	margin-left:50px;
+	color: black;
+	float: left;
+}
+h3{
+text-align:left;
+position: relative;
+}
+
+.wbtn {
+	width: 80px;
+	height: 30px;
+	border: solid 1px #e0e0e0;
+	border-radius: 10px;
+	background-color: #e0e0e0;
+	cursor: pointer;
+}
+.btn{text-align:center;}

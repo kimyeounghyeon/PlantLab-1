@@ -8,7 +8,9 @@
  <select id="NoticeList" resultType="NoticeVo" parameterType="String">
 select notice_no,notice_title,notice_date
 from Notice_TB
-
+ ORDER BY 
+notice_no desc,
+notice_date desc
 </select>
 
 	<select id="NoticeCnt" resultType="int">

@@ -6,38 +6,67 @@
 <html>
 <head>
 <meta charset="UTF-8">
+
+
 <title>읽기에욤</title>
+<link href="${path}/resources/css/login.css" rel="stylesheet"
+	type="text/css" />
+<link href="${path}/resources/css/header.css" rel="stylesheet" />
+<link href="${path}/resources/css/footer.css" rel="stylesheet" />
+<link href="${path}/resources/css/NoticeRead.css" rel="stylesheet" />
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/earlyaccess/jejumyeongjo.css" />
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+
+
 
 </head>
-<body>
-	<jsp:include page="../header.jsp"></jsp:include>
+<body><jsp:include page="../header.jsp"></jsp:include>
+	<jsp:include page="../mypagemenu.jsp"></jsp:include>
 <c:if test="${empty loginMember.userName}">
 <div id="mem">회원이 아닙니다.
+</div></c:if>
+<nav class="tbb">
+<table>
+			<tr>
+				<td>카테고리</td>
+			</tr>
+			<tr>
+				<td><hr></td>
+			</tr>
+			<tr class="cateList">
+				<td><a href="${path}/#">1:1 문의하기</a></td>
+			</tr>
+			<tr class="cateList">
+				<td><a href="${path}/nlist.do">공지사항</a></td>
+			</tr>
+			<tr class="cateList">
+				<td><a href="${path}/">자주 묻는 질문</a></td>
+			</tr>
+		</table></nav>
 
-</div>
-</c:if>
+
  <c:if test="${!empty loginMember}">
-		환영합니다
-<table border=1 >
-
+<table class="maintb" >
+<tr><td class="h2"colspan="4">공지 사항</td></tr>
 <tr>
-<th>${read.notice_title}</th>
+<td class="sub"colspan="4">${read.notice_title}</td>
 </tr>
-<tr><td>${read.notice_date}</td></tr>
-<tr><td>${read.notice_content}</td></tr>
-<tr><td>
-<input type="button" value="목록가자" id=back onclick="window.location='nlist.do'">
-
+<tr ><td class="datetb" colspan="2">${read.notice_date}</td>
 <c:if test="${loginMember.grade==1}">
-<input type ="button" value="수정하자" id =edit onclick="nupdate(${read.notice_no})"/>
-<input type="button" value="삭제" onclick ="ndelete(${read.notice_no})">
-</c:if>
-</td></tr>
+<td class="kan"><input class="wbtn" type ="button" value="수정" id =edit onclick="nupdate(${read.notice_no})"/></td>
+<td class="kan" id="del"><input class="wbtn" type="button" value="삭제" onclick ="ndelete(${read.notice_no})"></td>
+</c:if></tr>
+
+<tr><td colspan="4" class="content">${read.notice_content}</td></tr>
 
 
 </table>
 
 </c:if>
+	<jsp:include page="../footer.jsp"></jsp:include>
 </body>
 <script> function ndelete(notice_no){
 	var chek = confirm("정말 삭제하시겠습니까?");

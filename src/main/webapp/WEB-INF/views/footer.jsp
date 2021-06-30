@@ -7,6 +7,6 @@
 	<footer id="ft">
 		<div>
 				회사명: 무이림無以林&nbsp;&nbsp;대표: 플랜트랩 <br>주소&nbsp;:&nbsp;서울특별시 강남구
-				강남구 테헤란로14길 6 <br><a href="${path}/nlist.do">고객센터</a>&nbsp;/&nbsp;공지사항
+				강남구 테헤란로14길 6 <br>고객센터&nbsp;/&nbsp;<a href="${path}/nlist.do">공지사항</a>
 		</div>
 	</footer>
