@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>수정</title>
+<title>수정하기...</title>
 </head>
 <body>
 
