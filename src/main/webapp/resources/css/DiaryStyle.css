@@ -45,6 +45,7 @@
 	border-collapse: collapse;
 	float : left;
 	margin-left : 60px;
+	margin-bottom : 250px;
 }
 
 .tdiary td {
@@ -81,29 +82,17 @@
 }
 
 
-.dcontent {
-	height : 70px;
-	width: 350px;
-	white-space: nowrap;
-    overflow: hidden;
-	text-overflow: ellipsis;
-}
 
 .alinkdiv {
-	height : 70px;
+	height : 60px;
 	width: 350px;
 	white-space: nowrap;
     overflow: hidden;
 	text-overflow: ellipsis;
+	line-height : 60px;
 }
 
-.contexttr {
-	height : 70px;
-	width: 350px;
-	white-space: nowrap;
-    overflow: hidden;
-	text-overflow: ellipsis;
-}
+
 
 .like {
 	width : 30px;
@@ -130,6 +119,7 @@
 	margin-top : auto;
 	border-right: none;
 	width: 30px;
+	margin : 0px;
 }
 
 .liketdcnt {

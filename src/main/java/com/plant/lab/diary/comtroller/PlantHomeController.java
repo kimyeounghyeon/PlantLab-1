@@ -110,7 +110,7 @@ public class PlantHomeController {
 	@RequestMapping(value = "/detaildiary.do", method = RequestMethod.GET, produces = "application/text; charset=UTF-8")
 	@ResponseBody
 	public void diaryDetail(ModelAndView mv, HttpSession session, @RequestParam(name = "diary_no") int diary_no,
-			HttpServletResponse response) {
+			HttpServletResponse response, HttpServletRequest request) {
 		response.setCharacterEncoding("UTF-8");
 
 		System.out.println("[영현]detailDiary 진입");
@@ -119,9 +119,15 @@ public class PlantHomeController {
 		LikeVO sessionVO = new LikeVO();
 
 		MemberVO member = (MemberVO) session.getAttribute("loginMember");
+		
 		sessionVO.setUser_no(member.getUserNo());
 		sessionVO.setDiary_no(diary_no);
 
+		String user_id = member.getUserId();
+		System.out.println("로그인 한 아이디 " + user_id);
+		
+		
+		
 		List<DiaryVO> detailList = dService.detailDiary(diary_no);
 		List<Integer> likeList = dService.likeList(sessionVO);
 		List<CommentVO> listComment = dService.selectComment(diary_no);
@@ -130,6 +136,7 @@ public class PlantHomeController {
 		map.put("likeList", likeList);
 		map.put("detailList", detailList);
 		map.put("listComment", listComment);
+		map.put("user_id", user_id);
 
 
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();

@@ -16,6 +16,7 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 </head>
 <body>
+<% String user_id = (String)session.getAttribute("userId"); %>
 	<jsp:include page="../header.jsp"></jsp:include>
 	<div class="bgdiv">
 		<h3 class="subtitle">detail diary</h3>
@@ -49,13 +50,19 @@
 				var listComment = data.listComment;
 				console.log(listComment);
 				
+				var user_id = data.user_id;
 
 
 				var dnotice = "";
 				$.each(detailList, function(i, item){
                     dnotice += "<div class = 'dtdiary' id='dno_"+item.diary_no+"'><input type='hidden' class='knowdno' value='"+item.diary_no+"'>";
                     dnotice += "<table class='dtdiarytb'><tr class='dttr dtidtr'>";
+					if(user_id == item.user_id){
                     dnotice += "<td class='dtwriteid dtidtd' colspan='2'>"+item.user_id+"<button type='button' class='dtbtn ddelete'>삭제</button><button type='button' class='dtbtn dmodify'>수정</button></td></tr>";
+					} else {
+                    dnotice += "<td class='dtwriteid dtidtd' colspan='2'>"+item.user_id+"</td></tr>";
+					}
+
                     dnotice += "<tr class='dttr dtimgtr'><td class='dtdiaryimgtd' colspan='2'><img src='"+item.diary_img_src+"' class='dtdiaryimg'></td></tr>";
                     dnotice += "<tr class='dttr dtliketr'>"
                     var loop_flag = false;
@@ -73,13 +80,17 @@
                     }
                     dnotice += "<td class='dtliketdcnt'>좋아요 "+item.like_cnt+"개</td></tr>";
                     dnotice += "<tr class='dttr dtcontenttr'><td class='dtdcontent' colspan='2'>"+item.diary_content+"</td></tr>";
-                    dnotice += "<tr class='dttr dtinsertcommtr'><td class='dtinsertcommwriter'>"+item.user_id+"</td><td class='dtinsertcommcontent'><input type='text' class='writecomment' placeholder='댓글을 입력해주세요.'><button type='button' class='dtbtn insertcomm'>등록</button></td></tr>";
+                    dnotice += "<tr class='dttr dtinsertcommtr'><td class='dtinsertcommwriter'>"+user_id+"</td><td class='dtinsertcommcontent'><input type='text' class='writecomment' placeholder='댓글을 입력해주세요.'><button type='button' class='dtbtn insertcomm'>등록</button></td></tr>";
                  });
 				
 				if(listComment != null) {
 				$.each(listComment, function(i, item){
+					if(user_id == item.user_id){
                     dnotice += "<tr class='dttr dtlistcommtr'><td class='commwriter'>"+item.user_id+"</td><input type='hidden' class='comm_no' value='"+item.comm_no+"'><td class='dtlistcomm'>"+item.comm_comment+"<button type='button' class='dtbtn commdelete'> &#10005 </button><button type='button' class='dtbtn commmodify'>수정</button></td></tr>";
-            
+ 
+					} else {
+                    dnotice += "<tr class='dttr dtlistcommtr'><td class='commwriter'>"+item.user_id+"</td><input type='hidden' class='comm_no' value='"+item.comm_no+"'><td class='dtlistcomm'>"+item.comm_comment+"</td></tr>";
+					}
 				});
 				
 				}
@@ -173,16 +184,11 @@
 					},
  			dataType : "json",
 		success : function(data) {
-/* 				var comment = data.comment;
- */
-				console.log("댓글 번호~" + $(".comm_no").val());
 				console.log(data);
 				data = data[0];
 				console.log("data" + data);
- 				//$.each(comment, function(i, item){
 				$(".dtinsertcommtr").after("<tr class='dttr dtlistcommtr'><td class='commwriter'>"+data.user_id+"</td><td class='dtlistcomm'>"+data.comm_comment+"<button type='button' class='dtbtn commdelete'> &#10005 </button><button type='button' class='dtbtn commmodify'>수정</button></td></tr>");
-
-				/* }); */
+				$(".writecomment").val("");
 			},
 			error : function(data) {
 				console.log("댓글 등록 실패~" + data);
@@ -190,6 +196,41 @@
 			}
 		});
 	});
+	
+		
+		
+		// 댓글 삭제
+			$(document).on("click", ".commdelete", function(){
+				let dnoKnow = $(".knowdno").val();
+				var thisComm = $(this);
+				console.log(thisComm);
+				
+				var findParent = thisComm.parents(".dtlistcommtr");
+				console.log(findParent);
+				
+				var findChild = findParent.find(".comm_no");
+				
+				var thisComm_no = findChild.val();
+				console.log(thisComm_no);
+
+				
+				$.ajax({
+					url : "deleteComment.do",
+					type : "post",
+					data : { diary_no : dnoKnow,
+							 comm_no : thisComm_no
+							},
+					success : function(){
+							
+					};
+						});
+					});
+				
+
+			});
+			
+
+	
 	
 	
 	// 글 삭제
