@@ -7,8 +7,10 @@
 <head>
 <meta charset="UTF-8">
 <title>無以林 Write Diary</title>
-<link href="${path}/resources/css/WriteDiaryStyle.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/jejumyeongjo.css"/>
+<link href="${path}/resources/css/header.css" rel="stylesheet" />
+<link href="${path}/resources/css/footer.css" rel="stylesheet" />
+<link href="${path}/resources/css/WriteDiaryStyle.css" rel="stylesheet" />
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src = "${path }/resources/ckeditor/ckeditor.js"></script>
 </head>
@@ -18,7 +20,7 @@
 	<h3 class="subtitle">Write diary</h3>
 	<div class="writecontent">
 	<form id="diaryfrm" action="diaryInsert.do" method="POST" enctype="multipart/form-data">
- 	<input type="file"  name="diaryUpload"  style= "display: inline-block;" />
+ 	<input multiple="multiple" type="file" name="diaryUpload"  style= "display: inline-block;" />
 	<textarea name="writetext" rows="30" cols="80" id="writetext" placeholder="내용을 입력하세요" >
 	</textarea>
 <%-- 	<input type="hidden" class="writeDno" value="${diary_no }">

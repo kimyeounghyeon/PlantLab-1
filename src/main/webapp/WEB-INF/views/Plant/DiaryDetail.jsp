@@ -7,10 +7,11 @@
 <head>
 <meta charset="UTF-8">
 <title>無以林 Diary detail</title>
-<link rel="stylesheet"
-	href="https://fonts.googleapis.com/earlyaccess/jejumyeongjo.css" />
-<link href="${path}/resources/css/DetailDiaryStyle.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/jejumyeongjo.css"/>
+<link href="${path}/resources/css/header.css" rel="stylesheet" />
+<link href="${path}/resources/css/footer.css" rel="stylesheet" />
 <link href="${path}/resources/css/DiaryStyle.css" rel="stylesheet" />
+<link href="${path}/resources/css/DetailDiaryStyle.css" rel="stylesheet" />
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 </head>
@@ -150,6 +151,8 @@
 	
 	// 수정 페이지
 		$(document).on("click", ".dmodify", function(){
+		let dnoKnow = $(".knowdno").val();
+		
 		location.href="modifydiary?diary_no="+dnoKnow;
 	});
 	

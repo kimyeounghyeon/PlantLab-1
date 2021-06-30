@@ -7,9 +7,10 @@
 <head>
 <meta charset="UTF-8">
 <title>無以林 Diary</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/jejumyeongjo.css"/>
+<link href="${path}/resources/css/header.css" rel="stylesheet" />
+<link href="${path}/resources/css/footer.css" rel="stylesheet" />
 <link href="${path}/resources/css/DiaryStyle.css" rel="stylesheet" />
-<link rel="stylesheet"
-	href="https://fonts.googleapis.com/earlyaccess/jejumyeongjo.css" />
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 </head>
@@ -56,7 +57,7 @@
 	                              dnotice += "<div class = 'ddiary' id='dno_"+item.diary_no+"'>";
 	                              dnotice += "<table class='tdiary'><tr class='ttr idtr'>";
 	                              dnotice += "<td class='writeid idtd' colspan='2'>"+item.user_id+"</td></tr>";
-	                              dnotice += "<tr class='ttr imgtr'><td class='diaryimg' colspan='2'><img src='"+item.diary_img_src+"' class='diaryimg'></td></tr>";
+	                              dnotice += "<tr class='ttr imgtr'><td class='diaryimg' colspan='2'><a href='detaildiary?diary_no="+item.diary_no+"'><img src='"+item.diary_img_src+"' class='diaryimg'></a></td></tr>";
 	                              dnotice += "<tr class='ttr liketr'>"
 	                              var loop_flag = false;
 	                              for(var j=0; j<likeList.length; j++){

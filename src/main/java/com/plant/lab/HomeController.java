@@ -16,9 +16,9 @@ import com.plant.lab.member.model.vo.MemberVO;
 @Controller
 public class HomeController {
 
-	@RequestMapping(value = "header", method = { RequestMethod.POST, RequestMethod.GET })
+	@RequestMapping(value = "/", method = { RequestMethod.POST, RequestMethod.GET })
 	public String header() {
-		return "/";
+		return "Main";
 	}
 
 	@RequestMapping(value = "mypage", method = { RequestMethod.POST, RequestMethod.GET })
