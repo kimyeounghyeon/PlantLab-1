@@ -23,6 +23,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.plant.lab.diary.model.Service.DiaryService;
@@ -154,7 +156,6 @@ public class PlantHomeController {
 
 		MemberVO member = (MemberVO) session.getAttribute("loginMember");
 
-
 			vo.setDiary_content(diary_content);
 			vo.setDiary_write(member.getUserNo());
 			vo.setUser_id(member.getUserId());
@@ -166,16 +167,21 @@ public class PlantHomeController {
 			int result = -1;
 			int resultSeq = 0;
 			int diary_no = 0;
-
+			
+			
 			try {
-				if (multiFile != null && !multiFile.equals(""))
-					saveFile(multiFile, request);
-				String path = "\\lab\\resources\\diaryImg\\";
-				vo.setDiary_img_src(path+multiFile.getOriginalFilename());
+				if (multiFile != null && !multiFile.equals("")) {
+					String url = saveFile(multiFile, request);
+					vo.setDiary_img_src(url);					
+				}
+				
+				
+				
 			} catch (Exception e) {
 				e.printStackTrace();
 				System.out.println("이미지 저장에 실패했습니다~");
 			}
+			
 			
 			
 			try {
@@ -351,11 +357,11 @@ public class PlantHomeController {
 	}
 
 	// 파일 저장
-	private void saveFile(MultipartFile report, HttpServletRequest request) {
+	private String saveFile(MultipartFile report, HttpServletRequest request) {
 		String root = request.getSession().getServletContext().getRealPath("resources");
 		String savePath = root + "\\diaryImg";
 		File folder = new File(savePath);
-
+		String url = "";
 		if (!folder.exists()) {
 			folder.mkdir(); // 폴더가 없다면 생성한다.
 		}
@@ -369,12 +375,32 @@ public class PlantHomeController {
 			filePath = folder + "\\" + report.getOriginalFilename();
 
 			report.transferTo(new File(filePath)); // 파일을 저장한다
+			
+			
+			
+			// cloudinary.uploader().upload(Object file, Map options);
+			Map config = new HashMap();
+			config.put("cloud_name", "djdjsp7t1");
+			config.put("api_key", "862183527995216");
+			config.put("api_secret", "TBR2K0Q2UcJ3BbbFG0JdWxVjXXI");
+			Cloudinary cloudinary = new Cloudinary(config);
+			
+			Map res = cloudinary.uploader().upload(new File(filePath), ObjectUtils.emptyMap()); 
+			url = res.get("url") == null ? "" : res.get("url").toString(); 
+			System.out.println("::::"+url);
+
+			
+			
+			
 			System.out.println("파일 명 : " + report.getOriginalFilename());
 			System.out.println("파일 경로 : " + filePath);
 			System.out.println("파일 전송이 완료되었습니다.");
+
 		} catch (Exception e) {
 			System.out.println("파일 전송 에러 : " + e.getMessage());
 		}
+
+		return url;
 	}
 
 	// 파일 삭제
