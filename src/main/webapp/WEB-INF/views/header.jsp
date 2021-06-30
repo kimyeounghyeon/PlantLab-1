@@ -35,9 +35,9 @@
 			<div id="tab">
 				
 				<div class="tablinks" id="plant">
-					<a href="${path}/mMain.do" class="Tab">Plant</a>
+					<a href="${path}/mMain" class="Tab">Plant</a>
 					<div id="subtab">
-						<a href="#" id="subtabM" class="sub">Mission</a> 
+						<a href="${path}/attendance" id="subtabM" class="sub">Mission</a> 
 						<a href="${path }/diary" class="sub">Diary</a>
 					</div>
 				</div>

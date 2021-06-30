@@ -7,7 +7,9 @@
 <head>
     <meta charset="UTF-8">
     <title>無以林  event detail</title>
-    <link href="${path}/resources/css/font.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/jejumyeongjo.css"/>
+<link href="${path}/resources/css/header.css" rel="stylesheet" />
+<link href="${path}/resources/css/footer.css" rel="stylesheet" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
     .edetaildiv{
@@ -41,8 +43,9 @@
 					<c:param name="event_title" value="${event_tb.event_title}" />
 					<c:param name="start_date" value="${event_tb.start_date}" />
 					<c:param name="end_date" value="${event_tb.end_date}" />
-					<c:param name="event_content" value="${event_tb.event_content}" />
-					<c:param name="banner" value="${event_tb.banner}" />
+					<c:param name="event_views" value="${event_tb.event_views}" />
+					<c:param name="event_content" value="${path}/resources/img/${event_tb.event_content}" />
+					<c:param name="banner" value="${path}/resources/img/${event_tb.banner}" />
 						
 				</c:url> 
 				<c:url var="edelete" value="eDelete">
@@ -54,5 +57,6 @@
 		</tr>
 	</table>
 	</div>
+	<jsp:include page="../footer.jsp"></jsp:include>
 </body>
 </html>

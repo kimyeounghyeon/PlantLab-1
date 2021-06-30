@@ -28,7 +28,6 @@ public class EventController {
 	
 	@RequestMapping(value = "elist", method = RequestMethod.GET)
 	public ModelAndView eventListService( // 오류가 발생해도 오류메세지 뜨지않는다는 단점..
-			//@RequestParam(name = "event_no") int event_no,
 			@RequestParam(name = "page", defaultValue = "1") int page,
 			ModelAndView mv) {
 		
@@ -39,7 +38,6 @@ public class EventController {
 			
 			logger.info("이벤트 게시글 개수 확인하기 : " + listCount);
 			mv.addObject("list",eService.selectList(currentPage, LIMIT));
-			//mv.addObject("event_views",eService.addReadCount(event_no));
 			mv.addObject("currentPage", currentPage);
 			mv.addObject("maxPage", maxPage);
 			mv.addObject("listCount", listCount);
@@ -79,7 +77,7 @@ public class EventController {
 	}
 
 	@RequestMapping(value = "eInsert", method = RequestMethod.POST)
-	public ModelAndView monthlyInsert(Event_tb e, 
+	public ModelAndView eventInsert(Event_tb e, 
 			@RequestParam(name = "upfile1", required = false) MultipartFile report1,
 			@RequestParam(name = "upfile2", required = false) MultipartFile report2,
 			HttpServletRequest request, ModelAndView mv) {
@@ -98,50 +96,6 @@ public class EventController {
 		return mv;
 	}
 
-
-	private void saveFile(MultipartFile report1, MultipartFile report2, HttpServletRequest request) {
-		String root1 = request.getSession().getServletContext().getRealPath("resources");
-		String root2 = request.getSession().getServletContext().getRealPath("resources");
-		String savePath1 = root1 + "\\img";
-		String savePath2 = root2 + "\\img";
-		File folder1 = new File(savePath1);
-		File folder2 = new File(savePath2);
-		if (!folder1.exists()) {
-			folder1.mkdir(); // 폴더가 없다면 생성한다.
-		}
-		if (!folder2.exists()) {
-			folder2.mkdir(); // 폴더가 없다면 생성한다.
-		}
-		String filePath1 = null;
-		String filePath2 = null;
-		try { // 파일 저장
-			filePath1 = folder1 + "\\" + report1.getOriginalFilename();
-			report1.transferTo(new File(filePath1)); // 파일을 저장한다
-
-			filePath2 = folder2 + "\\" + report2.getOriginalFilename();
-			report2.transferTo(new File(filePath2)); // 파일을 저장한다
-		} catch (Exception e) {
-			System.out.println("파일 전송 에러 : " + e.getMessage());
-		}
-	}
-//	private void saveFile2(MultipartFile report2, HttpServletRequest request) {
-//		String root2 = request.getSession().getServletContext().getRealPath("resources");
-//		String savePath2 = root2 + "\\img";
-//		File folder2 = new File(savePath2);
-//		if (!folder2.exists()) {
-//			folder2.mkdir(); // 폴더가 없다면 생성한다.
-//		}
-//	
-//		String filePath2 = null;
-//		try { // 파일 저장
-//			
-//			filePath2 = folder2 + "\\" + report2.getOriginalFilename();
-//			report2.transferTo(new File(filePath2)); // 파일을 저장한다
-//			
-//		} catch (Exception e) {
-//			System.out.println("파일 전송 에러 : " + e.getMessage());
-//		}
-//	}
 	@RequestMapping(value = "eRenew", method = RequestMethod.GET)
 	public ModelAndView eventUpdateForm(@RequestParam(name = "event_no") int event_no, ModelAndView mv) {
 		try {
@@ -156,7 +110,9 @@ public class EventController {
 		return mv;
 	}
 	@RequestMapping(value = "eUpdate", method = RequestMethod.POST)
-	public ModelAndView eventUpdate(Event_tb e, @RequestParam(name = "page", defaultValue = "1") int page,
+	public ModelAndView eventUpdate(Event_tb e, 
+			//@RequestParam(name = "event_no") int event_no,
+			@RequestParam(name = "page", defaultValue = "1") int page,
 			@RequestParam("upfile1") MultipartFile report1,
 			@RequestParam("upfile2") MultipartFile report2,
 			HttpServletRequest request, ModelAndView mv) {
@@ -169,11 +125,17 @@ public class EventController {
 
 			e.setBanner(report1.getOriginalFilename());
 			e.setEvent_content(report2.getOriginalFilename());
-			mv.addObject("event_tb", eService.updateEvent(e).getEvent_no());
+			logger.info("e값 "+ e.toString());
+			logger.info("==============여기서 막힘   ===============");
+			//mv.addObject("event_no", eService.updateEvent(e).getEvent_no());
+			mv.addObject("event_no", eService.updateEvent(e));
+			//eService.updateEvent(e);
+			logger.info("==============6 ===============");
 			mv.addObject("currentPage", page);
 			mv.setViewName("redirect:elist");
 		} catch (Exception e1) {
 			logger.info("===============이벤트 수정 실패===============");
+			e1.printStackTrace();
 			mv.addObject("msg", e1.getMessage());
 			mv.setViewName("errorPage");
 		}
@@ -186,9 +148,9 @@ public class EventController {
 			logger.info("===============이벤트 삭제 ===============");
 			Event_tb e = eService.selectOne(event_no);
 			removeFile(e.getBanner(),e.getEvent_content(),request);
-			logger.info("===============파일삭제는 성공===============");
+			logger.info("===============배너 사진 삭제는 성공===============");
 			eService.deleteEvent(event_no); //여기서 막히는중 
-			logger.info("===============게시글삭제도 성공===============");
+			logger.info("===============내용 사진 삭제도 성공===============");
 			mv.addObject("currentPage", page);
 			mv.setViewName("redirect:elist");
 		} catch (Exception e1) {
@@ -198,20 +160,48 @@ public class EventController {
 		}
 		return mv;
 	}
-	private void removeFile(String event_content, String banner, HttpServletRequest request) {
+
+	private void saveFile(MultipartFile report1, MultipartFile report2, HttpServletRequest request) {
 		String root = request.getSession().getServletContext().getRealPath("resources");
 		String savePath = root + "\\img";
+		//String savePath2 = root + "\\img";
+		File folder1 = new File(savePath);
+		File folder2 = new File(savePath);
+		if (!folder1.exists()) {
+			folder1.mkdir(); // 폴더가 없다면 생성한다.
+		}
+		if (!folder2.exists()) {
+			folder2.mkdir(); // 폴더가 없다면 생성한다.
+		}
+		String filePath1 = null;
+		String filePath2 = null;
+		try { // 파일 저장
+			filePath1 = folder1 + "\\" + report1.getOriginalFilename();
+			report1.transferTo(new File(filePath1)); // 파일을 저장한다
+			logger.info("===============사진1 저장 ===============");
+			filePath2 = folder2 + "\\" + report2.getOriginalFilename();
+			report2.transferTo(new File(filePath2)); // 파일을 저장한다
+			logger.info("===============사진2 저장 ===============");
+		} catch (Exception e) {
+			System.out.println("파일 전송 에러 : " + e.getMessage());
+		}
+	}
 	
+	private void removeFile(String event_content, String banner, HttpServletRequest request) {
+		String root = request.getSession().getServletContext().getRealPath("resources");
+		
+		String savePath = root + "\\img";
+		//String savePath2 = root + "\\img";
 		String filePath1 = savePath + "\\" + banner;
 		String filePath2 = savePath + "\\" + event_content;
 	try { // 파일 저장
 
 		File delFile1 = new File(filePath1);
 		delFile1.delete();
-		System.out.println("파일1 삭제가 완료되었습니다.");
 		File delFile2 = new File(filePath2);
 		delFile2.delete();
-		System.out.println("파일2 삭제가 완료되었습니다.");
+		logger.info("파일1 삭제가 완료되었습니다.");
+		logger.info("파일2 삭제가 완료되었습니다.");
 	}catch(Exception e1) {
 		System.out.println("파일 삭제 에러 : " + e1.getMessage());
 	}

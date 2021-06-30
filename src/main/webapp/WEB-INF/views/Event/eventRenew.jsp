@@ -7,7 +7,9 @@
 <head>
     <meta charset="UTF-8">
     <title>無以林  event renew</title>
-    <link href="${path}/resources/css/font.css" rel="stylesheet"/>
+   <link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/jejumyeongjo.css"/>
+<link href="${path}/resources/css/header.css" rel="stylesheet" />
+<link href="${path}/resources/css/footer.css" rel="stylesheet" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
     .eReDiv{
@@ -32,9 +34,9 @@
 	<jsp:include page="../header.jsp"></jsp:include>
 	<div class="eReDiv">
 	
-<form action="eInsert" method="post" enctype="multipart/form-data">
+<form action="eUpdate" method="post" enctype="multipart/form-data">
 
-	<input type="hidden">
+	<input type="hidden" name="event_no" value="${event_tb.event_no}">
 		<table class="eretb">
 			<tr>
 				<td>이벤트 제목</td>
@@ -65,13 +67,14 @@
 			</tr>
 			<tr>
 				<td><input type="text"  class="mwn" name="end_date" value="${event_tb.end_date}"></td>
-			</tr>
-		<tr>
-		<br>	
-		<td colspan = "2" align = "center"><input type="submit" id="erebtn" value="수정완료"></td>
-		</tr>	
+				</tr>
+			<tr>
+			<br>	
+			<td colspan = "2" align = "center"><input type="submit" id="erebtn" value="수정완료"></td>
+			</tr>	
 		</table>
 	</form>
 	</div>
+	<jsp:include page="../footer.jsp"></jsp:include>
 </body>
 </html>

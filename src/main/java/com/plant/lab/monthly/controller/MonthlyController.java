@@ -84,20 +84,7 @@ public class MonthlyController {
 		}
 		return mv;
 	}
-	
-	@RequestMapping(value = "mRenew", method = RequestMethod.GET)
-	public ModelAndView monthlyUpdateForm(@RequestParam(name = "monthly_no") int monthly_no, ModelAndView mv) {
-		try {
-			logger.info("===============이달의 식물 수정 페이지 진입 ===============");
-			mv.addObject("monthly", moService.selectOne(monthly_no));
-			mv.setViewName("Monthly/monthlyRenew");
-		} catch (Exception e) {
-			logger.info("===============이달의 식물 수정 페이지 진입 실패===============");
-			mv.addObject("msg", e.getMessage());
-			mv.setViewName("errorPage");
-		}
-		return mv;
-	}
+
 
 	@RequestMapping(value = "mWrite", method = RequestMethod.GET)
 	public String monthlyInsertForm(ModelAndView mv) {
@@ -119,10 +106,25 @@ public class MonthlyController {
 		}
 		return mv;
 	}
-
+	
+	@RequestMapping(value = "mRenew", method = RequestMethod.GET)
+	public ModelAndView monthlyUpdateForm(@RequestParam(name = "monthly_no") int monthly_no, ModelAndView mv) {
+		try {
+			logger.info("===============이달의 식물 수정 페이지 진입 ===============");
+			mv.addObject("monthly", moService.selectOne(monthly_no));
+			mv.setViewName("Monthly/monthlyRenew");
+		} catch (Exception e) {
+			logger.info("===============이달의 식물 수정 페이지 진입 실패===============");
+			mv.addObject("msg", e.getMessage());
+			mv.setViewName("errorPage");
+		}
+		return mv;
+	}
 	@RequestMapping(value = "mUpdate", method = RequestMethod.POST)
-	public ModelAndView monthlyUpdate(Monthly m, @RequestParam(name = "page", defaultValue = "1") int page,
-			@RequestParam("upfile") MultipartFile report, HttpServletRequest request, ModelAndView mv) {
+	public ModelAndView monthlyUpdate(Monthly m, 
+			@RequestParam(name = "page", defaultValue = "1") int page,
+			@RequestParam("upfile") MultipartFile report, 
+			HttpServletRequest request, ModelAndView mv) {
 		try {
 			logger.info("===============이달의 식물 수정 ===============");
 			if (report != null && !report.equals("")) {
@@ -130,7 +132,7 @@ public class MonthlyController {
 				saveFile(report, request);
 				}
 			m.setMonthly_img(report.getOriginalFilename());
-			mv.addObject("monthly", moService.updateMonthly(m).getMonthly_no());
+			mv.addObject("monthly_no", moService.updateMonthly(m).getMonthly_no());
 			mv.addObject("currentPage", page);
 			mv.setViewName("redirect:mlist");
 		} catch (Exception e) {
@@ -179,7 +181,7 @@ public class MonthlyController {
 			System.out.println("파일 전송 에러 : " + e.getMessage());
 		}
 	}
-
+	
 	private void removeFile(String monthly_img, HttpServletRequest request) {
 		String root = request.getSession().getServletContext().getRealPath("resources");
 		String savePath = root + "\\img";

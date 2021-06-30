@@ -54,6 +54,7 @@
 	
 	<!-- 게시글 삭제 -->
 	<delete id="deleteMonthly" parameterType="int" flushCache="true" statementType="PREPARED">
-		DELETE FROM Monthly_tb WHERE monthly_no = #{monthly_no}
+		DELETE FROM Monthly_tb 
+		WHERE monthly_no = #{monthly_no}
 	</delete>
 </mapper>

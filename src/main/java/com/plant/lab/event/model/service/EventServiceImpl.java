@@ -40,10 +40,14 @@ public class EventServiceImpl implements EventService {
 		@Override
 		public Event_tb updateEvent(Event_tb e) {
 			int result = eDao.updateEvent(e);
+			System.out.println(e.getEvent_no());
 			if (result > 0) {
 				e =eDao.selectOne(e.getEvent_no());
+				System.out.println(e.toString());
+				
 			} else {
 				e = null;
+				System.out.println("널이네요 ~! ");
 			}
 			return e;
 		}
