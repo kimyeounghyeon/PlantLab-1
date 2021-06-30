@@ -1,6 +1,7 @@
 package com.plant.lab.member.model.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Random;
 
 import javax.mail.internet.MimeMessage;
@@ -8,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +17,6 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -65,7 +66,7 @@ public class MemberController {
 	public String memberLogin(MemberVO vo, HttpSession session, HttpServletRequest request,
 			HttpServletResponse response, Model model) throws IOException {
 
-		System.out.println("[계원] id와 pwd 정보 들어있음을 확인 : " + vo.toString());
+		
 		String getUser = vo.getUserId();
 		MemberVO login = mService.loginMember(vo);
 		if (login != null) {
@@ -113,13 +114,13 @@ public class MemberController {
 	        /* 이메일 보내기 */
 	        String setFrom = "wlvhtm901@naver.com";
 	        String toMail = email;
-	        String title = "회원가입 인증 이메일 입니다.";
+	        String title = "무이림 회원가입 인증 이메일 입니다.";
 	        String content = 
-	                "홈페이지를 방문해주셔서 감사합니다." +
+	                "무이림 홈페이지를 방문해주셔서 감사합니다." +
 	                "<br><br>" + 
-	                "인증 번호는 " + checkNum + "입니다." + 
+	                "해당 인증번호를 인증번호 확인란에 기입하여 주세요." +
 	                "<br>" + 
-	                "해당 인증번호를 인증번호 확인란에 기입하여 주세요.";
+	                "인증 번호는 " + checkNum + "입니다."; 
 	        
 
 			
@@ -140,4 +141,43 @@ public class MemberController {
 
 	
 	 }
+	 @RequestMapping(value="/update")
+	 public String registerUpdateView() throws Exception{
+	 	
+	 	return "modify";
+	 }
+	 
+	 @ResponseBody
+	 @RequestMapping(value="/doUpdate")
+	 public String registerUpdate(MemberVO vo, HttpSession session, HttpServletRequest request,
+			 @RequestParam(name= "userPwd") String userPwd, @RequestParam(name= "phone") int phone, 
+			 @RequestParam(name= "address") String address ) 
+			 throws Exception{ 
+		 
+	 	
+	            MemberVO member = (MemberVO) session.getAttribute("loginMember");
+	            
+	            
+	            vo.setUserId(member.getUserId());
+	            vo.setUserPwd(userPwd);
+	            System.out.println(userPwd);
+	            vo.setPhone(phone);
+	            System.out.println(phone);
+	            vo.setAddress(address);
+	            System.out.println(address);
+	            vo.setEmail(member.getEmail());
+	            vo.setUserName(member.getUserName());
+		 
+	            System.out.println("[계원]  pwd,email,address 정보 들어있음을 확인 : " + vo.toString());
+       
+	            int result = -1;
+		 
+		 result = mService.memberUpdate(vo);
+	 	System.out.println(result+"는 몇~");
+	 	session.invalidate();
+	 	
+	 	return String.valueOf(result);
+	 }
+	
+
 }

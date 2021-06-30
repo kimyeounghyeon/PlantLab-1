@@ -1,5 +1,6 @@
 package com.plant.lab.member.model.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.plant.lab.member.model.vo.MemberVO;
@@ -21,7 +22,10 @@ public interface MemberService {
     
     public int isValidId(String userId);
 
-	
+	public int memberUpdate(MemberVO vo);
+
+
+
     
 
 }

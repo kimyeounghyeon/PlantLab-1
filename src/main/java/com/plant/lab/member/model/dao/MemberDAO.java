@@ -44,6 +44,10 @@ public class MemberDAO {
 	public int isValidId(String userId) {
 		return sqlSession.selectOne("member.isValidId", userId);
 	}
+	
+	public int memberUpdate(MemberVO vo){
+		return sqlSession.update("member.memberUpdate", vo);
+		 }
 
 	
 }

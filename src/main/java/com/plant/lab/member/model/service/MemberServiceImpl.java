@@ -63,6 +63,12 @@ public class MemberServiceImpl implements MemberService {
 		// TODO Auto-generated method stub
 		return mDao.isValidId(userId);
 	}
+	@Override
+	public int memberUpdate(MemberVO vo) {
+		
+		return mDao.memberUpdate(vo);
+		
+	}
 
 
 
