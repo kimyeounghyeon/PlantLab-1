@@ -3,19 +3,22 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
 <title>無以林 join</title>
-<link href="${path}/resources/css/joinStyle.css" rel="stylesheet" />
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/earlyaccess/jejumyeongjo.css" />
+<link href="${path}/resources/css/header.css" rel="stylesheet" />
+<link href="${path}/resources/css/footer.css" rel="stylesheet" />
+<link href="${path}/resources/css/joinStyle.css" rel="stylesheet" />
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 </head>
-<body>
 	<jsp:include page="header.jsp"></jsp:include>
+<body>
 
 	<div class="joindiv">
 		<div class="content">
@@ -75,58 +78,115 @@
 
 					<div>
 						<h3 class="join_title_email">
-							<label for="email">본인 확인 이메일<span class="optional"></span></label>
+							<label for="email">본인 확인 이메일</label>
 						</h3>
-						<span class="box int_email"> <input type="text" id="email"
-							name="email" class="int" maxlength="100" placeholder="이메일 ">
-						</span> <span class="error_next_box">이메일 주소를 다시 확인해주세요.</span>
-						<div class="check_font" id="mail_check"></div>
+						<span class="box mail_input_box"><input class="mail_input"
+							id="emailint" name="email" ></span>
+					
+						<h3 class="join_title">
+							<label for="email">인증번호입력</label> <input
+								class="mail_check_button" type="button" value="인증번호버튼" >
+						</h3>
+						<span class="mail_check_wrop" id="mail_check_input_box_false"><input
+							class="mail_check_input" id="emailint2" disabled="disabled" placeholder="본인인증 확인을 해주세요 " ></span>
+						<div class="clearfix"></div>
+						<span id="mail_check_input_box_warn"></span>
 					</div>
-					<!-- MOBILE -->
-					<div>
-						<h3 class="join_title">
-							<label for="phone">휴대전화</label>
-						</h3>
-						<span class="box int_mobile"> <input type="tel" id="phone"
-							name="phone" class="int" maxlength="16" placeholder="숫자만 입력해주세요 ">
-						</span> <span class="error_next_box"></span>
-						<div class="check_font" id="pnum_check"></div>
-					</div>
-					<!-- address -->
-					<div>
-						<h3 class="join_title">
-							<label for="address">우편번호</label> <input class="add_chk_re"
-								type="button" value="우편번호찾기" id="add"
-								onclick="execDaumPostcode();">
-						</h3>
-						<span class="box int_address"> <input type="number"
-							id="address" name="address" class="int" maxlength="8">
-						</span>
-						<h3 class="join_title">
-							<label for="address">주소</label>
-						</h3>
-						<span class="box int_address"> <input type="text"
-							id="address2" name="address" class="int" maxlength="16">
-						</span>
-						<h3 class="join_title">
-							<label for="address">상세주소</label>
-						</h3>
-						<span class="box int_address"> <input type="text"
-							id="address3" name="address" class="int" maxlength="16"
-							placeholder="정확히 입력해주세요 ">
-						</span>
-					</div>
-					<!-- 가입 버튼  -->
-					<button type="submit" value="회원가입" id="btn">회원가입</button>
-				</form>
 			</div>
+
+
+			<!-- MOBILE -->
+			<div>
+				<h3 class="join_title">
+					<label for="phone">휴대전화</label>
+				</h3>
+				<span class="box int_mobile"> <input type="tel" id="phone"
+					name="phone" class="int" maxlength="16" placeholder="숫자만 입력해주세요 ">
+				</span> <span class="error_next_box"></span>
+				<div class="check_font" id="pnum_check"></div>
+			</div>
+			<!-- address -->
+			<div>
+				<h3 class="join_title">
+					<label for="address">우편번호</label> <input class="add_chk_re"
+						type="button" value="우편번호찾기" id="add"
+						onclick="execDaumPostcode();">
+				</h3>
+				<span class="box int_address"> <input type="number"
+					id="address" name="address" class="int" maxlength="8">
+				</span>
+				<h3 class="join_title">
+					<label for="address">주소</label>
+				</h3>
+				<span class="box int_address"> <input type="text"
+					id="address2" name="address" class="int" maxlength="16">
+				</span>
+				<h3 class="join_title">
+					<label for="address">상세주소</label>
+				</h3>
+				<span class="box int_address"> <input type="text"
+					id="address3" name="address" class="int" maxlength="16"
+					placeholder="정확히 입력해주세요 ">
+				</span>
+			</div>
+			<!-- 가입 버튼  -->
+			<button type="submit" value="회원가입" id="btn">회원가입</button>
+			</form>
 		</div>
-
-
 	</div>
+	
+
+
+
+
+	<%-- <jsp:include page="footer.jsp"></jsp:include>  --%>
+
 	<script
 		src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script>
+		var code = "";
+
+		/* 인증번호 이메일 전송 */
+		$(".mail_check_button").click(function() {
+
+			var email = $(".mail_input").val(); // 입력한 이메일
+			var cehckBox = $(".mail_check_input"); // 인증번호 입력란
+			var boxWrap = $(".mail_check_input_box"); // 인증번호 입력란 박스
+
+			$.ajax({
+
+				type : "GET",
+				url : "mailCheck?email=" + email,
+				success : function(data) {
+
+					//console.log("data : " + data);
+					cehckBox.attr("disabled", false);
+					boxWrap.attr("id", "mail_check_input_box_true");
+					code = data;
+
+				}
+
+			});
+
+		});
+
+		/* 인증번호 비교 */
+		$(".mail_check_input").blur(function() {
+			var inputCode = $(".mail_check_input").val(); // 입력코드    
+			var checkResult = $("#mail_check_input_box_warn"); // 비교 결과    
+
+			if (inputCode == code) { // 일치할 경우
+				checkResult.html("인증번호가 일치합니다.");
+				checkResult.attr("class", "correct");
+				checkResult.css("color","blue");
+			} else { // 일치하지 않을 경우
+				checkResult.html("인증번호를 다시 확인해주세요.");
+				checkResult.attr("class", "incorrect");
+				checkResult.css("color","red");
+			}
+
+		});
+
 		var afterValidIdCheck = "";
 		function execDaumPostcode() {
 			new daum.Postcode({
@@ -246,7 +306,7 @@
 		$("#btn").click(
 				function() {
 
-					var inval_Arr = new Array(3).fill(false);
+					var inval_Arr = new Array(4).fill(false);
 
 					// 비밀번호가 같은 경우 && 비밀번호 정규식
 					if (($('#userPwd').val() == ($('#userPwd2').val()))
@@ -269,6 +329,12 @@
 					} else {
 						inval_Arr[2] = false;
 					}
+					if($('#email').val() == null){
+						alert("이메일을 확인해주세요");
+						inval_Arr[3] = false;
+					} else{
+						inval_Arr[3] = true;
+					}
 
 					var validAll = true;
 					for (var i = 0; i < inval_Arr.length; i++) {
@@ -277,6 +343,7 @@
 							validAll = false;
 						}
 					}
+
 					var curUserId = $("#userId").val();
 					if (afterValidIdCheck != curUserId) {
 						alert("아이디를 확인해주세요.");
@@ -323,4 +390,5 @@
 	</script>
 
 </body>
+
 </html>

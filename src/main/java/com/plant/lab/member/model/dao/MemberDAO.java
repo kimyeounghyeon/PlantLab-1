@@ -35,15 +35,15 @@ public class MemberDAO {
 		String aaaa = sqlSession.selectOne("member.getMemberName", userId);
 		return aaaa;
 	}
-	
 
 	public MemberVO loginMember(MemberVO vo) {
 		return sqlSession.selectOne("member.loginMember", vo);
 
 	}
-	
+
 	public int isValidId(String userId) {
-		return sqlSession.selectOne("member.isValidId",userId);
+		return sqlSession.selectOne("member.isValidId", userId);
 	}
 
+	
 }

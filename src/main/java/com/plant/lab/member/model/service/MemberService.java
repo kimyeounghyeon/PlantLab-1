@@ -20,6 +20,8 @@ public interface MemberService {
     public MemberVO loginMember(MemberVO vo);
     
     public int isValidId(String userId);
+
+	
     
 
 }

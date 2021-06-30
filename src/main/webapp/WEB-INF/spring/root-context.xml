@@ -17,7 +17,7 @@
 		<property name="username" value="PlantLab" />
 		<property name="password" value="551235" />
 	</bean>
-	
+
 	<bean id="sqlSession"
 		class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="configLocation"
@@ -27,8 +27,9 @@
 	<bean class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg ref="sqlSession" />
 	</bean>
-	<bean id = "multipartResolver" class = "org.springframework.web.multipart.commons.CommonsMultipartResolver" />
-	
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
+
 	<!-- Transaction -->
 	<bean id="transactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
@@ -45,20 +46,29 @@
 			<tx:method name="delete*" rollback-for="Exception" />
 		</tx:attributes>
 	</tx:advice>
-	<tx:annotation-driven/>
+	<tx:annotation-driven />
+	
+	 <!-- navermail설정 -->
+    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl"> 
+     <property name="host" value="smtp.naver.com"/> <!-- 메이서버 호스트 -->
+     <property name="port" value="465"/> <!-- 메이서버 포트번호 -->
+     <property name="username" value="wlvhtm901"/> <!-- 자신의 이메일 아이디 -->
+     <property name="password" value="nove2016!"/> <!-- 자신의 비밀번호 -->
+       <!-- 보안연결 SSL과 관련된 설정 -->
+     <property name="javaMailProperties">
+      <props>
+      <prop key="mail.smtp.auth">true</prop>
+      <prop key="mail.smtp.starttls.enable">true</prop>
+      <prop key="mail.smtps.checkserveridentity">true</prop>
+      <prop key="mail.smtps.ssl.trust">*</prop>
+      <prop key="mail.debug">true</prop>
+      <prop key="mail.smtp.socketFactory.class">javax.net.ssl.SSLSocketFactory</prop>
+      </props>
+     </property>
+    </bean>
+	
 
-	<!-- Transaction 관련된 AOP 설정 -->
-	<aop:config proxy-target-class="true">
-		<aop:pointcut id="daoMethod"
-			expression="execution(* plant.lab.muita..*Impl.*(..)))" />
-		<aop:advisor id="transactionAdvisor"
-			pointcut-ref="daoMethod" advice-ref="txAdvice" />
-	</aop:config>
-
-
-
-
-
+	
 
 
 </beans>
