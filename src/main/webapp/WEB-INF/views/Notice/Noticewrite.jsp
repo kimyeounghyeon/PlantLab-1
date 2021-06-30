@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>게시글작성하기...</title>
+<title>게시글작성이래용</title>
 <head>
 
 </head>

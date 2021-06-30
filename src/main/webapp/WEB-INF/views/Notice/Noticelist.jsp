@@ -66,7 +66,7 @@ margin:auto;
     </c:forEach>
      </table>
  <c:if test="${1==loginMember.grade}">
-		<button type="button" onclick="location.href='nwrite.do'">글쓰기얌</button>
+		<button type="button" onclick="location.href='nwrite.do'">글쓰기에욤</button>
 		</c:if>	
  </div>
 </c:if>	

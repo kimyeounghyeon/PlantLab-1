@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>얍</title>
+<title>읽기에욤</title>
 
 </head>
 <body>
