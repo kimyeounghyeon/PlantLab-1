@@ -228,7 +228,7 @@
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
 		</dependency>
-<<<<<<< HEAD
+
 		<!-- https://mvnrepository.com/artifact/javax.mail/mail -->
 		<dependency>
 			<groupId>javax.mail</groupId>
@@ -243,8 +243,7 @@
 			<version>${org.springframework-version}</version>
 		</dependency>
 
-=======
->>>>>>> e6749bb45a70a6466a557fb924b383d7cbfd97e3
+
 
 		<!-- Test -->
 		<dependency>
