@@ -24,6 +24,8 @@
 		&nbsp;&nbsp; <br>
 		<div class="dback"></div>
 	</div>
+		<jsp:include page="../footer.jsp"></jsp:include>
+	
 </body>
 <script>
 	$(function(){
@@ -83,6 +85,7 @@
 				}
                	 dnotice += "</table></div>";
         	   	  $(".dback").append(dnotice);
+        	   	  
 			console.log("문제 없어요~");
 			},
 

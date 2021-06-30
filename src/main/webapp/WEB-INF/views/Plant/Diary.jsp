@@ -55,7 +55,7 @@
 	                   } else {
 	                           $.each(listDiary, function(i, item){
 	                              dnotice += "<div class = 'ddiary' id='dno_"+item.diary_no+"'>";
-	                              dnotice += "<table class='tdiary'><tr class='ttr idtr'>";
+	                              dnotice += "<table class='tdiary' style ='table-layout : fixed'><tr class='ttr idtr'>";
 	                              dnotice += "<td class='writeid idtd' colspan='2'>"+item.user_id+"</td></tr>";
 	                              dnotice += "<tr class='ttr imgtr'><td class='diaryimg' colspan='2'><a href='detaildiary?diary_no="+item.diary_no+"'><img src='"+item.diary_img_src+"' class='diaryimg'></a></td></tr>";
 	                              dnotice += "<tr class='ttr liketr'>"
@@ -72,7 +72,7 @@
 	                                 dnotice += "<td class='liketd unlike dno_"+item.diary_no+"'><img src='${path }/resources/img/좋아요누르기전그레이.png' class='like'>";
 	                              }
 	                              dnotice += "<td class='liketdcnt'>좋아요 "+item.like_cnt+"개</td></tr>";
-	                              dnotice += "<tr class='ttr contenttd'><td class='dcontent' colspan='2'><a href='detaildiary?diary_no="+item.diary_no+"'>"+item.diary_content+"</td></tr></table></div>";
+	                              dnotice += "<tr class='ttr contexttr'><td class='dcontent' colspan='2'><div class='alinkdiv'><a href='detaildiary?diary_no="+item.diary_no+"'>"+item.diary_content+"</a></div></td></tr></table></div>";
 	                           });
 	                       }
 	                       $(".dback").append(dnotice);
@@ -80,7 +80,8 @@
 	            },
 	            error : function(data) {
 	               console.log("에러일 때 데이터" + data);
-	               alert("잘못 된 접근입니다.");
+	               alert("로그인 후 이용해주세요");
+	               location.href="login";
 	            }
 	         });
 			

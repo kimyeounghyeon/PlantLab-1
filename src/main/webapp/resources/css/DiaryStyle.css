@@ -68,6 +68,11 @@
 	padding : 5px;
 }
 
+.idtd {
+	font-weight : bold;
+	color : #625b54;
+}
+
 .imgtr {
 	width : 100%;
 	height : 400px;
@@ -75,10 +80,29 @@
 	
 }
 
-.contexttd {
-	width : 100%;
-	height : 100px;
-	padding : 0;
+
+.dcontent {
+	height : 70px;
+	width: 350px;
+	white-space: nowrap;
+    overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.alinkdiv {
+	height : 70px;
+	width: 350px;
+	white-space: nowrap;
+    overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.contexttr {
+	height : 70px;
+	width: 350px;
+	white-space: nowrap;
+    overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 .like {

@@ -73,6 +73,8 @@ public class PlantHomeController {
 		List<DiaryVO> listDiary = dService.listDiary();
 		List<Integer> likeList = dService.likeList(sessionVO);
 
+		
+		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("listDiary", listDiary);
 		map.put("likeList", likeList);
@@ -103,6 +105,7 @@ public class PlantHomeController {
 		return mv;
 	}
 
+	
 	// 일기 상세 페이지 가져오기
 	@RequestMapping(value = "/detaildiary.do", method = RequestMethod.GET, produces = "application/text; charset=UTF-8")
 	@ResponseBody
@@ -156,19 +159,20 @@ public class PlantHomeController {
 
 		MemberVO member = (MemberVO) session.getAttribute("loginMember");
 
+
 			vo.setDiary_content(diary_content);
 			vo.setDiary_write(member.getUserNo());
 			vo.setUser_id(member.getUserId());
 			
 
 		System.out.println("vo가 문제지..?" + vo);
+		
 			
 		
 			int result = -1;
 			int resultSeq = 0;
 			int diary_no = 0;
-			
-			
+
 			try {
 				if (multiFile != null && !multiFile.equals("")) {
 					String url = saveFile(multiFile, request);
