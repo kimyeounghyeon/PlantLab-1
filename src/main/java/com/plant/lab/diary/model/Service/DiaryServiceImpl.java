@@ -32,18 +32,7 @@ public class DiaryServiceImpl implements DiaryService {
 	}
 
 	
-	@Override
-	public List<Integer> likeList(LikeVO lvo) {
-		List<Integer> list = null;
-		try {
-			list = dDao.likeList(lvo);
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-		System.out.println("[영현]likeList() :" + list);
-		return list;
-	}
-	
+	// 글 세부 정보
 	@Override
 	public List<DiaryVO> detailDiary(int diary_no) {
 		List<DiaryVO> list = null;
@@ -56,18 +45,8 @@ public class DiaryServiceImpl implements DiaryService {
 		return list;
 	}
 	
-	public int getSequence() {
-		int diaryNo = -1;
-		
-		try {
-			diaryNo = dDao.getSequence();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return diaryNo;
-	}
-
 	
+	// 좋아요
 	//@Transactional
 	@Override
 	public int insertLike(LikeVO lvo) {
@@ -106,8 +85,30 @@ public class DiaryServiceImpl implements DiaryService {
 		return result;
 	}
 	
+
+	@Override
+	public List<Integer> likeList(LikeVO lvo) {
+		List<Integer> list = null;
+		try {
+			list = dDao.likeList(lvo);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		System.out.println("[영현]likeList() :" + list);
+		return list;
+	}
+	
+	
+	
+	// 일기
 	@Override
 	public int writeDiary(DiaryVO vo) {
+		int result = -1;
+		try { 
+			result = dDao.writeDiary(vo);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 		return dDao.writeDiary(vo);
 	}
 	
@@ -122,16 +123,6 @@ public class DiaryServiceImpl implements DiaryService {
 		return result;
 	}
 	
-	@Override
-	public int insertDiary(DiaryVO vo) {
-		int result = -1;
-		try {
-			result = dDao.insertDiary(vo);
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-		return result;
-	}
 	
 	@Override
 	public int deleteDiary(DiaryVO vo) {
@@ -144,6 +135,19 @@ public class DiaryServiceImpl implements DiaryService {
 		return result;
 	}
 
+	public int getSequence() {
+		int diaryNo = -1;
+		
+		try {
+			diaryNo = dDao.getSequence();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return diaryNo;
+	}
+	
+	
+	// 댓글
 	@Override
 	public List<CommentVO> selectComment(int diary_no) {
 		List<CommentVO> list = null;
@@ -156,7 +160,6 @@ public class DiaryServiceImpl implements DiaryService {
 		return list;
 	}
 
-
 	
 	@Override
 	public int insertComment(CommentVO cvo) {
@@ -164,6 +167,18 @@ public class DiaryServiceImpl implements DiaryService {
 		try {
 		result = dDao.insertComment(cvo);
 		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	
+	@Override
+	public int updateComment(CommentVO cvo) {
+		int result = -1;
+		try {
+			result = dDao.deleteComment(cvo);
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return result;

@@ -367,6 +367,25 @@ public class PlantHomeController {
 
 	}
 	
+	// 댓글 수정
+	@RequestMapping(value = "/modifyComment.do", method = RequestMethod.POST)
+	@ResponseBody
+	public String updateComment(HttpServletRequest request, CommentVO cvo, @RequestParam(name="diary_no") int diary_no, @RequestParam(name="comm_no") int comm_no, @RequestParam(name="comm_comment") String comm_comment) {
+		System.out.println("댓글 수정 페이지 들어왔다~");
+		
+		cvo.setComm_no(comm_no);
+		System.out.println("댓글 번호~ " + comm_no);
+		cvo.setComm_comment("수정할 댓글 내용~ " + comm_comment);
+		
+		int result = -1;
+		result = dService.updateComment(cvo);
+		
+		System.out.println("수정 결과는??" + result);
+		return String.valueOf(result);
+
+	}
+	
+	
 	
 	// 댓글 삭제
 	@RequestMapping(value="deleteComment.do", method = RequestMethod.POST)

@@ -239,6 +239,46 @@
 		});
 	});
 	
+ 		// 댓글 수정
+		$(document).on("click", ".commmodify", function(){
+			$(".dtlistcomm").css("display","none");
+			$(".dtlistcommtr").append("<td class='modCommtd'><input type='text' class='modifycomment'><button type='button' class='dtbtn modcommsucc'>수정하기</button></td>");
+		});
+	
+ 		
+ 		
+ 		// 댓글 수정 확인
+		$(document).on("click", ".modcommsucc", function(){
+
+		let dnoKnow = $(".knowdno").val();
+		var thisComm = $(this);
+		console.log(thisComm);
+		
+		var findParent = thisComm.parents(".dtlistcommtr");
+		
+		var findChild = findParent.find(".comm_no");
+		var findComment = findParent.find(".dtlistcomm");
+		
+		var thisComm_no = findChild.val();
+		var thisComment = findComment.val();
+		
+			$.ajax({
+			url : "modifyComment.do",
+			type : "post",
+			data : {
+					comm_no : thisComm_no,
+					comm_comment : $(".modifycomment").val()
+				},
+			success : function(data){
+				console.log(comm_comment);
+				$(".dtinsertcommtr").append("<tr class='dttr dtlistcommtr'><td class='commwriter'>"+user_id+"</td><td class='dtlistcomm'><input type='text' class='writecomment' value='"+data.comm_comment+"'><button type='button' class='dtbtn modcommsucc'>수정하기</button></td></tr>");
+			},
+			error : function(data) {
+				alert("수정에 실패했습니다 ~ " + data);
+			}
+			
+		});		
+		});
 		
 		
 		// 댓글 삭제
