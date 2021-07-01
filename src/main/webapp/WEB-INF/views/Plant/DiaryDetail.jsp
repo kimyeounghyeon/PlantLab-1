@@ -25,11 +25,53 @@
 		&nbsp;&nbsp; <br>
 		<div class="dback"></div>
 	</div>
-		<jsp:include page="../footer.jsp"></jsp:include>
 	
+	<div class="modal">
+        <div class="modal_content">
+            <form class="report">
+                <input type="hidden" name="r_diary_no" value="주소">
+
+
+                <h3 class="subTitle">신고사유</h3>
+                <select name="report_content">
+                    <option value="광고">광고 / 도배 글</option>
+                    <option value="선정적">선정적 / 음란성 글</option>
+                    <option value="욕설">욕설 / 인신공격</option>
+                    <option value="기타">기타</option>
+                </select>
+
+                <br><br>
+
+                <h3 class="subTitle">상세내용</h3>
+                <textarea style="resize: none;" autofocus name="report_content"></textarea>
+                
+                <button type="button" class="rBtn" id="cancel">취소</button>
+                <button type="button" class="rBtn" id="subReport">신고</button>
+            </form>
+        </div>
+    </div>
+	
+	
+	<jsp:include page="../footer.jsp"></jsp:include>
 </body>
 <script>
 	$(function(){
+		//신고하기 모달창
+        $('.declaration').click(function(){
+	    	$(".modal").fadeIn(); 
+	    });
+		
+		$('#cancel').click(function(){
+			$(".modal").fadeOut(); 
+		});
+		
+		$('#subReport').click(function(){
+			var form = $('.report');
+			form.attr("method","post");
+			form.attr("action","report");
+			form.submit();
+		});
+		
 		// 게시글 불러오기
 		let dnoKnow = $(".knowdno").val();
 
