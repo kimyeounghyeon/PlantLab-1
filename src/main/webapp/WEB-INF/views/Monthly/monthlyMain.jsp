@@ -30,12 +30,14 @@ clear : both;
 	.plantimg{
 	width : 500px;
 	height : 650px;
+	margin-top : 40px;
 	margin-left: auto;
 	margin-right: auto;
 	}
 	#plantname{
 	width : 500px;
 	margin-left: auto;
+	margin-top : 30px;
 	margin-right: auto;
 	text-aglin : center;
 	}
