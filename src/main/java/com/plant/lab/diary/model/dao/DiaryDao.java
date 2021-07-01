@@ -33,6 +33,10 @@ public class DiaryDao {
 		return sqlSession.selectList("Diary.detailDiary", diary_no);
 	}
 	
+	public int detailWrite(int diary_no) {
+		return sqlSession.selectOne("Diary.detailWrite",diary_no);
+	}
+	
 
 	//글 작성
 	public int writeDiary(DiaryVO vo) {

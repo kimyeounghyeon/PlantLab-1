@@ -34,4 +34,7 @@ public interface DiaryService {
 	
 	// 게시글 번호 불러오기
 	public int getSequence();
+	
+	//
+	public int detailWrite(int diary_no);
 }

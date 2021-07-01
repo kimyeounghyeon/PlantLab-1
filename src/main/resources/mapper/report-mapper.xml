@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="Report">
+	<resultMap type="Report" id="ReportMap">
+	</resultMap>
+	
+	<!-- 신고 추가 -->
+	<insert id="insertReport" parameterType="Report" flushCache="true" statementType="PREPARED">
+		INSERT INTO report_tb VALUES(
+			REPORT_SEQ.NEXTVAL,
+			#{r_diary_no},
+			#{reported_user_no},
+			#{report_user_no},
+			#{report_content},
+			sysdate,
+			0			
+		)
+	</insert>
+	
+	<!-- 게시판별 누적 신고수 -->
+	<select id="countReport" parameterType="int" resultType="int">
+		SELECT count(*) FROM report_tb WHERE r_diary_no = #{diary_no}
+	</select>
+	
+</mapper>

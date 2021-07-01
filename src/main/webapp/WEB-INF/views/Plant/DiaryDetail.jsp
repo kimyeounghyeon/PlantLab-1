@@ -29,7 +29,7 @@
 	<div class="modal">
         <div class="modal_content">
             <form class="report">
-                <input type="hidden" name="r_diary_no" value="주소">
+                <input type="hidden" name="r_diary_no" value="${diary_no}">
 
 
                 <h3 class="subTitle">신고사유</h3>

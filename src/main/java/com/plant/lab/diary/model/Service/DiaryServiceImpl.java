@@ -195,4 +195,9 @@ public class DiaryServiceImpl implements DiaryService {
 		}
 		  return result;
 	}
+	
+	@Override
+	public int detailWrite(int diary_no) {
+		return dDao.detailWrite(diary_no);
+	}
 }

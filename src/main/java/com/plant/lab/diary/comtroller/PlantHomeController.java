@@ -32,6 +32,7 @@ import com.plant.lab.diary.model.vo.CommentVO;
 import com.plant.lab.diary.model.vo.DiaryVO;
 import com.plant.lab.diary.model.vo.LikeVO;
 import com.plant.lab.member.model.vo.MemberVO;
+import com.plant.lab.report.model.service.ReportService;
 
 
 /**
@@ -44,6 +45,8 @@ public class PlantHomeController {
 
 	@Autowired
 	private DiaryService dService;
+	@Autowired
+	private ReportService reportService;
 
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -99,9 +102,18 @@ public class PlantHomeController {
 		System.out.println("[영현]Detail diary 진입");
 		System.out.println("diary_no값 url로 잘 가져왔나용?" + diary_no);
 
-		mv.addObject("diary_no", diary_no);
-		mv.setViewName("Plant/DiaryDetail");
-		System.out.println("[영현]diary detail view 페이지 이동");
+		//누적신고 수 조회
+		int reportNum = reportService.countReport(diary_no);
+		if(reportNum >= 3) {
+			mv.addObject("rockM","ok");
+			mv.addObject("diaryNo",diary_no);
+			mv.setViewName("Plant/Diary");
+		}else {
+			mv.addObject("diary_no", diary_no);
+			mv.setViewName("Plant/DiaryDetail");			
+			System.out.println("[영현]diary detail view 페이지 이동");
+		}
+		
 		return mv;
 	}
 
