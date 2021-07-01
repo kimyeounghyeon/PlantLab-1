@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
+import javax.mail.Session;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.plant.lab.member.model.service.MemberService;
 import com.plant.lab.member.model.vo.MemberVO;
@@ -147,37 +149,33 @@ public class MemberController {
 	 	return "modify";
 	 }
 	 
-	 @ResponseBody
-	 @RequestMapping(value="/doUpdate")
-	 public String registerUpdate(MemberVO vo, HttpSession session, HttpServletRequest request,
-			 @RequestParam(name= "userPwd") String userPwd, @RequestParam(name= "phone") int phone, 
-			 @RequestParam(name= "address") String address ) 
-			 throws Exception{ 
-		 
+	@RequestMapping("doUpdate")
+	public String userUpdate(MemberVO vo, HttpSession session) {
+		
+		mService.memberUpdate(vo);
+		session.invalidate();
+		
+		return "Main";
+	}
+	 @RequestMapping(value="/delete")
+	 public String memberDeleteView() throws Exception{
 	 	
-	            MemberVO member = (MemberVO) session.getAttribute("loginMember");
-	            
-	            
-	            vo.setUserId(member.getUserId());
-	            vo.setUserPwd(userPwd);
-	            System.out.println(userPwd);
-	            vo.setPhone(phone);
-	            System.out.println(phone);
-	            vo.setAddress(address);
-	            System.out.println(address);
-	            vo.setEmail(member.getEmail());
-	            vo.setUserName(member.getUserName());
-		 
-	            System.out.println("[계원]  pwd,email,address 정보 들어있음을 확인 : " + vo.toString());
-       
-	            int result = -1;
-		 
-		 result = mService.memberUpdate(vo);
-	 	System.out.println(result+"는 몇~");
-	 	session.invalidate();
-	 	
-	 	return String.valueOf(result);
+	 	return "deleteUser";
 	 }
+	 @RequestMapping(value="/memberDelete", method = RequestMethod.POST)
+		public String memberDelete(MemberVO vo, @RequestParam (name = "userPwd") String userPwd, Model model, HttpSession session) throws Exception{
+		  vo.setUserPwd(userPwd);
+		 
+		  MemberVO member = (MemberVO) session.getAttribute("loginMember");
+		  
+		vo.setUserId(member.getUserId());	
+		
+		int result = mService.memberDelete(vo);
+		System.out.println(result);
+		session.invalidate();		
+		
+		return "Main";
 	
+	 }
 
 }

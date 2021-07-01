@@ -48,6 +48,10 @@ public class MemberDAO {
 	public int memberUpdate(MemberVO vo){
 		return sqlSession.update("member.memberUpdate", vo);
 		 }
+	public int memberDelete(MemberVO vo) {
+		return sqlSession.delete("member.memberDelete",vo);
+		
+	}
 
 	
 }

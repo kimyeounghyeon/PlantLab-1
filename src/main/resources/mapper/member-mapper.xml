@@ -44,5 +44,9 @@
 	<update id="memberUpdate" parameterType="MemberVO" >
 		UPDATE USER_TB SET user_pwd = #{userPwd}, phone = #{phone}, address = #{address} WHERE USER_ID = #{userId}
 	</update>
+	
+	<delete id="memberDelete" parameterType="MemberVO">
+		delete from user_tb where user_id = #{userId} and user_pwd = #{userPwd}
+	</delete>
 
 </mapper>

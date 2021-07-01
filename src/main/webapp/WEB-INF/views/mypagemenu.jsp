@@ -58,9 +58,11 @@ width: 1280px;
                         <li><a class="linkmenu" href="${path}/nlist.do">문의하기</a></li>
                         <li><a class="linkmenu" href="#">구매후기</a></li>
                         <li><a class="linkmenu" href="<%=request.getContextPath()%>/update">개인 정보 수정</a></li>
-                         <li><a class="linkmenu" href="#">회원탈퇴</a></li>
+                         <li><a class="linkmenu" href="<%=request.getContextPath()%>/delete">회원탈퇴</a></li>
                 </ul>
         </nav>
+        
+   
          
          
 
