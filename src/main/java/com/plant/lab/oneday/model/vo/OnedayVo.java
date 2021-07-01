@@ -6,34 +6,39 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class OnedayVo {
-	private int   oneday_no;
-	private String oneday_title;
-	private String oneday_img;
-	private String oneday_content;
-	private int oneday_maxPerson;
-	private String oneday_start;
-	private String oneday_end;
-	private int oneday_price ;
-	private String oneday_place;
-	private String oneday_dtailPlace;
+	private int   oneday_no;			//수업 번호
+	private String oneday_title;		//수업  제목
+	private String oneday_img;			//수업 썸네일
+	private String oneday_content;		//수업 설명
+	private int oneday_maxPerson; 		//재고
+	private String oneday_start;		//수업 시작날
+	private String oneday_end;			//마지막 수업
+	private int oneday_price ;         //가격
+	private String oneday_place;      //주소
+	private String oneday_dtailPlace;  //상세주소
+	private String oneday_Stime;  //수업시간 시작
+	private String oneday_Etime;  //수업시간 끝남
 	
 	
 	//RESERV_Date
 	
-	private int   reserv_no;
-	private int    user_no;
-	private String oneday_request;
-	private String reserv_date;
+	private int   reserv_no;     //예약번호
+	private int    user_no;			//회원번호
+	private String oneday_request;	//요구사항
+	private String reserv_date;		//수업들을 날짜(예약일)
 	
 	
 	
+
+
 	@Override
 	public String toString() {
 		return "OnedayVo [oneday_no=" + oneday_no + ", oneday_title=" + oneday_title + ", oneday_img=" + oneday_img
 				+ ", oneday_content=" + oneday_content + ", oneday_maxPerson=" + oneday_maxPerson + ", oneday_start="
 				+ oneday_start + ", oneday_end=" + oneday_end + ", oneday_price=" + oneday_price + ", oneday_place="
-				+ oneday_place + ", oneday_dtailPlace=" + oneday_dtailPlace + ", reserv_no=" + reserv_no + ", user_no="
-				+ user_no + ", oneday_request=" + oneday_request + ", reserv_date=" + reserv_date + "]";
+				+ oneday_place + ", oneday_dtailPlace=" + oneday_dtailPlace + ", oneday_Stime=" + oneday_Stime
+				+ ", oneday_Etime=" + oneday_Etime + ", reserv_no=" + reserv_no + ", user_no=" + user_no
+				+ ", oneday_request=" + oneday_request + ", reserv_date=" + reserv_date + "]";
 	}
 
 
@@ -44,7 +49,8 @@ public class OnedayVo {
 
 	public OnedayVo(int oneday_no, String oneday_title, String oneday_img, String oneday_content, int oneday_maxPerson,
 			String oneday_start, String oneday_end, int oneday_price, String oneday_place, String oneday_dtailPlace,
-			int reserv_no, int user_no, String oneday_request, String reserv_date) {
+			String oneday_Stime, String oneday_Etime, int reserv_no, int user_no, String oneday_request,
+			String reserv_date) {
 		super();
 		this.oneday_no = oneday_no;
 		this.oneday_title = oneday_title;
@@ -56,6 +62,8 @@ public class OnedayVo {
 		this.oneday_price = oneday_price;
 		this.oneday_place = oneday_place;
 		this.oneday_dtailPlace = oneday_dtailPlace;
+		this.oneday_Stime = oneday_Stime;
+		this.oneday_Etime = oneday_Etime;
 		this.reserv_no = reserv_no;
 		this.user_no = user_no;
 		this.oneday_request = oneday_request;
@@ -184,6 +192,30 @@ public class OnedayVo {
 
 
 
+	public String getOneday_Stime() {
+		return oneday_Stime;
+	}
+
+
+
+	public void setOneday_Stime(String oneday_Stime) {
+		this.oneday_Stime = oneday_Stime;
+	}
+
+
+
+	public String getOneday_Etime() {
+		return oneday_Etime;
+	}
+
+
+
+	public void setOneday_Etime(String oneday_Etime) {
+		this.oneday_Etime = oneday_Etime;
+	}
+
+
+
 	public int getReserv_no() {
 		return reserv_no;
 	}
@@ -229,12 +261,7 @@ public class OnedayVo {
 	public void setReserv_date(String reserv_date) {
 		this.reserv_date = reserv_date;
 	}
-	
-	
-	
 
-	
-	
 
 	
 	

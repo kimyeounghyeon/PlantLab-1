@@ -31,9 +31,8 @@
 	vertical-align: middle;
 	z-index: 1;
 } */
-
 .subtitle {
-	margin-top: 0;
+	margin: 0;
 	font-size: 20pt;
 	text-align: center;
 	padding-top: 20px;
@@ -78,17 +77,21 @@
 	display: inline-block;
 	clear: both;
 	width: 500px;
-	height: 20px;
+	height: 30px;
+	border-radius: 3px;
+	border: 0.1px solid #bebebe;
 }
 
 #oneinsertT {
 	margin-right: 375px;
-	float: right;
 	display: inline-block;
-	clear: both;
 	width: 500px;
 	height: 250px;
 	outline: none;
+	clear: both;
+	float: right;
+	border-radius: 3px;
+	border: 0.1px solid #bebebe;
 }
 
 #oneIbtn {
@@ -98,12 +101,13 @@
 	float: right;
 	display: inline-block;
 	clear: both;
-	width: 500px;
+	width: 506px;
 	height: 50px;
 	float: right;
 	margin-top: 30px;
-	background-color: #DAE4B2;
-	border-color: #DAE4B2;
+		border-radius: 3px;
+	background-color: #ADADAD;
+	border-color: #ADADAD ;
 }
 
 #updateInput {
@@ -126,6 +130,70 @@
 	margin-left: auto;
 	margin-right: 8px;
 	cursor: pointer;
-	background-color: #DAE4B2;
-	border-color: #DAE4B2;
+		border-radius: 3px;
+	background-color: #ADADAD;
+	border-color: #ADADAD 
+}
+
+.oneinsertD {
+	margin-right: 375px;
+	margin-bottom: 20px;
+	outline: none;
+	clear: both;
+	float: right;
+	display: inline-block;
+	clear: both;
+	width: 500px;
+	height: 30px;
+	border-radius: 3px;
+	border: 0.1px solid #bebebe;
+}
+
+/* #timeS {
+	margin-bottom: 20px;
+	outline: none;
+	float: right;
+	display: inline-block;
+	width: 100px;
+	height: 20px;
+} */
+#timeS {
+	margin-bottom: 20px;
+	margin-top: 20px; outline : none;
+	clear: both;
+	float: left;
+	display: inline-block;
+	width: 150px;
+	height: 30px;
+	margin-left: 440px;
+	border-radius: 3px;
+	border: 0.1px solid #bebebe;
+	outline: none;
+}
+
+.oneinsertTime {
+	text-align: center;
+	margin-bottom: 20px;
+	outline: none;
+	float: left;
+	display: inline-block;
+	margin-bottom: 20px;
+	margin-top: 20px;
+	outline: none;
+	float: left;
+	display: inline-block;
+	width: 150px;
+	height: 30px;
+	border-radius: 3px;
+	border: 0.1px solid #bebebe;
+}
+
+#insertspan {
+	margin-bottom: 20px;
+		margin-top:20px;
+	outline: none;
+	float: left;
+	display: inline-block;
+	width: 60px;
+	height: 20px;
 }

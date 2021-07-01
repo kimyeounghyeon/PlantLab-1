@@ -32,18 +32,11 @@
 	height: 130px;
 }
 
-#calendar {
-	margin-top: 30px;
-	margin-left: 60px;
-	margin-bottom: 100px;
-	border: 1px solid black;
-	display: inline-block;
-	float: left;
-	width: 600px;
-	height: 500px;
-	float: left;
-}
 
+#orn{
+	margin-top: 62px;
+	
+}
 .onedayinput {
 	display: inline-block;
 	text-align: left;
