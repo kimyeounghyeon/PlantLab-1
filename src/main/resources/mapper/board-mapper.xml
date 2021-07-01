@@ -94,12 +94,6 @@
 		select * from (select * from comment_tb ct, user_tb ut where ct.writer=ut.user_no) where diary_no=#{diary_no} order by comm_date desc
 	</select> 
 
-	
-	<!-- 최근 댓글 조회 -->
-<!-- 	<select id="currentComment" resultType="CommnetVO">
-		select top 1 * from (select * from comment_tb ct, user_tb ut where ct.writer=ut.user_no) order by comm_date desc
-	</select>  -->
-
 
  	<!-- 댓글 등록  -->
  	<insert id="insertComment" parameterType="CommentVO">
@@ -107,7 +101,15 @@
  	</insert>
  	
  	
+ 	<!-- 댓글 수정 -->
+ 	<update id="updateComment" parameterType="CommentVO">
+		update comment_tb set comm_comment = #{comm_comment}, comm_date = sysdate where comm_no = #{comm_no} 
+ 	</update>
  	
  	
+ 	<!-- 댓글 삭제 -->
+ 	<delete id="deleteComment" parameterType="CommentVO">
+ 		delete from comment_tb where diary_no = #{diary_no} and comm_no = #{comm_no}
+ 	</delete>
 
 </mapper>

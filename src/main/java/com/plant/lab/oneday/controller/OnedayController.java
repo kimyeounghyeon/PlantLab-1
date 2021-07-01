@@ -43,7 +43,7 @@ public class OnedayController {
 
 	
 	
-	//onedayclass Main page (등록돼있는 클래스 list)
+	//onedayclass Main page (등록된 클래스 list)
 	@RequestMapping(value = "onedayMain", method = RequestMethod.GET) // oneday class 메인 페이지
 	public ModelAndView onedayMain(ModelAndView mv) {
 
@@ -90,7 +90,7 @@ public class OnedayController {
 		System.out.println("oneday_no:" + oneday_no);
 		one.setOneday_no(oneday_no);
 		OnedayVo oneVo = oService.onedayselect(one); // selectone 메소드 실행
-
+		System.out.println(oneVo);
 		if (oneVo == null) {
 			mv.addObject("msg", "이미 마감된 클래스 입니다.");
 			mv.setViewName("<script>history.back();</script>");
@@ -123,7 +123,7 @@ public class OnedayController {
 	//회원 원데이 클래스  예약 
 	@RequestMapping(value = "/onedayReserveRS", method = RequestMethod.POST) // 클래스 예약 rs에 insert 세션필요
 	public ModelAndView onedayReserveRS(ModelAndView mv, @RequestParam(name = "onedayNo") int onedayNo, 
-	@RequestParam(name = "oneRequest") String oneRequest, HttpServletRequest request, HttpSession session) {
+	@RequestParam(name = "oneRequest") String oneRequest,@RequestParam(name = "reservDate") String reservDate,  HttpServletRequest request, HttpSession session) {
 		System.out.println(onedayNo);
 		System.out.println(oneRequest + "입니다.");
 
@@ -134,10 +134,11 @@ public class OnedayController {
 		oneVo.setUser_no(member.getUserNo());
 		oneVo.setOneday_no(onedayNo);
 		oneVo.setOneday_request(oneRequest);
+		oneVo.setReserv_date(reservDate);   //예약한 시간
 		oneVo = oService.onedayselect(oneVo);
 		System.out.println("결과 는~~~~~~~~~" + oneVo);
 		
-		//int result = oService.onedayreserve(oneVo);    //구매하면 예약됨
+		//int result = oService.onedayreserve(oneVo);    //구매하면 예약됨--> order controller로 이동
 //		System.out.println(result);
 //		mv.addObject("oneRsVo", result);
 		mv.addObject("user",member);
@@ -325,6 +326,12 @@ public class OnedayController {
 		String oneinsertDE = request.getParameter("oneinsertDE");
 		oneIVo.setOneday_end(oneinsertDE);
 		
+		String oneinsertST = request.getParameter("oneinsertST");
+		oneIVo.setOneday_Stime(oneinsertST);
+		System.out.println("!!!!!!!!!!!!!!!!!!skdjs"+oneinsertST);
+		String oneinsertET =request.getParameter("oneinsertET");
+		oneIVo.setOneday_Etime(oneinsertET);
+		System.out.println(oneinsertET);
 		System.out.println("vo체크::::"+oneIVo);
 		oService.onedayinsert(oneIVo);
 		

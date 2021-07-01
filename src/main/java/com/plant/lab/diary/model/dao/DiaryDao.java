@@ -33,18 +33,15 @@ public class DiaryDao {
 		return sqlSession.selectList("Diary.detailDiary", diary_no);
 	}
 	
+	public int detailWrite(int diary_no) {
+		return sqlSession.selectOne("Diary.detailWrite",diary_no);
+	}
+	
 
-	// 임시글 작성
+	//글 작성
 	public int writeDiary(DiaryVO vo) {
 		int result = 0;
 		result = sqlSession.insert("Diary.writeDiary", vo);
-		return result;
-	}
-	
-	// 찐 글 작성
-	public int insertDiary(DiaryVO vo) {
-		int result = -1;
-		result = sqlSession.insert("Diary.insertDiary", vo);
 		return result;
 	}
 	
@@ -85,6 +82,13 @@ public class DiaryDao {
 		return sqlSession.insert("Diary.insertComment", cvo);
 		
 	}
+	
+	
+	// 댓글 수정
+	public int updateComment(CommentVO cvo) {
+		return sqlSession.update("Diary.updateComment", cvo);
+	}
+	
 	
 	// 댓글 삭제
 	public int deleteComment(CommentVO cvo) {

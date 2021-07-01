@@ -5,11 +5,11 @@
 
 
 <select id="onedayselectlist"  resultType="OnedayVo">   <!-- 클래스 전체 목록 보기(회원 , 관리자) -->
-SELECT * FROM onedayclass_tb   <![CDATA[ WHERE SYSDATE <= Oneday_End]]> ORDER BY oneday_no
+SELECT * FROM ONEDAYCLASS_TB ORDER BY oneday_no
 </select>
 
 <select id="onedayselect" parameterType="OnedayVo" resultType="OnedayVo">   <!-- 클래스 상세보기 (회원, 관리자)-->
-SELECT * FROM onedayclass_tb  WHERE Oneday_No=#{oneday_no}
+SELECT * FROM ONEDAYCLASS_TB  WHERE Oneday_No=#{oneday_no}
 </select>
 
 <select id="onedayMyselect" parameterType="OnedayVo" resultType="OnedayVo">   <!--예약한 클래스 보기  (회원, 관리자)-->
@@ -17,24 +17,24 @@ SELECT * FROM onedayclass_tb  WHERE Oneday_No=#{oneday_no}
 SELECT * FROM ONEDAYCLASS_TB c right join ONEDAYCLASSRS_TB r on c.oneday_no = r.oneday_no WHERE  USER_NO=#{user_no}
 </select>
 
-<insert id="onedayreserve" parameterType="OnedayVo"  >    <!-- 클래스 예약하기 -->
-insert into onedayclassrs_tb (RESERV_NO , ONEDAY_NO , USER_NO , ONEDAY_REQUEST ) VALUES (OnedayRs_SEQ.nextval ,#{oneday_no} ,#{user_no} ,#{oneday_request}  )
+<insert id="onedayreserve" parameterType="OnedayVo"  >    <!-- 클래스 예약하기  A-->
+insert into ONEDAYCLASSRS_TB (RESERV_NO , ONEDAY_NO , USER_NO , ONEDAY_REQUEST  , RESERV_DATE  ) VALUES (OnedayRs_SEQ.nextval ,#{oneday_no} ,#{user_no} ,#{oneday_request} , #{reserv_date} )
 </insert>
 
-<delete id="onedaycancel" parameterType="OnedayVo">    <!-- 클래스 예약 취소 -->
-<![CDATA[ DELETE FROM ONEDAYCLASSRS_TB   WHERE Oneday_No=#{oneday_no} and USER_NO=#{user_no} and SYSDATE > RESERV_DATE]]> 
+<delete id="onedaycancel" parameterType="OnedayVo">    <!-- 클래스 예약 취소 A -->
+<![CDATA[ DELETE FROM ONEDAYCLASSRS_TB   WHERE Oneday_No=#{oneday_no}  and  USER_NO=#{user_no}]]> 
 </delete>
 
 
 
-<insert id="onedayinsert" parameterType="OnedayVo" >   <!-- 관리자 클래스 등록 -->
+<insert id="onedayinsert" parameterType="OnedayVo" >   <!-- 관리자 클래스 등록   A-->
 <!-- INSERT INTO  onedayclass_tb VALUES( =Oneday_SEQ.nextval, ONEDAY_TITLE=#{oneday_title} , ONEDAY_IMG=#{oneday_img}, ONEDAY_CONTENT=#{oneday_content}, ONEDAY_MAXPERSON=#{oneday_maxPerson}, ONEDAY_START=#{oneday_start},ONEDAY_END=#{oneday_end} ,ONEDAY_PRICE=#{oneday_price},ONEDAY_PLACE=#{oneday_place})   -->
-INSERT INTO  onedayclass_tb VALUES( Oneday_SEQ.nextval, #{oneday_title} , #{oneday_img} , #{oneday_content} , #{oneday_maxPerson} , #{oneday_start}, #{oneday_end} , #{oneday_price},  #{oneday_place} ,#{oneday_dtailPlace})  
+INSERT INTO  ONEDAYCLASS_TB VALUES( Oneday_SEQ.nextval, #{oneday_title} , #{oneday_img} , #{oneday_content} , #{oneday_maxPerson} , #{oneday_start}, #{oneday_end} , #{oneday_price},  #{oneday_place} ,#{oneday_dtailPlace}  , #{oneday_Stime} , #{oneday_Etime})  
 </insert>
 
 
-<update id="onedayupdate" parameterType="OnedayVo">     <!-- 관리자 클래스  수정-->
-UPDATE  onedayclass_tb  SET ONEDAY_TITLE=#{oneday_title} , ONEDAY_IMG=#{oneday_img} , ONEDAY_CONTENT=#{oneday_content} , ONEDAY_MAXPERSON=#{oneday_maxPerson} , ONEDAY_START=#{oneday_start} , ONEDAY_END=#{oneday_end} , ONEDAY_PRICE=#{oneday_price} , ONEDAY_PLACE=#{oneday_place} ,  ONEDAY_DTAILPLACE=#{oneday_dtailPlace} WHERE ONEDAY_NO=#{oneday_no}
+<update id="onedayupdate" parameterType="OnedayVo">     <!-- 관리자 클래스  수정    A-->
+UPDATE  onedayclass_tb  SET ONEDAY_TITLE=#{oneday_title} , ONEDAY_IMG=#{oneday_img} , ONEDAY_CONTENT=#{oneday_content} , ONEDAY_MAXPERSON=#{oneday_maxPerson} , ONEDAY_START=#{oneday_start} , ONEDAY_END=#{oneday_end} , ONEDAY_PRICE=#{oneday_price} , ONEDAY_PLACE=#{oneday_place} ,  ONEDAY_DTAILPLACE=#{oneday_dtailPlace}  , ONEDAY_STIME=#{oneday_Stime} , ONEDAY_ETIME=#{oneday_Etime}  WHERE ONEDAY_NO=#{oneday_no}
 </update> 
 
 <delete id="onedaydelete" parameterType="OnedayVo" >   <!-- 관리자 클래스  삭제-->

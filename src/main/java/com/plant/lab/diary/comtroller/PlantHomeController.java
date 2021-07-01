@@ -32,6 +32,7 @@ import com.plant.lab.diary.model.vo.CommentVO;
 import com.plant.lab.diary.model.vo.DiaryVO;
 import com.plant.lab.diary.model.vo.LikeVO;
 import com.plant.lab.member.model.vo.MemberVO;
+import com.plant.lab.report.model.service.ReportService;
 
 
 /**
@@ -44,6 +45,8 @@ public class PlantHomeController {
 
 	@Autowired
 	private DiaryService dService;
+	@Autowired
+	private ReportService reportService;
 
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -99,9 +102,18 @@ public class PlantHomeController {
 		System.out.println("[영현]Detail diary 진입");
 		System.out.println("diary_no값 url로 잘 가져왔나용?" + diary_no);
 
-		mv.addObject("diary_no", diary_no);
-		mv.setViewName("Plant/DiaryDetail");
-		System.out.println("[영현]diary detail view 페이지 이동");
+		//누적신고 수 조회
+		int reportNum = reportService.countReport(diary_no);
+		if(reportNum >= 3) {
+			mv.addObject("rockM","ok");
+			mv.addObject("diaryNo",diary_no);
+			mv.setViewName("Plant/Diary");
+		}else {
+			mv.addObject("diary_no", diary_no);
+			mv.setViewName("Plant/DiaryDetail");			
+			System.out.println("[영현]diary detail view 페이지 이동");
+		}
+		
 		return mv;
 	}
 
@@ -366,6 +378,25 @@ public class PlantHomeController {
 		return jsonOutput;
 
 	}
+	
+	// 댓글 수정
+	@RequestMapping(value = "/modifyComment.do", method = RequestMethod.POST)
+	@ResponseBody
+	public String updateComment(HttpServletRequest request, CommentVO cvo, @RequestParam(name="diary_no") int diary_no, @RequestParam(name="comm_no") int comm_no, @RequestParam(name="comm_comment") String comm_comment) {
+		System.out.println("댓글 수정 페이지 들어왔다~");
+		
+		cvo.setComm_no(comm_no);
+		System.out.println("댓글 번호~ " + comm_no);
+		cvo.setComm_comment("수정할 댓글 내용~ " + comm_comment);
+		
+		int result = -1;
+		result = dService.updateComment(cvo);
+		
+		System.out.println("수정 결과는??" + result);
+		return String.valueOf(result);
+
+	}
+	
 	
 	
 	// 댓글 삭제

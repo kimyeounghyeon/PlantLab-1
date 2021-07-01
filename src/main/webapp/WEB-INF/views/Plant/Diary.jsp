@@ -12,7 +12,7 @@
 <link href="${path}/resources/css/footer.css" rel="stylesheet" />
 <link href="${path}/resources/css/DiaryStyle.css" rel="stylesheet" />
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <body>
 	<jsp:include page="../header.jsp"></jsp:include>
@@ -30,6 +30,18 @@
 
 	<script>
 		$(function() {
+			var reportM = "<c:out value="${reportM}" />";
+			
+			if(reportM != ""){
+				 swal("알려주셔서 고맙습니다. \n 회원님의 소중한 의견은 무이림 커뮤니티를 안전하게 유지하는 데 도움이 됩니다.");
+			}
+			
+			var rockM = "<c:out value="${rockM}" />";
+			var diaryNo = "<c:out value="${diaryNo}" />";
+			if(rockM != ""){
+				 swal("해당 게시글("+diaryNo+"번)은 누적 신고수가 3건을 넘어 볼 수 없습니다. \n 자세한 내용은 운영자에게 문의해주세요.");
+			}
+			
 			console.log("들어왔습니당~");
 			$.ajax({
 	            url : "diary.do",

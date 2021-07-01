@@ -23,15 +23,18 @@ public interface DiaryService {
 	// 글쓰기
 	public int writeDiary(DiaryVO vo);
 	public int writeImg(DiaryVO vo);
-	public int insertDiary(DiaryVO vo);
 	public int deleteDiary(DiaryVO vo);
 
 	// 댓글
 	public List<CommentVO> selectComment(int diary_no);
 	public int insertComment(CommentVO cvo);
+	public int updateComment(CommentVO cvo);
 	public int deleteComment(CommentVO cvo);
 	
 	
 	// 게시글 번호 불러오기
 	public int getSequence();
+	
+	//
+	public int detailWrite(int diary_no);
 }

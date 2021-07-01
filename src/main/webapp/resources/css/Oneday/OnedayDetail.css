@@ -70,9 +70,10 @@
 }
 
 #onePl {
+	margin-top:20px;
 	margin-bottom: 0;
 	height: 90px;
-	text-align: left;
+	text-align:center;
 	vertical-align: middle;
 	z-index: 1;
 }

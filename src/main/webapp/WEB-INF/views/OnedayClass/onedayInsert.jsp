@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/jejumyeongjo.css"/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/jejumyeongjo.css"/>
 <link href="${path}/resources/css/header.css" rel="stylesheet" />
 <link href="${path}/resources/css/footer.css" rel="stylesheet" />
 <link href="${path}/resources/css/Oneday/OnedayInsert.css" rel="stylesheet" />
@@ -80,11 +80,19 @@
 <br/>
 
 
-<input type="date" class="oneinsert"   id="start"  name="oneinsertDS" />
+<input type="date" class="oneinsertD"   id="start"  name="oneinsertDS" />
 
 <span class="inserttag" >클래스  마감일</span>
 <br/>
-<input type="date" class="oneinsert"  id="end"   name="oneinsertDE" />
+<input type="date" class="oneinsertD"  id="end"   name="oneinsertDE" />
+<br/>
+
+
+<span class="inserttag" >클래스  수업시간</span>
+<br>
+<input type="time"   id="timeS"   name="oneinsertST" />
+<span  id="insertspan">~</span>
+<input type="time" class="oneinsertTime"  id="timeE"   name="oneinsertET" />
 <br/>
 
 
