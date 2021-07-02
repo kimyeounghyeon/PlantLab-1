@@ -31,4 +31,13 @@
 	<select id="selectOrderList" resultType="arraylist" parameterType="int" resultMap="OrderMap">
 		SELECT * FROM purchase_tb WHERE user_no = #{user_no} order by buy_date desc
 	</select>
+	
+	<!-- 주문상세내역 조회 (단일출력) -->
+	<select id="selectOrder" resultType="Order" parameterType="int" resultMap="OrderMap">
+		SELECT p.*, u.user_name 
+		FROM purchase_tb p 
+		JOIN user_tb u
+		ON p.user_no = u.user_no
+		WHERE p.buy_no = #{buy_no}
+	</select>
 </mapper>

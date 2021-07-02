@@ -119,3 +119,7 @@
 li.now{
     font-weight: bold;
 }
+
+.w3-btn-floating:hover{
+	cursor: pointer;
+}

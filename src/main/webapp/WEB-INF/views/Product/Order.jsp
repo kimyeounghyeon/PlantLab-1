@@ -9,6 +9,7 @@
 	<title>無以林 주문</title>
 	<link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/jejumyeongjo.css"/>
 	<link href="${path}/resources/css/header.css" rel="stylesheet"/>
+	<link href="${path}/resources/css/footer.css" rel="stylesheet"/>
 	<link href="${path}/resources/css/Product/OrderStyle.css" rel="stylesheet"/>
 
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>

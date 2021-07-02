@@ -12,4 +12,5 @@ public interface OrderService {
 	public int listCount(int user_no);
 	public List<Order> selectOrderList(int startPage, int limit,int user_no);
 	public List<OrderDetail> selectOrderDList(int buy_no);
+	public Order selectOrder(int buy_no);
 }

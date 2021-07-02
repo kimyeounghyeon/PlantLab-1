@@ -8,6 +8,7 @@
     <title>無以林 주문 내역</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/jejumyeongjo.css" />
     <link href="${path}/resources/css/header.css" rel="stylesheet"/>
+    <link href="${path}/resources/css/footer.css" rel="stylesheet"/>
     <link rel="stylesheet" href="${path}/resources/css/OrderListStyle.css"/>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -19,7 +20,7 @@
         <section id="main_section">
             <!-- Store 제목 -->
             <div class="main_header">
-                <h1 class="title">주문상세내역</h1>
+                <h1 class="title">주문 내역</h1>
             </div>
 
             <article class="main_article">
@@ -46,7 +47,7 @@
 		                            <td rowspan="2" class="space"></td>
 		                            <td class="proNames" colspan="2">
 		                            	<input type="hidden" name="buy_no" value="${vo.buy_no}">
-		                                <p><a href="/OrderView?buy_no=${vo.buy_no}"> </a></p>
+		                                <p><a href="<%=request.getContextPath()%>/OrderView?buy_no=${vo.buy_no}"> </a></p>
 		                            </td>
 		                            <td class="btn"> 
 		                                <button type="button" class="proBtn">문의하기</button>
@@ -73,8 +74,8 @@
                         <p>이용해주셔서 감사합니다.<br>상품의 이용방법, 주문취소 등에 대한 문의는 고객센터를 이용해 주세요.</p>
                     </div>
                 </div>
-                
-                
+                <br>
+                    
                  <c:if test="${not empty currentPage}">
                 	<div class="page">
 	                    <ul>

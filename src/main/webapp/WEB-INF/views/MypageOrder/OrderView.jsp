@@ -6,8 +6,9 @@
 <html lang="en">
 <head>
     <title>無以林 주문 상세 내역</title>
-     <link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/jejumyeongjo.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/jejumyeongjo.css" />
     <link href="${path}/resources/css/header.css" rel="stylesheet"/>
+    <link href="${path}/resources/css/footer.css" rel="stylesheet"/>
     <link rel="stylesheet" href="${path}/resources/css/OrderViewStyle.css"/>
     
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -30,15 +31,15 @@
                     <table class="orderView" border="1">
                         <tr>
                             <td><span>주문번호</span></td>
-                            <td><input type="text" readonly></td>
+                            <td><input type="text" id="orderNo" readonly value="${order.buy_no}"></td>
                         </tr>
                         <tr>
                             <td><span>주문일자</span></td>
-                            <td><input type="text" readonly></td>
+                            <td><input type="text" id="orderDate" readonly value="${order.buy_date}"></td>
                         </tr>
                         <tr>
                             <td><span>주문자</span></td>
-                            <td><input type="text" readonly></td>
+                            <td><input type="text" readonly value="${order.user_name}"></td>
                         </tr>
                         
                     </table>
@@ -49,11 +50,26 @@
                     <table class="orderView" border="1">
                         <tr>
                             <td><span>총 주문 금액</span></td>
-                            <td><input type="text" readonly></td>
+                            <td><input type="text" readonly value="${order.buy_totalprice}"></td>
                         </tr>
                         <tr>
                             <td><span>결제수단</span></td>
-                            <td><input type="text" readonly></td>
+                            <td>
+                            	<c:choose>
+                            		<c:when test="${order.buy_paymentmethod eq 'card'}">
+                            			<input type="text" readonly id="paymentV" value="신용/체크카드">
+                            		</c:when>
+                            		<c:when test="${order.buy_paymentmethod eq 'phone'}">
+                            			<input type="text" readonly id="paymentV" value="휴대폰결제">
+                            		</c:when>
+                            		<c:when test="${order.buy_paymentmethod eq 'trans'}">
+                            			<input type="text" readonly id="paymentV" value="계좌이체">
+                            		</c:when>
+                            		<c:otherwise>
+                            			<input type="text" readonly id="paymentV" value="가상계좌">
+                            		</c:otherwise>
+                            	</c:choose>
+                            </td>
                         </tr>
                     </table>
                 </div>
@@ -62,45 +78,36 @@
                 <div>
                     <h3>주문 상품 정보</h3>
                     <table class="orderList">
-                        <tr>
-                            <td class="proImg" rowspan="2">
-                               
-                            </td>
-                            <td rowspan="2" class="space"></td>
-                            <td class="proNames" colspan="2">
-                                <p><a href="">상품 이름출력~~</a></p>
-                            </td>
-                            <td rowspan="2" class="space"></td>
-                        </tr>
-                        <tr>
-                            <td class="proAllP proGuid">
-                                <span class="proNum">구매수량 : 1개 /</span>
-                                <span class="proPri">15000원</span>
-                            </td>
-                            <td class="proDate proGuid">
-                                <span>구매 날짜</span><span>2020-20-20</span>
-                            </td>
-                        </tr>
-                        <tr><td><br></td></tr>
-                        <tr>
-                            <td class="proImg" rowspan="2">
-                                <img src="test.jpg">
-                            </td>
-                            <td rowspan="2" class="space"></td>
-                            <td class="proNames" colspan="2">
-                                <p><a href="">상품 이름출력~~</a></p>
-                            </td>
-                            <td rowspan="2" class="space"></td>
-                        </tr>
-                        <tr>
-                            <td class="proAllP proGuid">
-                                <span class="proNum">구매수량 : 1개 /</span>
-                                <span class="proPri">15000원</span>
-                            </td>
-                            <td class="proDate proGuid">
-                                <span>구매 날짜</span><span>2020-20-20</span>
-                            </td>
-                        </tr>
+                    	<c:forEach var="vo" items="${detailList}" varStatus="status">
+	                        <tr>
+	                            <td class="proImg" rowspan="2">
+	                               <a href="${path}/productView?proNo=${vo.pro_no}">
+	                               		<img src="${vo.pro_image}" />
+	                               </a>
+	                            </td>
+	                            <td rowspan="2" class="space"></td>
+	                            <td class="proNames" colspan="2">
+	                                <p><a href="${path}/productView?proNo=${vo.pro_no}">${vo.pro_name}</a></p>
+	                            </td>
+	                            <td rowspan="2" class="space"></td>
+	                        </tr>
+	                        <tr>
+	                            <td class="proAllP proGuid">
+	                                <span class="proNum">
+	                                	구매수량 : ${vo.pro_num}개 /
+	                                </span>
+	                                <span class="proPri">
+	                                	
+	                                </span>
+	                                <input type="hidden" class="pro_num" value="${vo.pro_num}">
+	                                <input type="hidden" class="pro_price" value="${vo.pro_price}">
+	                            </td>
+	                            <td class="proDate proGuid">
+	                                <span>구매 날짜</span><span>${order.buy_date}</span>
+	                            </td>
+	                        </tr>
+	                        <tr><td><br></td></tr>
+                        </c:forEach>
                     </table>
                 </div>
                 <br><br><br>
@@ -109,23 +116,26 @@
                     <table class="orderView" border="1">
                         <tr>
                             <td><span>받는 분</span></td>
-                            <td><input type="text" readonly></td>
+                            <td><input type="text" readonly value="${order.buy_rc_name}"></td>
                         </tr>
                         <tr>
                             <td><span>우편번호</span></td>
-                            <td><input type="text" readonly></td>
+                            <td>
+                            	<input type="hidden" id="add" value="${order.buy_rc_address}">
+                            	<input type="text" readonly id="post">
+                            </td>
                         </tr>
                         <tr>
                             <td><span>주소</span></td>
-                            <td><input type="text" readonly></td>
+                            <td><input type="text" readonly id="addV"></td>
                         </tr>
                         <tr>
                             <td><span>휴대전화</span></td>
-                            <td><input type="text" readonly></td>
+                            <td><input type="text" readonly value="${order.buy_rc_phone}"></td>
                         </tr>
                         <tr>
                             <td><span>배송 메세지</span></td>
-                            <td><input type="text" readonly></td>
+                            <td><input type="text" readonly value="${order.buy_requests}"></td>
                         </tr>
                     </table>
                 </div>
@@ -134,4 +144,57 @@
     </div>
      <jsp:include page="../footer.jsp"></jsp:include>
 </body>
+<script>
+	$(function(){
+		//주문번호
+		var orderNo = $('#orderNo');
+		
+		var no = orderNo.val();
+		var orderDate = $('#orderDate').val();
+		
+		orderDate = change(orderDate);
+		
+		orderNo.val(orderDate+no);
+		
+		//금액계산
+		var proPri = $('.proPri'); //출력창
+		var pro_num = $('.pro_num').val(); //값
+		var pro_price = $('.pro_price');
+		
+		for(var i = 0; i < pro_num.length; i++){
+            var valP = changeM(pro_price[i].value);
+            
+          	var hap = pro_num[i] * valP;
+          	
+          	hap =  hap.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+             
+          	proPri[i].append(hap+"원");
+        }
+		
+		//주소
+		var add = $('#add').val();
+		var post = $('#post');
+		var addV = $('#addV');
+		
+		var postValue = add.substring(1,add.indexOf(')'));
+		post.val(postValue);
+		
+		var addValue = add.substring(add.indexOf(')')+1,add.length);
+		addV.val(addValue);
+		
+		
+		function changeM(text){
+			text = text.substring(0,text.indexOf('원'));
+			text = text.replace(',','');
+			
+			return text;
+		}
+		
+		function change(text){
+			text = text.replace(/[^\d]+/g, "");
+			return text;
+		}
+	});
+
+</script>
 </html>

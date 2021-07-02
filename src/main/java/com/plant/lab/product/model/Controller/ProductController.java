@@ -94,12 +94,11 @@ public class ProductController {
 	
 //상품 상세보기
 	@RequestMapping(value = "/productView", method = RequestMethod.GET)
-	public ModelAndView productDetail(ModelAndView mv, HttpServletResponse response,HttpServletRequest req,
+	public ModelAndView productDetail(ModelAndView mv, HttpServletResponse response,HttpServletRequest req,HttpSession session,
 			@RequestParam(name = "proNo") int pro_no) {
 		try {
 			logger.info("===============상품상세 페이지===============");
-			
-			HttpSession session = req.getSession();
+			logger.info(":::"+pro_no);
 			MemberVO member = (MemberVO) session.getAttribute("loginMember");
 			
 			//로그인 확인
@@ -118,7 +117,7 @@ public class ProductController {
 			
 			int searchRe = 0;
 			
-			if(viewPro.size() != 0) { //최근본 상품 목록이 있을경우
+			if(viewPro.size() > 0) { //최근본 상품 목록이 있을경우
 				Collections.reverse(viewPro);
 				
 				for(int i=0; i<viewPro.size(); i++) { //이미 등록된 경우
@@ -166,7 +165,7 @@ public class ProductController {
 				}
 			}
 			
-			mv.addObject("viewPro",viewPro);
+			//mv.addObject("viewPro",viewPro);
 			mv.addObject("percent",percent);
 			mv.addObject("productCon",proConService.searchList(pro_no));
 			mv.addObject("reviewList",reviewService.searchList(pro_no));

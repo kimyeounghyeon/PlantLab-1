@@ -68,18 +68,27 @@ public class OrderServiceImpl implements OrderService{
 		return 0;
 	}
 	
+	//회원별 주문리스트 개수
 	@Override
 	public int listCount(int user_no) {
 		return orderDao.listCount(user_no);
 	}
 	
+	//회원별 주문내역 리스트
 	@Override
 	public List<Order> selectOrderList(int startPage, int limit,int user_no) {
 		return orderDao.selectOrderList(startPage,limit,user_no);
 	}
 	
+	//주문상세리스트
 	@Override
 	public List<OrderDetail> selectOrderDList(int buy_no) {
 		return orderDao.selectOrderDList(buy_no);
+	}
+	
+	//주문상세조회
+	@Override
+	public Order selectOrder(int buy_no) {
+		return orderDao.selectOrder(buy_no);
 	}
 }

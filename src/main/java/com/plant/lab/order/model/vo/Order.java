@@ -17,6 +17,8 @@ public class Order {
 	private String buy_rc_name;
 	private String buy_rc_address;
 	private int buy_rc_phone;
+	private String user_name;
+	
 	public int getBuy_no() {
 		return buy_no;
 	}
@@ -89,4 +91,11 @@ public class Order {
 	public void setBuy_rc_phone(int buy_rc_phone) {
 		this.buy_rc_phone = buy_rc_phone;
 	}
+	public String getUser_name() {
+		return user_name;
+	}
+	public void setUser_name(String user_name) {
+		this.user_name = user_name;
+	}
+	
 }

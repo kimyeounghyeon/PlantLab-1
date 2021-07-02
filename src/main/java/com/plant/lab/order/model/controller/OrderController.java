@@ -135,7 +135,7 @@ public class OrderController {
 		return mv;
 	}
 	
-//마이페이지 상세 주문보기
+//마이페이지 주문내역 보기
 	@RequestMapping(value="/orderList", method=RequestMethod.GET)
 	public ModelAndView orderList(ModelAndView mv,HttpSession session,
 			@RequestParam(name = "page", defaultValue = "1") int page) {
@@ -164,7 +164,7 @@ public class OrderController {
 		return mv;
 	}
 	
-//마이페이지 상세주문 상품보기
+//마이페이지 주문내역 ajax
 	@RequestMapping(value="/orderPro.do", method=RequestMethod.GET)
 	public void orderPro(@RequestParam(name = "buy_no") int buy_no,
 			HttpSession session,HttpServletResponse response) {
@@ -206,5 +206,30 @@ public class OrderController {
 			logger.info("!!!!!!주문이미지 AJAX1 오류!!!!!!");
 			e.printStackTrace();
 		}
+	}
+	
+	
+//마이페이지 상세주문내역 보기
+	@RequestMapping(value="/OrderView", method=RequestMethod.GET)
+	public ModelAndView orderViewList(ModelAndView mv,HttpSession session,
+			@RequestParam(name = "buy_no") int buy_no) {
+		
+		logger.info("===============마이페이지 상세주문내역 페이지===============");
+		MemberVO member = (MemberVO) session.getAttribute("loginMember");
+		
+		if(member == null || member.getUserId() == "" ) {
+			mv.setViewName("logIn");
+			return mv;
+		}else {
+			mv.setViewName("MypageOrder/OrderView");			
+		}
+		
+		Order order = orderService.selectOrder(buy_no);
+		List<OrderDetail> detailList = orderService.selectOrderDList(buy_no);
+		
+		mv.addObject("order",order);
+		mv.addObject("detailList",detailList);
+		
+		return mv;
 	}
 }

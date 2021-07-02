@@ -9,6 +9,7 @@
      width: 1250px;
      margin: auto;
      clear: both;
+     margin-bottom: 100px;
  }
 
  /* 헤더 */
@@ -97,12 +98,14 @@
     margin-left: 10px;
     width: 80%;
     height: 20px;
-    border: solid 1px #ccc;
+    border: none;
+    font-size: 20px;
+    text-align: center;
 }
 
 .orderView input:focus{
     outline:none;
-    border: solid 1px #ccc;
+    border: none;
 }
 
 .orderView td:nth-child(1){

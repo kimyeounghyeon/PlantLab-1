@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/jejumyeongjo.css"/>
     <link href="${path}/resources/css/header.css" rel="stylesheet"/>
+    <link href="${path}/resources/css/footer.css" rel="stylesheet"/>
     <link href="${path}/resources/css/Product/ProductViewStyle.css" rel="stylesheet"/>
     
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
@@ -223,6 +224,10 @@
         </section>
     </div>
 </body>
+
+<script>
+	
+</script>
 
 <script>
 	var pro_totalStar = $('#pro_totalStar').val();

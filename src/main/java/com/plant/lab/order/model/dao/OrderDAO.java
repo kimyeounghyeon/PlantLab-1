@@ -41,4 +41,9 @@ public class OrderDAO {
 	public List<OrderDetail> selectOrderDList(int buy_no){
 		return sqlSession.selectList("OrderDetail.selectOrderDList",buy_no);
 	}
+	
+	//주문상세내역조회
+	public Order selectOrder(int buy_no) {
+		return sqlSession.selectOne("Order.selectOrder",buy_no);
+	}
 }
