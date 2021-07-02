@@ -1,15 +1,12 @@
-.ft{
-	font-family: 'Jeju Myeongjo';
-	position: relative;
-	width: auto;
-	height: 100px;
-	font-size:9px;
-	clear: both;
-	margin-top: 100px;
-	padding-top: 100px
+*{font-family: 'Jeju Myeongjo';}
+
 }
 table{margin:auto;
-height: 100px;}
+position: relative;
+height: 100px;
+clear: both;
+	margin-top: 100px;
+	padding-top: 100px}
 
 .name {vertical-align:top;
 padding-top:14px;
@@ -32,4 +29,5 @@ padding-top:5px	}
 font-weight:bold;
 }
 
-.cnt{line-height:140%}
+.cnt{line-height:140%
+	font-size:9px;}
