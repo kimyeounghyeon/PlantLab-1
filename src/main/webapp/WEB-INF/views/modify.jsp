@@ -9,21 +9,22 @@
 <head>
 <meta charset="UTF-8">
 <title>無以林</title>
+<link href="${path}/resources/css/footer.css" rel="stylesheet" />
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/earlyaccess/jejumyeongjo.css" />
 <link href="${path}/resources/css/header.css" rel="stylesheet" />
-<link href="${path}/resources/css/footer.css" rel="stylesheet" />
 <link href="${path}/resources/css/joinStyle.css" rel="stylesheet" />
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 </head>
 <jsp:include page="header.jsp"></jsp:include>
+	<jsp:include page="mypagemenu.jsp"></jsp:include>
 <body>
-
+<section>
 	<div class="joindiv">
 		<div class="content">
 			<div>
-				<h1>JOIN</h1>
+				<h1>개인 정보 수정</h1>
 				<form id="frmEmp">
 					<!-- ID -->
 					<div class="form-group">
@@ -31,7 +32,7 @@
 							<label for="userId">아이디</label>
 						</h3>
 						<span class="box int_id"> <input type="text" class="int" name="userId" id="userId"
-							value="${loginMember.userId}" disabled="disabled">
+							value="${loginMember.userId}" readonly="readonly">
 						</span>
 					</div>
 					<!-- PW1 -->
@@ -66,7 +67,7 @@
 							<label for="userName">이름</label>
 						</h3>
 						<span class="box int_name"> <input type="text" class="int"
-							value="${loginMember.userName}" disabled="disabled">
+							value="${loginMember.userName}" readonly="readonly">
 						</span>
 					</div>
 
@@ -77,7 +78,7 @@
 							<label for="email">이메일</label>
 						</h3>
 						<span class="box mail_input_box"><input type="text"
-							class="int" value="${loginMember.email}" disabled="disabled">
+							class="int" value="${loginMember.email}" readonly="readonly">
 						</span>
 
 					</div>
@@ -122,6 +123,8 @@
 				</form>
 			</div>
 		</div>
+		</section>
+					<jsp:include page="footer.jsp"></jsp:include>
 </body>
 <script
 	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -238,7 +241,7 @@
 				}
 
 				if (validAll) {
-					alert('정보수정 완료되었습니다!');
+					alert('정보수정 완료 다시 로그인 해주세요!');
 
 					var frm = document.getElementById("frmEmp");
 					frm.action = "doUpdate";
@@ -250,28 +253,11 @@
 				}
 
 			});
-	function onBlurId() {
-		$.ajax({
-			url : '/doUpdate',
-			type : 'POST',
-			data : {
-				userPwd : $("#userPwd").val(),
-				phone : $("#phone").val(),
-				address : $("#address").val()
-			},
-			success : function(data) {
-				
-				  alert("넘어가나용");
-				  location.href ="Main";
-				},
-				error:function(data){
-				
-					 alert("안 넘어가나용");
+	
+	    
+	
 
-				}
-	         
-		});
-	}
+
 	
 </script>
 </html>

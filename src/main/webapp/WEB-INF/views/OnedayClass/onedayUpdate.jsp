@@ -68,10 +68,10 @@
 <span class="inserttag" >클래스 주소</span>
 <br/>
 
-<input type="text" class="oneinsert" id="addr1"   name="oneinsertP" />   <!-- 주소 -->
+<input type="text" class="oneinsert" id="addr1"   name="oneinsertP" value="${one.oneday_place}" />   <!-- 주소 -->
 <br/>
 <span class="inserttag" >클래스 상세주소</span>
-<input type="text" class="oneinsert" id="addr2"    name="oneinsertPD" />	<!-- 상세주소-->
+<input type="text" class="oneinsert" id="addr2"    name="oneinsertPD"  value="${one.oneday_dtailPlace}"/>	<!-- 상세주소-->
 <br/>
 
 <span class="inserttag" >클래스  시작일</span>
@@ -83,6 +83,13 @@
 <span class="inserttag" >클래스  마감일</span>
 <br/>
 <input type="date" class="oneinsert"    name="oneinsertDE" value="${one.oneday_end}" />
+<br/>
+
+<span class="inserttag" >클래스  수업시간</span>
+<br>
+<input type="time"   id="timeS"   name="oneinsertST" value="${one.oneday_Stime}" />
+<span  id="insertspan">~</span>
+<input type="time" class="oneinsertTime"  id="timeE"   name="oneinsertET"  value="${one.oneday_Etime}"/>
 <br/>
 
 

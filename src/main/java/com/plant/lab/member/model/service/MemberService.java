@@ -24,7 +24,7 @@ public interface MemberService {
 
 	public int memberUpdate(MemberVO vo);
 
-
+    public int memberDelete(MemberVO vo);
 
     
 

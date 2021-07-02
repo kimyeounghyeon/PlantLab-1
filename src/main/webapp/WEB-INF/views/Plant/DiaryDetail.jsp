@@ -128,10 +128,10 @@
 				if(listComment != null) {
 				$.each(listComment, function(i, item){
 					if(user_id == item.user_id){
-                    dnotice += "<tr class='dttr dtlistcommtr'><td class='commwriter'>"+item.user_id+"</td><input type='hidden' class='comm_no' value='"+item.comm_no+"'><td class='dtlistcomm'>"+item.comm_comment+"<button type='button' class='dtbtn commdelete'> &#10005 </button><button type='button' class='dtbtn commmodify'>수정</button></td></tr>";
+                    dnotice += "<tr class='dttr dtlistcommtr'><td class='commwriter'>"+item.user_id+"</td><input type='hidden' class='comm_no' value='"+item.comm_no+"'><td class='dtlistcomm'><span class='spanComm'>"+item.comm_comment+"</span><button type='button' class='dtbtn commdelete'> &#10005 </button><button type='button' class='dtbtn commmodify'>수정</button></td></tr>";
  
 					} else {
-                    dnotice += "<tr class='dttr dtlistcommtr'><td class='commwriter'>"+item.user_id+"</td><input type='hidden' class='comm_no' value='"+item.comm_no+"'><td class='dtlistcomm'>"+item.comm_comment+"</td></tr>";
+                    dnotice += "<tr class='dttr dtlistcommtr'><td class='commwriter'>"+item.user_id+"</td><input type='hidden' class='comm_no' value='"+item.comm_no+"'><td class='dtlistcomm'><span class='spanComm'>"+item.comm_comment+"</span></td></tr>";
 					}
 				});
 				
@@ -229,7 +229,7 @@
 				console.log(data);
 				data = data[0];
 				console.log("data" + data);
-				$(".dtinsertcommtr").after("<tr class='dttr dtlistcommtr'><td class='commwriter'>"+data.user_id+"</td><td class='dtlistcomm'>"+data.comm_comment+"<button type='button' class='dtbtn commdelete'> &#10005 </button><button type='button' class='dtbtn commmodify'>수정</button></td></tr>");
+				$(".dtinsertcommtr").after("<tr class='dttr dtlistcommtr'><td class='writecomment commwriter'>"+data.user_id+"</td><td class='dtlistcomm'>"+data.comm_comment+"<button type='button' class='dtbtn commdelete'> &#10005 </button><button type='button' class='dtbtn commmodify'>수정</button></td></tr>");
 				$(".writecomment").val("");
 			},
 			error : function(data) {
@@ -241,8 +241,16 @@
 	
  		// 댓글 수정
 		$(document).on("click", ".commmodify", function(){
-			$(".dtlistcomm").css("display","none");
-			$(".dtlistcommtr").append("<td class='modCommtd'><input type='text' class='modifycomment'><button type='button' class='dtbtn modcommsucc'>수정하기</button></td>");
+			console.log("찍어라~");
+			var thisComm = $(this);
+			var thisCommentBox = thisComm.parents(".dtlistcommtr");
+			console.log(thisCommentBox);
+			var thisCommentTd = thisCommentBox.find(".spanComm");  
+
+			var thisCommentTx = thisCommentTd.text();
+			
+			thisCommentTd.empty();
+			thisCommentTd.append("<td class='modCommtd'><input type='text' class='modifycomment' value='"+thisCommentTx+"'><button type='button' class='dtbtn modcommsucc'>수정하기</button></td>");
 		});
 	
  		
@@ -252,26 +260,61 @@
 
 		let dnoKnow = $(".knowdno").val();
 		var thisComm = $(this);
-		console.log(thisComm);
 		
+		
+			// 댓글 번호 찾기
 		var findParent = thisComm.parents(".dtlistcommtr");
-		
 		var findChild = findParent.find(".comm_no");
-		var findComment = findParent.find(".dtlistcomm");
-		
 		var thisComm_no = findChild.val();
-		var thisComment = findComment.val();
+		
+		
+		
+			// 수정할 댓글 내용 찾기
+		var findParent2 = thisComm.parents(".modCommtd");
+		var findComment = findParent2.find(".modifycomment").val();
+		var thisComment = findComment;
+		
+		
+		var thisCommentBox = thisComm.parents(".dtlistcommtr");
+		var thisCommentTd = thisCommentBox.find(".dtlistcomm");
+		var thisCommentTdMo = thisCommentBox.find(".modCommtd");		
+		
 		
 			$.ajax({
 			url : "modifyComment.do",
 			type : "post",
 			data : {
+					diary_no : dnoKnow,
 					comm_no : thisComm_no,
-					comm_comment : $(".modifycomment").val()
+					comm_comment : thisComment
 				},
+			dataType : "json",
 			success : function(data){
-				console.log(comm_comment);
-				$(".dtinsertcommtr").append("<tr class='dttr dtlistcommtr'><td class='commwriter'>"+user_id+"</td><td class='dtlistcomm'><input type='text' class='writecomment' value='"+data.comm_comment+"'><button type='button' class='dtbtn modcommsucc'>수정하기</button></td></tr>");
+
+				var listComment = data.listComment;
+				var user_id = data.user_id;
+				
+				
+				
+				// if문 써서 세션 걸기
+				
+				if(listComment != null) {
+					$(".dtlistcommtr").remove();
+					var commentHtml = "";
+					$.each(listComment, function(i, item){
+						commentHtml+="<tr class='dttr dtlistcommtr'>";
+						commentHtml+="<td class='commwriter'>"+data.user_id+"</td>";
+						console.log(item.comm_no);
+						commentHtml+="<input type='hidden' class='comm_no' value='"+item.comm_no+"'>";
+						commentHtml+="<td class='dtlistcomm'>";
+						commentHtml+=item.comm_comment;  // 댓글내용
+						commentHtml+="<button type='button' class='dtbtn commdelete'> &#10005 </button>";
+						commentHtml+="<button type='button' class='dtbtn commmodify'>수정</button>";
+						commentHtml+="</td></tr>";
+						});
+					$(".dtinsertcommtr").after(commentHtml);
+				}
+				
 			},
 			error : function(data) {
 				alert("수정에 실패했습니다 ~ " + data);

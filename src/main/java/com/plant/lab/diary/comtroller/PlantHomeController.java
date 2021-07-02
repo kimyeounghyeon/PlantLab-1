@@ -382,19 +382,40 @@ public class PlantHomeController {
 	// 댓글 수정
 	@RequestMapping(value = "/modifyComment.do", method = RequestMethod.POST)
 	@ResponseBody
-	public String updateComment(HttpServletRequest request, CommentVO cvo, @RequestParam(name="diary_no") int diary_no, @RequestParam(name="comm_no") int comm_no, @RequestParam(name="comm_comment") String comm_comment) {
+	public String updateComment(HttpServletRequest request, CommentVO cvo, HttpSession session, @RequestParam(name="comm_no") int comm_no, @RequestParam(name="comm_comment") String comm_comment,
+								@RequestParam(name="diary_no") int diary_no) {
 		System.out.println("댓글 수정 페이지 들어왔다~");
 		
+		
+		System.out.println("댓글번호" + comm_no);
+		System.out.println("댓글내용" + comm_comment);
+		System.out.println("게시글번호" + diary_no);
+		
+		
+		MemberVO member = (MemberVO) session.getAttribute("loginMember");
+		String user_id = member.getUserId();
+		
+
 		cvo.setComm_no(comm_no);
-		System.out.println("댓글 번호~ " + comm_no);
-		cvo.setComm_comment("수정할 댓글 내용~ " + comm_comment);
+		cvo.setComm_comment(comm_comment);
 		
 		int result = -1;
 		result = dService.updateComment(cvo);
 		
 		System.out.println("수정 결과는??" + result);
-		return String.valueOf(result);
 
+		List<CommentVO> listComment = dService.selectComment(diary_no);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("user_id", user_id);
+		map.put("listComment", listComment);
+		
+		
+		
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		String jsonOutput = gson.toJson(map);
+
+		return jsonOutput;
 	}
 	
 	

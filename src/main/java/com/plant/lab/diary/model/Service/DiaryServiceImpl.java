@@ -177,7 +177,7 @@ public class DiaryServiceImpl implements DiaryService {
 	public int updateComment(CommentVO cvo) {
 		int result = -1;
 		try {
-			result = dDao.deleteComment(cvo);
+			result = dDao.updateComment(cvo);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
