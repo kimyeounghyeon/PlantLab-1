@@ -173,8 +173,8 @@ public class PlantHomeController {
 	// 일기 등록
 	@RequestMapping(value = "diaryInsert.do", method = RequestMethod.POST)
 	public String boardInsert(DiaryVO vo, HttpServletResponse response, @RequestParam(name = "diaryUpload", required = false) MultipartFile multiFile,
-			HttpSession session, HttpServletRequest request, @RequestParam(name = "writetext") String diary_content,
-			ModelAndView mv) {
+			HttpSession session, HttpServletRequest request, @RequestParam(name = "writetext") String diary_content
+			) {
 
 		MemberVO member = (MemberVO) session.getAttribute("loginMember");
 
@@ -183,13 +183,8 @@ public class PlantHomeController {
 			vo.setDiary_write(member.getUserNo());
 			vo.setUser_id(member.getUserId());
 			
-
-		System.out.println("vo가 문제지..?" + vo);
-		
-			
 		
 			int result = -1;
-			int resultSeq = 0;
 			int diary_no = 0;
 
 			try {
@@ -197,26 +192,25 @@ public class PlantHomeController {
 					String url = saveFile(multiFile, request);
 					vo.setDiary_img_src(url);					
 				}
-				
-				
+
 				
 			} catch (Exception e) {
 				e.printStackTrace();
 				System.out.println("이미지 저장에 실패했습니다~");
-			}
-			
+			}	
 			
 			
 			try {
-			resultSeq = dService.getSequence();
-			diary_no = resultSeq;
-			vo.setDiary_no(diary_no);
-			System.out.println(vo);
+				result = dService.writeDiary(vo);
+				System.out.println("글쓰기 성공 했나용?" + result);
+				
+				diary_no = dService.getSequence();
+				System.out.println("시퀀스 번호~ " + diary_no);
 			
-			System.out.println("시퀀스 번호~ " + resultSeq);
 			
-			result = dService.writeDiary(vo);
-			System.out.println("글쓰기 성공 했나용?" + result);
+				vo.setDiary_no(diary_no);
+			
+			
 			
 			 int resultImg = dService.writeImg(vo);
 			 System.out.println(resultImg + " : 이거맞지~");
@@ -228,12 +222,69 @@ public class PlantHomeController {
 		return "Plant/Diary";
 	}
 
+	
 	// 일기 수정
 	@RequestMapping(value = "/modifydiary")
-	public String modifyDiary() {
+	public String modifyDiary(HttpServletRequest request, DiaryVO vo, @RequestParam(name="diary_no") int diary_no, Model model) {
 		System.out.println("수정페이지 들어왔고요~");
+		System.out.println("수정페이지에서 dno 있는지 확인해볼래 " + diary_no);
+		
+		List<DiaryVO> detailDiary = dService.detailDiary(diary_no);
+		model.addAttribute("detailDiary", detailDiary);
+		
+		
+//		request.getSession().setAttribute("diary_no", diary_no);
+		
+		
 		return "Plant/modifyDiary";
 	}
+	
+	
+	// 일기 수정 내용 불러오기
+	@RequestMapping(value="/modifydiary.do", method=RequestMethod.POST)
+	public String modifyDiaryLoad(HttpServletRequest request, HttpSession session, DiaryVO vo,
+				@RequestParam(name="modifytext") String modifytext, @RequestParam(name = "diaryModImg", required = false) MultipartFile multiFile,
+				@RequestParam(name="diary_no") int diary_no) {
+		
+		System.out.println("일기 수정 페이지 진입~");
+		System.out.println("일기 수정 페이지에서 값 가져오기~" + modifytext);
+		System.out.println("일기 수정 페이지에서 값 가져오기~" + multiFile);
+		System.out.println("일기 수정 페이지에서 값 가져오기~" + diary_no);
+		
+		MemberVO member = (MemberVO) session.getAttribute("loginMember");
+		System.out.println("수정.do 들어옴");
+		
+		int result = -1;
+		int resultImg = -1; 
+		
+		vo.setDiary_no(diary_no);
+		vo.setUser_id(member.getUserId());
+		vo.setDiary_content(modifytext);
+		
+		try {
+			if (multiFile != null && !multiFile.equals("")) {
+				String url = saveFile(multiFile, request);
+				vo.setDiary_img_src(url);
+				
+				result = dService.modifyDiary(vo);
+				resultImg = dService.modifyImg(vo);
+				
+				System.out.println("글 수정 성공? " + result);
+				System.out.println("이미지 수정 성공? " + resultImg);
+			}
+
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("수정 실패~ result : " + result + "resultImg : " + resultImg);
+		}	
+		
+
+		
+		return "Plant/Diary";
+		
+	}
+	
 
 	// 일기 삭제
 	@RequestMapping(value = "/deletediary.do")
@@ -353,9 +404,9 @@ public class PlantHomeController {
 	public String Insertcomment(HttpServletRequest request, CommentVO cvo, HttpSession session,
 			HttpServletResponse response, @RequestParam(name = "diary_no") int diary_no,
 			@RequestParam(name = "comm_comment") String comm_comment) {
-		System.out.println("다이어리 번호는? " + diary_no);
+
+		
 		int result = -1;
-		System.out.println("댓글 페이지 진입 성공~");
 
 		MemberVO member = (MemberVO) session.getAttribute("loginMember");
 		String user_id = member.getUserId();
@@ -367,8 +418,8 @@ public class PlantHomeController {
 		cvo.setComm_comment(comm_comment);
 
 		System.out.println("cvo에 뭐 들어있음?" + cvo);
-		int insertComment = dService.insertComment(cvo);
-		System.out.println("댓글 잘 됐어? " + insertComment);
+		result = dService.insertComment(cvo);
+		System.out.println("댓글 잘 됐어? " + result);
 		List<CommentVO> listComment = dService.selectComment(diary_no);
 
 		// Parse Pretty
@@ -486,23 +537,5 @@ public class PlantHomeController {
 		return url;
 	}
 
-	// 파일 삭제
-	private void removeFile(String board_file, HttpServletRequest request) {
-		String root = request.getSession().getServletContext().getRealPath("resources");
-		String savePath = root + "\\diaryImg";
-
-		String filePath = savePath + "\\" + board_file;
-
-		try {
-			System.out.println(board_file + "을 삭제합니다.");
-			System.out.println("기존 저장 경로 : " + savePath);
-
-			File delFile = new File(filePath);
-			delFile.delete();
-			System.out.println("파일 삭제가 완료되었습니다.");
-		} catch (Exception e) {
-			System.out.println("파일 삭제 에러 : " + e.getMessage());
-		}
-	}
 
 }

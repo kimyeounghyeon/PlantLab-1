@@ -144,7 +144,8 @@
 
 			error : function(data) {
 				console.log("에러일 때 데이터" + data);
-				alert("잘못 된 접근입니다.");
+	               alert("로그인 후 이용해주세요");
+	               location.href="login";
 			}
 		});
 		
@@ -250,7 +251,7 @@
 			var thisCommentTx = thisCommentTd.text();
 			
 			thisCommentTd.empty();
-			thisCommentTd.append("<td class='modCommtd'><input type='text' class='modifycomment' value='"+thisCommentTx+"'><button type='button' class='dtbtn modcommsucc'>수정하기</button></td>");
+			thisCommentTd.append("<input type='text' class='modifycomment' value='"+thisCommentTx+"'><button type='button' class='dtbtn modcommsucc'>수정하기</button>");
 		});
 	
  		
@@ -258,6 +259,7 @@
  		// 댓글 수정 확인
 		$(document).on("click", ".modcommsucc", function(){
 
+			console.log("댓글 수정 또 누르면~~");
 		let dnoKnow = $(".knowdno").val();
 		var thisComm = $(this);
 		
@@ -270,14 +272,14 @@
 		
 		
 			// 수정할 댓글 내용 찾기
-		var findParent2 = thisComm.parents(".modCommtd");
+		var findParent2 = thisComm.parents(".spanComm");
 		var findComment = findParent2.find(".modifycomment").val();
 		var thisComment = findComment;
 		
 		
 		var thisCommentBox = thisComm.parents(".dtlistcommtr");
 		var thisCommentTd = thisCommentBox.find(".dtlistcomm");
-		var thisCommentTdMo = thisCommentBox.find(".modCommtd");		
+		var thisCommentTdMo = thisCommentBox.find(".spanComm");		
 		
 		
 			$.ajax({
@@ -295,22 +297,26 @@
 				var user_id = data.user_id;
 				
 				
-				
-				// if문 써서 세션 걸기
+				// TODO : if문 써서 세션 걸기
 				
 				if(listComment != null) {
 					$(".dtlistcommtr").remove();
 					var commentHtml = "";
+					
 					$.each(listComment, function(i, item){
 						commentHtml+="<tr class='dttr dtlistcommtr'>";
-						commentHtml+="<td class='commwriter'>"+data.user_id+"</td>";
+						commentHtml+="<td class='commwriter'>"+item.user_id+"</td>";
 						console.log(item.comm_no);
 						commentHtml+="<input type='hidden' class='comm_no' value='"+item.comm_no+"'>";
 						commentHtml+="<td class='dtlistcomm'>";
-						commentHtml+=item.comm_comment;  // 댓글내용
+						commentHtml+="<span class='spanComm'>"+item.comm_comment+"</span>";  // 댓글내용
+					if(user_id == item.user_id) {
 						commentHtml+="<button type='button' class='dtbtn commdelete'> &#10005 </button>";
-						commentHtml+="<button type='button' class='dtbtn commmodify'>수정</button>";
-						commentHtml+="</td></tr>";
+						commentHtml+="<button type='button' class='dtbtn commmodify'>수정</button></td></tr>";
+					} else {
+						commentHtml+="</td></tr>"
+					}
+
 						});
 					$(".dtinsertcommtr").after(commentHtml);
 				}

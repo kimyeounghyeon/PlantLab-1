@@ -22,6 +22,8 @@
 	<div class="bgdiv">
 		<h3 class="subtitle">diary</h3>
 		<br>
+			<p class="diaryintro"> 반려식물 일기를 작성해주세요! </p>
+		<br>
 		<button type="button" class="dwirte">일기 쓰기</button>
 		<br> <br>
 		<div class="dback"></div>

@@ -23,6 +23,8 @@ public interface DiaryService {
 	// 글쓰기
 	public int writeDiary(DiaryVO vo);
 	public int writeImg(DiaryVO vo);
+	public int modifyDiary(DiaryVO vo);
+	public int modifyImg(DiaryVO vo);
 	public int deleteDiary(DiaryVO vo);
 
 	// 댓글
@@ -37,4 +39,6 @@ public interface DiaryService {
 	
 	//
 	public int detailWrite(int diary_no);
+	
+
 }

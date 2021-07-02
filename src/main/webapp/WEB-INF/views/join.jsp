@@ -329,7 +329,7 @@
 					} else {
 						inval_Arr[2] = false;
 					}
-					if($('#email').val() == null){
+					if($('#emailint').val() == null){
 						alert("이메일을 확인해주세요");
 						inval_Arr[3] = false;
 					} else{
