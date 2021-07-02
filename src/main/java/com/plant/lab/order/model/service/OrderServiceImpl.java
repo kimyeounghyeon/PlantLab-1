@@ -14,8 +14,6 @@ import com.plant.lab.order.model.vo.OrderDetail;
 import com.plant.lab.product.model.dao.ProductDAO;
 import com.plant.lab.product.model.vo.Product;
 
-import sun.util.logging.resources.logging;
-
 @Service("orderService")
 public class OrderServiceImpl implements OrderService{
 	@Autowired
@@ -67,5 +65,20 @@ public class OrderServiceImpl implements OrderService{
 	public int orderDetailInsert(OrderDetail detail) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+	
+	@Override
+	public int listCount(int user_no) {
+		return orderDao.listCount(user_no);
+	}
+	
+	@Override
+	public List<Order> selectOrderList(int startPage, int limit,int user_no) {
+		return orderDao.selectOrderList(startPage,limit,user_no);
+	}
+	
+	@Override
+	public List<OrderDetail> selectOrderDList(int buy_no) {
+		return orderDao.selectOrderDList(buy_no);
 	}
 }

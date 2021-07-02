@@ -14,4 +14,13 @@
 			#{pro_num}
 		)
 	</insert>
+	
+	<!-- 회원별 구매상세 검색 -->
+	<select id="selectOrderDList" resultType="arraylist" parameterType="Order" resultMap="OrderDetailMap">
+		SELECT pl.pro_num,p.pro_image,p.pro_price 
+		FROM purchase_list_tb pl 
+		JOIN pro_tb p
+		ON pl.pro_no = p.pro_no
+		WHERE buy_no = #{buy_no}
+	</select>
 </mapper>

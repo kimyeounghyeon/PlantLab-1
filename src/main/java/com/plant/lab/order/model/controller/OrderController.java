@@ -1,11 +1,20 @@
 package com.plant.lab.order.model.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +24,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.plant.lab.cart.model.controller.CartController;
 import com.plant.lab.cart.model.service.CartService;
 import com.plant.lab.cart.model.vo.Cart;
@@ -26,6 +37,7 @@ import com.plant.lab.order.model.vo.OrderDetail;
 import com.plant.lab.product.model.service.ProductContentService;
 import com.plant.lab.product.model.service.ProductService;
 import com.plant.lab.product.model.vo.Product;
+import com.plant.lab.review.model.vo.Review;
 
 @Controller
 public class OrderController {
@@ -39,7 +51,7 @@ public class OrderController {
 	private OrderService orderService;
 	
 	private static final Logger logger = LoggerFactory.getLogger(CartController.class);
-	
+	public static final int LIMIT = 1;
 //상품 주문페이지 이동
 	@RequestMapping(value="/orders", method=RequestMethod.POST)
 	public ModelAndView orderPro(ModelAndView mv,Order order,HttpSession session,
@@ -121,5 +133,63 @@ public class OrderController {
 			
 		mv.setViewName("Main");
 		return mv;
+	}
+	
+//마이페이지 상세 주문보기
+	@RequestMapping(value="/orderList", method=RequestMethod.GET)
+	public ModelAndView orderList(ModelAndView mv,HttpSession session,
+			@RequestParam(name = "page", defaultValue = "1") int page) {
+		
+		logger.info("===============마이페이지 구매리스트 페이지===============");
+		MemberVO member = (MemberVO) session.getAttribute("loginMember");
+		
+		if(member == null || member.getUserId() == "" ) {
+			mv.setViewName("logIn");
+			return mv;
+		}else {
+			mv.setViewName("MypageOrder/OrderList");			
+		}
+		
+		//페이지처리
+		int currentPage = page; // 한 페이지당 출력할 목록 개수
+		int listCount = orderService.listCount(member.getUserNo()); //전체 게시글 개수
+		int maxPage = (int) ((double) listCount / LIMIT + 0.9); //최대 페이지
+		
+		
+		List<Order> orderList = orderService.selectOrderList(currentPage,LIMIT,member.getUserNo());
+		
+		mv.addObject("orderList", orderList);
+		mv.addObject("currentPage", currentPage);
+		mv.addObject("maxPage", maxPage);
+		return mv;
+	}
+	
+//마이페이지 상세주문 상품보기
+	@RequestMapping(value="/orderPro.do", method=RequestMethod.GET)
+	public void orderPro(@RequestParam(name = "buy_no") int buy_no,
+			HttpSession session,HttpServletResponse response) {
+		try {
+			logger.info("===============주문이미지 ajax===============");
+			logger.info("번호확인!!!!:::"+buy_no);
+			
+			List<OrderDetail> details = orderService.selectOrderDList(buy_no);
+			
+			logger.info("번호확인!!!!:::"+details.toString());
+//			Map<String, Object> map = new HashMap<String, Object>();
+//			map.put("detail",detail);
+//			
+//			Gson gson = new GsonBuilder().setPrettyPrinting().create();
+//			String jsonOutput = gson.toJson(map);
+//			
+//			try {
+//				response.getWriter().write(jsonOutput.toString());
+//				System.out.println("데이터확인:::" + jsonOutput);
+//			} catch (IOException e) {
+//				e.printStackTrace();
+//			}
+		}catch (Exception e) {
+			logger.info("!!!!!!주문이미지 AJAX1 오류!!!!!!");
+			e.printStackTrace();
+		}
 	}
 }

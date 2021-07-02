@@ -9,7 +9,7 @@ public class Order {
 	private int user_no;
 	private int reserv_no;
 	private int buy_totalprice;
-	private Date date;
+	private Date buy_date;
 	private String buy_paymentmethod;
 	private int phone;
 	private String buy_email;
@@ -41,12 +41,6 @@ public class Order {
 	}
 	public void setBuy_totalprice(int buy_totalprice) {
 		this.buy_totalprice = buy_totalprice;
-	}
-	public Date getDate() {
-		return date;
-	}
-	public void setDate(Date date) {
-		this.date = date;
 	}
 	public String getBuy_paymentmethod() {
 		return buy_paymentmethod;
@@ -89,5 +83,11 @@ public class Order {
 	}
 	public void setBuy_rc_phone(int buy_rc_phone) {
 		this.buy_rc_phone = buy_rc_phone;
+	}
+	public Date getBuy_date() {
+		return buy_date;
+	}
+	public void setBuy_date(Date buy_date) {
+		this.buy_date = buy_date;
 	}
 }
