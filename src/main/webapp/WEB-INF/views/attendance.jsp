@@ -18,26 +18,46 @@ clear : both;
 .aimg{
 margin-left : auto;
 margin-right : auto;
+text-align : center;
 }
 .abtn{
 margin-left : auto;
 margin-right : auto;
 text-align : center;
-border: none;
-background : none;
+font-size: 30px;
+text-align : center;
+border : none;
+background-color:#D5D9BA;
+width : 300px;
+padding : 5px;
 }
 .img{
 text-align : center;
 margin-left : auto;
 margin-right : auto;
+
+}
+
+.etb{
+margin-left : auto;
+margin-right : auto;
+}
+.btntd{
+text-align : center;
 }
 </style>
 </head>
 <body>
 <jsp:include page="./header.jsp"></jsp:include>
 <div class="adiv">
-<div class="aimg"></div>
-<div><button type="button" class="abtn">출석 완료</button></div>
+	<table class=etb>
+		<tr>
+			<td class="aimg"></td>
+		</tr>
+		<tr>
+			<td class="btntd"><button type="button" class="abtn">출석 완료</button></td>
+		</tr>
+	</table>
 </div>
 <jsp:include page="./footer.jsp"></jsp:include>
 </body>
@@ -47,7 +67,7 @@ margin-right : auto;
 			$.ajax({
 				url : "attendance.do",
 				type : "post",
-				data : { user_no :  '122' },
+				data : { user_no :  '${user_no}' },
 				//dataType : "json",
 				success : function(data) {
 					var aa = data;
