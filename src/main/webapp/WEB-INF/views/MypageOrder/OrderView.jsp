@@ -64,7 +64,7 @@
                     <table class="orderList">
                         <tr>
                             <td class="proImg" rowspan="2">
-                                <img src="test.jpg">
+                               
                             </td>
                             <td rowspan="2" class="space"></td>
                             <td class="proNames" colspan="2">

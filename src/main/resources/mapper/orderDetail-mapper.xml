@@ -17,7 +17,7 @@
 	
 	<!-- 회원별 구매상세 검색 -->
 	<select id="selectOrderDList" resultType="arraylist" parameterType="Order" resultMap="OrderDetailMap">
-		SELECT pl.pro_num,p.pro_image,p.pro_price 
+		SELECT pl.pro_num,p.pro_image,p.pro_price,p.pro_name
 		FROM purchase_list_tb pl 
 		JOIN pro_tb p
 		ON pl.pro_no = p.pro_no

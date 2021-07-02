@@ -7,6 +7,7 @@ public class OrderDetail {
 	private int pro_num;
 	private String pro_image;
 	private String pro_price;
+	private String pro_name;
 	
 	public int getBuy_no() {
 		return buy_no;
@@ -44,4 +45,11 @@ public class OrderDetail {
 	public void setPro_price(String pro_price) {
 		this.pro_price = pro_price;
 	}
+	public String getPro_name() {
+		return pro_name;
+	}
+	public void setPro_name(String pro_name) {
+		this.pro_name = pro_name;
+	}
+	
 }

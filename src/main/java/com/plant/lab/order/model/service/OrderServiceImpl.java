@@ -38,12 +38,13 @@ public class OrderServiceImpl implements OrderService{
 				result = orderDao.orderDetailInsert(orderD);
 		}
 		
+		System.out.println("카트페이지 :::"+cart.size());
 		 
 		for(int i = 0; i<cart.size(); i++){
 			for(int j=0; j<pro_no.size(); j++) {
-				if(cart.get(i).getPro_no() == pro_no.get(i)) {
+				if(cart.get(i).getPro_no() == pro_no.get(j)) {
 					//카트삭제
-					cart.get(i).setPro_no(pro_no.get(i));
+					cart.get(i).setPro_no(pro_no.get(j));
 					cart.get(i).setUser_no(order.getUser_no());
 					result = cartDao.cartDetailDel(cart.get(i));
 				}

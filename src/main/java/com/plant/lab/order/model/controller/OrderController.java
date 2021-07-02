@@ -170,23 +170,38 @@ public class OrderController {
 			HttpSession session,HttpServletResponse response) {
 		try {
 			logger.info("===============주문이미지 ajax===============");
+			response.setCharacterEncoding("UTF-8");
+			
 			logger.info("번호확인!!!!:::"+buy_no);
 			
 			List<OrderDetail> details = orderService.selectOrderDList(buy_no);
+			List<String> imgList = new ArrayList<String>();
 			
-			logger.info("번호확인!!!!:::"+details.toString());
-//			Map<String, Object> map = new HashMap<String, Object>();
-//			map.put("detail",detail);
-//			
-//			Gson gson = new GsonBuilder().setPrettyPrinting().create();
-//			String jsonOutput = gson.toJson(map);
-//			
-//			try {
-//				response.getWriter().write(jsonOutput.toString());
-//				System.out.println("데이터확인:::" + jsonOutput);
-//			} catch (IOException e) {
-//				e.printStackTrace();
-//			}
+			
+			for(int i=0; i<details.size(); i++) {
+				imgList.add(details.get(i).getPro_image());
+			}
+			
+			Map<String, Object> map = new HashMap<String, Object>();
+
+			if(details.size() <= 0) {
+				map.put("imgList",null);
+				map.put("details",null);			
+			}else {
+				map.put("imgList",imgList);
+				map.put("details",details);								
+			}
+			
+			
+			Gson gson = new GsonBuilder().setPrettyPrinting().create();
+			String jsonOutput = gson.toJson(map);
+			
+			try {
+				response.getWriter().write(jsonOutput.toString());
+				System.out.println("데이터확인:::" + jsonOutput);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}catch (Exception e) {
 			logger.info("!!!!!!주문이미지 AJAX1 오류!!!!!!");
 			e.printStackTrace();

@@ -39,14 +39,15 @@
 		                    <table class="orderList">
 		                        <tr>
 		                            <td class="proImg" rowspan="2">
-		                                <img src="test.jpg">
+		                                <div class="reviewImg" style="max-width:800px;position:relative">
+		                                
+		                                </div>
 		                            </td>
 		                            <td rowspan="2" class="space"></td>
 		                            <td class="proNames" colspan="2">
 		                            	<input type="hidden" name="buy_no" value="${vo.buy_no}">
-		                                <p><a href="/OrderView?buy_no=${vo.buy_no}">상품 이름출력~~</a></p>
+		                                <p><a href="/OrderView?buy_no=${vo.buy_no}"> </a></p>
 		                            </td>
-		                            <td rowspan="2" class="space"></td>
 		                            <td class="btn"> 
 		                                <button type="button" class="proBtn">문의하기</button>
 		                            </td>
@@ -69,7 +70,7 @@
                     
                     <br>
                     <div class="proFoot">
-                        <p>구매가 완료되었습니다. 이용해주셔서 감사합니다.<br>상품의 이용방법, 주문취소 등에 대한 문의는 고객센터를 이용해 주세요.</p>
+                        <p>이용해주셔서 감사합니다.<br>상품의 이용방법, 주문취소 등에 대한 문의는 고객센터를 이용해 주세요.</p>
                     </div>
                 </div>
                 
@@ -119,40 +120,67 @@
 <script>
 	$(function(){
 		var buy_no = ($('input[name=buy_no]').val())*1;
-		var proImg = $('.proImg');
-		
+		var reviewImg = $('.reviewImg');
+		var proNames = $('.proNames a');
 		$.ajax({
 			url:"orderPro.do",
 			data : {buy_no : buy_no},
 			type:"get",
 			dataType : "json",
 			success:function(data){
-				/* // 전달받은 data를 JSON 문자열 형태로 바꾼다
-				var jsonStr = JSON.stringify(data); 
-				// 바꾼 문자열을 json 객체로 변환한다
-				var json = JSON.parse(jsonStr);
-				
-				var html = "";
-				
-				if(data.length<=1){
-					html += "<img src='"+json.list[0].pro_image+"'/>";
-					alert(data.pro_image);
-				}else{
-					alert("2");
-					$.each(data,function(index,e){
-						html += "<img src='"+e.pro_image+"' class=\"mySlides\"/>";
-					});
-					
-					html += "<a class='w3-btn-floating' style='position:absolute; top:45%; left:0;' onclick='plusDivs(-1)'>❮ </a>";
-                    html += "<a class='w3-btn-floating' style='position:absolute;top:45%;right:0;' onclick='plusDivs(1)'>❯ </a>";
-				} */
+               
+				if(data.imgList != null){
+					var imgList = data.imgList;
+		               var details = data.details;
+		               
+		               var html = "";
+		               $.each(imgList, function(i, item){
+		            	   html += "<img src='"+item+"' class=\"mySlides\"/>";
+		               });
+		               
+		               if(imgList.length > 1){
+		            	   html += "<a class='w3-btn-floating' style='position:absolute; top:45%; left:0;' onclick='plusDivs(-1)'>❮ </a>";
+		                   html += "<a class='w3-btn-floating' style='position:absolute;top:45%;right:0;' onclick='plusDivs(1)'>❯ </a>";
+		               }
+		               
+		               if(details.length > 1){
+		            	   proNames.append(details[0].pro_name + " 외 " + (details.length-1) +"개");
+		            	   
+		               }else{
+		            	   $.each(details, function(i, item){
+		            		   proNames.append(item.pro_name);
+		            		   console.log(item.pro_name);
+		                   });
+		               }
+		               
+		               reviewImg.append(html);
+		               showDivs(slideIndex);
+				}
+               
 			},
 			error : function(request, status, errorData){ 
-				alert("error code : " + request.status + "\n"
-						 + "message : " + request.responseText + "\n"
-						 + "error : " + errorData); 
+				
 			}
 		});
 	});
+</script>
+<script>
+	var slideIndex = 1;
+	
+	
+	function plusDivs(n) {
+	    showDivs(slideIndex += n);
+	};
+	
+	function showDivs(n) {
+	    var i;
+	    var x = document.getElementsByClassName("mySlides");
+	    if (n > x.length) {slideIndex = 1}
+	    if (n < 1) {slideIndex = x.length} ;
+	    for (i = 0; i < x.length; i++) {
+	        x[i].style.display = "none";
+	    }
+	    x[slideIndex-1].style.display = "block";
+	};
 </script>
 </html>
