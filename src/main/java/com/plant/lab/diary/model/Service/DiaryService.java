@@ -12,6 +12,8 @@ public interface DiaryService {
 	// 게시글
 	public List<DiaryVO> listDiary();
 	public List<DiaryVO> detailDiary(int diary_no);
+	public List<DiaryVO> searchId(String keyword);
+	public List<DiaryVO> searchContent(String keyword);
 	
 	// 좋아요
 	public List<Integer> likeList(LikeVO lvo);
@@ -37,8 +39,7 @@ public interface DiaryService {
 	// 게시글 번호 불러오기
 	public int getSequence();
 	
-	//
 	public int detailWrite(int diary_no);
-	
+
 
 }

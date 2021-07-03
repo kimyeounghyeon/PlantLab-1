@@ -44,6 +44,34 @@ public class DiaryServiceImpl implements DiaryService {
 	}
 	
 	
+	// 검색
+	// 아이디 검색
+	@Override
+	public List<DiaryVO> searchId(String keyword) {
+		List<DiaryVO> list = null;
+		try {
+			list = dDao.searchId(keyword);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	
+	// 내용 검색
+	@Override
+	public List<DiaryVO> searchContent(String keyword) {
+		List<DiaryVO> list = null;
+		try {
+			list = dDao.searchContent(keyword);
+		} catch(Exception e) {
+			e.printStackTrace();
+		} 
+		 return list;
+	}
+	
+	
+	
 	// 좋아요
 	//@Transactional
 	@Override
@@ -215,8 +243,10 @@ public class DiaryServiceImpl implements DiaryService {
 		  return result;
 	}
 	
+
 	@Override
 	public int detailWrite(int diary_no) {
 		return dDao.detailWrite(diary_no);
 	}
+	
 }

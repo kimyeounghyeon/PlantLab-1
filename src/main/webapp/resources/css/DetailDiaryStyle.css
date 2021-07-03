@@ -137,6 +137,11 @@
 	width : 150px;
 }
 
+.modifycomment {
+	border : 1px solid gray;
+	width : 85%;
+}
+
 
 /* ====== 신고하기 모달창 ====== */
 .modal{ 

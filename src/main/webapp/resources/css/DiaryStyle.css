@@ -10,7 +10,42 @@
 
 .diaryintro {
 	text-align : center;
+	font-size : 11pt;
 }   
+
+.search {
+	height : 35px;
+	border : none;
+}
+
+.search ::-ms-expand {
+display: none;
+}
+
+.keyword {
+	border-left : none;
+	border-right : none;
+	border-top : none;
+	border-bottom : 1px solid #6a6560;
+	width : 300px;
+	text-align : center;
+}
+
+.selectSearch {
+	margin-left : 70px;
+	margin-bottom : 0px;
+}
+
+.search : selected {
+	border : none;
+}
+
+.searchResult {
+	text-align : center;
+	font-weight : bold;
+	font-size : 17pt;
+	color : #d3dcd7;
+}
    
 .bgdiv {
 	clear : both;
@@ -25,7 +60,7 @@
 
 .dwirte {
 	float : right;
-	margin-right : 100px;
+	margin-right : 35px;
 	border : none;
 	background-color : white;
 	font-size : 14pt;
@@ -95,7 +130,6 @@
 	text-overflow: ellipsis;
 	line-height : 60px;
 }
-
 
 
 .like {

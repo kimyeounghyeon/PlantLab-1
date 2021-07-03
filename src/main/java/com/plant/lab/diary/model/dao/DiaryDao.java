@@ -28,8 +28,14 @@ public class DiaryDao {
 		return sqlSession.selectList("Diary.detailDiary", diary_no);
 	}
 	
-	public int detailWrite(int diary_no) {
-		return sqlSession.selectOne("Diary.detailWrite",diary_no);
+	// 아이디로 게시글 검색
+	public List<DiaryVO> searchId(String keyword) {
+		return sqlSession.selectList("Diary.searchId",keyword);
+	}
+	
+	// 글 내용으로 게시글 검색
+	public List<DiaryVO> searchContent(String keyword) {
+		return sqlSession.selectList("Diary.searchContent",keyword);
 	}
 	
 	// 좋아요 리스트 조회
@@ -112,4 +118,8 @@ public class DiaryDao {
 		return sqlSession.selectOne("Diary.getSequence");
 	}
 	
+	
+	public int detailWrite(int diary_no) {
+		return sqlSession.selectOne("Diary.detailWrite",diary_no);
+	}
 }

@@ -3,6 +3,7 @@ package com.plant.lab.diary.comtroller;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -54,7 +55,7 @@ public class PlantHomeController {
 
 	// 일기 메인페이지
 	@RequestMapping(value = "/diary", method = RequestMethod.GET)
-	public ModelAndView listdiary(ModelAndView mv, HttpSession session, LikeVO lvo, DiaryVO vo) {
+	public ModelAndView listdiary(ModelAndView mv, HttpSession session) {
 		System.out.println("[영현]diary 진입");
 
 		mv.setViewName("Plant/Diary");
@@ -163,7 +164,51 @@ public class PlantHomeController {
 
 		System.out.println("[영현]diary detail jsp 페이지 이동");
 	}
+	
+	// 일기 검색
+	@ResponseBody
+	@RequestMapping(value = "/searchdiary.do", method = RequestMethod.POST)
+	public void searchId(HttpServletRequest request, HttpServletResponse response, HttpSession session, @RequestParam(name="keyword") String keyword, @RequestParam(name="selectVal") String selectVal) {
+		System.out.println(selectVal+ "로 검색하는 페이지 진입" + keyword);
+		response.setCharacterEncoding("UTF-8");
 
+		LikeVO sessionVO = new LikeVO();
+		MemberVO member = (MemberVO) session.getAttribute("loginMember");
+		sessionVO.setUser_no(member.getUserNo());
+		
+		
+		List<Integer> likeList = dService.likeList(sessionVO);
+		List<DiaryVO> SearchId = new ArrayList<DiaryVO>();
+		List<DiaryVO> SearchContent = new ArrayList<DiaryVO>();
+		
+		if(selectVal == "id") {
+		SearchId = dService.searchId(keyword);
+		} else if (selectVal == "content") {
+		SearchContent = dService.searchContent(keyword);
+		} else {
+			SearchId = dService.searchId(keyword);
+			SearchContent = dService.searchContent(keyword);
+		}
+
+		
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("SearchId", SearchId);
+		map.put("SearchContent", SearchContent);
+		map.put("likeList", likeList);
+		
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		String jsonOutput = gson.toJson(map);
+		
+		try {
+			response.getWriter().write(jsonOutput.toString());
+			System.out.println("데이터 잘 갔나 확인!!!! " + jsonOutput);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		System.out.println("컨트롤러는 일을 다 했습니당");
+	}
+	
 	// 일기 쓰기
 	@RequestMapping(value = "/writediary", method = RequestMethod.GET)
 	public String writediary() {

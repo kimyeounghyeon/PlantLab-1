@@ -20,6 +20,61 @@
 	]]>
 	</select>
 	
+	<!-- 글 세부 내용 -->
+ 	<select id="detailDiary" parameterType="int" resultType="DiaryVO">
+ 	 	<![CDATA[
+		select diaryall.*, liketb.like_cnt from 
+	    (
+	    select udt.*, dit.diary_img_num, dit.diary_img_src from 
+	        (select dt.*, ut.user_id, ut.user_name from diary_tb dt left outer join user_tb ut on dt.diary_write = ut.user_no) udt 
+	    left outer join 
+	        diary_img_tb dit 
+	    on dit.diary_no = udt.diary_no 
+	    ) diaryall
+		left join 
+		    (select diary_no, count(*) as like_cnt from like_tb group by diary_no) liketb
+		on diaryall.diary_no = liketb.diary_no where diaryall.diary_no = #{diary_no}
+		order by diaryall.diary_date desc
+	]]>
+ 	</select>
+ 	
+	<!-- 아이디를 통한 게시글 검색 -->
+ 	<select id="searchId" parameterType="String" resultType="DiaryVO">
+ 	 	<![CDATA[
+		select diaryall.*, liketb.like_cnt from 
+	    (
+	    select udt.*, dit.diary_img_num, dit.diary_img_src from 
+	        (select dt.*, ut.user_id, ut.user_name from diary_tb dt left outer join user_tb ut on dt.diary_write = ut.user_no) udt 
+	    left outer join 
+	        diary_img_tb dit 
+	    on dit.diary_no = udt.diary_no 
+	    ) diaryall
+		left join 
+		    (select diary_no, count(*) as like_cnt from like_tb group by diary_no) liketb
+		on diaryall.diary_no = liketb.diary_no where diaryall.user_id LIKE '%'||#{keyword}||'%'
+		order by diaryall.diary_date desc
+	]]>
+ 	</select>
+ 	
+	<!-- 내용을 통한 게시글 검색 -->
+ 	<select id="searchContent" parameterType="String" resultType="DiaryVO">
+ 	 	<![CDATA[
+		select diaryall.*, liketb.like_cnt from 
+	    (
+	    select udt.*, dit.diary_img_num, dit.diary_img_src from 
+	        (select dt.*, ut.user_id, ut.user_name from diary_tb dt left outer join user_tb ut on dt.diary_write = ut.user_no) udt 
+	    left outer join 
+	        diary_img_tb dit 
+	    on dit.diary_no = udt.diary_no 
+	    ) diaryall
+		left join 
+		    (select diary_no, count(*) as like_cnt from like_tb group by diary_no) liketb
+		on diaryall.diary_no = liketb.diary_no where diaryall.diary_content LIKE '%'||#{keyword}||'%'
+		order by diaryall.diary_date desc
+	]]>
+ 	</select>
+ 	
+	
 	<!-- 좋아요 리스트 -->
 	<select id="likeList" parameterType="LikeVO" resultType="int">
 		select diary_no from like_tb where user_no = #{user_no}
@@ -47,7 +102,7 @@
  		insert into diary_tb values(diary_seq.nextVal, #{diary_write}, #{diary_content} , sysdate, default)
  	</insert>
  	
- 	 	<!-- 이미지 등록 -->
+ 	<!-- 이미지 등록 -->
  	<insert id="writeImg" parameterType="DiaryVO" flushCache="true" statementType="PREPARED">
  		insert into Diary_Img_TB values(#{diary_no}, img_SEQ.nextVal, #{diary_img_src})
  	</insert>
@@ -67,34 +122,11 @@
  		   select Diary_SEQ.currVal from dual
  	</select>
  	
- 	
-
- 	
  	<!-- 글 삭제 -->
  	<delete id="deleteDiary" parameterType="DiaryVO" flushCache="true" statementType="PREPARED">
  		delete from diary_tb where diary_no = #{diary_no}
  	</delete>
  
- 	
- 	
- 	<!-- 글 세부 내용 -->
- 	<select id="detailDiary" parameterType="int" resultType="DiaryVO">
- 	 	<![CDATA[
-		select diaryall.*, liketb.like_cnt from 
-	    (
-	    select udt.*, dit.diary_img_num, dit.diary_img_src from 
-	        (select dt.*, ut.user_id, ut.user_name from diary_tb dt left outer join user_tb ut on dt.diary_write = ut.user_no) udt 
-	    left outer join 
-	        diary_img_tb dit 
-	    on dit.diary_no = udt.diary_no 
-	    ) diaryall
-		left join 
-		    (select diary_no, count(*) as like_cnt from like_tb group by diary_no) liketb
-		on diaryall.diary_no = liketb.diary_no where diaryall.diary_no = #{diary_no}
-		order by diaryall.diary_date desc
-	]]>
- 	</select>
- 	 
  	 
  	<!-- 댓글 조회 -->
 	<select id="selectComment" parameterType="int" resultType="CommentVO">
@@ -118,5 +150,24 @@
  	<delete id="deleteComment" parameterType="CommentVO">
  		delete from comment_tb where diary_no = #{diary_no} and comm_no = #{comm_no}
  	</delete>
+ 	
+ 	
+ 		<!-- 내용을 통한 게시글 검색 -->
+ 	<select id="detailWrite" parameterType="int" resultType="DiaryVO">
+ 	 	<![CDATA[
+		select diaryall.*, liketb.like_cnt from 
+	    (
+	    select udt.*, dit.diary_img_num, dit.diary_img_src from 
+	        (select dt.*, ut.user_id, ut.user_name from diary_tb dt left outer join user_tb ut on dt.diary_write = ut.user_no) udt 
+	    left outer join 
+	        diary_img_tb dit 
+	    on dit.diary_no = udt.diary_no 
+	    ) diaryall
+		left join 
+		    (select diary_no, count(*) as like_cnt from like_tb group by diary_no) liketb
+		on diaryall.diary_no = liketb.diary_no where diary_no = #{diary_no}
+		order by diaryall.diary_date desc
+	]]>
+ 	</select>
 
 </mapper>

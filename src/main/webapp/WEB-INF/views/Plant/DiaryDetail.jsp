@@ -247,11 +247,14 @@
 			var thisCommentBox = thisComm.parents(".dtlistcommtr");
 			console.log(thisCommentBox);
 			var thisCommentTd = thisCommentBox.find(".spanComm");  
+			var thisCommentBtn = thisCommentBox.find(".dtbtn");  
 
 			var thisCommentTx = thisCommentTd.text();
 			
 			thisCommentTd.empty();
-			thisCommentTd.append("<input type='text' class='modifycomment' value='"+thisCommentTx+"'><button type='button' class='dtbtn modcommsucc'>수정하기</button>");
+			thisCommentBtn.remove();
+			
+			thisCommentTd.append("<input type='text' class='modifycomment' value='"+thisCommentTx+"'>&nbsp;&nbsp;&nbsp; <button type='button' class='dtbtn modcommsucc'>수정하기</button>");
 		});
 	
  		
@@ -297,7 +300,6 @@
 				var user_id = data.user_id;
 				
 				
-				// TODO : if문 써서 세션 걸기
 				
 				if(listComment != null) {
 					$(".dtlistcommtr").remove();
