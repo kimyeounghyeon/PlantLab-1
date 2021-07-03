@@ -32,19 +32,32 @@ display: none;
 }
 
 .selectSearch {
-	margin-left : 70px;
+	margin-left : 65px;
 	margin-bottom : 0px;
 }
 
-.search : selected {
+.searchBtn {
 	border : none;
+	background-color : white;
+	padding : 0px;
+}
+
+.searchBtn:hover {
+	cursor:pointer;
+}
+
+.searchicon {
+	width : 20px;
+	height : 20px;
+	bottom : 5px;
+	padding : 0px;
 }
 
 .searchResult {
 	text-align : center;
 	font-weight : bold;
 	font-size : 17pt;
-	color : #d3dcd7;
+	color : #625b54;
 }
    
 .bgdiv {
@@ -80,7 +93,7 @@ display: none;
 	clear : both;
 	width : 350px;
 	height : 500px;
-	border : 1px solid gray;
+	border : 1px solid #b2b2b2;
 	border-collapse: collapse;
 	float : left;
 	margin-left : 60px;
@@ -92,7 +105,7 @@ display: none;
 }
 
 .ttr {
-	border : 1px solid gray;
+	border : 1px solid #c0c0c0;
 	padding : 8px;
 }
 

@@ -181,14 +181,11 @@ public class PlantHomeController {
 		List<DiaryVO> SearchId = new ArrayList<DiaryVO>();
 		List<DiaryVO> SearchContent = new ArrayList<DiaryVO>();
 		
-		if(selectVal == "id") {
+//		if(selectVal == "id") {
 		SearchId = dService.searchId(keyword);
-		} else if (selectVal == "content") {
+//		} else if (selectVal == "content") {
 		SearchContent = dService.searchContent(keyword);
-		} else {
-			SearchId = dService.searchId(keyword);
-			SearchContent = dService.searchContent(keyword);
-		}
+//		} 
 
 		
 		
@@ -581,6 +578,5 @@ public class PlantHomeController {
 
 		return url;
 	}
-
 
 }

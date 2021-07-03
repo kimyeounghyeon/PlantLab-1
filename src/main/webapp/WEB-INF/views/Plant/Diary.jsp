@@ -22,13 +22,13 @@
 	<div class="bgdiv">
 		<h3 class="subtitle">diary</h3>
 			<p class="diaryintro"> 반려식물과 함께하는 일상을 공유해주세요.</p>
-		<br>
+		<br><br>
 		<div class="selectSearch">
 		<select name="search" class="search">
 			<option class="search" value = "id">아이디</option>
 			<option class="search" value = "content">내용</option>
 		 </select>
-		 <input type="text" class="keyword" placeholder="검색어를 입력해주세요.">&nbsp;<button type="button" class="searchBtn">검색</button>
+		 <input type="text" class="keyword" placeholder="검색어를 입력해주세요.">&nbsp;<button type="button" class="searchBtn"><img src="${path }/resources/img/search.png" class="searchicon"></button>
 		<button type="button" class="dwirte">일기 쓰기</button>
 		</div>
 		<br> <br>
@@ -195,12 +195,12 @@
 
 
  
-			               if(idSearch.length == 0 || contentSearch.length == 0) {
+			               if(idSearch.length == 0 && idSearch == null || contentSearch.length == 0 && contentSearch == null) {
 			            	   thisDiv.empty();
 				               dnotice = "<br><br><p class='searchResult'>" + keyword + "에 대한 결과가 없습니다. <br> 첫 일기의 주인공이 되어주세요💚"; 
 				               thisDiv.append(dnotice);
-							} else if (idSearch.length != 0 || contentSearch.length != 0) {
-								if(searchBox =="id" && idSearch.length !=0) {
+							} else {
+								if(searchBox =="id") {
 					            	thisDiv.empty();
 
 								  $.each(idSearch, function(i, item){
@@ -226,7 +226,7 @@
 		                           });
 								  thisDiv.append(dnotice);
 								
-							} else if(searchBox == "content" && contentSearch.length !=0) {
+							} else if(searchBox == "content") {
 				            	   thisDiv.empty();
 
 								  $.each(contentSearch, function(i, item){
