@@ -16,5 +16,25 @@
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
 	<jsp:include page="mypagemenu.jsp"></jsp:include>
+	
+	<table class="mydTable">
+			<tr class="mdtr">
+				<th class="mdth mydNum"> NO </th>
+				<th class="myContent"> 내용 </th>
+				<th class="myDate"> 날짜 </th>
+				<th class="myLike"> 좋아요 </th>
+			</tr>
+		<c:forEach var="d" items="${mydiary}">
+			<c:set var="i" value="${i+1 }" />
+			<tr class="mdtr">
+				<td class="mydNum">${i}</td>
+				<td class="myContent">${d.diary_content}</td>
+				<td class="myDate">${d.diary_date}</td>
+				<td class="myLike">${d.like_cnt}</td>
+			</tr>
+		</c:forEach>
+	</table>
+	
+	
 </body>
 </html>

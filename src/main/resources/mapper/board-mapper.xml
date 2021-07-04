@@ -152,7 +152,7 @@
  	</delete>
  	
  	
- 		<!-- 내용을 통한 게시글 검색 -->
+ 	<!-- TODO : 유저번호 -->
  	<select id="detailWrite" parameterType="int" resultType="DiaryVO">
  	 	<![CDATA[
 		select diaryall.*, liketb.like_cnt from 
@@ -168,6 +168,11 @@
 		on diaryall.diary_no = liketb.diary_no where diary_no = #{diary_no}
 		order by diaryall.diary_date desc
 	]]>
+ 	</select>
+ 	
+ 	<!-- 마이페이지 게시글 조회 -->
+ 	<select id="mydiary" parameterType="int" resultType="DiaryVO">
+	select * from diary_tb dt left outer join (select diary_no, count(*) as like_cnt from like_tb group by diary_no) liketb on dt.diary_no = liketb.diary_no where diary_write = #{diary_write} order by diary_date desc
  	</select>
 
 </mapper>

@@ -1,1 +1,9 @@
 @charset "UTF-8";
+
+.mydTable {
+	border : 1px solid gray;
+}
+
+.mdtr {
+	border : 1px solid gray;
+}

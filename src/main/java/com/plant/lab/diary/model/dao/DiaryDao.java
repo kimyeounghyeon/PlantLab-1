@@ -122,4 +122,9 @@ public class DiaryDao {
 	public int detailWrite(int diary_no) {
 		return sqlSession.selectOne("Diary.detailWrite",diary_no);
 	}
+	
+	// 내가 쓴 글
+	public List<DiaryVO> mydiary(int diary_write) {
+		return sqlSession.selectList("Diary.mydiary", diary_write);
+	}
 }

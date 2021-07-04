@@ -323,7 +323,7 @@ public class PlantHomeController {
 		
 
 		
-		return "Plant/Diary";
+		return "redirect:diary";
 		
 	}
 	
@@ -578,5 +578,19 @@ public class PlantHomeController {
 
 		return url;
 	}
+	
+	
+	// 마이페이지
+	@RequestMapping(value="/mydiary")
+	public ModelAndView mydiary(HttpServletRequest request, HttpSession session, ModelAndView mv) {
+		MemberVO member = (MemberVO) session.getAttribute("loginMember");
+		
+		int diary_write = member.getUserNo();
+		List<DiaryVO> mydiary = dService.mydiary(diary_write);
+		mv.setViewName("MyDiary");
+		mv.addObject("mydiary", mydiary);
+		return mv;
+	}
+	
 
 }

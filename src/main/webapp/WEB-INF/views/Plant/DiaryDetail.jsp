@@ -262,7 +262,7 @@
  		// 댓글 수정 확인
 		$(document).on("click", ".modcommsucc", function(){
 
-			console.log("댓글 수정 또 누르면~~");
+		console.log("댓글 수정 또 누르면~~");
 		let dnoKnow = $(".knowdno").val();
 		var thisComm = $(this);
 		

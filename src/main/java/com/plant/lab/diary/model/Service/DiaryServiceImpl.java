@@ -248,5 +248,17 @@ public class DiaryServiceImpl implements DiaryService {
 	public int detailWrite(int diary_no) {
 		return dDao.detailWrite(diary_no);
 	}
+
+
+	@Override
+	public List<DiaryVO> mydiary(int diary_write) {
+		List<DiaryVO> list = null;
+		try {
+			list = dDao.mydiary(diary_write);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
 	
 }

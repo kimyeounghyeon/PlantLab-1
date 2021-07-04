@@ -41,5 +41,7 @@ public interface DiaryService {
 	
 	public int detailWrite(int diary_no);
 
+	// 내가 쓴 글
+	public List<DiaryVO> mydiary(int diary_write);
 
 }

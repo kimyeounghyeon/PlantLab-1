@@ -34,8 +34,16 @@
 	</form>
 	</div>
 	</div>
+		<script>
+	      var ckeditor_config = {
+	      resize_enaleb : false,
+	      height : "400px",
+	      enterMode : CKEDITOR.ENTER_BR,
+	      };			
+	</script>
 	<script>
-	CKEDITOR.replace("modifytext",{filebrowserUploadUrl : "${path}/comm/ckUpload"});
+	CKEDITOR.replace("modifytext",ckeditor_config);
+	
 	
 	$(function(){
 		$("#dmodifybtn").click(function(){
