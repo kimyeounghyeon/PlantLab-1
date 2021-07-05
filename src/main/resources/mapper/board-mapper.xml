@@ -156,23 +156,6 @@
  	</delete>
  	
  	
- 	<!-- TODO : 유저번호 -->
- 	<select id="detailWrite" parameterType="int" resultType="DiaryVO">
- 	 	<![CDATA[
-		select diaryall.*, liketb.like_cnt from 
-	    (
-	    select udt.*, dit.diary_img_num, dit.diary_img_src from 
-	        (select dt.*, ut.user_id, ut.user_name from diary_tb dt left outer join user_tb ut on dt.diary_write = ut.user_no) udt 
-	    left outer join 
-	        diary_img_tb dit 
-	    on dit.diary_no = udt.diary_no 
-	    ) diaryall
-		left join 
-		    (select diary_no, count(*) as like_cnt from like_tb group by diary_no) liketb
-		on diaryall.diary_no = liketb.diary_no where diary_no = #{diary_no}
-		order by diaryall.diary_date desc
-	]]>
- 	</select>
  	
  	<!-- 마이페이지 게시글 조회 -->
  	<select id="mydiary" parameterType="int" resultType="DiaryVO">

@@ -392,13 +392,10 @@ public class PlantHomeController {
 	// 좋아요 해제
 	@RequestMapping(value = "deletelike.do", method = RequestMethod.POST)
 	@ResponseBody
-	public String deletelike(HttpSession session, ModelAndView mv, Model model,
-			@RequestParam(name = "diary_no") int diary_no) {
+	public String deletelike(HttpSession session, @RequestParam(name = "diary_no") int diary_no) {
 		System.out.println("딜리트 들어왔어용");
 		int result = -1;
 
-		System.out.println(mv.getModel());
-		System.out.println(model.containsAttribute("likeList"));
 		
 		LikeVO lvo = new LikeVO();
 		MemberVO member = (MemberVO) session.getAttribute("loginMember");

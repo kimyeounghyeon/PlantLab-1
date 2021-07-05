@@ -28,7 +28,7 @@
 			<c:set var="i" value="${i+1 }" />
 			<tr class="mdtr">
 				<td class="mydNum">${i}</td>
-				<td class="myContent">${d.diary_content}</td>
+				<td class="myContent"><div class="contentmove"><a href='detaildiary?diary_no=${d.diary_no}'>${d.diary_content}</a></div></td>
 				<td class="myDate">${d.diary_date}</td>
 				<td class="myLike">${d.like_cnt}</td>
 			</tr>
