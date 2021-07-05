@@ -14,8 +14,6 @@ import com.plant.lab.order.model.vo.OrderDetail;
 import com.plant.lab.product.model.dao.ProductDAO;
 import com.plant.lab.product.model.vo.Product;
 
-import sun.util.logging.resources.logging;
-
 @Service("orderService")
 public class OrderServiceImpl implements OrderService{
 	@Autowired
@@ -40,12 +38,13 @@ public class OrderServiceImpl implements OrderService{
 				result = orderDao.orderDetailInsert(orderD);
 		}
 		
+		System.out.println("카트페이지 :::"+cart.size());
 		 
 		for(int i = 0; i<cart.size(); i++){
 			for(int j=0; j<pro_no.size(); j++) {
-				if(cart.get(i).getPro_no() == pro_no.get(i)) {
+				if(cart.get(i).getPro_no() == pro_no.get(j)) {
 					//카트삭제
-					cart.get(i).setPro_no(pro_no.get(i));
+					cart.get(i).setPro_no(pro_no.get(j));
 					cart.get(i).setUser_no(order.getUser_no());
 					result = cartDao.cartDetailDel(cart.get(i));
 				}
@@ -67,5 +66,29 @@ public class OrderServiceImpl implements OrderService{
 	public int orderDetailInsert(OrderDetail detail) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+	
+	//회원별 주문리스트 개수
+	@Override
+	public int listCount(int user_no) {
+		return orderDao.listCount(user_no);
+	}
+	
+	//회원별 주문내역 리스트
+	@Override
+	public List<Order> selectOrderList(int startPage, int limit,int user_no) {
+		return orderDao.selectOrderList(startPage,limit,user_no);
+	}
+	
+	//주문상세리스트
+	@Override
+	public List<OrderDetail> selectOrderDList(int buy_no) {
+		return orderDao.selectOrderDList(buy_no);
+	}
+	
+	//주문상세조회
+	@Override
+	public Order selectOrder(int buy_no) {
+		return orderDao.selectOrder(buy_no);
 	}
 }

@@ -130,10 +130,18 @@
 
 .dtdiaryimg {
 	margin : 20px;
+	max-width: 800px;
+    max-height: 600px;
 }
 
 .commwriter {
 	text-align : center;
+	width : 150px;
+}
+
+.modifycomment {
+	border : 1px solid gray;
+	width : 85%;
 }
 
 

@@ -1,8 +1,6 @@
 package com.plant.lab.diary.model.Service;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,6 +42,34 @@ public class DiaryServiceImpl implements DiaryService {
 		}
 		return list;
 	}
+	
+	
+	// 검색
+	// 아이디 검색
+	@Override
+	public List<DiaryVO> searchId(String keyword) {
+		List<DiaryVO> list = null;
+		try {
+			list = dDao.searchId(keyword);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	
+	// 내용 검색
+	@Override
+	public List<DiaryVO> searchContent(String keyword) {
+		List<DiaryVO> list = null;
+		try {
+			list = dDao.searchContent(keyword);
+		} catch(Exception e) {
+			e.printStackTrace();
+		} 
+		 return list;
+	}
+	
 	
 	
 	// 좋아요
@@ -109,7 +135,7 @@ public class DiaryServiceImpl implements DiaryService {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		return dDao.writeDiary(vo);
+		return result;
 	}
 	
 	@Override
@@ -123,10 +149,31 @@ public class DiaryServiceImpl implements DiaryService {
 		return result;
 	}
 	
+	@Override
+	public int modifyDiary(DiaryVO vo) {
+		int result = -1;
+		try {
+			result = dDao.modifyDiary(vo);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	@Override
+	public int modifyImg(DiaryVO vo) {
+		int result = -1;
+		try {
+			result = dDao.modifyImg(vo);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 	
 	@Override
 	public int deleteDiary(DiaryVO vo) {
-		int result = -2;
+		int result = -1;
 		try {
 			result = dDao.deleteDiary(vo);
 		} catch(Exception e) {
@@ -136,14 +183,14 @@ public class DiaryServiceImpl implements DiaryService {
 	}
 
 	public int getSequence() {
-		int diaryNo = -1;
+		int diary_no = -1;
 		
 		try {
-			diaryNo = dDao.getSequence();
+			diary_no = dDao.getSequence();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return diaryNo;
+		return diary_no;
 	}
 	
 	
@@ -177,7 +224,7 @@ public class DiaryServiceImpl implements DiaryService {
 	public int updateComment(CommentVO cvo) {
 		int result = -1;
 		try {
-			result = dDao.deleteComment(cvo);
+			result = dDao.updateComment(cvo);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -196,8 +243,22 @@ public class DiaryServiceImpl implements DiaryService {
 		  return result;
 	}
 	
+
 	@Override
 	public int detailWrite(int diary_no) {
 		return dDao.detailWrite(diary_no);
 	}
+
+
+	@Override
+	public List<DiaryVO> mydiary(int diary_write) {
+		List<DiaryVO> list = null;
+		try {
+			list = dDao.mydiary(diary_write);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
 }

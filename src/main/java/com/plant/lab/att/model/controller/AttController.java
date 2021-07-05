@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.plant.lab.att.model.service.AttService;
 import com.plant.lab.att.model.vo.Att_tb;
+import com.plant.lab.member.model.vo.MemberVO;
 
 @Controller
 public class AttController {
@@ -42,16 +43,15 @@ public class AttController {
 	      	logger.info("attendance.do진입");
 			response.setCharacterEncoding("UTF-8");
 			
+			Att_tb asessionVO = new Att_tb();
+			MemberVO member = (MemberVO) session.getAttribute("loginMember");
+			asessionVO.setUser_no(member.getUserNo());
 			
-			// 로그인 전 코드
-			Att_tb sessionVO = new Att_tb();
-			sessionVO.setUser_no(122);   // session.getAtt....
-			
-			int result = aService.insertAtt(sessionVO);
+			int result = aService.insertAtt(asessionVO);
 			logger.info("attendance.do에서 result = 출석은 " + result);
 			
 		   
-			int attCnt = aService.attCnt(sessionVO);
+			int attCnt = aService.attCnt(asessionVO);
 		      
 
 		    return attCnt;

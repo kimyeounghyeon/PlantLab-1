@@ -9,7 +9,8 @@
 	<title>無以林 주문</title>
 	<link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/jejumyeongjo.css"/>
 	<link href="${path}/resources/css/header.css" rel="stylesheet"/>
-	<link href="${path}/resources/css/OrderStyle.css" rel="stylesheet"/>
+	<link href="${path}/resources/css/footer.css" rel="stylesheet"/>
+	<link href="${path}/resources/css/Product/OrderStyle.css" rel="stylesheet"/>
 
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -116,6 +117,7 @@
                            <span id="deliv" class="prSpan"></span> 
                            <span>=</span> 
                            <span id="allPrice"></span>
+                           <input type="hidden" name="buy_totalprice" value="">
                            <input type="hidden" class="inputV" id="priceIn" value="${total}">
                            <input type="hidden" class="inputV" id="delivIn" value="${deliv}">
                         </p>
@@ -377,12 +379,14 @@
 	    var allPrice = $('#allPrice');
 	    
 		
-	    var val = (inputV[0].value*1) + (inputV[1].value*1);
-	    saveTotal = val;
-	    val =  val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	    var vals = (inputV[0].value*1) + (inputV[1].value*1);
+	    saveTotal = vals;
+	    var buy_totalprice = $('input[name=buy_totalprice]');
+	    vals =  vals.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 	   
-	    proInfo[2].value = val+"원";
-    	allPrice.append(val+"원");
+	    proInfo[2].value = vals+"원";
+	    buy_totalprice.val(vals+"원");
+    	allPrice.append(vals+"원");
 	    
 	    for(var i=0; i<inputV.length; i++){
 	    	var val = inputV[i].value;

@@ -32,6 +32,7 @@
 </head>
 <body>
 	<jsp:include page="../header.jsp"></jsp:include>
+	<jsp:include page="../mypagemenu.jsp"></jsp:include>
 <div class="mdediv">
 <div class="plantimg"><img class="plantimg" src="<%=request.getContextPath() %>/resources/img/${monthly.monthly_img}"></div>
 

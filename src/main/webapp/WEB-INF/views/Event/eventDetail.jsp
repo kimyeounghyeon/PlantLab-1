@@ -19,6 +19,36 @@
     margin-left : auto;
     margin-right : auto;
     }
+    .eupde{
+    text-align : center;
+    }
+    #e_title{
+    color: #1E262C;
+    margin-bottom: 5px;
+    font-weight : bold;
+    font-size: 25px;
+    
+    }
+    #cimg{
+    width : 15px;
+    height :  15px;
+    }
+    #ctd{
+    line-height : 100%;
+    border-bottom : 1px solid #efefef;
+    margin-bottom : 15px;
+    padding-bottom : 20px;
+    }
+    #trbottom{
+    height : 25px;
+    }
+    #eimg{
+    width : 15px;
+    height: 15px;
+    }
+    #imgtr{
+    
+    }
     </style>
 </head>
 <body>
@@ -27,17 +57,19 @@
 	<table class="edetailtb">
 	<input type="hidden" name="event_views" value="${event_views}">
 		<tr>
-			<td>${event_tb.event_title}</td>
+			<td id="e_title">${event_tb.event_title}</td>
 		</tr>
-		<tr>
-			<td>${event_tb.start_date}~${event_tb.end_date}</td>
+		<tr id="trbottom">
+			<td id="ctd"><img id="cimg" src="${path}/resources/img/calendar.png"> ${event_tb.start_date}~${event_tb.end_date}
+			
+			<!--  <img id="eimg" src="${path}/resources/img/eye.png">${event_tb.event_views}</td>-->
 		</tr>
-		<tr>
+		<tr id="imgtr">
 			<td><img class="mimg" src="<%=request.getContextPath() %>/resources/img/${event_tb.event_content}"></td>
 			
 		</tr>
 		<tr>
-			<td>
+			<td  class='eupde'>
 			<c:url var="eupview" value="eRenew">
 					<c:param name="event_no" value="${event_tb.event_no}" />
 					<c:param name="event_title" value="${event_tb.event_title}" />
@@ -51,8 +83,10 @@
 				<c:url var="edelete" value="eDelete">
 					<c:param name="event_no" value="${event_tb.event_no}" />
 				</c:url> 
-				<a href="${eupview}"> 수정 </a> &nbsp;&nbsp; 
-				<a href="${edelete}"> 삭제 </a> &nbsp;&nbsp; 
+				<c:if test="${loginMember.grade==1}">
+					<a href="${eupview}"> 수정 </a> &nbsp;&nbsp; 
+					<a href="${edelete}"> 삭제 </a> &nbsp;&nbsp; 
+				</c:if>
 			</td>
 		</tr>
 	</table>

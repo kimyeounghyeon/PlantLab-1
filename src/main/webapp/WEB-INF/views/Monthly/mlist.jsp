@@ -51,7 +51,7 @@ width : 100px;
 </head>
 <body>
 <jsp:include page="../header.jsp"></jsp:include>
-
+<jsp:include page="../mypagemenu.jsp"></jsp:include>
 <div class="mlistdiv">
 
 <h2 align="center" >이달의 식물</h2>

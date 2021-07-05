@@ -9,7 +9,8 @@
     <title>無以林 cart</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/jejumyeongjo.css"/>
     <link href="${path}/resources/css/header.css" rel="stylesheet"/>
-    <link href="${path}/resources/css/CartStyle.css" rel="stylesheet"/>
+    <link href="${path}/resources/css/footer.css" rel="stylesheet"/>
+    <link href="${path}/resources/css/Product/CartStyle.css" rel="stylesheet"/>
 
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

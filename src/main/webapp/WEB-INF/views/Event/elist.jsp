@@ -20,13 +20,16 @@ margin-right: auto;
 }
 .eventbanner{
 height : 200px;
-width : 750px;
+width : 800px;
 margin : 1.5px;
 border-radius : 30px;
 }
 
 #eventsub{
 width : 470px;
+	font-size : 20px;
+	font-weight : bold;
+	
 }
 #period{
 width : 200px;
@@ -59,6 +62,7 @@ width : 750px;
 </head>
 
 <body>
+
 	<jsp:include page="../header.jsp"></jsp:include>
 	<div class="elistdiv">
 	<h2 align="center">event</h2>
@@ -66,9 +70,11 @@ width : 750px;
  	</div>
 	<table class="event">
   		<tr>
+  			<c:if test="${loginMember.grade==1}">
   			<td id="etd"  colspan="4">
  				<button type="button" id="ebtn" onclick="window.location='eWrite'">등록하기</button>
        		</td>
+       		</c:if>
        	</tr>
          
         <c:forEach var="vo" items="${list}">

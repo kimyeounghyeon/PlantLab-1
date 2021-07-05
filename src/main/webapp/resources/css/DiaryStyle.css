@@ -7,6 +7,58 @@
    line-height: 30px;
    
    }
+
+.diaryintro {
+	text-align : center;
+	font-size : 11pt;
+}   
+
+.search {
+	height : 35px;
+	border : none;
+}
+
+.search ::-ms-expand {
+display: none;
+}
+
+.keyword {
+	border-left : none;
+	border-right : none;
+	border-top : none;
+	border-bottom : 1px solid #6a6560;
+	width : 300px;
+	text-align : center;
+}
+
+.selectSearch {
+	margin-left : 65px;
+	margin-bottom : 0px;
+}
+
+.searchBtn {
+	border : none;
+	background-color : white;
+	padding : 0px;
+}
+
+.searchBtn:hover {
+	cursor:pointer;
+}
+
+.searchicon {
+	width : 20px;
+	height : 20px;
+	bottom : 5px;
+	padding : 0px;
+}
+
+.searchResult {
+	text-align : center;
+	font-weight : bold;
+	font-size : 17pt;
+	color : #625b54;
+}
    
 .bgdiv {
 	clear : both;
@@ -21,7 +73,7 @@
 
 .dwirte {
 	float : right;
-	margin-right : 100px;
+	margin-right : 35px;
 	border : none;
 	background-color : white;
 	font-size : 14pt;
@@ -41,11 +93,12 @@
 	clear : both;
 	width : 350px;
 	height : 500px;
-	border : 1px solid gray;
+	border : 1px solid #b2b2b2;
 	border-collapse: collapse;
 	float : left;
 	margin-left : 60px;
 	margin-bottom : 250px;
+	
 }
 
 .tdiary td {
@@ -53,7 +106,7 @@
 }
 
 .ttr {
-	border : 1px solid gray;
+	border : 1px solid #c0c0c0;
 	padding : 8px;
 }
 
@@ -91,7 +144,6 @@
 	text-overflow: ellipsis;
 	line-height : 60px;
 }
-
 
 
 .like {

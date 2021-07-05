@@ -3,6 +3,7 @@ package com.plant.lab.event.controller;
 import java.io.File;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.plant.lab.event.model.service.EventService;
 import com.plant.lab.event.model.vo.Event_tb;
+import com.plant.lab.member.model.vo.MemberVO;
 
 @Controller
 public class EventController {
@@ -29,9 +31,15 @@ public class EventController {
 	@RequestMapping(value = "elist", method = RequestMethod.GET)
 	public ModelAndView eventListService( // 오류가 발생해도 오류메세지 뜨지않는다는 단점..
 			@RequestParam(name = "page", defaultValue = "1") int page,
-			ModelAndView mv) {
+			ModelAndView mv, HttpSession session) {
+		
+		
+		
 		
 		try {
+			
+			MemberVO member = (MemberVO) session.getAttribute("loginMember");
+			
 			int currentPage = page; // 한 페이지당 출력할 목록 갯수
 			int listCount = eService.listCount();
 			int maxPage = (int) ((double) listCount / LIMIT + 0.9);
@@ -53,8 +61,12 @@ public class EventController {
 
 	@RequestMapping(value = "eDetail", method = RequestMethod.GET)
 	public ModelAndView eventDetail(@RequestParam(name = "event_no") int event_no,
-			@RequestParam(name = "page", defaultValue = "1") int page, ModelAndView mv) {
+			@RequestParam(name = "page", defaultValue = "1") int page,
+			ModelAndView mv, HttpSession session) {
 		try {
+			
+			MemberVO member = (MemberVO) session.getAttribute("loginMember");
+			
 			logger.info("===============이벤트 상세 페이지===============");
 			int currentPage = page; // 한 페이지당 출력할
 			logger.info("currentPage :" + currentPage );

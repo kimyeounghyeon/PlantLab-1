@@ -1,0 +1,38 @@
+@charset "UTF-8";
+
+.mydTable {
+	border : 1px solid gray;
+}
+
+.mdtr {
+	border : 1px solid gray;
+}
+
+.mydNum {
+	width : 70px;
+}
+
+.myContent {
+	width : 500px;
+	height : 60px;
+	white-space: nowrap;
+	overflow : hidden;
+	text-overflow: ellipsis;
+}
+
+.contentmove {
+	width : 500px;
+	height : 60px;
+	white-space: nowrap;
+	overflow : hidden;
+	text-overflow: ellipsis;
+	line-height : 60px;
+}
+
+.myDate {
+	width : 100px;
+}
+
+.myLike {
+	width : 80px;
+}

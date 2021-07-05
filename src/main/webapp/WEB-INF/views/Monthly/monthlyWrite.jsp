@@ -36,6 +36,7 @@ border : 1px solid #625b54;
 
 <body>
 	<jsp:include page="../header.jsp"></jsp:include>
+	<jsp:include page="../mypagemenu.jsp"></jsp:include>
 	<form action="mInsert" method="post" enctype="multipart/form-data">
 		<div id="mdiv">
 			<h3 align="center">이달의 식물 등록하기</h3>

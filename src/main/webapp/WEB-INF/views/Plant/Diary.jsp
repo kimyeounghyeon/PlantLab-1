@@ -21,8 +21,16 @@
 	${likeList} --%>
 	<div class="bgdiv">
 		<h3 class="subtitle">diary</h3>
-		<br>
+			<p class="diaryintro"> 반려식물과 함께하는 일상을 공유해주세요.</p>
+		<br><br>
+		<div class="selectSearch">
+		<select name="search" class="search">
+			<option class="search" value = "id">아이디</option>
+			<option class="search" value = "content">내용</option>
+		 </select>
+		 <input type="text" class="keyword" placeholder="검색어를 입력해주세요.">&nbsp;<button type="button" class="searchBtn"><img src="${path }/resources/img/search.png" class="searchicon"></button>
 		<button type="button" class="dwirte">일기 쓰기</button>
+		</div>
 		<br> <br>
 		<div class="dback"></div>
 	</div>
@@ -159,6 +167,107 @@
 
 			$(".dwirte").click(function() {
 				location.href = "writediary";
+			});
+			
+			
+			// 검색
+			$(document).on("click", ".searchBtn", function(){
+				console.log("검색버튼 클릭 클릭~")
+					$.ajax({
+						url : "searchdiary.do",
+						type : "post",
+						data : {
+								keyword : $(".keyword").val(),
+								selectVal : $("select[name='search']").val()
+								},
+						dataType : "json",
+						success : function(data){
+							
+				            var dnotice = "";
+				            var thisDiv = $(".dback");
+				            var keyword = $(".keyword").val();
+				            var searchBox = $("select[name='search']").val();
+
+				            
+							var idSearch = data.SearchId;
+							var contentSearch = data.SearchContent;	
+				            var likeList = data.likeList;
+
+
+				            if(idSearch.length == 0 && contentSearch.length == 0) {
+				           	 	thisDiv.empty();
+				            	dnotice = "<br><br><p class='searchResult'>" + keyword + "에 대한 결과가 없습니다. <br> 첫 일기의 주인공이 되어주세요💚"; 
+				            	thisDiv.append(dnotice);
+							} else {
+								if(searchBox =="id" && idSearch.length>0) {
+					            	thisDiv.empty();
+
+								  $.each(idSearch, function(i, item){
+		                              dnotice += "<div class = 'ddiary' id='dno_"+item.diary_no+"'>";
+		                              dnotice += "<table class='tdiary' style ='table-layout : fixed'><tr class='ttr idtr'>";
+		                              dnotice += "<td class='writeid idtd' colspan='2'>"+item.user_id+"</td></tr>";
+		                              dnotice += "<tr class='ttr imgtr'><td class='diaryimg' colspan='2'><a href='detaildiary?diary_no="+item.diary_no+"'><img src='"+item.diary_img_src+"' class='diaryimg'></a></td></tr>";
+		                              dnotice += "<tr class='ttr liketr'>"
+		                              var loop_flag = false;
+		                              for(var j=0; j<likeList.length; j++){
+		                                 if(item.diary_no == likeList[j]){
+		                                    loop_flag = true;
+		                                    break;
+		                                 }
+		                              }
+		                              if(loop_flag) {
+		                                 dnotice += "<td class='liketd liked dno_"+item.diary_no+"'><img src='${path }/resources/img/색변경좋아요.png' class='like'>";
+		                              } else {
+		                                 dnotice += "<td class='liketd unlike dno_"+item.diary_no+"'><img src='${path }/resources/img/좋아요누르기전그레이.png' class='like'>";
+		                              }
+		                              dnotice += "<td class='liketdcnt'>좋아요 "+item.like_cnt+"개</td></tr>";
+		                              dnotice += "<tr class='ttr contexttr'><td class='dcontent' colspan='2'><div class='alinkdiv'><a href='detaildiary?diary_no="+item.diary_no+"'>"+item.diary_content+"</a></div></td></tr></table></div>";
+		                           });
+								  thisDiv.append(dnotice);
+								} else if(searchBox =="id" && idSearch.length==0) {
+									thisDiv.empty();
+					            	dnotice = "<br><br><p class='searchResult'>" + keyword + "에 대한 결과가 없습니다. <br> 첫 일기의 주인공이 되어주세요💚"; 
+					            	thisDiv.append(dnotice);
+								
+							} else if(searchBox == "content" && contentSearch.length>0) {
+				            	   thisDiv.empty();
+
+								  $.each(contentSearch, function(i, item){
+		                              dnotice += "<div class = 'ddiary' id='dno_"+item.diary_no+"'>";
+		                              dnotice += "<table class='tdiary' style ='table-layout : fixed'><tr class='ttr idtr'>";
+		                              dnotice += "<td class='writeid idtd' colspan='2'>"+item.user_id+"</td></tr>";
+		                              dnotice += "<tr class='ttr imgtr'><td class='diaryimg' colspan='2'><a href='detaildiary?diary_no="+item.diary_no+"'><img src='"+item.diary_img_src+"' class='diaryimg'></a></td></tr>";
+		                              dnotice += "<tr class='ttr liketr'>"
+		                              var loop_flag = false;
+		                              for(var j=0; j<likeList.length; j++){
+		                                 if(item.diary_no == likeList[j]){
+		                                    loop_flag = true;
+		                                    break;
+		                                 }
+		                              }
+		                              if(loop_flag) {
+		                                 dnotice += "<td class='liketd liked dno_"+item.diary_no+"'><img src='${path }/resources/img/색변경좋아요.png' class='like'>";
+		                              } else {
+		                                 dnotice += "<td class='liketd unlike dno_"+item.diary_no+"'><img src='${path }/resources/img/좋아요누르기전그레이.png' class='like'>";
+		                              }
+		                              dnotice += "<td class='liketdcnt'>좋아요 "+item.like_cnt+"개</td></tr>";
+		                              dnotice += "<tr class='ttr contexttr'><td class='dcontent' colspan='2'><div class='alinkdiv'><a href='detaildiary?diary_no="+item.diary_no+"'>"+item.diary_content+"</a></div></td></tr></table></div>";
+		                           });
+								  thisDiv.append(dnotice);
+							} else {
+								thisDiv.empty();
+				            	dnotice = "<br><br><p class='searchResult'>" + keyword + "에 대한 결과가 없습니다. <br> 첫 일기의 주인공이 되어주세요💚"; 
+				            	thisDiv.append(dnotice);
+							}
+								
+							} 
+							
+						},
+						error : function(data) {
+							console.log("실패했당");
+						}
+						
+					});
 			});
 
 		});

@@ -33,6 +33,7 @@ border : 1px solid #625b54;
 </head>
 <body>
 	<jsp:include page="../header.jsp"></jsp:include>
+	<jsp:include page="../mypagemenu.jsp"></jsp:include>
 	<div class="mupdiv">
 	<form name="renewForm" action="mUpdate" method="post" enctype="multipart/form-data">
 		<input type="hidden" name="monthly_no" value="${monthly.monthly_no}">
