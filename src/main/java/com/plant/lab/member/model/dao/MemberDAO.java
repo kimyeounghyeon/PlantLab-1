@@ -1,5 +1,6 @@
 package com.plant.lab.member.model.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -50,8 +51,17 @@ public class MemberDAO {
 		 }
 	public int memberDelete(MemberVO vo) {
 		return sqlSession.delete("member.memberDelete",vo);
-		
+	 }
+	
+	public String findId(MemberVO vo) {
+		return sqlSession.selectOne("member.findId",vo);
+  
+	}
+	public String findPassword(MemberVO vo) {
+		return sqlSession.selectOne("member.findPassword",vo);
+  
 	}
 
+	
 	
 }

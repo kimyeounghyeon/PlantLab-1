@@ -2,6 +2,7 @@ package com.plant.lab.member.model.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import javax.mail.Session;
@@ -18,10 +19,12 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.plant.lab.member.model.service.MemberService;
@@ -45,7 +48,7 @@ public class MemberController {
 
 	@RequestMapping(value = "doJoin", method = RequestMethod.POST)
 	public String doJoinMember(MemberVO vo) {
-
+       System.out.println(vo);
 		mService.insertMember(vo);
 
 		return "Main";
@@ -170,12 +173,69 @@ public class MemberController {
 		  
 		vo.setUserId(member.getUserId());	
 		
+	
 		int result = mService.memberDelete(vo);
 		System.out.println(result);
 		session.invalidate();		
 		
+		
 		return "Main";
+		
+	
 	
 	 }
+	 @RequestMapping(value="find_id_form")
+		public String findIdView() {
+			return "findId";
+		}
+		
+	    // 아이디 찾기 실행
+		@RequestMapping(value="find_id", method=RequestMethod.POST)
+		public String findIdAction(MemberVO vo, Model model, HttpServletRequest request) {
+			vo.setUserName(request.getParameter("userName"));
+			vo.setPhone(Integer.parseInt(request.getParameter("phone")));
+			System.out.println("vo는!~~~~~~~" + vo);
+			String user = mService.findId(vo);
+			System.out.println("아이디는 " + user);
+			
+			if(user == null) { 
+				model.addAttribute("check", 1);
+			} else { 
+				model.addAttribute("check", 0);
+				model.addAttribute("userId", user);
+				System.out.println(vo);
+			}
+			
+			return "findId";
+		}
+		
+	    // 비밀번호 찾기 페이지로 이동
+		@RequestMapping(value="find_password_form")
+		public String findPasswordView() {
+			return "findPassword";
+		}
+		
+	    // 비밀번호 찾기 실행
+		@RequestMapping(value="find_password", method=RequestMethod.POST)
+		public String findPasswordAction(MemberVO vo, Model model, HttpServletRequest request) {
+			vo.setUserId(request.getParameter("userId"));
+			vo.setUserName(request.getParameter("userName"));
+			vo.setPhone(Integer.parseInt(request.getParameter("phone")));
+			String user = mService.findPassword(vo);
+			System.out.println("유저 비밀번호는 " + user);
+			
+			if(user == null) { 
+				model.addAttribute("check", 1);
+			} else { 
+				model.addAttribute("check", 0);
+				model.addAttribute("userPwd", user);
+			}
+			
+			return "findPassword";
+		}
+		
+	}
+	
+     
 
-}
+

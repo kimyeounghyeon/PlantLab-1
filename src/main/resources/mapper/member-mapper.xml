@@ -20,15 +20,6 @@
 		select count(*) as count from user_tb 
 	</select>
 
-	
-	<select id="searchMember2" parameterType="MemberVO" resultType="MemberVO">
-		select user_id as userId, user_name as userName from user_tb where id=#{userId}
-	</select>
-	
-	<select id="searchMember" parameterType="MemberVO" resultMap="MemberMap">
-		select user_id, user_name from user_tb where user_id=#{userId}
-	</select>
-	
 	<select id="loginMember" parameterType="MemberVO" resultMap="MemberMap">
 		SELECT * FROM USER_TB WHERE USER_ID =#{userId} AND USER_PWD = #{userPwd} 
 	</select>
@@ -48,5 +39,17 @@
 	<delete id="memberDelete" parameterType="MemberVO">
 		delete from user_tb where user_id = #{userId} and user_pwd = #{userPwd}
 	</delete>
+    
+	<select id="findId" parameterType="MemberVO" resultType="String">
+		select user_id from user_tb where user_Name=#{userName} and phone=#{phone}
+	</select>
+	
+	<select id="findPassword"  parameterType="MemberVO" resultType="String">
+		select user_pwd from user_tb where user_Id=#{userId} and user_Name=#{userName} and phone=#{phone}
+	</select>
+	
+	<update id="updatePassword"  parameterType="MemberVO" >
+		update user_tb set user_pwd=#{userPwd} where user_id=#{userId}
+	</update>
 
 </mapper>

@@ -3,7 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 
-
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -158,7 +157,7 @@
 				type : "GET",
 				url : "mailCheck?email=" + email,
 				success : function(data) {
-
+                     alert("인증번호가 발송되었습니다. ")
 					//console.log("data : " + data);
 					cehckBox.attr("disabled", false);
 					boxWrap.attr("id", "mail_check_input_box_true");
@@ -329,7 +328,7 @@
 					} else {
 						inval_Arr[2] = false;
 					}
-					if($('#email').val() == null){
+					if($('#emailint').val() == null){
 						alert("이메일을 확인해주세요");
 						inval_Arr[3] = false;
 					} else{

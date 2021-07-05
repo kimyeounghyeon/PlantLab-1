@@ -12,16 +12,13 @@
 	href="<%=request.getContextPath()%>/resources/css/loginStyle.css">
 <meta charset="UTF-8">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<title>Insert title here</title>
+<title>로그인</title>
 </head>
+<body>
 <div class="main">
-
-
 	<!--웹페이지 상단-->
 	<header>
-
 		<div id="logo">
-
 			<a href="<%=request.getContextPath()%>/"> <img alt="logo"
 				src="${path }/resources/img/logo.png" />
 			</a>
@@ -31,7 +28,6 @@
 	<form id="loginFrm">
 		<!--로그인 부분-->
 		<section class="login-wrap">
-
 			<div class="login-id-wrap">
 				<input placeholder="아이디" type="text" class="input-id" name="userId"></input>
 			</div>
@@ -42,10 +38,6 @@
 			<div class="login-btn-wrap">
 				<button type="button" class="login-btn" id="loingbtn">로그인</button>
 			</div>
-
-
-
-
 		</section>
 	</form>
 
@@ -83,12 +75,10 @@
 
 
 	</section>
-
 	<section class="find-signup-wrap">
-
-		<span class="find-id"> <a href="#" target="_blank"
+		<span class="find-id"> <a href="<%=request.getContextPath()%>/find_id_form" target="_blank"
 			title="아이디찾기">아이디 찾기</a>
-		</span> <span class="find-pw"> <a href="#" target="_blank"
+		</span> <span class="find-pw"> <a href="<%=request.getContextPath()%>/find_password_form" target="_blank"
 			title="비밀번호 찾기">비밀번호 찾기</a>
 		</span> <span class="sign-up"> <a
 			href="<%=request.getContextPath()%>/join" target="_blank"
@@ -115,7 +105,6 @@
                }
             }
         });
-
 	});
 </script>
 			

@@ -1,6 +1,7 @@
 package com.plant.lab.member.model.service;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -74,7 +75,15 @@ public class MemberServiceImpl implements MemberService {
 		
 		return mDao.memberDelete(vo);
 	}
-	
+	@Override
+	public String findId(MemberVO vo){
+      return mDao.findId(vo);	
+	}
+	@Override
+	public String findPassword(MemberVO vo){
+      return mDao.findPassword(vo);	
+	}
+
 
 
 
