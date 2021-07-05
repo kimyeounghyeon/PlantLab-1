@@ -48,7 +48,7 @@
                         display: block;                           
                         width: 400px;                             
                         font-size: 20px;                          
-                        font-weight: bold;                        
+                                          
                         
                 }
                 #mypagemenu .linkmenu:hover {            
@@ -71,7 +71,7 @@
                         display: block;                           
                         width: 300px;                             
                         font-size: 20px;                          
-                        font-weight: bold;                        
+                                             
                         
                 }
                 #managepagemenu .linkmenu:hover {            
