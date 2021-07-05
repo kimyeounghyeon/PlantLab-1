@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -16,12 +17,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.plant.lab.cart.model.controller.CartController;
 import com.plant.lab.cart.model.vo.Cart;
 import com.plant.lab.member.model.vo.MemberVO;
+import com.plant.lab.order.model.service.OrderService;
+import com.plant.lab.order.model.vo.Order;
+import com.plant.lab.order.model.vo.OrderDetail;
 import com.plant.lab.review.model.service.ReviewService;
 import com.plant.lab.review.model.vo.Review;
 
@@ -29,10 +34,27 @@ import com.plant.lab.review.model.vo.Review;
 public class ReviewController {
 	@Autowired
 	private ReviewService reviewService;
+	@Autowired
+	private OrderService orderService;
 	
 	private static final Logger logger = LoggerFactory.getLogger(CartController.class);
 	
-	//imgSearch
+//리뷰작성
+	@RequestMapping(value="/revieWrite", method=RequestMethod.POST)
+	public ModelAndView reviewWrite(ModelAndView mv,HttpSession session,
+			@RequestParam(value="buy_no",required=true) int buy_no,
+			HttpServletRequest req) {
+		logger.info("===============리뷰작성 페이지===============");
+		
+		MemberVO member = (MemberVO) session.getAttribute("loginMember");
+		
+		mv.addObject("buy_no",buy_no);
+		mv.setViewName("MypageOrder/ReviewWrite");
+		return mv;
+	}
+	
+	
+//리뷰 이미지 ajax
 	@RequestMapping(value="/imgSearch.do", method=RequestMethod.POST)
 	public void cartSearch(Review review,
 			HttpSession session,

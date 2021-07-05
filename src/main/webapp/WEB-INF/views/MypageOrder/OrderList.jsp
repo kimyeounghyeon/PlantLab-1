@@ -37,12 +37,15 @@
                 	
                 	<c:if test="${not empty orderList}">
                 		<c:forEach  var="vo" items="${orderList}" varStatus="status">
+		                    <form>
+		                    <input type="hidden" name="buy_no" value="${vo.buy_no}">
 		                    <table class="orderList">
 		                        <tr>
 		                            <td class="proImg" rowspan="2">
 		                                <div class="reviewImg" style="max-width:800px;position:relative">
 		                                
 		                                </div>
+		                                
 		                            </td>
 		                            <td rowspan="2" class="space"></td>
 		                            <td class="proNames" colspan="2">
@@ -60,11 +63,12 @@
 		                            <td class="proDate proGuid">
 		                                <span>구매 날짜</span><span>${vo.buy_date}</span>
 		                            </td>
-		                            <td class="btn">
-		                                <button type="button" class="proBtn">리뷰작성하기</button>
+		                            <td class="btn addB">
+		                                <button type="button" class="proBtn" id="reivewB">리뷰작성하기</button>
 		                            </td>
 		                        </tr>
 		                    </table>
+		                    </form>
 	                    </c:forEach>
                     </c:if>
                     <br>
@@ -120,6 +124,19 @@
 </body>
 <script>
 	$(function(){
+		//전송
+		var proBtn = $('#reivewB');
+		
+		proBtn.click(function(){
+			var form = $('form');
+			form.attr("method","post");
+        	form.attr("action","revieWrite");
+        	form.submit();
+		
+		});
+		
+		
+		//상품 이미지 가져오기
 		var buy_no = ($('input[name=buy_no]').val())*1;
 		var reviewImg = $('.reviewImg');
 		var proNames = $('.proNames a');
@@ -150,7 +167,6 @@
 		               }else{
 		            	   $.each(details, function(i, item){
 		            		   proNames.append(item.pro_name);
-		            		   console.log(item.pro_name);
 		                   });
 		               }
 		               

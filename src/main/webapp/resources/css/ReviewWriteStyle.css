@@ -1,0 +1,140 @@
+@charset "UTF-8";
+/* 초기화 */
+*{
+    font-family: 'Jeju Myeongjo';
+}
+
+#content{
+     width: 1250px;
+     margin: auto;
+     clear: both;
+ }
+
+ /* 헤더 */
+ .main_header{
+    text-align: center;
+    height: 130px;
+    line-height: 100px;
+    padding-top: 20px;
+}
+
+/* 메인 */
+
+.main_article>form>h3{
+    width: 80%;
+    margin: 20px auto;
+    text-align: left;
+    
+}
+.main_article>form{
+    width: 80%;
+    margin: auto;
+    text-align: center;
+    border: solid 1px #ccc;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.proGuide{
+    width: 80%;
+    margin: auto;
+    border-radius: 10px;
+    box-shadow: 3px 3px 5px #ccc;
+}
+
+.proImg{
+    width: 30%;
+    height: 210px;
+    text-align: center;
+}
+
+.proImg img{
+	margin-left:18px;
+	width: 200px;
+    text-align:center;
+    border-radius: 10px;
+}
+
+.proName p{
+    font-size: 24px;
+    text-align: center;
+}
+
+/*별점*/
+.star {
+    width: 80%;
+    margin: auto;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.starH{
+    margin-bottom: 25px;
+}
+
+.star .star_radio {
+    display:none; 
+}
+
+.star .star_radio+label {
+    position:relative;
+    display: inline-block;
+    cursor: pointer;
+    color:#ccc;
+    font-size: 50px;
+    
+}
+
+
+.star_radio:checked+label {
+    color:#ADBA85;
+    font-size: 50px;
+}
+
+/*입력창*/
+input[name='rv_title'],textarea{
+    font-size: 25px;
+    margin: auto;
+    width: 80%;
+    
+    border-radius: 10px;
+    border: solid 1px #ccc;
+    margin-top: 10px;
+}
+
+input[name='rv_title']{
+    height: 50px;
+}
+
+textarea{
+    height: 300px;
+}
+
+input[name='rv_title']:focus,textarea:focus{
+    outline:none;
+    border: solid 1px #ccc;
+}
+
+/*버튼*/
+#reBtn{
+    margin-top: 50px;
+    width: 300px;
+    height: 80px;
+    background-color: white;
+    border: solid 1px #ccc;
+    border-radius: 10px;
+    box-shadow: 3px 3px 5px #ccc;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#reBtn:hover{
+    background-color: #ADBA85;
+    color: white;
+    font-weight: bold;
+}
+
+
+.w3-btn-floating{
+	cursor: pointer;
+}

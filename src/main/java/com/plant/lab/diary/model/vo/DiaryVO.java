@@ -16,6 +16,7 @@ public class DiaryVO {
 	private String user_id;
 	private String user_name;
 	private int like_cnt;
+	private int user_no;
 	
 	public DiaryVO() {}
 

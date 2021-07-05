@@ -63,7 +63,7 @@ public class OrderController {
 		
 		List<Cart> carts = new ArrayList<Cart>();
 		List<Cart> orders = new ArrayList<Cart>();
-		//TODO 테스트용 나중에 삭제
+		
 		order.setUser_no(member.getUserNo());
 		
 		carts = cartService.serchList(order.getUser_no());

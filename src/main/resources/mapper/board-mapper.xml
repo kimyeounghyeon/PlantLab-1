@@ -127,6 +127,10 @@
  		delete from diary_tb where diary_no = #{diary_no}
  	</delete>
  
+ 	<select id="detailWriter" parameterType="int" resultType="int">
+ 		select diary_write from diary_tb where diary_no = #{diary_no}
+ 	</select>
+ 	 
  	 
  	<!-- 댓글 조회 -->
 	<select id="selectComment" parameterType="int" resultType="CommentVO">

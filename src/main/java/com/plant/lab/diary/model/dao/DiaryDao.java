@@ -33,14 +33,9 @@ public class DiaryDao {
 		return sqlSession.selectList("Diary.searchId",keyword);
 	}
 	
-	// 글 내용으로 게시글 검색
-	public List<DiaryVO> searchContent(String keyword) {
-		return sqlSession.selectList("Diary.searchContent",keyword);
-	}
-	
-	// 좋아요 리스트 조회
-	public List<Integer> likeList(LikeVO lvo) {
-		return sqlSession.selectList("Diary.likeList", lvo);
+	//조회
+	public int detailWrite(int diary_no) {
+		return sqlSession.selectOne("Diary.detailWriter",diary_no);
 	}
 	
 
