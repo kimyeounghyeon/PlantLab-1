@@ -188,10 +188,13 @@
                                         	<c:forEach var="vo" items="${reviewList}" varStatus="status">
                                         		 <tr class="accordian">
 		                                            	<td class="reviewTitle">
-		                                                <div class="title">${vo.rv_title}</div>
+		                                                	<div class="title">
+		                                                		${vo.rv_title}
+		                                                	</div>
 		                                                <div class="writer">
 		                                                	${vo.user_name}
 		                                                	<input type="hidden" name="user_no2" value="${vo.user_no}">
+		                                                	<input type="hidden" name="rv_no" value="${vo.rv_no}">
 		                                                </div>
 		                                                <div class="star userStar">
 		                                                	<c:forEach var="i" begin="1" end="${vo.rv_star}">
@@ -342,10 +345,11 @@
             var pro_no = $('#pro_no').val();
             var user_no = $(this).find('input').val();
             var reviewImg = $(this).next().find('.reviewImg');
-            
+            var rv_no = $(this).find('input[name=rv_no]').val();
             $.ajax({
 				url:"imgSearch.do",
 				data : {pro_no : pro_no,
+						rv_no : rv_no,
 						user_no : user_no},
 				type:"post",
 				dataType : "json",

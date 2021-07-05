@@ -13,6 +13,7 @@ public class Review {
 	private int rv_star;
 	private int rv_img_num;
 	private String rv_img_src;
+	private int buy_no;
 	
 	public int getRv_no() {
 		return rv_no;
@@ -73,6 +74,12 @@ public class Review {
 	}
 	public void setRv_img_src(String rv_img_src) {
 		this.rv_img_src = rv_img_src;
+	}
+	public int getBuy_no() {
+		return buy_no;
+	}
+	public void setBuy_no(int buy_no) {
+		this.buy_no = buy_no;
 	}
 	
 }

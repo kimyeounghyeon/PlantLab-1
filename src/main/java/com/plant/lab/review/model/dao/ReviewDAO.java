@@ -34,4 +34,19 @@ public class ReviewDAO {
 	public int starCount(HashMap<String, Integer> map) {
 		return sqlSession.selectOne("Review.starCount",map);
 	}
+	
+	//리뷰추가
+	public int insertReview(Review review){
+		return sqlSession.insert("Review.insertReview",review);
+	}
+	
+	//리뷰이미지추가
+	public int insertRvImg(Review review){
+		return sqlSession.insert("Review.insertRvImg",review);
+	}
+	
+	//리뷰작성여부 체크
+	public int checkRv(int buy_no) {
+		return sqlSession.selectOne("Review.checkRv",buy_no);
+	}
 }

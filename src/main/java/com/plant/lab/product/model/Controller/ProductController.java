@@ -143,9 +143,16 @@ public class ProductController {
 			Collections.reverse(viewPro);
 			
 			
-			//리뷰 퍼센트 계산
+			
+			
+			//리뷰 퍼센트 계산 / 리뷰 총점 계산
 			int count = reviewService.listCount(pro_no);
 			logger.info("개수확인:::"+count);
+			
+			Product pro = proService.selectOne(pro_no);
+			if(count != 0) {
+				pro.setPro_totalStar(pro.getPro_totalStar()/count);				
+			}
 			
 			List<Double> percent = new ArrayList<Double>();
 			HashMap<String, Integer> map = new HashMap<String, Integer>();
@@ -157,7 +164,7 @@ public class ProductController {
 				map.remove("star");
 				map.put("star", i);
 				int test = reviewService.starCount(map);
-				logger.info("test:::"+test);
+				
 				if(test == 0) {
 					percent.add(0.0);
 				}else {
@@ -165,11 +172,14 @@ public class ProductController {
 				}
 			}
 			
+			logger.info("점수확인:::"+percent);
+			
 			//mv.addObject("viewPro",viewPro);
+
 			mv.addObject("percent",percent);
 			mv.addObject("productCon",proConService.searchList(pro_no));
 			mv.addObject("reviewList",reviewService.searchList(pro_no));
-			mv.addObject("product",proService.selectOne(pro_no));
+			mv.addObject("product",pro);
 			mv.setViewName("Product/ProductView");
 		}catch (Exception e) {
 			logger.info("!!!!!!상품 상세 오류!!!!!!");

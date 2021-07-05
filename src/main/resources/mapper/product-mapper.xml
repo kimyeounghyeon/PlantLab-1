@@ -17,17 +17,17 @@
 	
 	<!-- 페이지당 상품 조회  rowbounds 판매량순 사용-->
 	<select id="selectListOrderBest" resultType="arraylist" parameterType="string" resultMap="ProductMap">
-		SELECT * FROM pro_tb where pro_cate = #{cate} order by pro_stock
+		SELECT * FROM pro_tb where pro_cate = #{cate} and pro_cate = #{cate} order by pro_stock
 	</select>
 	
 	<!-- 페이지당 상품 조회  rowbounds 낮은 가격순 사용-->
 	<select id="selectListOrderLow" resultType="arraylist" parameterType="string" resultMap="ProductMap">
-		SELECT * FROM pro_tb where pro_price not like '(품절)' order by to_number(replace(replace(pro_price,',',''),'원',''))
+		SELECT * FROM pro_tb where pro_cate = #{cate} and pro_price not like '(품절)' order by to_number(replace(replace(pro_price,',',''),'원',''))
 	</select>
 	
 	<!-- 페이지당 상품 조회  rowbounds 높은 가격순 사용-->
 	<select id="selectListOrderHigh" resultType="arraylist" parameterType="string" resultMap="ProductMap">
-		SELECT * FROM pro_tb where pro_price not like '(품절)' order by to_number(replace(replace(pro_price,',',''),'원','')) desc
+		SELECT * FROM pro_tb where pro_cate = #{cate} and pro_price not like '(품절)' order by to_number(replace(replace(pro_price,',',''),'원','')) desc
 	</select>
 	
 	<!-- 상품 검색 -->
@@ -47,6 +47,13 @@
 	<update id="updateStock" parameterType="Product" flushCache="true" statementType="PREPARED">
 		UPDATE pro_tb 
 		SET pro_stock = #{pro_stock} 
+		WHERE pro_no = #{pro_no}
+	</update>
+	
+	<!-- 상품 총점 업데이트 -->
+	<update id="updateStar" parameterType="Product" flushCache="true" statementType="PREPARED">
+		update pro_tb
+		set pro_totalStar = pro_totalStar + #{pro_totalStar}
 		WHERE pro_no = #{pro_no}
 	</update>
 </mapper>

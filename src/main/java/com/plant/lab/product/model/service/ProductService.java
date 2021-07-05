@@ -29,4 +29,7 @@ public interface ProductService {
 	
 	//상품삭제
 	public int deleteProduct(int pro_no);
+	
+	//별점 업데이트
+	public int updateStar(Product product);
 }

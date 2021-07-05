@@ -14,12 +14,19 @@
 		ORDER BY rv_no desc
 	</select>
 	
+	<!-- 리뷰 작성여부 확인 -->
+	<select id="checkRv" resultType="int" parameterType="int">
+		SELECT rv_no FROM rv_tb
+		WHERE buy_no = #{buy_no}
+	</select>
+	
 	<!-- 리뷰 이미지 불러오기 -->
 	<select id="selectImgList" resultType="arraylist" parameterType="int" resultMap="ReviewMap">
 		SELECT i.rv_img_src FROM rv_tb r
 		JOIN rv_img_tb i
 		ON r.rv_no = i.rv_no
-		WHERE r.pro_no = #{pro_no}
+		WHERE r.rv_no = #{rv_no}
+        AND r.pro_no = 40
 		AND r.user_no = #{user_no}
 		ORDER BY i.rv_img_num
 	</select>
@@ -33,4 +40,27 @@
 	<select id="starCount" resultType="int" parameterType="HashMap">
 		SELECT count(rv_star) FROM rv_tb WHERE pro_no = #{pro_no} and rv_star = #{star}
 	</select>
+	
+	<!-- 리뷰추가 -->
+	<insert id="insertReview" parameterType="Review" flushCache="true" statementType="PREPARED">
+		INSERT INTO rv_tb VALUES(
+			RV_SEQ.NEXTVAL,
+			#{rv_title},
+			#{rv_content},
+			sysdate,
+			#{rv_star},
+			#{user_no},
+			#{buy_no},
+			#{pro_no}
+		)
+	</insert>
+	
+	<!-- 리뷰이미지추가 -->
+	<insert id="insertRvImg" parameterType="Review" flushCache="true" statementType="PREPARED">
+ 		INSERT INTO  rv_img_tb VALUES(
+ 			RV_SEQ.CURRVAL, #{rv_img_num}, #{rv_img_src}
+ 		)
+ 	</insert>
+ 	
+ 	
 </mapper>

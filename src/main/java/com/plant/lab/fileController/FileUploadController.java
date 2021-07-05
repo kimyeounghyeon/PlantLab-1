@@ -1,36 +1,63 @@
 package com.plant.lab.fileController;
 
 import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.web.multipart.MultipartFile;
 
-public class FileUploadController {
-	private void saveFile(MultipartFile report1, MultipartFile report2, HttpServletRequest request) {
-		String root1 = request.getSession().getServletContext().getRealPath("resources");
-		String root2 = request.getSession().getServletContext().getRealPath("resources");
-		String savePath1 = root1 + "\\img";
-		String savePath2 = root2 + "\\img";
-		File folder1 = new File(savePath1);
-		File folder2 = new File(savePath2);
-		if (!folder1.exists()) {
-			folder1.mkdir(); // 폴더가 없다면 생성한다.
-		}
-		if (!folder2.exists()) {
-			folder2.mkdir(); // 폴더가 없다면 생성한다.
-		}
-		String filePath1 = null;
-		String filePath2 = null;
-		try { // 파일 저장
-			filePath1 = folder1 + "\\" + report1.getOriginalFilename();
-			report1.transferTo(new File(filePath1)); // 파일을 저장한다
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 
-			filePath2 = folder2 + "\\" + report2.getOriginalFilename();
-			report2.transferTo(new File(filePath2)); // 파일을 저장한다
+
+public class FileUploadController {
+	public String saveFile(MultipartFile report, HttpServletRequest request) {
+		String root = request.getSession().getServletContext().getRealPath("resources");
+		String savePath = root + "\\diaryImg";
+		File folder = new File(savePath);
+		String url = "";
+		if (!folder.exists()) {
+			folder.mkdir(); // 폴더가 없다면 생성한다.
+		}
+
+		String filePath = null;
+
+		try {
+			System.out.println(report.getOriginalFilename() + "을 저장합니다.");
+			System.out.println("저장 경로 : " + savePath);
+
+			filePath = folder + "\\" + report.getOriginalFilename();
+
+			report.transferTo(new File(filePath)); // 파일을 저장한다
+			
+			
+			
+			// cloudinary.uploader().upload(Object file, Map options);
+			Map config = new HashMap();
+			config.put("cloud_name", "djdjsp7t1");
+			config.put("api_key", "862183527995216");
+			config.put("api_secret", "TBR2K0Q2UcJ3BbbFG0JdWxVjXXI");
+			Cloudinary cloudinary = new Cloudinary(config);
+			
+			Map res = cloudinary.uploader().upload(new File(filePath), ObjectUtils.emptyMap()); 
+			url = res.get("url") == null ? "" : res.get("url").toString(); 
+			System.out.println("::::"+url);
+
+			
+			
+			
+			System.out.println("파일 명 : " + report.getOriginalFilename());
+			System.out.println("파일 경로 : " + filePath);
+			System.out.println("파일 전송이 완료되었습니다.");
+
 		} catch (Exception e) {
 			System.out.println("파일 전송 에러 : " + e.getMessage());
 		}
+
+		return url;
 	}
 	
 	

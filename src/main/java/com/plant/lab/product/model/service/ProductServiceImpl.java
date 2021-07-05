@@ -72,4 +72,10 @@ public class ProductServiceImpl implements ProductService{
 	public int deleteProduct(int pro_no) {
 		return 0;
 	}
+	
+	//별점업데이트
+	@Override
+	public int updateStar(Product product) {
+		return proDao.updateStar(product);
+	}
 }

@@ -64,6 +64,7 @@
 		                                <span>구매 날짜</span><span>${vo.buy_date}</span>
 		                            </td>
 		                            <td class="btn addB">
+		                            
 		                                <button type="button" class="proBtn" id="reivewB">리뷰작성하기</button>
 		                            </td>
 		                        </tr>
@@ -159,14 +160,16 @@
 		               if(imgList.length > 1){
 		            	   html += "<a class='w3-btn-floating' style='position:absolute; top:45%; left:0;' onclick='plusDivs(-1)'>❮ </a>";
 		                   html += "<a class='w3-btn-floating' style='position:absolute;top:45%;right:0;' onclick='plusDivs(1)'>❯ </a>";
+		                  
 		               }
 		               
 		               if(details.length > 1){
 		            	   proNames.append(details[0].pro_name + " 외 " + (details.length-1) +"개");
-		            	   
+		            	  
 		               }else{
 		            	   $.each(details, function(i, item){
 		            		   proNames.append(item.pro_name);
+		            		   
 		                   });
 		               }
 		               

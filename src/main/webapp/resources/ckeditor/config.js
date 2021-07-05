@@ -8,12 +8,15 @@ CKEDITOR.editorConfig = function( config ) {
 	// For complete reference see:
 	// https://ckeditor.com/docs/ckeditor4/latest/api/CKEDITOR_config.html
 
-	// The toolbar groups arrangement, optimized for two toolbar rows.
+	// The toolbar groups arrangement, optimized for two toolbar rows..
+	
+	config.resize_enabled = false; //크기조절 막기
+	config.uiColor = '#F3EFEC'; //색상
+	
 	config.toolbarGroups = [
 		{ name: 'clipboard',   groups: [ 'clipboard', 'undo' ] },
 		{ name: 'editing',     groups: [ 'find', 'selection', 'spellchecker' ] },
 		{ name: 'links' },
-		{ name: 'insert' },
 		{ name: 'forms' },
 		{ name: 'tools' },
 		{ name: 'document',	   groups: [ 'mode', 'document', 'doctools' ] },

@@ -79,4 +79,9 @@ public class ProductDAO {
 	public int deleteProduct(int pro_no) { 
 		return 1;
 	}
+	
+	//상품 별점 업데이트
+	public int updateStar(Product product) {
+		return sqlSession.update("Product.updateStar",product);
+	}
 }

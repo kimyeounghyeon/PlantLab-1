@@ -17,4 +17,10 @@ public interface ReviewService {
 	
 	//상품별 별점 수
 	public int starCount(HashMap<String, Integer> map);
+	
+	//리뷰추가
+	public int insertReview(Review review,List<String> img,List<Integer> pro_no);
+	
+	//리뷰작성여부 체크
+	public int checkRv(int buy_no);
 }
