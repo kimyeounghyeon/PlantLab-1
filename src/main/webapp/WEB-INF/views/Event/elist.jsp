@@ -20,13 +20,16 @@ margin-right: auto;
 }
 .eventbanner{
 height : 200px;
-width : 750px;
+width : 800px;
 margin : 1.5px;
 border-radius : 30px;
 }
 
 #eventsub{
 width : 470px;
+	font-size : 20px;
+	font-weight : bold;
+	
 }
 #period{
 width : 200px;

@@ -11,6 +11,8 @@
 <link href="${path}/resources/css/header.css" rel="stylesheet" />
 <link href="${path}/resources/css/footer.css" rel="stylesheet" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    
     <style>
     .eReDiv{
     clear : both;
@@ -28,6 +30,7 @@
 	width : 400px;
 	border : 1px solid #625b54;
 	}
+	
     </style>
 </head>
 <body>
@@ -77,4 +80,10 @@
 	</div>
 	<jsp:include page="../footer.jsp"></jsp:include>
 </body>
+<script>
+
+	$("#erebtn").click(function(){
+		swal("수정이 완료되었습니다.","", "info")
+	}
+</script>
 </html>
