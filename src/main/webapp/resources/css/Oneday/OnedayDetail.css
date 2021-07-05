@@ -93,24 +93,14 @@
 	z-index: 1;
 	
 }
-/* #classText{
-	
-	background-color:white;
-	width: 455px;
-	height: 550px;
-	text-align:center;
-	vertical-align: middle;
-	z-index: 1;
-	
-} */
+
 #classBtn {
 	clear: both;
 	display: inline-block;
-	width: 450px;
+	width: 350px;
 	height: 80px;
 	margin-top: 50px;
 	border: 1px solid black;
-	width: 250px;
 	cursor: pointer;
 	border: 1px solid #ccc;
 	color: black;
@@ -125,17 +115,7 @@
 	background-color: #625b54;
 	color: white;
 }
-/* #classBtn {
-	clear: both;
-	display: block;
-	width: 450px;
-	height: 80px;
-	margin-left: 505px;
-	margin-top: 20px;
-	border: 1px solid black;
-	width: 250px;
-		cursor: pointer;
-} */
+
 
 #classImg>img {
 	text-align: center;

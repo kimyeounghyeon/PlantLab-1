@@ -111,7 +111,11 @@ public class OnedayController {
 	public ModelAndView onedayReserve(ModelAndView mv, @RequestParam(name = "onedayNo") int oneday_no,
 			HttpServletRequest request, HttpSession session, @ModelAttribute("user") MemberVO user) {
 		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!" + oneday_no);
-		mv.addObject("OneR", oneday_no);
+		OnedayVo one = new OnedayVo();
+		one.setOneday_no(oneday_no);
+		OnedayVo oneVo = oService.onedayselect(one); // selectone 메소드 실행
+		//mv.addObject("OneR", oneday_no);
+		mv.addObject("OneR", oneVo);
 		mv.setViewName("OnedayClass/onedayReserve");
 		return mv;
 	}
@@ -134,7 +138,8 @@ public class OnedayController {
 		oneVo.setUser_no(member.getUserNo());
 		oneVo.setOneday_no(onedayNo);
 		oneVo.setOneday_request(oneRequest);
-		oneVo.setReserv_date(reservDate);   //예약한 시간
+		oneVo.setReserv_date(reservDate);   //예약을 원하는 날짜
+		System.out.println(reservDate);
 		oneVo = oService.onedayselect(oneVo);
 		System.out.println("결과 는~~~~~~~~~" + oneVo);
 		
@@ -328,7 +333,6 @@ public class OnedayController {
 		
 		String oneinsertST = request.getParameter("oneinsertST");
 		oneIVo.setOneday_Stime(oneinsertST);
-		System.out.println("!!!!!!!!!!!!!!!!!!skdjs"+oneinsertST);
 		String oneinsertET =request.getParameter("oneinsertET");
 		oneIVo.setOneday_Etime(oneinsertET);
 		System.out.println(oneinsertET);
