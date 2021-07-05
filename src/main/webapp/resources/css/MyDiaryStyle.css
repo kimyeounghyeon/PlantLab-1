@@ -13,7 +13,7 @@
 }
 
 .myContent {
-	width : 500px;
+	width : 862px;
 	height : 60px;
 	white-space: nowrap;
 	overflow : hidden;
@@ -21,7 +21,7 @@
 }
 
 .contentmove {
-	width : 500px;
+	width : 862px;
 	height : 60px;
 	white-space: nowrap;
 	overflow : hidden;
@@ -30,9 +30,32 @@
 }
 
 .myDate {
-	width : 100px;
+	width : 150px;
 }
 
 .myLike {
-	width : 80px;
+	width : 100px;
+}
+
+.likeimg {
+	width : 20px;
+	height : 20px;
+}
+
+.mdtd {
+	text-align : center;
+}
+
+.aContentLink {
+	text-decoration : none;
+	color : black;
+}
+
+.aContentLink:visit {
+	text-decoration : none;
+	color : gray;
+}
+
+.regis_page {
+	text-align : center;
 }

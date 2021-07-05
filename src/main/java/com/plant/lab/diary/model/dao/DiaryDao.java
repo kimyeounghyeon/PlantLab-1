@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -41,6 +42,11 @@ public class DiaryDao {
 	// 글 내용으로 게시글 검색
 	public List<DiaryVO> searchContent(String keyword) {
 		return sqlSession.selectList("Diary.searchContent",keyword);
+	}
+	
+	// 게시글 수 구하기
+	public int getlistCount(int diary_write) {
+		return sqlSession.selectOne("Diary.getlistCount", diary_write);
 	}
 	
 	// 좋아요 리스트 조회
@@ -125,7 +131,9 @@ public class DiaryDao {
 	
 	
 	// 내가 쓴 글
-	public List<DiaryVO> mydiary(int diary_write) {
-		return sqlSession.selectList("Diary.mydiary", diary_write);
-	}
+	public List<DiaryVO> myDiary(int startPage, int limit, int diary_write){
+	      int offset = (startPage - 1) * limit;
+	      RowBounds row = new RowBounds(offset, limit);
+	      return sqlSession.selectList("Diary.mydiary", diary_write, row);
+	   }
 }

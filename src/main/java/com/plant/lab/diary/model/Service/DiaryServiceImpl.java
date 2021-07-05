@@ -71,6 +71,18 @@ public class DiaryServiceImpl implements DiaryService {
 	}
 	
 	
+	@Override
+	public int getlistCount(int diary_write) {
+		int cnt = -1;
+		try {
+			cnt = dDao.getlistCount(diary_write);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		 return cnt;
+	}
+	
+	
 	
 	// 좋아요
 	//@Transactional
@@ -251,14 +263,8 @@ public class DiaryServiceImpl implements DiaryService {
 
 
 	@Override
-	public List<DiaryVO> mydiary(int diary_write) {
-		List<DiaryVO> list = null;
-		try {
-			list = dDao.mydiary(diary_write);
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-		return list;
-	}
+	   public List<DiaryVO> myDiary(int startPage, int limit, int diary_write) {
+	      return dDao.myDiary(startPage, limit, diary_write);
+	   }
 	
 }

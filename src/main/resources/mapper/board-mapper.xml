@@ -74,6 +74,11 @@
 	]]>
  	</select>
  	
+ 	<!-- 게시글 갯수 구하기 -->
+ 	<select id="getlistCount" resultType="int">
+ 		select count(*) as diary_cnt from diary_tb where diary_write = #{diary_write}
+ 	</select>
+ 	
 	
 	<!-- 좋아요 리스트 -->
 	<select id="likeList" parameterType="LikeVO" resultType="int">

@@ -48,6 +48,9 @@ public class PlantHomeController {
 	private DiaryService dService;
 	@Autowired
 	private ReportService reportService;
+	
+	public static final int LIMIT = 5;
+	public static final int pageBlock = 5;
 
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -579,15 +582,90 @@ public class PlantHomeController {
 	
 	// 마이페이지
 	@RequestMapping(value="/mydiary")
-	public ModelAndView mydiary(HttpServletRequest request, HttpSession session, ModelAndView mv) {
+	public ModelAndView mydiary(HttpServletRequest request, HttpSession session, ModelAndView mv,  @RequestParam(name="page", defaultValue = "1") int page)
+		{
 		MemberVO member = (MemberVO) session.getAttribute("loginMember");
-		
 		int diary_write = member.getUserNo();
-		List<DiaryVO> mydiary = dService.mydiary(diary_write);
+	
+		
+	      int listCount = dService.getlistCount(diary_write);	
+	      int pageCnt = (listCount / LIMIT) + (listCount % LIMIT == 0 ? 0 : 1);
+	      int currentPage = page;
+	      
+	      int startPage = 1;
+	      int endPage = 5;
+	      if(currentPage % pageBlock == 0) {
+	         startPage = ((currentPage/pageBlock)-1) * pageBlock + 1;
+	      }else {
+	         startPage = ((currentPage/pageBlock)) * pageBlock + 1;
+	      }
+	      endPage = startPage + pageBlock - 1;
+	      
+	      if(endPage > pageCnt)
+	         endPage = pageCnt;
+	      
+	      int maxPage = (int)((double) listCount / LIMIT + 0.9 );
+	      mv.addObject("pageCnt", pageCnt);
+	      mv.addObject("startPage", startPage);
+	      mv.addObject("endPage", endPage);
+	      mv.addObject("currentPage", currentPage);
+	      mv.addObject("maxPage", maxPage);
+	      mv.addObject("diary_write", diary_write);
+	      mv.addObject("listCount", listCount);
+
+		
+		List<DiaryVO> mydiary = dService.myDiary(currentPage, LIMIT, diary_write);
 		mv.setViewName("MyDiary");
 		mv.addObject("mydiary", mydiary);
 		return mv;
 	}
 	
-
+	// 관리자 다이어리
+	@RequestMapping(value="/admindiary", method=RequestMethod.POST)
+	public ModelAndView adminDiary(HttpSession session, HttpServletRequest request, ModelAndView mv, @RequestParam(name="page", defaultValue = "1") int page) {
+		
+		MemberVO member = (MemberVO) session.getAttribute("loginMember");
+		int diary_write = member.getUserNo();
+		
+		List<DiaryVO> listDiary = dService.listDiary();
+		 int listCount = dService.getlistCount(diary_write);	
+	     int pageCnt = (listCount / LIMIT) + (listCount % LIMIT == 0 ? 0 : 1);
+	     int currentPage = page;
+	      
+	      int startPage = 1;
+	      int endPage = 5;
+	      if(currentPage % pageBlock == 0) {
+	         startPage = ((currentPage/pageBlock)-1) * pageBlock + 1;
+	      }else {
+	         startPage = ((currentPage/pageBlock)) * pageBlock + 1;
+	      }
+	      endPage = startPage + pageBlock - 1;
+	      
+	      if(endPage > pageCnt)
+	         endPage = pageCnt;
+	      
+	      int maxPage = (int)((double) listCount / LIMIT + 0.9 );
+	      mv.addObject("pageCnt", pageCnt);
+	      mv.addObject("startPage", startPage);
+	      mv.addObject("endPage", endPage);
+	      mv.addObject("currentPage", currentPage);
+	      mv.addObject("maxPage", maxPage);
+	      mv.addObject("diary_write", diary_write);
+	      mv.addObject("listCount", listCount);
+		mv.addObject("listDiary", listDiary);
+		mv.setViewName("AdminDiary");
+		return mv;
+	}
+	// 마이 페이지 게시글 삭제
+//	@RequestMapping(value="/deletemydiary.do", method=RequestMethod.POST)
+//	public String deleteMyDiary(HttpServletRequest request, HttpSession session, @RequestParam(name = "selectChk[]") int[] selectChk) {
+//		for(int i=0; i<selectChk.length; i++) {
+//			System.out.println(selectChk[i]);
+//			
+//		}
+//
+//		MemberVO member = (MemberVO) session.getAttribute("loginMember");
+//		return null;
+//	
+//	}
 }
