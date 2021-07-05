@@ -16,27 +16,41 @@
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
 	<jsp:include page="mypagemenu.jsp"></jsp:include>
-<!-- 	<form id="myDiaryFrm">
+	<c:if test="${not empty mydiary }">
+	<form id="myDiaryFrm">
 	<button type="button" class="deleteMyDiary">삭제하기</button>
-	</form> -->
+	</form>
+	</c:if>
+	<br>
+	<input type="text" class="myKeyword" placeholder="검색어를 입력해주세요.">&nbsp;<button type="button" class="mySearchBtn"><img src="${path }/resources/img/search.png" class="mySearchicon"></button>
 	<table class="mydTable">
 			<tr class="mdtr">
-<!-- 				<th class="mdth selectAlltd"><input type="checkbox" name="selectAll" class="selectAll">
- -->			<th class="mdth mydNum"> NO </th>
+ 				<th class="mdth selectAlltd"><input type="checkbox" name="selectAll" class="selectAll">
+ 				<th class="mdth mydNum"> NO </th>
 				<th class="mdth myContent"> 내용 </th>
 				<th class="mdth myDate"> 날짜 </th>
 				<th class="mdth myLike"> <img class="likeimg" src="${path }/resources/img/색변경좋아요.png"> </th>
 			</tr>
+	<c:if test="${not empty mydiary }">
 		<c:forEach var="d" items="${mydiary}">
 			<c:set var="i" value="${i+1 }" />
 			<tr class="mdtr">
-<%-- 				<td class="mdtd mydSelect"><input type="checkbox" name="selectChk[]" value="${d.diary_no }"></td>
- --%>			<td class="mdtd mydNum">${i}</td>
+ 				<td class="mdtd mydSelect"><input type="checkbox" name="selectChk[]" value="${d.diary_no }"></td>
+ 				<td class="mdtd mydNum">${i}</td>
 				<td class="mdtd myContent"><div class="contentmove"><a href='detaildiary?diary_no=${d.diary_no}' class="aContentLink">${d.diary_content}</a></div></td>
 				<td class="mdtd myDate">${d.diary_date}</td>
 				<td class="mdtd myLike">${d.like_cnt}</td>
 			</tr>
 		</c:forEach>
+		</c:if>
+		<c:if test="${empty mydiary }">
+		<tr class="mdtr">
+			<td class="mdtd emptyDiary" colspan="5"> 등록 된 게시물이 없습니다. 반려식물과의 일상을 기록해보세요!</td>
+		</tr>
+		<tr class="mdtr">
+			<td class="mdtd moveDiary" colspan="5"><a href="<%=request.getContextPath() %>/diary" class="aMoveDiary">일기 쓰러 가기</a> 
+		</tr>
+		</c:if>
 	</table>
 	<br><br>
 	            <div class="regis_page">
@@ -70,7 +84,7 @@
 			}
 		});
 		
-/* 		$(".deleteMyDiary").click(function(){
+		$(".deleteMyDiary").click(function(){
 			$("input[name=selectChk]:checked").each(function(){
 				var checkVal = $(this).val();
 			console.log("값" + checkVal);
@@ -79,7 +93,7 @@
 			frm.method = "post";
 			frm.submit(); 
 			});
-		}); */
+		});
 		});
 </script>
 	

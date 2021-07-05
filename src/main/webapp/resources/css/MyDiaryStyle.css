@@ -1,19 +1,51 @@
 @charset "UTF-8";
 
+.mySearchicon {
+	width : 20px;
+	height : 20px;
+	bottom : 5px;
+	padding : 0px;
+}
+.mySearchBtn {
+	border : none;
+	background-color : white;
+	padding : 0px;
+}
+
+.mySearchBtn:hover {
+	cursor:pointer;
+}
+
+.myKeyword {
+	border-left : none;
+	border-right : none;
+	border-top : none;
+	border-bottom : 1px solid #6a6560;
+	width : 300px;
+	text-align : center;
+	margin-left: 140px;
+    font-size: 12pt;
+}
+}
+
 .mydTable {
-	border : 1px solid gray;
+	clear : both;
+	border : 1px solid #b2b2b2;
+	margin: 50px auto;
 }
 
 .mdtr {
 	border : 1px solid gray;
 }
-
+.mydSelect {
+	width : 40px;
+}
 .mydNum {
 	width : 70px;
 }
 
 .myContent {
-	width : 862px;
+	width : 820px;
 	height : 60px;
 	white-space: nowrap;
 	overflow : hidden;
@@ -21,12 +53,13 @@
 }
 
 .contentmove {
-	width : 862px;
+	width : 820x;
 	height : 60px;
 	white-space: nowrap;
 	overflow : hidden;
 	text-overflow: ellipsis;
 	line-height : 60px;
+	margin-right: 5px;
 }
 
 .myDate {
@@ -58,4 +91,33 @@
 
 .regis_page {
 	text-align : center;
+}
+
+.mydNum {
+    font-style: italic;
+    font-weight: bold;
+    color: #625b54;
+    }
+    
+
+.emptyDiary {
+	 font-size: 14pt;
+	 padding: 80px;
+}
+
+.moveDiary {
+	text-align: center;
+    padding: 40px;
+    font-size: 14pt;
+    font-weight: bold;
+}
+
+.aMoveDiary:visit {
+	text-decoration : none;
+	color : #625b54;
+}
+
+.deleteMyDiary {
+	float : right;
+	margin-right : 140px;
 }

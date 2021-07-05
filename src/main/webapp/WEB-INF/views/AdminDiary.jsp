@@ -24,9 +24,9 @@
 			<tr class="mdtr">
 <%-- 				<td class="mdtd mydSelect"><input type="checkbox" name="selectChk[]" value="${d.diary_no }"></td>
  --%>			<td class="admdtd admdNum">${i}</td>
+ 				<td class="admdtd admdId">${d.user_id }</td>
 				<td class="admdtd admdContent"><div class="admdcontentmove"><a href='detaildiary?diary_no=${d.diary_no}' class="admdaContentLink">${d.diary_content}</a></div></td>
 				<td class="admdtd admdDate">${d.diary_date}</td>
-				<td class="admdtd admdLike">${d.like_cnt}</td>
 			</tr>
 		</c:forEach>
 	</table>
