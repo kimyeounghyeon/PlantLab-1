@@ -36,7 +36,7 @@ public class DiaryDao {
 	//조회
 	public int detailWrite(int diary_no) {
 		return sqlSession.selectOne("Diary.detailWriter",diary_no);
-
+	}
 
 	// 글 내용으로 게시글 검색
 	public List<DiaryVO> searchContent(String keyword) {
@@ -123,10 +123,6 @@ public class DiaryDao {
 		return sqlSession.selectOne("Diary.getSequence");
 	}
 	
-	
-	public int detailWrite(int diary_no) {
-		return sqlSession.selectOne("Diary.detailWrite",diary_no);
-	}
 	
 	// 내가 쓴 글
 	public List<DiaryVO> mydiary(int diary_write) {
