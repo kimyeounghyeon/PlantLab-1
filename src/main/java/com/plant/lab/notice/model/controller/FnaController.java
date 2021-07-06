@@ -1,34 +1,15 @@
 package com.plant.lab.notice.model.controller;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.jsp.tagext.TryCatchFinally;
-
-import org.apache.ibatis.annotations.Param;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.config.YamlProcessor.ResolutionMethod;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.google.gson.JsonObject;
-import com.plant.lab.event.controller.EventController;
 import com.plant.lab.notice.model.service.FnaService;
 import com.plant.lab.notice.model.vo.FnaVo;
-import com.plant.lab.notice.model.vo.NoticeVo;
 import com.plant.lab.notice.model.vo.PagingVo;
 
 
@@ -57,7 +38,7 @@ public String flist(PagingVo vo, Model model, @RequestParam(value="nowPage" ,req
 	vo=new PagingVo(total,Integer.parseInt(nowPage),Integer.parseInt(cntPerPage));
 	model.addAttribute("paging", vo);
 	model.addAttribute("viewAll", fService.FnaList(vo));
-	return "Notice/Fnalist";	
+	return "Fna/Fnalist";	
 }
 
 
@@ -65,7 +46,7 @@ public String flist(PagingVo vo, Model model, @RequestParam(value="nowPage" ,req
 public  String write( ModelAndView mav,Model model,FnaVo vo) {
 
 
-	return "Notice/Fnawrite";
+	return "Fna/Fnawrite";
 }
 
 
