@@ -5,18 +5,26 @@
   	<resultMap type="Att_tb" id="resultAtt">
 	</resultMap>
 		
-		<!-- 좋아요 리스트
+	
 	<select id="attList" parameterType="Att_tb" resultType="int">
-		select count(*) from att_tb where user_no =#{user_no}
-	</select> -->
+		select a.user_no, b.user_name, count(a.att_date) AS 출석횟수
+		from att_tb a, user_tb b
+		where a.user_no=b.user_no
+        group by b.user_name,a.user_no
+		order by a.user_no;
+	</select> 
+	
 	
 	<!-- 출석 클릭 -->
 	<insert id="insertAtt" parameterType="Att_tb" flushCache="true" statementType="PREPARED">
 		insert into att_tb values(#{user_no},sysdate)
 	</insert>
-
+	<!--출석  여부 체크  -->
+  	<select id="attChk" parameterType="Att_tb" resultType="int">
+		select count(*) from att_tb where user_no =#{user_no} and to_char(att_date,'yyyy-mm-dd')= to_char(sysdate,'yyyy-mm-dd')
+	</select>
 	<!--출석  횟수  -->
   	<select id="attCnt" parameterType="Att_tb" resultType="int">
-		select count(*) from att_tb where user_no =#{user_no}
+		select count(*) from att_tb where user_no =#{user_no} 
 	</select>
 </mapper>

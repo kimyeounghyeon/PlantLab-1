@@ -11,6 +11,7 @@
 <link href="${path}/resources/css/header.css" rel="stylesheet" />
 <link href="${path}/resources/css/footer.css" rel="stylesheet" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <style>
 .adiv{
 clear : both;
@@ -24,13 +25,14 @@ text-align : center;
 margin-left : auto;
 margin-right : auto;
 text-align : center;
-font-size: 30px;
+font-size: 25px;
 text-align : center;
 border : none;
-background-color:#D5D9BA;
-width : 300px;
+background: none;
 padding : 5px;
-border-radius : 20px;
+border-radius : 50%; 
+width:120px;
+height :120px;
 }
 .img{
 text-align : center;
@@ -45,6 +47,7 @@ margin-right : auto;
 }
 .btntd{
 text-align : center;
+padding-top:28px;
 }
 .mention{
 
@@ -56,6 +59,22 @@ font-size: 27px;
 .sec{
 text-align : center;
 font-size: 20px;
+}
+#water{
+width:20px;
+height:20px;
+}
+#watering{
+width:120px;
+height:120px;
+}
+#ebtn{
+width : 300px;
+height: 50px;
+font-size: 25px;
+background : #625854;
+color : white;
+border : none;
 }
 </style>
 </head>
@@ -72,17 +91,22 @@ font-size: 20px;
 <div class="mention">
 <!-- <div id="fir">꽃을 피우자!</div>
 <br>-->
-<div class="sec">꽃에 매일 물을 주세요~</div>
+<div class="sec">꽃에 매일 물을 주세요~<img id="water" src="${path}/resources/img/water.png"></div>
 <br>
 <div class="sec">30개의 물방울을 모으면 꽃이 완전히 활짝 피고, 선물을 받을 수 있어요.</div>
 </div>
-	<table class=etb>
+	<table class="etb">
+		<tr>
+			<td class="btntd">
+			<button type="button" class="abtn">
+			<img id="watering" src="${path}/resources/img/watering-can.png">
+			</button>
+			</td>
+		</tr>
 		<tr>
 			<td class="aimg"></td>
 		</tr>
-		<tr>
-			<td class="btntd"><button type="button" class="abtn">물주기!</button></td>
-		</tr>
+		
 	</table>
 </div>
 </c:if>
@@ -97,17 +121,25 @@ font-size: 20px;
 			//dataType : "json",
 			success : function(data) {
 				var aa = data;
+				if(data !=0){
+					swal("하루에 한 번만 참여할 수 있습니다.");
+				}
 				console.log( "aa는 : " + aa);
 				var attimg="";
 				$(".aimg").html("");
-				if( aa < 10) {
+				if( aa <= 9) {
 					attimg = "<img class='img' src='${path}/resources/img/1.jpg'>";
-				}else if ( 10 <= aa <20 ){
-					attimg = "<img class='img' src='${path}/resources/img/2.jpg'>";						
-				}else if ( 20 <= aa <27){
+					
+				}else if ( 10 <= aa && aa <= 19 ){
+					attimg = "<img class='img' src='${path}/resources/img/2.jpg'>";
+					
+				}else if ( 20 <= aa && aa <= 29){
 					attimg = "<img class='img' src='${path}/resources/img/3.jpg'>";
-				}else if ( aa=  28){
+					
+				}else if ( aa = 30){
 					attimg = "<img class='img' src='${path}/resources/img/4.jpg'>";
+					
+				
 				}
 				$(".aimg").html(attimg);
 				},
@@ -128,14 +160,19 @@ font-size: 20px;
 					console.log( "aa는 : " + aa);
 					var attimg="";
 					
-					if( aa < 10) {
+					if( aa <= 9) {
 						attimg = "<img class='img' src='${path}/resources/img/1.jpg'>";
-					}else if ( 10 <= aa && aa <20 ){
-						attimg = "<img class='img' src='${path}/resources/img/2.jpg'>";						
-					}else if ( 20 <= aa && aa <27){
+						attimg += aa+"/30";
+					}else if ( 10 <= aa && aa <= 19 ){
+						attimg = "<img class='img' src='${path}/resources/img/2.jpg'>";	
+						attimg += aa+"/30";
+					}else if ( 20 <= aa && aa <=29){
 						attimg = "<img class='img' src='${path}/resources/img/3.jpg'>";
-					}else if ( aa=  28){
+						attimg += aa+"/30";
+					}else if ( aa=30){
 						attimg = "<img class='img' src='${path}/resources/img/4.jpg'>";
+						attimg += "<div>"+aa+"/30</div><br>";
+						attimg += "<div><button id='ebtn'>이벤트 신청하기</button></div>"
 					}
 					  $(".aimg").html(attimg);
 					},

@@ -18,7 +18,7 @@ public class AttDao {
 //			return sqlSession.selectList("Att_tb.attList", a);
 //		} 
 		
-	// 좋아요 클릭
+	// 출석 클릭
 		public int insertAtt(Att_tb a) {
 			return sqlSession.insert("Att_tb.insertAtt", a);   
 		}	
@@ -27,5 +27,9 @@ public class AttDao {
 		public int attCnt(Att_tb a) {
 			return sqlSession.selectOne("Att_tb.attCnt", a);
 		}
-
+	// 출석 여부 확인
+		public int attChk(Att_tb a) {
+			return sqlSession.selectOne("Att_tb.attCnt", a);
+		}
+		
 }

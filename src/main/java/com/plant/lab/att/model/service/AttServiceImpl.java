@@ -35,7 +35,6 @@ public class AttServiceImpl implements AttService{
 		return result;
 	}
 	
-	//@Transactional
 	@Override
 	public int insertAtt(Att_tb a) {
 		int result = -1;
@@ -43,6 +42,17 @@ public class AttServiceImpl implements AttService{
 			result = aDao.insertAtt(a);
 			//if(result>0)
 			result = aDao.attCnt(a);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	@Override
+	public int attChk(Att_tb a) {
+		int result = -1;
+		try {
+			result = aDao.attChk(a);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

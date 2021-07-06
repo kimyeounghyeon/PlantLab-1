@@ -29,13 +29,24 @@ public class AttController {
 		@RequestMapping(value = "/attendance", method = RequestMethod.GET)
 		public ModelAndView listattendance(ModelAndView mv, HttpSession session, Att_tb a) {
 			logger.info("attendance 진입 ");
-			
 			mv.setViewName("attendance");
 			logger.info("attendance view 페이지 이동");
 			return mv;
 		}
 	
-	
+		@RequestMapping(value = "/attendance2", method = RequestMethod.POST)
+		@ResponseBody
+		public int showAttImg(HttpSession session, HttpServletResponse response) {
+				response.setCharacterEncoding("UTF-8");
+				
+				Att_tb asessionVO = new Att_tb();
+				MemberVO member = (MemberVO) session.getAttribute("loginMember");
+				asessionVO.setUser_no(member.getUserNo());
+		
+				int attCnt = aService.attCnt(asessionVO);
+			      
+			    return attCnt;
+			   }
 	
 	@RequestMapping(value = "/attendance.do", method = RequestMethod.POST)
 	@ResponseBody
@@ -47,17 +58,17 @@ public class AttController {
 			MemberVO member = (MemberVO) session.getAttribute("loginMember");
 			asessionVO.setUser_no(member.getUserNo());
 			
-			int result = aService.insertAtt(asessionVO);
-			logger.info("attendance.do에서 result = 출석은 " + result);
-			
+			//if(aService.attChk(asessionVO)==0) {
+				int result = aService.insertAtt(asessionVO);
+				logger.info("attendance.do에서 result = 출석은 " + result);
+			//}
 		   
 			int attCnt = aService.attCnt(asessionVO);
 		      
-
 		    return attCnt;
 		   }
 	
-	
+
 //	// 출석 클릭
 //	// 이거 호출하는 곳이 없는 것 같아요? 사용한 적 있는 url 인가요?아니오...
 //	@RequestMapping(value = "/insertatt", method = RequestMethod.POST)
