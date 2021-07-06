@@ -15,6 +15,7 @@ public interface DiaryService {
 	public List<DiaryVO> searchId(String keyword);
 	public List<DiaryVO> searchContent(String keyword);
 	public int getlistCount(int diary_write);
+	public int getListCountAll();
 	
 	// 좋아요
 	public List<Integer> likeList(LikeVO lvo);
@@ -44,5 +45,9 @@ public interface DiaryService {
 
 	// 내가 쓴 글
 	public List<DiaryVO> myDiary(int startPage, int limit, int diary_write);
+	public List<DiaryVO> myContent(int startPage, int limit, DiaryVO vo);
+	
+	// 관리자 일기 관리
+	public List<DiaryVO> admlistDiary(int startPage, int limit);
 	
 	}

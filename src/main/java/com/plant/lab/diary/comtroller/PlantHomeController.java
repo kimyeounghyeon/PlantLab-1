@@ -582,10 +582,16 @@ public class PlantHomeController {
 	
 	// 마이페이지
 	@RequestMapping(value="/mydiary")
-	public ModelAndView mydiary(HttpServletRequest request, HttpSession session, ModelAndView mv,  @RequestParam(name="page", defaultValue = "1") int page)
-		{
+	public ModelAndView mydiary(HttpServletRequest request, HttpServletResponse response, HttpSession session, ModelAndView mv,  @RequestParam(name="page", defaultValue = "1") int page,
+			@RequestParam(name="myKeyword", required = false) String keyword) {
+
+		DiaryVO vo = new DiaryVO();
+
 		MemberVO member = (MemberVO) session.getAttribute("loginMember");
 		int diary_write = member.getUserNo();
+		
+		vo.setDiary_write(diary_write);
+		vo.setDiary_content(keyword);
 	
 		
 	      int listCount = dService.getlistCount(diary_write);	
@@ -614,23 +620,40 @@ public class PlantHomeController {
 	      mv.addObject("listCount", listCount);
 
 		
-		List<DiaryVO> mydiary = dService.myDiary(currentPage, LIMIT, diary_write);
+		
+		//검색어가 있을 경우
+		if (keyword != null && !keyword.equals("")) {
+			mv.addObject("currentPage", null);
+			mv.addObject("SearchMylistDiary", dService.myContent(currentPage, LIMIT, vo));			
+			System.out.println("1");
+		}
+		else { //검색어가 없을 경우
+			mv.addObject("currentPage", currentPage);
+			mv.addObject("mydiary", dService.myDiary(currentPage, LIMIT, diary_write));	
+			System.out.println("2");
+
+		}
 		mv.setViewName("MyDiary");
-		mv.addObject("mydiary", mydiary);
+		
 		return mv;
 	}
 	
 	// 관리자 다이어리
-	@RequestMapping(value="/admindiary", method=RequestMethod.POST)
-	public ModelAndView adminDiary(HttpSession session, HttpServletRequest request, ModelAndView mv, @RequestParam(name="page", defaultValue = "1") int page) {
+	@RequestMapping(value="/admindiary")
+	public ModelAndView adminDiary(HttpSession session,
+			HttpServletRequest request, ModelAndView mv, 
+			@RequestParam(name="page", defaultValue = "1") int page,
+			@RequestParam(name="admKeyword", required = false) String keyword) {
 		
 		MemberVO member = (MemberVO) session.getAttribute("loginMember");
 		int diary_write = member.getUserNo();
 		
-		List<DiaryVO> listDiary = dService.listDiary();
-		 int listCount = dService.getlistCount(diary_write);	
+		 int listCount = dService.getListCountAll();	
+		 System.out.println("listCount" + listCount);
 	     int pageCnt = (listCount / LIMIT) + (listCount % LIMIT == 0 ? 0 : 1);
+	     System.out.println("pageCnt" + pageCnt);
 	     int currentPage = page;
+	     System.out.println("currentPage" + currentPage);
 	      
 	      int startPage = 1;
 	      int endPage = 5;
@@ -642,30 +665,88 @@ public class PlantHomeController {
 	      endPage = startPage + pageBlock - 1;
 	      
 	      if(endPage > pageCnt)
-	         endPage = pageCnt;
-	      
+		         endPage = pageCnt;
+		      
 	      int maxPage = (int)((double) listCount / LIMIT + 0.9 );
+
+	      System.out.println("검색어는 " + keyword);
+	      
+			//검색어가 있을 경우
+			if (keyword != null && !keyword.equals("")) {
+				mv.addObject("currentPage", null);
+				mv.addObject("SearchAdmlistDiary", dService.searchId(keyword));			
+				System.out.println("1");
+			}
+			else { //검색어가 없을 경우
+				mv.addObject("currentPage", currentPage);
+				mv.addObject("admlistDiary", dService.admlistDiary(currentPage, LIMIT));	
+				System.out.println("2");
+
+			}
+	
 	      mv.addObject("pageCnt", pageCnt);
 	      mv.addObject("startPage", startPage);
 	      mv.addObject("endPage", endPage);
 	      mv.addObject("currentPage", currentPage);
 	      mv.addObject("maxPage", maxPage);
-	      mv.addObject("diary_write", diary_write);
 	      mv.addObject("listCount", listCount);
-		mv.addObject("listDiary", listDiary);
 		mv.setViewName("AdminDiary");
 		return mv;
 	}
-	// 마이 페이지 게시글 삭제
-//	@RequestMapping(value="/deletemydiary.do", method=RequestMethod.POST)
-//	public String deleteMyDiary(HttpServletRequest request, HttpSession session, @RequestParam(name = "selectChk[]") int[] selectChk) {
-//		for(int i=0; i<selectChk.length; i++) {
-//			System.out.println(selectChk[i]);
-//			
-//		}
-//
-//		MemberVO member = (MemberVO) session.getAttribute("loginMember");
-//		return null;
-//	
-//	}
+	
+	
+	 // 마이 페이지 게시글 삭제
+	@RequestMapping(value="/deletemydiary.do", method=RequestMethod.POST)
+	public String deleteMyDiary(HttpServletRequest request, HttpServletResponse response, HttpSession session, @RequestParam(name="checkVal") List<Integer> diary_no) {
+		MemberVO member = (MemberVO) session.getAttribute("loginMember");
+		int result = -1;
+		DiaryVO vo = new DiaryVO();
+		/*
+		 * PrintWriter out = null; if(member.getUserId() == null) { try { out =
+		 * response.getWriter(); out.print("<script>location.href='login';</script>"); }
+		 * catch (IOException e) { e.printStackTrace(); } finally { out.flush();
+		 * out.close(); }
+		 * 
+		 * } else { int checkVal = Integer.parseInt(request.getParameter("checkVal"));
+		 * System.out.println(checkVal); }
+		 */
+		
+		for(int i=0; i<diary_no.size(); i++) {
+			System.out.println(diary_no.get(i));
+			vo.setDiary_no(diary_no.get(i));
+			result = dService.deleteDiary(vo);
+			System.out.println(i+"번째 result는 " + result);
+		}
+	
+
+		return "redirect:mydiary";
+	
+	}
+	
+	// 관리자 페이지 게시글 삭제
+	@RequestMapping(value="/deleteadmindiary.do", method=RequestMethod.POST)
+	public String deleteAdminDiary(HttpServletRequest request, HttpServletResponse response, HttpSession session, @RequestParam(name="checkVal") List<Integer> diary_no) {
+		MemberVO member = (MemberVO) session.getAttribute("loginMember");
+		int result = -1;
+		DiaryVO vo = new DiaryVO();
+		/*
+		 * PrintWriter out = null; if(member.getUserId() == null) { try { out =
+		 * response.getWriter(); out.print("<script>location.href='login';</script>"); }
+		 * catch (IOException e) { e.printStackTrace(); } finally { out.flush();
+		 * out.close(); }
+		 * 
+		 * } else { int checkVal = Integer.parseInt(request.getParameter("checkVal"));
+		 * System.out.println(checkVal); }
+		 */
+		
+		for(int i=0; i<diary_no.size(); i++) {
+			System.out.println(diary_no.get(i));
+			vo.setDiary_no(diary_no.get(i));
+			result = dService.deleteDiary(vo);
+			System.out.println(i+"번째 result는 " + result);
+		}
+		
+		return "redirect:admindiary";
+		
+	}
 }

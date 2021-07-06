@@ -74,9 +74,14 @@
 	]]>
  	</select>
  	
- 	<!-- 게시글 갯수 구하기 -->
+ 	<!-- 마이 페이지 게시글 갯수 구하기 -->
  	<select id="getlistCount" resultType="int">
  		select count(*) as diary_cnt from diary_tb where diary_write = #{diary_write}
+ 	</select>
+ 	
+ 	<!-- 관리자 페이지 게시글 갯수 구하기 -->
+ 	<select id="getListCountAll" resultType="int">
+ 		select count(*) as diary_cnt from diary_tb 
  	</select>
  	
 	
@@ -166,5 +171,17 @@
  	<select id="mydiary" parameterType="int" resultType="DiaryVO">
 	select * from diary_tb dt left outer join (select diary_no, count(*) as like_cnt from like_tb group by diary_no) liketb on dt.diary_no = liketb.diary_no where diary_write = #{diary_write} order by diary_date desc
  	</select>
+ 	
+ 	<!-- 마이페이지 내용 조회 -->
+ 	<select id="myContent" parameterType="DiaryVO" resultType="DiaryVO">
+ 		select * from diary_tb dt left outer join (select diary_no, count(*) as like_cnt from like_tb group by diary_no) liketb on dt.diary_no = liketb.diary_no where diary_write = #{diary_write} and diary_content LIKE '%'||#{keyword}||'%' order by diary_date desc
+ 	</select>
+ 	
+ 	<!-- 관리자 페이지 게시글 조회 -->
+ 	<select id="admlistDiary" resultType="DiaryVO">
+	select * from diary_tb dt left outer join user_tb ut on dt.diary_write = ut.user_no
+ 	</select>
+ 	
+ 	
 
 </mapper>

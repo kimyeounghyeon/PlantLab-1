@@ -44,9 +44,14 @@ public class DiaryDao {
 		return sqlSession.selectList("Diary.searchContent",keyword);
 	}
 	
-	// 게시글 수 구하기
+	// 마이 페이지 게시글 수 구하기
 	public int getlistCount(int diary_write) {
 		return sqlSession.selectOne("Diary.getlistCount", diary_write);
+	}
+	
+	// 관리자 페이지 게시글 수 구하기
+	public int getListCountAll() {
+		return sqlSession.selectOne("Diary.getListCountAll");
 	}
 	
 	// 좋아요 리스트 조회
@@ -136,4 +141,19 @@ public class DiaryDao {
 	      RowBounds row = new RowBounds(offset, limit);
 	      return sqlSession.selectList("Diary.mydiary", diary_write, row);
 	   }
+	
+	public List<DiaryVO> myContent(int startPage, int limit, DiaryVO vo){
+		int offset = (startPage - 1) * limit;
+		RowBounds row = new RowBounds(offset, limit);
+		return sqlSession.selectList("Diary.mydiary", vo, row);
+	}
+	
+
+	
+	// 관리자 일기 관리
+	public List<DiaryVO> admlistDiary(int startPage, int limit) {
+		int offset = (startPage - 1) * limit;
+		RowBounds row = new RowBounds(offset, limit);
+		return sqlSession.selectList("Diary.admlistDiary", row);
+	}
 }

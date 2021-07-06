@@ -71,6 +71,7 @@ public class DiaryServiceImpl implements DiaryService {
 	}
 	
 	
+	// 게시글 수 구하기
 	@Override
 	public int getlistCount(int diary_write) {
 		int cnt = -1;
@@ -80,6 +81,17 @@ public class DiaryServiceImpl implements DiaryService {
 			e.printStackTrace();
 		}
 		 return cnt;
+	}
+	
+	@Override
+	public int getListCountAll() {
+		int cnt = -1;
+		try {
+			cnt = dDao.getListCountAll();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return cnt;
 	}
 	
 	
@@ -266,5 +278,15 @@ public class DiaryServiceImpl implements DiaryService {
 	   public List<DiaryVO> myDiary(int startPage, int limit, int diary_write) {
 	      return dDao.myDiary(startPage, limit, diary_write);
 	   }
+	
+	@Override
+	public List<DiaryVO> myContent(int startPage, int limit, DiaryVO vo) {
+		return dDao.myContent(startPage, limit, vo);
+	}
+	
+	@Override
+	public List<DiaryVO> admlistDiary(int startPage, int limit) {
+		return dDao.admlistDiary(startPage, limit);
+	}
 	
 }

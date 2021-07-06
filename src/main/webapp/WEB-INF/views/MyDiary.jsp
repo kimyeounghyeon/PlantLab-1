@@ -18,11 +18,15 @@
 	<jsp:include page="mypagemenu.jsp"></jsp:include>
 	<c:if test="${not empty mydiary }">
 	<form id="myDiaryFrm">
+	<div class="frmDiv">
 	<button type="button" class="deleteMyDiary">삭제하기</button>
+	</div>
 	</form>
 	</c:if>
 	<br>
-	<input type="text" class="myKeyword" placeholder="검색어를 입력해주세요.">&nbsp;<button type="button" class="mySearchBtn"><img src="${path }/resources/img/search.png" class="mySearchicon"></button>
+	<form id="searchMyDiary">
+	<input type="text" name="myKeyword" class="myKeyword" placeholder="검색어를 입력해주세요.">&nbsp;<button type="button" class="mySearchBtn"><img src="${path }/resources/img/search.png" class="mySearchicon"></button>
+	</form>
 	<table class="mydTable">
 			<tr class="mdtr">
  				<th class="mdth selectAlltd"><input type="checkbox" name="selectAll" class="selectAll">
@@ -35,7 +39,7 @@
 		<c:forEach var="d" items="${mydiary}">
 			<c:set var="i" value="${i+1 }" />
 			<tr class="mdtr">
- 				<td class="mdtd mydSelect"><input type="checkbox" name="selectChk[]" value="${d.diary_no }"></td>
+ 				<td class="mdtd mydSelect"><input type="checkbox" name="selectChk" value="${d.diary_no }"></td>
  				<td class="mdtd mydNum">${i}</td>
 				<td class="mdtd myContent"><div class="contentmove"><a href='detaildiary?diary_no=${d.diary_no}' class="aContentLink">${d.diary_content}</a></div></td>
 				<td class="mdtd myDate">${d.diary_date}</td>
@@ -50,6 +54,18 @@
 		<tr class="mdtr">
 			<td class="mdtd moveDiary" colspan="5"><a href="<%=request.getContextPath() %>/diary" class="aMoveDiary">일기 쓰러 가기</a> 
 		</tr>
+		</c:if>
+		<c:if test="${not empty SearchMylistDiary }">
+		<c:forEach var="smld" items="${SearchMylistDiary}">
+			<c:set var="i" value="${i+1 }" />
+			<tr class="mdtr">
+ 				<td class="mdtd mydSelect"><input type="checkbox" name="selectChk" value="${smld.diary_no }"></td>
+ 				<td class="mdtd mydNum">${i}</td>
+				<td class="mdtd myContent"><div class="contentmove"><a href='detaildiary?diary_no=${smld.diary_no}' class="aContentLink">${smld.diary_content}</a></div></td>
+				<td class="mdtd myDate">${smld.diary_date}</td>
+				<td class="mdtd myLike">${smld.like_cnt}</td>
+			</tr>
+		</c:forEach>
 		</c:if>
 	</table>
 	<br><br>
@@ -76,25 +92,43 @@
 
 <script>
 	$(function(){
-		$(".selectAll").click(function(){
-			if($(".selectAll").prop("checked")){
+			var frm = document.getElementById("myDiaryFrm");
+			var mySearchfrm = document.getElementById("searchMyDiary");
+
+ 		$(".selectAll").click(function(){
+			if($(this).prop('checked')){
 				$("input[name='selectChk']").prop("checked", true);
 			} else {
 				$("input[name='selectChk']").prop("checked", false);
 			}
-		});
+		});	
+
 		
-		$(".deleteMyDiary").click(function(){
-			$("input[name=selectChk]:checked").each(function(){
-				var checkVal = $(this).val();
-			console.log("값" + checkVal);
-			var frm = document.getElementById("myDiaryFrm");
+	 	$(".deleteMyDiary").click(function(){
+			var checkVal = "";
+
+ 			$("input[name=selectChk]:checked").each(function(){
+			 checkVal = $(this).val(); 
+			 console.log("값" + checkVal);
+
+        		var checkValinput = "<input type='hidden' name='checkVal' value='"+checkVal+"'>";
+        		$(".frmDiv").prepend(checkValinput);
+        	
+ 			});
+      	
  			frm.action = "deletemydiary.do";
 			frm.method = "post";
-			frm.submit(); 
-			});
-		});
-		});
+			frm.submit();   
+ 		}); 
+	 	
+	 	$(".mySearchBtn").click(function(){
+	 		searchMyDiary.action = "mydiary";
+	 		searchMyDiary.method = "post";
+	 		searchMyDiary.submit();
+	 	});
+	});
+
+		
 </script>
 	
 </body>

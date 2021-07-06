@@ -1,0 +1,118 @@
+@charset "UTF-8";
+
+.admSearchicon {
+	width : 20px;
+	height : 20px;
+	bottom : 5px;
+	padding : 0px;
+}
+.admSearchBtn {
+	border : none;
+	background-color : white;
+	padding : 0px;
+}
+
+.admSearchBtn {
+	cursor:pointer;
+}
+
+.admKeyword {
+	border-left : none;
+	border-right : none;
+	border-top : none;
+	border-bottom : 1px solid #6a6560;
+	width : 300px;
+	text-align : center;
+	margin-left: 140px;
+    font-size: 12pt;
+}
+
+.admdTable {
+	clear : both;
+	border : 1px solid #b2b2b2;
+	margin: 50px auto;
+}
+
+.admdtr {
+	border : 1px solid gray;
+}
+.admdSelect {
+	width : 40px;
+}
+.admdNum {
+	width : 70px;
+}
+
+.admdContent {
+	width : 720px;
+	height : 60px;
+	white-space: nowrap;
+	overflow : hidden;
+	text-overflow: ellipsis;
+}
+
+
+.admdcontentmove {
+	width : 820x;
+	height : 60px;
+	white-space: nowrap;
+	overflow : hidden;
+	text-overflow: ellipsis;
+	line-height : 60px;
+	margin-right: 5px;
+}
+
+.admdId {
+	width : 200px;
+}
+
+.admdDate {
+	width : 150px;
+}
+
+.admdtd {
+	text-align : center;
+}
+
+.aContentLink {
+	text-decoration : none;
+	color : black;
+}
+
+.aContentLink:visit {
+	text-decoration : none;
+	color : gray;
+}
+
+.regis_page {
+	text-align : center;
+}
+
+.admdNum {
+    font-style: italic;
+    font-weight: bold;
+    color: #625b54;
+    }
+    
+
+.emptyadmDiary {
+	 font-size: 14pt;
+	 padding: 80px;
+}
+
+.moveadmDiary {
+	text-align: center;
+    padding: 40px;
+    font-size: 14pt;
+    font-weight: bold;
+}
+
+.aMoveDiary:visit {
+	text-decoration : none;
+	color : #625b54;
+}
+
+.deleteAdminDiary {
+	float : right;
+	margin-right : 140px;
+}
