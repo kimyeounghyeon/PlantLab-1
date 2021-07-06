@@ -10,8 +10,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
     <link href="${path}/resources/css/header.css" rel="stylesheet"/>
     <link href="${path}/resources/css/footer.css" rel="stylesheet"/>
-     <link rel="stylesheet" href="${path}/resources/css/ReviewWriteStyle.css"/>
-
+    <link rel="stylesheet" href="${path}/resources/css/ReviewWriteStyle.css"/>
+    
+	<script src = "${path }/resources/ckeditor/ckeditor.js"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
@@ -25,7 +27,7 @@
             </div>
 
             <article class="main_article">
-                <form>
+                <form enctype="multipart/form-data">
                     <h3>상품 내역</h3>
                     <table class="proGuide">
                         <tr>
@@ -62,11 +64,18 @@
 
                     <h3>리뷰 작성</h3>
                     <div>
-                        <input type="text" name="rv_title" placeholder="리뷰 제목">
+                        <input type="text" name="rv_title" id="rv_title" placeholder="리뷰 제목">
                     </div>
-
-                    <div>
-                        <textarea style="resize: none;" name="rv_content"></textarea>
+                    
+                    <div class="file">
+                    	<button type="button" id="fileAdd">이미지 추가</button>
+                    	<div class="fileList">
+                    	</div>
+                    </div>
+                    
+					<br><br>
+                    <div class="content">
+                        <textarea style="resize: none;" name="rv_content" id="rv_content"></textarea>
                     </div>
                     
                     <div>
@@ -78,8 +87,29 @@
     </div>
     <jsp:include page="../footer.jsp"></jsp:include>
 </body>
-
 <script>
+	var ckeditor_config = {
+	     resize_enaleb : false,
+	     height : 300,
+	     width : 800,
+	     enterMode : CKEDITOR.ENTER_BR,
+     };	
+
+	CKEDITOR.replace("rv_content", ckeditor_config);
+</script>
+<script>
+	
+	//이미지 업로드
+	var fileAdd = $('#fileAdd');
+	
+	fileAdd.click(function(){
+		//cnt += 1;
+		//var html = "<br><label class=\"labels\" for=\"file"+cnt+"\">파일 추가</label>";
+		var html = "<input multiple=\"multiple\" type=\"file\" name=\"rv_img_srcs\" /><br>";
+		//html += "<input class=\"upload-name\" id=\""+cnt+"\" value=\"파일선택\">";
+		$(".fileList").append(html);
+	});
+	
 	//이미지	
 	var buy_no = $('input[name=buy_no]').val();
 	var proName = $('.proName p');
@@ -107,11 +137,13 @@
                 if(details.length > 1){
                 	$.each(details, function(i, item){
                 		proName.append(item.pro_name+"<br>");
+                		$('.proGuide').append("<input type=\"hidden\" name=\"pro_no\" value=\""+item.pro_no + "\">");
 	                 });
             	   
                 }else{
             	    $.each(details, function(i, item){
             	 	   proName.append(item.pro_name);
+            	 	  $('.proGuide').append("<input type=\"hidden\" name=\"pro_no\" value=\""+item.pro_no + "\">");
                     });
                 }
                
@@ -127,7 +159,7 @@
 	
 	//별점계산
     var star = $("input[type=checkbox]");
-    var rv_star =$("");
+    var rv_star =$("input[name=rv_star]");
     var i = 0;
 
     star.click(function(){
@@ -150,7 +182,31 @@
         }
 
         starH.append("별점 "+(i+1)+"/5");
+        rv_star.val(i+1);
     });
+    
+    
+	//글 등록하기
+	var reBtn = $('#reBtn');
+	
+	reBtn.click(function(){
+		var starV = rv_star.val();
+		var rv_title = $('#rv_title').val();
+		
+		if(starV == "" || starV == null){
+			swal("별점을 입력해주세요", "", "info");
+		}
+		
+		if(rv_title == ""|| rv_title == null){
+			swal("제목을 입력해주세요", "", "info");
+		}else{
+			var form = $('form');
+			form.attr("method","post");
+	    	form.attr("action","reviewInsert");
+	    	form.submit();			
+		}
+	});
+
 </script>
 <script>
 	var slideIndex = 1;

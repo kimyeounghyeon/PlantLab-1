@@ -12,32 +12,33 @@
 <link href="${path}/resources/css/footer.css" rel="stylesheet" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style>
-#plantimg{
-width : 500px;
-height : 650px;
-margin-left: auto;
-margin-right: auto;
-}
-#plantname{
-width : 500px;
-margin-left: auto;
-margin-right: auto;
-text-aglin : center;
-}
-.mmain{
-clear : both;
-}
-	.plantimg{
+	#plantimg{
 	width : 500px;
 	height : 650px;
-	margin-top : 40px;
 	margin-left: auto;
 	margin-right: auto;
 	}
 	#plantname{
 	width : 500px;
 	margin-left: auto;
-	margin-top : 30px;
+	margin-right: auto;
+	text-aglin : center;
+	}
+	.mmain{
+	clear : both;
+	}
+	.plantimg{
+	width : 500px;
+	height : 650px;
+	margin-top : 5px;
+	margin-left: auto;
+	margin-right: auto;
+	}
+	#plantname{
+	width : 500px;
+	font-size:22px;
+	margin-left: auto;
+	margin-top : 10px;
 	margin-right: auto;
 	text-aglin : center;
 	}
@@ -46,10 +47,11 @@ clear : both;
 <body>
 	<jsp:include page="../header.jsp"></jsp:include>
 <div class="mmain">
-<div class="plantimg"><img class="plantimg" src="<%=request.getContextPath() %>/resources/img/${monthly.monthly_img}"></div>
+<h2 align="center">이달의 식물</h2>
+<div class="plantimg">
+<img class="plantimg" src="<%=request.getContextPath() %>/resources/img/${monthly.monthly_img}"></div>
 <br>
-
-<div id= "plantname" align="center">${monthly.monthly_name}</div>
+<div id= "plantname" align="center">'${monthly.monthly_name}'</div>
 </div>
 <jsp:include page="../footer.jsp"></jsp:include>
 </body>

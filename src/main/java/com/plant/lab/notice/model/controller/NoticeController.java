@@ -1,25 +1,15 @@
 package com.plant.lab.notice.model.controller;
 
 
-import java.text.DateFormat;
-
 import java.util.List;
-import java.util.Locale;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import org.springframework.web.servlet.ModelAndView;
-
-import com.plant.lab.member.model.vo.MemberVO;
 
 import com.plant.lab.notice.model.service.NoticeService;
 import com.plant.lab.notice.model.vo.NoticeVo;
@@ -109,7 +99,10 @@ nService.NoticeDel(notice_no);
 return "redirect:nlist.do";
 }
 
-
+@RequestMapping(value = "inquery", method = RequestMethod.GET)
+public String showInquery(ModelAndView mv) {
+	return "Notice/inquery";
+}
 
 	
 }

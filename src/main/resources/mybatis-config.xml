@@ -16,15 +16,16 @@
 		<typeAlias alias="Product"    type="com.plant.lab.product.model.vo.Product" />
 		<typeAlias alias="ProductCon" type="com.plant.lab.product.model.vo.ProductContnet" />
 		<typeAlias alias="Review" 	  type="com.plant.lab.review.model.vo.Review" />
+		<typeAlias alias="Report"	  type="com.plant.lab.report.model.vo.Report" />
 		<typeAlias alias="Cart"  	  type="com.plant.lab.cart.model.vo.Cart" />
 		<typeAlias alias="Order"	  type="com.plant.lab.order.model.vo.Order" />
 		<typeAlias alias="OrderDetail" type="com.plant.lab.order.model.vo.OrderDetail"/>
 		<typeAlias alias="DiaryVO"	  type="com.plant.lab.diary.model.vo.DiaryVO" />
-		<typeAlias alias="Report"	  type="com.plant.lab.report.model.vo.Report" />
 		<typeAlias alias="LikeVO"     type="com.plant.lab.diary.model.vo.LikeVO" />
 		<typeAlias alias="NoticeVo"	  type="com.plant.lab.notice.model.vo.NoticeVo" />
 		<typeAlias alias="OnedayVo"   type="com.plant.lab.oneday.model.vo.OnedayVo" />
 		<typeAlias alias="Att_tb" type="com.plant.lab.att.model.vo.Att_tb" />
+		<typeAlias alias="FnaVo" type="com.plant.lab.notice.model.vo.FnaVo" />
 	</typeAliases>
 
 	<mappers> <!-- 사용하고자 하는 쿼리를 정의한 mapper.xml을 등록 -->
@@ -43,6 +44,8 @@
 		<mapper resource="mapper/notice-mapper.xml" />
 		<mapper resource="mapper/oneday-mapper.xml" />
 		<mapper resource="mapper/att-mapper.xml" />
+		<mapper resource="mapper/fna-mapper.xml"/>
+	
 	</mappers>
 
 

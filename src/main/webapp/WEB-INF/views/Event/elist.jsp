@@ -27,8 +27,8 @@ border-radius : 30px;
 
 #eventsub{
 width : 470px;
-	font-size : 20px;
-	font-weight : bold;
+font-size : 20px;
+font-weight : bold;
 	
 }
 #period{
@@ -53,10 +53,12 @@ clear: both;
 border : none;
 color : white;
 background: #625b54;
+height : 30px;
 }
 #etd{
 text-align : right;
 width : 750px;
+
 }
 </style>
 </head>

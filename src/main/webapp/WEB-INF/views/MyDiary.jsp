@@ -16,25 +16,86 @@
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
 	<jsp:include page="mypagemenu.jsp"></jsp:include>
-	
+	<c:if test="${not empty mydiary }">
+	<form id="myDiaryFrm">
+	<button type="button" class="deleteMyDiary">삭제하기</button>
+	</form>
+	</c:if>
+	<br>
+	<input type="text" class="myKeyword" placeholder="검색어를 입력해주세요.">&nbsp;<button type="button" class="mySearchBtn"><img src="${path }/resources/img/search.png" class="mySearchicon"></button>
 	<table class="mydTable">
 			<tr class="mdtr">
-				<th class="mdth mydNum"> NO </th>
-				<th class="myContent"> 내용 </th>
-				<th class="myDate"> 날짜 </th>
-				<th class="myLike"> 좋아요 </th>
+ 				<th class="mdth selectAlltd"><input type="checkbox" name="selectAll" class="selectAll">
+ 				<th class="mdth mydNum"> NO </th>
+				<th class="mdth myContent"> 내용 </th>
+				<th class="mdth myDate"> 날짜 </th>
+				<th class="mdth myLike"> <img class="likeimg" src="${path }/resources/img/색변경좋아요.png"> </th>
 			</tr>
+	<c:if test="${not empty mydiary }">
 		<c:forEach var="d" items="${mydiary}">
 			<c:set var="i" value="${i+1 }" />
 			<tr class="mdtr">
-				<td class="mydNum">${i}</td>
-				<td class="myContent"><div class="contentmove"><a href='detaildiary?diary_no=${d.diary_no}'>${d.diary_content}</a></div></td>
-				<td class="myDate">${d.diary_date}</td>
-				<td class="myLike">${d.like_cnt}</td>
+ 				<td class="mdtd mydSelect"><input type="checkbox" name="selectChk[]" value="${d.diary_no }"></td>
+ 				<td class="mdtd mydNum">${i}</td>
+				<td class="mdtd myContent"><div class="contentmove"><a href='detaildiary?diary_no=${d.diary_no}' class="aContentLink">${d.diary_content}</a></div></td>
+				<td class="mdtd myDate">${d.diary_date}</td>
+				<td class="mdtd myLike">${d.like_cnt}</td>
 			</tr>
 		</c:forEach>
+		</c:if>
+		<c:if test="${empty mydiary }">
+		<tr class="mdtr">
+			<td class="mdtd emptyDiary" colspan="5"> 등록 된 게시물이 없습니다. 반려식물과의 일상을 기록해보세요!</td>
+		</tr>
+		<tr class="mdtr">
+			<td class="mdtd moveDiary" colspan="5"><a href="<%=request.getContextPath() %>/diary" class="aMoveDiary">일기 쓰러 가기</a> 
+		</tr>
+		</c:if>
 	</table>
-	
+	<br><br>
+	            <div class="regis_page">
+            <c:if test="${startPage != 1 }">
+                  <a href="<%=request.getContextPath() %>/mydiary?page=${startPage-1}">이전</a>
+            </c:if>
+            <c:forEach var="p" begin="${startPage}" end="${endPage}" step="1">
+                <c:if test="${p eq currentPage}">
+                   <font color="#6A60A9" size="4"><b>[${p}]</b></font>
+                </c:if>
+                <c:if test="${p ne currentPage}">
+                <c:url var="diaryChk" value="mydiary">
+                	<c:param name="page" value="${p}" />
+						</c:url>
+							<a href="${diaryChk}" class="aLink"><b>[${p}]</b></a>
+<%--                    <a href="<%=request.getContextPath() %>/mydiary?page=${endPage+1}"></a><font color="gray" size="4"><b>[${p}]</b></font></a>
+ --%>                </c:if>
+             </c:forEach>
+            <c:if test="${endPage < pageCnt }">
+                  <a href="<%=request.getContextPath() %>/mydiary?page=${endPage+1}">다음</a>
+            </c:if>
+            </div>
+
+<script>
+	$(function(){
+		$(".selectAll").click(function(){
+			if($(".selectAll").prop("checked")){
+				$("input[name='selectChk']").prop("checked", true);
+			} else {
+				$("input[name='selectChk']").prop("checked", false);
+			}
+		});
+		
+		$(".deleteMyDiary").click(function(){
+			$("input[name=selectChk]:checked").each(function(){
+				var checkVal = $(this).val();
+			console.log("값" + checkVal);
+			var frm = document.getElementById("myDiaryFrm");
+ 			frm.action = "deletemydiary.do";
+			frm.method = "post";
+			frm.submit(); 
+			});
+		});
+		});
+</script>
 	
 </body>
 </html>

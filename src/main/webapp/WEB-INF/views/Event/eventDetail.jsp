@@ -82,6 +82,7 @@
 				</c:url> 
 				<c:url var="edelete" value="eDelete">
 					<c:param name="event_no" value="${event_tb.event_no}" />
+					
 				</c:url> 
 				<c:if test="${loginMember.grade==1}">
 					<a href="${eupview}"> 수정 </a> &nbsp;&nbsp; 

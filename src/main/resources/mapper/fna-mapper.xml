@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+
+<mapper namespace="Fna">
+
+
+<select id="FnaCount" resultType="int">
+	select count(*)from fna_tb
+	</select>
+
+
+	
+
+	<select id="FnaList" resultType="FnaVo" parameterType="FnaVo">
+	SELECT* FROM(SELECT ROWNUM RN,A.*
+				FROM (SELECT *FROM fna_tb ORDER BY fna_no DESC) A)
+	WHERE RN BETWEEN #{start} AND #{end}
+	</select>
+
+
+	<insert id="FnaInsert" parameterType="FnaVo" statementType="PREPARED" flushCache="true">
+		INSERT INTO Fna_Tb
+		(fna_no,fna_title,fna_content,fna_date,user_no)
+		values(Fna_SEQ.nextVal, #{fna_title}, #{fna_content},sysdate,#{user_no})
+	</insert>
+
+
+
+	<select id="FnaRead" resultType="FnaVo" parameterType="NoticeVo">
+		select * from Fna_TB
+		where fna_no= #{fna_no}
+	</select>
+
+
+	<update id="FnaUpdate" parameterType="FnaVo" flushCache="true" statementType="PREPARED">
+		update Fna_Tb
+		set Fna_title =#{fna_title},fna_content =#{fna_content}
+		where fna_no =#{fna_no}
+	</update>
+
+
+
+	<delete id="FnaDel" parameterType="int" flushCache="true" statementType="PREPARED">
+		delete from Fna_TB
+		WHERE fna_no = #{fna_no}
+	</delete>
+
+
+</mapper>
+
+

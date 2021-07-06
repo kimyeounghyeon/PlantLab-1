@@ -33,13 +33,13 @@
 				<td><hr></td>
 			</tr>
 			<tr class="cateList">
-				<td><a href="${path}/#">1:1 문의하기</a></td>
+				<td><a href="${path}/inquery">1:1 문의하기</a></td>
 			</tr>
 			<tr class="cateList">
 				<td><a href="${path}/nlist.do">공지사항</a></td>
 			</tr>
 			<tr class="cateList">
-				<td><a href="${path}/">자주 묻는 질문</a></td>
+				<td><a href="${path}/flist">자주 묻는 질문</a></td>
 			</tr>
 		</table></nav>
 

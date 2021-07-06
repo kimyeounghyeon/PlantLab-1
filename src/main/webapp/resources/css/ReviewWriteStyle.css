@@ -1,140 +1,202 @@
 @charset "UTF-8";
 /* 초기화 */
-*{
-    font-family: 'Jeju Myeongjo';
+* {
+	font-family: 'Jeju Myeongjo';
 }
 
-#content{
-     width: 1250px;
-     margin: auto;
-     clear: both;
- }
+#content {
+	width: 1250px;
+	margin: auto;
+	clear: both;
+}
 
- /* 헤더 */
- .main_header{
-    text-align: center;
-    height: 130px;
-    line-height: 100px;
-    padding-top: 20px;
+/* 헤더 */
+.main_header {
+	text-align: center;
+	height: 130px;
+	line-height: 100px;
+	padding-top: 20px;
 }
 
 /* 메인 */
-
-.main_article>form>h3{
-    width: 80%;
-    margin: 20px auto;
-    text-align: left;
-    
-}
-.main_article>form{
-    width: 80%;
-    margin: auto;
-    text-align: center;
-    border: solid 1px #ccc;
-    border-radius: 10px;
-    padding: 20px;
+.main_article>form>h3 {
+	width: 80%;
+	margin: 20px auto;
+	text-align: left;
 }
 
-.proGuide{
-    width: 80%;
-    margin: auto;
-    border-radius: 10px;
-    box-shadow: 3px 3px 5px #ccc;
+.main_article>form {
+	width: 80%;
+	margin: auto;
+	text-align: center;
+	border: solid 1px #ccc;
+	border-radius: 10px;
+	padding: 20px;
 }
 
-.proImg{
-    width: 30%;
-    height: 210px;
-    text-align: center;
+.proGuide {
+	width: 80%;
+	margin: auto;
+	border-radius: 10px;
+	box-shadow: 3px 3px 5px #ccc;
 }
 
-.proImg img{
-	margin-left:18px;
+.proImg {
+	width: 30%;
+	height: 210px;
+	text-align: center;
+}
+
+.proImg img {
+	margin-left: 18px;
 	width: 200px;
-    text-align:center;
-    border-radius: 10px;
+	text-align: center;
+	border-radius: 10px;
 }
 
-.proName p{
-    font-size: 24px;
-    text-align: center;
+.proName p {
+	font-size: 24px;
+	text-align: center;
 }
 
 /*별점*/
 .star {
-    width: 80%;
-    margin: auto;
-    margin-top: 10px;
-    text-align: center;
+	width: 80%;
+	margin: auto;
+	margin-top: 10px;
+	text-align: center;
 }
 
-.starH{
-    margin-bottom: 25px;
+.starH {
+	margin-bottom: 25px;
 }
 
 .star .star_radio {
-    display:none; 
+	display: none;
 }
 
 .star .star_radio+label {
-    position:relative;
-    display: inline-block;
-    cursor: pointer;
-    color:#ccc;
-    font-size: 50px;
-    
+	position: relative;
+	display: inline-block;
+	cursor: pointer;
+	color: #ccc;
+	font-size: 50px;
 }
 
-
 .star_radio:checked+label {
-    color:#ADBA85;
-    font-size: 50px;
+	color: #ADBA85;
+	font-size: 50px;
 }
 
 /*입력창*/
-input[name='rv_title'],textarea{
-    font-size: 25px;
-    margin: auto;
-    width: 80%;
-    
-    border-radius: 10px;
-    border: solid 1px #ccc;
-    margin-top: 10px;
+input[name='rv_title'], textarea{
+	font-size: 25px;
+	margin: auto;
+	width: 80%;
+	border-radius: 10px;
+	border: solid 1px #ccc;
+	margin-top: 10px;
 }
 
-input[name='rv_title']{
-    height: 50px;
+input[name='rv_title'] {
+	height: 50px;
 }
 
-textarea{
-    height: 300px;
+textarea {
+	height: 300px;
 }
 
-input[name='rv_title']:focus,textarea:focus{
-    outline:none;
-    border: solid 1px #ccc;
+input[name='rv_title']:focus, textarea:focus {
+	outline: none;
+	border: solid 1px #ccc;
+}
+
+#fileAdd{
+	display:block;
+	float:left;
+	background-color: #F7F5F3;
+	border:none;
+	margin-left:95px;
+	margin-top : 20px;
+	border-radius:10px;
+	cursor:pointer;
+	height: 50px;
+}
+
+.fileList{
+	float:left;
+	margin-top : 25px;
+	margin-left: 10px;
+}
+
+.fileList input{
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.file{
+	margin-bottom: 50px;
+}
+
+
+/* .fileList input[type="file"] {
+  position: absolute;
+  width: 0;
+  height: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+} */
+
+/* .fileList label {
+  display: inline-block;
+  padding: 10px 20px;
+  color: #999;
+  vertical-align: middle;
+  background-color: #fdfdfd;
+  cursor: pointer;
+  border: 1px solid #ebebeb;
+  border-radius: 5px;
+} */
+
+/* .fileList .upload-name {
+  display: inline-block;
+  height: 35px;
+  font-size:18px; 
+  padding: 0 10px;
+  vertical-align: middle;
+  background-color: #f5f5f5;
+  border: 1px solid #ebebeb;
+  border-radius: 5px;
+
+} */
+
+.content {
+	clear:both;
+	width: 80%;
+	text-align: center;
+	margin: auto;
 }
 
 /*버튼*/
-#reBtn{
-    margin-top: 50px;
-    width: 300px;
-    height: 80px;
-    background-color: white;
-    border: solid 1px #ccc;
-    border-radius: 10px;
-    box-shadow: 3px 3px 5px #ccc;
-    font-size: 20px;
-    font-weight: bold;
+#reBtn {
+	margin-top: 50px;
+	width: 300px;
+	height: 80px;
+	background-color: white;
+	border: solid 1px #ccc;
+	border-radius: 10px;
+	box-shadow: 3px 3px 5px #ccc;
+	font-size: 20px;
+	font-weight: bold;
 }
 
-#reBtn:hover{
-    background-color: #ADBA85;
-    color: white;
-    font-weight: bold;
+#reBtn:hover {
+	background-color: #ADBA85;
+	color: white;
+	font-weight: bold;
 }
 
-
-.w3-btn-floating{
+.w3-btn-floating {
 	cursor: pointer;
 }

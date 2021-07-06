@@ -31,7 +31,7 @@
                 <hr>
                 <ul class="cateList">
                     <li><a href="${path}/product?cate=p">식물</a></li>
-                    <li><a href="${path}/product?cate=m">관리제품</a></li>
+                    <li><a href="${path}/product?cate=c">관리제품</a></li>
                     <li><a href="${path}/product?cate=g">원예용품</a></li>
                 </ul>
             </article>

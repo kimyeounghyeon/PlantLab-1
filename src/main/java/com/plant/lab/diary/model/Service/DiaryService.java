@@ -14,6 +14,7 @@ public interface DiaryService {
 	public List<DiaryVO> detailDiary(int diary_no);
 	public List<DiaryVO> searchId(String keyword);
 	public List<DiaryVO> searchContent(String keyword);
+	public int getlistCount(int diary_write);
 	
 	// 좋아요
 	public List<Integer> likeList(LikeVO lvo);
@@ -42,6 +43,6 @@ public interface DiaryService {
 	public int detailWrite(int diary_no);
 
 	// 내가 쓴 글
-	public List<DiaryVO> mydiary(int diary_write);
-
-}
+	public List<DiaryVO> myDiary(int startPage, int limit, int diary_write);
+	
+	}
