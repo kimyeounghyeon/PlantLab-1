@@ -127,18 +127,21 @@ public class OrderController {
 		
 		if(result == 0) {
 			logger.info("구매실패");
+			mv.setViewName("redirect:");
 		}else{
 			logger.info("구매성공");
+			mv.setViewName("redirect:/orderList");
 		}
 			
-		mv.setViewName("Main");
+		
 		return mv;
 	}
 	
 //마이페이지 주문내역 보기
 	@RequestMapping(value="/orderList", method=RequestMethod.GET)
 	public ModelAndView orderList(ModelAndView mv,HttpSession session,
-			@RequestParam(name = "page", defaultValue = "1") int page) {
+			@RequestParam(name = "page", defaultValue = "1") int page,
+			@RequestParam(name="rvMsg", required = false) String rvMsg) {
 		
 		logger.info("===============마이페이지 구매리스트 페이지===============");
 		MemberVO member = (MemberVO) session.getAttribute("loginMember");
@@ -148,6 +151,13 @@ public class OrderController {
 			return mv;
 		}else {
 			mv.setViewName("MypageOrder/OrderList");			
+		}
+		
+		logger.info("rvMsg확인:::"+rvMsg);
+		if(rvMsg != null) {
+			mv.addObject("rvMsg", "ok");
+		}else{
+			mv.addObject("rvMsg","");
 		}
 		
 		//페이지처리

@@ -16,7 +16,7 @@
 	
 	<!-- 리뷰 작성여부 확인 -->
 	<select id="checkRv" resultType="int" parameterType="int">
-		SELECT rv_no FROM rv_tb
+		SELECT count(rv_no) FROM rv_tb
 		WHERE buy_no = #{buy_no}
 	</select>
 	
@@ -26,8 +26,6 @@
 		JOIN rv_img_tb i
 		ON r.rv_no = i.rv_no
 		WHERE r.rv_no = #{rv_no}
-        AND r.pro_no = 40
-		AND r.user_no = #{user_no}
 		ORDER BY i.rv_img_num
 	</select>
 	

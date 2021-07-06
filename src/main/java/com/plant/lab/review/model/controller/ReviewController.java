@@ -49,16 +49,17 @@ public class ReviewController {
 			@RequestParam(value="buy_no",required=true) int buy_no,
 			HttpServletRequest req) {
 		logger.info("===============리뷰작성 페이지===============");
-		
+		logger.info("buy_no체크::::"+buy_no);
 		
 		MemberVO member = (MemberVO) session.getAttribute("loginMember");
 		
-		int check = 0;
-		check = reviewService.checkRv(buy_no);
-		logger.info("check체크::::"+check);
-		if(check == 0) {
-			mv.setViewName("redirect:/orderList/");
-			mv.addObject("msg","이미 리뷰를 작성하셨습니다.");
+		
+		int check = reviewService.checkRv(buy_no);
+		
+		if(check != 0 || check > 0) {
+			logger.info("check체크::::"+check);
+			mv.setViewName("redirect:orderList");
+			mv.addObject("rvMsg","ok");
 			return mv;
 		}else {
 			mv.addObject("buy_no",buy_no);

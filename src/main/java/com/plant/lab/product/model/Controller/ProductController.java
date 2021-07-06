@@ -176,6 +176,7 @@ public class ProductController {
 			
 			//mv.addObject("viewPro",viewPro);
 
+			mv.addObject("count",count);
 			mv.addObject("percent",percent);
 			mv.addObject("productCon",proConService.searchList(pro_no));
 			mv.addObject("reviewList",reviewService.searchList(pro_no));
