@@ -30,6 +30,7 @@ border : none;
 background-color:#D5D9BA;
 width : 300px;
 padding : 5px;
+border-radius : 20px;
 }
 .img{
 text-align : center;
@@ -45,6 +46,17 @@ margin-right : auto;
 .btntd{
 text-align : center;
 }
+.mention{
+
+}
+#fir{
+text-align : center;
+font-size: 27px;
+}
+.sec{
+text-align : center;
+font-size: 20px;
+}
 </style>
 </head>
 <body>
@@ -56,12 +68,20 @@ text-align : center;
 </c:if>
  <c:if test="${!empty loginMember}">
 <div class="adiv">
+<h2 align="center">출석 이벤트</h2>
+<div class="mention">
+<!-- <div id="fir">꽃을 피우자!</div>
+<br>-->
+<div class="sec">꽃에 매일 물을 주세요~</div>
+<br>
+<div class="sec">30개의 물방울을 모으면 꽃이 완전히 활짝 피고, 선물을 받을 수 있어요.</div>
+</div>
 	<table class=etb>
 		<tr>
 			<td class="aimg"></td>
 		</tr>
 		<tr>
-			<td class="btntd"><button type="button" class="abtn">출석 완료</button></td>
+			<td class="btntd"><button type="button" class="abtn">물주기!</button></td>
 		</tr>
 	</table>
 </div>
@@ -69,10 +89,37 @@ text-align : center;
 <jsp:include page="./footer.jsp"></jsp:include>
 </body>
 <script type="text/javascript">
-
-		$(".abtn").click(function() {
+	$(".abtn").click(function() {
+		$.ajax({
+			url : "attendance.do",
+			type : "post",
+			data : { user_no :  '${user_no}' },
+			//dataType : "json",
+			success : function(data) {
+				var aa = data;
+				console.log( "aa는 : " + aa);
+				var attimg="";
+				$(".aimg").html("");
+				if( aa < 10) {
+					attimg = "<img class='img' src='${path}/resources/img/1.jpg'>";
+				}else if ( 10 <= aa <20 ){
+					attimg = "<img class='img' src='${path}/resources/img/2.jpg'>";						
+				}else if ( 20 <= aa <27){
+					attimg = "<img class='img' src='${path}/resources/img/3.jpg'>";
+				}else if ( aa=  28){
+					attimg = "<img class='img' src='${path}/resources/img/4.jpg'>";
+				}
+				$(".aimg").html(attimg);
+				},
+			error : function() {
+				alert("잘못 된 접근입니다.");
+			}
+		});
+	});
+		//사진 보여주는 
+		
 			$.ajax({
-				url : "attendance.do",
+				url : "attendance2",
 				type : "post",
 				data : { user_no :  '${user_no}' },
 				//dataType : "json",
@@ -83,9 +130,9 @@ text-align : center;
 					
 					if( aa < 10) {
 						attimg = "<img class='img' src='${path}/resources/img/1.jpg'>";
-					}else if ( 10 <= aa <20 ){
+					}else if ( 10 <= aa && aa <20 ){
 						attimg = "<img class='img' src='${path}/resources/img/2.jpg'>";						
-					}else if ( 20 <= aa <27){
+					}else if ( 20 <= aa && aa <27){
 						attimg = "<img class='img' src='${path}/resources/img/3.jpg'>";
 					}else if ( aa=  28){
 						attimg = "<img class='img' src='${path}/resources/img/4.jpg'>";
@@ -96,6 +143,6 @@ text-align : center;
 					alert("잘못 된 접근입니다.");
 				}
 			});
-			});
+			
 </script>
 </html>

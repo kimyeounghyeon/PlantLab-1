@@ -29,6 +29,8 @@ function showInsertForm() {
   color : white;
   border : none;
   margin-left : 1140px;
+    width :75px;
+  height : 25px;
 }
 .mlisttb{
  margin-left : auto;
@@ -58,7 +60,7 @@ width : 100px;
 <div class="mlistdiv">
 
 <h2 align="center" >이달의 식물</h2>
-<button id="subtn"type="button" onclick="window.location='mWrite'">등록하기</button>
+<button id="subtn" type="button" onclick="window.location='mWrite'">등록하기</button>
 	<table class="mlisttb">
 		<tr class="bottomline" >
 			<td>No</td>

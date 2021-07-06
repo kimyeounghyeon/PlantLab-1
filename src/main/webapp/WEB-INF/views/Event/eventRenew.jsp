@@ -73,17 +73,21 @@
 				</tr>
 			<tr>
 			<br>	
-			<td colspan = "2" align = "center"><input type="submit" id="erebtn" value="수정완료"></td>
+			<td colspan = "2" align = "center"><button type="submit" id="erebtn">수정완료</button></td>
 			</tr>	
 		</table>
 	</form>
 	</div>
 	<jsp:include page="../footer.jsp"></jsp:include>
 </body>
-<script>
+<script type="text/javascript">
+
 
 	$("#erebtn").click(function(){
-		swal("수정이 완료되었습니다.","", "info")
+		swal("수정이 완료되었습니다.","", "info");
 	}
+
+</script>
+
 </script>
 </html>

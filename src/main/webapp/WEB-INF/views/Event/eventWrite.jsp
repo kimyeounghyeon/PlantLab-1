@@ -20,6 +20,8 @@
   background: #625b54;
   color : white;
   border : none;
+  width :75px;
+  height : 25px;
 
   }
 .ewriteform{
@@ -30,6 +32,10 @@
 .mwn{
 width : 400px;
 border : 1px solid #625b54;
+height:26px;
+}
+.hei{
+height:26px; 
 }
 </style>
 </head>
@@ -39,7 +45,7 @@ border : 1px solid #625b54;
 		<div id="ediv">
 			<h3 align="center">이벤트 등록하기</h3>
 			<table class="ewriteform">
-				<tr>
+				<tr class="">
 					<td>이벤트 제목</td>
 				</tr>
 				<tr>
@@ -49,13 +55,13 @@ border : 1px solid #625b54;
 					<td>배너 이미지</td>
 				</tr>
 				<tr>
-					<td class="mwn"><input type="file"  name="upfile1"></td>
+					<td class="mwn"><input type="file" class="hei" name="upfile1"></td>
 				</tr>
 				<tr>
 					<td>이벤트 내용</td>
 				</tr>
 				<tr>
-					<td class="mwn"><input type="file"  name="upfile2"></td>
+					<td class="mwn"><input type="file"  class="hei" name="upfile2"></td>
 				</tr>
 				<tr>
 					<td>이벤트 시작일</td>
@@ -66,7 +72,7 @@ border : 1px solid #625b54;
 				<tr>
 					<td>이벤트 종료일</td>
 				</tr>
-				<tr>
+				<tr class="hei">
 					<td><input type="text"  class="mwn" name="end_date" placeholder="yyyy.mm.dd"></td>
 				</tr>
 			</table>
