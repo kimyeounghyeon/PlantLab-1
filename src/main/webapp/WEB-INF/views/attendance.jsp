@@ -49,6 +49,12 @@ text-align : center;
 </head>
 <body>
 <jsp:include page="./header.jsp"></jsp:include>
+<c:if test="${empty loginMember.userName}">
+<div class="adiv">
+<h2 align ="center">로그인 후 이용 바랍니다 .</h2>
+</div>
+</c:if>
+ <c:if test="${!empty loginMember}">
 <div class="adiv">
 	<table class=etb>
 		<tr>
@@ -59,6 +65,7 @@ text-align : center;
 		</tr>
 	</table>
 </div>
+</c:if>
 <jsp:include page="./footer.jsp"></jsp:include>
 </body>
 <script type="text/javascript">

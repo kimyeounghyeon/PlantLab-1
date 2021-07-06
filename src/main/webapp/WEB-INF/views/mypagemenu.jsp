@@ -87,7 +87,7 @@
     	<ul>
                         <li><a class="linkmenu" href="<%=request.getContextPath()%>/orderList">주문 내역</a></li>
                         <li><a class="linkmenu" href="<%=request.getContextPath()%>/mydiary">내가 쓴 일기</a></li>
-                        <li><a class="linkmenu" href="${path}/nlist.do">문의하기</a></li>
+                        <li><a class="linkmenu" href="${path}/inquery">문의하기</a></li>
                         <li><a class="linkmenu" href="#">구매후기</a></li>
                         <li><a class="linkmenu" href="<%=request.getContextPath()%>/update">개인 정보 수정</a></li>
                          <li><a class="linkmenu" href="<%=request.getContextPath()%>/delete">회원탈퇴</a></li>
@@ -100,7 +100,7 @@
 			<ul>
 	 			<li><a class="linkmenu" href="${path}/">상품 관리</a></li>
                 <li><a class="linkmenu" href="${path}/">주문 관리</a></li>
-                <li><a class="linkmenu" href="${path}/admindiary">일기 관리</a></li>
+                <li><a class="linkmenu" href="${path}/">일기 관리</a></li>
                	<li><a class="linkmenu" href="${path}/mlist">이달의 식물 관리</a></li>
              </ul>
              <ul>   
