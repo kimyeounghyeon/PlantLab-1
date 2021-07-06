@@ -34,6 +34,7 @@ function showInsertForm() {
  margin-left : auto;
  margin-right : auto;
  width : 800px;
+ border-collapse:collapse;
   
 }
 .mimg{
@@ -47,6 +48,8 @@ width : 200px;
 .mupde{
 width : 100px;
 }
+
+
 </style>
 </head>
 <body>
@@ -57,7 +60,7 @@ width : 100px;
 <h2 align="center" >이달의 식물</h2>
 <button id="subtn"type="button" onclick="window.location='mWrite'">등록하기</button>
 	<table class="mlisttb">
-		<tr>
+		<tr class="bottomline" >
 			<td>No</td>
 			<td>식물이름</td>
 			<td>식물사진</td>
@@ -69,13 +72,13 @@ width : 100px;
 		<c:if test="${listCount eq 0}">
 			<tr>
 				<td colspan="6" align="center"><br>
-				<br> 게시판에 저장된 글이 없습니다.<br>
+				<br> 저장된 글이 없습니다.<br>
 				<br></td>
 			</tr>
 		</c:if>
 		<c:if test="${listCount ne 0}">
 			 <c:forEach var="vo" items="${list}">
-				<tr>
+				<tr class="bottomline">
 					<td align="center">${vo.monthly_no}</td>
 					<td><a href="mDetail?monthly_no=${vo.monthly_no}">${vo.monthly_name}</a></td>
 					<td class="mimg" align="center"><a href="mDetail?monthly_no=${vo.monthly_no}">

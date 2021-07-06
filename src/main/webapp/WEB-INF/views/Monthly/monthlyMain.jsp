@@ -51,7 +51,7 @@
 <div class="plantimg">
 <img class="plantimg" src="<%=request.getContextPath() %>/resources/img/${monthly.monthly_img}"></div>
 <br>
-<div id= "plantname" align="center">${monthly.monthly_name}</div>
+<div id= "plantname" align="center">'${monthly.monthly_name}'</div>
 </div>
 <jsp:include page="../footer.jsp"></jsp:include>
 </body>
