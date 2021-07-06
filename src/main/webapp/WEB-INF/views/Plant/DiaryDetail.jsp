@@ -12,8 +12,8 @@
 <link href="${path}/resources/css/footer.css" rel="stylesheet" />
 <link href="${path}/resources/css/DiaryStyle.css" rel="stylesheet" />
 <link href="${path}/resources/css/DetailDiaryStyle.css" rel="stylesheet" />
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <body>
 <% String user_id = (String)session.getAttribute("userId"); %>
@@ -56,6 +56,14 @@
 </body>
 <script>
 	$(function(){
+		//
+		var reportM = "<c:out value="${reportM}" />";
+		
+		console.log("no:::"+reportM);
+		if(reportM == "no"){
+			 swal("이미 신고하였습니다.");
+		}
+		
 		//신고하기 모달창
         $('.declaration').click(function(){
 	    	$(".modal").fadeIn(); 

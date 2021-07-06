@@ -70,14 +70,14 @@ public class OrderServiceImpl implements OrderService{
 	
 	//회원별 주문리스트 개수
 	@Override
-	public int listCount(int user_no) {
-		return orderDao.listCount(user_no);
+	public int listCount(Order order) {
+		return orderDao.listCount(order);
 	}
 	
 	//회원별 주문내역 리스트
 	@Override
-	public List<Order> selectOrderList(int startPage, int limit,int user_no) {
-		return orderDao.selectOrderList(startPage,limit,user_no);
+	public List<Order> selectOrderList(int startPage, int limit,Order order) {
+		return orderDao.selectOrderList(startPage,limit,order);
 	}
 	
 	//주문상세리스트

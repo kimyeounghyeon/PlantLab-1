@@ -17,8 +17,15 @@ public class ReportServiceImpl implements ReportService{
 		return reportDao.insertReport(report);
 	}
 	
+	//신고수
 	@Override
 	public int countReport(int diary_no) {
 		return reportDao.countReport(diary_no);
+	}
+	
+	//신고체크
+	@Override
+	public int checkReport(Report report) {
+		return reportDao.checkReport(report);
 	}
 }

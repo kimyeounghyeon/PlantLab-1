@@ -43,8 +43,9 @@ a{
 
 ul.cateList{
     list-style: none;
-    margin: 5px;
+    
     padding: 0px;
+    text-align: center;
 }
 
 ul.cateList li a:hover{

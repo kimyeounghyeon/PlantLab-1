@@ -26,15 +26,15 @@ public class OrderDAO {
 	}
 	
 	//회원별 주문상세 개수
-	public int listCount(int user_no) {
-		return sqlSession.selectOne("Order.listCount",user_no);
+	public int listCount(Order order) {
+		return sqlSession.selectOne("Order.listCount",order);
 	}
 	
 	//회원별 주문검색
-	public List<Order> selectOrderList(int startPage, int limit,int user_no){
+	public List<Order> selectOrderList(int startPage, int limit,Order order){
 		int startRow = (startPage - 1) * limit;
 		RowBounds row = new RowBounds(startRow, limit);
-		return sqlSession.selectList("Order.selectOrderList",user_no,row);
+		return sqlSession.selectList("Order.selectOrderList",order,row);
 	}
 	
 	//주문상세정보

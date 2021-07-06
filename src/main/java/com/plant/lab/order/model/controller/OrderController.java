@@ -52,6 +52,8 @@ public class OrderController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(CartController.class);
 	public static final int LIMIT = 1;
+	public static final int LIMIT2 = 10;
+	
 //상품 주문페이지 이동
 	@RequestMapping(value="/orders", method=RequestMethod.POST)
 	public ModelAndView orderPro(ModelAndView mv,Order order,HttpSession session,
@@ -137,14 +139,45 @@ public class OrderController {
 		return mv;
 	}
 	
+//관리자페이지 주문내역 보기
+	@RequestMapping(value="/managerOL", method=RequestMethod.GET)
+	public ModelAndView morderList(ModelAndView mv,HttpSession session,
+			@RequestParam(name = "page", defaultValue = "1") int page) {
+		
+		logger.info("===============마이페이지 구매리스트 페이지===============");
+		MemberVO member = (MemberVO) session.getAttribute("loginMember");
+		
+		
+		if(member == null || member.getUserId() == "" ) {
+			mv.setViewName("logIn");
+			return mv;
+		}else {
+			mv.setViewName("MypageOrder/ManagerOL");			
+		}
+		
+		//페이지처리
+		int currentPage = page; // 한 페이지당 출력할 목록 개수
+		int listCount = orderService.listCount(null); //전체 게시글 개수
+		int maxPage = (int) ((double) listCount / LIMIT2 + 0.9); //최대 페이지
+		
+		
+		List<Order> orderList = orderService.selectOrderList(currentPage,LIMIT2,null);
+		
+		mv.addObject("orderList", orderList);
+		mv.addObject("currentPage", currentPage);
+		mv.addObject("maxPage", maxPage);
+		return mv;
+	}	
+
 //마이페이지 주문내역 보기
 	@RequestMapping(value="/orderList", method=RequestMethod.GET)
-	public ModelAndView orderList(ModelAndView mv,HttpSession session,
+	public ModelAndView orderList(ModelAndView mv,HttpSession session,Order order,
 			@RequestParam(name = "page", defaultValue = "1") int page,
 			@RequestParam(name="rvMsg", required = false) String rvMsg) {
 		
 		logger.info("===============마이페이지 구매리스트 페이지===============");
 		MemberVO member = (MemberVO) session.getAttribute("loginMember");
+		order.setUser_no(member.getUserNo());
 		
 		if(member == null || member.getUserId() == "" ) {
 			mv.setViewName("logIn");
@@ -162,11 +195,11 @@ public class OrderController {
 		
 		//페이지처리
 		int currentPage = page; // 한 페이지당 출력할 목록 개수
-		int listCount = orderService.listCount(member.getUserNo()); //전체 게시글 개수
+		int listCount = orderService.listCount(order); //전체 게시글 개수
 		int maxPage = (int) ((double) listCount / LIMIT + 0.9); //최대 페이지
 		
 		
-		List<Order> orderList = orderService.selectOrderList(currentPage,LIMIT,member.getUserNo());
+		List<Order> orderList = orderService.selectOrderList(currentPage,LIMIT,order);
 		
 		mv.addObject("orderList", orderList);
 		mv.addObject("currentPage", currentPage);

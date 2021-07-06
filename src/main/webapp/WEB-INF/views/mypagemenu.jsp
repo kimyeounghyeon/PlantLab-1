@@ -98,8 +98,8 @@
 	<c:if test="${loginMember.grade==1}">
 		<div id="managepagemenu">
 			<ul>
-	 			<li><a class="linkmenu" href="${path}/">상품 관리</a></li>
-                <li><a class="linkmenu" href="${path}/">주문 관리</a></li>
+	 			<li><a class="linkmenu" href="${path}/managerPL">상품 관리</a></li>
+                <li><a class="linkmenu" href="${path}/managerOL">주문 관리</a></li>
                 <li><a class="linkmenu" href="${path}/">일기 관리</a></li>
                	<li><a class="linkmenu" href="${path}/mlist">이달의 식물 관리</a></li>
              </ul>

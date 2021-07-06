@@ -21,4 +21,9 @@ public class ReportDAO {
 	public int countReport(int diary_no) {
 		return sqlSession.selectOne("Report.countReport",diary_no);
 	}
+	
+	//신고체크
+	public int checkReport(Report report) {
+		return sqlSession.selectOne("Report.checkReport",report);
+	}
 }

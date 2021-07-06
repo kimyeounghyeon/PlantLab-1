@@ -13,43 +13,48 @@
     <link href="${path}/resources/css/Product/ProductListStyle.css" rel="stylesheet"/>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    
+    <style>
+    	.addPro{
+    		cursor:pointer;
+    		background-color: #ccc;
+    		font-size: 15px;
+    		border:solid 1px #ccc;
+    		margin-top:54px;
+    		margin-right: 20px;
+    		width:100px;
+    		height:100px;
+    		float:right;
+    		border-radius: 10px;
+    	}
+    	
+    	.addPro:hover{
+    		background-color: #ADBA85;
+    	}
+    	
+    	.managerPro{
+    		margin-left:150px;
+    	}
+    </style>
 </head>
 
 <body>
 	<jsp:include page="../header.jsp"></jsp:include>
+	<jsp:include page="../mypagemenu.jsp"></jsp:include>
     <div id="content" class="contents">
 		<section id="main_section">
-            <!-- Store 제목 -->
-            <div class="main_header">
-                <h1 class="title">식물</h1>
-                <!-- <h4 class="subTitle">식 물</h4> -->
-            </div>
-
             <!-- Stroe 카테고리(왼쪽바) -->
             <article class="aside1">
                 <h3>카테고리</h3>
                 <hr>
                 <ul class="cateList">
-                    <li><a href="${path}/product?cate=p">식물</a></li>
-                    <li><a href="${path}/product?cate=c">화분</a></li>
-                    <li><a href="${path}/product?cate=g">소품</a></li>
+                    <li><a href="${path}/managerPL?cate=p">식물</a></li>
+                    <li><a href="${path}/managerPL?cate=c">화분</a></li>
+                    <li><a href="${path}/managerPL?cate=g">소품</a></li>
                 </ul>
             </article>
 
-            <!-- Store 최근본 상품(오른쪽바) -->
-            <%@include file ="RightSideBar.jsp" %>
-
 			<article class="main_article">
-				<input type="hidden" id="order" value="${nowOrder}">
-                <div class="orderby">
-                    <ul class="orderList">
-                        <li><a id="new" href="${path}/product?cate=${nowCate}&orderby=new">최신순</a></li>
-                        <li><a id="best" href="${path}/product?cate=${nowCate}&orderby=best">판매량순</a></li>
-                        <li><a id="low" href="${path}/product?cate=${nowCate}&orderby=low">낮은 가격순</a></li>
-                        <li><a id="high" href="${path}/product?cate=${nowCate}&orderby=high">높은 가격순</a></li>
-                    </ul>
-                </div>
-                
                 <div class="search">
                     <form name="proListF">
                    		<input type="hidden" name="page" value="${currentPage}"> 
@@ -57,8 +62,10 @@
 	                    <input type="button" value="검색" id="serachBtn">
                     </form>
                 </div>
+                
+                <button type="button" class="addPro" onClick="${path}/proInsert">추가하기</button>
 				
-                <div class="pro">
+                <div class="pro managerPro">
                 	<c:if test="${empty proList}">
                 		<div class="proList"><h2>&nbsp;상품이 존재하지 않습니다.</h2></div>
                 	</c:if>
@@ -86,7 +93,7 @@
 	                    		<li>◀</li>
 	                    	</c:if>
 	                    	<c:if test="${currentPage > 1}">
-	                    		<c:url var="plistST" value="/product?cate=${nowCate}&orderby=${nowOrder}">
+	                    		<c:url var="plistST" value="/managerPL?cate=${nowCate}&orderby=${nowOrder}">
 									<c:param name="page" value="${currentPage-1}" />
 								</c:url>
 								<li> <a href="${plistST}">◀</a></li>
@@ -98,7 +105,7 @@
 									<li>${p}</li>
 								</c:if>
 								<c:if test="${p ne currentPage}">
-									<c:url var="plistchk" value="/product?cate=${nowCate}&orderby=${nowOrder}">
+									<c:url var="plistchk" value="/managerPL?cate=${nowCate}&orderby=${nowOrder}">
 										<c:param name="page" value="${p}" />
 									</c:url>
 									<li><a href="${plistchk}">${p}</a></li>
@@ -108,7 +115,7 @@
 								<li>▶</li>
 							 </c:if> 
 							<c:if test="${currentPage < maxPage}">
-								<c:url var="plistEND" value="/product?cate=${nowCate}&orderby=${nowOrder}">
+								<c:url var="plistEND" value="/managerPL?cate=${nowCate}&orderby=${nowOrder}">
 									<c:param name="page" value="${currentPage+1}" />
 								</c:url>
 								<li><a href="${plistEND}">▶</a></li>
@@ -127,10 +134,7 @@
 
 <script>
 	$(function(){
-		//정렬 리스트에 클래스 부여
-		var order = $('#order').val();
-		var nowO = $('#'+order);
-		nowO.addClass('nowOrder');
+		//상품추가 이동
 		
 		//검색
 	    var search = $('#searchInput');
@@ -152,7 +156,7 @@
 	            swal("검색어를 입력해주세요!", "", "info");
 	        }else{
 	        	form.method = "get"
-	        	form.action = "/product";
+	        	form.action = "/managerPL";
 	        	form.submit();
 	        }
 	    };

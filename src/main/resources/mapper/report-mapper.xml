@@ -22,4 +22,10 @@
 		SELECT count(*) FROM report_tb WHERE r_diary_no = #{diary_no}
 	</select>
 	
+	<!-- 신고체크 -->
+	<select id="checkReport" parameterType="Report" resultType="int">
+		SELECT count(*) FROM report_tb 
+		WHERE report_user_no = #{report_user_no} 
+		AND r_diary_no = #{r_diary_no}
+	</select>
 </mapper>

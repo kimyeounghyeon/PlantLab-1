@@ -23,13 +23,24 @@
 	</insert>
 	
 	<!--회원별 주문 개수 조회 -->
-	<select id="listCount" parameterType="int" resultType="int">
-		SELECT count(*) FROM purchase_tb WHERE user_no = #{user_no}
+	<select id="listCount" parameterType="Order" resultType="int">
+		SELECT count(*) FROM purchase_tb 
+		<where>
+	        <if test="user_no != null">
+	        	user_no = #{user_no}
+	        </if>
+        </where>
 	</select>
 	
 	<!-- 회원별 주문 테이블 조회 rowbounds 사용-->
-	<select id="selectOrderList" resultType="arraylist" parameterType="int" resultMap="OrderMap">
-		SELECT * FROM purchase_tb WHERE user_no = #{user_no} order by buy_date desc
+	<select id="selectOrderList" resultType="arraylist" parameterType="Order" resultMap="OrderMap">
+		SELECT * FROM purchase_tb 
+		<where>
+	        <if test="user_no != null">
+	        	user_no = #{user_no}
+	        </if>
+        </where>
+		order by buy_date desc
 	</select>
 	
 	<!-- 주문상세내역 조회 (단일출력) -->

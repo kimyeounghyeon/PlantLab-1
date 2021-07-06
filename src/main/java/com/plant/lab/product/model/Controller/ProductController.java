@@ -50,6 +50,48 @@ public class ProductController {
 	public static final int LIMIT = 12;
 	
 //상품출력 리스트
+	@RequestMapping(value = "/managerPL", method = RequestMethod.GET)
+	public ModelAndView mproductListService(
+			HttpServletResponse response,
+			HttpServletRequest req,
+			@RequestParam(name="cate", defaultValue = "p") String cate,
+			@RequestParam(name="orderby", defaultValue = "new") String orderby,
+			@RequestParam(name = "page", defaultValue = "1") int page,
+			@RequestParam(name = "keyword", required = false) String keyword, ModelAndView mv) {
+		try {
+			logger.info("===============상품리스트 페이지===============");
+			
+			
+			//페이지처리
+			int currentPage = page; // 한 페이지당 출력할 목록 개수
+			int listCount = proService.listCount(cate); //전체 게시글 개수
+			int maxPage = (int) ((double) listCount / LIMIT + 0.9); //최대 페이지
+
+			logger.info("상품 개수 확인하기 : " + listCount);
+			
+			//검색어가 있을 경우
+			if (keyword != null && !keyword.equals("")) {
+				mv.addObject("currentPage", null);
+				mv.addObject("proList", proService.searchList(keyword));				
+			}
+			else { //검색어가 없을 경우
+				mv.addObject("currentPage", currentPage);
+				mv.addObject("proList", proService.selectList(currentPage, LIMIT,cate,orderby));				
+			} 
+		
+			mv.addObject("maxPage", maxPage);
+			mv.addObject("nowCate",cate);
+			mv.addObject("nowOrder",orderby);
+			mv.addObject("listCount", listCount);
+			mv.setViewName("Product/MangerPL");
+		} catch (Exception e) {
+			logger.info("!!!!!!페이지 리스트 오류!!!!!!");
+			e.printStackTrace();
+			mv.setViewName("Product/MangerPL");
+		}
+		return mv;
+	}
+//상품출력 리스트
 	@RequestMapping(value = "/product", method = RequestMethod.GET)
 	public ModelAndView productListService(
 			HttpServletResponse response,
@@ -186,6 +228,16 @@ public class ProductController {
 			logger.info("!!!!!!상품 상세 오류!!!!!!");
 			e.printStackTrace();
 		}
+		
+		return mv;
+	}
+	
+//상품추가하기
+	@RequestMapping(value = "/proInsert", method = RequestMethod.GET)
+	public ModelAndView productInsert(ModelAndView mv,HttpServletResponse response,
+			HttpServletRequest req,HttpSession session) {
+
+		
 		
 		return mv;
 	}
