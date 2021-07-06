@@ -165,6 +165,8 @@ public class MemberController {
 	 	
 	 	return "deleteUser";
 	 }
+	 
+	 
 	 @RequestMapping(value="/memberDelete", method = RequestMethod.POST)
 		public String memberDelete(MemberVO vo, @RequestParam (name = "userPwd") String userPwd, Model model, HttpSession session) throws Exception{
 		  vo.setUserPwd(userPwd);
@@ -180,10 +182,16 @@ public class MemberController {
 		
 		
 		return "Main";
-		
-	
-	
 	 }
+	 
+	 @ResponseBody
+	 @RequestMapping(value="/isExistIdPw")
+	 public String  userDelete(MemberVO vo) throws Exception {
+		int result = mService.isExistIdPw(vo);
+		return Integer.toString(result);
+		
+	 }
+	 
 	 @RequestMapping(value="find_id_form")
 		public String findIdView() {
 			return "findId";

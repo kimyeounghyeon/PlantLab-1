@@ -33,7 +33,7 @@
 			</div>
 			<div class="login-pw-wrap">
 				<input placeholder="비밀번호" type="password" class="input-pw"
-					name="userPwd"></input>
+					name="userPwd" style="all: none;"></input>
 			</div>
 			<div class="login-btn-wrap">
 				<button type="button" class="login-btn" id="loingbtn">로그인</button>
@@ -76,12 +76,12 @@
 
 	</section>
 	<section class="find-signup-wrap">
-		<span class="find-id"> <a href="<%=request.getContextPath()%>/find_id_form" target="_blank"
+		<span class="find-id"> <a href="<%=request.getContextPath()%>/find_id_form" 
 			title="아이디찾기">아이디 찾기</a>
-		</span> <span class="find-pw"> <a href="<%=request.getContextPath()%>/find_password_form" target="_blank"
+		</span> <span class="find-pw"> <a href="<%=request.getContextPath()%>/find_password_form"
 			title="비밀번호 찾기">비밀번호 찾기</a>
 		</span> <span class="sign-up"> <a
-			href="<%=request.getContextPath()%>/join" target="_blank"
+			href="<%=request.getContextPath()%>/join"
 			title="회원가입">회원가입</a>
 		</span>
 	</section>

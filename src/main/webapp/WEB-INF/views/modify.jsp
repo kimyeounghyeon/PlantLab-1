@@ -8,7 +8,7 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<title>無以林</title>
+<title>정보수정</title>
 <link href="${path}/resources/css/footer.css" rel="stylesheet" />
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/earlyaccess/jejumyeongjo.css" />
@@ -40,7 +40,7 @@
 						<h3 class="join_title">
 							<label for=userPwd>비밀번호</label>
 						</h3>
-						<span class="box int_pass"> <input type="password"
+						<span class="box int_pass"> <input type="password" style="font-family: none;"
 							id="userPwd" name="userPwd" class="int" maxlength="20"> <span
 							id="alertTxt">사용불가</span>
 						</span> <span class="error_next_box"></span>
@@ -53,7 +53,7 @@
 						<h3 class="join_title">
 							<label for="userPwd2">비밀번호 재확인</label>
 						</h3>
-						<span class="box int_pass_check"> <input type="password"
+						<span class="box int_pass_check"> <input type="password" style="font-family: none;"
 							id="userPwd2" name="userPwd2" class="int" maxlength="20">
 						</span> <span class="error_next_box"></span> <span id="alert-success"
 							style="display: none; color: blue;">비밀번호가 일치합니다.</span> <span
@@ -123,8 +123,9 @@
 				</form>
 			</div>
 		</div>
+		</div>
 		</section>
-					<jsp:include page="footer.jsp"></jsp:include>
+			<%-- 		<jsp:include page="footer.jsp"></jsp:include> --%>
 </body>
 <script
 	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>

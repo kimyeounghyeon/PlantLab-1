@@ -1,8 +1,4 @@
 @charset "UTF-8";
-
-body{
-	line-height: 0;
-}
 h1{
 	text-align : center;
 }
@@ -18,7 +14,7 @@ h1{
 }
 
 h3 {
-	margin: 13px 0 6px;
+	margin: 35px 0 15px;
 	font-size: 14px;
 	font-weight: 700;
 }
@@ -88,7 +84,10 @@ h3 {
 .box.int_pass_check {
 	padding-right: 14px;
 }
-
+#age_wrap {
+    display: table;
+    width: 100%;
+}
 
 /* 에러메세지 */
 .error_next_box {
@@ -139,4 +138,11 @@ h3 {
 .join_title_email {
 	height: 30px;
 }
+.chk_re {
+	text-align : center;
+	text-decoration : none;
+}
 
+#check_font{
+	padding-top: 20;
+}

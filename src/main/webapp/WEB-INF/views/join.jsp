@@ -7,7 +7,7 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<title>無以林 join</title>
+<title>회원가입</title>
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/earlyaccess/jejumyeongjo.css" />
 <link href="${path}/resources/css/header.css" rel="stylesheet" />
@@ -16,7 +16,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 </head>
-	<jsp:include page="header.jsp"></jsp:include>
+<jsp:include page="header.jsp"></jsp:include>
 <body>
 
 	<div class="joindiv">
@@ -40,8 +40,7 @@
 						<h3 class="join_title">
 							<label for=userPwd>비밀번호</label>
 						</h3>
-						<span class="box int_pass"> <input type="password"
-							id="userPwd" name="userPwd" class="int" maxlength="20"> <span
+						<span class="box int_pass"> <input type="password" style="font-family: none;"	id="userPwd" name="userPwd" class="int" maxlength="20"> <span
 							id="alertTxt">사용불가</span>
 						</span> <span class="error_next_box"></span>
 						<div class="check_font" id="pass_check"></div>
@@ -53,8 +52,8 @@
 						<h3 class="join_title">
 							<label for="userPwd2">비밀번호 재확인</label>
 						</h3>
-						<span class="box int_pass_check"> <input type="password"
-							id="userPwd2" name="userPwd2" class="int" maxlength="20">
+						<span class="box int_pass_check"> 
+						<input type="password" style="font-family: none;" id="userPwd2" name="userPwd2" class="int" maxlength="20" >
 						</span> <span class="error_next_box"></span> <span id="alert-success"
 							style="display: none; color: blue;">비밀번호가 일치합니다.</span> <span
 							id="alert-danger" style="display: none; color: red;">비밀번호가
@@ -80,60 +79,62 @@
 							<label for="email">본인 확인 이메일</label>
 						</h3>
 						<span class="box mail_input_box"><input class="mail_input"
-							id="emailint" name="email" ></span>
-					
+							id="emailint" name="email"></span>
+
 						<h3 class="join_title">
 							<label for="email">인증번호입력</label> <input
-								class="mail_check_button" type="button" value="인증번호버튼" >
+								class="mail_check_button" type="button" value="인증번호버튼">
 						</h3>
 						<span class="mail_check_wrop" id="mail_check_input_box_false"><input
-							class="mail_check_input" id="emailint2" disabled="disabled" placeholder="본인인증 확인을 해주세요 " ></span>
+							class="mail_check_input" id="emailint2" disabled="disabled"
+							placeholder="본인인증 확인을 해주세요 "></span>
 						<div class="clearfix"></div>
 						<span id="mail_check_input_box_warn"></span>
 					</div>
-			</div>
 
 
-			<!-- MOBILE -->
-			<div>
-				<h3 class="join_title">
-					<label for="phone">휴대전화</label>
-				</h3>
-				<span class="box int_mobile"> <input type="tel" id="phone"
-					name="phone" class="int" maxlength="16" placeholder="숫자만 입력해주세요 ">
-				</span> <span class="error_next_box"></span>
-				<div class="check_font" id="pnum_check"></div>
+
+					<!-- MOBILE -->
+					<div>
+						<h3 class="join_title">
+							<label for="phone">휴대전화</label>
+						</h3>
+						<span class="box int_mobile"> <input type="tel" id="phone"
+							name="phone" class="int" maxlength="16" placeholder="숫자만 입력해주세요 ">
+						</span> <span class="error_next_box"></span>
+						<div class="check_font" id="pnum_check"></div>
+					</div>
+					<!-- address -->
+					<div>
+						<h3 class="join_title">
+							<label for="address">우편번호</label> <input class="add_chk_re"
+								type="button" value="우편번호찾기" id="add"
+								onclick="execDaumPostcode();">
+						</h3>
+						<span class="box int_address"> <input type="text"
+							id="address" name="address" class="int" maxlength="8">
+						</span>
+						<h3 class="join_title">
+							<label for="address">주소</label>
+						</h3>
+						<span class="box int_address"> <input type="text"
+							id="address2" name="address" class="int" maxlength="16">
+						</span>
+						<h3 class="join_title">
+							<label for="address">상세주소</label>
+						</h3>
+						<span class="box int_address"> <input type="text"
+							id="address3" name="address" class="int" maxlength="16"
+							placeholder="정확히 입력해주세요 ">
+						</span>
+					</div>
+					<!-- 가입 버튼  -->
+					<button type="submit" value="회원가입" id="btn">회원가입</button>
+				</form>
 			</div>
-			<!-- address -->
-			<div>
-				<h3 class="join_title">
-					<label for="address">우편번호</label> <input class="add_chk_re"
-						type="button" value="우편번호찾기" id="add"
-						onclick="execDaumPostcode();">
-				</h3>
-				<span class="box int_address"> <input type="number"
-					id="address" name="address" class="int" maxlength="8">
-				</span>
-				<h3 class="join_title">
-					<label for="address">주소</label>
-				</h3>
-				<span class="box int_address"> <input type="text"
-					id="address2" name="address" class="int" maxlength="16">
-				</span>
-				<h3 class="join_title">
-					<label for="address">상세주소</label>
-				</h3>
-				<span class="box int_address"> <input type="text"
-					id="address3" name="address" class="int" maxlength="16"
-					placeholder="정확히 입력해주세요 ">
-				</span>
-			</div>
-			<!-- 가입 버튼  -->
-			<button type="submit" value="회원가입" id="btn">회원가입</button>
-			</form>
 		</div>
 	</div>
-	
+
 
 
 
@@ -157,7 +158,7 @@
 				type : "GET",
 				url : "mailCheck?email=" + email,
 				success : function(data) {
-                     alert("인증번호가 발송되었습니다. ")
+					alert("인증번호가 발송되었습니다. ")
 					//console.log("data : " + data);
 					cehckBox.attr("disabled", false);
 					boxWrap.attr("id", "mail_check_input_box_true");
@@ -177,11 +178,11 @@
 			if (inputCode == code) { // 일치할 경우
 				checkResult.html("인증번호가 일치합니다.");
 				checkResult.attr("class", "correct");
-				checkResult.css("color","blue");
+				checkResult.css("color", "blue");
 			} else { // 일치하지 않을 경우
 				checkResult.html("인증번호를 다시 확인해주세요.");
 				checkResult.attr("class", "incorrect");
-				checkResult.css("color","red");
+				checkResult.css("color", "red");
 			}
 
 		});
@@ -328,10 +329,10 @@
 					} else {
 						inval_Arr[2] = false;
 					}
-					if($('#emailint').val() == null){
+					if ($('#emailint').val() == null) {
 						alert("이메일을 확인해주세요");
 						inval_Arr[3] = false;
-					} else{
+					} else {
 						inval_Arr[3] = true;
 					}
 

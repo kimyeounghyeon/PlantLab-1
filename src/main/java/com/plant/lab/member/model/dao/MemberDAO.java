@@ -61,6 +61,10 @@ public class MemberDAO {
 		return sqlSession.selectOne("member.findPassword",vo);
   
 	}
+	
+	public int isExistIdPw(MemberVO vo) {
+		return sqlSession.selectOne("member.isExistIdPw",vo);
+	}
 
 	
 	

@@ -72,7 +72,6 @@ public class MemberServiceImpl implements MemberService {
 	}
 	@Override
 	public int memberDelete(MemberVO vo) {
-		
 		return mDao.memberDelete(vo);
 	}
 	@Override
@@ -83,7 +82,11 @@ public class MemberServiceImpl implements MemberService {
 	public String findPassword(MemberVO vo){
       return mDao.findPassword(vo);	
 	}
-
+    @Override
+    public int isExistIdPw(MemberVO vo) {
+    	int result = mDao.isExistIdPw(vo);
+    	return result;
+    }
 
 
 

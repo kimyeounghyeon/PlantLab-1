@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>회원 탈퇴</title>
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/earlyaccess/jejumyeongjo.css" />
 <link rel="stylesheet" type="text/css"
@@ -22,7 +22,7 @@
 	<section class="login-wrap">
 		<h1>회원 탈퇴</h1>
 		<div class="content">
-			<form id="loginFrm" action="/lab/memberDelete" method="POST">
+			<form id="delFrm"  action="memberDelete" method="post">
 				<div class="login-id-wrap">
 					<h3>
 						<label for="userId">아이디</label>
@@ -37,18 +37,52 @@
 						<label for="userPwd">비밀번호</label>
 					</h3>
 					<span class="box int_pass"> <input class="int input-pw"
-						type="password" id="userPass" name="userPwd" placeholder="비밀번호" />
+						type="password" id="userPass" name="userPwd" placeholder="비밀번호" style="font-family: none;"/>
 					</span>
 				</div>
 
 				<div class="login-btn-wrap">
-					<button class="btn" type="submit" id="submit">회원탈퇴</button>
+					<button class="btn" type="button" id="btn">회원탈퇴</button>
 				</div>
+				
 
 			</form>
-			<div></div>
 		</div>
 	</section>
-	<jsp:include page="footer.jsp"></jsp:include> 
+	<%-- <jsp:include page="footer.jsp"></jsp:include>  --%>
+	<script>
+	$(document).ready(function(e){
+		$('#btn').click(function(){
+			
+			if($('#passPwd').val() == ''){
+				alert("패스워드를 입력해 주세요.");
+				$('#passPwd').focus();
+				return;
+			}
+			$.ajax({
+				url: "isExistIdPw",
+				type: "POST",
+				data: $('#delFrm').serializeArray(),
+				success: function(data){
+					if(data==0){
+						alert("패스워드가 틀렸습니다.");
+						return;
+					}else{
+						var result = confirm('정말 탈퇴 하시겠습니까?');
+						if(result){
+							$('#delFrm').submit();
+						}
+					}
+				},
+				error: function(){
+					alert("서버 에러.");
+				}
+			});
+		});
+	});
+		
+			
+		
+	</script>
 </body>
 </html>

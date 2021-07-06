@@ -48,8 +48,8 @@
 		select user_pwd from user_tb where user_Id=#{userId} and user_Name=#{userName} and phone=#{phone}
 	</select>
 	
-	<update id="updatePassword"  parameterType="MemberVO" >
-		update user_tb set user_pwd=#{userPwd} where user_id=#{userId}
-	</update>
-
+	<select id="isExistIdPw" parameterType="MemberVO" resultType="int">
+	 select count(*) from user_tb where user_id=#{userId} and user_Pwd=#{userPwd}
+	</select>
+	
 </mapper>

@@ -29,6 +29,8 @@ public interface MemberService {
     public String findId(MemberVO vo);
 
     public String findPassword(MemberVO vo);
+    
+    public int isExistIdPw(MemberVO vo); 
 
  
    
