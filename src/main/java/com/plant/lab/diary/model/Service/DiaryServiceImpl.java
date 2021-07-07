@@ -56,8 +56,16 @@ public class DiaryServiceImpl implements DiaryService {
 		}
 		return list;
 	}
-	
-	
+	@Override
+	public List<DiaryVO> searchId(int startPage, int limit, String keyword) {
+		List<DiaryVO> list = null;
+		try {
+			list = dDao.searchId(startPage, limit, keyword);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
 	// 내용 검색
 	@Override
 	public List<DiaryVO> searchContent(String keyword) {
@@ -69,7 +77,37 @@ public class DiaryServiceImpl implements DiaryService {
 		} 
 		 return list;
 	}
-	
+	@Override
+	public List<DiaryVO> searchContent(int startPage, int limit, String keyword) {
+		List<DiaryVO> list = null;
+		try {
+			list = dDao.searchContent(startPage, limit, keyword);
+		} catch(Exception e) {
+			e.printStackTrace();
+		} 
+		 return list;
+	}
+	// 검색 글 갯수
+	@Override
+	public int getSearchIdListCount(String keyword) {;
+		int result= -1;
+		try {
+			result = dDao.getSearchIdListCount(keyword);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	@Override
+	public int getSearchContentListCount(String keyword) {;
+		int result= -1;
+		try {
+			result = dDao.getSearchContentListCount(keyword);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 	
 	// 게시글 수 구하기
 	@Override

@@ -13,7 +13,13 @@ public interface DiaryService {
 	public List<DiaryVO> listDiary();
 	public List<DiaryVO> detailDiary(int diary_no);
 	public List<DiaryVO> searchId(String keyword);
+	public List<DiaryVO> searchId(int startPage, int limit, String keyword);
 	public List<DiaryVO> searchContent(String keyword);
+	public List<DiaryVO> searchContent(int startPage, int limit, String keyword);
+	
+	public int getSearchIdListCount(String keyword);
+	public int getSearchContentListCount(String keyword);
+	
 	public int getlistCount(int diary_write);
 	public int getListCountAll();
 	

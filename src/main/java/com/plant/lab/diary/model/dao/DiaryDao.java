@@ -33,17 +33,39 @@ public class DiaryDao {
 	public List<DiaryVO> searchId(String keyword) {
 		return sqlSession.selectList("Diary.searchId",keyword);
 	}
-	
-	//조회
-	public int detailWrite(int diary_no) {
-		return sqlSession.selectOne("Diary.detailWriter",diary_no);
+	public List<DiaryVO> searchId(int startPage, int limit, String keyword) {
+		int offset = (startPage - 1) * limit;
+		RowBounds row = new RowBounds(offset, limit);
+		List<DiaryVO> result = sqlSession.selectList("Diary.searchId", keyword, row);
+		return result;
 	}
 
 	// 글 내용으로 게시글 검색
 	public List<DiaryVO> searchContent(String keyword) {
 		return sqlSession.selectList("Diary.searchContent",keyword);
 	}
+	public List<DiaryVO> searchContent(int startPage, int limit, String keyword) {
+		int offset = (startPage - 1) * limit;
+		RowBounds row = new RowBounds(offset, limit);
+		List<DiaryVO> result = sqlSession.selectList("Diary.searchContent", keyword, row);
+		return result;
+	}	
+	public int getSearchIdListCount(String keyword) {;
+		return sqlSession.selectOne("Diary.getSearchIdListCount",keyword);
+	}
+	public int getSearchContentListCount(String keyword) {;
+		return sqlSession.selectOne("Diary.getSearchContentListCount",keyword);
+	}
+
 	
+	
+	
+	
+	
+	//조회
+	public int detailWrite(int diary_no) {
+		return sqlSession.selectOne("Diary.detailWriter",diary_no);
+	}
 	// 마이 페이지 게시글 수 구하기
 	public int getlistCount(int diary_write) {
 		return sqlSession.selectOne("Diary.getlistCount", diary_write);
@@ -154,6 +176,8 @@ public class DiaryDao {
 	public List<DiaryVO> admlistDiary(int startPage, int limit) {
 		int offset = (startPage - 1) * limit;
 		RowBounds row = new RowBounds(offset, limit);
-		return sqlSession.selectList("Diary.admlistDiary", row);
+		List<DiaryVO> result = sqlSession.selectList("Diary.admlistDiary", null, row);
+		System.out.println("[yh~] result:"+ result.toString());
+		return result;
 	}
 }

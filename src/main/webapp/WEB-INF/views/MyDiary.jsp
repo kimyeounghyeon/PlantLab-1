@@ -68,8 +68,7 @@
 		</c:forEach>
 		</c:if>
 	</table>
-	<br><br>
-	            <div class="regis_page">
+	        <div class="regis_page">
             <c:if test="${startPage != 1 }">
                   <a href="<%=request.getContextPath() %>/mydiary?page=${startPage-1}">이전</a>
             </c:if>

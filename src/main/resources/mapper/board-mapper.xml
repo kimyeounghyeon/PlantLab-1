@@ -51,7 +51,8 @@
 	    ) diaryall
 		left join 
 		    (select diary_no, count(*) as like_cnt from like_tb group by diary_no) liketb
-		on diaryall.diary_no = liketb.diary_no where diaryall.user_id LIKE '%'||#{keyword}||'%'
+		on diaryall.diary_no = liketb.diary_no 
+		where diaryall.user_id LIKE '%'||#{keyword}||'%'
 		order by diaryall.diary_date desc
 	]]>
  	</select>
@@ -73,6 +74,43 @@
 		order by diaryall.diary_date desc
 	]]>
  	</select>
+ 	
+ 	<!-- 아이디를 통한 게시글 개수 -->
+ 	<select id="getSearchIdListCount" parameterType="String" resultType="int">
+ 	 	<![CDATA[
+		select count(*) from 
+	    (
+	    select udt.*, dit.diary_img_num, dit.diary_img_src from 
+	        (select dt.*, ut.user_id, ut.user_name from diary_tb dt left outer join user_tb ut on dt.diary_write = ut.user_no) udt 
+	    left outer join 
+	        diary_img_tb dit 
+	    on dit.diary_no = udt.diary_no 
+	    ) diaryall
+		left join 
+		    (select diary_no, count(*) as like_cnt from like_tb group by diary_no) liketb
+		on diaryall.diary_no = liketb.diary_no 
+		where diaryall.user_id LIKE '%'||#{keyword}||'%'
+	]]>
+ 	</select>
+ 	
+ 	<!-- 내용을 통한 게시글 개수 -->
+ 	<select id="getSearchContentListCount" parameterType="String" resultType="int">
+ 	 	<![CDATA[
+		select count(*) from 
+	    (
+	    select udt.*, dit.diary_img_num, dit.diary_img_src from 
+	        (select dt.*, ut.user_id, ut.user_name from diary_tb dt left outer join user_tb ut on dt.diary_write = ut.user_no) udt 
+	    left outer join 
+	        diary_img_tb dit 
+	    on dit.diary_no = udt.diary_no 
+	    ) diaryall
+		left join 
+		    (select diary_no, count(*) as like_cnt from like_tb group by diary_no) liketb
+		on diaryall.diary_no = liketb.diary_no 
+		where diaryall.diary_content LIKE '%'||#{keyword}||'%'
+	]]>
+ 	</select>
+ 	
  	
  	<!-- 마이 페이지 게시글 갯수 구하기 -->
  	<select id="getlistCount" resultType="int">
@@ -179,7 +217,7 @@
  	
  	<!-- 관리자 페이지 게시글 조회 -->
  	<select id="admlistDiary" resultType="DiaryVO">
-	select * from diary_tb dt left outer join user_tb ut on dt.diary_write = ut.user_no
+	select * from diary_tb dt left outer join user_tb ut on dt.diary_write = ut.user_no order by diary_date desc
  	</select>
  	
  	
