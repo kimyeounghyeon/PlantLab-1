@@ -19,4 +19,10 @@ public class ProductContentImpl implements ProductContentService{
 		
 		return proConDao.searchList(pro_no);
 	}
+	
+	//인서트
+	@Override
+	public int insertProD(ProductContnet product) {
+		return proConDao.insertProD(product);
+	}
 }

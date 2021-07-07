@@ -60,8 +60,8 @@ public class ProductDAO {
 	}
 	
 	//상품추가
-	public int insertProduct(Product product) { 
-		return 1;
+	public int insertPro(Product product) { 
+		return sqlSession.insert("Product.insertPro", product);
 	}
 	
 	//상품수정

@@ -19,5 +19,8 @@ public class ProductContentDAO {
 		return sqlSession.selectList("ProductCon.selectList",pro_no);
 	}
 	
-	//상품 이미지 가져오기
+	//상품 상세설명 추가
+	public int insertProD(ProductContnet product) { 
+		return sqlSession.insert("ProductCon.insertProD", product);
+	}
 }

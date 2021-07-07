@@ -1,0 +1,94 @@
+@charset "UTF-8";
+
+/* 초기화 */
+*{
+    font-family: 'Jeju Myeongjo';
+}
+
+#content{
+    width: 1250px;
+    margin: auto;
+    clear: both;
+}
+
+/* 헤더 */
+.main_header{
+    text-align: center;
+    height: 130px;
+    line-height: 100px;
+    padding-top: 20px;
+    /* background-color: bisque; */
+}
+
+
+/* 메인 */
+.addPro{
+    width: 80%;
+    margin: auto;
+    text-align: center;
+}
+
+.proT{
+    width: 80%;
+    margin: auto;
+    text-align: center;
+}
+
+.proT tr:nth-child(2n-1){
+    text-align: left;
+}
+
+.proT tr:nth-child(2){
+    margin-top: 80px;
+}
+
+.proT input[type='text'],select{
+    width: 100%;
+    height: 80px;
+    font-size: 20px;
+}
+
+select{
+    width: 101%;
+}
+
+.files{
+    width: 80%;
+}
+
+.fileList input{
+    width: 80%;
+    margin-bottom: 10px;
+}
+
+#fileAdd,.addBtn{
+	display:block;
+	float:left;
+	background-color: #D5D9BA;
+	border:none;
+	margin-left:95px;
+	margin-top : 20px;
+	border-radius:10px;
+	cursor:pointer;
+	height: 50px;
+}
+
+#fileAdd:hover,.addBtn:hover{
+   font-weight: bold;
+}
+
+.fileList{
+	float:left;
+	margin-top : 25px;
+	margin-left: 10px;
+}
+
+.btn{
+    text-align: center;
+}
+
+.addBtn{
+    width: 80%;
+    height: 60px;
+    margin-top: 30px;
+}

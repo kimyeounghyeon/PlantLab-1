@@ -7,13 +7,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.plant.lab.product.model.dao.ProductContentDAO;
 import com.plant.lab.product.model.dao.ProductDAO;
 import com.plant.lab.product.model.vo.Product;
+import com.plant.lab.product.model.vo.ProductContnet;
 
 @Service("proService")
 public class ProductServiceImpl implements ProductService{
 	@Autowired
 	private ProductDAO proDao;
+	@Autowired
+	private ProductContentDAO proConDao;
 
 	//상품개수
 	@Override
@@ -51,9 +55,23 @@ public class ProductServiceImpl implements ProductService{
 
 	@Transactional
 	@Override
-	public int insertProduct(Product product) {
-		return 0;
+	public int insertPro(Product product,List<String> img) {
+		int result = 0;
+		result = proDao.insertPro(product);
+		if(result == 1) {
+			ProductContnet proc = new ProductContnet();
+			proc.setPro_cate(product.getPro_cate());
+
+			if(img.size()!=0) {
+				for(int i = 0; i<img.size();i++) {
+					proc.setPro_detail(img.get(i));
+					result = proConDao.insertProD(proc);
+				}
+			}
+		}
+		return result;
 	}
+
 
 	@Transactional
 	@Override

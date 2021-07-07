@@ -11,4 +11,22 @@
 		ON p.pro_no = d.pro_no
 		WHERE p.pro_no = #{pro_no}
 	</select>
+	
+	<!-- 상품 insert -->
+	<insert id="insertProD" parameterType="ProductCon" flushCache="true" statementType="PREPARED">
+		INSERT INTO pro_dtail_tb VALUES(
+			<choose>
+				<when test="pro_cate == 'c'">
+					PRO_C_SEQ.CURRVAL,
+				</when>
+				<when test="pro_cate == 'g'">
+					PRO_G_SEQ.CURRVAL,
+				</when>
+				<when test="pro_cate == 'p'">
+					PRO_P_SEQ.CURRVAL,
+				</when>
+			</choose>
+			#{pro_detail}
+		)
+	</insert>
 </mapper>

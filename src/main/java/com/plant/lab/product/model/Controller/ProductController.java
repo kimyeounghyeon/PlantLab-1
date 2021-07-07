@@ -27,14 +27,17 @@ import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.plant.lab.fileController.FileUploadController;
 import com.plant.lab.member.model.vo.MemberVO;
 import com.plant.lab.product.model.service.ProductContentService;
 import com.plant.lab.product.model.service.ProductService;
 import com.plant.lab.product.model.vo.Product;
 import com.plant.lab.product.model.vo.ProductContnet;
 import com.plant.lab.review.model.service.ReviewService;
+import com.plant.lab.review.model.vo.Review;
 
 @Controller
 public class ProductController {
@@ -49,11 +52,9 @@ public class ProductController {
 	private static final Logger logger = LoggerFactory.getLogger(ProductController.class);
 	public static final int LIMIT = 12;
 	
-//상품출력 리스트
+//관리자 리스트
 	@RequestMapping(value = "/managerPL", method = RequestMethod.GET)
-	public ModelAndView mproductListService(
-			HttpServletResponse response,
-			HttpServletRequest req,
+	public ModelAndView mproductListService(HttpServletResponse response, HttpServletRequest req, HttpSession session,
 			@RequestParam(name="cate", defaultValue = "p") String cate,
 			@RequestParam(name="orderby", defaultValue = "new") String orderby,
 			@RequestParam(name = "page", defaultValue = "1") int page,
@@ -61,6 +62,13 @@ public class ProductController {
 		try {
 			logger.info("===============상품리스트 페이지===============");
 			
+			MemberVO member = (MemberVO) session.getAttribute("loginMember");
+			if(member == null || member.getUserId() == "" ) {
+				mv.setViewName("logIn");
+				return mv;
+			}else {
+				mv.setViewName("MypageOrder/ManagerOL");			
+			}
 			
 			//페이지처리
 			int currentPage = page; // 한 페이지당 출력할 목록 개수
@@ -68,11 +76,13 @@ public class ProductController {
 			int maxPage = (int) ((double) listCount / LIMIT + 0.9); //최대 페이지
 
 			logger.info("상품 개수 확인하기 : " + listCount);
+			logger.info("keyword확인 : " + keyword);
 			
 			//검색어가 있을 경우
 			if (keyword != null && !keyword.equals("")) {
 				mv.addObject("currentPage", null);
-				mv.addObject("proList", proService.searchList(keyword));				
+				mv.addObject("proList", proService.searchList(keyword));	
+				logger.info("검색::::"+proService.searchList(keyword));
 			}
 			else { //검색어가 없을 경우
 				mv.addObject("currentPage", currentPage);
@@ -232,13 +242,67 @@ public class ProductController {
 		return mv;
 	}
 	
-//상품추가하기
-	@RequestMapping(value = "/proInsert", method = RequestMethod.GET)
+//상품추가 페이지 이동
+	@RequestMapping(value = "/proWrite", method = RequestMethod.GET)
 	public ModelAndView productInsert(ModelAndView mv,HttpServletResponse response,
 			HttpServletRequest req,HttpSession session) {
 
+		MemberVO member = (MemberVO) session.getAttribute("loginMember");
+		if(member == null || member.getUserId() == "" ) {
+			mv.setViewName("logIn");
+			return mv;
+		}else {
+			mv.setViewName("MypageOrder/ManagerOL");			
+		}
 		
+		mv.setViewName("Product/ProductInsert");
 		
 		return mv;
+	}
+	
+//상품추가
+	@RequestMapping(value="/proInsert", method=RequestMethod.POST)
+	public String reviewInsert(HttpSession session,Product pro,
+			HttpServletRequest request,
+			@RequestParam(name = "pro_details", required = false) MultipartFile[] multiFiles,
+			@RequestParam(name = "pro_img", required = false) MultipartFile multiFile,
+			HttpServletRequest req) {
+		logger.info("===============리뷰작성 페이지===============");
+
+		List<String> img = new ArrayList<String>();
+		
+		MemberVO member = (MemberVO) session.getAttribute("loginMember");
+		FileUploadController uplad = new FileUploadController();
+		
+		try {
+			//상품 상세설명 이미지 업로드
+			if(multiFiles.length != 0) {
+				for(int i=0; i<multiFiles.length; i++) {
+					if (multiFiles[i] != null && !multiFiles[i].equals("")) {
+						
+						String url = uplad.saveFile(multiFiles[i], request);
+						img.add(url);		
+					}
+				}
+			}
+			
+			String url = uplad.saveFile(multiFile, request);
+			pro.setPro_image(url);
+			
+			//상품등록 및 상품상세등록
+			int result = proService.insertPro(pro, img);
+			
+			if(result == 1) {
+				logger.info("상품추가성공!!!!!!");
+			}else {
+				logger.info("상품추가실패!!!!!!");
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("이미지 저장에 실패했습니다~");
+		}	
+		
+		return "redirect:/managerPL";
 	}
 }

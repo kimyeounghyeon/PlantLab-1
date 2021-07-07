@@ -19,7 +19,7 @@ public interface ProductService {
 	public Product selectOne(int pro_no);
 	
 	//상품추가
-	public int insertProduct(Product product);
+	public int insertPro(Product product,List<String> img);
 	
 	//상품수정
 	public int updateProduct(Product product);
