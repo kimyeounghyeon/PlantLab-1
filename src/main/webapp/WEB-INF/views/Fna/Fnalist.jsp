@@ -141,8 +141,15 @@ font-weight:bold;
 						<td class="fmargin" id="fnaq">Q .${f.fna_title}</td>
 						<c:if test="${1==loginMember.grade}">
 						<td class="fmargin">
-							<button type="submit" class="udbtn" onclick="fupdate()">수정</button>
-							<button type="submit" class="udbtn" onclick="fdelete()">삭제</button>
+						
+								<form name="form1" action="fdelete" method="POST">
+									<input type="hidden" name="fna_no" value="${f.fna_no}" />
+									<button type="submit" class="del" id="del">삭제</button>
+							</form>
+							<form name="form2" action="fupdate" method="GET">
+									<input type="hidden" name="fna_no" value="${f.fna_no}" />
+									<button type="submit" class="del" onclick="location.href='fupdate'" id="del">수정</button>
+							</form>
 						</td>
 							
 							<form name="del" action="fdelete" method="POST">
@@ -182,14 +189,17 @@ font-weight:bold;
 	<jsp:include page="../footer.jsp"></jsp:include>
 </body>
 <script type="text/javascript">
-	function fdelete() {
-		var chek = confirm("정말 삭제하시겠습니까?");
-		if (chek) {
-			function submit() {
-				document.forms["fna_no"].submit();
-			}
-		};
-	}
+$("form").on("submit", function() {
+
+    var fna_no = $(this).find('[name=number]').val();
+ });
+
+function fupdate(fna_no){
+	location.href="fupdate?fna_no="+fna_no}
+
+
+	
+	
 </script>
 
 </html>

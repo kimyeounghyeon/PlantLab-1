@@ -23,7 +23,7 @@ public int FnaCount() {
 		}
 
 @Override
-public List<FnaVo> FnaList(PagingVo vo) {
+public List<FnaVo> FnaList(PagingVo vo){
 	return fDao.FnaList(vo);
 
 }
@@ -46,5 +46,9 @@ public int FnaDel(int vo) {
 	return fDao.Fnadel(vo);
 }
 
+@Override
+public int fnaupdate(FnaVo n) {
+	return fDao.Fnaupdate(n);
+}
 
 }

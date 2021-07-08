@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.plant.lab.notice.model.vo.FnaVo;
-
+import com.plant.lab.notice.model.vo.NoticeVo;
 import com.plant.lab.notice.model.vo.PagingVo;
 import com.plant.lab.product.model.vo.Product;
 
@@ -41,6 +41,10 @@ public class FnaDao {
 		  return sqlSession.selectOne("Fna.FnaRead",no);
   }
   
+	
+	  public int Fnaupdate(FnaVo n) { 
+	      return sqlSession.update("Fna.FnaUpdate",n);
+	   }
 	
 
 

@@ -15,7 +15,7 @@ public interface FnaService {
 
 	public int FnaInsert(FnaVo vo);
 	public FnaVo FnaRead(int Fna_no);
+	public int fnaupdate(FnaVo n);
 
-	
 	public int FnaDel(int vo);
 }
