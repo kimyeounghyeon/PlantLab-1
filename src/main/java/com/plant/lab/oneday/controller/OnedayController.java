@@ -413,6 +413,14 @@ public class OnedayController {
 
 		String oneinsertDE = request.getParameter("oneinsertDE");
 		oneUVo.setOneday_end(oneinsertDE);
+		
+		String oneinsertST = request.getParameter("oneinsertST");
+		oneUVo.setOneday_Stime(oneinsertST);;
+		
+		String oneinsertET = request.getParameter("oneinsertET");
+		oneUVo.setOneday_Etime(oneinsertET);;
+		
+		
 
 		oService.onedayupdate(oneUVo);
 		mv.setViewName("redirect:/onedayAdmin");

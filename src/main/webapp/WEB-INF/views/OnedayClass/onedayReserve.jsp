@@ -55,6 +55,8 @@
 				<button id="onedayp" type="submit">결제하기</button>
 				
 			</form>
+			
+			<span></span>
 		</div>
 	</div>
 

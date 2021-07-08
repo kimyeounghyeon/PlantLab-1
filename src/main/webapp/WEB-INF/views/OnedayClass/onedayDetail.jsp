@@ -42,12 +42,12 @@
 				<div id="classContent">
 
 					<p class="classText" id="detailTitle">${oneVo.oneday_title}</p>
-					<p class="classText">가격: &ensp; ${oneVo.oneday_price}원</p>
+					<p class="classText" id="detailPrice">가격: &ensp; ${oneVo.oneday_price}원</p>
 					<p class="classText">신청 인원: &ensp; ${oneVo.oneday_maxPerson}</p>
 					<p class="classText">수업 시간: &ensp; ${oneVo.oneday_Stime} ~ ${oneVo.oneday_Etime}</p>
 					<p id="oneDate">신청기간: &ensp; ${oneVo.oneday_start } ~
 						${oneVo.oneday_end }</p>
-					<button id="classBtn" type="submit">신청</button>
+					<button id="classBtn" type="submit">예약</button>
 					<input type="hidden" name="onedayNo" value="${ oneVo.oneday_no}">
 			</form>
 		</div>
@@ -109,7 +109,7 @@
 								// 인포윈도우로 장소에 대한 설명을 표시합니다
 								var infowindow = new kakao.maps.InfoWindow(
 										{
-											content : '<div style="width:150px;text-align:center;padding:6px 0; border-radius: 3px;">${oneVo.oneday_title}</div>'
+											content : '<div style="width:150px;text-align:center;padding:6px 0; border-radius: 3px;">${oneVo.oneday_dtailPlace}</div>'
 										});
 								infowindow.open(map, marker);
 
