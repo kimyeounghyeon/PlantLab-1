@@ -70,6 +70,7 @@
                     <div class="file">
                     	<button type="button" id="fileAdd">이미지 추가</button>
                     	<div class="fileList">
+                    		
                     	</div>
                     </div>
                     
@@ -101,14 +102,32 @@
 	
 	//이미지 업로드
 	var fileAdd = $('#fileAdd');
+	var cnt = 0;
+	
+	var id = 0;
 	
 	fileAdd.click(function(){
-		//cnt += 1;
-		//var html = "<br><label class=\"labels\" for=\"file"+cnt+"\">파일 추가</label>";
-		var html = "<input multiple=\"multiple\" type=\"file\" name=\"rv_img_srcs\" /><br>";
-		//html += "<input class=\"upload-name\" id=\""+cnt+"\" value=\"파일선택\">";
+		cnt += 1;
+		var html = "<br><label class=\"labels\" for=\""+cnt+"\">파일 추가</label>";
+		html += "<input multiple=\"multiple\" id=\""+cnt+"\" type=\"file\" name=\"rv_img_srcs\" />";
+		html += "<input class=\"upload-name\" id=\"in"+cnt+"\" value=\"파일선택\"><br>";
 		$(".fileList").append(html);
+		
+		$(".labels").click(function(){
+			id = $(this).attr('for');
+			console.log('id11::'+id);
+			
+
+			$('#'+id).on('change',function(){
+				console.log('id33::'+id);
+				 var fileName = $('#'+id).val();
+				 $("#in"+id).val(fileName);
+			});
+		});
+		
+		
 	});
+	
 	
 	//이미지	
 	var buy_no = $('input[name=buy_no]').val();

@@ -125,8 +125,9 @@ input[name='rv_title']:focus, textarea:focus {
 
 .fileList{
 	float:left;
-	margin-top : 25px;
+	margin-top : 10px;
 	margin-left: 10px;
+	margin-bottom:20px;
 }
 
 .fileList input{
@@ -138,17 +139,17 @@ input[name='rv_title']:focus, textarea:focus {
 	margin-bottom: 50px;
 }
 
-
-/* .fileList input[type="file"] {
+/*첨부파일시작*/
+.fileList input[type="file"] {
   position: absolute;
   width: 0;
   height: 0;
   padding: 0;
   overflow: hidden;
   border: 0;
-} */
+}
 
-/* .fileList label {
+.fileList label {
   display: inline-block;
   padding: 10px 20px;
   color: #999;
@@ -157,19 +158,20 @@ input[name='rv_title']:focus, textarea:focus {
   cursor: pointer;
   border: 1px solid #ebebeb;
   border-radius: 5px;
-} */
+} 
 
-/* .fileList .upload-name {
-  display: inline-block;
-  height: 35px;
-  font-size:18px; 
-  padding: 0 10px;
-  vertical-align: middle;
-  background-color: #f5f5f5;
-  border: 1px solid #ebebeb;
-  border-radius: 5px;
+.fileList .upload-name {
+	margin-left:10px;
+	display: inline-block;
+	height: 20px;
+	font-size:18px;
+	vertical-align: middle;
+	background-color: #f5f5f5;
+	border: 1px solid #ebebeb;
+	border-radius: 5px;
 
-} */
+}
+/*첨부파일끝*/
 
 .content {
 	clear:both;

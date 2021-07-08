@@ -266,10 +266,29 @@
 	
 	//이미지 업로드
 	var fileAdd = $('#fileAdd');
-
-	fileAdd.click(function() {
-		var html = "<input multiple=\"multiple\" type=\"file\" name=\"pro_details\" /><br>";
+	var cnt = 0;
+	
+	var id = 0;
+	fileAdd.click(function(){
+		cnt += 1;
+		var html = "<br><label class=\"labels\" for=\""+cnt+"\">파일 추가</label>";
+		html += "<input multiple=\"multiple\" id=\""+cnt+"\" type=\"file\" name=\"pro_details\" />";
+		html += "<input class=\"upload-name\" id=\"in"+cnt+"\" value=\"파일선택\"><br>";
 		$(".fileList").append(html);
+		
+		$(".labels").click(function(){
+			id = $(this).attr('for');
+			console.log('id11::'+id);
+			
+
+			$('#'+id).on('change',function(){
+				console.log('id33::'+id);
+				 var fileName = $('#'+id).val();
+				 $("#in"+id).val(fileName);
+			});
+		});
+		
+		
 	});
 
 	//유효성검사
