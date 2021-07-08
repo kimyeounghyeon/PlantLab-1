@@ -17,14 +17,15 @@
 	<jsp:include page="header.jsp"></jsp:include>
 	<jsp:include page="mypagemenu.jsp"></jsp:include>
 	<div class="dbg">
-	<c:if test="${not empty admlistDiary }">
+	  <div class="main_header">
+                <h2 class="title">일기 관리</h2>
+            </div>
 		<form id="adminDiaryFrm">
 			<div class="adFrmDiv">
 				<button type="button" class="deleteAdminDiary">삭제하기</button>
+				<button id="goList">목록으로</button>
 			</div>
 		</form>
-	</c:if>
-	<br>
 	<form id="searchIdFrm">
 	<div class="selectAdminSearch">
 	<select name="search" class="adminSearch">
@@ -37,11 +38,7 @@
 		</button>
 		</div>
 	</form>
-	<c:if test="${not empty admlistDiary }">
-	<div class="listBtn">
-		<button id="goList">목록으로</button>
-	</div>
-	</c:if>
+
 	<table class="admdTable">
 		<tr class="admdtr">
 			<th class="admdth selectAlltd"><input type="checkbox"
@@ -67,7 +64,6 @@
 			</c:forEach>
 		</c:if>
 		<c:if test="${empty admlistDiary }">
-			<button id="list_normal">목록으로돌아가기</button>
 			<tr class="admmdtr">
 				<td class="admdtd emptyadmDiary" colspan="5">등록 된 게시물이 없습니다.
 					반려식물과의 일상을 기록해보세요!</td>
@@ -99,8 +95,8 @@
 			<a href="<%=request.getContextPath() %>/admindiary?page=${endPage+1}&keyword=${keyword}">다음</a>
 		</c:if>
 	</div>
-	
 </div>
+		<jsp:include page="footer.jsp"></jsp:include>
 	<script>
 $(function(){
 	var frm = document.getElementById("adminDiaryFrm");

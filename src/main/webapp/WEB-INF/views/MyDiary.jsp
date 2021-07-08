@@ -16,10 +16,15 @@
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
 	<jsp:include page="mypagemenu.jsp"></jsp:include>
+	<div class="dbg">
+	  <div class="main_header">
+                <h2 class="title">내가 쓴 일기</h2>
+            </div>
 	<c:if test="${not empty myDiary }">
 	<form id="myDiaryFrm">
 	<div class="frmDiv">
 	<button type="button" class="deleteMyDiary">삭제하기</button>
+	<button id="goMyList">목록으로</button>
 	</div>
 	</form>
 	</c:if>
@@ -29,7 +34,7 @@
 	</form>
 	<table class="mydTable">
 			<tr class="mdtr">
- 				<th class="mdth selectAlltd"><input type="checkbox" name="selectAll" class="selectAll">
+ 				<th class="mdth selectAlltd" ><input type="checkbox" name="selectAll" class="selectAll">
  				<th class="mdth mydNum"> NO </th>
 				<th class="mdth myContent"> 내용 </th>
 				<th class="mdth myDate"> 날짜 </th>
@@ -37,7 +42,6 @@
 			</tr>
 	<c:if test="${not empty myDiary }">
 		<c:forEach var="d" items="${myDiary}">
-			
 			<tr class="mdtr">
  				<td class="mdtd mydSelect"><input type="checkbox" name="selectChk" value="${d.diary_no }"></td>
  				<td class="mdtd mydNum">${d.diary_no }</td>
@@ -77,8 +81,8 @@
                   <a href="<%=request.getContextPath() %>/mydiary?page=${endPage+1}&keyword=${keyword}">다음</a>
             </c:if>
             </div>
-	<!-- TODO  -->
-	<button id="list_normal">목록으로돌아가기</button>
+        </div>
+            	<jsp:include page="footer.jsp"></jsp:include>
 
 <script>
 	$(function(){
@@ -94,14 +98,17 @@
 		});	
 
 
-	$("#list_normal").click(function(){  // TODO
-		 $(".admKeyword").val("");
+	$("#goMyList").click(function(){  // TODO
+		 $(".myKeyword").val("");
 		 location.href="mydiary";
 	});
 		
 	 	$(".deleteMyDiary").click(function(){
 			var checkVal = "";
+			
+			var result = confirm("정말 삭제하시겠습니까?");
 
+			if(result) {
  			$("input[name=selectChk]:checked").each(function(){
 			 checkVal = $(this).val(); 
 			 console.log("값" + checkVal);
@@ -113,7 +120,10 @@
       	
  			frm.action = "deletemydiary.do";
 			frm.method = "post";
-			frm.submit();   
+			frm.submit();  
+			 } else {
+				 history.back();
+			 }
  		}); 
 	 	
 	 	$(".mySearchBtn").click(function(){
@@ -122,7 +132,7 @@
 
 		if ($(".myKeyword").val() == "") {
 			console.log($(".myKeyword").val());
-			alert("검색어가 없습니다.");
+			alert("검색어가 없습니다.");                                                                                                                                                                                                                                                                                                                                                                                                        
 		} else {
 			mySearchfrm.action = "mydiary";
 			mySearchfrm.method = "post";

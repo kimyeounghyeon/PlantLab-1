@@ -6,16 +6,27 @@
 	margin : auto;
 }
 
-.selectAdminSearch {
-	position : fixed;
-	margin-left : 25px;
+ .main_header{
+    text-align: center;
+    height: 130px;
+    line-height: 100px;
+    padding-top: 20px;
+    color : #625b54;
+    /* background-color: bisque; */
 }
+
+
+.selectAdminSearch {
+    margin-bottom: 25px;
+    margin-left: 25px;
+    }
 
 .adminSearch {
 	border : none;
 	font-size : 13pt;
 	height : 30px;
 	text-align : center;
+	margin-left: 100px;
 }
 
 .admSearchicon {
@@ -36,9 +47,6 @@
     font-size: 12pt;
 }
 
-.selectAdminSearch {
-	margin-bottom : 0px;
-}
 
 .admSearchBtn {
 	border : none;
@@ -48,33 +56,34 @@
 }
 
 .deleteAdminDiary {
-	border : none;
-	background-color : white;
-	cursor:pointer;
-	font-size : 15pt;
-	font-weight : bold;
-	float : right;
-	margin-right : 10px;
-	margin-top : 20px;
-	color : #625b54;
+    border: none;
+    background-color: white;
+    cursor: pointer;
+    font-size: 14pt;
+    font-weight: bold;
+    float: right;
+    margin-right: 120px;
+    color: #625b54;
 }
 
 #goList {
-	border : none;
-	background-color : white;
-	cursor:pointer;
-	font-size : 15pt;
-	font-weight : bold;
-	float : right;
-	margin-right : 10px;
-	color : #625b54;
-	margin-top : 4px;
+	border: none;
+    background-color: white;
+    cursor: pointer;
+    font-size: 15pt;
+    font-weight: bold;
+    float: right;
+    margin-right: 10px;
+    color: #625b54;
 	}
 
 .admdTable {
 	clear : both;
-	border : 1px solid #b2b2b2;
-	margin: 50px auto;
+    border: solid 1px #ccc;
+    border-radius: 10px;
+    padding: 10px;
+    margin: auto;
+    width: 80%;
 }
 
 .admdtr {
@@ -133,6 +142,7 @@
 
 .regis_page {
 	text-align : center;
+	margin-top: 40px;
 }
 
 .admdNum {
