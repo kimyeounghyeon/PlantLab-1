@@ -38,7 +38,7 @@
 	]]>
  	</select>
  	
-	<!-- 아이디를 통한 게시글 검색 -->
+	<!-- 관리자 / diary 아이디를 통한 게시글 검색 -->
  	<select id="searchId" parameterType="String" resultType="DiaryVO">
  	 	<![CDATA[
 		select diaryall.*, liketb.like_cnt from 
@@ -57,7 +57,7 @@
 	]]>
  	</select>
  	
-	<!-- 내용을 통한 게시글 검색 -->
+	<!-- 관리자 / diary 내용을 통한 게시글 검색 -->
  	<select id="searchContent" parameterType="String" resultType="DiaryVO">
  	 	<![CDATA[
 		select diaryall.*, liketb.like_cnt from 
@@ -75,7 +75,7 @@
 	]]>
  	</select>
  	
- 	<!-- 아이디를 통한 게시글 개수 -->
+ 	<!-- 관리자 / diary 아이디를 통한 게시글 개수 -->
  	<select id="getSearchIdListCount" parameterType="String" resultType="int">
  	 	<![CDATA[
 		select count(*) from 
@@ -93,7 +93,7 @@
 	]]>
  	</select>
  	
- 	<!-- 내용을 통한 게시글 개수 -->
+ 	<!-- 관리자 / diary 내용을 통한 게시글 개수 -->
  	<select id="getSearchContentListCount" parameterType="String" resultType="int">
  	 	<![CDATA[
 		select count(*) from 
@@ -111,6 +111,41 @@
 	]]>
  	</select>
  	
+ 	<!-- 마이페이지 내용을 통한 게시글 개수 -->
+ 	<select id="getSearchContentMyListCount" parameterType="DiaryVO" resultType="int">
+ 	 	<![CDATA[
+		select count(*) from 
+	    (
+	    select udt.*, dit.diary_img_num, dit.diary_img_src from 
+	        (select dt.*, ut.user_id, ut.user_name from diary_tb dt left outer join user_tb ut on dt.diary_write = ut.user_no) udt 
+	    left outer join 
+	        diary_img_tb dit 
+	    on dit.diary_no = udt.diary_no 
+	    ) diaryall
+		left join 
+		    (select diary_no, count(*) as like_cnt from like_tb group by diary_no) liketb
+		on diaryall.diary_no = liketb.diary_no 
+		where diaryall.diary_content LIKE '%'||#{diary_content}||'%' and diaryall.diary_write = #{diary_write}
+	]]>
+ 	</select>
+ 	
+ 	<!-- 마이페이지 내용을 통한 게시글 검색 -->
+ 	<select id="searchMyContent" parameterType="DiaryVO" resultType="DiaryVO">
+ 	 	<![CDATA[
+		select diaryall.*, liketb.like_cnt from 
+	    (
+	    select udt.*, dit.diary_img_num, dit.diary_img_src from 
+	        (select dt.*, ut.user_id, ut.user_name from diary_tb dt left outer join user_tb ut on dt.diary_write = ut.user_no) udt 
+	    left outer join 
+	        diary_img_tb dit 
+	    on dit.diary_no = udt.diary_no 
+	    ) diaryall
+		left join 
+		    (select diary_no, count(*) as like_cnt from like_tb group by diary_no) liketb
+		on diaryall.diary_no = liketb.diary_no where diaryall.diary_content LIKE '%'||#{diary_content}||'%' and diaryall.diary_write = #{diary_write}
+		order by diaryall.diary_date desc
+	]]>
+ 	</select>
  	
  	<!-- 마이 페이지 게시글 갯수 구하기 -->
  	<select id="getlistCount" resultType="int">
@@ -206,13 +241,13 @@
  	
  	
  	<!-- 마이페이지 게시글 조회 -->
- 	<select id="mydiary" parameterType="int" resultType="DiaryVO">
+ 	<select id="myDiary" parameterType="int" resultType="DiaryVO">
 	select * from diary_tb dt left outer join (select diary_no, count(*) as like_cnt from like_tb group by diary_no) liketb on dt.diary_no = liketb.diary_no where diary_write = #{diary_write} order by diary_date desc
  	</select>
  	
  	<!-- 마이페이지 내용 조회 -->
  	<select id="myContent" parameterType="DiaryVO" resultType="DiaryVO">
- 		select * from diary_tb dt left outer join (select diary_no, count(*) as like_cnt from like_tb group by diary_no) liketb on dt.diary_no = liketb.diary_no where diary_write = #{diary_write} and diary_content LIKE '%'||#{keyword}||'%' order by diary_date desc
+ 		select * from diary_tb dt left outer join (select diary_no, count(*) as like_cnt from like_tb group by diary_no) liketb on dt.diary_no = liketb.diary_no where diary_write = #{diary_write} and diary_content LIKE '%'||#{diary_content}||'%' order by diary_date desc
  	</select>
  	
  	<!-- 관리자 페이지 게시글 조회 -->

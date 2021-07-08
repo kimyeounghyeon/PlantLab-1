@@ -19,6 +19,7 @@ public interface DiaryService {
 	
 	public int getSearchIdListCount(String keyword);
 	public int getSearchContentListCount(String keyword);
+	public int getSearchContentMyListCount(DiaryVO vo);
 	
 	public int getlistCount(int diary_write);
 	public int getListCountAll();

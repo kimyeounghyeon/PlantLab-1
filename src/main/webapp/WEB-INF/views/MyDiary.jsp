@@ -16,7 +16,7 @@
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
 	<jsp:include page="mypagemenu.jsp"></jsp:include>
-	<c:if test="${not empty mydiary }">
+	<c:if test="${not empty myDiary }">
 	<form id="myDiaryFrm">
 	<div class="frmDiv">
 	<button type="button" class="deleteMyDiary">삭제하기</button>
@@ -25,7 +25,7 @@
 	</c:if>
 	<br>
 	<form id="searchMyDiary">
-	<input type="text" name="myKeyword" class="myKeyword" placeholder="검색어를 입력해주세요.">&nbsp;<button type="button" class="mySearchBtn"><img src="${path }/resources/img/search.png" class="mySearchicon"></button>
+	<input type="text" name="keyword" class="myKeyword" placeholder="검색어를 입력해주세요." value="${keyword }" >&nbsp;<button type="button" class="mySearchBtn"><img src="${path }/resources/img/search.png" class="mySearchicon"></button>
 	</form>
 	<table class="mydTable">
 			<tr class="mdtr">
@@ -35,59 +35,50 @@
 				<th class="mdth myDate"> 날짜 </th>
 				<th class="mdth myLike"> <img class="likeimg" src="${path }/resources/img/색변경좋아요.png"> </th>
 			</tr>
-	<c:if test="${not empty mydiary }">
-		<c:forEach var="d" items="${mydiary}">
-			<c:set var="i" value="${i+1 }" />
+	<c:if test="${not empty myDiary }">
+		<c:forEach var="d" items="${myDiary}">
+			
 			<tr class="mdtr">
  				<td class="mdtd mydSelect"><input type="checkbox" name="selectChk" value="${d.diary_no }"></td>
- 				<td class="mdtd mydNum">${i}</td>
+ 				<td class="mdtd mydNum">${d.diary_no }</td>
 				<td class="mdtd myContent"><div class="contentmove"><a href='detaildiary?diary_no=${d.diary_no}' class="aContentLink">${d.diary_content}</a></div></td>
 				<td class="mdtd myDate">${d.diary_date}</td>
 				<td class="mdtd myLike">${d.like_cnt}</td>
 			</tr>
 		</c:forEach>
 		</c:if>
-		<c:if test="${empty mydiary }">
+		<c:if test="${empty myDiary }">
 		<tr class="mdtr">
-			<td class="mdtd emptyDiary" colspan="5"> 등록 된 게시물이 없습니다. 반려식물과의 일상을 기록해보세요!</td>
+			<td class="mdtd emptyDiary" colspan="5"> 등록 된 게시물이 없습니다.
+			 반려식물과의 일상을 기록해보세요!</td>
 		</tr>
 		<tr class="mdtr">
 			<td class="mdtd moveDiary" colspan="5"><a href="<%=request.getContextPath() %>/diary" class="aMoveDiary">일기 쓰러 가기</a> 
 		</tr>
-		</c:if>
-		<c:if test="${not empty SearchMylistDiary }">
-		<c:forEach var="smld" items="${SearchMylistDiary}">
-			<c:set var="i" value="${i+1 }" />
-			<tr class="mdtr">
- 				<td class="mdtd mydSelect"><input type="checkbox" name="selectChk" value="${smld.diary_no }"></td>
- 				<td class="mdtd mydNum">${i}</td>
-				<td class="mdtd myContent"><div class="contentmove"><a href='detaildiary?diary_no=${smld.diary_no}' class="aContentLink">${smld.diary_content}</a></div></td>
-				<td class="mdtd myDate">${smld.diary_date}</td>
-				<td class="mdtd myLike">${smld.like_cnt}</td>
-			</tr>
-		</c:forEach>
-		</c:if>
-	</table>
+				</c:if>
+					</table>
 	        <div class="regis_page">
             <c:if test="${startPage != 1 }">
-                  <a href="<%=request.getContextPath() %>/mydiary?page=${startPage-1}">이전</a>
+                  <a href="<%=request.getContextPath() %>/mydiary?page=${startPage-1}&keyword=${keyword}">이전</a>
             </c:if>
             <c:forEach var="p" begin="${startPage}" end="${endPage}" step="1">
                 <c:if test="${p eq currentPage}">
-                   <font color="#6A60A9" size="4"><b>[${p}]</b></font>
+                   <font color="#6A60A9" size="4"><b> ${p} </b></font>
                 </c:if>
                 <c:if test="${p ne currentPage}">
                 <c:url var="diaryChk" value="mydiary">
                 	<c:param name="page" value="${p}" />
+			<c:param name="keyword" value="${keyword}" />
 						</c:url>
-							<a href="${diaryChk}" class="aLink"><b>[${p}]</b></a>
-<%--                    <a href="<%=request.getContextPath() %>/mydiary?page=${endPage+1}"></a><font color="gray" size="4"><b>[${p}]</b></font></a>
- --%>                </c:if>
+			<a href="${diaryChk}" class="aLink"><b> ${p} </b></a>
+                </c:if>
              </c:forEach>
             <c:if test="${endPage < pageCnt }">
-                  <a href="<%=request.getContextPath() %>/mydiary?page=${endPage+1}">다음</a>
+                  <a href="<%=request.getContextPath() %>/mydiary?page=${endPage+1}&keyword=${keyword}">다음</a>
             </c:if>
             </div>
+	<!-- TODO  -->
+	<button id="list_normal">목록으로돌아가기</button>
 
 <script>
 	$(function(){
@@ -102,6 +93,11 @@
 			}
 		});	
 
+
+	$("#list_normal").click(function(){  // TODO
+		 $(".admKeyword").val("");
+		 location.href="mydiary";
+	});
 		
 	 	$(".deleteMyDiary").click(function(){
 			var checkVal = "";
@@ -121,9 +117,17 @@
  		}); 
 	 	
 	 	$(".mySearchBtn").click(function(){
-	 		searchMyDiary.action = "mydiary";
-	 		searchMyDiary.method = "post";
-	 		searchMyDiary.submit();
+		console.log("클릭눌렀음");
+		console.log($(".myKeyword").val());
+
+		if ($(".myKeyword").val() == "") {
+			console.log($(".myKeyword").val());
+			alert("검색어가 없습니다.");
+		} else {
+			mySearchfrm.action = "mydiary";
+			mySearchfrm.method = "post";
+			mySearchfrm.submit();
+		}
 	 	});
 	});
 

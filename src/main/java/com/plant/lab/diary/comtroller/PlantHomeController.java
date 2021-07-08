@@ -583,7 +583,7 @@ public class PlantHomeController {
 	// 마이페이지
 	@RequestMapping(value="/mydiary")
 	public ModelAndView mydiary(HttpServletRequest request, HttpServletResponse response, HttpSession session, ModelAndView mv,  @RequestParam(name="page", defaultValue = "1") int page,
-			@RequestParam(name="myKeyword", required = false) String keyword) {
+			@RequestParam(name="keyword", required = false) String keyword) {
 		System.out.println("[ㅇㅎ]page: "+ page);
 		
 		DiaryVO vo = new DiaryVO();
@@ -594,45 +594,58 @@ public class PlantHomeController {
 		vo.setDiary_write(diary_write);
 		vo.setDiary_content(keyword);
 
-		  int listCount = dService.getlistCount(diary_write);	
-		  int pageCnt = (listCount / LIMIT) + (listCount % LIMIT == 0 ? 0 : 1);
-		  int currentPage = page;
-		  
-		  int startPage = 1;
-		  int endPage = 5;
-		  if(currentPage % pageBlock == 0) {
-		     startPage = ((currentPage/pageBlock)-1) * pageBlock + 1;
-		  }else {
-		     startPage = ((currentPage/pageBlock)) * pageBlock + 1;
-		  }
-		  endPage = startPage + pageBlock - 1;
-		  
-		  if(endPage > pageCnt)
-		     endPage = pageCnt;
-		  
-		  int maxPage = (int)((double) listCount / LIMIT + 0.9 );
-		  mv.addObject("pageCnt", pageCnt);
-		  mv.addObject("startPage", startPage);
-		  mv.addObject("endPage", endPage);
-		  mv.addObject("currentPage", currentPage);
-		  mv.addObject("maxPage", maxPage);
-		  mv.addObject("diary_write", diary_write);
-		  mv.addObject("listCount", listCount);
-		
-		//검색어가 있을 경우
-		if (keyword != null && !keyword.equals("")) {
-		mv.addObject("currentPage", null);
-		mv.addObject("SearchMylistDiary", dService.myContent(currentPage, LIMIT, vo));			
-		System.out.println("1");
-		}
-		else { //검색어가 없을 경우
-		mv.addObject("currentPage", currentPage);
-		mv.addObject("mydiary", dService.myDiary(currentPage, LIMIT, diary_write));	
-		System.out.println("2");
-		
-		}
-		mv.setViewName("MyDiary");
-		
+		int listCount = 0;  //초기화
+
+	     int currentPage = page;
+	     System.out.println("currentPage" + currentPage);
+	      
+	      int startPage = 1;
+	      int endPage = 5;
+	      if(currentPage % pageBlock == 0) {
+	         startPage = ((currentPage/pageBlock)-1) * pageBlock + 1;
+	      }else {
+	         startPage = ((currentPage/pageBlock)) * pageBlock + 1;
+	      }
+	      endPage = startPage + pageBlock - 1;
+	      
+
+	      System.out.println("검색어는 " + keyword);
+	      List<DiaryVO> result = null;
+			//검색어가 있을 경우
+			if (keyword != null && !keyword.equals("")) {
+				//TODO: select box 조건 확인 if else  7
+				listCount = dService.getSearchContentMyListCount(vo);  // 찾은 글 갯수
+				result= dService.myContent(currentPage, LIMIT, vo);
+				System.out.println("1");
+				System.out.println("1 ----- "+ result.toString());
+				mv.addObject("keyword", keyword);
+				
+			}
+			else { //검색어가 없을 경우
+				listCount = dService.getlistCount(diary_write);  // 총 글 갯수
+				result= dService.myDiary(currentPage, LIMIT, diary_write);	
+				System.out.println("2");
+				System.out.println("2 ----- "+ result.toString());
+				keyword = null;
+			}
+	
+		     int pageCnt = (listCount / LIMIT) + (listCount % LIMIT == 0 ? 0 : 1);
+		     System.out.println("pageCnt" + pageCnt);
+		     
+			if(endPage > pageCnt)
+				endPage = pageCnt;
+			
+			int maxPage = (int)((double) listCount / LIMIT + 0.9 );
+			
+		  mv.addObject("myDiary", result);
+	      mv.addObject("pageCnt", pageCnt);
+	      mv.addObject("startPage", startPage);
+	      mv.addObject("endPage", endPage);
+	      mv.addObject("currentPage", currentPage);
+	      mv.addObject("maxPage", maxPage);
+	      mv.addObject("listCount", listCount);
+	      System.out.println("끝!");
+	      mv.setViewName("MyDiary");
 		return mv;
 	}
 	

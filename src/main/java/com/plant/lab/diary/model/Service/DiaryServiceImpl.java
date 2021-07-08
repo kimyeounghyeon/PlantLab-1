@@ -89,7 +89,7 @@ public class DiaryServiceImpl implements DiaryService {
 	}
 	// 검색 글 갯수
 	@Override
-	public int getSearchIdListCount(String keyword) {;
+	public int getSearchIdListCount(String keyword) {
 		int result= -1;
 		try {
 			result = dDao.getSearchIdListCount(keyword);
@@ -99,7 +99,7 @@ public class DiaryServiceImpl implements DiaryService {
 		return result;
 	}
 	@Override
-	public int getSearchContentListCount(String keyword) {;
+	public int getSearchContentListCount(String keyword) {
 		int result= -1;
 		try {
 			result = dDao.getSearchContentListCount(keyword);
@@ -107,6 +107,17 @@ public class DiaryServiceImpl implements DiaryService {
 			e.printStackTrace();
 		}
 		return result;
+	}
+	
+	@Override
+	public int getSearchContentMyListCount(DiaryVO vo) {
+	int result= -1;
+	try {
+		result = dDao.getSearchContentMyListCount(vo);
+	} catch(Exception e) {
+		e.printStackTrace();
+	}
+	return result;
 	}
 	
 	// 게시글 수 구하기

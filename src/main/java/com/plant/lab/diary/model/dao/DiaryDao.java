@@ -50,11 +50,14 @@ public class DiaryDao {
 		List<DiaryVO> result = sqlSession.selectList("Diary.searchContent", keyword, row);
 		return result;
 	}	
-	public int getSearchIdListCount(String keyword) {;
+	public int getSearchIdListCount(String keyword) {
 		return sqlSession.selectOne("Diary.getSearchIdListCount",keyword);
 	}
-	public int getSearchContentListCount(String keyword) {;
-		return sqlSession.selectOne("Diary.getSearchContentListCount",keyword);
+	public int getSearchContentMyListCount(DiaryVO vo) {
+	return sqlSession.selectOne("Diary.getSearchContentMyListCount", vo);
+	}
+	public int getSearchContentListCount(String keyword) {
+		return sqlSession.selectOne("Diary.getSearchContentListCount", keyword);
 	}
 
 	
@@ -161,13 +164,13 @@ public class DiaryDao {
 	public List<DiaryVO> myDiary(int startPage, int limit, int diary_write){
 	      int offset = (startPage - 1) * limit;
 	      RowBounds row = new RowBounds(offset, limit);
-	      return sqlSession.selectList("Diary.mydiary", diary_write, row);
+	      return sqlSession.selectList("Diary.myDiary", diary_write, row);
 	   }
 	
 	public List<DiaryVO> myContent(int startPage, int limit, DiaryVO vo){
 		int offset = (startPage - 1) * limit;
 		RowBounds row = new RowBounds(offset, limit);
-		return sqlSession.selectList("Diary.mydiary", vo, row);
+		return sqlSession.selectList("Diary.myContent", vo, row);
 	}
 	
 

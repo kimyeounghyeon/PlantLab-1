@@ -69,7 +69,7 @@
 	<div class="regis_page">
 		<c:if test="${startPage != 1 }">
 			<a
-				href="<%=request.getContextPath() %>/admindiary?page=${startPage-1}">이전</a>
+				href="<%=request.getContextPath() %>/admindiary?page=${startPage-1}&keyword=${keyword}">이전</a>
 		</c:if>
 		<c:forEach var="p" begin="${startPage}" end="${endPage}" step="1">
 			<c:if test="${p eq currentPage}">
