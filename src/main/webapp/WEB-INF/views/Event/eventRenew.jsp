@@ -22,15 +22,23 @@
     margin-right : auto;
     }
     #erebtn{
-   	background: #625b54;
+    background: #625b54;
   	color : white;
- 	border : none;
+  	border : none;
+  	width :75px;
+ 	height : 28px;
     }
    .mwn{
 	width : 400px;
 	border : 1px solid #625b54;
+	height:26px;
 	}
-	
+	.mtop{
+	padding-top : 10px;
+	}
+	.hei{
+height:26px; 
+}
     </style>
 </head>
 <body>
@@ -40,42 +48,44 @@
 <form action="eUpdate" method="post" enctype="multipart/form-data">
 
 	<input type="hidden" name="event_no" value="${event_tb.event_no}">
+		<h3 align="center">이벤트 수정하기</h3>
 		<table class="eretb">
 			<tr>
-				<td>이벤트 제목</td>
+				<td td class="mtop">이벤트 제목</td>
 			</tr>
 			<tr>
-				<td><input type="text" class="mwn" name="event_title" value="${event_tb.event_title}"></td>
+				<td ><input type="text" class="mwn" name="event_title" value="${event_tb.event_title}"></td>
 			</tr>
 			<tr>
-				<td>배너 이미지</td>
+				<td td class="mtop">배너 이미지</td>
 			</tr>
 			<tr>
-				<td class="mwn"><input type="file" name="upfile1" value="${event_tb.banner}"></td>
+				<td class="mwn"><input type="file" name="upfile1" class="hei" value="${event_tb.banner}"></td>
 			</tr>
 			<tr>
-				<td>이벤트 내용</td>
+				<td td class="mtop">이벤트 내용</td>
 			</tr>
 			<tr>
-				<td class="mwn"><input type="file" name="upfile2" value="${event_tb.event_content}"></td>
+				<td class="mwn"><input type="file" name="upfile2" class="hei" value="${event_tb.event_content}"></td>
 			</tr>
 			<tr>
-				<td>이벤트 시작일</td>
+				<td td class="mtop">이벤트 시작일</td>
 			</tr>
 			<tr>
 				<td><input type="text" class="mwn"name="start_date" value="${event_tb.start_date}"></td>
 			</tr>
 			<tr>
-				<td>이벤트 종료일</td>
+				<td td class="mtop">이벤트 종료일</td>
 			</tr>
 			<tr>
 				<td><input type="text"  class="mwn" name="end_date" value="${event_tb.end_date}"></td>
 				</tr>
 			<tr>
-			<br>	
-			<td colspan = "2" align = "center"><button type="submit" id="erebtn">수정완료</button></td>
-			</tr>	
 		</table>
+			<br>	
+				<div align="center">
+					<button type="submit" id="erebtn">수정완료</button>
+				</div>	
 	</form>
 	</div>
 	<jsp:include page="../footer.jsp"></jsp:include>

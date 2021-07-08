@@ -21,22 +21,24 @@
   color : white;
   border : none;
   width :75px;
-  height : 25px;
-
+  height : 28px;
   }
 .ewriteform{
   margin-left : auto;
   margin-right : auto;
  
-}
+	}
 .mwn{
-width : 400px;
-border : 1px solid #625b54;
-height:26px;
-}
+	width : 400px;
+	border : 1px solid #625b54;
+	height:26px;
+	}
 .hei{
-height:26px; 
-}
+	height:26px; 
+	}
+.mtop{
+	padding-top : 10px;
+	}
 </style>
 </head>
 <body>
@@ -45,32 +47,32 @@ height:26px;
 		<div id="ediv">
 			<h3 align="center">이벤트 등록하기</h3>
 			<table class="ewriteform">
-				<tr class="">
-					<td>이벤트 제목</td>
+				<tr>
+					<td class="mtop">이벤트 제목</td>
 				</tr>
 				<tr>
-					<td><input type="text" class="mwn" name="event_title"></td>
+					<td><input type="text" class="mwn" name="event_title" placeholder="제목을 입력해주세요"></td>
 				</tr>
 				<tr>
-					<td>배너 이미지</td>
+					<td class="mtop">배너 이미지</td>
 				</tr>
 				<tr>
 					<td class="mwn"><input type="file" class="hei" name="upfile1"></td>
 				</tr>
 				<tr>
-					<td>이벤트 내용</td>
+					<td class="mtop">이벤트 내용</td>
 				</tr>
 				<tr>
 					<td class="mwn"><input type="file"  class="hei" name="upfile2"></td>
 				</tr>
 				<tr>
-					<td>이벤트 시작일</td>
+					<td class="mtop">이벤트 시작일</td>
 				</tr>
 				<tr>
 					<td ><input type="text"  class="mwn" name="start_date" placeholder="yyyy.mm.dd"></td>
 				</tr>
 				<tr>
-					<td>이벤트 종료일</td>
+					<td class="mtop">이벤트 종료일</td>
 				</tr>
 				<tr class="hei">
 					<td><input type="text"  class="mwn" name="end_date" placeholder="yyyy.mm.dd"></td>

@@ -26,16 +26,19 @@ border-radius : 30px;
 }
 
 #eventsub{
-width : 470px;
+width : 530px;
 font-size : 20px;
 font-weight : bold;
-	
+}
+a#ref:visited { 
+text-decoration : none;
+color: #625b54;
 }
 #period{
-width : 200px;
+width : 160px;
 }
 #viewimg{
-width : 30px;
+width : 20px;
 line-height : 100%;
 }
 #eimg{
@@ -82,7 +85,7 @@ width : 750px;
         <c:forEach var="vo" items="${list}">
         <tr>
            	<td colspan="4">
-	           	<a href="eDetail?event_no=${vo.event_no}">
+	           	<a id="ref" href="eDetail?event_no=${vo.event_no}">
 	           		<img class="eventbanner" src="<%=request.getContextPath() %>/resources/img/${vo.banner}">
 	           	</a>
            	</td>

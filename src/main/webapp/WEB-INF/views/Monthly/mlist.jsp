@@ -28,9 +28,10 @@ function showInsertForm() {
   background: #625b54;
   color : white;
   border : none;
-  margin-left : 1140px;
-    width :75px;
-  height : 25px;
+  margin-left : 710px;
+  width :75px;
+  height : 28px;
+
 }
 .mlisttb{
  margin-left : auto;
@@ -42,7 +43,7 @@ function showInsertForm() {
 .mimg{
 width : 150px;
 height : 170px;
-padding : 3px;
+padding  : 5px;
 }
 #mdate{
 width : 200px;
@@ -61,6 +62,8 @@ width : 100px;
 
 <h2 align="center" >이달의 식물</h2>
 <button id="subtn" type="button" onclick="window.location='mWrite'">등록하기</button>
+<br>
+<br>
 	<table class="mlisttb">
 		<tr class="bottomline" >
 			<td>No</td>
@@ -107,6 +110,7 @@ width : 100px;
 		</c:if>
 		
 		<!-- 앞 페이지 번호 처리 -->
+		<br>
 		<tr align="center" height="20">
 			<td colspan=6">
 			<c:if test="${currentPage <= 1}">이전&nbsp; </c:if> 

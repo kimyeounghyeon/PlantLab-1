@@ -36,7 +36,7 @@
 	}
 	#plantname{
 	width : 500px;
-	font-size:22px;
+	font-size:20px;
 	margin-left: auto;
 	margin-top : 10px;
 	margin-right: auto;

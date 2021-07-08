@@ -21,20 +21,27 @@ margin-right:auto;
 margin-left: auto;
 }
 #renew{
- background: #625b54;
+  background: #625b54;
   color : white;
   border : none;
+  width :75px;
+  height : 28px;
 }
 .mwn{
-width : 400px;
-border : 1px solid #625b54;
+	width : 400px;
+	border : 1px solid #625b54;
+	height:26px;
 }
+.mtop{
+	padding-top : 10px;
+	}
 </style>
 </head>
 <body>
 	<jsp:include page="../header.jsp"></jsp:include>
 	<jsp:include page="../mypagemenu.jsp"></jsp:include>
 	<div class="mupdiv">
+	<h3 align="center">이달의 식물 수정하기</h3>
 	<form name="renewForm" action="mUpdate" method="post" enctype="multipart/form-data">
 		<input type="hidden" name="monthly_no" value="${monthly.monthly_no}">
 		<input type="hidden" name="monthly_img" value="${monthly.monthly_img}">
@@ -42,13 +49,13 @@ border : 1px solid #625b54;
 	
 		<table id="mupform">
 			<tr>
-				<td>식물 이름</td>
+				<td class="mtop">식물 이름</td>
 			</tr>
 			<tr>
 				<td><input type="text" class="mwn" name="monthly_name" value="${monthly.monthly_name}"></td>
 			</tr>
 			<tr>
-				<td>현재 식물 이미지</td>
+				<td class="mtop">현재 식물 이미지</td>
 			</tr>
 			<tr>
 				<td class="mwn">
@@ -56,7 +63,7 @@ border : 1px solid #625b54;
 				</td>
 			</tr>
 			<tr>
-				<td>식물 이미지</td>
+				<td class="mtop">식물 이미지</td>
 			</tr>
 			<tr>
 				<td class="mwn"><input type="file" name="upfile"></td>
