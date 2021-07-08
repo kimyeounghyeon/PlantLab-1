@@ -21,7 +21,7 @@
 	</insert>
 	<!--출석  여부 체크  -->
   	<select id="attChk" parameterType="Att_tb" resultType="int">
-		select count(*) from att_tb where user_no =#{user_no} and to_char(att_date,'yyyy-mm-dd')= to_char(sysdate,'yyyy-mm-dd')
+		select count(*) from att_tb where user_no =#{user_no} and TO_CHAR(att_date,'yyyy-mm-dd')= TO_CHAR(sysdate,'yyyy-mm-dd')
 	</select>
 	<!--출석  횟수  -->
   	<select id="attCnt" parameterType="Att_tb" resultType="int">

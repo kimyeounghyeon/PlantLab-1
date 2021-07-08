@@ -104,7 +104,7 @@
                	<li><a class="linkmenu" href="${path}/mlist">이달의 식물 관리</a></li>
              </ul>
              <ul>   
-                <li><a class="linkmenu" href="${path}/">문의 관리</a></li>
+                <li><a class="linkmenu" href="${path}/inquery">문의 관리</a></li>
                 <li><a class="linkmenu" href="${path}/">후기 관리</a></li>
                 <li><a class="linkmenu" href="${path}/">회원 관리</a></li>
                 <li><a class="linkmenu" href="${path}/">신고 관리</a></li>

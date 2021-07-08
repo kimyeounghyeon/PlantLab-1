@@ -29,7 +29,7 @@ public class AttDao {
 		}
 	// 출석 여부 확인
 		public int attChk(Att_tb a) {
-			return sqlSession.selectOne("Att_tb.attCnt", a);
+			return sqlSession.selectOne("Att_tb.attChk", a);
 		}
 		
 }

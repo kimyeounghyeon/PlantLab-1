@@ -16,6 +16,9 @@
 .adiv{
 clear : both;
 }
+.attcnt{
+font-size : 20px;
+}
 .aimg{
 margin-left : auto;
 margin-right : auto;
@@ -68,7 +71,7 @@ height:20px;
 width:120px;
 height:120px;
 }
-#ebtn{
+.ebtn{
 width : 300px;
 height: 50px;
 font-size: 25px;
@@ -129,22 +132,24 @@ border : none;
 				$(".aimg").html("");
 				if( aa <= 9) {
 					attimg = "<img class='img' src='${path}/resources/img/1.jpg'>";
-					
+					attimg += "<div class='attcnt'>"+aa+"/30</div>";
 				}else if ( 10 <= aa && aa <= 19 ){
 					attimg = "<img class='img' src='${path}/resources/img/2.jpg'>";
-					
+					attimg += "<div class='attcnt'>"+aa+"/30</div>";
 				}else if ( 20 <= aa && aa <= 29){
 					attimg = "<img class='img' src='${path}/resources/img/3.jpg'>";
-					
+					attimg += "<div class='attcnt'>"+aa+"/30</div>";
 				}else if ( aa = 30){
 					attimg = "<img class='img' src='${path}/resources/img/4.jpg'>";
-					
+					attimg += "<div class='attcnt'>"+aa+"/30</div><br>";
+					attimg += "<div><button class='ebtn'>이벤트 신청하기</button></div>"
 				
 				}
 				$(".aimg").html(attimg);
 				},
 			error : function() {
-				alert("잘못 된 접근입니다.");
+				alert("로그인 후 이용해주세요");
+	               location.href="login";
 			}
 		});
 	});
@@ -162,22 +167,23 @@ border : none;
 					
 					if( aa <= 9) {
 						attimg = "<img class='img' src='${path}/resources/img/1.jpg'>";
-						attimg += aa+"/30";
+						attimg += "<div class='attcnt'>"+aa+"/30</div>";
 					}else if ( 10 <= aa && aa <= 19 ){
 						attimg = "<img class='img' src='${path}/resources/img/2.jpg'>";	
-						attimg += aa+"/30";
+						attimg += "<div class='attcnt'>"+aa+"/30</div>";
 					}else if ( 20 <= aa && aa <=29){
 						attimg = "<img class='img' src='${path}/resources/img/3.jpg'>";
-						attimg += aa+"/30";
+						attimg += "<div class='attcnt'>"+aa+"/30</div>";
 					}else if ( aa=30){
 						attimg = "<img class='img' src='${path}/resources/img/4.jpg'>";
-						attimg += "<div>"+aa+"/30</div><br>";
-						attimg += "<div><button id='ebtn'>이벤트 신청하기</button></div>"
+						attimg += "<div class='attcnt'>"+aa+"/30</div><br>";
+						attimg += "<div><button class='ebtn'>이벤트 신청하기</button></div>"
 					}
 					  $(".aimg").html(attimg);
 					},
 				error : function() {
-					alert("잘못 된 접근입니다.");
+					alert("로그인 후 이용해주세요");
+		              location.href="login";
 				}
 			});
 			

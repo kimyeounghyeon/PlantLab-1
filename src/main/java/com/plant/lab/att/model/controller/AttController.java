@@ -58,10 +58,13 @@ public class AttController {
 			MemberVO member = (MemberVO) session.getAttribute("loginMember");
 			asessionVO.setUser_no(member.getUserNo());
 			
-			//if(aService.attChk(asessionVO)==0) {
+			int cnt= aService.attChk(asessionVO);
+			logger.info("출석 여부 0이면 add " + cnt);
+			
+			if(cnt==0) {
 				int result = aService.insertAtt(asessionVO);
-				logger.info("attendance.do에서 result = 출석은 " + result);
-			//}
+				logger.info("출석은 " + result);
+			}
 		   
 			int attCnt = aService.attCnt(asessionVO);
 		      
