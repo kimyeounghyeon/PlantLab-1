@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -46,7 +47,7 @@ public class ReviewController {
 //리뷰작성이동
 	@RequestMapping(value="/revieWrite", method=RequestMethod.POST)
 	public ModelAndView revieWrite(ModelAndView mv,HttpSession session,
-			@RequestParam(value="buy_no",required=true) int buy_no,
+			@RequestParam(value="buy_no",required=true) int buy_no,RedirectAttributes redirectAttributes,
 			HttpServletRequest req) {
 		logger.info("===============리뷰작성 페이지===============");
 		logger.info("buy_no체크::::"+buy_no);
@@ -58,7 +59,10 @@ public class ReviewController {
 		
 		if(check != 0 || check > 0) {
 			logger.info("check체크::::"+check);
-			mv.setViewName("redirect:orderList");
+			redirectAttributes.addFlashAttribute("rvMsg", "ok");
+			String referer = req.getHeader("Referer");
+			 
+			mv.setViewName("redirect:"+ referer);
 			mv.addObject("rvMsg","ok");
 			return mv;
 		}else {

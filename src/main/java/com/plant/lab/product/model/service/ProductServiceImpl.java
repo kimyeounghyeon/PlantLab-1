@@ -53,6 +53,7 @@ public class ProductServiceImpl implements ProductService{
 		return proDao.selectOne(pro_no);
 	};
 
+	//상품추가
 	@Transactional
 	@Override
 	public int insertPro(Product product,List<String> img) {
@@ -72,23 +73,30 @@ public class ProductServiceImpl implements ProductService{
 		return result;
 	}
 
-
+	//상품업데이트
 	@Transactional
 	@Override
-	public int updateProduct(Product product) {
-		return 0;
+	public int updatePro(Product product){
+		return proDao.updatePro(product);
 	}
 
+	//상품재고업데이트
 	@Transactional
 	@Override
 	public int updateStock(Product product) {
 		return proDao.updateStock(product);
 	}
 	
+	//상품삭제
 	@Transactional
 	@Override
-	public int deleteProduct(int pro_no) {
-		return 0;
+	public int deletePro(int pro_no) {
+		int result = 0;
+		
+		result = proConDao.deleteProD(pro_no);
+		result = proDao.deletePro(pro_no);
+		
+		return result;
 	}
 	
 	//별점업데이트

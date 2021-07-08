@@ -61,7 +61,7 @@ select{
     margin-bottom: 10px;
 }
 
-#fileAdd,.addBtn{
+#fileAdd,.addBtn,.modyBtn{
 	display:block;
 	float:left;
 	background-color: #D5D9BA;
@@ -73,7 +73,7 @@ select{
 	height: 50px;
 }
 
-#fileAdd:hover,.addBtn:hover{
+#fileAdd:hover,.addBtn:hover, .modyBtn:hover{
    font-weight: bold;
 }
 
@@ -87,7 +87,7 @@ select{
     text-align: center;
 }
 
-.addBtn{
+.addBtn,.modyBtn{
     width: 80%;
     height: 60px;
     margin-top: 30px;

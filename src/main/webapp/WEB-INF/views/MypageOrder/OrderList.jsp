@@ -11,6 +11,7 @@
     <link href="${path}/resources/css/footer.css" rel="stylesheet"/>
     <link rel="stylesheet" href="${path}/resources/css/OrderListStyle.css"/>
 
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
@@ -125,6 +126,14 @@
 </body>
 <script>
 	$(function(){
+		//리뷰체크
+		var rvMsg = "<c:out value="${rvMsg}" />";
+		
+		if(rvMsg != ""){
+			 swal("이미 리뷰를 작성하셨습니다.");
+		}
+		
+		
 		//전송
 		var proBtn = $('#reivewB');
 		

@@ -22,13 +22,13 @@ public interface ProductService {
 	public int insertPro(Product product,List<String> img);
 	
 	//상품수정
-	public int updateProduct(Product product);
+	public int updatePro(Product product);
 	
 	//상품제고 수정
 	public int updateStock(Product product);
 	
 	//상품삭제
-	public int deleteProduct(int pro_no);
+	public int deletePro(int pro_no);
 	
 	//별점 업데이트
 	public int updateStar(Product product);

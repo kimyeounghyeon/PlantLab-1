@@ -12,7 +12,7 @@
 		WHERE p.pro_no = #{pro_no}
 	</select>
 	
-	<!-- 상품 insert -->
+	<!-- 상품 상세 insert -->
 	<insert id="insertProD" parameterType="ProductCon" flushCache="true" statementType="PREPARED">
 		INSERT INTO pro_dtail_tb VALUES(
 			<choose>
@@ -29,4 +29,25 @@
 			#{pro_detail}
 		)
 	</insert>
+	
+	<!-- 상품 상세 insert -->
+	<insert id="updateProD" parameterType="ProductCon" flushCache="true" statementType="PREPARED">
+		INSERT INTO pro_dtail_tb VALUES(
+			#{pro_no},
+			#{pro_detail}
+		)
+	</insert>
+	
+	<!-- 상품 상세 Delete -->
+	<delete id="deleteProD" parameterType="int" flushCache="true" statementType="PREPARED">
+		DELETE FROM pro_dtail_tb 
+		WHERE pro_no = #{pro_no} 
+	</delete>
+	
+	<!-- 상품 상세 하나만 Delete -->
+	<delete id="deleteProDOne" parameterType="ProductCon" flushCache="true" statementType="PREPARED">
+		DELETE FROM pro_dtail_tb 
+		WHERE pro_no = #{pro_no} 
+		AND pro_detail = #{pro_detail}
+	</delete>
 </mapper>

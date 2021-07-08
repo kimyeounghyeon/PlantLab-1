@@ -79,4 +79,21 @@
 			#{pro_cate}
 		)
 	</insert>
+	
+	<!-- 상품 Delete -->
+	<delete id="deletePro" parameterType="int" flushCache="true" statementType="PREPARED">
+		DELETE FROM pro_tb 
+		WHERE pro_no = #{pro_no} 
+	</delete>
+	
+	<!-- 상품  업데이트 -->
+	<update id="updatePro" parameterType="Product" flushCache="true" statementType="PREPARED">
+		UPDATE pro_tb 
+		SET pro_name = #{pro_name},
+			pro_image = #{pro_image},
+			pro_price = #{pro_price},
+			pro_stock = #{pro_stock},
+			pro_cate = #{pro_cate} 
+		WHERE pro_no = #{pro_no}
+	</update>
 </mapper>

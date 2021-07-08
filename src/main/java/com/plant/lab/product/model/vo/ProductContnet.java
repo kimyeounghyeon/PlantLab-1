@@ -4,9 +4,16 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ProductContnet {
+	private int pro_no;
 	private String pro_detail;
 	private char pro_cate;
 	
+	public int getPro_no() {
+		return pro_no;
+	}
+	public void setPro_no(int pro_no) {
+		this.pro_no = pro_no;
+	}
 	public String getPro_detail() {
 		return pro_detail;
 	}

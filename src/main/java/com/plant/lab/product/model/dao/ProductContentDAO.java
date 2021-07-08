@@ -23,4 +23,20 @@ public class ProductContentDAO {
 	public int insertProD(ProductContnet product) { 
 		return sqlSession.insert("ProductCon.insertProD", product);
 	}
+	
+	public int updateProD(ProductContnet product) { 
+		return sqlSession.insert("ProductCon.updateProD", product);
+	}
+	
+	
+	//상품 상세설명 삭제
+	public int deleteProD(int pro_no) { 
+		return sqlSession.insert("ProductCon.deleteProD", pro_no);
+	}
+	
+	//상품 설명하나만 삭제
+	public int deleteProDOne(ProductContnet product) {
+		return sqlSession.delete("ProductCon.deleteProDOne",product);
+	}
+	
 }

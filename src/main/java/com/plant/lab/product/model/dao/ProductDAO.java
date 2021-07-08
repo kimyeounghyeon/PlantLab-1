@@ -65,8 +65,8 @@ public class ProductDAO {
 	}
 	
 	//상품수정
-	public int updateProduct(Product product) { 
-		return 1;
+	public int updatePro(Product product) { 
+		return sqlSession.update("Product.updatePro",product);
 	}
 	
 	//상품제고수정
@@ -76,8 +76,8 @@ public class ProductDAO {
 	}
 	
 	//상품삭제
-	public int deleteProduct(int pro_no) { 
-		return 1;
+	public int deletePro(int pro_no) { 
+		return sqlSession.delete("Product.deletePro",pro_no);
 	}
 	
 	//상품 별점 업데이트

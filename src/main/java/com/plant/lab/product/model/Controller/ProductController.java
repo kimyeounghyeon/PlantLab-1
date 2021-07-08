@@ -1,6 +1,8 @@
 package com.plant.lab.product.model.Controller;
 
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.CookieStore;
 import java.sql.SQLException;
 import java.text.DateFormat;
@@ -30,6 +32,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.plant.lab.fileController.FileUploadController;
 import com.plant.lab.member.model.vo.MemberVO;
 import com.plant.lab.product.model.service.ProductContentService;
@@ -93,14 +97,15 @@ public class ProductController {
 			mv.addObject("nowCate",cate);
 			mv.addObject("nowOrder",orderby);
 			mv.addObject("listCount", listCount);
-			mv.setViewName("Product/MangerPL");
+			mv.setViewName("Product/ManagerPL");
 		} catch (Exception e) {
 			logger.info("!!!!!!페이지 리스트 오류!!!!!!");
 			e.printStackTrace();
-			mv.setViewName("Product/MangerPL");
+			mv.setViewName("Product/ManagerPL");
 		}
 		return mv;
 	}
+	
 //상품출력 리스트
 	@RequestMapping(value = "/product", method = RequestMethod.GET)
 	public ModelAndView productListService(
@@ -241,12 +246,46 @@ public class ProductController {
 		
 		return mv;
 	}
+
+//관리자 상품상세 페이지 이동
+	@RequestMapping(value = "/managerPV", method = RequestMethod.GET)
+	public ModelAndView mproductDetail(ModelAndView mv,
+			HttpServletResponse response,
+			HttpServletRequest req,HttpSession session,
+			@RequestParam(name = "proNo") int pro_no) {
+		try {
+			logger.info("===============상품상세 페이지===============");
+			logger.info(":::"+pro_no);
+			MemberVO member = (MemberVO) session.getAttribute("loginMember");
+			
+			if(member == null || member.getUserId() == "" ) {
+				mv.setViewName("logIn");
+				return mv;
+			}else {
+				mv.setViewName("MypageOrder/ManagerOL");			
+			}
+			
+			//상품 정보 및 상세이미지 가져오기
+			mv.addObject("productCon",proConService.searchList(pro_no));
+			mv.addObject("product",proService.selectOne(pro_no));
+			
+			mv.setViewName("Product/ManagerPV");
+		}catch (Exception e) {
+			logger.info("!!!!!!관리자 상품 상세 오류!!!!!!");
+			e.printStackTrace();
+		}
+		
+		return mv;
+	}
 	
 //상품추가 페이지 이동
 	@RequestMapping(value = "/proWrite", method = RequestMethod.GET)
 	public ModelAndView productInsert(ModelAndView mv,HttpServletResponse response,
-			HttpServletRequest req,HttpSession session) {
-
+			HttpServletRequest req,HttpSession session,
+			@RequestParam(name = "proNo", defaultValue = "0") int pro_no) {
+		logger.info("===============상품추가 페이지===============");
+		logger.info("::::"+pro_no);
+		
 		MemberVO member = (MemberVO) session.getAttribute("loginMember");
 		if(member == null || member.getUserId() == "" ) {
 			mv.setViewName("logIn");
@@ -255,7 +294,16 @@ public class ProductController {
 			mv.setViewName("MypageOrder/ManagerOL");			
 		}
 		
-		mv.setViewName("Product/ProductInsert");
+		if(pro_no == 0) {
+			mv.setViewName("Product/ProductInsert");
+			mv.addObject("check","new");
+		}else {
+			mv.setViewName("Product/ProductInsert");
+			mv.addObject("pro",proService.selectOne(pro_no));
+			mv.addObject("proD",proConService.searchList(pro_no));
+			mv.addObject("check","mod");
+		}
+		
 		
 		return mv;
 	}
@@ -304,5 +352,135 @@ public class ProductController {
 		}	
 		
 		return "redirect:/managerPL";
+	}
+	
+//상품 삭제 proDel
+	@RequestMapping(value="/proDel", method=RequestMethod.GET)
+	public ModelAndView proDel(HttpSession session,Product pro,ModelAndView mv,
+			HttpServletRequest request,
+			HttpServletRequest req) {
+		try {
+			logger.info("===============삭제 컨트롤러===============");
+			
+			//상품 정보 및 상세이미지 가져오기
+			
+			int result = proService.deletePro(pro.getPro_no());
+			
+			if(result == 0) {
+				logger.info("상품삭제실패!!!!!");
+			}else {
+				logger.info("상품삭제성공!!!!!");
+			}
+			
+			mv.setViewName("redirect:/managerPL");
+		}catch (Exception e) {
+			logger.info("!!!!!!관리자 상품 상세 오류!!!!!!");
+			e.printStackTrace();
+		}
+		return mv;
+	}
+
+//상품 수정
+	@RequestMapping(value="/proModi", method=RequestMethod.POST)
+	public String proModify(HttpSession session,HttpServletRequest request,
+			Product pro,
+			@RequestParam(name = "pro_details", required = false) MultipartFile[] multiFiles,
+			@RequestParam(name = "pro_img", required = false) MultipartFile multiFile,
+			HttpServletRequest req) {
+		logger.info("===============상품 수정 페이지===============");
+
+		FileUploadController uplad = new FileUploadController();
+		
+		logger.info("proNo:::"+pro.getPro_no());
+		logger.info("getPro_image:::"+pro.getPro_image());
+		
+		try {
+			//상품 섬네일 변경시
+			if(pro.getPro_image() == "del" && multiFile != null) {
+				String url = uplad.saveFile(multiFile, request);
+				pro.setPro_image(url);
+			}
+			
+			//상품 상세설명 이미지 업로드
+			List<String> img = new ArrayList<String>();
+			
+			if(multiFiles.length != 0) {
+				for(int i=0; i<multiFiles.length; i++) {
+					if (multiFiles[i] != null && !multiFiles[i].equals("")) {
+						String url = uplad.saveFile(multiFiles[i], request);
+						img.add(url);		
+					}
+				}
+			}
+			
+			//상품상세등록
+			int result = proConService.updateProD(pro,img);
+			
+			if(result == 1) {
+				logger.info("상품상세등록성공!!!!!!");
+				
+			}else {
+				logger.info("상품상세등록실패!!!!!!");
+			}
+			
+			
+			result = proService.updatePro(pro);
+			logger.info("수정후 result!!!!!!"+result);
+			
+
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("이미지 저장에 실패했습니다~");
+		}	
+		
+		return "redirect:/managerPL";
+	}
+	
+//상품 상세이미지 삭제 ajax imgDel
+	@RequestMapping(value="/imgDel.do", method=RequestMethod.POST)
+	public void cartSearch(ProductContnet proCon,
+			HttpSession session,HttpServletResponse response) throws IOException{
+		try {
+			logger.info("===============상세 이미지 삭제 ajax===============");
+			PrintWriter out = response.getWriter();
+			
+			logger.info("상품번호:::"+proCon.getPro_no());
+			logger.info("이미지주소:::"+proCon.getPro_detail());
+			
+			
+			//이미지 삭제하기
+			int result = proConService.deleteProDOne(proCon);
+			if(result == 1) {
+				logger.info("상품이미지삭제성공!!!!!");
+			}else {
+				logger.info("상품이미지삭제실패!!!!!");
+			}
+			
+			//이미지 불러오기
+			List<ProductContnet> proimg = proConService.searchList(proCon.getPro_no());
+			List<String> imgList = new ArrayList<String>();
+			
+			
+			for(int i=0; i<proimg.size(); i++) {
+				imgList.add(proimg.get(i).getPro_detail());
+			}
+			
+			Collections.reverse(imgList);
+			
+			Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		    String jsonOutput = gson.toJson(imgList);
+
+		      try {
+		         response.getWriter().write(jsonOutput);
+		         logger.info("데이터 확인 : " + jsonOutput);
+		      } catch (IOException e) {
+		         e.printStackTrace();
+		      }
+		      
+		}catch (Exception e) {
+			logger.info("!!!!!!카트 AJAX1 오류!!!!!!");
+			e.printStackTrace();
+		}
 	}
 }
