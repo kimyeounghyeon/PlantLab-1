@@ -184,11 +184,8 @@ public class PlantHomeController {
 		List<DiaryVO> SearchId = new ArrayList<DiaryVO>();
 		List<DiaryVO> SearchContent = new ArrayList<DiaryVO>();
 		
-//		if(selectVal == "id") {
 		SearchId = dService.searchId(keyword);
-//		} else if (selectVal == "content") {
 		SearchContent = dService.searchContent(keyword);
-//		} 
 
 		
 		
@@ -654,7 +651,11 @@ public class PlantHomeController {
 	public ModelAndView adminDiary(HttpSession session,
 			HttpServletRequest request, ModelAndView mv, 
 			@RequestParam(name="page", defaultValue = "1") int page,
-			@RequestParam(name="keyword", required = false) String keyword) {
+			@RequestParam(name="keyword", required = false) String keyword,
+			@RequestParam(name="search", defaultValue = "id") String search) {
+		
+		System.out.println("search 박스의 값은 " + search);
+		
 		
 		MemberVO member = (MemberVO) session.getAttribute("loginMember");
 		int diary_write = member.getUserNo();
@@ -677,19 +678,26 @@ public class PlantHomeController {
 	      List<DiaryVO> result=null;
 			//검색어가 있을 경우
 			if (keyword != null && !keyword.equals("")) {
-				//TODO: select box 조건 확인 if else  
-				listCount = dService.getSearchIdListCount(keyword);  // 찾은 글 갯수
-				result= dService.searchId(currentPage, LIMIT, keyword);
-				System.out.println("1");
-				System.out.println("1 ----- "+ result.toString());
-				mv.addObject("keyword", keyword);
+				if(search.equals("id")) {
+					listCount = dService.getSearchIdListCount(keyword);  // 아이디로 찾은 글 갯수
+					result= dService.searchId(currentPage, LIMIT, keyword);
+					System.out.println("1");
+					System.out.println("1 ----- "+ result.toString());
+					mv.addObject("keyword", keyword);
+				} else if(search.equals("content")) {
+					listCount = dService.getSearchContentListCount(keyword);  // 내용으로 찾은 글 갯수
+					result= dService.searchContent(currentPage, LIMIT, keyword);
+					System.out.println("2");
+					System.out.println("2 ----- "+ result.toString());
+					mv.addObject("keyword", keyword);
+				}
 				
 			}
 			else { //검색어가 없을 경우
 				listCount = dService.getListCountAll();  // 총 글 갯수
 				result= dService.admlistDiary(currentPage, LIMIT);	
-				System.out.println("2");
-				System.out.println("2 ----- "+ result.toString());
+				System.out.println("3");
+				System.out.println("3 ----- "+ result.toString());
 				keyword = null;
 			}
 	

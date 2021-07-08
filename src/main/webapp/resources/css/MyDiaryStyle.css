@@ -26,6 +26,19 @@
 	margin-left: 140px;
     font-size: 12pt;
 }
+
+.selectSearch {
+	margin-left : 65px;
+	margin-bottom : 0px;
+}
+
+.search {
+	height : 35px;
+	border : none;
+}
+
+.search ::-ms-expand {
+display: none;
 }
 
 .mydTable {

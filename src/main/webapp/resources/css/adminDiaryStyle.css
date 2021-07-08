@@ -1,19 +1,28 @@
 @charset "UTF-8";
 
+.dbg {
+	clear : both;
+	width : 1250px;
+	margin : auto;
+}
+
+.selectAdminSearch {
+	position : fixed;
+	margin-left : 25px;
+}
+
+.adminSearch {
+	border : none;
+	font-size : 13pt;
+	height : 30px;
+	text-align : center;
+}
+
 .admSearchicon {
 	width : 20px;
 	height : 20px;
 	bottom : 5px;
 	padding : 0px;
-}
-.admSearchBtn {
-	border : none;
-	background-color : white;
-	padding : 0px;
-}
-
-.admSearchBtn {
-	cursor:pointer;
 }
 
 .admKeyword {
@@ -23,9 +32,44 @@
 	border-bottom : 1px solid #6a6560;
 	width : 300px;
 	text-align : center;
-	margin-left: 140px;
+	margin-left: 10px;
     font-size: 12pt;
 }
+
+.selectAdminSearch {
+	margin-bottom : 0px;
+}
+
+.admSearchBtn {
+	border : none;
+	background-color : white;
+	padding : 0;
+	cursor:pointer;
+}
+
+.deleteAdminDiary {
+	border : none;
+	background-color : white;
+	cursor:pointer;
+	font-size : 15pt;
+	font-weight : bold;
+	float : right;
+	margin-right : 10px;
+	margin-top : 20px;
+	color : #625b54;
+}
+
+#goList {
+	border : none;
+	background-color : white;
+	cursor:pointer;
+	font-size : 15pt;
+	font-weight : bold;
+	float : right;
+	margin-right : 10px;
+	color : #625b54;
+	margin-top : 4px;
+	}
 
 .admdTable {
 	clear : both;
@@ -40,7 +84,7 @@
 	width : 40px;
 }
 .admdNum {
-	width : 70px;
+	width : 80px;
 }
 
 .admdContent {
@@ -50,7 +94,6 @@
 	overflow : hidden;
 	text-overflow: ellipsis;
 }
-
 
 .admdcontentmove {
 	width : 820x;
@@ -74,13 +117,17 @@
 	text-align : center;
 }
 
-.aContentLink {
+.admdaContentLink {
 	text-decoration : none;
 	color : black;
 }
 
-.aContentLink:visit {
+.admdaContentLink:visited {
 	text-decoration : none;
+	color : gray;
+}
+
+.admdaContentLink:link {
 	color : gray;
 }
 
@@ -112,7 +159,3 @@
 	color : #625b54;
 }
 
-.deleteAdminDiary {
-	float : right;
-	margin-right : 140px;
-}

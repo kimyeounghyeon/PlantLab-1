@@ -16,6 +16,7 @@
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
 	<jsp:include page="mypagemenu.jsp"></jsp:include>
+	<div class="dbg">
 	<c:if test="${not empty admlistDiary }">
 		<form id="adminDiaryFrm">
 			<div class="adFrmDiv">
@@ -25,11 +26,22 @@
 	</c:if>
 	<br>
 	<form id="searchIdFrm">
+	<div class="selectAdminSearch">
+	<select name="search" class="adminSearch">
+			<option class="adminSearch" value = "id">아이디</option>
+			<option class="adminSearch" value = "content">내용</option>
+	</select>
 		<input type="text" name="keyword" class="admKeyword" placeholder="검색어를 입력해주세요." value="${keyword }">&nbsp;
 		<button type="button" class="admSearchBtn">
 			<img src="${path }/resources/img/search.png" class="admSearchicon">
 		</button>
+		</div>
 	</form>
+	<c:if test="${not empty admlistDiary }">
+	<div class="listBtn">
+		<button id="goList">목록으로</button>
+	</div>
+	</c:if>
 	<table class="admdTable">
 		<tr class="admdtr">
 			<th class="admdth selectAlltd"><input type="checkbox"
@@ -54,13 +66,14 @@
 				</tr>
 			</c:forEach>
 		</c:if>
-		<c:if test="${empty admlistDiary} ">
+		<c:if test="${empty admlistDiary }">
+			<button id="list_normal">목록으로돌아가기</button>
 			<tr class="admmdtr">
-				<td class="mdtd emptyadmDiary" colspan="5">등록 된 게시물이 없습니다.
+				<td class="admdtd emptyadmDiary" colspan="5">등록 된 게시물이 없습니다.
 					반려식물과의 일상을 기록해보세요!</td>
 			</tr>
 			<tr class="admmdtr">
-				<td class="mdtd moveadmDiary" colspan="5"><a href="<%=request.getContextPath() %>/diary" class="aMoveDiary">일기쓰러 가기</a>
+				<td class="admdtd moveadmDiary" colspan="5"><a href="<%=request.getContextPath() %>/diary" class="aMoveDiary">일기쓰러 가기</a></td>
 			</tr>
 		</c:if>
 	</table>
@@ -68,8 +81,7 @@
 	<br>
 	<div class="regis_page">
 		<c:if test="${startPage != 1 }">
-			<a
-				href="<%=request.getContextPath() %>/admindiary?page=${startPage-1}&keyword=${keyword}">이전</a>
+			<a href="<%=request.getContextPath() %>/admindiary?page=${startPage-1}&keyword=${keyword}">이전</a>
 		</c:if>
 		<c:forEach var="p" begin="${startPage}" end="${endPage}" step="1">
 			<c:if test="${p eq currentPage}">
@@ -88,9 +100,7 @@
 		</c:if>
 	</div>
 	
-	<!-- TODO  -->
-	<button id="list_normal">목록으로돌아가기</button>
-
+</div>
 	<script>
 $(function(){
 	var frm = document.getElementById("adminDiaryFrm");
@@ -111,31 +121,43 @@ $(function(){
 	
 	$(".deleteAdminDiary").click(function(){
 	var checkVal = "";
+	var result = confirm("정말 삭제하시겠습니까?");
 
+	if(result) {
 		$("input[name=selectChk]:checked").each(function(){
 	 checkVal = $(this).val(); 
 	 console.log("값" + checkVal);
 
-		var checkValinput = "<input type='hidden' name='checkVal' value='"+checkVal+"'>";
-		$(".adFrmDiv").prepend(checkValinput);
-	
-		});
+	 if(checkVal!=null) {
+	var checkValinput = "<input type='hidden' name='checkVal' value='"+checkVal+"'>";
+	$(".adFrmDiv").prepend(checkValinput);
 	
 	frm.action = "deleteadmindiary.do";
 	frm.method = "post";
 	frm.submit();   
+	 } else {
+		 history.back();
+	 }
+	});
+		 
+	 }
+		
 	}); 
 	
 	
 	$(".admSearchBtn").click(function(){
 		console.log("클릭눌렀음");
+		
+		var searchVal = $(".adminSearch").val();
+		console.log("셀렉트 박스 값은 " + searchVal);
+		
 		if ($(".admKeyword").val() == "") {
 			alert("검색어가 없습니다.");
 		} else {
 			searchFrm.action = "admindiary";
 			searchFrm.method = "post";
 			searchFrm.submit();
-		}
+		} 
 	});
 });
 	</script>
