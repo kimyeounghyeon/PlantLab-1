@@ -19,22 +19,15 @@
 * {
 	font-family: 'Jeju Myeongjo';
 }
-
-.tbb table {
-	font-weight: bold;
-	position: relative;
-	color: black;
-}
-
 .tbb {
+font-weight:bold;
 	width: 150px;
-	left: 0px;
-	margin-top: 50px;
 	height: 250px;
-	float: left;
 	position: relative;
+	margin-left:50px;
+	color: black;
+	float: left;
 }
-
 .tablearticle {
 	position: relative;
 	float: right;
@@ -49,11 +42,11 @@
 }
 
 .paging {
-	position: relative;
 	width: 50px;
 	height: 15px;
-	top: 50px;
 	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .fnadiv {
@@ -63,38 +56,38 @@
 .maintb {
 	margin-left: auto;
 	margin-right: auto;
-	width : 700px;
+	width : 850px;
 	border-collapse: collapse;
 }
 .wbtn{
-border : none;
-text-align:right;
-background :  #625854;
-color : white;
-margin-left : 915px;
-height : 25px;
+	border : none;
+	text-align:right;
+	background :  #625854;
+	color : white;
+	margin-left : 980px;
+	height : 25px;
 }
 #fnaq{
-width : 600px;
-font-size :20px;
-font-weight : bold;
+	width : 750px;
+	font-size :20px;
+	font-weight : bold;
 }
 .udbtn{
-background : none;
-border : none;
-color : #625854;
+	background : none;
+	border : none;
+	color : #625854;
 }
 #trunder{
-border-bottom : 1px solid #625854;
-height : 100px;
+	border-bottom : 1px solid #625854;
+	height : 100px;
 }
 #trtop{
-border-top :0.4px solid #625854;
+	border-top :0.4px solid #625854;
 
 }
 .fmargin{
-padding-top : 10px;
-padding-bottom : 10px;
+	padding-top : 10px;
+	padding-bottom : 10px;
 }
 
 </style>
@@ -107,13 +100,10 @@ padding-bottom : 10px;
 </head>
 <body>
 	<jsp:include page="../header.jsp"></jsp:include>
-
-
-
-
+	<jsp:include page="../mypagemenu.jsp"></jsp:include>
 	<!-- 도저히 못하겠다,, ul 형태로 다시짜보자..-->
 	<div class="fnadiv">
-		<nav class="tbb">
+	<nav class="tbb">
 			<table>
 				<tr>
 					<td>카테고리</td>
@@ -166,14 +156,13 @@ padding-bottom : 10px;
 
 				</c:forEach>
 			</table>
-
-			<div class="paging" style="display: block; text-align: center;">
+			<br>
+			<br>
+			<div class="paging">
 				<c:if test="${paging.startPage != 1 }">
-					<a
-						href="${path}/flist?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&lt;</a>
+					<a href="${path}/flist?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&lt;</a>
 				</c:if>
-				<c:forEach begin="${paging.startPage }" end="${paging.endPage }"
-					var="p">
+				<c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="p">
 					<c:choose>
 						<c:when test="${p == paging.nowPage }">
 							<b>${p }</b>
