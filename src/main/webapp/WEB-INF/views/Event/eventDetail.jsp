@@ -13,7 +13,10 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
     .edetaildiv{
-    clear: both;
+   	clear: both;
+	width: 1250px;
+	margin: auto;
+	
     }
     .edetailtb{
     margin-left : auto;

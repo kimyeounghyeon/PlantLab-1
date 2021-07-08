@@ -26,7 +26,10 @@
 	text-aglin : center;
 	}
 	.mdediv{
-	clear:both;
+		clear: both;
+	width: 1250px;
+	margin: auto;
+	
 	}
 </style>
 </head>

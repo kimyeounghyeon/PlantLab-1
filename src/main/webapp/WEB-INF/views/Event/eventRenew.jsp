@@ -14,71 +14,84 @@
    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     
     <style>
-    .eReDiv{
-    clear : both;
-    }
-    .eretb{
-    margin-left : auto;
-    margin-right : auto;
-    }
-    #erebtn{
-    background: #625b54;
-  	color : white;
-  	border : none;
-  	width :75px;
- 	height : 28px;
-    }
-   .mwn{
-	width : 400px;
-	border : 1px solid #625b54;
-	height:26px;
-	}
-	.mtop{
-	padding-top : 10px;
-	}
-	.hei{
-height:26px; 
+  .eReDiv{
+  	clear: both;
+	width: 1250px;
+	margin: auto;
+  }
+  
+  #erebtn{
+   width: 70%;
+    height: 85px;
+    border: 1px solid #ccc;
+    color: black;
+    background-color: #ccc;
+    font-size: 20px;
+    font-weight: bold;
+}
+#erebtn:hover{
+    cursor: pointer;
+    background-color: #D5D9BA;
+}
+
+#eretb{
+   width: 70%;
+    height: 100px;
+    margin: auto;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    border-bottom: none;
+    border-collapse: collapse;
+    border-color: #ccc;
+    padding: 10px;
+}
+#eretb td:nth-child(1) span{
+    margin-left: 30px;
+}
+#eretb td:nth-child(1){
+    background-color: #F3EFEC;
+    width: 200px;
+}
+
+#eretb td:nth-child(2){
+  	padding-left : 10px;
+  	height : 45px;
+}
+#eretb tr{
+border-left : none;
+border-right : none;
 }
     </style>
 </head>
 <body>
 	<jsp:include page="../header.jsp"></jsp:include>
 	<div class="eReDiv">
+	<h3 align="center">이벤트 수정하기</h3>
 	
-<form action="eUpdate" method="post" enctype="multipart/form-data">
+	<form action="eUpdate" method="post" enctype="multipart/form-data">
 
 	<input type="hidden" name="event_no" value="${event_tb.event_no}">
-		<h3 align="center">이벤트 수정하기</h3>
-		<table class="eretb">
+		<table id="eretb" border="1">
 			<tr>
-				<td td class="mtop">이벤트 제목</td>
+				<td><span>이벤트 제목</span></td>
+				<td><input type="text" name="event_title" value="${event_tb.event_title}"></td>
 			</tr>
 			<tr>
-				<td ><input type="text" class="mwn" name="event_title" value="${event_tb.event_title}"></td>
+				<td ><span>배너 이미지</span></td>
+				<td><input type="file" name="upfile1" value="${event_tb.banner}"></td>
 			</tr>
 			<tr>
-				<td td class="mtop">배너 이미지</td>
+				<td><span>이벤트 내용</span></td>
+				<td><input type="file" name="upfile2"  value="${event_tb.event_content}"></td>
 			</tr>
 			<tr>
-				<td class="mwn"><input type="file" name="upfile1" class="hei" value="${event_tb.banner}"></td>
+				<td><span>이벤트 시작일</span></td>
+				<td><input type="text"name="start_date" value="${event_tb.start_date}"></td>
 			</tr>
 			<tr>
-				<td td class="mtop">이벤트 내용</td>
-			</tr>
-			<tr>
-				<td class="mwn"><input type="file" name="upfile2" class="hei" value="${event_tb.event_content}"></td>
-			</tr>
-			<tr>
-				<td td class="mtop">이벤트 시작일</td>
-			</tr>
-			<tr>
-				<td><input type="text" class="mwn"name="start_date" value="${event_tb.start_date}"></td>
-			</tr>
-			<tr>
-				<td td class="mtop">이벤트 종료일</td>
-			</tr>
-			<tr>
-				<td><input type="text"  class="mwn" name="end_date" value="${event_tb.end_date}"></td>
+				<td><span>이벤트 종료일</span></td>
+				<td><input type="text"   name="end_date" value="${event_tb.end_date}"></td>
 				</tr>
 			<tr>
 		</table>

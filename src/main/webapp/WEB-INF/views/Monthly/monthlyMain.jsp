@@ -25,7 +25,10 @@
 	text-aglin : center;
 	}
 	.mmain{
-	clear : both;
+	clear: both;
+	width: 1250px;
+	margin: auto;
+	
 	}
 	.plantimg{
 	width : 500px;

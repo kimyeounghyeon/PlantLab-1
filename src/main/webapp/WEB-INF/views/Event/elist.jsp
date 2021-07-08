@@ -50,7 +50,10 @@ width : 20px;
 width :50px;
 }
 .elistdiv{
-clear: both;
+	clear: both;
+	width: 1250px;
+	margin: auto;
+	
 }
 #ebtn{
 border : none;

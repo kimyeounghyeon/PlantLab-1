@@ -13,28 +13,51 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style>
 .mupdiv{
-clear : both;
+	clear: both;
+	width: 1250px;
+	margin: auto;
 }
 #mupform{
+   width: 70%;
+    height: 100px;
+    margin: auto;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    border-bottom: none;
+    border-collapse: collapse;
+    border-color: #ccc;
+    padding: 10px;
+}
+#mupform td:nth-child(1) span{
+    margin-left: 30px;
+}
+#mupform td:nth-child(1){
+    background-color: #F3EFEC;
+    width: 200px;
+}
 
-margin-right:auto;
-margin-left: auto;
+#mupform td:nth-child(2){
+  	padding-left : 10px;
+  	height : 45px;
+}
+#mupform tr{
+border-left : none;
+border-right : none;
 }
 #renew{
-  background: #625b54;
-  color : white;
-  border : none;
-  width :75px;
-  height : 28px;
+   width: 70%;
+    height: 85px;
+    border: 1px solid #ccc;
+    color: black;
+    background-color: #ccc;
+    font-size: 20px;
+    font-weight: bold;
 }
-.mwn{
-	width : 400px;
-	border : 1px solid #625b54;
-	height:26px;
+#renew:hover{
+    cursor: pointer;
+    background-color: #D5D9BA;
 }
-.mtop{
-	padding-top : 10px;
-	}
 </style>
 </head>
 <body>
@@ -47,32 +70,26 @@ margin-left: auto;
 		<input type="hidden" name="monthly_img" value="${monthly.monthly_img}">
 	
 	
-		<table id="mupform">
+		<table id="mupform" border="1">
 			<tr>
-				<td class="mtop">식물 이름</td>
-			</tr>
-			<tr>
+				<td class="mtop"><span>식물 이름</span></td>
 				<td><input type="text" class="mwn" name="monthly_name" value="${monthly.monthly_name}"></td>
 			</tr>
 			<tr>
-				<td class="mtop">현재 식물 이미지</td>
-			</tr>
-			<tr>
+				<td class="mtop"><span>현재 식물 이미지</span></td>
 				<td class="mwn">
 					 ${monthly.monthly_img}
 				</td>
 			</tr>
 			<tr>
-				<td class="mtop">식물 이미지</td>
-			</tr>
-			<tr>
+				<td class="mtop"><span>식물 이미지</span></td>
 				<td class="mwn"><input type="file" name="upfile"></td>
 			</tr>
 			
 		</table>
 		<br>
 		<div align="center">
-		<input type="submit" id="renew" value="등록하기">
+		<input type="submit" id="renew" value="수정완료">
 		</div>
 	</form>
 	</div>

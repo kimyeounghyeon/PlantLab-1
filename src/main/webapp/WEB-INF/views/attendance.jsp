@@ -14,7 +14,10 @@
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <style>
 .adiv{
-clear : both;
+	clear: both;
+	width: 1250px;
+	margin: auto;
+	
 }
 .attcnt{
 font-size : 20px;
@@ -52,9 +55,7 @@ margin-right : auto;
 text-align : center;
 padding-top:28px;
 }
-.mention{
 
-}
 #fir{
 text-align : center;
 font-size: 27px;
