@@ -61,6 +61,7 @@ select{
     margin-bottom: 10px;
 }
 
+
 #fileAdd,.addBtn,.modyBtn{
 	display:block;
 	float:left;
@@ -72,6 +73,7 @@ select{
 	cursor:pointer;
 	height: 50px;
 }
+
 
 
 .fileList input[type="file"] {
@@ -105,8 +107,6 @@ select{
 	border-radius: 5px;
 
 }
-
-
 
 
 #fileAdd:hover,.addBtn:hover, .modyBtn:hover{

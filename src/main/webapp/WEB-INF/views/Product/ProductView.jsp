@@ -137,6 +137,7 @@
                                         </div>
                                     </div>
                                     <p class="starNum">${product.pro_totalStar}<span> / 5</spna></p>
+                                    <p class="cntP">(${count}명)</p>
                                 </div>
     
                                 <div class="starDetail">
@@ -145,7 +146,7 @@
                                     	<c:if test="${not empty percent }">
                                     	<c:forEach var="vo" items="${percent}" varStatus="status">
 	                                        <div class="graph">
-	                                            <span class="barNum">${fn:length(percent)-status.index}점</span><span class="bar" style="width: ${vo}%;"></span>
+	                                            <span class="barNum">${fn:length(percent)-status.index}점</span><span class="bar" style="width: ${vo}%;">${vo}%</span>
 	                                        </div>
                                         </c:forEach>
                                         </c:if>

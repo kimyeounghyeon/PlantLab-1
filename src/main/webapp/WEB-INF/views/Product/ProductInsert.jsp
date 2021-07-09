@@ -391,10 +391,10 @@
 			//유효성검사체크
 			var input = $('input[type=text]');
 			var result = 0;
-
+		
 			for (var i = 0; i < check.length; i++) {
 				if (check[i] == 0) {
-					swal("다시 확인해주세요.");
+					swal("텍스트 입력창을 한 번씩 클릭해주세요.");
 					result = 0;
 					break;
 				} else {
@@ -402,7 +402,7 @@
 				}
 			}
 
-			//빈값체크
+			
 			if (result == 1) {
 				for (var i = 0; i < input.length; i++) {
 					if (input[i].value == "" || input[i].value == null) {
@@ -423,9 +423,10 @@
 		    	form.submit();
 				
 			} else {
-				swal("다시 확인해주세요.");
+				swal("텍스트 입력창을 한 번씩 클릭해주세요.");
 			}
 		}else{
+			
 			var pro_image = $('input[name=pro_img]').val();
 			var proI = $('#proI');
 
@@ -442,7 +443,7 @@
 
 				for (var i = 0; i < check.length; i++) {
 					if (check[i] == 0) {
-						swal("다시 확인해주세요.");
+						swal("텍스트 입력창을 한 번씩 클릭해주세요.");
 						result = 0;
 						break;
 					} else {
@@ -470,7 +471,7 @@
 			    	form.attr("action","proModi");
 			    	form.submit();
 				} else {
-					swal("다시 확인해주세요.");
+					swal("텍스트 입력창을 한 번씩 클릭해주세요.");
 				}
 			}
 		}

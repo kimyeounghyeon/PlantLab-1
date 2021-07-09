@@ -11,6 +11,7 @@
 	<link href="${path}/resources/css/header.css" rel="stylesheet"/>
 	<link href="${path}/resources/css/footer.css" rel="stylesheet"/>
 	<link href="${path}/resources/css/MainStyle.css" rel="stylesheet"/>
+	
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="${path}/resources/js/rainyday.js"></script>
 </head>
@@ -51,7 +52,7 @@
 		        console.log("도시이름  : "+ resp.name );
 		        console.log("구름  : "+ (resp.clouds.all) +"%" );      
 		        
-		        if(resp.weather[0].main == 'Clouds'){
+		        if(resp.weather[0].main == 'Rain'){
 		        	makeItRain();
 		        }else{
 		        }

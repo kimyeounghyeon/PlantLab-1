@@ -39,6 +39,14 @@ public class CartController {
 			
 			MemberVO member = (MemberVO) session.getAttribute("loginMember");
 			
+			if(member == null || member.getUserId() == "" ) {
+				mv.setViewName("logIn");
+				return mv;
+			}else {
+				mv.setViewName("MypageOrder/ManagerOL");			
+			}
+			
+			
 			List<Cart> cart = new ArrayList<Cart>();
 			cart = cartService.serchList(member.getUserNo());
 			

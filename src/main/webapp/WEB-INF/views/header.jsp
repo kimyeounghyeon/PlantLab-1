@@ -9,7 +9,7 @@
 		<div id="main">
 			<!-- header top -->
              <div id="mainTop">
-				<a href="#" class="top">cart</a> 
+				<a href="${path}/cart" class="top">cart</a> 
 				<a href="${path}/mypage.do" class="top">my</a>
 				<c:choose>
 					<c:when test="${sessionScope.loginMember!=null}">

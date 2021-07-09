@@ -11,8 +11,60 @@
     <link href="${path}/resources/css/header.css" rel="stylesheet"/>
     <link href="${path}/resources/css/footer.css" rel="stylesheet"/>
     <link href="${path}/resources/css/Product/ProductListStyle.css" rel="stylesheet"/>
+    
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    
+     <style>
+    
+    	.search {
+			height : 35px;
+			border : none;
+		}
+	
+		.search ::-ms-expand {
+		display: none;
+		}
+		
+		.keyword {
+			border-left : none;
+			border-right : none;
+			border-top : none;
+			border-bottom : 1px solid #6a6560;
+			width : 300px;
+			text-align : center;
+		}
+		
+		.selectSearch {
+			margin-left : 65px;
+			margin-bottom : 0px;
+		}
+		
+		.searchBtn {
+			border : none;
+			background-color : white;
+			padding : 0px;
+		}
+		
+		.searchBtn:hover {
+			cursor:pointer;
+		}
+		
+		.searchicon {
+			width : 20px;
+			height : 20px;
+			bottom : 5px;
+			padding : 0px;
+		}
+		
+		.searchResult {
+			text-align : center;
+			font-weight : bold;
+			font-size : 17pt;
+			color : #625b54;
+		}
+		   
+    </style>
 </head>
 
 <body>
@@ -53,8 +105,11 @@
                 <div class="search">
                     <form name="proListF">
                    		<input type="hidden" name="page" value="${currentPage}"> 
-	                    <input type="text" id="searchInput" name="keyword" placeholder=" 검색어">
-	                    <input type="button" value="검색" id="serachBtn">
+	                    
+	                    <input type="text" id="searchV" name="keyword" class="keyword" placeholder="검색어를 입력해주세요.">&nbsp;
+	                    <button type="button" class="searchBtn">
+	                    	<img src="${path }/resources/img/search.png" class="searchicon">
+	                    </button>
                     </form>
                 </div>
 				
@@ -133,8 +188,8 @@
 		nowO.addClass('nowOrder');
 		
 		//검색
-	    var search = $('#searchInput');
-	    var serachBtn = $('#serachBtn');
+	    var search = $('#searchV');
+	    var serachBtn = $('.searchicon');
 		var form = $('form[name=proListF]');
 		
 	    serachBtn.click(function(){

@@ -309,8 +309,10 @@
         var allBuy = $('#allBuy');	
     	
         allBuy.click(function(){
-        	
-        	allcheck.click();
+        	if(!allcheck.prop('checked')){
+	        	allcheck.click();    		
+        	}
+        		
         	
         	for(var a=0; a<prock.length;a++){
                 proNo[a] = pro_no[a].value;
