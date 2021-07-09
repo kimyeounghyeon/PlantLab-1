@@ -63,6 +63,13 @@ public class OrderController {
 		
 		MemberVO member = (MemberVO) session.getAttribute("loginMember");
 		
+		if(member == null || member.getUserId() == "" ) {
+			mv.setViewName("logIn");
+			return mv;
+		}else {
+			mv.setViewName("MypageOrder/ReviewList");			
+		}
+		
 		List<Cart> carts = new ArrayList<Cart>();
 		List<Cart> orders = new ArrayList<Cart>();
 		
@@ -97,6 +104,13 @@ public class OrderController {
 		logger.info("바로확인:"+order.getBuy_totalprice());
 		
 		MemberVO member = (MemberVO) session.getAttribute("loginMember");
+		
+		if(member == null || member.getUserId() == "" ) {
+			mv.setViewName("logIn");
+			return mv;
+		}else {
+			mv.setViewName("MypageOrder/ReviewList");			
+		}
 		order.setUser_no(member.getUserNo());
 		
 		mv.addObject("user",member);
@@ -177,6 +191,13 @@ public class OrderController {
 		
 		logger.info("===============마이페이지 구매리스트 페이지===============");
 		MemberVO member = (MemberVO) session.getAttribute("loginMember");
+		
+		if(member == null || member.getUserId() == "" ) {
+			mv.setViewName("logIn");
+			return mv;
+		}else {
+			mv.setViewName("MypageOrder/ReviewList");			
+		}
 		order.setUser_no(member.getUserNo());
 		
 		if(member == null || member.getUserId() == "" ) {

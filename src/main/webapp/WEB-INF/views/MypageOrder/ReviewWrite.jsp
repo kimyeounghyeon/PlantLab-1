@@ -15,6 +15,20 @@
 	<script src = "${path }/resources/ckeditor/ckeditor.js"></script>
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <style>
+    	.delProD{
+    		background-color: #625b54;
+    		color: white;
+    		border: none;
+    		box-shadow: 2px 2px 2px #ccc;
+    		cursor: pointer;
+    	}
+    	
+    	.imgL img{
+    		margin-left: 100px;
+    	}
+    </style>
 </head>
 <body>
 	<jsp:include page="../header.jsp"></jsp:include>
@@ -22,68 +36,147 @@
     <div id="content" class="contents">
         <section id="main_section">
             <!-- Store 제목 -->
-            <div class="main_header">
-                <h1 class="title">리뷰 작성</h1>
-            </div>
-
-            <article class="main_article">
-                <form enctype="multipart/form-data">
-                    <h3>상품 내역</h3>
-                    <table class="proGuide">
-                        <tr>
-                            <td class="proImg">
-                                <div class="reviewImg" style="max-width:800px;position:relative">
-		                                
-		                        </div>
-                                <input type="hidden" name="buy_no" value="${buy_no}">
-                            </td>
-                            <td class="proName">
-                                <p> </p>
-                            </td>
-                        </tr>
-                    </table>
-                    <br><br><br>
-                    <h3>상품 별점</h3>
-                    <div class="star">
-                        <h3 class="starH">별점 0/0</h3>
-
-                        <input type="hidden" name="rv_star">
-                        <input type="checkbox" id="star1" value="1" class="star_radio" title="1점">
-                        <label for="star1"><i class="fas fa-star"></i></label>
-                        <input type="checkbox" id="star2" value="2" class="star_radio" title="2점">
-                        <label for="star2"><i class="fas fa-star"></i></label>
-                        <input type="checkbox" id="star3" value="3" class="star_radio" title="3점">
-                        <label for="star3"><i class="fas fa-star"></i></label>
-                        <input type="checkbox" id="star4" value="4" class="star_radio" title="4점">
-                        <label for="star4"><i class="fas fa-star"></i></label>
-                        <input type="checkbox" name="rv_star" id="star5" value="5" class="star_radio" title="5점">
-                        <label for="star5"><i class="fas fa-star"></i></label>
-                    </div>
-
-                    <br><br><br>
-
-                    <h3>리뷰 작성</h3>
-                    <div>
-                        <input type="text" name="rv_title" id="rv_title" placeholder="리뷰 제목">
-                    </div>
-                    
-                    <div class="file">
-                    	<button type="button" id="fileAdd">이미지 추가</button>
-                    	<div class="fileList">
-                    		
-                    	</div>
-                    </div>
-                    
-					<br><br>
-                    <div class="content">
-                        <textarea style="resize: none;" name="rv_content" id="rv_content"></textarea>
-                    </div>
-                    
-                    <div>
-                        <button type="button" id="reBtn">등록하기</button>
-                    </div>
-                </form>
-            </article>
+            
+             <!-- 새글 작성 -->
+             <c:if test="${newCheck eq 'new'}">
+	            <div class="main_header">
+	                <h1 class="title">리뷰 작성</h1>
+	            </div>
+	
+	            <article class="main_article">
+	                <form enctype="multipart/form-data">
+	                    <h3>상품 내역</h3>
+	                    <table class="proGuide">
+	                        <tr>
+	                            <td class="proImg">
+	                                <div class="reviewImg" style="max-width:800px;position:relative">
+			                                
+			                        </div>
+	                                <input type="hidden" name="buy_no" value="${buy_no}">
+	                            </td>
+	                            <td class="proName">
+	                                <p> </p>
+	                            </td>
+	                        </tr>
+	                    </table>
+	                    
+	                    <br><br><br>
+	                   
+	                   	<h3>상품 별점</h3>
+	                    <div class="star">
+	                        <h3 class="starH">별점 0/0</h3>
+	
+	                        <input type="hidden" name="rv_star">
+	                        <input type="checkbox" id="star1" value="1" class="star_radio" title="1점">
+	                        <label for="star1"><i class="fas fa-star"></i></label>
+	                        <input type="checkbox" id="star2" value="2" class="star_radio" title="2점">
+	                        <label for="star2"><i class="fas fa-star"></i></label>
+	                        <input type="checkbox" id="star3" value="3" class="star_radio" title="3점">
+	                        <label for="star3"><i class="fas fa-star"></i></label>
+	                        <input type="checkbox" id="star4" value="4" class="star_radio" title="4점">
+	                        <label for="star4"><i class="fas fa-star"></i></label>
+	                        <input type="checkbox" name="rv_star" id="star5" value="5" class="star_radio" title="5점">
+	                        <label for="star5"><i class="fas fa-star"></i></label>
+	                    </div>
+	
+	                    <br><br><br>
+	
+	                    <h3>리뷰 작성</h3>
+	                    <div>
+	                        <input type="text" name="rv_title" id="rv_title" placeholder="리뷰 제목">
+	                    </div>
+	                    
+	                    <div class="file">
+	                    	<button type="button" id="fileAdd">이미지 추가</button>
+	                    	<div class="fileList">
+	                    		
+	                    	</div>
+	                    </div>
+	                    
+						<br><br>
+	                    <div class="content">
+	                        <textarea style="resize: none;" name="rv_content" id="rv_content"></textarea>
+	                    </div>
+	                    
+	                    <div>
+	                        <button type="button" id="reBtn">등록하기</button>
+	                    </div>
+	                   
+	                </form>
+	            </article>
+            </c:if>
+            
+           	
+           	<!-- 리뷰 수정 -->
+            <c:if test="${newCheck eq 'mody'}">
+	            <div class="main_header">
+	                <h1 class="title">리뷰 수정</h1>
+	            </div>
+	
+	            <article class="main_article">
+	                <form enctype="multipart/form-data">
+	                    <h3>상품 내역</h3>
+	                    <table class="proGuide">
+	                        <tr>
+	                            <td class="proImg">
+	                                <div class="reviewImg" style="max-width:800px;position:relative">
+			                                
+			                        </div>
+	                                <input type="hidden" name="buy_no" value="${review.buy_no}">
+	                            </td>
+	                            <td class="proName">
+	                                <p> </p>
+	                            </td>
+	                        </tr>
+	                    </table>
+	                    
+	                    <br><br><br>
+	                   
+	                   	<h3>상품 별점</h3>
+	                    <div class="star">
+	                        <h3 class="starH">별점 0/0</h3>
+							
+							<input type="hidden" name="rv_no" value="${review.rv_no}">
+	                        <input type="hidden" name="rv_star" value="${review.rv_star}">
+	                        <input type="checkbox" id="star1" value="1" class="star_radio" title="1점" disabled="disabled">
+	                        <label for="star1"><i class="fas fa-star"></i></label>
+	                        <input type="checkbox" id="star2" value="2" class="star_radio" title="2점" disabled="disabled">
+	                        <label for="star2"><i class="fas fa-star"></i></label>
+	                        <input type="checkbox" id="star3" value="3" class="star_radio" title="3점" disabled="disabled">
+	                        <label for="star3"><i class="fas fa-star"></i></label>
+	                        <input type="checkbox" id="star4" value="4" class="star_radio" title="4점" disabled="disabled">
+	                        <label for="star4"><i class="fas fa-star"></i></label>
+	                        <input type="checkbox" name="rv_star" id="star5" value="5" class="star_radio" title="5점">
+	                        <label for="star5"><i class="fas fa-star"></i></label>
+	                    </div>
+	
+	                    <br><br><br>
+	
+	                    <h3>리뷰 작성</h3>
+	                    <div>
+	                        <input type="text" readonly="readonly" name="rv_title" id="rv_title" placeholder="리뷰 제목" value="${review.rv_title}">
+	                    </div>
+	                    
+	                    <div class="file">
+	                    	
+	                    	<div class="fileList imgL">
+	                    		<c:if test="${not empty reImg}">
+		                        	<c:forEach var="vo" items="${reImg}" varStatus="status">
+		                        		<img src="${vo.rv_img_src}" style="width:150px" id="img${status.index}">
+		                        		<br>
+		                        	</c:forEach>
+	                        	</c:if>
+	                    	</div>
+	                    </div>
+	                    
+						<br><br>
+	                    <div class="content">
+	                        <textarea style="resize: none;" name="rv_content" id="rv_content" readonly="readonly">${review.rv_content}</textarea>
+	                    </div>
+	                   
+	                </form>
+	            </article>
+            </c:if>
         </section>
     </div>
     <jsp:include page="../footer.jsp"></jsp:include>
@@ -181,6 +274,7 @@
     var rv_star =$("input[name=rv_star]");
     var i = 0;
 
+   
     star.click(function(){
         var starH = $('.starH');
         starH.empty();
@@ -204,6 +298,12 @@
         rv_star.val(i+1);
     });
     
+    if(rv_star.val() != ''){
+    	var starV = rv_star.val();
+    	$("#star"+starV).trigger('click');
+    	console.log("star:::"+starV);
+    }
+    
     
 	//글 등록하기
 	var reBtn = $('#reBtn');
@@ -226,6 +326,8 @@
 		}
 	});
 
+
+	
 </script>
 <script>
 	var slideIndex = 1;

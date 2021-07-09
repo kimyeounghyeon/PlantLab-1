@@ -357,9 +357,12 @@
 				success:function(data){
 					reviewImg.empty("");
 					var html=""
-					if(data.length<=1){
+					if(data.length==1){
 						html += "<img src='"+data+"'/>";
 						
+					}if(data.length==0){
+						var srcValue = $('#proImg img').prop('src');
+						html += "<img src='"+srcValue+"'/>";
 					}else{
 						$.each(data,function(index,e){
 							html += "<img src='"+e+"' class=\"mySlides\"/>";

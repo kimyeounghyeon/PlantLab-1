@@ -294,10 +294,10 @@ public class ProductController {
 			mv.setViewName("MypageOrder/ManagerOL");			
 		}
 		
-		if(pro_no == 0) {
+		if(pro_no == 0) { //신규추가
 			mv.setViewName("Product/ProductInsert");
 			mv.addObject("check","new");
-		}else {
+		}else { //수정
 			mv.setViewName("Product/ProductInsert");
 			mv.addObject("pro",proService.selectOne(pro_no));
 			mv.addObject("proD",proConService.searchList(pro_no));

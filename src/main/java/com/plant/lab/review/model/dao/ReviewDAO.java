@@ -10,6 +10,8 @@ import org.springframework.stereotype.Repository;
 import com.plant.lab.product.model.vo.ProductContnet;
 import com.plant.lab.review.model.vo.Review;
 
+import oracle.net.aso.r;
+
 @Repository("reviewDao")
 public class ReviewDAO {
 	@Autowired
@@ -18,6 +20,15 @@ public class ReviewDAO {
 	//리뷰 가져오기
 	public List<Review> searchList(int pro_no) {
 		return sqlSession.selectList("Review.selectList",pro_no);
+	}
+	
+	//리뷰 목록
+	public List<Review> selectRvList(Review review){
+		return sqlSession.selectList("Review.selectRvList",review);
+	}
+	
+	public Review selectReview(Review review) {
+		return sqlSession.selectOne("Review.selectReview",review);
 	}
 	
 	//리뷰 사진 가져오기
@@ -48,5 +59,15 @@ public class ReviewDAO {
 	//리뷰작성여부 체크
 	public int checkRv(int buy_no) {
 		return sqlSession.selectOne("Review.checkRv",buy_no);
+	}
+	
+	//리뷰삭제
+	public int deleteReview(Review review) {
+		return sqlSession.delete("Review.deleteReview",review);
+	}
+	
+	//리뷰이미지 삭제
+	public int deleteRvImg(Review review) {
+		return sqlSession.delete("Review.deleteRvImg",review);
 	}
 }

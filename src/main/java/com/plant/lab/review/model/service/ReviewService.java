@@ -3,11 +3,14 @@ package com.plant.lab.review.model.service;
 import java.util.HashMap;
 import java.util.List;
 
+import com.plant.lab.order.model.vo.OrderDetail;
 import com.plant.lab.review.model.vo.Review;
 
 public interface ReviewService {
 	//리뷰 가져오기
 	public List<Review> searchList(int pro_no);
+	public List<Review> selectRvList(Review review);
+	public Review selectReview(Review review);
 	
 	//리뷰 사진 가져오기
 	public List<Review> selectImgList(Review review);
@@ -23,4 +26,10 @@ public interface ReviewService {
 	
 	//리뷰작성여부 체크
 	public int checkRv(int buy_no);
+	
+	//리뷰삭제
+	public int deleteReview(Review review,List<OrderDetail> img);
+	
+	//리뷰이미지 삭제
+	public int deleteRvImg(Review review);
 }

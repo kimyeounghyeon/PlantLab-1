@@ -84,4 +84,7 @@ public class ProductDAO {
 	public int updateStar(Product product) {
 		return sqlSession.update("Product.updateStar",product);
 	}
+	public int updateDelStar(Product product) {
+		return sqlSession.update("Product.updateDelStar",product);
+	}
 }

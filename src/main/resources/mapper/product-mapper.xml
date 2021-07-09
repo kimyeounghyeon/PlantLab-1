@@ -57,6 +57,12 @@
 		WHERE pro_no = #{pro_no}
 	</update>
 	
+	<update id="updateDelStar" parameterType="Product" flushCache="true" statementType="PREPARED">
+		update pro_tb
+		set pro_totalStar = pro_totalStar - #{pro_totalStar}
+		WHERE pro_no = #{pro_no}
+	</update>
+	
 	<!-- 상품 insert -->
 	<insert id="insertPro" parameterType="Product" flushCache="true" statementType="PREPARED">
 		INSERT INTO pro_tb VALUES(

@@ -39,6 +39,7 @@
                 	<c:if test="${not empty orderList}">
                 		<c:forEach  var="vo" items="${orderList}" varStatus="status">
 		                    <form>
+		                    <input type="hidden" name="new" value="new">
 		                    <input type="hidden" name="buy_no" value="${vo.buy_no}">
 		                    <table class="orderList">
 		                        <tr>
@@ -139,7 +140,7 @@
 		
 		proBtn.click(function(){
 			var form = $('form');
-			form.attr("method","post");
+			form.attr("method","get");
         	form.attr("action","revieWrite");
         	form.submit();
 		

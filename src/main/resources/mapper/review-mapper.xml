@@ -7,10 +7,23 @@
 	
 	<!-- 리뷰 전체 불러오기 -->
 	<select id="selectList" resultType="arraylist" parameterType="int" resultMap="ReviewMap">
-		SELECT r.*,u.user_name FROM rv_tb r
+		SELECT r.*,u.user_name,p.buy_no FROM rv_tb r
         JOIN user_tb u
         ON u.user_no = r.user_no
+        JOIN purchase_list_tb p
+        ON r.buy_no = p.buy_no
     	WHERE pro_no = #{pro_no}
+		ORDER BY rv_no desc
+	</select>
+	
+	<!-- 리뷰 리스트 불러오기 -->
+	<select id="selectRvList" resultType="arraylist" parameterType="Review" resultMap="ReviewMap">
+		SELECT * FROM rv_tb
+        <where>
+        	<if test="user_no != null">
+		    	user_no = #{user_no}	
+        	</if>
+        </where>
 		ORDER BY rv_no desc
 	</select>
 	
@@ -20,23 +33,42 @@
 		WHERE buy_no = #{buy_no}
 	</select>
 	
+	<!-- 리뷰 한개 불러오기 -->
+	<select id="selectReview" resultType="Review" parameterType="int">
+		SELECT * FROM rv_tb
+		WHERE buy_no = #{buy_no}
+	</select>
+	
 	<!-- 리뷰 이미지 불러오기 -->
-	<select id="selectImgList" resultType="arraylist" parameterType="int" resultMap="ReviewMap">
-		SELECT i.rv_img_src FROM rv_tb r
+	<select id="selectImgList" resultType="arraylist" parameterType="Review" resultMap="ReviewMap">
+		SELECT i.rv_img_src,i.rv_no FROM rv_tb r
 		JOIN rv_img_tb i
-		ON r.rv_no = i.rv_no
-		WHERE r.rv_no = #{rv_no}
+		ON r.rv_no = i.rv_no 
+		<where>
+			<if test="rv_no != 0">
+				r.rv_no = #{rv_no} 
+			</if>
+			<if test="rv_no == 0">
+				r.buy_no = #{buy_no} 
+			</if>
+		</where>
 		ORDER BY i.rv_img_num
 	</select>
 	
 	<!-- 상품별 총 리뷰수 -->
 	<select id="listCount" parameterType="int" resultType="int">
-		SELECT count(rv_star) FROM rv_tb WHERE pro_no = #{pro_no}
+		SELECT count(r.rv_star) FROM rv_tb r
+		JOIN purchase_list_tb p
+		ON r.buy_no = p.buy_no
+		WHERE p.pro_no = #{pro_no}
 	</select>
 	
 	<!-- 상품별 별점 수 -->
 	<select id="starCount" resultType="int" parameterType="HashMap">
-		SELECT count(rv_star) FROM rv_tb WHERE pro_no = #{pro_no} and rv_star = #{star}
+		SELECT count(rv_star) FROM rv_tb r
+		JOIN purchase_list_tb p
+		ON r.buy_no = p.buy_no
+		WHERE p.pro_no = #{pro_no} and rv_star = #{star}
 	</select>
 	
 	<!-- 리뷰추가 -->
@@ -48,8 +80,7 @@
 			sysdate,
 			#{rv_star},
 			#{user_no},
-			#{buy_no},
-			#{pro_no}
+			#{buy_no}
 		)
 	</insert>
 	
@@ -60,5 +91,15 @@
  		)
  	</insert>
  	
- 	
+ 	<!-- 리뷰삭제 -->
+ 	<delete id="deleteReview" parameterType="Review" flushCache="true" statementType="PREPARED">
+		DELETE FROM rv_tb
+		WHERE rv_no = #{rv_no}
+	</delete>
+	
+ 	<!-- 리뷰이미지삭제 -->
+ 	<delete id="deleteRvImg" parameterType="Review" flushCache="true" statementType="PREPARED">
+		DELETE FROM rv_img_tb
+		WHERE rv_no = #{rv_no}
+	</delete>
 </mapper>

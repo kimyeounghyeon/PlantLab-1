@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.plant.lab.order.model.vo.OrderDetail;
 import com.plant.lab.product.model.dao.ProductDAO;
 import com.plant.lab.product.model.vo.Product;
 import com.plant.lab.review.model.dao.ReviewDAO;
@@ -23,9 +24,21 @@ public class ReviewServiceImpl implements ReviewService{
 	public List<Review> searchList(int pro_no) {
 		return reviewDao.searchList(pro_no);
 	}
+	
+	@Override
+	public Review selectReview(Review review) {
+		return reviewDao.selectReview(review);
+	}
+	
+	@Override
+	public List<Review> selectRvList(Review review) {
+		return reviewDao.selectRvList(review);
+	}
 
 	@Override
 	public List<Review> selectImgList(Review review){
+		System.out.println("테스트용:::"+review.getRv_no());
+		System.out.println("테스트용:::"+review.getBuy_no());
 		return reviewDao.selectImgList(review);
 	}
 
@@ -43,10 +56,9 @@ public class ReviewServiceImpl implements ReviewService{
 	@Override
 	public int insertReview(Review review,List<String> img,List<Integer> pro_no) {
 		int result = 0;
-		for(int i=0; i<pro_no.size();i++) {
-			review.setPro_no(pro_no.get(i));
-			result = reviewDao.insertReview(review);
-			
+		result = reviewDao.insertReview(review);
+
+		for(int i=0; i<pro_no.size();i++) {	
 			if(result == 1) {
 				if(img.size()>0) {
 					for(int j=0; j<img.size();j++) {
@@ -73,5 +85,35 @@ public class ReviewServiceImpl implements ReviewService{
 	public int checkRv(int buy_no) {
 		
 		return reviewDao.checkRv(buy_no);
+	}
+	
+	//리뷰삭제하기
+	@Transactional
+	@Override
+	public int deleteReview(Review review,List<OrderDetail> img) {
+		int result = 0;
+		
+		Product pro = new Product();
+		pro.setPro_totalStar(review.getRv_star());
+
+		for(int i=0; i<img.size();i++) {
+			pro.setPro_no(img.get(i).getPro_no());
+			result = proDao.updateDelStar(pro);
+			System.out.println("평점삭제::::"+result);
+		}
+
+		result = reviewDao.deleteReview(review);
+		System.out.println("리뷰삭제::::"+result);
+		
+		result = reviewDao.deleteRvImg(review);
+		System.out.println("리뷰이미지삭제::::"+result);
+		
+		
+		return result;
+	}
+	
+	@Override
+	public int deleteRvImg(Review review) {
+		return reviewDao.deleteRvImg(review);
 	}
 }

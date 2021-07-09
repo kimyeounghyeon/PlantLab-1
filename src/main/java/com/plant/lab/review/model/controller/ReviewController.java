@@ -34,6 +34,7 @@ import com.plant.lab.order.model.vo.Order;
 import com.plant.lab.order.model.vo.OrderDetail;
 import com.plant.lab.product.model.service.ProductService;
 import com.plant.lab.product.model.vo.Product;
+import com.plant.lab.product.model.vo.ProductContnet;
 import com.plant.lab.review.model.service.ReviewService;
 import com.plant.lab.review.model.vo.Review;
 
@@ -41,36 +42,86 @@ import com.plant.lab.review.model.vo.Review;
 public class ReviewController {
 	@Autowired
 	private ReviewService reviewService;
+	@Autowired
+	private OrderService orderService;
 	
 	private static final Logger logger = LoggerFactory.getLogger(CartController.class);
 	
+//리뷰 리스트
+	@RequestMapping(value="/reviewList", method=RequestMethod.GET)
+	public ModelAndView revieList(ModelAndView mv, HttpSession session, HttpServletRequest req,
+			@RequestParam(name = "page", defaultValue = "1") int page) {
+		
+		logger.info("===============리뷰리스트 페이지===============");
+		MemberVO member = (MemberVO) session.getAttribute("loginMember");
+		
+		if(member == null || member.getUserId() == "" ) {
+			mv.setViewName("logIn");
+			return mv;
+		}else {
+			mv.setViewName("MypageOrder/ReviewList");			
+		}
+		
+		Review review = new Review();
+		
+		if(member.getGrade() != 1) {
+			review.setUser_no(member.getUserNo());			
+		}
+		logger.info("리뷰회원:::"+review.getUser_no());
+		mv.addObject("reviewList", reviewService.selectRvList(review));
+		
+		return mv;
+	}
+	
 //리뷰작성이동
-	@RequestMapping(value="/revieWrite", method=RequestMethod.POST)
+	@RequestMapping(value="/revieWrite", method=RequestMethod.GET)
 	public ModelAndView revieWrite(ModelAndView mv,HttpSession session,
-			@RequestParam(value="buy_no",required=true) int buy_no,RedirectAttributes redirectAttributes,
+			@RequestParam(value="buy_no", required=true) int buy_no,
+			@RequestParam(value="new", required=true) String newCheck,
+			RedirectAttributes redirectAttributes,
 			HttpServletRequest req) {
 		logger.info("===============리뷰작성 페이지===============");
 		logger.info("buy_no체크::::"+buy_no);
 		
 		MemberVO member = (MemberVO) session.getAttribute("loginMember");
 		
-		
-		int check = reviewService.checkRv(buy_no);
-		
-		if(check != 0 || check > 0) {
-			logger.info("check체크::::"+check);
-			redirectAttributes.addFlashAttribute("rvMsg", "ok");
-			String referer = req.getHeader("Referer");
-			 
-			mv.setViewName("redirect:"+ referer);
-			mv.addObject("rvMsg","ok");
-			return mv;
-		}else {
-			mv.addObject("buy_no",buy_no);
-			mv.setViewName("MypageOrder/ReviewWrite");	
+		if(newCheck.equals("new")) {
+			logger.info("신규작성으로 이동");
+			int check = reviewService.checkRv(buy_no);
 			
-			return mv;
+			if(check != 0 || check > 0) {
+				logger.info("check체크::::"+check);
+				redirectAttributes.addFlashAttribute("rvMsg", "ok");
+				String referer = req.getHeader("Referer");
+				 
+				mv.setViewName("redirect:"+ referer);
+				mv.addObject("rvMsg","ok");
+				return mv;
+			}else {
+				mv.addObject("buy_no",buy_no);
+				mv.addObject("newCheck",newCheck);
+				mv.setViewName("MypageOrder/ReviewWrite");	
+			}
+		}else {
+			logger.info("수정으로 이동");
+			Review review = new Review();
+			review.setBuy_no(buy_no);
+			
+			List<Review> reImg = reviewService.selectImgList(review);
+			
+			logger.info("buy_no:::::"+review.getBuy_no());
+			logger.info("이미지:::::"+reImg.toString());
+			
+			mv.setViewName("Product/ProductInsert");
+			mv.addObject("review",reviewService.selectReview(review));
+			mv.addObject("reImg",reImg);
+			mv.addObject("newCheck",newCheck);
+			
+			mv.setViewName("MypageOrder/ReviewWrite");	
 		}
+		
+		
+		return mv;
 	}
 	
 //리뷰작성
@@ -114,6 +165,35 @@ public class ReviewController {
 	}
 	
 	
+//리뷰삭제	
+	@RequestMapping(value="/reviewDel", method=RequestMethod.POST)
+	public String reviewDel(HttpSession session,Review review,
+			@RequestParam(value="new", required=false) String newCheck,
+			HttpServletRequest request,HttpServletRequest req) {
+		logger.info("===============리뷰삭제===============");
+
+		MemberVO member = (MemberVO) session.getAttribute("loginMember");
+		
+		
+		List<OrderDetail> buyPro = orderService.selectOrderDList(review.getBuy_no());
+		
+		for(int i=0; i<buyPro.size();i++) {
+			logger.info(i+"번 상품업데이트번호:::"+buyPro.get(i).getPro_no());
+		}
+		
+		int result = 0;
+		result = reviewService.deleteReview(review,buyPro);
+		
+		if(result ==1) {
+			logger.info("리뷰삭제성공!!!");
+		}else {
+			logger.info("리뷰삭제실패!!!");
+		}
+		
+		return "redirect:/reviewList";
+	}
+	
+
 //리뷰 이미지 ajax
 	@RequestMapping(value="/imgSearch.do", method=RequestMethod.POST)
 	public void cartSearch(Review review,
@@ -121,7 +201,6 @@ public class ReviewController {
 			HttpServletResponse response) throws IOException{
 		try {
 			logger.info("===============리뷰 이미지 ajax===============");
-			logger.info("===============리뷰 이미지 ajax==============="+review.getRv_no());
 			PrintWriter out = response.getWriter();
 			List<Review> reImg = reviewService.selectImgList(review);
 			List<String> imgList = new ArrayList<String>();
@@ -149,4 +228,6 @@ public class ReviewController {
 			e.printStackTrace();
 		}
 	}
+	
+	
 }
