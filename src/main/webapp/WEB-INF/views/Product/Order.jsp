@@ -40,8 +40,10 @@
 	                            <td class="space" rowspan="2"></td>
 	                            <td class="proName">
 	                                <p>${oneRsVo.oneday_title}</p>
-	                                <input type="hidden" name="oneday_no" value="${oneRsVo.oneday_no}">
-	                                <input type="hidden" name="oneday_request" value="${oneRsVo.oneday_request}">
+	                                <input type="hidden" name="reserv_no" value="${oneRsVo.oneday_no}">
+	                                 <input type="hidden" name="buy_totalprice" value="">
+                           			<input type="hidden" class="reserv_date" name="reserv_date" id="priceIn" value="${oneRsVo.reserv_date}">
+	                                <input type="hidden" name="buy_requests" value="${oneRsVo.oneday_request}">
 	                            </td>
 	                        </tr>
 	                        <tr>

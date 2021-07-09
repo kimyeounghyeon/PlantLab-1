@@ -39,7 +39,7 @@
 
 					<input type="hidden" name="oneday_no" value="${o.oneday_no}">
 					<a  id="omb" href="${path}/onedayDetail?oneday_no=${o.oneday_no}" >
-						<div style="border: 1px solid black; text-align: center;" >예약하기</div>
+						<div id="Mbtn"  >예약하기</div>
 					</a>
 				</div>
 
@@ -49,47 +49,7 @@
 
 		</div>
 	</div>
-	<script type="text/javascript">
-		/*  		$(function() {
-		 $.ajax({
-		 url : "onedayDetail",
-		 type : "GET",
-		 data : {oneday_no : '${one}.oneday_no' },
-		 dataType : "json",
-		 contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-		 success : function(data){
-		 console.log("원데이 main 성공했어용~");
-		 var one = data.one;
-		 console.log(one);
-		 }
-		 error : function(data) {
-		 console.log("원데이 main 실패~");
-		 }
-		
-		 
-		 
-		
-		 }); */
-		//}
-		/* 			var onediv = $(".onediv");
-		 var onefrm = $(".onefrm"); 
-		 for (var i = 0; i < onediv.length; i++) {
-		 $(onediv[i]).click(function() {
-		 $(onefrm[i]).submit();	
 
-		 })
-		 } */
-
-		/* 	 $(function(){
-		 $("#onediv").click(function(){
-		 $("form").submit();
-
-		 })
-		 }); 
-		 }); 
-		
-		 */
-	</script>
 
 
 

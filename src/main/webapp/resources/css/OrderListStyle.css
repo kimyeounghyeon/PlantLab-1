@@ -124,3 +124,7 @@ li.now{
 .w3-btn-floating:hover{
 	cursor: pointer;
 }
+
+.reviewImg > img{
+	height: 300px;
+}

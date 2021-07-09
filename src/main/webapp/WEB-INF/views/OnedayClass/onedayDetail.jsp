@@ -9,20 +9,18 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<link rel="stylesheet"
-	href="https://fonts.googleapis.com/earlyaccess/jejumyeongjo.css" />
+<link href="${path}/resources/css/Oneday/OnedayDetail.css"  rel="stylesheet" />
+<link rel="stylesheet"	href="https://fonts.googleapis.com/earlyaccess/jejumyeongjo.css" />
 <link href="${path}/resources/css/header.css" rel="stylesheet" />
 <link href="${path}/resources/css/footer.css" rel="stylesheet" />
-<link href="${path}/resources/css/Oneday/OnedayDetail.css"
-	rel="stylesheet" />
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <meta charset="UTF-8">
-<title>無以林 classDtail</title>
+<title>classDtail</title>
 </head>
 
 <body>
 	<jsp:include page="../header.jsp"></jsp:include>
-	<div id="fullmain">
+	<div id="fullmainD">
 		<div id="main">
 
 
@@ -42,10 +40,11 @@
 				<div id="classContent">
 
 					<p class="classText" id="detailTitle">${oneVo.oneday_title}</p>
-					<p class="classText" id="detailPrice">가격: &ensp; ${oneVo.oneday_price}원</p>
+					<p class="classText" id="detailPrice">&nbsp; ${oneVo.oneday_price}원</p>
+					<hr style="border: 0px; height: 1px; background-color: #E8E8E8; margin-bottom: 60px;">
 					<p class="classText">신청 인원: &ensp; ${oneVo.oneday_maxPerson}</p>
 					<p class="classText">수업 시간: &ensp; ${oneVo.oneday_Stime} ~ ${oneVo.oneday_Etime}</p>
-					<p id="oneDate">신청기간: &ensp; ${oneVo.oneday_start } ~
+					<p id="oneDate">수업 일정: &ensp; ${oneVo.oneday_start } ~
 						${oneVo.oneday_end }</p>
 					<button id="classBtn" type="submit">예약</button>
 					<input type="hidden" name="onedayNo" value="${ oneVo.oneday_no}">

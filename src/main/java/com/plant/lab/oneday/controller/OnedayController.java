@@ -31,9 +31,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.plant.lab.member.model.vo.MemberVO;
 import com.plant.lab.oneday.model.service.OnedayServiceImpl;
 import com.plant.lab.oneday.model.vo.OnedayVo;
+import com.plant.lab.order.model.vo.OrderDetail;
 
 @Controller
 public class OnedayController {
@@ -137,11 +140,15 @@ public class OnedayController {
 		System.out.println("member.getUserNo()입니다.~~~" + member.getUserNo());
 		oneVo.setUser_no(member.getUserNo());
 		oneVo.setOneday_no(onedayNo);
+		
 		oneVo.setOneday_request(oneRequest);
 		oneVo.setReserv_date(reservDate);   //예약을 원하는 날짜
-		System.out.println(reservDate);
-		oneVo = oService.onedayselect(oneVo);
+		System.out.println("원하는 예약일이 들어감"+reservDate);
+		System.out.println("원하는 요청 들어감"+oneRequest);
 		System.out.println("결과 는~~~~~~~~~" + oneVo);
+		oneVo = oService.onedayselect(oneVo);
+		oneVo.setOneday_request(oneRequest);
+		oneVo.setReserv_date(reservDate);   //예약을 원하는 날짜
 		
 		//int result = oService.onedayreserve(oneVo);    //구매하면 예약됨--> order controller로 이동
 //		System.out.println(result);
@@ -471,6 +478,38 @@ public class OnedayController {
 		
 		return url;
 	}
+	
+	//마이페이지 주문내역 ajax
+		@RequestMapping(value="/orderClass1", method=RequestMethod.GET)
+		public void orderClass(@RequestParam(name = "reserv_no") int reserv_no,
+				HttpSession session,HttpServletResponse response) {
+			try {
+				log.info("===============주문이미지 ajax===============");
+				response.setCharacterEncoding("UTF-8");
+				
+				log.info("번호확인!!!!:::"+reserv_no);
+				OnedayVo vo = new OnedayVo();
+				vo.setOneday_no(reserv_no);
+				
+				OnedayVo one = oService.onedayselect(vo);
+				
+				
+				Gson gson = new GsonBuilder().setPrettyPrinting().create();
+				String jsonOutput = gson.toJson(one);
+				
+				try {
+					response.getWriter().write(jsonOutput.toString());
+					System.out.println("데이터확인:::" + jsonOutput);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}catch (Exception e) {
+				log.info("!!!!!!주문이미지 AJAX1 오류!!!!!!");
+				e.printStackTrace();
+			}
+		}
+	
+	
 	
 	
 	

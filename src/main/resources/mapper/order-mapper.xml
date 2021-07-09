@@ -9,7 +9,14 @@
 		INSERT INTO purchase_tb VALUES(
 			PURCHASE_SEQ.NEXTVAL,
 			#{user_no},
-			null,
+			<choose>
+				<when test="reserv_no != 0 ">
+					#{reserv_no},
+				</when>
+				<when test="reserv_no == 0">
+					null,
+				</when>
+			</choose>
 			#{buy_totalprice},
 			sysdate,
 			#{buy_paymentmethod},

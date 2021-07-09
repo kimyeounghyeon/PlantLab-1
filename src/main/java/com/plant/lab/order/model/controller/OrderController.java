@@ -31,6 +31,8 @@ import com.plant.lab.cart.model.service.CartService;
 import com.plant.lab.cart.model.vo.Cart;
 import com.plant.lab.member.model.service.MemberService;
 import com.plant.lab.member.model.vo.MemberVO;
+import com.plant.lab.oneday.model.service.OnedayService;
+import com.plant.lab.oneday.model.vo.OnedayVo;
 import com.plant.lab.order.model.service.OrderService;
 import com.plant.lab.order.model.vo.Order;
 import com.plant.lab.order.model.vo.OrderDetail;
@@ -49,6 +51,8 @@ public class OrderController {
 	private MemberService mService;
 	@Autowired
 	private OrderService orderService;
+	@Autowired
+	private OnedayService onedayService;
 	
 	private static final Logger logger = LoggerFactory.getLogger(CartController.class);
 	public static final int LIMIT = 1;
@@ -62,13 +66,6 @@ public class OrderController {
 		logger.info("===============주문 페이지===============");
 		
 		MemberVO member = (MemberVO) session.getAttribute("loginMember");
-		
-		if(member == null || member.getUserId() == "" ) {
-			mv.setViewName("logIn");
-			return mv;
-		}else {
-			mv.setViewName("MypageOrder/ReviewList");			
-		}
 		
 		List<Cart> carts = new ArrayList<Cart>();
 		List<Cart> orders = new ArrayList<Cart>();
@@ -104,13 +101,6 @@ public class OrderController {
 		logger.info("바로확인:"+order.getBuy_totalprice());
 		
 		MemberVO member = (MemberVO) session.getAttribute("loginMember");
-		
-		if(member == null || member.getUserId() == "" ) {
-			mv.setViewName("logIn");
-			return mv;
-		}else {
-			mv.setViewName("MypageOrder/ReviewList");			
-		}
 		order.setUser_no(member.getUserNo());
 		
 		mv.addObject("user",member);
@@ -127,20 +117,45 @@ public class OrderController {
 	@RequestMapping(value="/orderInsert", method=RequestMethod.POST)
 	public ModelAndView orderInsert(ModelAndView mv,Product product,Cart cart,HttpSession session,OrderDetail orderD,
 			Order order,
-			@RequestParam(name = "pro_no") List<Integer> pro_no,
-			@RequestParam(name="pro_num")  List<Integer> pro_num,HttpServletRequest req) {
+			@RequestParam(name = "pro_no", required = false) List<Integer> pro_no,
+			@RequestParam(name="pro_num", required = false)  List<Integer> pro_num,HttpServletRequest req ,
+			@RequestParam(name="reserv_date" ,required = false) String rd ,
+			@RequestParam(name="buy_requests" ,required = false) String rq
+			
+			)
+	{
 		logger.info("===============주문추가===============");
-		logger.info("상품사이즈 체크:"+pro_no.size());
+		
 		
 		MemberVO member = (MemberVO) session.getAttribute("loginMember");
 		order.setUser_no(member.getUserNo());
+		int result=0;
 		
+		if(pro_no != null) {
 		List<Cart> carts = new ArrayList<Cart>();
 		carts = cartService.serchList(order.getUser_no());
 		
 		//구매 테이블 추가
-		int result = orderService.orderInsert(order,pro_no,pro_num,carts);
-		
+		//찍어보기
+			result = orderService.orderInsert(order,pro_no,pro_num,carts);
+		}else {
+			logger.info("::::::::"+order.getReserv_no());
+			//oneday Reserve RS TB 에 저장
+			OnedayVo one = new OnedayVo();
+			
+			
+			//ajax 
+			 one.setOneday_no(order.getReserv_no());
+			 one.setOneday_request(rq);
+			 one.setReserv_date(rd);
+			 one.setUser_no(order.getUser_no());
+			 System.out.println(one);
+			result = onedayService.onedayreserve(one);
+			
+			 //purcharse TB에 저장
+			result = orderService.orderInsert(order);
+			
+		}
 		if(result == 0) {
 			logger.info("구매실패");
 			mv.setViewName("redirect:");
@@ -191,13 +206,6 @@ public class OrderController {
 		
 		logger.info("===============마이페이지 구매리스트 페이지===============");
 		MemberVO member = (MemberVO) session.getAttribute("loginMember");
-		
-		if(member == null || member.getUserId() == "" ) {
-			mv.setViewName("logIn");
-			return mv;
-		}else {
-			mv.setViewName("MypageOrder/ReviewList");			
-		}
 		order.setUser_no(member.getUserNo());
 		
 		if(member == null || member.getUserId() == "" ) {
@@ -240,6 +248,8 @@ public class OrderController {
 			
 			List<OrderDetail> details = orderService.selectOrderDList(buy_no);
 			List<String> imgList = new ArrayList<String>();
+			
+			
 			
 			
 			for(int i=0; i<details.size(); i++) {

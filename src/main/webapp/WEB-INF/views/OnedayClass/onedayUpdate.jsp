@@ -24,10 +24,10 @@
 
 
 
-<div id="fullmain">
-<div id="main">
+<div id="fullmainI">
+<div id="mainI">
 
-<h5 class="subtitle">AD Class Update</h5>
+<h5 class="subtitle">class update</h5>
 <form action="${path}/onedayUpdateRs"  enctype="multipart/form-data" method="post"> 
 <br/>
 <input type="hidden"  name="oneno"  class="oneinsert"  value="${one.oneday_no}"/>

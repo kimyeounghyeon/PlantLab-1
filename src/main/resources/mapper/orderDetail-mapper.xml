@@ -9,9 +9,14 @@
 	<insert id="insertOrderDetail" parameterType="OrderDetail" flushCache="true" statementType="PREPARED">
 		INSERT INTO purchase_list_tb VALUES(
 			PURCHASE_SEQ.CURRVAL,
-			#{pro_no},
-			null,
-			#{pro_num}
+			<choose>
+				<when test="reserv_no != 0">
+					null, #{reserv_no} , 1 , #{reserv_date}
+				</when>
+				<when test="reserv_no == 0">
+					#{pro_no}, null , #{pro_num} , null
+				</when>
+			</choose>
 		)
 	</insert>
 	

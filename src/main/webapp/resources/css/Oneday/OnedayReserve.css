@@ -1,6 +1,5 @@
 @charset "UTF-8";
 
-
 * {
 	font-family: 'Jeju Myeongjo';
 	font-size: 13pt;
@@ -8,7 +7,7 @@
 	line-height: 30px;
 }
 
-#fullmain {
+#fullmainR {
 	text-align: center;
 	width: 1280px;
 	margin: 0 auto;
@@ -16,7 +15,7 @@
 	clear: both;
 }
 
-#main {
+#mainR {
 	display: inline-block;
 	text-align: center;
 	width: 1250px;
@@ -26,17 +25,14 @@
 
 .subtitle {
 	margin-top: 0;
-	font-size: 20pt;
+	font-size: 25pt;
 	text-align: center;
 	padding-top: 20px;
-	height: 130px;
+	height: 50px;
 }
 
 
-#orn{
-	margin-top: 62px;
-	
-}
+
 .onedayinput {
 	display: inline-block;
 	text-align: left;
@@ -45,34 +41,38 @@
 	margin-bottom: 10px;
 	width: 400px;
 	height: 5px;
+	color: black;
+	font-weight: bold;
 }
 
 .onedaybox {
-	outline:none;
+	outline: none;
 	margin-top: 20px;
 	float: right;
 	display: inline-block;
 	width: 400px;
 	height: 50px;
 	margin-right: 45px;
-	z-index: 1
+	z-index: 1;
+	margin-bottom: 30px;
+	border-color:  #DDDDDD;
+	border: 1px solid #DDDDDD;
 }
 
 #oneRequest {
-	outline:none;
+	outline: none;
 	margin-top: 20px;
 	float: right;
 	display: inline-block;
 	width: 402px;
-	height: 200px;
+	height: 195px;
 	margin-right: 45px;
+		border-color: #DDDDDD;
 }
-
-
 
 /* 결제하기*/
 #onedayp {
-	cursor:pointer;
+	cursor: pointer;
 	margin-top: 20px;
 	float: right;
 	display: inline-block;
@@ -81,11 +81,11 @@
 	margin-right: 45px;
 	z-index: 1;
 	margin-bottom: 100px;
-	border: 1px solid #ccc;
-	color: black;
-	background-color: #ccc;
+	border: 1px solid #625b54;
 	font-size: 15px;
 	font-weight: bold;
+     background-color: white;
+     color: black;
 }
 
 #onedayp:hover {
@@ -93,3 +93,45 @@
 	color: white;
 }
 
+#refund {
+	font-weight:600;
+    float: left;
+    text-align: left;
+    margin-right: 600px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    margin-top: 150px;
+    color: black;
+}
+
+#cancel {
+	font-weight:600;
+	  color: black;
+	float: left;
+	text-align: left;
+	margin-right: 580px;
+	margin-bottom: 10px;
+	cursor: pointer;
+}
+
+.rh {
+	clear: both;
+	border: 0px;
+	height: 1px;
+	background-color: #a6a6a6;
+	margin-bottom: 60px;
+}
+
+#refundT {
+	margin-top: 10px;
+	clear: both;
+	text-align: left;
+	margin-bottom: 20px;
+}
+
+#cancelT {
+	margin-top: 10px;
+	clear: both;
+	text-align: left;
+	margin-bottom: 20px;
+}

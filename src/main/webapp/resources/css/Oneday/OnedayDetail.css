@@ -7,7 +7,7 @@
 	line-height: 30px;
 }
 
-#fullmain {
+#fullmainD {
 	text-align: center;
 	width: 1280px;
 	margin: 0 auto;
@@ -25,18 +25,14 @@
 
 .subtitle {
 	margin-top: 0;
+	padding-bottom:30px;
 	font-size: 20pt;
 	text-align: center;
 	padding-top: 20px;
-	height: 130px;
+	height: 30px;
 }
 
-#detailTitle{
-	font-size: 20pt;
-	font-weight: 700;
-	
-	
-}
+
 #classImg {
 	line-height: 550px;
 	text-align: center;
@@ -83,7 +79,7 @@
 	text-align: left;
 	vertical-align: middle;
 	z-index: 1;
-	font-size: 14pt;
+	font-size: 12pt;
 	font-weight: 500;
 }
 
@@ -93,8 +89,9 @@
 	text-align: left;
 	vertical-align: middle;
 	z-index: 1;
-	font-size: 14pt;
+	font-size: 12pt;
  	font-weight: 500;
+ 	color: #212121;
 	
 }
 
@@ -103,14 +100,13 @@
 	display: inline-block;
 	width: 350px;
 	height: 80px;
-	margin-top: 50px;
-	border: 1px solid black;
+	margin-top: 100px;
 	cursor: pointer;
-	border: 1px solid #ccc;
-	color: black;
-	background-color: #ccc;
 	font-size: 14px;
 	font-weight: bold;
+	border: 1px solid #625b54;
+     background-color: white;
+     color: black;
 	
 }
 
@@ -147,6 +143,16 @@
 }
 
 #detailPrice{
-font-size:16pt;
-font-weight:600;	
+font-size:14pt;
+font-weight:500;	
+color: #212121;
+margin-bottom: 10px;
+}
+
+#detailTitle{
+	font-size: 15pt;
+	font-weight: 600;
+	color: #212121;
+	margin-bottom: 10px;
+	
 }

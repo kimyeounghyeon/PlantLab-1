@@ -13,7 +13,7 @@
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 <meta charset="UTF-8">
-<title>無以林 class Add Insert</title>
+<title>class insert</title>
 <style type="text/css">
 </style>
 </head>
@@ -23,8 +23,8 @@
 
 
 
-<div id="fullmain">
-<div id="main">
+<div id="fullmainI">
+<div id="mainI">
 <div id="insertDiv"> 
 <h5 class="subtitle">class 등록</h5>
 
@@ -41,9 +41,8 @@
 <br/>
 <input type="file" accept="image/jpeg, image/jpg, image/png"  id="updateInput"  name="oneinsertS" />
 
-<!-- <div id="some" style="border: 1px solid black; display: inline-block;" >
 
-</div> -->
+</div>
 
 
 <br/>
@@ -80,11 +79,11 @@
 <br/>
 
 
-<input type="date" class="oneinsertD"   id="start"  name="oneinsertDS" />
+<input type="date" class="oneinsert"   id="start"  name="oneinsertDS" />
 
 <span class="inserttag" >클래스  마감일</span>
 <br/>
-<input type="date" class="oneinsertD"  id="end"   name="oneinsertDE" />
+<input type="date" class="oneinsert"  id="end"   name="oneinsertDE" />
 <br/>
 
 

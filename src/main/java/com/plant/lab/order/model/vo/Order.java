@@ -18,7 +18,15 @@ public class Order {
 	private String buy_rc_address;
 	private int buy_rc_phone;
 	private String user_name;
+	private String reserv_date;
+
 	
+	public String getReserv_date() {
+		return reserv_date;
+	}
+	public void setReserv_date(String reserv_date) {
+		this.reserv_date = reserv_date;
+	}
 	public int getBuy_no() {
 		return buy_no;
 	}

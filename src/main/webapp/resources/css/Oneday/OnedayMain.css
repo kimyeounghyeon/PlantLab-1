@@ -43,7 +43,7 @@
 }
 
 .ocontext {
-	width:600px;
+	width: 600px;
 	float: right;
 	margin-top: 100px;
 	margin-bottom: 120px;
@@ -62,4 +62,16 @@
 	background-color: EAEBE7;
 	z-index: 1;
 	display: inline;
+}
+
+#Mbtn {
+	border: 1px solid black;
+	text-align: center;
+	padding: 3px;
+}
+
+#Mbtn:hover {
+	background-color: #625b54;
+	color: white;
+	border: 1px solid #625b54;
 }

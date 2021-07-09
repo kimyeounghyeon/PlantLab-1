@@ -39,12 +39,12 @@
                 	<c:if test="${not empty orderList}">
                 		<c:forEach  var="vo" items="${orderList}" varStatus="status">
 		                    <form>
-		                    <input type="hidden" name="new" value="new">
 		                    <input type="hidden" name="buy_no" value="${vo.buy_no}">
+		                    <input type="hidden" name="reserv_no" value="${vo.reserv_no}">  <!-- 추가======-->
 		                    <table class="orderList">
 		                        <tr>
 		                            <td class="proImg" rowspan="2">
-		                                <div class="reviewImg" style="max-width:800px;position:relative">
+                                <div class="reviewImg" style="max-width:800px;position:relative;">
 		                                
 		                                </div>
 		                                
@@ -140,7 +140,7 @@
 		
 		proBtn.click(function(){
 			var form = $('form');
-			form.attr("method","get");
+			form.attr("method","post");
         	form.attr("action","revieWrite");
         	form.submit();
 		
@@ -149,49 +149,80 @@
 		
 		//상품 이미지 가져오기
 		var buy_no = ($('input[name=buy_no]').val())*1;
+		var reserv_no = ($('input[name=reserv_no]').val())*1;
 		var reviewImg = $('.reviewImg');
 		var proNames = $('.proNames a');
-		$.ajax({
-			url:"orderPro.do",
-			data : {buy_no : buy_no},
-			type:"get",
-			dataType : "json",
-			success:function(data){
-               
-				if(data.imgList != null){
-					var imgList = data.imgList;
-		               var details = data.details;
-		               
-		               var html = "";
-		               $.each(imgList, function(i, item){
-		            	   html += "<img src='"+item+"' class=\"mySlides\"/>";
-		               });
-		               
-		               if(imgList.length > 1){
-		            	   html += "<a class='w3-btn-floating' style='position:absolute; top:45%; left:0;' onclick='plusDivs(-1)'>❮ </a>";
-		                   html += "<a class='w3-btn-floating' style='position:absolute;top:45%;right:0;' onclick='plusDivs(1)'>❯ </a>";
-		                  
-		               }
-		               
-		               if(details.length > 1){
-		            	   proNames.append(details[0].pro_name + " 외 " + (details.length-1) +"개");
-		            	  
-		               }else{
-		            	   $.each(details, function(i, item){
-		            		   proNames.append(item.pro_name);
-		            		   
-		                   });
-		               }
-		               
-		               reviewImg.append(html);
-		               showDivs(slideIndex);
+		
+		console.log("reserv_no:::"+reserv_no);
+		
+		//상품 구매시 ajax
+		if (reserv_no == 0) {
+		
+			$.ajax({
+				url:"orderPro.do",
+				data : {buy_no : buy_no},
+				type:"get",
+				dataType : "json",
+				success:function(data){
+	               
+					if(data.imgList != null){
+						var imgList = data.imgList;
+			               var details = data.details;
+			               
+			               var html = "";
+			               $.each(imgList, function(i, item){
+			            	   html += "<img src='"+item+"' class=\"mySlides\"/>";
+			               });
+			               
+			               if(imgList.length > 1){
+			            	   html += "<a class='w3-btn-floating' style='position:absolute; top:45%; left:0;' onclick='plusDivs(-1)'>❮ </a>";
+			                   html += "<a class='w3-btn-floating' style='position:absolute;top:45%;right:0;' onclick='plusDivs(1)'>❯ </a>";
+			                  
+			               }
+			               
+			               if(details.length > 1){
+			            	   proNames.append(details[0].pro_name + " 외 " + (details.length-1) +"개");
+			            	  
+			               }else{
+			            	   $.each(details, function(i, item){
+			            		   proNames.append(item.pro_name);
+			            		   
+			                   });
+			               }
+			               
+			               reviewImg.append(html);
+			               showDivs(slideIndex);
+					}
+	               
+				},
+				error : function(request, status, errorData){ 
+					
 				}
-               
-			},
-			error : function(request, status, errorData){ 
-				
-			}
-		});
+			});
+		}else{
+			
+			
+			//클래스  구매시 ajax
+			
+			
+			$.ajax({
+				url:"orderClass1",
+				data : {reserv_no : reserv_no},
+				type:"get",
+				dataType : "json",
+				success:function(data){
+					var html ="";
+					html += "<img src='"+data.oneday_img+"'/>";
+					 proNames.append(data.oneday_title);
+		            
+		            
+		            reviewImg.append(html);
+				}
+			});
+			
+			
+		}
+		
 	});
 </script>
 <script>

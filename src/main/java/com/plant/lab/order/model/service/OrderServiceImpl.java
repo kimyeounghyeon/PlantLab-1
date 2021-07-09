@@ -28,7 +28,9 @@ public class OrderServiceImpl implements OrderService{
 	@Override
 	public int orderInsert(Order order,List<Integer> pro_no,List<Integer> pro_num,List<Cart> cart) {
 		 int result = 0;
+		 System.out.println("::::::::::::::::::::::"+order.getReserv_no());
 		 result = orderDao.orderInsert(order);
+		 
 		 
 		 OrderDetail orderD = new OrderDetail();
 		 for(int i=0; i<pro_no.size();i++) {
@@ -61,10 +63,19 @@ public class OrderServiceImpl implements OrderService{
 		
 		 return result;
 	}
-
+	
+	@Override
+	public int orderInsert(Order order) {
+		 int result = 0;
+		 System.out.println(order.getReserv_no());
+		 result = orderDao.orderInsert(order);
+		
+		 return result;
+	}
+//디테일
 	@Override
 	public int orderDetailInsert(OrderDetail detail) {
-		// TODO Auto-generated method stub
+//		int D_result = orderDao.orderDetailInsert(detail);
 		return 0;
 	}
 	
