@@ -30,8 +30,10 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.plant.lab.diary.model.Service.DiaryService;
 import com.plant.lab.diary.model.vo.CommentVO;
+import com.plant.lab.diary.model.vo.DiaryImgVO;
 import com.plant.lab.diary.model.vo.DiaryVO;
 import com.plant.lab.diary.model.vo.LikeVO;
+import com.plant.lab.fileController.FileUploadController;
 import com.plant.lab.member.model.vo.MemberVO;
 import com.plant.lab.report.model.service.ReportService;
 
@@ -78,6 +80,7 @@ public class PlantHomeController {
 		sessionVO.setUser_no(member.getUserNo());
 
 		List<DiaryVO> listDiary = dService.listDiary();
+		System.out.println("listDiary의 결과는 ~ " + listDiary);
 		List<Integer> likeList = dService.likeList(sessionVO);
 
 		
@@ -145,9 +148,10 @@ public class PlantHomeController {
 		
 		
 		List<DiaryVO> detailList = dService.detailDiary(diary_no);
+		System.out.println("DiaryVO는 뭐있을까" + detailList);
 		List<Integer> likeList = dService.likeList(sessionVO);
 		List<CommentVO> listComment = dService.selectComment(diary_no);
-
+		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("likeList", likeList);
 		map.put("detailList", detailList);
@@ -214,13 +218,15 @@ public class PlantHomeController {
 
 	// 일기 등록
 	@RequestMapping(value = "diaryInsert.do", method = RequestMethod.POST)
-	public String boardInsert(DiaryVO vo, HttpServletResponse response, @RequestParam(name = "diaryUpload", required = false) MultipartFile multiFile,
-			HttpSession session, HttpServletRequest request, @RequestParam(name = "writetext") String diary_content
+	public String boardInsert(DiaryVO vo, HttpServletResponse response, 
+			HttpSession session, HttpServletRequest request, @RequestParam(name = "writetext") String diary_content,
+			@RequestParam(name = "diary_img_srcs", required = false) MultipartFile[] multiFile
 			) {
 
 		MemberVO member = (MemberVO) session.getAttribute("loginMember");
-
-
+		List<String> diary_img_src = new ArrayList<String>();
+		DiaryImgVO ivo = new DiaryImgVO();
+		
 			vo.setDiary_content(diary_content);
 			vo.setDiary_write(member.getUserNo());
 			vo.setUser_id(member.getUserId());
@@ -230,11 +236,14 @@ public class PlantHomeController {
 			int diary_no = 0;
 
 			try {
-				if (multiFile != null && !multiFile.equals("")) {
-					String url = saveFile(multiFile, request);
-					vo.setDiary_img_src(url);					
+				for(int i=0; i<multiFile.length; i++) {
+					if (multiFile[i] != null && !multiFile[i].equals("")) {
+						FileUploadController uplad = new FileUploadController();
+						
+						String url = uplad.saveFile(multiFile[i], request);
+						diary_img_src.add(url);		
+					}
 				}
-
 				
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -243,19 +252,12 @@ public class PlantHomeController {
 			
 			
 			try {
-				result = dService.writeDiary(vo);
-				System.out.println("글쓰기 성공 했나용?" + result);
+			
+				int resultWrite = 0;
 				
-				diary_no = dService.getSequence();
-				System.out.println("시퀀스 번호~ " + diary_no);
-			
-			
-				vo.setDiary_no(diary_no);
-			
-			
-			
-			 int resultImg = dService.writeImg(vo);
-			 System.out.println(resultImg + " : 이거맞지~");
+				ivo.setDiary_no(diary_no);
+				resultWrite = dService.writeDiary(vo, diary_img_src);
+				System.out.println(resultWrite + " : 이거맞지~");
 			 
 			 
 		} catch (Exception e) {
@@ -298,18 +300,19 @@ public class PlantHomeController {
 		
 		int result = -1;
 		int resultImg = -1; 
-		
+		DiaryImgVO ivo = new DiaryImgVO();
 		vo.setDiary_no(diary_no);
+		ivo.setDiary_no(diary_no);
 		vo.setUser_id(member.getUserId());
 		vo.setDiary_content(modifytext);
 		
 		try {
 			if (multiFile != null && !multiFile.equals("")) {
 				String url = saveFile(multiFile, request);
-				vo.setDiary_img_src(url);
+				ivo.setDiary_img_src(url);
 				
 				result = dService.modifyDiary(vo);
-				resultImg = dService.modifyImg(vo);
+				resultImg = dService.modifyImg(ivo);
 				
 				System.out.println("글 수정 성공? " + result);
 				System.out.println("이미지 수정 성공? " + resultImg);
@@ -597,7 +600,7 @@ public class PlantHomeController {
 	     System.out.println("currentPage" + currentPage);
 	      
 	      int startPage = 1;
-	      int endPage = 5;
+	      int endPage = 4;
 	      if(currentPage % pageBlock == 0) {
 	         startPage = ((currentPage/pageBlock)-1) * pageBlock + 1;
 	      }else {
@@ -665,7 +668,7 @@ public class PlantHomeController {
 	     System.out.println("currentPage" + currentPage);
 	      
 	      int startPage = 1;
-	      int endPage = 5;
+	      int endPage = 4;
 	      if(currentPage % pageBlock == 0) {
 	         startPage = ((currentPage/pageBlock)-1) * pageBlock + 1;
 	      }else {

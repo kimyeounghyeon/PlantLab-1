@@ -11,7 +11,6 @@
     height: 130px;
     line-height: 100px;
     padding-top: 20px;
-    color : #625b54;
     /* background-color: bisque; */
 }
 
@@ -22,6 +21,7 @@
 	bottom : 5px;
 	padding : 0px;
 }
+
 .mySearchBtn {
 	border : none;
 	background-color : white;
@@ -59,46 +59,30 @@ display: none;
 }
 
 .deleteMyDiary {
-  flex: 1 1 auto;
-  text-align: center;
-  text-transform: uppercase;
-  transition: 1s;
-  padding : 8px;
-  background-size: 200% auto;
-  border : none;
-  color: #625b54;
-  font-size : 14pt;
-  background-color : white;
-  border-radius: 10px;
-  margin-top: 15px;
-  float : right;
-  margin-right : 120px;
-  cursor: pointer;
+	float: right;
+	width: 100px;
+	cursor: pointer;
+    height: 45px;
+    background-color: white;
+	z-index: 1;
+	border : 1px solid #ccc;
+	margin-right: 125px;
 }
 
 .deleteMyDiary:hover {
-	background-image: linear-gradient(to right, white 0%, #625b54 51%, #625b54 100%);
 	color : white;
-	background-position: right center;
+	background-color #625b54;
 }
 
 #goMyList {
-	border: none;
-    background-color: white;
-    cursor: pointer;
-    float: right;
-    margin-right: 10px;
-    color: #625b54;
-    flex: 1 1 auto;
-  	text-align: center;
-  	text-transform: uppercase;
-  	transition: 1s;
-  	padding : 8px;
-  	background-size: 200% auto;
-  	font-size : 14pt;
-  	border-radius: 10px;
-  	margin-top: 15px;
-  	float : right;
+	float: right;
+	width: 100px;
+	cursor: pointer;
+    height: 45px;
+    z-index: 1;
+	background-color : white;
+	border : 1px solid #ccc;
+	margin-right : 10px;
 }
 
 #goMyList:hover {
@@ -120,12 +104,10 @@ display: none;
 
 .mdtr {
 	border : 1px solid gray;
-	
 }
 
 .mdth {
 	border-bottom : 1px solid #ccc;
-	
 }
 .mydSelect {
 	width : 40px;

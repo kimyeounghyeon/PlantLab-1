@@ -20,8 +20,13 @@
 	<h3 class="subtitle">Write diary</h3>
 	<div class="writecontent">
 	<form id="diaryfrm" action="diaryInsert.do" method="POST" enctype="multipart/form-data">
- 	<input multiple="multiple" type="file" name="diaryUpload"  style= "display: inline-block;" />
-	<textarea name="writetext" rows="30" cols="80" id="writetext" placeholder="내용을 입력하세요" >
+   <div class="file">
+      <button type="button" id="fileAdd">이미지 추가</button>
+          <div class="fileList">
+                    		
+           </div>
+           </div>
+    <textarea name="writetext" rows="30" cols="80" id="writetext" placeholder="내용을 입력하세요" >
 	</textarea>
 <%-- 	<input type="hidden" class="writeDno" value="${diary_no }">
  --%>	<br><br><br><br>
@@ -33,6 +38,33 @@
 <jsp:include page="../footer.jsp"></jsp:include>
 
 	<script>
+	//이미지 업로드
+	var cnt = 0;
+	var id = 0;
+	
+	$("#fileAdd").click(function(){
+		console.log("하이");
+		cnt += 1;
+		var html = "<br><label class=\"labels\" for=\""+cnt+"\">파일 추가</label>";
+		html += "<input multiple=\"multiple\" id=\""+cnt+"\" type=\"file\" name=\"diary_img_srcs\" />";
+		html += "<input class=\"upload-name\" id=\"in"+cnt+"\" value=\"파일선택\"><br>";
+		$(".fileList").append(html);
+		
+		$(".labels").click(function(){
+			id = $(this).attr('for');
+			console.log('id11::'+id);
+			
+
+			$('#'+id).on('change',function(){
+				console.log('id33::'+id);
+				 var fileName = $('#'+id).val();
+				 $("#in"+id).val(fileName);
+			});
+		});
+		
+		
+	});
+
 	      var ckeditor_config = {
 	      resize_enaleb : false,
 	      height : "400px",
@@ -48,6 +80,7 @@
 	var frm = $("#diaryfrm");
 	
 	frm.submit();
+	
 
 	});
 	</script>

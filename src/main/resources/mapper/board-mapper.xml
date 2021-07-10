@@ -1,40 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="Diary">
+<resultMap type="DiaryVO" id="diaryMainVO">
+	<id column = "diary_no" property="diary_no"/>
+	<result column="diary_write" property="diary_write"/>
+	<result column="diary_content" property="diary_content"/>
+	<result column="diary_date" property="diary_date"/>
+	<result column="diary_views" property="diary_views"/>
+	<result column="user_id" property="user_id"/>
+	<result column="like_cnt" property="like_cnt"/>
+	<collection property="diaryImgVO" column="diary_no" ofType="DiaryImgVO" columnPrefix="s_">
+	<id column="diary_no" property="diary_no"/>
+	<result column="diary_img_num" property="diary_img_num"/>
+	<result column="diary_img_src" property="diary_img_src"/>
+	</collection>
+</resultMap>
+
+<resultMap type="DiaryVO" id="diaryDetailVO" >
+	<id column = "diary_no" property="diary_no"/>
+	<result column="diary_write" property="diary_write"/>
+	<result column="diary_content" property="diary_content"/>
+	<result column="diary_date" property="diary_date"/>
+	<result column="diary_views" property="diary_views"/>
+	<result column="user_id" property="user_id"/>
+	<result column="like_cnt" property="like_cnt"/>
+	<collection property="diaryImgVO" column="diary_no" ofType="DiaryImgVO" columnPrefix="s_">
+	<id column="diary_no" property="diary_no"/>
+	<result column="diary_img_num" property="diary_img_num"/>
+	<result column="diary_img_src" property="diary_img_src"/>
+	</collection>
+</resultMap>
 
 	<!-- 글 리스트 -->
- 	<select id="listDiary" resultType="DiaryVO">
+ 	<select id="listDiary" resultMap="diaryMainVO">
  	<![CDATA[
-		select diaryall.*, liketb.like_cnt from 
-	    (
-	    select udt.*, dit.diary_img_num, dit.diary_img_src from 
-	        (select dt.*, ut.user_id, ut.user_name from diary_tb dt left outer join user_tb ut on dt.diary_write = ut.user_no) udt 
-	    left outer join 
-	        diary_img_tb dit 
-	    on dit.diary_no = udt.diary_no 
-	    ) diaryall
-		left join 
-		    (select diary_no, count(*) as like_cnt from like_tb group by diary_no) liketb
-		on diaryall.diary_no = liketb.diary_no
-		order by diaryall.diary_date desc
+      select f.diary_no, f.user_id, f.diary_content, s.diary_img_num as s_diary_img_num, s.diary_img_src as s_diary_img_src, f.diary_date, f.like_cnt from 
+    (
+    select a.*, (select count(*) as like_cnt from like_tb where diary_no=a.diary_no) as like_cnt, b.user_id, b.user_name
+    from (select * from diary_tb) a 
+    left outer join user_tb b 
+    on a.diary_write = b.user_no
+    ) f 
+    LEFT OUTER JOIN diary_img_tb s
+    on f.diary_no = s.diary_no order by f.diary_date desc
 	]]>
 	</select>
 	
 	<!-- 글 세부 내용 -->
- 	<select id="detailDiary" parameterType="int" resultType="DiaryVO">
+ 	<select id="detailDiary" parameterType="int" resultMap="diaryDetailVO">
  	 	<![CDATA[
-		select diaryall.*, liketb.like_cnt from 
-	    (
-	    select udt.*, dit.diary_img_num, dit.diary_img_src from 
-	        (select dt.*, ut.user_id, ut.user_name from diary_tb dt left outer join user_tb ut on dt.diary_write = ut.user_no) udt 
-	    left outer join 
-	        diary_img_tb dit 
-	    on dit.diary_no = udt.diary_no 
-	    ) diaryall
-		left join 
-		    (select diary_no, count(*) as like_cnt from like_tb group by diary_no) liketb
-		on diaryall.diary_no = liketb.diary_no where diaryall.diary_no = #{diary_no}
-		order by diaryall.diary_date desc
+        select f.diary_no, f.user_id, f.diary_content, s.diary_img_num as s_diary_img_num, s.diary_img_src as s_diary_img_src, f.diary_date, f.like_cnt from 
+    (
+    select a.*, (select count(*) as like_cnt from like_tb where diary_no=a.diary_no) as like_cnt, b.user_id, b.user_name
+    from (select * from diary_tb where diary_no= #{diary_no}) a 
+    left outer join user_tb b 
+    on a.diary_write = b.user_no
+    ) f 
+    LEFT OUTER JOIN diary_img_tb s
+    on f.diary_no = s.diary_no
 	]]>
  	</select>
  	
@@ -157,6 +180,10 @@
  		select count(*) as diary_cnt from diary_tb 
  	</select>
  	
+ 	<!-- 이미지 테이블 조회 -->
+ 	<!-- <select id="diaryImg" parameterType="int" resultType="DiaryImgVO">
+ 		select * from diary_img_tb where diary_no = #{diary_no}
+ 	</select> -->
 	
 	<!-- 좋아요 리스트 -->
 	<select id="likeList" parameterType="LikeVO" resultType="int">
@@ -186,7 +213,7 @@
  	</insert>
  	
  	<!-- 이미지 등록 -->
- 	<insert id="writeImg" parameterType="DiaryVO" flushCache="true" statementType="PREPARED">
+ 	<insert id="writeImg" parameterType="DiaryImgVO" flushCache="true" statementType="PREPARED">
  		insert into Diary_Img_TB values(#{diary_no}, img_SEQ.nextVal, #{diary_img_src})
  	</insert>
  	
@@ -196,7 +223,7 @@
  	</update>
  	
  	<!-- 이미지 수정 -->
- 	<update id="modifyImg" parameterType="DiaryVO" flushCache="true" statementType="PREPARED">
+ 	<update id="modifyImg" parameterType="DiaryImgVO" flushCache="true" statementType="PREPARED">
  		update diary_img_tb set diary_img_src = #{diary_img_src} where diary_no = #{diary_no}
  	</update>
  	

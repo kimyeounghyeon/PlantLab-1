@@ -92,16 +92,9 @@
 			success : function(data){
 				console.log("성공했어용~");
 				var detailList = data.detailList;
-				console.log(detailList);
-				
 	            var likeList = data.likeList;
-				console.log(likeList);
-				
 				var listComment = data.listComment;
-				console.log(listComment);
-				
 				var user_id = data.user_id;
-
 
 				var dnotice = "";
 				$.each(detailList, function(i, item){
@@ -112,8 +105,17 @@
 					} else {
                     dnotice += "<td class='dtwriteid dtidtd' colspan='2'>"+item.user_id+"</td></tr>";
 					}
-
-                    dnotice += "<tr class='dttr dtimgtr'><td class='dtdiaryimgtd' colspan='2'><img src='"+item.diary_img_src+"' class='dtdiaryimg'></td></tr>";
+                    dnotice += "<tr class='dttr dtimgtr'><td class='dtdiaryimgtd' colspan='2'>";
+                    
+					for(var k=0; k<item.diaryImgVO.length; k++) {
+                    dnotice += "<img src='"+item.diaryImgVO[k].diary_img_src+"' class='dtdiaryimg mySlides'>";
+					}
+					
+                    dnotice += "</td></tr>";
+                    if(item.diaryImgVO.length>1){
+                    dnotice += "<a class='w3-btn-floating' style='position:fixed; top:600px; left:270px;' onclick='plusDivs(-1)'> ❮ </a>";
+                    dnotice += "<a class='w3-btn-floating' style='position:fixed; top:600px; right:270px;' onclick='plusDivs(1)'> ❯ </a>";
+                    }
                     dnotice += "<tr class='dttr dtliketr'>"
                     var loop_flag = false;
                     for(var j=0; j<likeList.length; j++){
@@ -146,6 +148,8 @@
 				}
                	 dnotice += "</table></div>";
         	   	  $(".dback").append(dnotice);
+	               showDivs(slideIndex);
+
         	   	  
 			console.log("문제 없어요~");
 			},
@@ -392,9 +396,26 @@
 
 		});
 	});
-		
-	
+
 	});
+</script>
+<script>
+	var slideIndex = 1;
+	
+	function plusDivs(n) {
+	    showDivs(slideIndex += n);
+	};
+	
+	function showDivs(n) {
+	    var i;
+	    var x = document.getElementsByClassName("mySlides");
+	    if (n > x.length) {slideIndex = 1}
+	    if (n < 1) {slideIndex = x.length} ;
+	    for (i = 0; i < x.length; i++) {
+	        x[i].style.display = "none";
+	    }
+	    x[slideIndex-1].style.display = "block";
+	};
 </script>
 </html>
 

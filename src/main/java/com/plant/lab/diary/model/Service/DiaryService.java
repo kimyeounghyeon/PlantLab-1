@@ -1,9 +1,9 @@
 package com.plant.lab.diary.model.Service;
 
 import java.util.List;
-import java.util.Map;
 
 import com.plant.lab.diary.model.vo.CommentVO;
+import com.plant.lab.diary.model.vo.DiaryImgVO;
 import com.plant.lab.diary.model.vo.DiaryVO;
 import com.plant.lab.diary.model.vo.LikeVO;
 
@@ -24,6 +24,8 @@ public interface DiaryService {
 	public int getlistCount(int diary_write);
 	public int getListCountAll();
 	
+//	public List<DiaryImgVO> diaryImg(int diary_no);
+	
 	// 좋아요
 	public List<Integer> likeList(LikeVO lvo);
 	public int insertLike(LikeVO lvo);
@@ -32,10 +34,11 @@ public interface DiaryService {
 	
 	
 	// 글쓰기
-	public int writeDiary(DiaryVO vo);
-	public int writeImg(DiaryVO vo);
+	
+	public int writeDiary(DiaryVO vo, List<String> diary_img_src);
+//	public int writeImg(DiaryVO vo);
 	public int modifyDiary(DiaryVO vo);
-	public int modifyImg(DiaryVO vo);
+	public int modifyImg(DiaryImgVO vo);
 	public int deleteDiary(DiaryVO vo);
 
 	// 댓글

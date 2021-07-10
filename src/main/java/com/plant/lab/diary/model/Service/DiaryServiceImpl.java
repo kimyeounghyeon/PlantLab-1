@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.plant.lab.diary.model.dao.DiaryDao;
 import com.plant.lab.diary.model.vo.CommentVO;
+import com.plant.lab.diary.model.vo.DiaryImgVO;
 import com.plant.lab.diary.model.vo.DiaryVO;
 import com.plant.lab.diary.model.vo.LikeVO;
 
@@ -25,7 +26,6 @@ public class DiaryServiceImpl implements DiaryService {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println("[영현]listDiary() list중 1개:" + list.get(0).toString());
 		return list;
 	}
 
@@ -143,6 +143,16 @@ public class DiaryServiceImpl implements DiaryService {
 		return cnt;
 	}
 	
+//	@Override
+//	public List<DiaryImgVO> diaryImg(int diary_no) {
+//		List<DiaryImgVO> list = null;
+//		try {
+//			list = dDao.diaryImg(diary_no);
+//		} catch(Exception e) {
+//			e.printStackTrace();
+//		}
+//		return list;
+//	}
 	
 	
 	// 좋아요
@@ -200,25 +210,36 @@ public class DiaryServiceImpl implements DiaryService {
 	
 	
 	// 일기
-	@Override
-	public int writeDiary(DiaryVO vo) {
-		int result = -1;
-		try { 
-			result = dDao.writeDiary(vo);
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-		return result;
-	}
+//	@Override
+//	public int writeDiary(DiaryVO vo) {
+//		int result = -1;
+//		try { 
+//			result = dDao.writeDiary(vo);
+//		} catch(Exception e) {
+//			e.printStackTrace();
+//		}
+//		return result;
+//	}
 	
 	@Override
-	public int writeImg(DiaryVO vo) {
-		int result = -1;
-		try {
-			result = dDao.writeImg(vo);
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
+	public int writeDiary(DiaryVO vo, List<String> diary_img_src) {
+		int result = 0;
+		
+			result = dDao.writeDiary(vo);
+			
+			int diary_no = getSequence();
+			System.out.println("시퀀스 번호~ " + diary_no);
+			
+			if(result == 1) {
+			if (diary_img_src.size() > 0) {
+				for (int j = 0; j < diary_img_src.size(); j++) {
+					DiaryImgVO ivo = new DiaryImgVO();
+					ivo.setDiary_no(diary_no);
+					ivo.setDiary_img_src(diary_img_src.get(j));
+					dDao.writeImg(ivo);
+				}
+			}
+			}
 		return result;
 	}
 	
@@ -234,7 +255,7 @@ public class DiaryServiceImpl implements DiaryService {
 	}
 	
 	@Override
-	public int modifyImg(DiaryVO vo) {
+	public int modifyImg(DiaryImgVO vo) {
 		int result = -1;
 		try {
 			result = dDao.modifyImg(vo);
@@ -257,7 +278,6 @@ public class DiaryServiceImpl implements DiaryService {
 
 	public int getSequence() {
 		int diary_no = -1;
-		
 		try {
 			diary_no = dDao.getSequence();
 		} catch (Exception e) {

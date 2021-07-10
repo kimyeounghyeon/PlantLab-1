@@ -21,6 +21,7 @@
 		<typeAlias alias="Order"	  type="com.plant.lab.order.model.vo.Order" />
 		<typeAlias alias="OrderDetail" type="com.plant.lab.order.model.vo.OrderDetail"/>
 		<typeAlias alias="DiaryVO"	  type="com.plant.lab.diary.model.vo.DiaryVO" />
+		<typeAlias alias="DiaryImgVO"	type="com.plant.lab.diary.model.vo.DiaryImgVO" />
 		<typeAlias alias="LikeVO"     type="com.plant.lab.diary.model.vo.LikeVO" />
 		<typeAlias alias="NoticeVo"	  type="com.plant.lab.notice.model.vo.NoticeVo" />
 		<typeAlias alias="OnedayVo"   type="com.plant.lab.oneday.model.vo.OnedayVo" />

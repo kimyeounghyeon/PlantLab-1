@@ -63,7 +63,7 @@
 					</table>
 	        <div class="regis_page">
             <c:if test="${startPage != 1 }">
-                  <a href="<%=request.getContextPath() %>/mydiary?page=${startPage-1}&keyword=${keyword}">이전</a>
+                  <a href="<%=request.getContextPath() %>/mydiary?page=${startPage-1}&keyword=${keyword}"> ◀ </a>
             </c:if>
             <c:forEach var="p" begin="${startPage}" end="${endPage}" step="1">
                 <c:if test="${p eq currentPage}">
@@ -78,7 +78,7 @@
                 </c:if>
              </c:forEach>
             <c:if test="${endPage < pageCnt }">
-                  <a href="<%=request.getContextPath() %>/mydiary?page=${endPage+1}&keyword=${keyword}">다음</a>
+                  <a href="<%=request.getContextPath() %>/mydiary?page=${endPage+1}&keyword=${keyword}"> ▶ </a>
             </c:if>
             </div>
         </div>

@@ -1,6 +1,7 @@
 package com.plant.lab.diary.model.vo;
 
 import java.sql.Date;
+import java.util.List;
 
 import org.springframework.stereotype.Component;
 
@@ -11,36 +12,27 @@ public class DiaryVO {
 	private String diary_content;
 	private Date diary_date;
 	private int diary_views;
-	private int diary_img_num;
-	private String diary_img_src;
 	private String user_id;
 	private String user_name;
 	private int like_cnt;
 	private int user_no;
+	private List<DiaryImgVO> diaryImgVO;
 	
 	public DiaryVO() {}
 
 	public DiaryVO(int diary_no, int diary_write, String diary_content, Date diary_date, int diary_views,
-			int diary_img_num, String diary_img_src, String user_id, String user_name, int like_cnt) {
+			List<DiaryImgVO> diaryImgVO, String user_id, String user_name, int like_cnt, int user_no) {
 		super();
 		this.diary_no = diary_no;
 		this.diary_write = diary_write;
 		this.diary_content = diary_content;
 		this.diary_date = diary_date;
 		this.diary_views = diary_views;
-		this.diary_img_num = diary_img_num;
-		this.diary_img_src = diary_img_src;
+		this.diaryImgVO = diaryImgVO;
 		this.user_id = user_id;
 		this.user_name = user_name;
 		this.like_cnt = like_cnt;
-	}
-
-	@Override
-	public String toString() {
-		return "DiaryVO [diary_no=" + diary_no + ", diary_write=" + diary_write + ", diary_content=" + diary_content
-				+ ", diary_date=" + diary_date + ", diary_views=" + diary_views + ", diary_img_num=" + diary_img_num
-				+ ", diary_img_src=" + diary_img_src + ", user_id=" + user_id + ", user_name=" + user_name
-				+ ", like_cnt=" + like_cnt + "]";
+		this.user_no = user_no;
 	}
 
 	public int getDiary_no() {
@@ -83,20 +75,12 @@ public class DiaryVO {
 		this.diary_views = diary_views;
 	}
 
-	public int getDiary_img_num() {
-		return diary_img_num;
+	public List<DiaryImgVO> getDiaryImgVO() {
+		return diaryImgVO;
 	}
 
-	public void setDiary_img_num(int diary_img_num) {
-		this.diary_img_num = diary_img_num;
-	}
-
-	public String getDiary_img_src() {
-		return diary_img_src;
-	}
-
-	public void setDiary_img_src(String diary_img_src) {
-		this.diary_img_src = diary_img_src;
+	public void setDiaryImgVO(List<DiaryImgVO> diaryImgVO) {
+		this.diaryImgVO = diaryImgVO;
 	}
 
 	public String getUser_id() {
@@ -123,6 +107,21 @@ public class DiaryVO {
 		this.like_cnt = like_cnt;
 	}
 
+	public int getUser_no() {
+		return user_no;
+	}
+
+	public void setUser_no(int user_no) {
+		this.user_no = user_no;
+	}
+
+	@Override
+	public String toString() {
+		return "DiaryVO [diary_no=" + diary_no + ", diary_write=" + diary_write + ", diary_content=" + diary_content
+				+ ", diary_date=" + diary_date + ", diary_views=" + diary_views + ", diaryImgVO=" + diaryImgVO
+				+ ", user_id=" + user_id + ", user_name=" + user_name + ", like_cnt=" + like_cnt + ", user_no="
+				+ user_no + "]";
+	}
 
 
 	

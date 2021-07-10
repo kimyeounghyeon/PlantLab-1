@@ -47,7 +47,7 @@
                         color: #625854;                            
                         display: block;                           
                         width: 400px;                             
-                        font-size: 20px;                          
+                        font-size: 13pt;                          
                                           
                         
                 }
