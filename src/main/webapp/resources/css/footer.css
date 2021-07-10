@@ -4,51 +4,24 @@
 	font-family: 'Jeju Myeongjo';
 }
 
-.ft {
-	font-family: 'Jeju Myeongjo';
-	position: relative;
-	width: auto;
-	height: 100px;
-	clear: both;
-	margin-top: 100px;
-	padding-top: 100px
+.end{
+	line-height : 100%;
+	padding-left : 40px;
+}
+.tablet{
+	
+	margin : auto;
 }
 
-.tablet {
-	margin: auto;
-	height: 100px;
+.tablet a{
+	color : #1e1e1e;
+	font-weight : bold;
+	
 }
 
-.name {
-	vertical-align: top;
-	padding-top: 14px;
-	padding-right: 40px;
-	font-size: 16px;
-	font-weight: bold;
-	position: relative;
+#chi{
+	width : 70px;
+	position : relative;
+	top : 6px;
+	left: -4px;
 }
-
-.subname {
-	font-weight:bold;
-	font-size: 12px;
-	padding-top: 10px;
-	padding-bottom: 10px;
-}
-
-.end {
-	font-size: 12px;
-	line-height: 80%;
-	vertical-align: top;
-	padding-top: 5px
-}
-
-.hu {
-	font-size: 12px;
-	font-weight: bold;
-}
-
-.cnt {
-		font-size: 9px;
-	line-height: 140%
-}
-.kk{font-size:12px;}
