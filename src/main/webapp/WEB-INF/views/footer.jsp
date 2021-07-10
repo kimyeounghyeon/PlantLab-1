@@ -16,7 +16,7 @@
 			
 				<td class="end" rowspan="3">
 				<a href="#">1:1 상담 신청&nbsp;&nbsp;</a>/<a href="${path}/mypage">고객센터</a>
-				<r>문의는1:1상담을 이용해주세요.
+				<br>문의는1:1상담을 이용해주세요.
 				</td>
 			
 			<tr>
