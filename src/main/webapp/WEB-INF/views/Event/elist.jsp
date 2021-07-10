@@ -60,11 +60,22 @@ width :50px;
 	margin: auto;
 	
 }
+
 #ebtn{
-border : none;
-color : white;
-background: #625b54;
-height : 30px;
+	border: 1px solid black;
+	padding: 3px;
+	width: 100px;
+	cursor: pointer;
+	height: 50px;
+	background-color: EAEBE7;
+	background : white;
+}
+
+
+#ebtn:hover {
+	background-color: #625b54;
+	color: white;
+	border: 1px solid #625b54;
 }
 #etd{
 text-align : right;

@@ -29,14 +29,25 @@ function showInsertForm() {
   text-align : center;
   
 }
-#subtn{
-  background: #625b54;
-  color : white;
-  border : none;
-  margin-left : 810px;
-  width :75px;
-  height : 28px;
 
+
+#subtn{
+	border: 1px solid black;
+	padding: 3px;
+	margin-left : 800px;
+	width: 100px;
+	cursor: pointer;
+	height: 50px;
+	background-color: EAEBE7;
+	
+	background : white;
+}
+
+
+#subtn:hover {
+	background-color: #625b54;
+	color: white;
+	border: 1px solid #625b54;
 }
 .mlisttb{
 
@@ -143,7 +154,7 @@ li.now{
 					<td align="center">${vo.monthly_no}</td>
 					<td><a href="mDetail?monthly_no=${vo.monthly_no}">${vo.monthly_name}</a></td>
 					<td class="mimg" align="center"><a href="mDetail?monthly_no=${vo.monthly_no}">
-					<img class="mimg" src="<%=request.getContextPath() %>/resources/img/${vo.monthly_img}">
+					<img class="mimg" src="${path}/resources/img/${vo.monthly_img}">
 					</a>
 					</td>
 					<td id="mdate" align="center">${vo.monthly_date}</td>
@@ -158,8 +169,8 @@ li.now{
 					<c:url var="mdelete" value="mDelete">
 						<c:param name="monthly_no" value="${vo.monthly_no}" />
 					</c:url> 
-					<a href="${mupview}"> 수정 </a> &nbsp;&nbsp; 
-					<a href="${mdelete}"> 삭제 </a>
+					<a href="${mupview}">수정</a> &nbsp;&nbsp; 
+					<a href="${mdelete}"> 삭제</a>
 					</td>
 				</tr>
 		</c:forEach>
