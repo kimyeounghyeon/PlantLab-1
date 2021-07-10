@@ -17,10 +17,15 @@ function showInsertForm() {
 }
 </script>
 <style>
+*{
+    font-family: 'Jeju Myeongjo';
+    color: #625b54;
+}
+
 .mlistdiv{
   clear: both;
-  margin-left : auto;
-  margin-right : auto;
+  width: 1250px;
+  margin: auto;
   text-align : center;
   
 }
@@ -28,16 +33,18 @@ function showInsertForm() {
   background: #625b54;
   color : white;
   border : none;
-  margin-left : 710px;
+  margin-left : 810px;
   width :75px;
   height : 28px;
 
 }
 .mlisttb{
- margin-left : auto;
- margin-right : auto;
- width : 800px;
- border-collapse:collapse;
+
+  border: solid 1px #ccc;
+  border-radius: 10px;
+  padding: 10px;
+  margin: auto;
+
   
 }
 .mimg{
@@ -52,7 +59,51 @@ width : 200px;
 width : 100px;
 }
 
+.space{
+    height: 20px;
+    border-bottom: solid 1px #ccc;
+  }
+ .tGuid{
+    font-weight: bold;
+}
+ .main_header{
+    text-align: center;
+    height: 130px;
+    line-height: 100px;
+    padding-top: 20px;
+ }
+ .mlisttb{
+    border: solid 1px #ccc;
+    border-radius: 10px;
+    padding: 10px;
+    margin: auto;
+    width: 900px;
+}
+ .voGuid{
+    height: 40px;
+}
+.page{
+    width: 80%;
+    margin: auto;
+    height: 100px;
+    clear: both;
+    text-align: center;
+    line-height: 100px;
+}
+.page li{
+    list-style: none;
+    display: inline;
+    margin: 0px 20px;
+    font-size: 18px;
+}
 
+.page li:hover{
+    font-weight: bold;
+}
+
+li.now{
+    font-weight: bold;
+}
 </style>
 </head>
 <body>
@@ -60,18 +111,23 @@ width : 100px;
 <jsp:include page="../mypagemenu.jsp"></jsp:include>
 <div class="mlistdiv">
 
-<h2 align="center" >이달의 식물</h2>
+ <div class="main_header">
+      <h2 class="title">이달의 식물</h2>
+  </div>
 <button id="subtn" type="button" onclick="window.location='mWrite'">등록하기</button>
 <br>
 <br>
 	<table class="mlisttb">
 		<tr class="bottomline" >
-			<td>No</td>
-			<td>식물이름</td>
-			<td>식물사진</td>
-			<td>작성일</td>
-			<td>기능</td>
+			<td class="tGuid">No</td>
+			<td class="tGuid">식물이름</td>
+			<td class="tGuid">식물사진</td>
+			<td class="tGuid">작성일</td>
+			<td class="tGuid">기능</td>
 	
+		</tr>
+		<tr>
+		  <td colspan="5" class="space"></td>
 		</tr>
 		<!-- 글이 없을 경우 -->
 		<c:if test="${listCount eq 0}">
@@ -109,37 +165,41 @@ width : 100px;
 		</c:forEach>
 		</c:if>
 		
+	</table>
 		<!-- 앞 페이지 번호 처리 -->
 		<br>
-		<tr align="center" height="20">
-			<td colspan=6">
-			<c:if test="${currentPage <= 1}">이전&nbsp; </c:if> 
+		<div class="page">
+		<ul>
+			<c:if test="${currentPage <= 1}">
+			<li>◀</li>
+			</c:if> 
 			
  				<c:if test="${currentPage > 1}">
 					<c:url var="molistST" value="mlist">
 						<c:param name="page" value="${currentPage-1}" />
 					</c:url>
-					<a href="${molistST}">이전</a>
+					<li><a href="${molistST}">◀</a></li>
 				</c:if>
 				 <!-- 끝 페이지 번호 처리 --> 
 				 <c:set var="endPage" value="${maxPage}" />
 				 <c:forEach var="p" begin="${startPage+1}" end="${endPage}">
 					<c:if test="${p eq currentPage}">
-						${p}
+						<li>${p}</li>
 					</c:if>
 				
 				</c:forEach>
 				
-				 <c:if test="${currentPage >= maxPage}">다음 </c:if>
+				 <c:if test="${currentPage >= maxPage}">
+				 <li>▶</li>
+				 </c:if>
 				 <c:if test="${currentPage < maxPage}">
 					<c:url var="molistEND" value="mlist">
 						<c:param name="page" value="${currentPage+1}" />
 					</c:url>
-					<a href="${molistEND}">다음</a>	
+					<li><a href="${molistEND}">▶</a></li>	
 				</c:if>
-			</td>
-		</tr>
-	</table>
+			</ul>
+		</div>
 </div>
 <jsp:include page="../footer.jsp"></jsp:include>
 </body>

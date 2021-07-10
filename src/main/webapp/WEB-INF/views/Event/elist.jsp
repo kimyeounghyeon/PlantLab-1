@@ -5,15 +5,23 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <title>無以林 event</title>
-   <link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/jejumyeongjo.css"/>
+<meta charset="UTF-8">
+<title>無以林 event</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/jejumyeongjo.css"/>
 <link href="${path}/resources/css/header.css" rel="stylesheet" />
 <link href="${path}/resources/css/footer.css" rel="stylesheet" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 
 <style>
+ *{
+font-family: 'Jeju Myeongjo';
+color : #1e1e1e;
+}
+.ref :visited {
+text-decoration : none;
+color : gray;
+}
 .event{
 margin-left: auto;
 margin-right: auto;
@@ -30,10 +38,7 @@ width : 530px;
 font-size : 20px;
 font-weight : bold;
 }
-a#ref:visited { 
-text-decoration : none;
-color: #625b54;
-}
+
 #period{
 width : 160px;
 }
@@ -88,13 +93,13 @@ width : 750px;
         <c:forEach var="vo" items="${list}">
         <tr>
            	<td colspan="4">
-	           	<a id="ref" href="eDetail?event_no=${vo.event_no}">
+	           	<a class="ref" href="eDetail?event_no=${vo.event_no}">
 	           		<img class="eventbanner" src="<%=request.getContextPath() %>/resources/img/${vo.banner}">
 	           	</a>
            	</td>
   		</tr>
 		<tr>
-           	<td id="eventsub"><a href="eDetail?event_no=${vo.event_no}">&nbsp;&nbsp;${vo.event_title}</a></td>
+           	<td id="eventsub"><a class="ref" href="eDetail?event_no=${vo.event_no}">&nbsp;&nbsp;${vo.event_title}</a></td>
             <td id="period">${vo.start_date}~${vo.end_date}</td>
 		    <td id="viewimg"><img id="eimg" src="${path}/resources/img/eye.png"></td>
 		    <td id="view">${vo.event_views}</td>

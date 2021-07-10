@@ -12,6 +12,11 @@
 <link href="${path}/resources/css/footer.css" rel="stylesheet" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	 <style>
+	    *{
+   	font-family: 'Jeju Myeongjo';
+   	color : #1e1e1e;
+   }
+  
   #ediv{
   	clear: both;
 	width: 1250px;

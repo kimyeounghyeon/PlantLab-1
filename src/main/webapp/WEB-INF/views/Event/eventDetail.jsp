@@ -12,6 +12,14 @@
 <link href="${path}/resources/css/footer.css" rel="stylesheet" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
+   *{
+   	font-family: 'Jeju Myeongjo';
+   	color : #1e1e1e;
+   }
+   .ref  :visited {
+   text-decoration : none;
+   color : gray;
+   }
     .edetaildiv{
    	clear: both;
 	width: 1250px;
@@ -52,12 +60,12 @@
     }
     #lm{
     float: right;
-    width : 40px;
+    width : 50px;
     }
     #mtop{
     padding-top : 10px;
     }
-    
+   
     </style>
 </head>
 <body>
@@ -90,8 +98,8 @@
 					<c:param name="event_no" value="${event_tb.event_no}" />
 				</c:url> 
 				<c:if test="${loginMember.grade==1}">
-					<a href="${eupview}"> 수정 </a> &nbsp;&nbsp; 
-					<a href="${edelete}"> 삭제 </a> &nbsp;&nbsp; 
+					<a class="ref" href="${eupview}"> 수정 </a> &nbsp;&nbsp; 
+					<a class="ref" href="${edelete}"> 삭제 </a> &nbsp;&nbsp; 
 				</c:if>
 			</td>
 		</tr>

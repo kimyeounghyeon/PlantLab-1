@@ -14,6 +14,11 @@
    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     
     <style>
+      *{
+   	font-family: 'Jeju Myeongjo';
+   	color : #1e1e1e;
+   }
+
   .eReDiv{
   	clear: both;
 	width: 1250px;
