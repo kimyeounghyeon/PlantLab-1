@@ -213,7 +213,7 @@
  	</insert>
  	
  	<!-- 이미지 등록 -->
- 	<insert id="writeImg" parameterType="DiaryImgVO" flushCache="true" statementType="PREPARED">
+ 	<insert id="writeImg" parameterType="list" flushCache="true" statementType="PREPARED">
  		insert into Diary_Img_TB values(#{diary_no}, img_SEQ.nextVal, #{diary_img_src})
  	</insert>
  	
@@ -223,7 +223,7 @@
  	</update>
  	
  	<!-- 이미지 수정 -->
- 	<update id="modifyImg" parameterType="DiaryImgVO" flushCache="true" statementType="PREPARED">
+ 	<update id="modifyImg" parameterType="list" flushCache="true" statementType="PREPARED">
  		update diary_img_tb set diary_img_src = #{diary_img_src} where diary_no = #{diary_no}
  	</update>
  	
@@ -236,6 +236,11 @@
  	<delete id="deleteDiary" parameterType="DiaryVO" flushCache="true" statementType="PREPARED">
  		delete from diary_tb where diary_no = #{diary_no}
  	</delete>
+ 	
+ 	<!-- 이미지 삭제 -->
+ 	<delete id="deleteImg" parameterType="int" flushCache="true" statementType="PREPARED">
+		delete from diary_img_tb where diary_img_num = #{diary_img_num}
+	</delete>
  
  	<select id="detailWriter" parameterType="int" resultType="int">
  		select diary_write from diary_tb where diary_no = #{diary_no}

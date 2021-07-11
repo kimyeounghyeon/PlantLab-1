@@ -105,14 +105,14 @@ public class DiaryDao {
 		return sqlSession.update("Diary.modifyDiary", vo);
 	}
 
-	// 이미지 수정
-	public int modifyImg(DiaryImgVO vo) {
-		return sqlSession.update("Diary.modifyImg", vo);
-	}
-
 	// 글 삭제
 	public int deleteDiary(DiaryVO vo) {
 		return sqlSession.delete("Diary.deleteDiary", vo);
+	}
+	
+	// 이미지 삭제
+	public int deleteImg(int diary_img_num) {
+		return sqlSession.delete("Diary.deleteImg", diary_img_num);
 	}
 
 	// 좋아요 클릭

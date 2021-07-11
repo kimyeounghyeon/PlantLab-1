@@ -23,18 +23,46 @@
 	<div class="modifycontent">
 
 	<form action="modifydiary.do" method="POST" enctype="multipart/form-data" id="modifyFrm">
-
-	<c:forEach var="d" items="${detailDiary }" varStatus="status">
-	<input type="hidden" name="diary_no" value="${d.diary_no }">
- 	<input multiple="multiple" type="file" name="diaryModImg"  style= "display: inline-block;" value="${d.diary_img_src }"/>
-	<textarea name="modifytext" rows="30" cols="80" id="modifytext"g >${d.diary_content }</textarea>
-	</c:forEach>
+	<input type="hidden" name="diary_no" value="${detailDiary[0].diary_no }">
+	   <div class="file">
+      <button type="button" id="fileAdd">이미지 추가</button>
+          <div class="fileList">
+                    		
+           </div>
+           </div>
+	<textarea name="modifytext" rows="30" cols="80" id="modifytext"g >${detailDiary[0].diary_content }</textarea>
 	<br><br><br><br>
 	<button type="button" id="dmodifybtn">수정하기</button>
 	</form>
 	</div>
 	</div>
 		<script>
+		//이미지 업로드
+		var cnt = 0;
+		var id = 0;
+		
+		$("#fileAdd").click(function(){
+			console.log("하이");
+			cnt += 1;
+			var html = "<br><label class=\"labels\" for=\""+cnt+"\">파일 추가</label>";
+			html += "<input multiple=\"multiple\" id=\""+cnt+"\" type=\"file\" name=\"diary_img_srcs\" />";
+			html += "<input class=\"upload-name\" id=\"in"+cnt+"\" value=\"파일선택\"><br>";
+			$(".fileList").append(html);
+			
+			$(".labels").click(function(){
+				id = $(this).attr('for');
+				console.log('id11::'+id);
+				
+
+				$('#'+id).on('change',function(){
+					console.log('id33::'+id);
+					 var fileName = $('#'+id).val();
+					 $("#in"+id).val(fileName);
+				});
+			});
+			
+			
+		});
 	      var ckeditor_config = {
 	      resize_enaleb : false,
 	      height : "400px",

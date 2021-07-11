@@ -284,46 +284,42 @@ public class PlantHomeController {
 	}
 	
 	
-	// 일기 수정 내용 불러오기
+	// 일기 수정하기
 	@RequestMapping(value="/modifydiary.do", method=RequestMethod.POST)
 	public String modifyDiaryLoad(HttpServletRequest request, HttpSession session, DiaryVO vo,
-				@RequestParam(name="modifytext") String modifytext, @RequestParam(name = "diaryModImg", required = false) MultipartFile multiFile,
+				@RequestParam(name="modifytext") String modifytext, @RequestParam(name = "diary_img_srcs", required = false) MultipartFile[] multiFile,
 				@RequestParam(name="diary_no") int diary_no) {
 		
-		System.out.println("일기 수정 페이지 진입~");
-		System.out.println("일기 수정 페이지에서 값 가져오기~" + modifytext);
-		System.out.println("일기 수정 페이지에서 값 가져오기~" + multiFile);
-		System.out.println("일기 수정 페이지에서 값 가져오기~" + diary_no);
 		
 		MemberVO member = (MemberVO) session.getAttribute("loginMember");
-		System.out.println("수정.do 들어옴");
-		
+		List<String> diary_img_src = new ArrayList<String>();
+
 		int result = -1;
-		int resultImg = -1; 
 		DiaryImgVO ivo = new DiaryImgVO();
 		vo.setDiary_no(diary_no);
-		ivo.setDiary_no(diary_no);
 		vo.setUser_id(member.getUserId());
 		vo.setDiary_content(modifytext);
 		
 		try {
-			if (multiFile != null && !multiFile.equals("")) {
-				String url = saveFile(multiFile, request);
-				ivo.setDiary_img_src(url);
-				
-				result = dService.modifyDiary(vo);
-				resultImg = dService.modifyImg(ivo);
-				
-				System.out.println("글 수정 성공? " + result);
-				System.out.println("이미지 수정 성공? " + resultImg);
+			for(int i=0; i<multiFile.length; i++) {
+				if (multiFile[i] != null && !multiFile[i].equals("")) {
+					FileUploadController uplad = new FileUploadController();
+					
+					String url = uplad.saveFile(multiFile[i], request);
+					diary_img_src.add(url);		
+				}
 			}
 
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("수정 실패~ result : " + result + "resultImg : " + resultImg);
+			System.out.println("이미지 수정에 실패했습니다. ");
 		}	
 		
+		
+		ivo.setDiary_no(diary_no);
+		result = dService.modifyDiary(vo, diary_img_src);
+		System.out.println(result + " : 이거맞지~");
 
 		
 		return "redirect:diary";
