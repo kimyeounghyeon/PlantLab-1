@@ -20,8 +20,9 @@
 					</c:otherwise> 
 				</c:choose>
 		
-       
+       <c:if test="${sessionScope.loginMember==null}">
 				<a href="<%=request.getContextPath()%>/join" class="top">join</a>
+				</c:if>
 			</div>
 
 			<!--  logo -->

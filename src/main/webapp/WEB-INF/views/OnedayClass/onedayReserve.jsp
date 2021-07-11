@@ -30,7 +30,7 @@
 		<div id="mainR">
 
 			<form action="onedayReserveRS" method="post">
-				<h3 class="subtitle">Class Reserve</h3>
+				<h3 class="subtitle">class reserve</h3>
 
 			<div id="calendar"></div>
 
@@ -54,6 +54,7 @@
 			</form>
 			
 			
+	<div class="showhide">		
 			<span id="refund" onclick="openClose1();">환불 사항  </span>
 			<hr class="rh">
 			<div id="refundT" >
@@ -80,9 +81,13 @@
 &emsp; -1:1 고객 센터를 이용해주세요 <br>
 
 </div>
+</div>
+
 <br>
 <br>
 <br>
+
+<div class="showhide">
 <span id="cancel" onclick="openClose2();">취소 사항   </span>
 
 <hr class="rh">
@@ -95,7 +100,7 @@
 
 &emsp; 3. 취소를 원하는 클래스 상단 체크박스 선택 - 취소 <br>
 </div>
-			
+</div>			
 		</div>
 	</div>
 

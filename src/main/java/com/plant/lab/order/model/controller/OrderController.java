@@ -249,6 +249,7 @@ public class OrderController {
 			List<OrderDetail> details = orderService.selectOrderDList(buy_no);
 			List<String> imgList = new ArrayList<String>();
 			
+
 			
 			
 			
@@ -300,7 +301,8 @@ public class OrderController {
 		
 		Order order = orderService.selectOrder(buy_no);
 		List<OrderDetail> detailList = orderService.selectOrderDList(buy_no);
-		
+		System.out.println("현재 상세보기 값 확인 중 입니다."+detailList.get(0));
+		System.out.println("buy_no"+buy_no);
 		mv.addObject("order",order);
 		mv.addObject("detailList",detailList);
 		

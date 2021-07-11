@@ -40,7 +40,7 @@
                 		<c:forEach  var="vo" items="${orderList}" varStatus="status">
 		                    <form>
 		                    <input type="hidden" name="buy_no" value="${vo.buy_no}">
-		                    <input type="hidden" name="reserv_no" value="${vo.reserv_no}">  <!-- 추가======-->
+		                    <input type="hidden" name="reserv_no" value="${vo.reserv_no}"  id="reserv_no">  <!-- 추가======-->
 		                    <table class="orderList">
 		                        <tr>
 		                            <td class="proImg" rowspan="2">
@@ -54,6 +54,7 @@
 		                            	<input type="hidden" name="buy_no" value="${vo.buy_no}">
 		                                <p><a href="<%=request.getContextPath()%>/OrderView?buy_no=${vo.buy_no}"> </a></p>
 		                            </td>
+		                           
 		                            <td class="btn"> 
 		                                <button type="button" class="proBtn">문의하기</button>
 		                            </td>
@@ -67,7 +68,18 @@
 		                            </td>
 		                            <td class="btn addB">
 		                            
-		                                <button type="button" class="proBtn" id="reivewB">리뷰작성하기</button>
+		                            <c:choose>
+		                            <c:when  test="${vo.reserv_no ==0 }">
+		                             <button type="button" class="proBtn" id="reivewB">리뷰작성하기</button>
+		                            
+		                            </c:when>
+		                            <c:when test="${vo.reserv_no !=0 }">
+		                             <button type="button" class="proBtn" id="oneCancel">예약 취소하기</button>
+		                            </c:when>
+		                            </c:choose>
+		                            
+		                            
+		       
 		                            </td>
 		                        </tr>
 		                    </table>
@@ -127,6 +139,67 @@
 </body>
 <script>
 	$(function(){
+		//class 예약 취소 
+		var reserv_no= $("#reserv_no");
+		
+			$("#oneCancel").click(function() {
+				var allData = {
+					'reserv_no' : reserv_no
+				};
+				$.ajax({
+					url : "${path}/onedayCancle",
+					type : "GET",
+					data : allData,
+					async:false,
+					success : function(data) {
+						console.log('return reserv_no value는  : ' + data);
+						alert("삭제되었습니다.");
+					var can=	$("#oneCancel").text("취소 요청중");
+					var day =10;
+					function setCookie(cookiee , can , day)
+					{
+					   var exdate=new Date();
+					   exdate.setDate(exdate.getDate() + day);
+					   var can=escape(can) + ((day==null) ? "" : "; expires="+exdate.toUTCString());
+					   document.cookiee=cookiee + "=" + can;
+					}
+					setCookie('cookiee','can',day); 
+					
+					
+					function getCookie(cookiee)
+					{
+					   var i,x,y,ARRcookies=document.cookie.split(";");
+					   for (i=0;i<ARRcookies.length;i++)
+					   {
+					     x=ARRcookies[i].substr(0,ARRcookies[i].indexOf("="));
+					     y=ARRcookies[i].substr(ARRcookies[i].indexOf("=")+1);
+					     x=x.replace(/^\s+|\s+$/g,"");
+					     if (x==cookiee)
+					     {
+					       return unescape(y);
+					     }
+					   }
+					}
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					},
+					error : function(request){
+						
+						alert("유효 하지 않는 클래스 입니다.");
+						}
+					});
+				
+				})
+		
+		
 		//리뷰체크
 		var rvMsg = "<c:out value="${rvMsg}" />";
 		

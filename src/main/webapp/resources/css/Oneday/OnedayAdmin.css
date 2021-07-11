@@ -16,11 +16,11 @@
 	cursor: pointer;
 	margin-right: 40px;
 	margin-bottom: 15px;
-	border: 1px solid #ccc;
 	color: black;
-	background-color: #ccc;
 	font-size: 15px;
 	font-weight: bold;
+		border: 2px solid #dee1e6;
+	background-color: white;
 }
 
 #oneArBtn {
@@ -32,19 +32,21 @@
 	cursor: pointer;
 	margin-right: 40px;
 	margin-bottom: 15px;
-	border: 1px solid #ccc;
+	border: 2px solid #dee1e6;
+	background-color: white;
 	color: black;
-	background-color: #ccc;
 	font-size: 15px;
 	font-weight: bold;
 }
 
 #oneAdBtn:hover {
+	border: 2px solid #625b54;
 	background-color: #625b54;
 	color: white;
 }
 
 #oneArBtn:hover {
+	border: 2px solid  #625b54;
 	background-color: #625b54;
 	color: white;
 }
@@ -117,6 +119,13 @@
 	padding: 0;
 }
 
+.checkContain{
+	
+	margin-left: 50px;
+}
+
+
+/* 
 <!--CHECK BOX-->
 .checkContain {
 	display: block;
@@ -165,4 +174,4 @@
 	border-width: 0 3px 3px 0;
 	margin-left: 3px;
 	transform: rotate(45deg);
-}
+} */

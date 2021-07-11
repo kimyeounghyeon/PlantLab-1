@@ -77,8 +77,10 @@
                 <br><br><br>
                 <div>
                     <h3>주문 상품 정보</h3>
-                    <table class="orderList">
                     	<c:forEach var="vo" items="${detailList}" varStatus="status">
+                    <c:if test="${vo.oneday_title == null}">
+                    
+                 		   <table class="orderList">
 	                        <tr>
 	                            <td class="proImg" rowspan="2">
 	                               <a href="${path}/productView?proNo=${vo.pro_no}">
@@ -107,11 +109,45 @@
 	                            </td>
 	                        </tr>
 	                        <tr><td><br></td></tr>
-                        </c:forEach>
                     </table>
+                    </c:if>
+                        </c:forEach>
+                <!-- 클래스 상세 -->
+                    	<c:forEach var="vo" items="${detailList}" varStatus="status">
+                    	   <c:if test="${vo.oneday_title != null}">
+                                <table class="orderList">
+	                        <tr>
+	                            <td class="proImg" rowspan="2">
+	                               <a href="${path}/onedayDetail?oneday_no=${vo.reserv_no}">
+	                               		<img src="${vo.oneday_img}" />
+	                               </a>
+	                            </td>
+	                            <td rowspan="2" class="space"></td>
+	                            <td class="proNames" colspan="2">
+	                                <p> <a href="${path}/onedayDetail?oneday_no=${vo.reserv_no}">${vo.oneday_title}</a></p>
+	                            </td>
+	                            <td rowspan="2" class="space"></td>
+	                        </tr>
+	                        <tr>
+	                            <td class="proAllP proGuid">
+	                            <span></span>
+	                                <span>
+	                                	 ${vo.oneday_price} 원
+	                                </span>
+	                            </td>
+	                            <td class="proDate proGuid">
+	                                <span>구매 날짜</span><span>${order.buy_date}</span>
+	                            </td>
+	                        </tr>
+	                        <tr><td><br></td></tr>
+                    </table>
+                </c:if>
+                        </c:forEach>
                 </div>
                 <br><br><br>
                 <div>
+                
+                   <c:if test="${order.reserv_no == 0}">
                     <h3>배송지 정보</h3>
                     <table class="orderView" border="1">
                         <tr>
@@ -138,6 +174,38 @@
                             <td><input type="text" readonly value="${order.buy_requests}"></td>
                         </tr>
                     </table>
+                    </c:if>
+                    
+                    
+                    
+                         <c:if test="${order.reserv_no != 0}">
+                    <c:forEach var="vo" items="${detailList}" varStatus="status">
+                          <h3>예약 정보</h3>
+                         <table class="orderView" border="1">
+                        <tr>
+                            <td><span>수강생</span></td>
+                            <td><input type="text" readonly value="${order.buy_rc_name}"></td>
+                        </tr>
+                        <tr>
+                            <td><span>수강생 전화번호</span></td>
+                              <td><input type="text" readonly value="${order.buy_rc_phone}"></td>
+                        </tr>
+                        <tr>
+                            <td><span>예약일</span></td>
+                             <td><input type="text" readonly value="${vo.reserv_date}"></td>
+                        </tr>
+                        <tr>
+                            <td><span>요청사항</span></td>
+                            <td><input type="text" readonly value="${vo.oneday_request}"></td>
+                        </tr>
+                        <tr>
+                          <td><span>클래스 주소</span></td>
+                            <td><input type="text" readonly value="${vo.oneday_place} ${vo.oneday_dtailplace}"></td>
+                        </tr>
+                    
+                    </table>
+                       </c:forEach>
+                       </c:if>
                 </div>
             </article>
         </section>
@@ -145,6 +213,7 @@
      <jsp:include page="../footer.jsp"></jsp:include>
 </body>
 <script>
+console.log("${detailList[0].reserv_no}");
 	$(function(){
 		//주문번호
 		var orderNo = $('#orderNo');

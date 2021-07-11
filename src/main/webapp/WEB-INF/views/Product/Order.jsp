@@ -35,7 +35,7 @@
                     		<input type="hidden" name="rsCheck" value="rs">
                     		<tr>
 	                            <td class="proImg" rowspan="2">
-	                                <img src="${pageContext.request.contextPath}/resources/img/${oneRsVo.oneday_img}">
+	                                <img src="${oneRsVo.oneday_img}">
 	                            </td>
 	                            <td class="space" rowspan="2"></td>
 	                            <td class="proName">
@@ -499,17 +499,12 @@
 
 				
 				if(payCheck = true){
-					console.log("진입~");
+					
 					var form = $('.orderer');
-					if(rsCheck == 'ca'){
+					
 						form.attr("method","post");
 			        	form.attr("action","orderInsert");
 			        	form.submit();
-					}else{
-						form.attr("method","post");
-			        	form.attr("action","onedayReserveF");
-			        	form.submit();
-					}
 					
 				};
 			});

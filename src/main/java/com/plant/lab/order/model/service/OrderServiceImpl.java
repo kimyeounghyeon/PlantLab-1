@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.plant.lab.cart.model.dao.CartDAO;
 import com.plant.lab.cart.model.vo.Cart;
+import com.plant.lab.oneday.model.vo.OnedayVo;
 import com.plant.lab.order.model.dao.OrderDAO;
 import com.plant.lab.order.model.vo.Order;
 import com.plant.lab.order.model.vo.OrderDetail;
@@ -28,7 +29,8 @@ public class OrderServiceImpl implements OrderService{
 	@Override
 	public int orderInsert(Order order,List<Integer> pro_no,List<Integer> pro_num,List<Cart> cart) {
 		 int result = 0;
-		 System.out.println("::::::::::::::::::::::"+order.getReserv_no());
+		 System.out.println("::::::::::::::::현재 orderservice impl!::::::"+order.getReserv_no());
+		 
 		 result = orderDao.orderInsert(order);
 		 
 		 
@@ -64,20 +66,29 @@ public class OrderServiceImpl implements OrderService{
 		 return result;
 	}
 	
+	//클래스 상세 추가
 	@Override
-	public int orderInsert(Order order) {
+	public int orderInsert(Order order ) {
 		 int result = 0;
-		 System.out.println(order.getReserv_no());
+		 System.out.println("현재 지그매은 오더 서배스 입니다~~~"+order.getReserv_no());
 		 result = orderDao.orderInsert(order);
+		
+		System.out.println("현재 오더서비스입니다~!!!"+order.getReserv_no());
+		System.out.println("현재 오더서비스입니다~!!!"+order.getReserv_date());
+		 OrderDetail orderD = new OrderDetail();
+		 orderD.setReserv_no( order.getReserv_no());
+		 orderD.setReserv_date( order.getReserv_date());
+		 
+		 result = orderDao.orderDetailInsert(orderD);
 		
 		 return result;
 	}
-//디테일
 	@Override
 	public int orderDetailInsert(OrderDetail detail) {
-//		int D_result = orderDao.orderDetailInsert(detail);
+		// TODO Auto-generated method stub
 		return 0;
 	}
+
 	
 	//회원별 주문리스트 개수
 	@Override
@@ -102,4 +113,6 @@ public class OrderServiceImpl implements OrderService{
 	public Order selectOrder(int buy_no) {
 		return orderDao.selectOrder(buy_no);
 	}
+
+
 }

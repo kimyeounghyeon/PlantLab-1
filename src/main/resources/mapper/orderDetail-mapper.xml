@@ -19,13 +19,18 @@
 			</choose>
 		)
 	</insert>
-	
+
 	<!-- 회원별 구매상세 검색 -->
 	<select id="selectOrderDList" resultType="arraylist" parameterType="Order" resultMap="OrderDetailMap">
-		SELECT pl.pro_num,p.pro_image,p.pro_price,p.pro_name,p.pro_no
+SELECT pl.pro_num, pl.RESERV_DATE, pl.RESERV_NO , p.pro_image, p.pro_price, p.pro_name, p.pro_no, o.ONEDAY_TITLE , o.ONEDAY_IMG, o.ONEDAY_PRICE ,o.ONEDAY_PLACE , o.ONEDAY_DTAILPLACE , ors.ONEDAY_REQUEST
 		FROM purchase_list_tb pl 
-		JOIN pro_tb p
+		left outer JOIN pro_tb p
 		ON pl.pro_no = p.pro_no
-		WHERE buy_no = #{buy_no}
+        full outer join ONEDAYCLASS_TB o
+        on pl.RESERV_NO = o.ONEDAY_NO
+        full outer join ONEDAYCLASSRS_TB ors
+        on pl.RESERV_NO = ors.RESERV_NO
+        WHERE buy_no = 	#{buy_no}  
+		
 	</select>
 </mapper>

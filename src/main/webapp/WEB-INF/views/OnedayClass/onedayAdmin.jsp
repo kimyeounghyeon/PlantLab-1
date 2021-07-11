@@ -19,7 +19,7 @@
 <body>
 	<jsp:include page="../header.jsp"></jsp:include>
 	<div class="bgdiv">
-		<h3 class="subtitle">Admin oneday class</h3>
+		<h3 class="subtitle">admin oneday class</h3>
 		<button id="oneAdBtn">클래스 등록</button>
 		<button id="oneArBtn">클래스 삭제</button>
 		<div class="dback">

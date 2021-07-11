@@ -23,7 +23,7 @@
 			<div class="main_header">
 		    </div>
 			<div class="rain front-row"></div>
-	      		<img src="${path}/resources/img/main.gif" id="mainImg">
+	      		<img src="${path}/resources/img/plantLab_Main.gif" id="mainImg">
 	    	<div class="rain back-row"></div>
 		</section>		
 	</div>

@@ -204,21 +204,19 @@ public class OnedayController {
 	@RequestMapping(value = "onedayCancle", method = RequestMethod.GET) // 클래스 예약 취소 delete 세션필요
 	@ResponseBody
 	public void onedayCancle(ModelAndView mv, HttpServletResponse response, HttpSession session,
-			@RequestParam(value = "checkArray[]") List<Object> checkArr) {
+			@RequestParam(name = "reserv_no") int reserv_no ) {
 		MemberVO member = (MemberVO) session.getAttribute("loginMember"); // 로그인된 사람만 들어오기
-		log.info("valueArr값은" + checkArr); // 들어온 값 확인
+		log.info("valueArr값은" + reserv_no); // 들어온 값 확인
 
 		try {
-			for (Object ob : checkArr) {
 				OnedayVo oneVo = new OnedayVo();
-				System.out.println("ob값은" + ob);
-				oneVo.setOneday_no(Integer.parseInt(ob.toString()));
+				oneVo.setOneday_no(reserv_no);
 				oneVo.setUser_no(member.getUserNo());
 				System.out.println(oneVo.toString());
 				//oService.onedaycancel(oneVo);
 				System.out.println("결과"+oService.onedaycancel(oneVo));
-				System.out.println(ob + "취소완료");
-			}
+				System.out.println(oneVo + "취소완료");
+			
 		} catch (Exception e) {
 			log.info("클래스 취소 실패");
 			e.printStackTrace();

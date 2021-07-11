@@ -7,7 +7,6 @@ import com.plant.lab.cart.model.vo.Cart;
 public class Order {
 	private int buy_no;
 	private int user_no;
-	private int reserv_no;
 	private String buy_totalprice;
 	private Date buy_date;
 	private String buy_paymentmethod;
@@ -18,6 +17,7 @@ public class Order {
 	private String buy_rc_address;
 	private int buy_rc_phone;
 	private String user_name;
+	private int reserv_no;
 	private String reserv_date;
 
 	

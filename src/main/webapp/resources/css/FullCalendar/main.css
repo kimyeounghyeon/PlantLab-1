@@ -570,10 +570,11 @@ A HORIZONTAL event
 */
 .fc-h-event { /* allowed to be top-level */
   display: block;
-  border: 1px solid #3788d8;
-  border: 1px solid var(--fc-event-border-color, #3788d8);
-  background-color: #3788d8;
-  background-color: var(--fc-event-bg-color, #3788d8)
+  border: 1px solid #B6EBA9;
+  border: 1px solid var(--fc-event-border-color, #B6EBA9);
+  background-color: #B6EBA9;
+  background-color: var(--fc-event-bg-color, #B6EBA9);
+  height: 100%;
 
 }
 .fc-h-event .fc-event-main {
@@ -1449,4 +1450,15 @@ A VERTICAL event
 	float: left;
  	width: 600px;
 	float: left;
+	margin-left: 5px;
+}
+.fc-event-title-container{
+	
+   background-color: #B6EBA9;
+   border: 1px solid #B6EBA9;
+}
+.fc-next-button fc-button fc-button-primary{
+	   background-color: #4dd172;
+   border: 1px solid #4dd172;
+	
 }
