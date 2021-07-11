@@ -95,8 +95,11 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public MemberVO getUserInfo(String userId) {
 		return  mDao.getUserInfo(userId);
-
 	
+	}
+	@Override
+	public int userDelete(MemberVO vo) {
+		return mDao.userDelete(vo);
 	}
 
 }

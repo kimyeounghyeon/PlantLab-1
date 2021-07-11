@@ -15,21 +15,23 @@
 <link href="${path}/resources/css/userListStyle.css" rel="stylesheet" />
 </head>
 <jsp:include page="header.jsp"></jsp:include>
-	<jsp:include page="mypagemenu.jsp"></jsp:include>
+<jsp:include page="mypagemenu.jsp"></jsp:include>
 <section class="setop">
 	<div class="mypagelist">
-	 <div class="main_header">
-                <h1 class="title">회원 관리</h1>
-            </div>
+		<div class="main_header">
+			<h1 class="title">회원 관리</h1>
+		</div>
 		<div class="search">
-			<form class="search_form" action="#" method="get">
+			<form class="search_form">
 				<input class="search_bar" type="text" name="keyword"
 					placeholder="회원아이디로 검색">
-				<button class="search_btn" type="submit">검색</button>
+				<button class="search_btn" type="submit">
+					<img src="${path }/resources/img/search.png" class="admSearchicon">
+				</button>
 			</form>
 			<c:if test="${empty search }">
 				<c:if test="${not empty search}">
-					<h1>${search}에대한 검색 결과입니다.</h1>
+					<h1>${search}에대한검색결과입니다.</h1>
 					<table class="userList search">
 						<tr>
 							<th><input type="checkbox" id="checkall" /></th>
@@ -40,10 +42,10 @@
 							<th>주소</th>
 						</tr>
 						<tr>
-						<td colspan="6" class="space"></td>
+							<td colspan="6" class="space"></td>
 						</tr>
 						<tr>
-							<td><input type="checkbox" name="item" /></td>
+							<td><input type="checkbox" name="selectChk" name="item"/></td>
 							<td>2</td>
 							<td>${list.userId }</td>
 							<td>${list.userName }</td>
@@ -72,14 +74,14 @@
 								<th>주소</th>
 						</thead>
 						<tr>
-						<td colspan="6" class="space"></td>
+							<td colspan="6" class="space"></td>
 						</tr>
 						<tbody>
 							<c:forEach items="${userList }" var="list">
 								<tr>
-									<td><input type="checkbox" name="item" id="item"
-										value="${list.userId }" /></td>
-								    <td class="id">${list.userId }</td>
+									<td><input type="checkbox" name="selectChk" id="item"
+										value="${list.userNo }" /></td>
+									<td class="id">${list.userId }</td>
 									<td class="name">${list.userName }</td>
 									<td class="pnum">${list.phone }</td>
 									<td class="mail">${list.email }</td>
@@ -92,19 +94,26 @@
 			</c:if>
 		</div>
 	</div>
-	<button class="Withdrawal" type="button" id="delete_btn">회원탈퇴</button>
-	<br>
-	<br>
+	<form id="adminuser">
+	<div class="adFrmDiv">
+	<button class="deletebtn" type="button" id="delete_btn">회원탈퇴</button>
+	</div>
+	</form>>
 	<c:if test="${startPage != 1 }">
-		<a href="<%=request.getContextPath() %>/page/indexpage/user?pageNum=${startPage-1}&search=${search }">이전</a>
+		<a
+			href="<%=request.getContextPath() %>/userList?pageNum=${startPage-1}&search=${search}">
+			◀</a>
 	</c:if>
 	<c:forEach begin="${startPage }" end="${endPage }" var="s" step="1">
-		<a href="<%=request.getContextPath() %>/page/indexpage/user?pageNum=${s }&search=${search }">${s }</a>
+		<a
+			href="<%=request.getContextPath() %>/userList?pageNum=${s }&search=${search }">${s }</a>
 	</c:forEach>
 	<c:if test="${endPage < pageCnt }">
-		<a href="<%=request.getContextPath() %>/page/indexpage/user?pageNum=${endPage+1}&search=${search }">다음</a>
+		<a
+			href="<%=request.getContextPath() %>/userList?pageNum=${endPage+1}&search=${search }">▶
+		</a>
 	</c:if>
-	
+
 </section>
 <jsp:include page="footer.jsp"></jsp:include>
 <script>
@@ -112,31 +121,37 @@
 
 	$("#checkall").change(function(){
 	    if($("#checkall").is(":checked")){
-	     $("input[name='item']").prop('checked', true);
+	     $("input[name='selectChk']").prop('checked', true);
 	    }else{
-	     $("input[name='item']").prop('checked', false);
+	     $("input[name='selectChk']").prop('checked', false);
 	    }
 	});
+     
+	$(".deletebtn").click(function(){
+        var checkVal = "";
+        var frm = document.getElementById("adminuser");
+        var result = confirm("정말 삭제하시겠습니까?");
+
+        if(result) {
+         $("input[name=selectChk]:checked").each(function(){
+         checkVal = $(this).val(); 
+         console.log("값" + checkVal);
+
+             var checkValinput = "<input type='hidden' name='checkVal' value='"+checkVal+"'>";
+             $(".adFrmDiv").prepend(checkValinput);
+          
+         });
+        
+        frm.action = "adminDelete.do";
+        frm.method = "post";
+        frm.submit();  
+         } else {
+            history.back();
+         }
+      }); 
 
 
-	$(function (){
-		   $("#delete_btn").click(Withdrawal);
-		  
-		      function Withdrawal(){
-		          if($("input:checkbox[name='item']:checked")) {
-		             var ids = $("#item").val();
-		             console.log("테스트");
-		             console.log(ids);
-		             		             
-	            	 var frmhidden = document.getElementById("frmhidden");
-	                 frmhidden.action = "#";
-	                 frmhidden.method = "post";
-	                 frmhidden.submit();	                
-		             } else {
-		            	 console.log("실패");
-		             }
-		         }
-		   });
+	
 		   
 	
 	

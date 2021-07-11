@@ -76,4 +76,8 @@ public class MemberDAO {
 
 	
 	}
+	
+	public int userDelete(MemberVO vo) {
+		return sqlSession.delete("member.userDelete",vo);
+	}
 }

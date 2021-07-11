@@ -124,9 +124,9 @@
 			</div>
 		</div>
 		</div>
-		</section>
 				<jsp:include page="footer.jsp"></jsp:include> 
-</body>
+		</section>
+
 <script
 	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
@@ -261,4 +261,5 @@
 
 	
 </script>
+</body>
 </html>

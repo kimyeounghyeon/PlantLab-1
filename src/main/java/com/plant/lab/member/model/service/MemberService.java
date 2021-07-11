@@ -35,9 +35,8 @@ public interface MemberService {
     public List<MemberVO> getUserList(MemberVO vo);
 	
 	public MemberVO getUserInfo(String userId);
-
 	
- 
-   
+	public int userDelete(MemberVO vo);
+	
 
 }

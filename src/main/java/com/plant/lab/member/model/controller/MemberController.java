@@ -161,7 +161,8 @@ public class MemberController {
 
 		return "deleteUser";
 	}
-    // 아이디 탈퇴
+
+	// 아이디 탈퇴
 	@RequestMapping(value = "/memberDelete", method = RequestMethod.POST)
 	public String memberDelete(MemberVO vo, @RequestParam(name = "userPwd") String userPwd, Model model,
 			HttpSession session) throws Exception {
@@ -235,13 +236,30 @@ public class MemberController {
 
 		return "findPassword";
 	}
+
+	// 회원관리
+	@RequestMapping(value = "/userList")
+	public String getUserList(Model model, MemberVO vo) throws Exception {
+		logger.info("getUserList()....");
+		model.addAttribute("userList", mService.getUserList(vo));
+		return "userList";
+
+	}
+
+	// 회원관리 삭제
+	@RequestMapping(value="adminDelete.do")
+	  public String adminUserDelete(MemberVO vo, @RequestParam(name="checkVal")List<Integer> userNo) throws Exception{
+		
 	
-	 // 회원관리 
-	  @RequestMapping(value = "/userList") 
-	  public String getUserList(Model model, MemberVO vo) throws Exception{
-	  logger.info("getUserList()....");  
-	  model.addAttribute("userList", mService.getUserList(vo));
-	  return "userList";
+		  for(int i=0; i<userNo.size(); i++) {
+		         System.out.println(userNo.get(i));
+		         vo.setUserNo(userNo.get(i));
+		       int result = mService.userDelete(vo);
+		         System.out.println(i+"번째 result는 " + result);
+		      }  
+		  return "redirect:userList";
 	  
-	 }
+	  
+	}
+
 }
