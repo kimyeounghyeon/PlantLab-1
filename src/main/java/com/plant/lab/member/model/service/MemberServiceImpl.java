@@ -87,7 +87,16 @@ public class MemberServiceImpl implements MemberService {
     	int result = mDao.isExistIdPw(vo);
     	return result;
     }
+   @Override
+   public List<MemberVO> getUserList(MemberVO vo){
+		return mDao.getUserList(vo);
+	}
+	
+	@Override
+	public MemberVO getUserInfo(String userId) {
+		return  mDao.getUserInfo(userId);
 
-
+	
+	}
 
 }

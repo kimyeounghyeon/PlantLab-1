@@ -66,6 +66,14 @@ public class MemberDAO {
 		return sqlSession.selectOne("member.isExistIdPw",vo);
 	}
 
+	public List<MemberVO> getUserList(MemberVO vo){
+		return sqlSession.selectList("member.getUserList", vo);
+	}
 	
 	
+	public MemberVO getUserInfo(String userId) {
+		return  sqlSession.selectOne("member.getUserInfo", userId);
+
+	
+	}
 }

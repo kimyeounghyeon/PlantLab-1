@@ -52,4 +52,13 @@
 	 select count(*) from user_tb where user_id=#{userId} and user_Pwd=#{userPwd}
 	</select>
 	
+	<select id="getUserInfo" resultType="MemberVO"> 
+	SELECT user_Id , user_Name , phone , email , address FROM user_tb WHERE user_Id = #{userId} 
+	</select>
+
+	
+	<select id="getUserList" parameterType="MemberVO" resultType="MemberVO">
+	 select user_no as userNo, user_id as userId, user_name as userName, phone, email, address from user_tb
+	</select>
+	
 </mapper>

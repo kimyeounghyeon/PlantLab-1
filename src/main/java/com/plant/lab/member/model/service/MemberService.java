@@ -30,8 +30,13 @@ public interface MemberService {
 
     public String findPassword(MemberVO vo);
     
-    public int isExistIdPw(MemberVO vo); 
+    public int isExistIdPw(MemberVO vo);
 
+    public List<MemberVO> getUserList(MemberVO vo);
+	
+	public MemberVO getUserInfo(String userId);
+
+	
  
    
 
