@@ -6,8 +6,11 @@
 
 
 <footer>
-<hr>
 <br>
+<br>
+<br>
+<br>
+<hr>
 <br>
 <br>
 		<table class="tablet" border="0">

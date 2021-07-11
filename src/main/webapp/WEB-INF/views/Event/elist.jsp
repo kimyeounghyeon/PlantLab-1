@@ -27,20 +27,20 @@ margin-left: auto;
 margin-right: auto;
 }
 .eventbanner{
-height : 200px;
-width : 800px;
+height : 280px;
+width :950px;
 margin : 1.5px;
 border-radius : 30px;
 }
 
 #eventsub{
-width : 530px;
+width : 720px;
 font-size : 20px;
 font-weight : bold;
 }
 
 #period{
-width : 160px;
+width : 170px;
 }
 #viewimg{
 width : 20px;
@@ -69,6 +69,7 @@ width :50px;
 	height: 50px;
 	background-color: EAEBE7;
 	background : white;
+	margin-right :30px;
 }
 
 
@@ -79,7 +80,7 @@ width :50px;
 }
 #etd{
 text-align : right;
-width : 750px;
+width : 700px;
 
 }
 </style>
