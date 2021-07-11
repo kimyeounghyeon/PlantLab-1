@@ -131,20 +131,25 @@ border : none;
 				console.log( "aa는 : " + aa);
 				var attimg="";
 				$(".aimg").html("");
-				if( aa <= 9) {
+				if( 1 <= aa && aa <= 4) {
 					attimg = "<img class='img' src='${path}/resources/img/1.jpg'>";
 					attimg += "<div class='attcnt'>"+aa+"/30</div>";
-				}else if ( 10 <= aa && aa <= 19 ){
+				}else if ( 5 <= aa && aa <= 9 ){
 					attimg = "<img class='img' src='${path}/resources/img/2.jpg'>";
 					attimg += "<div class='attcnt'>"+aa+"/30</div>";
-				}else if ( 20 <= aa && aa <= 29){
+				}else if ( 10 <= aa && aa <= 15){
 					attimg = "<img class='img' src='${path}/resources/img/3.jpg'>";
 					attimg += "<div class='attcnt'>"+aa+"/30</div>";
-				}else if ( aa = 30){
+				}else if (16 <= aa && aa <= 22 ){
 					attimg = "<img class='img' src='${path}/resources/img/4.jpg'>";
+					attimg += "<div class='attcnt'>"+aa+"/30</div>";
+				}else if ( 23 <= aa && aa <= 29){
+					attimg = "<img class='img' src='${path}/resources/img/5.jpg'>";
+					attimg += "<div class='attcnt'>"+aa+"/30</div>";
+				}else if ( aa = 30){
+					attimg = "<img class='img' src='${path}/resources/img/6.jpg'>";
 					attimg += "<div class='attcnt'>"+aa+"/30</div><br>";
 					attimg += "<div><button class='ebtn'>이벤트 신청하기</button></div>"
-				
 				}
 				$(".aimg").html(attimg);
 				},
@@ -166,17 +171,23 @@ border : none;
 					console.log( "aa는 : " + aa);
 					var attimg="";
 					
-					if( aa <= 9) {
+					if( 1 <= aa && aa <= 4) {
 						attimg = "<img class='img' src='${path}/resources/img/1.jpg'>";
 						attimg += "<div class='attcnt'>"+aa+"/30</div>";
-					}else if ( 10 <= aa && aa <= 19 ){
-						attimg = "<img class='img' src='${path}/resources/img/2.jpg'>";	
+					}else if ( 5 <= aa && aa <= 9 ){
+						attimg = "<img class='img' src='${path}/resources/img/2.jpg'>";
 						attimg += "<div class='attcnt'>"+aa+"/30</div>";
-					}else if ( 20 <= aa && aa <=29){
+					}else if ( 10 <= aa && aa <= 15){
 						attimg = "<img class='img' src='${path}/resources/img/3.jpg'>";
 						attimg += "<div class='attcnt'>"+aa+"/30</div>";
-					}else if ( aa=30){
+					}else if (16 <= aa && aa <= 22 ){
 						attimg = "<img class='img' src='${path}/resources/img/4.jpg'>";
+						attimg += "<div class='attcnt'>"+aa+"/30</div>";
+					}else if ( 23 <= aa && aa <= 29){
+						attimg = "<img class='img' src='${path}/resources/img/5.jpg'>";
+						attimg += "<div class='attcnt'>"+aa+"/30</div>";
+					}else if ( aa = 30){
+						attimg = "<img class='img' src='${path}/resources/img/6.jpg'>";
 						attimg += "<div class='attcnt'>"+aa+"/30</div><br>";
 						attimg += "<div><button class='ebtn'>이벤트 신청하기</button></div>"
 					}
