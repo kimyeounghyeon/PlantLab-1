@@ -17,19 +17,19 @@
     <style>
     	.addPro{
     		cursor:pointer;
-    		background-color: #ccc;
+    		background-color: white;
     		font-size: 15px;
     		border:solid 1px #ccc;
     		margin-top:54px;
     		margin-right: 20px;
     		width:100px;
-    		height:100px;
+    		height:60px;
     		float:right;
     		border-radius: 10px;
     	}
     	
     	.addPro:hover{
-    		background-color: #ADBA85;
+    		background-color: #625b54;
     	}
     	
     	.managerPro{
