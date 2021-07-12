@@ -178,4 +178,7 @@ display: none;
 	padding: 0px;
 }
 
+.footerDiv {
+	clear: both;
+}
 

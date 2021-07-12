@@ -34,7 +34,9 @@
 		<br> <br>
 		<div class="dback"></div>
 	</div>
+	<div class="footerDiv">
 	 	<jsp:include page="../footer.jsp"></jsp:include> 
+	 	</div>
 
 	<script>
 		$(function() {
