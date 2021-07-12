@@ -37,7 +37,7 @@
 				<td><a href="${path}/inquery">1:1 문의하기</a></td>
 			</tr>
 			<tr class="cateList">
-				<td><a href="${path}/nlist.do">공지사항</a></td>
+				<td><a href="${path}/nlist">공지사항</a></td>
 			</tr>
 			<tr class="cateList">
 				<td><a href="${path}/flist">자주 묻는 질문</a></td>
@@ -53,7 +53,7 @@
 <c:if test="${loginMember.grade==1}">
 <table class="fom">
 <tr><td class="wr">수정하기</td></tr>
-<tr><td><form name="update" method="POST" action="${path}/nnupdate.do">
+<tr><td><form name="update" method="POST" action="${path}/nnupdate">
 <input type="hidden" name="notice_no" value="${data.notice_no}">
 <input type="hidden" name="user_no" value="${loginMember.grade}">
 <div><input name="notice_title" size="81" value="${data.notice_title}" type="text"/></div></td></tr>

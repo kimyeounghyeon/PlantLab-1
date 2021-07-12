@@ -22,7 +22,7 @@ public class NoticeController {
 	
 
 
-	@RequestMapping(value="nlist.do" ,method=RequestMethod.GET)
+	@RequestMapping(value="nlist" ,method=RequestMethod.GET)
 	public ModelAndView noticeList(NoticeVo voo,Model model,ModelAndView mav){
 	try {
 
@@ -45,7 +45,7 @@ public class NoticeController {
 
 
 
-	@RequestMapping(value="nwrite.do", method=RequestMethod.GET)
+	@RequestMapping(value="nwrite", method=RequestMethod.GET)
     public  String write( ModelAndView mav,Model model,NoticeVo vo) {
 	
 	
@@ -54,16 +54,16 @@ public class NoticeController {
     
 	
 	
-	@RequestMapping(value="ninsert.do", method=RequestMethod.POST)
+	@RequestMapping(value="ninsert", method=RequestMethod.POST)
     public String insert( ModelAndView mav,Model model,NoticeVo vo) throws Exception{
 		nService.NoticeInsert(vo);
 		
-		return "redirect:nlist.do";
+		return "redirect:nlist";
 		
        
     }
 	
-@RequestMapping(value="nread.do",method=RequestMethod.GET)
+@RequestMapping(value="nread",method=RequestMethod.GET)
 public ModelAndView read(@RequestParam(name="notice_no")int notice_no, ModelAndView mav)
 {mav.addObject("read",nService.NoticeRead(notice_no));
 mav.setViewName("Notice/NoticeRead");
@@ -71,7 +71,7 @@ return mav;
 	}		
 
 		
-@RequestMapping(value = "nupdate.do", method = RequestMethod.GET)
+@RequestMapping(value = "nupdate", method = RequestMethod.GET)
 public ModelAndView update(@RequestParam(name="notice_no")int notice_no, ModelAndView mav,Model model) {
 	try {
 		mav.addObject("data",nService.NoticeRead(notice_no));
@@ -82,7 +82,7 @@ public ModelAndView update(@RequestParam(name="notice_no")int notice_no, ModelAn
 	}
 	return mav;
 }
-@RequestMapping(value ="nnupdate.do", method =RequestMethod.POST)
+@RequestMapping(value ="nnupdate", method =RequestMethod.POST)
 public String udpate2(NoticeVo m, Model model) {
 	try {
 		nService.NoticeUpdate(m);
@@ -90,13 +90,13 @@ public String udpate2(NoticeVo m, Model model) {
 		model.addAttribute("msg", e1.getMessage());
 		model.addAttribute("errorPage");
 	}
-	return "redirect:nread.do?notice_no="+m.getNotice_no();
+	return "redirect:nread?notice_no="+m.getNotice_no();
 	}
 
-@RequestMapping(value="ndelete.do")
+@RequestMapping(value="ndelete")
 public String delete(@RequestParam(name="notice_no")int notice_no,Model mo)throws Exception{
 nService.NoticeDel(notice_no);
-return "redirect:nlist.do";
+return "redirect:nlist";
 }
 
 @RequestMapping(value = "inquery", method = RequestMethod.GET)
