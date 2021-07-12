@@ -125,37 +125,39 @@ $(function(){
 	 console.log("값" + checkVal);
 
 	 if(checkVal!=null) {
-	var checkValinput = "<input type='hidden' name='checkVal' value='"+checkVal+"'>";
-	$(".adFrmDiv").prepend(checkValinput);
-	
-	frm.action = "deleteadmindiary.do";
-	frm.method = "post";
-	frm.submit();   
-	 } else {
-		 history.back();
-	 }
-	});
-		 
-	 }
-		
-	}); 
-	
-	
-	$(".admSearchBtn").click(function(){
-		console.log("클릭눌렀음");
-		
-		var searchVal = $(".adminSearch").val();
-		console.log("셀렉트 박스 값은 " + searchVal);
-		
-		if ($(".admKeyword").val() == "") {
-			alert("검색어가 없습니다.");
-		} else {
-			searchFrm.action = "admindiary";
-			searchFrm.method = "post";
-			searchFrm.submit();
-		} 
-	});
-});
+	var checkValinput = "<input type='hidden' name='checkVal' value='"+
+		checkVal+"'>";
+															$(".adFrmDiv")
+																	.prepend(
+																			checkValinput);
+
+															frm.action = "deleteadmindiary.do";
+															frm.method = "post";
+															frm.submit();
+														} else {
+															history.back();
+														}
+													});
+
+								}
+
+							});
+
+			$(".admSearchBtn").click(function() {
+				console.log("클릭눌렀음");
+
+				var searchVal = $(".adminSearch").val();
+				console.log("셀렉트 박스 값은 " + searchVal);
+
+				if ($(".admKeyword").val() == "") {
+					alert("검색어가 없습니다.");
+				} else {
+					searchFrm.action = "admindiary";
+					searchFrm.method = "post";
+					searchFrm.submit();
+				}
+			});
+		});
 	</script>
 </body>
 </html>

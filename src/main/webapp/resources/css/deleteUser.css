@@ -11,7 +11,7 @@ h1{
 }
 
 .content {
-	position: absolute;
+	position: relative;
 	left: 50%;
 	transform: translate(-50%);
 	width: 460px;
@@ -78,9 +78,6 @@ h3 {
 	cursor: pointer;
 	font-size: 15px;
 	font-weight: 500;
-
-}
-#userPass{
 
 }
 

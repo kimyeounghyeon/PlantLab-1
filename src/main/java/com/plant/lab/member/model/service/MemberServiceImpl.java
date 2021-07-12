@@ -101,5 +101,23 @@ public class MemberServiceImpl implements MemberService {
 	public int userDelete(MemberVO vo) {
 		return mDao.userDelete(vo);
 	}
-
+	
+	@Override
+	public List<MemberVO> admlistUser(MemberVO vo){
+		return mDao.admlistUser(vo);
+	}
+	@Override
+	public int getlistall(MemberVO vo) {
+		return mDao.getlistall(vo);
+	}
+	@Override
+	public List<MemberVO> getSearchUser(MemberVO vo) {
+		// TODO Auto-generated method stub
+		return mDao.getSearchUser(vo);
+	}
+	@Override
+	public int getUserTotalCnt(MemberVO vo) {
+		// TODO Auto-generated method stub
+		return mDao.getUserTotalCnt(vo);
+	}
 }

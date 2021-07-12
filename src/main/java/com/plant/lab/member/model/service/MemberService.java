@@ -38,5 +38,12 @@ public interface MemberService {
 	
 	public int userDelete(MemberVO vo);
 	
+	public List<MemberVO> admlistUser(MemberVO vo);
+	
+	public int getlistall(MemberVO vo);
+	
+	public int getUserTotalCnt(MemberVO vo);
+	
+	public List<MemberVO> getSearchUser(MemberVO vo);
 
 }

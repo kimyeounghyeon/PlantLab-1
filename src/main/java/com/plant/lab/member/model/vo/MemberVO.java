@@ -13,6 +13,8 @@ public class MemberVO {
     private int phone;
     private int grade;
     private String address;
+    private int startNum;
+    private int endNum;
     
     
     
@@ -29,7 +31,48 @@ public class MemberVO {
 	}
 
  	
- 	
+ 	//페이징 vo
+	public MemberVO(int userNo, String userId, String userName, String userPwd, String email, int phone, int grade,
+			String address, int startNum, int endNum) {
+		super();
+		this.userNo = userNo;
+		this.userId = userId;
+		this.userName = userName;
+		this.userPwd = userPwd;
+		this.email = email;
+		this.phone = phone;
+		this.grade = grade;
+		this.address = address;
+		this.startNum = startNum;
+		this.endNum = endNum;
+	}
+
+
+
+	public int getStartNum() {
+		return startNum;
+	}
+
+
+
+	public void setStartNum(int startNum) {
+		this.startNum = startNum;
+	}
+
+
+
+	public int getEndNum() {
+		return endNum;
+	}
+
+
+
+	public void setEndNum(int endNum) {
+		this.endNum = endNum;
+	}
+
+
+
 	public MemberVO() {
 	}
 

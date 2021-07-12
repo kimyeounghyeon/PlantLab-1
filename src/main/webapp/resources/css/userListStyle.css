@@ -28,13 +28,21 @@
 	bottom: 5px;
 	padding: 0px;
 }
+.pnum{
+    height: 60px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 60px;
+    margin-right: 5px;
+}
 
 .search_btn {
 	border: none;
 	background-color: white;
 	padding: 0px;
 }
-
+ 
 .search_btn {
 	cursor: pointer;
 }
@@ -49,6 +57,16 @@
 	margin-left: 38%;
 	font-size: 12pt;
 }
+.row{
+	text-align: center;
+	margin-top: 3%;
+}
+.admSearchBtn {
+	border : none;
+	background-color : white;
+	padding : 0;
+	cursor:pointer;
+}
 
 .userList {
 	clear: both;
@@ -60,9 +78,7 @@
 	width: 80%;
 }
 
-#item{
-    width: 10px;
-}
+
 .deletebtn {
 	width: 350px;
 	cursor: pointer;
@@ -72,4 +88,14 @@
 	border : 1px solid #ccc;
 	margin-left: 38%;
 	margin-top: 2%;
+}
+.page{
+    width: 80%;
+    margin: auto;
+    height: 100px;
+    clear: both;
+    text-align: center;
+    line-height: 100px;
+     margin: 0px 20px;
+    font-size: 18px;
 }

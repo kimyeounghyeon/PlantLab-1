@@ -2,67 +2,112 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="member">
 	<resultMap type="MemberVO" id="MemberMap">
-		<result column="user_no" property="userNo"/>
-		<result column="user_id" property="userId"/>
-		<result column="user_name" property="userName"/>
-		<result column="user_pwd" property="userPwd"/>
-		<result column="email" property="email"/>
-		<result column="phone" property="phone"/>
-		<result column="grade" property="grade"/>
-		<result column="address" property="address"/>
+		<result column="user_no" property="userNo" />
+		<result column="user_id" property="userId" />
+		<result column="user_name" property="userName" />
+		<result column="user_pwd" property="userPwd" />
+		<result column="email" property="email" />
+		<result column="phone" property="phone" />
+		<result column="grade" property="grade" />
+		<result column="address" property="address" />
 	</resultMap>
-	
-<!-- 	<resultMap type="MemberVO" id="MemberCount">
-		<result column="count" property="count"/>
-	</resultMap> -->
+
+	<!-- <resultMap type="MemberVO" id="MemberCount"> <result column="count" 
+		property="count"/> </resultMap> -->
 
 	<select id="countMember" resultType="MemberVO">
-		select count(*) as count from user_tb 
+		select count(*) as count
+		from user_tb
 	</select>
 
-	<select id="loginMember" parameterType="MemberVO" resultMap="MemberMap">
-		SELECT * FROM USER_TB WHERE USER_ID =#{userId} AND USER_PWD = #{userPwd} 
+	<select id="loginMember" parameterType="MemberVO"
+		resultMap="MemberMap">
+		SELECT * FROM USER_TB WHERE USER_ID =#{userId} AND USER_PWD
+		= #{userPwd}
 	</select>
 
-	<insert id="insertMember" parameterType="MemberVO" statementType="PREPARED" >
-		insert into user_tb values (user_seq.nextVal, #{userId}, #{userName}, #{userPwd}, #{email}, #{phone}, 0, #{address})
+	<insert id="insertMember" parameterType="MemberVO"
+		statementType="PREPARED">
+		insert into user_tb values (user_seq.nextVal,
+		#{userId}, #{userName}, #{userPwd}, #{email}, #{phone}, 0, #{address})
 	</insert>
-	
-	<select id="isValidId"  parameterType="string" resultType="Integer">
+
+	<select id="isValidId" parameterType="string"
+		resultType="Integer">
 		SELECT COUNT(*) FROM user_tb WHERE USER_ID = #{userId}
 	</select>
-	
-	<update id="memberUpdate" parameterType="MemberVO" >
-		UPDATE USER_TB SET user_pwd = #{userPwd}, phone = #{phone}, address = #{address} WHERE USER_ID = #{userId}
+
+	<update id="memberUpdate" parameterType="MemberVO">
+		UPDATE
+		USER_TB SET user_pwd = #{userPwd}, phone = #{phone}, address =
+		#{address} WHERE USER_ID = #{userId}
 	</update>
-	
+
 	<delete id="memberDelete" parameterType="MemberVO">
-		delete from user_tb where user_id = #{userId} and user_pwd = #{userPwd}
+		delete from user_tb
+		where user_id = #{userId} and user_pwd = #{userPwd}
 	</delete>
-	
+
 	<delete id="userDelete" parameterType="MemberVO">
- 		delete from user_tb where user_no = #{userNo}
- 	</delete>
-    
+		delete from user_tb where user_no = #{userNo}
+	</delete>
+
 	<select id="findId" parameterType="MemberVO" resultType="String">
-		select user_id from user_tb where user_Name=#{userName} and phone=#{phone}
-	</select>
-	
-	<select id="findPassword"  parameterType="MemberVO" resultType="String">
-		select user_pwd from user_tb where user_Id=#{userId} and user_Name=#{userName} and phone=#{phone}
-	</select>
-	
-	<select id="isExistIdPw" parameterType="MemberVO" resultType="int">
-	 select count(*) from user_tb where user_id=#{userId} and user_Pwd=#{userPwd}
-	</select>
-	
-	<select id="getUserInfo" resultType="MemberVO"> 
-	SELECT user_Id , user_Name , phone , email , address FROM user_tb WHERE user_Id = #{userId} 
+		select
+		user_id from user_tb where user_Name=#{userName} and phone=#{phone}
 	</select>
 
-	
-	<select id="getUserList" parameterType="MemberVO" resultType="MemberVO">
-	 select user_no as userNo, user_id as userId, user_name as userName, phone, email, address from user_tb
+	<select id="findPassword" parameterType="MemberVO"
+		resultType="String">
+		select user_pwd from user_tb where user_Id=#{userId} and
+		user_Name=#{userName} and phone=#{phone}
+	</select>
+
+	<select id="isExistIdPw" parameterType="MemberVO"
+		resultType="int">
+		select count(*) from user_tb where user_id=#{userId} and user_Pwd=#{userPwd}
+	</select>
+
+	<select id="getUserInfo" resultType="MemberVO">
+		SELECT user_Id , user_Name , phone , email , address FROM user_tb WHERE
+		user_Id = #{userId}
+	</select>
+
+
+	<select id="getUserList" parameterType="MemberVO"
+		resultType="MemberVO">
+		select user_no as userNo, user_id as userId, user_name as userName, phone,
+		email, address from user_tb
+	</select>
+
+	<select id="userList" resultType="MemberVO">
+		select
+		user_no as userNo, user_id as userId, user_name as userName, phone,
+		email, address
+		from user_tb
+		order by user_no desc
 	</select>
 	
+	<select id="userListAll" resultType="int">
+	 select count(*) as user_no form user_tb
+	</select>
+	
+	<select id="getUserTotalCnt" resultType="Integer">
+		SELECT COUNT(*) FROM USER_TB
+	 	 <if test="userId!='' and userId!=null">
+			where user_id like '%' ||  #{userId} || '%'
+		</if>  
+	</select>
+	
+	
+	<select id="getSearchUser" parameterType="MemberVO" resultType="MemberVO">
+	SELECT user_no as userNo, user_id as userId, user_name as userName, phone,
+		email, address FROM (SELECT A.*, ROWNUM AS rnum from(
+	SELECT * FROM USER_TB ORDER BY USER_ID DESC
+	) A) WHERE rnum between #{startNum} and #{endNum}
+	<if test="userId!='' and userId!=null">
+		and user_id like '%' ||  #{userId} || '%'
+	</if> 
+	</select>
+
 </mapper>

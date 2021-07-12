@@ -13,14 +13,14 @@
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/earlyaccess/jejumyeongjo.css" />
 <link href="${path}/resources/css/header.css" rel="stylesheet" />
-<link href="${path}/resources/css/joinStyle.css" rel="stylesheet" />
+<link href="${path}/resources/css/ModifyStyle.css" rel="stylesheet" />
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 </head>
 <jsp:include page="header.jsp"></jsp:include>
-	<jsp:include page="mypagemenu.jsp"></jsp:include>
+<jsp:include page="mypagemenu.jsp"></jsp:include>
 <body>
-<section>
+
 	<div class="joindiv">
 		<div class="content">
 			<div>
@@ -124,11 +124,8 @@
 			</div>
 		</div>
 		</div>
-				<jsp:include page="footer.jsp"></jsp:include> 
-		</section>
-
-<script
-	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<jsp:include page="footer.jsp"></jsp:include> 	
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
 	var afterValidIdCheck = "";
 	function execDaumPostcode() {
@@ -261,5 +258,5 @@
 
 	
 </script>
-</body>
+	</body>
 </html>

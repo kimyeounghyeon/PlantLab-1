@@ -49,7 +49,7 @@
 			</form>
 		</div>
 	</section>
-	 <jsp:include page="footer.jsp"></jsp:include>  
+<jsp:include page="footer.jsp"></jsp:include>	
 	<script>
 	$(document).ready(function(e){
 		$('#btn').click(function(){

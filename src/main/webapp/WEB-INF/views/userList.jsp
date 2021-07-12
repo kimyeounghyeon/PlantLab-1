@@ -22,16 +22,16 @@
 			<h1 class="title">회원 관리</h1>
 		</div>
 		<div class="search">
-			<form class="search_form">
-				<input class="search_bar" type="text" name="keyword"
+			<form class="searchIdFrm">
+				<input class="search_bar" type="text" name="search"
 					placeholder="회원아이디로 검색">
-				<button class="search_btn" type="submit">
+				<button type="button" class="admSearchBtn">
 					<img src="${path }/resources/img/search.png" class="admSearchicon">
 				</button>
 			</form>
-			<c:if test="${empty search }">
-				<c:if test="${not empty search}">
-					<h1>${search}에대한검색결과입니다.</h1>
+			<c:if test="${empty keyword }">
+				<c:if test="${not empty keyword}">
+					<h1>${keyword}에대한검색결과입니다.</h1>
 					<table class="userList search">
 						<tr>
 							<th><input type="checkbox" id="checkall" /></th>
@@ -47,11 +47,11 @@
 						<tr>
 							<td><input type="checkbox" name="selectChk" name="item"/></td>
 							<td>2</td>
-							<td>${list.userId }</td>
-							<td>${list.userName }</td>
-							<td>${list.phone }</td>
-							<td>${list.email }</td>
-							<td>${list.address }</td>
+							<td class="id">${list.userId }</td>
+									<td class="name">${list.userName }</td>
+									<td class="pnum">${list.phone }</td>
+									<td class="mail">${list.email }</td>
+									<td class="addre">${list.address }</td>
 						</tr>
 					</table>
 				</c:if>
@@ -59,7 +59,7 @@
 		</div>
 		<div class=row>
 			<c:if test="${empty userList}">
-      등록 된 회원이 없습니다.
+      <h2>등록 된 회원이 없습니다.</h2>
       </c:if>
 			<c:if test="${not empty userList }">
 				<form id="frmhidden">
@@ -98,25 +98,16 @@
 	<div class="adFrmDiv">
 	<button class="deletebtn" type="button" id="delete_btn">회원탈퇴</button>
 	</div>
-	</form>>
-	<c:if test="${startPage != 1 }">
-		<a
-			href="<%=request.getContextPath() %>/userList?pageNum=${startPage-1}&search=${search}">
-			◀</a>
-	</c:if>
-	<c:forEach begin="${startPage }" end="${endPage }" var="s" step="1">
-		<a
-			href="<%=request.getContextPath() %>/userList?pageNum=${s }&search=${search }">${s }</a>
-	</c:forEach>
-	<c:if test="${endPage < pageCnt }">
-		<a
-			href="<%=request.getContextPath() %>/userList?pageNum=${endPage+1}&search=${search }">▶
-		</a>
-	</c:if>
-
+	</form>
+	<div class="page">
+	${page}
+</div>
 </section>
 <jsp:include page="footer.jsp"></jsp:include>
 <script>
+$(function(){
+    var frm = document.getElementById("adminuser");
+    var searchFrm = document.getElementById("searchIdFrm");
 
 
 	$("#checkall").change(function(){
@@ -126,10 +117,14 @@
 	     $("input[name='selectChk']").prop('checked', false);
 	    }
 	});
+	
+	$("#list_normal").click(function(){  // TODO
+		 $(".Keyword").val("");
+		 location.href="searchUserId";
+	});
      
 	$(".deletebtn").click(function(){
         var checkVal = "";
-        var frm = document.getElementById("adminuser");
         var result = confirm("정말 삭제하시겠습니까?");
 
         if(result) {
@@ -149,7 +144,19 @@
             history.back();
          }
       }); 
+	$(".admSearchBtn").click(function() {
+		console.log("클릭눌렀음");
 
+
+		if ($(".search_bar").val() == "") {
+			alert("검색어가 없습니다.");
+		} else {
+			searchFrm.action = "searchUserId";
+			searchFrm.method = "post";
+			searchFrm.submit();
+		}
+	});
+});
 
 	
 		   

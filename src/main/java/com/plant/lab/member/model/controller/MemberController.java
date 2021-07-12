@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.plant.lab.diary.model.vo.DiaryVO;
 import com.plant.lab.member.model.service.MemberService;
 import com.plant.lab.member.model.vo.MemberVO;
 
@@ -35,11 +36,15 @@ public class MemberController {
 
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 
+	private static final String LIMIT = null;
+
 	@Autowired
 	private MemberService mService;
 
 	@Autowired
 	private JavaMailSender mailSender;
+
+	private int pageBlock;
 
 	@RequestMapping(value = "join", method = RequestMethod.GET)
 	public String joinMember() {
@@ -237,14 +242,14 @@ public class MemberController {
 		return "findPassword";
 	}
 
-	// 회원관리
-	@RequestMapping(value = "/userList")
-	public String getUserList(Model model, MemberVO vo) throws Exception {
-		logger.info("getUserList()....");
-		model.addAttribute("userList", mService.getUserList(vo));
-		return "userList";
-
-	}
+//	// 회원관리
+//	@RequestMapping(value = "/userList")
+//	public String getUserList(Model model, MemberVO vo) throws Exception {
+//		logger.info("getUserList()....");
+//		model.addAttribute("userList", mService.getUserList(vo));
+//		return "userList";
+//
+//	}
 
 	// 회원관리 삭제
 	@RequestMapping(value="adminDelete.do")
@@ -261,5 +266,71 @@ public class MemberController {
 	  
 	  
 	}
+	// 회원 검색
+	@RequestMapping(value="/userList")
+	public String adminDiary(HttpSession session,
+			HttpServletRequest request, Model model, MemberVO vo,
+			@RequestParam(name="page", defaultValue = "1") int page,
+		    @RequestParam(name="keyword", required = false) String keyword,
+			@RequestParam(name="search", defaultValue = "") String search) {
+	
+		
+		//=================페이지네이션
+
+			int startRowNum = (page - 1) * 5 + 1;
+			int endRowNum = startRowNum + 5 - 1;
+			MemberVO pageVo = new MemberVO();
+			pageVo.setUserId(search);
+			pageVo.setStartNum(startRowNum);
+			pageVo.setEndNum(endRowNum);
+			List<MemberVO> getUserList = mService.getSearchUser(pageVo);
+			int recordTotalCount = mService.getUserTotalCnt(pageVo);
+			int pageTotalCount = recordTotalCount / 5;
+			if (recordTotalCount % 5 != 0) {
+				pageTotalCount++;
+			}
+			//보안코드
+			if (page < 1) {
+				page = 1;
+			} else if (page > pageTotalCount) {
+				page = pageTotalCount;
+			}
+
+			int startNavi = (page - 1) / 5 * 5 + 1;
+			int endNavi = startNavi + 5 - 1;
+			if (endNavi > pageTotalCount) {
+				endNavi = pageTotalCount;
+			}
+			boolean needPrev = true;
+			boolean needNext = true;
+
+			if (startNavi == 1) {
+				needPrev = false;
+			}
+			if (endNavi == pageTotalCount) {
+				needNext = false;
+			}
+				
+			StringBuilder sb = new StringBuilder();
+			//temporary
+			
+			if (needPrev) {
+				sb.append("<a href=userList?page=" + (startNavi - 1) + "&search="+search+"> </a>");
+			}
+			for (int i = startNavi; i <= endNavi; i++) {
+				sb.append("<a href=userList?page=" + i +"&search=" + search + "> " + i + " </a>");
+			}
+			if (needNext) {
+				sb.append("<a href=userList?page=" + (endNavi + 1) + "&search=" + search + ">   </a>");
+			}
+			model.addAttribute("page",sb.toString());
+			model.addAttribute("userList",getUserList);
+			//raise
+			return "userList";
+			
+		
+
+	}
+	
 
 }

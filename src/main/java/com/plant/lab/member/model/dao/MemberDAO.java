@@ -76,8 +76,20 @@ public class MemberDAO {
 
 	
 	}
-	
 	public int userDelete(MemberVO vo) {
 		return sqlSession.delete("member.userDelete",vo);
+	}
+	public List<MemberVO> admlistUser(MemberVO vo) {
+		return sqlSession.selectList("member.userList",vo);
+	}
+	public int getlistall(MemberVO vo) {
+		return sqlSession.selectOne("member.userListAll",vo);
+	}
+
+	public int getUserTotalCnt(MemberVO vo) {
+		return sqlSession.selectOne("member.getUserTotalCnt",vo);
+	}
+	public List<MemberVO> getSearchUser(MemberVO vo) {
+		return sqlSession.selectList("member.getSearchUser", vo);
 	}
 }
