@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.plant.lab.order.model.vo.OrderDetail;
+import com.plant.lab.product.model.vo.Product;
 import com.plant.lab.review.model.vo.Review;
 
 public interface ReviewService {
@@ -11,12 +12,14 @@ public interface ReviewService {
 	public List<Review> searchList(int pro_no);
 	public List<Review> selectRvList(Review review);
 	public Review selectReview(Review review);
+	public List<Review> selectSearch(String keyword);
 	
 	//리뷰 사진 가져오기
 	public List<Review> selectImgList(Review review);
 	
 	//상품별 총 리뷰수 
 	public int listCount(int pro_no);
+	public int listCountRv(Review review);
 	
 	//상품별 별점 수
 	public int starCount(HashMap<String, Integer> map);

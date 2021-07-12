@@ -57,6 +57,7 @@ public class OrderController {
 	private static final Logger logger = LoggerFactory.getLogger(CartController.class);
 	public static final int LIMIT = 1;
 	public static final int LIMIT2 = 10;
+	public static final int pageBlock = 5;
 	
 //상품 주문페이지 이동
 	@RequestMapping(value="/orders", method=RequestMethod.POST)
@@ -185,15 +186,35 @@ public class OrderController {
 		}
 		
 		//페이지처리
+		Order order = new Order();
 		int currentPage = page; // 한 페이지당 출력할 목록 개수
-		int listCount = orderService.listCount(null); //전체 게시글 개수
+		int listCount = orderService.listCount(order); //전체 게시글 개수
+		logger.info("개수 확인하기 : " + listCount);
 		int maxPage = (int) ((double) listCount / LIMIT2 + 0.9); //최대 페이지
 		
+		int startPage = 1;
+	     int endPage = 4;
+	     if(currentPage % pageBlock == 0) {
+	         startPage = ((currentPage/pageBlock)-1) * pageBlock + 1;
+	      }else {
+	         startPage = ((currentPage/pageBlock)) * pageBlock + 1;
+	      }
+	      endPage = startPage + pageBlock - 1;
+		
+	     int pageCnt = (listCount / LIMIT2) + (listCount % LIMIT2== 0 ? 0 : 1);
+		     
+		if(endPage > pageCnt) {
+			endPage = pageCnt;			
+		}
 		
 		List<Order> orderList = orderService.selectOrderList(currentPage,LIMIT2,null);
 		
 		mv.addObject("orderList", orderList);
 		mv.addObject("currentPage", currentPage);
+		mv.addObject("pageCnt", pageCnt);
+	    mv.addObject("startPage", startPage);
+	    mv.addObject("endPage", endPage);
+		mv.addObject("listCount", listCount);
 		mv.addObject("maxPage", maxPage);
 		return mv;
 	}	
@@ -206,7 +227,6 @@ public class OrderController {
 		
 		logger.info("===============마이페이지 구매리스트 페이지===============");
 		MemberVO member = (MemberVO) session.getAttribute("loginMember");
-		order.setUser_no(member.getUserNo());
 		
 		if(member == null || member.getUserId() == "" ) {
 			mv.setViewName("logIn");
@@ -215,6 +235,9 @@ public class OrderController {
 			mv.setViewName("MypageOrder/OrderList");			
 		}
 		
+		
+		
+		order.setUser_no(member.getUserNo());
 		logger.info("rvMsg확인:::"+rvMsg);
 		if(rvMsg != null) {
 			mv.addObject("rvMsg", "ok");
@@ -225,13 +248,33 @@ public class OrderController {
 		//페이지처리
 		int currentPage = page; // 한 페이지당 출력할 목록 개수
 		int listCount = orderService.listCount(order); //전체 게시글 개수
+		logger.info("개수 확인하기 : " + listCount);
 		int maxPage = (int) ((double) listCount / LIMIT + 0.9); //최대 페이지
 		
+		 int startPage = 1;
+	     int endPage = 4;
+	     if(currentPage % pageBlock == 0) {
+	         startPage = ((currentPage/pageBlock)-1) * pageBlock + 1;
+	      }else {
+	         startPage = ((currentPage/pageBlock)) * pageBlock + 1;
+	      }
+	      endPage = startPage + pageBlock - 1;
+		
+	     int pageCnt = (listCount / LIMIT) + (listCount % LIMIT == 0 ? 0 : 1);
+		     
+		if(endPage > pageCnt) {
+			endPage = pageCnt;			
+		}
+	      
 		
 		List<Order> orderList = orderService.selectOrderList(currentPage,LIMIT,order);
 		
 		mv.addObject("orderList", orderList);
 		mv.addObject("currentPage", currentPage);
+		mv.addObject("pageCnt", pageCnt);
+	    mv.addObject("startPage", startPage);
+	    mv.addObject("endPage", endPage);
+		mv.addObject("listCount", listCount);
 		mv.addObject("maxPage", maxPage);
 		return mv;
 	}

@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="${path}/resources/css/OrderListStyle.css"/>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <style>
     	.managerList{
     		text-align: center;
@@ -42,7 +43,56 @@
     		cursor: pointer;
     	}
     	
-    	.regis_page{
+    	.search {
+			height : 35px;
+			border : none;
+			margin-left:130px;
+			margin-bottom: 25px;
+		}
+	
+		.search ::-ms-expand {
+		display: none;
+		}
+		
+		.keyword {
+			border-left : none;
+			border-right : none;
+			border-top : none;
+			border-bottom : 1px solid #6a6560;
+			width : 300px;
+			text-align : center;
+		}
+		
+		.selectSearch {
+			margin-left : 65px;
+			margin-bottom : 0px;
+		}
+		
+		.searchBtn {
+			border : none;
+			background-color : white;
+			padding : 0px;
+		}
+		
+		.searchBtn:hover {
+			cursor:pointer;
+		}
+		
+		.searchicon {
+			width : 20px;
+			height : 20px;
+			bottom : 5px;
+			padding : 0px;
+		}
+		
+		.searchResult {
+			text-align : center;
+			font-weight : bold;
+			font-size : 17pt;
+			color : #625b54;
+		}
+		
+		.regis_page{
     		margin: auto;
     		text-align: center;
     	}
@@ -59,6 +109,16 @@
             </div>
 
             <article class="main_article">
+            	<div class="search">
+                    <form name="proListF">
+                   		<input type="hidden" name="page" value="${currentPage}"> 
+	                    <input type="text" id="searchV" name="keyword" class="keyword" placeholder="리뷰 번호를 입력해주세요.">&nbsp;
+	                    <button type="button" class="searchBtn">
+	                    	<img src="${path }/resources/img/search.png" class="searchicon">
+	                    </button>
+                    </form>
+                </div>
+            
                 <div>
                 	<c:if test="${empty reviewList}">
                 		<table class="orderList">
@@ -113,6 +173,7 @@
 						<c:if test="${p ne currentPage}">
 							<c:url var="adminDiaryChk" value="reviewList">
 								<c:param name="page" value="${p}" />
+								<c:param name="keyword" value="${keyword}" />
 							</c:url>
 							<a href="${adminDiaryChk}" class="aLink"><b>[${p}]</b></a>
 						</c:if>
@@ -140,10 +201,9 @@
         	form.submit();
 		});
 		
-		
 		//검색
 	    var search = $('#searchV');
-	    var serachBtn = $('.searchBtn');
+	    var serachBtn = $('.searchicon');
 		var form = $('form[name=proListF]');
 		
 	    serachBtn.click(function(){

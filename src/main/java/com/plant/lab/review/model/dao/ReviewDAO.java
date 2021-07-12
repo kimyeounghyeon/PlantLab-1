@@ -27,6 +27,11 @@ public class ReviewDAO {
 		return sqlSession.selectList("Review.selectRvList",review);
 	}
 	
+	public List<Review> selectSearch(String keyword){
+		return sqlSession.selectList("Review.selectSearch",keyword);
+	}
+	
+	
 	public Review selectReview(Review review) {
 		return sqlSession.selectOne("Review.selectReview",review);
 	}
@@ -34,6 +39,11 @@ public class ReviewDAO {
 	//리뷰 사진 가져오기
 	public List<Review> selectImgList(Review review) {
 		return sqlSession.selectList("Review.selectImgList",review);
+	}
+	
+	//회원별 총 리뷰수
+	public int listCountRv(Review review) {
+		return sqlSession.selectOne("Review.listCountRv",review);
 	}
 	
 	//상품별 총 리뷰수 
