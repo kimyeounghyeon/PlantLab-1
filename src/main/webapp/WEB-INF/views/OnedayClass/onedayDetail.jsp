@@ -20,7 +20,6 @@
 <body>
 	<jsp:include page="../header.jsp"></jsp:include>
 	<div id="fullmainD">
-		<div id="mainD">
 			<h3 class="subtitle">Class Info</h3>
 
 
@@ -42,23 +41,25 @@
 						${oneVo.oneday_end }</p>
 					<button id="classBtn" type="submit">예약</button>
 					<input type="hidden" name="onedayNo" value="${ oneVo.oneday_no}">
+				</div>
 			</form>
-		</div>
 		<br> <br> <br> <br> <strong><em
 			class="infodetail">과정 소개</em></strong>
 		<hr>
-		<br><div style="font-size: 12pt;"> ${fn:replace(oneVo.oneday_content,replaceChar , "<br/>")}</div> <br>
+		<br>
+		<div style="font-size: 12pt;"> ${fn:replace(oneVo.oneday_content,replaceChar , "<br/>")}</div> 
+		<br>
 		<br> <br> <strong><em class="infodetail">수업 장소</em></strong>
 		<hr>
 		<br>
 		<div id="map"></div>
 		<p id="onePl">${oneVo.oneday_place} ${oneVo.oneday_dtailPlace}</p>
 
-	</div>
+<div>
 
-<div></div>
+</div>
 	<script type="text/javascript"
-		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=bf32a1f590525c78d662c84a7e2fd217&libraries=services,clusterer,drawing"></script>
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=bf32a1f590525c78d662c84a7e2fd217&libraries=services,clusterer,drawing"></script>
 	<script type="text/javascript">
 		$(function() {
 			$("#classBtn")
@@ -111,7 +112,7 @@
 							}
 						});
 	</script>
-
+</div>
 
 	<jsp:include page="../footer.jsp"></jsp:include>
 </body>

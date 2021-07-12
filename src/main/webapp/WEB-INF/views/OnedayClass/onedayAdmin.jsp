@@ -8,20 +8,19 @@
 <head>
 <meta charset="UTF-8">
 <title>無以林 Admin OnedayClass</title>
-<link href="${path}/resources/css/Oneday/OnedayAdmin.css"
-	rel="stylesheet" />
-<link rel="stylesheet"
-	href="https://fonts.googleapis.com/earlyaccess/jejumyeongjo.css" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/jejumyeongjo.css" />
+<link href="${path}/resources/css/Oneday/OnedayAdmin.css" rel="stylesheet" />
 <link href="${path}/resources/css/header.css" rel="stylesheet" />
 <link href="${path}/resources/css/footer.css" rel="stylesheet" />
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 	<jsp:include page="../header.jsp"></jsp:include>
+	<jsp:include page="../mypagemenu.jsp"></jsp:include>
 			<div id="fullmainA">
 			<div id="mainA">
 	<div class="bgdiv">
-		<h3 class="subtitle">admin oneday class</h3>
+		<h2 class="subtitle">클래스 관리</h2>
 		<button id="oneAdBtn">클래스 등록</button>
 		<button id="oneArBtn">클래스 삭제</button>
 

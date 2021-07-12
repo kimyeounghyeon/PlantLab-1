@@ -24,7 +24,6 @@
 	vertical-align: middle;
 }
 
-
 .subtitle {
 	margin: 0;
 	font-size: 20pt;
@@ -51,63 +50,61 @@
 }
 
 .inserttag {
-margin-right: 420px;
-    margin-bottom: 20px;
-    clear: both;
-    float: right;
-    text-align: left;
-    width: 500px;
-    height: 20px;
-    display: inline-block;
-    float: right;
-    font-size: 14pt;
-    color: black;
-    font-weight: 600;
+	margin-right: 420px;
+	margin-bottom: 20px;
+	clear: both;
+	float: right;
+	text-align: left;
+	width: 500px;
+	height: 20px;
+	display: inline-block;
+	float: right;
+	font-size: 13pt;
+	font-weight: 600;
 }
 
 .oneinsert {
-    margin-right: 330px;
-    margin-bottom: 35px;
-    outline: none;
-    clear: both;
-    float: right;
-    display: inline-block;
-    clear: both;
-    width: 600px;
-    height: 50px;
-    border-radius: 3px;
-    border: 0.1px solid #bebebe;
+	margin-right: 330px;
+	margin-bottom: 35px;
+	outline: none;
+	clear: both;
+	float: right;
+	display: inline-block;
+	clear: both;
+	width: 600px;
+	height: 50px;
+	border-radius: 3px;
+	border: 0.1px solid #bebebe;
 }
 
 #oneinsertT {
-    margin-right: 330px;
-    display: inline-block;
-    width: 600px;
-    height: 250px;
-    outline: none;
-    clear: both;
-    float: right;
-    border-radius: 3px;
-    border: 0.1px solid #bebebe;
+	margin-right: 330px;
+	display: inline-block;
+	width: 600px;
+	height: 250px;
+	outline: none;
+	clear: both;
+	float: right;
+	border-radius: 3px;
+	border: 0.1px solid #bebebe;
 }
 
 #oneIbtn {
 	margin-right: 328px;
-    cursor: pointer;
-    margin-top: 30px;
-    float: right;
-    display: inline-block;
-    clear: both;
-    width: 610px;
-    height: 60px;
-    float: right;
-    margin-top: 30px;
-    border-radius: 3px;
-    border: 2px solid #625b54;
-     background-color: white;
-     color: black;
+	cursor: pointer;
+	margin-top: 30px;
+	float: right;
+	display: inline-block;
+	clear: both;
+	width: 610px;
+	height: 60px;
+	float: right;
+	border-radius: 3px;
+	border: 2px solid #625b54;
+	background-color: white; margin-bottom : 100px;
+	font-weight: bold;
+	margin-bottom: 100px;
 }
-
 
 #oneIbtn:hover {
 	background-color: #625b54;
@@ -115,30 +112,30 @@ margin-right: 420px;
 }
 
 #updateInput {
-    clear: both;
-    margin-bottom: 20px;
-    outline: none;
-    display: inline-block;
-    width: 600px;
-    height: 40px;
-	
+	clear: both;
+	margin-bottom: 20px;
+	outline: none;
+	display: inline-block;
+	width: 600px;
+	height: 40px;
 }
 
 #adrBtn {
-    clear: both;
-    margin-bottom: 20px;
-    outline: none;
-    display: inline-block;
-    width: 610px;
-    padding: 0;
-    height: 50px;
-    margin-left: auto;
-    margin-right: 15px;
-    cursor: pointer;
-    border-radius: 3px;
-  	border: 2px solid #625b54;
-     background-color: white;
-     color: black;
+	clear: both;
+	margin-bottom: 20px;
+	outline: none;
+	display: inline-block;
+	width: 610px;
+	padding: 0;
+	height: 50px;
+	margin-left: auto;
+	margin-right: 15px;
+	cursor: pointer;
+	border-radius: 3px;
+	border: 2px solid #625b54;
+	background-color: white;
+	margin-bottom: 100px;
+	font-weight: bold;
 }
 
 #adrBtn:hover {
@@ -161,41 +158,41 @@ margin-right: 420px;
 }
 
 #timeS {
-    margin-bottom: 20px;
-    margin-top: 20px;
-    outline: none;
-    clear: both;
-    float: left;
-    display: inline-block;
-    width: 200px;
-    height: 40px;
-    margin-left: 380px;
-    border-radius: 3px;
-    border: 0.1px solid #bebebe;
-    outline: none;
-    text-align: center;
+	margin-bottom: 20px;
+	margin-top: 20px;
+	outline: none;
+	clear: both;
+	float: left;
+	display: inline-block;
+	width: 200px;
+	height: 40px;
+	margin-left: 380px;
+	border-radius: 3px;
+	border: 0.1px solid #bebebe;
+	outline: none;
+	text-align: center;
 }
 
 #timeE {
-text-align: center;
-    margin-bottom: 20px;
-    outline: none;
-    float: left;
-    display: inline-block;
-    margin-bottom: 20px;
-    margin-top: 20px;
-    outline: none;
-    float: left;
-    display: inline-block;
-    width: 200px;
-    height: 40px;
-    border-radius: 3px;
-    border: 0.1px solid #bebebe;
+	text-align: center;
+	margin-bottom: 20px;
+	outline: none;
+	float: left;
+	display: inline-block;
+	margin-bottom: 20px;
+	margin-top: 20px;
+	outline: none;
+	float: left;
+	display: inline-block;
+	width: 200px;
+	height: 40px;
+	border-radius: 3px;
+	border: 0.1px solid #bebebe;
 }
 
 #insertspan {
 	margin-bottom: 20px;
-		margin-top:20px;
+	margin-top: 20px;
 	outline: none;
 	float: left;
 	display: inline-block;

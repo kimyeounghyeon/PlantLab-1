@@ -1,5 +1,10 @@
 @charset "UTF-8";
 
+* {
+	font-family: 'Jeju Myeongjo';
+	color: #625b54;
+}
+
 #fullmainA {
 	text-align: center;
 	width: 1280px;
@@ -26,8 +31,7 @@
 	cursor: pointer;
 	margin-right: 40px;
 	margin-bottom: 15px;
-	color: black;
-	font-size: 15px;
+	font-size: 12px;
 	font-weight: bold;
 	border: 2px solid #dee1e6;
 	background-color: white;
@@ -45,8 +49,7 @@
 	margin-bottom: 15px;
 	border: 2px solid #dee1e6;
 	background-color: white;
-	color: black;
-	font-size: 15px;
+	font-size: 12px;
 	font-weight: bold;
 	font-family: 'Jeju Myeongjo';
 }
@@ -74,12 +77,11 @@
 }
 
 .subtitle {
-	margin-top: 0;
-	font-size: 20pt;
 	text-align: center;
+	line-height: 100px;
 	padding-top: 20px;
-	height: 130px;
 	font-family: 'Jeju Myeongjo';
+	margin-bottom: 0; 
 }
 
 .onediv {
@@ -93,7 +95,7 @@
 	clear: both;
 	width: 350px;
 	height: 500px;
-	border: 1px solid #E8E8E8;
+	border: 1px solid #625b54;
 	border-collapse: collapse;
 	float: left;
 	margin-left: 60px;
