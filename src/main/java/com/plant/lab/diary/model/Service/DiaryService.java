@@ -38,7 +38,7 @@ public interface DiaryService {
 	public int writeDiary(DiaryVO vo, List<String> diary_img_src);
 	public int modifyDiary(DiaryVO vo, List<String> diary_img_src);
 	public int deleteDiary(DiaryVO vo);
-	public int deleteImg(int diary);
+	public int deleteImg(int diary_img_num);
 
 	// 댓글
 	public List<CommentVO> selectComment(int diary_no);

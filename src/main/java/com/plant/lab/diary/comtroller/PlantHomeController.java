@@ -336,6 +336,17 @@ public class PlantHomeController {
 		
 	}
 	
+	//이미지 삭제
+	@RequestMapping(value="/deleteimg.do") 
+		public void deleteImg(HttpServletResponse response, HttpSession session, DiaryVO vo, @RequestParam(name = "diary_img_num") int diary_img_num) {
+			System.out.println("이미지 삭제 페이지 입장!");
+			System.out.println("이미지 번호~" + diary_img_num);
+			int result = -1;
+			result = dService.deleteImg(diary_img_num);
+			System.out.println("result번호는 " + result);
+		}
+	
+	
 
 	// 일기 삭제
 	@RequestMapping(value = "/deletediary.do")
