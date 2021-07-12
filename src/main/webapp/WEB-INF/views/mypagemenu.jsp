@@ -175,7 +175,7 @@
 				<li><a class="linkmenu"
 					href="<%=request.getContextPath()%>/mydiary" id="bl">내가 쓴 일기</a></li>
 				<li><a class="linkmenu" href="${path}/inquery" id="cl">문의하기</a></li>
-				<li><a class="linkmenu" href="#" id="dl">구매후기</a></li>
+				<li><a class="linkmenu" href="${path}/reviewList" id="dl">구매후기</a></li>
 				<li><a class="linkmenu" id="el"
 					href="<%=request.getContextPath()%>/update">개인 정보 수정</a></li>
 				<li><a class="linkmenu" id="fl"
@@ -203,7 +203,7 @@
 
 				<li><a class="linkmenu" href="${path}/inquery" id="ei">문의
 						관리</a></li>
-				<li><a class="linkmenu" href="${path}/" id="fi">후기 관리</a></li>
+				<li><a class="linkmenu" href="${path}/reviewList" id="fi">후기 관리</a></li>
 				<li><a class="linkmenu" href="${path}/userList" id="gi">회원
 						관리</a></li>
 				<li><a class="linkmenu" href="${path}/onedayAdmin" id="hi">클래스
