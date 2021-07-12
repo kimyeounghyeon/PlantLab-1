@@ -13,6 +13,12 @@
 
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+    	.regis_page{
+    		margin: auto;
+    		text-align: center;
+    	}
+    </style>
 </head>
 <body>
 	<jsp:include page="../header.jsp"></jsp:include>
@@ -39,6 +45,7 @@
                 	<c:if test="${not empty orderList}">
                 		<c:forEach  var="vo" items="${orderList}" varStatus="status">
 		                    <form>
+		                    <input type="hidden" name="new" value="new">
 		                    <input type="hidden" name="buy_no" value="${vo.buy_no}">
 		                    <input type="hidden" name="reserv_no" value="${vo.reserv_no}"  id="reserv_no">  <!-- 추가======-->
 		                    <table class="orderList">
@@ -56,7 +63,7 @@
 		                            </td>
 		                           
 		                            <td class="btn"> 
-		                                <button type="button" class="proBtn">문의하기</button>
+		                                <button type="button" class="proBtn" id="qnaB">문의하기</button>
 		                            </td>
 		                        </tr>
 		                        <tr>
@@ -70,11 +77,11 @@
 		                            
 		                            <c:choose>
 		                            <c:when  test="${vo.reserv_no ==0 }">
-		                             <button type="button" class="proBtn" id="reivewB">리뷰작성하기</button>
+		                             <button type="button" class="proBtn" id="reivewB">리뷰작성</button>
 		                            
 		                            </c:when>
 		                            <c:when test="${vo.reserv_no !=0 }">
-		                             <button type="button" class="proBtn" id="oneCancel">예약 취소하기</button>
+		                             <button type="button" class="proBtn" id="oneCancel">예약 취소</button>
 		                            </c:when>
 		                            </c:choose>
 		                            
@@ -94,44 +101,27 @@
                     </div>
                 </div>
                 <br>
-                    
-                 <c:if test="${not empty currentPage}">
-                	<div class="page">
-	                    <ul>
-	                    	<c:if test="${currentPage <= 1}">
-	                    		<li>◀</li>
-	                    	</c:if>
-	                    	<c:if test="${currentPage > 1}">
-	                    		<c:url var="plistST" value="/orderList">
-									<c:param name="page" value="${currentPage-1}" />
-								</c:url>
-								<li> <a href="${plistST}">◀</a></li>
-	                    	</c:if>
-	                    	
-	                    	<c:set var="endPage" value="${maxPage}" /> 
-							<c:forEach var="p" begin="${startPage+1}" end="${endPage}">
-								<c:if test="${p eq currentPage}">
-									<li>${p}</li>
-								</c:if>
-								<c:if test="${p ne currentPage}">
-									<c:url var="plistchk" value="/orderList">
-										<c:param name="page" value="${p}" />
-									</c:url>
-									<li><a href="${plistchk}">${p}</a></li>
-								</c:if>
-							</c:forEach> 
-							<c:if test="${currentPage >= maxPage}">
-								<li>▶</li>
-							 </c:if> 
-							<c:if test="${currentPage < maxPage}">
-								<c:url var="plistEND" value="/orderList">
-									<c:param name="page" value="${currentPage+1}" />
-								</c:url>
-								<li><a href="${plistEND}">▶</a></li>
-							</c:if>
-	                    </ul>
-	                </div>
-                </c:if>
+                
+                <div class="regis_page">
+					<c:if test="${startPage != 1 }">
+						<a href="${path}/orderList?page=${startPage-1}"> ◀ </a>
+					</c:if>
+					<c:forEach var="p" begin="${startPage}" end="${endPage}" step="1">
+						<c:if test="${p eq currentPage}">
+							<font color="#6A60A9" size="4"><b> ${p} </b></font>
+						</c:if>
+						<c:if test="${p ne currentPage}">
+							<c:url var="adminDiaryChk" value="orderList">
+								<c:param name="page" value="${p}" />
+								<c:param name="keyword" value="${keyword}" />
+							</c:url>
+							<a href="${adminDiaryChk}" class="aLink"><b>[${p}]</b></a>
+						</c:if>
+					</c:forEach>
+					<c:if test="${endPage < pageCnt }">
+						<a href="<%=request.getContextPath() %>/orderList?page=${endPage+1}"> ▶ </a>
+					</c:if>
+				</div>
             </article>
         </section>
     </div>
@@ -213,12 +203,22 @@
 		
 		proBtn.click(function(){
 			var form = $('form');
-			form.attr("method","post");
+			form.attr("method","get");
         	form.attr("action","revieWrite");
         	form.submit();
 		
 		});
 		
+		
+		var qnaB = $('#qnaB');
+		
+		qnaB.click(function(){
+			var form = $('form');
+			form.attr("method","get");
+        	form.attr("action","inquery");
+        	form.submit();
+		
+		});
 		
 		//상품 이미지 가져오기
 		var buy_no = ($('input[name=buy_no]').val())*1;

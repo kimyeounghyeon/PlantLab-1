@@ -46,29 +46,70 @@ public class ReviewController {
 	private OrderService orderService;
 	
 	private static final Logger logger = LoggerFactory.getLogger(CartController.class);
+	public static final int LIMIT2 = 10;
+	public static final int pageBlock = 5;
 	
 //리뷰 리스트
 	@RequestMapping(value="/reviewList", method=RequestMethod.GET)
 	public ModelAndView revieList(ModelAndView mv, HttpSession session, HttpServletRequest req,
-			@RequestParam(name = "page", defaultValue = "1") int page) {
+			@RequestParam(name = "page", defaultValue = "1") int page,
+			@RequestParam(name = "keyword", required = false) String keyword) {
 		
 		logger.info("===============리뷰리스트 페이지===============");
+		
 		MemberVO member = (MemberVO) session.getAttribute("loginMember");
 		
 		if(member == null || member.getUserId() == "" ) {
 			mv.setViewName("logIn");
 			return mv;
-		}else {
-			mv.setViewName("MypageOrder/ReviewList");			
 		}
 		
 		Review review = new Review();
 		
 		if(member.getGrade() != 1) {
 			review.setUser_no(member.getUserNo());			
+			logger.info("리뷰회원:::"+review.getUser_no());
+			mv.setViewName("MypageOrder/ReviewList");			
+			mv.addObject("reviewList", reviewService.selectRvList(review));
+		}else {
+			
+			if (keyword != null && !keyword.equals("")) {
+				mv.addObject("currentPage", null);
+				mv.addObject("reviewList", reviewService.selectSearch(keyword));
+				mv.setViewName("MypageOrder/ManagerRL");
+			}else { //검색어가 없을 경우
+				mv.addObject("reviewList", reviewService.selectRvList(review));		
+				mv.setViewName("MypageOrder/ManagerRL");	
+			} 
 		}
-		logger.info("리뷰회원:::"+review.getUser_no());
-		mv.addObject("reviewList", reviewService.selectRvList(review));
+		
+		
+		int currentPage = page; // 한 페이지당 출력할 목록 개수
+		int listCount = reviewService.listCountRv(review); //전체 게시글 개수
+		logger.info("개수 확인하기 : " + listCount);
+		int maxPage = (int) ((double) listCount / LIMIT2 + 0.9); //최대 페이지
+		
+		int startPage = 1;
+	     int endPage = 4;
+	     if(currentPage % pageBlock == 0) {
+	         startPage = ((currentPage/pageBlock)-1) * pageBlock + 1;
+	      }else {
+	         startPage = ((currentPage/pageBlock)) * pageBlock + 1;
+	      }
+	      endPage = startPage + pageBlock - 1;
+		
+	     int pageCnt = (listCount / LIMIT2) + (listCount % LIMIT2 == 0 ? 0 : 1);
+		     
+		if(endPage > pageCnt) {
+			endPage = pageCnt;			
+		}
+		
+		mv.addObject("currentPage", currentPage);
+		mv.addObject("pageCnt", pageCnt);
+	    mv.addObject("startPage", startPage);
+	    mv.addObject("endPage", endPage);
+		mv.addObject("listCount", listCount);
+		mv.addObject("maxPage", maxPage);
 		
 		return mv;
 	}

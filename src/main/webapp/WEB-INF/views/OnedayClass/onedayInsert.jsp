@@ -26,7 +26,7 @@
 <div id="fullmainI">
 <div id="mainI">
 <div id="insertDiv"> 
-<h5 class="subtitle">class 등록</h5>
+<h5 class="subtitle">class register</h5>
 
 
 <form action="${path}/onedayInsertResult"  enctype="multipart/form-data" method="post">

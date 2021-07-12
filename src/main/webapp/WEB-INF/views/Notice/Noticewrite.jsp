@@ -36,7 +36,7 @@
 				<td><a href="${path}/inquery">1:1 문의하기</a></td>
 			</tr>
 			<tr class="cateList">
-				<td><a href="${path}/nlist.do">공지사항</a></td>
+				<td><a href="${path}/nlist">공지사항</a></td>
 			</tr>
 			<tr class="cateList">
 				<td><a href="${path}/flist">자주 묻는 질문</a></td>
@@ -58,7 +58,7 @@
 		<div class="tb">
 			<table class="fom">
 			<tr><td class="wr">글쓰기</td></tr>
-				<tr><td><form name="form1" method="POST" action="${path}/ninsert.do">
+				<tr><td><form name="form1" method="POST" action="${path}/ninsert">
 					<div>
 						<input type="hidden"  name="user_no" id="user_no"
 							value="${loginMember.userNo}"> <input name="notice_title"

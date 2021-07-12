@@ -40,7 +40,7 @@
 				<td><a href="${path}/inquery">1:1 문의하기</a></td>
 			</tr>
 			<tr class="cateList">
-				<td><a href="${path}/nlist.do">공지사항</a></td>
+				<td><a href="${path}/nlist">공지사항</a></td>
 			</tr>
 			<tr class="cateList">
 				<td><a href="${path}/flist">자주 묻는 질문</a></td>
@@ -61,7 +61,7 @@
 </c:if></tr>
 
 <tr><td colspan="4" class="content">${read.notice_content}</td></tr>
-<tr><td colspan="4" class="btn"><button type ="button" class="btnsave" onclick="location.href='nwrite.do'">목록으로 돌아가기</button></td></tr>
+<tr><td colspan="4" class="btn"><button type ="button" class="btnsave" onclick="location.href='nwrite'">목록으로 돌아가기</button></td></tr>
 
 </table>
 
@@ -71,10 +71,10 @@
 </body>
 <script> function ndelete(notice_no){
 	var chek = confirm("정말 삭제하시겠습니까?");
-	if(chek){location.href="ndelete.do?notice_no="+notice_no};
+	if(chek){location.href="ndelete?notice_no="+notice_no};
 }
 function nupdate(notice_no){
-	location.href="nupdate.do?notice_no="+notice_no}
+	location.href="nupdate?notice_no="+notice_no}
 
 </script>
 </html>

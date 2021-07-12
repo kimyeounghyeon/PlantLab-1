@@ -172,7 +172,7 @@
                             </tr>
                         </table>
                     <br><br>
-                    
+ <c:if test="${empty oneRsVo}">                  
                     <h3>배송정보</h3>
                     <label class="checkContain">
                         <input type="checkbox" name="prock">
@@ -208,6 +208,16 @@
                             </tr>
                         </table>
                     <br><br>
+</c:if>                     
+<c:if test="${not empty oneRsVo}">                       
+
+                              <input type="hidden" class="info" name="buy_rc_name" value="${user.userName}">
+                               <input type="hidden" name="buy_rc_address" value="${user.address}">
+                      
+
+</c:if>   
+
+
 
                     <h3>결제정보</h3>
                         <table border="1" class="orderT">

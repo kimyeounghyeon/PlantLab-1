@@ -1,61 +1,138 @@
+
 @charset "UTF-8";
-
-
 
 * {
 	font-family: 'Jeju Myeongjo';
 }
 
-
-
-.bo {
-	text-align: left;
-	padding-left: 50px;
+a {
+	text-decoration: none;
+	color: black;
 }
-.wr{height:0px;}
-.maintb {
+
+
+
+.aside1 {
+	float: left;
+	width: 120px;
+	height: 250px;
 	position: relative;
-	float: right;
-	margin: auto;
-	border-collapse: collapse;
-	border: 0px;
-	height: 200px;
-	width: 60%;
-	margin-right:200px;
+	top: 25.5px;
+	margin-right: 15px;
+	margin-top:-50px;
 }
 
-.no {
-	padding-right: 200px;
-	padding-left: 200px;
+.aside1 hr {
+	border: solid 1px #625b54;
+	margin-top: -5px;
+}
+
+ul.cateList {
+	list-style: none;
+	padding: 0px;
+	text-align: left;
+}
+
+ul.cateList li a:hover {
+	font-weight: bold;
+	color: #ADBA85;
+}
+
+.aside1 h3, .aside2 h3 {
 	text-align: center;
 }
 
-.sub {
-	border-bottom: 1px solid #BDBDBD;
-	border-top: 1px solid #BDBDBD;
-	background: #e0e0e0;
+ul.cateList li, ul.recentList li {
+	margin: 20px 10px;
 }
 
-.tbb {
-font-weight:bold;
-	width: 150px;
-	height: 250px;
-	position: relative;
-	margin-left:50px;
-	color: black;
-	float: left;
-}
-h3{
-text-align:left;
-position: relative;
+#content{
+	clear : both;
+	width : 1250px;
+	margin : auto;	
+	  overflow:hidden;
+	  		margin-bottom:100px;
 }
 
-.wbtn {
-	width: 80px;
-	height: 30px;
-	border: solid 1px #e0e0e0;
-	border-radius: 10px;
-	background-color: #e0e0e0;
+#main_section{
+    clear: both;
+}
+
+.main_header{
+position:relative;
+margin-left:600px;
+
+}
+
+
+.wbtn{
+ float: right;
+	width: 100px;
 	cursor: pointer;
+    height: 45px;
+    margin-top:-40px;
+    margin-bottom:10px;
+    background-color: white;
+	z-index: 1;
+	border : 1px solid #ccc;
+display:inline;
+	margin-right:141px;}	
+	.wbtn:hover {
+	background-color: #625b54;
+	color: white;
+	border: 1px solid #625b54;
 }
-.btn{text-align:center;}
+	
+	
+	
+	.admdTable {
+	clear : both;
+    border: solid 1px #ccc;
+    border-radius: 10px;
+    padding: 10px;
+    margin: auto;
+    width: 70%;
+    margin-left:100px;
+    position: relative;
+display: inline-table;
+}
+
+
+.admdtr{
+	border : 1px solid gray;
+}
+
+.admdtd {
+	text-align : center;
+}
+
+.admdNum {
+	width : 80px;
+}
+
+.admdContent {
+	width : 720px;
+	height : 60px;
+	white-space: nowrap;
+	overflow : hidden;
+	text-overflow: ellipsis;
+}
+
+.admdDate {
+	width : 150px;
+}
+
+.admdth {
+	border-bottom : 1px solid #ccc;
+}
+
+
+.admdcontentmove {
+	width : 820x;
+	height : 20px;
+	white-space: nowrap;
+	overflow : hidden;
+	text-overflow: ellipsis;
+	line-height : 20px;
+	margin-right: 5px;
+}

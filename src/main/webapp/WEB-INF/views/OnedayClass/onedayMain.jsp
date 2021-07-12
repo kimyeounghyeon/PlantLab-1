@@ -20,7 +20,9 @@
 </head>
 <body>
 	<jsp:include page="../header.jsp"></jsp:include>
-	<div class="bgdiv">
+	<div id="fullmain">
+		<div id="main">	
+		<div class="bgdiv">
 		<h3 class="subtitle">oneday class</h3>
 		<p id="p">
 			과도한 스트레스에 지친 현대인들이 자연을 알아가는 시간 <br> 원예 활동을 통해 일상에 꽃을 피워보세요
@@ -35,12 +37,12 @@
 							<img src="${o.oneday_img }" class="oneimg">
 						</div>
 					</a>
-					<p class="ocontext">${o.oneday_title }</p>
+					<p class="ocontext">${o.oneday_title}</p>
 
-					<input type="hidden" name="oneday_no" value="${o.oneday_no}">
 					<a  id="omb" href="${path}/onedayDetail?oneday_no=${o.oneday_no}" >
 						<div id="Mbtn"  >예약하기</div>
 					</a>
+					<input type="hidden" name="oneday_no" value="${o.oneday_no}">
 				</div>
 
 
@@ -50,7 +52,8 @@
 		</div>
 	</div>
 
-
+</div>
+</div>
 
 
 	<jsp:include page="../footer.jsp"></jsp:include>

@@ -27,63 +27,79 @@
 	<jsp:include page="../header.jsp"></jsp:include>
 	<jsp:include page="../mypagemenu.jsp"></jsp:include>
 
-	<nav class="tbb">
-		<table>
-			<tr>
-				<td>카테고리</td>
-			</tr>
-			<tr>
-				<td><hr></td>
-			</tr>
-
-			<tr class="cateList">
-				<td><a href="${path}/inquery">1:1 문의하기</a></td>
-			</tr>
-			<tr class="cateList">
-				<td><a href="${path}/nlist.do">공지사항</a></td>
-			</tr>
-			<tr class="cateList">
-				<td><a href="${path}/flist">자주 묻는 질문</a></td>
-			</tr>
-		</table>
-	</nav>
-	<c:if test="${empty loginMember.userName}">
-
-		<div id="mem">회원이 아닙니다.</div>
-	</c:if>
-
-	<c:if test="${!empty loginMember}">
-
-		<article class="tableaticle">
-			<table class="maintb">
-			<tr><td colspan="3" class="wr"><h3>공지사항</h3></td></tr>
-				<tr class="sub">
-					<th>글번호</th>
-					<th class="no" style="text-align: center;">제목</th>
-					<th>작성일</th>
-
-				</tr>
-				<c:forEach var="f" items="${list}">
-					<tr>
-
-						<td>${f.notice_no}</td>
-						<td class="bo"><a
-							href="${path}/nread.do?notice_no=${f.notice_no}">${f.notice_title}</a></td>
-
-						<td>${f.notice_date}</td>
-					</tr>
-
-				</c:forEach>
-			<tr><td colspan=3><article class="btn"><c:if test="${1==loginMember.grade}">
-							<button class="wbtn" type="button"
-								onclick="location.href='nwrite.do'">글쓰기</button>
-						</c:if></article></td></tr>
-			</table>
-			
-		</article>
 
 
-	</c:if>
+	<div id="content" class="contents">
+
+
+		<section id="main_section">
+
+
+			<article class="aside1">
+				<h3>카테고리</h3>
+				<hr>
+				<ul class="cateList">
+					<li><a href="${path}/inquery">1:1 문의하기</a></li>
+					<li><a href="${path}/nlist">공지사항</a></li>
+					<li><a href="${path}/flist">자주 묻는 질문</a></li>
+				</ul>
+			</article>
+
+  <div class="main_header">
+                <h2 class="title">공지 사항</h2>
+            </div>
+
+
+
+			<c:if test="${empty loginMember.userName}">
+
+				<div id="mem">회원이 아닙니다.</div>
+			</c:if>
+
+
+
+
+			<c:if test="${!empty loginMember}">
+
+		
+
+			<div class="adFrmDiv">
+			<c:if test="${1==loginMember.grade}">
+			<button class="wbtn" type="button" onclick="location.href='nwrite'">글쓰기</button>
+			</c:if>
+			</div>
+	
+
+
+
+
+<table class="admdTable">
+							<tr class="admdtr">
+								<th class="admdth admdNum">글번호</th>
+								<th class="admdth admdContent">제목</th>
+								<th class="admdth admdDate">작성일</th>
+
+							</tr>
+							<c:if test="${not empty list}">
+							<c:forEach var="f" items="${list}">
+								<tr class="admdtr">
+
+									<td class="admdtd admdNum">${f.notice_no}</td>
+									<td class="admdtd admdContent"><div class="admdcontentmove"></div><a
+										href="${path}/nread?notice_no=${f.notice_no}">${f.notice_title}</a></td>
+
+									<td class="admdtd admdDate">${f.notice_date}</td>
+								</tr>
+
+							</c:forEach></c:if>
+							<tr>
+								
+							</tr>
+						</table>
+
+			</c:if>
+		</section>
+	</div>
 	<jsp:include page="../footer.jsp"></jsp:include>
 
 </body>

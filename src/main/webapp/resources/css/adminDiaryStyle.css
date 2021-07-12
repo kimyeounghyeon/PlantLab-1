@@ -6,6 +6,13 @@
 	margin : auto;
 }
 
+a {
+	color : gray;
+}
+a:visit{
+	color : gray;
+}
+
  .main_header{
     text-align: center;
     height: 130px;

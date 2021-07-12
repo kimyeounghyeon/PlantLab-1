@@ -29,6 +29,12 @@
     		height: 40px;
     	}
     </style>
+    <style>
+    	.regis_page{
+    		margin: auto;
+    		text-align: center;
+    	}
+    </style>
 </head>
 <body>
 	<jsp:include page="../header.jsp"></jsp:include>
@@ -84,43 +90,25 @@
                 </div>
                 <br>
                     
-                 <c:if test="${not empty currentPage}">
-                	<div class="page">
-	                    <ul>
-	                    	<c:if test="${currentPage <= 1}">
-	                    		<li>◀</li>
-	                    	</c:if>
-	                    	<c:if test="${currentPage > 1}">
-	                    		<c:url var="plistST" value="/orderList">
-									<c:param name="page" value="${currentPage-1}" />
-								</c:url>
-								<li> <a href="${plistST}">◀</a></li>
-	                    	</c:if>
-	                    	
-	                    	<c:set var="endPage" value="${maxPage}" /> 
-							<c:forEach var="p" begin="${startPage+1}" end="${endPage}">
-								<c:if test="${p eq currentPage}">
-									<li>${p}</li>
-								</c:if>
-								<c:if test="${p ne currentPage}">
-									<c:url var="plistchk" value="/orderList">
-										<c:param name="page" value="${p}" />
-									</c:url>
-									<li><a href="${plistchk}">${p}</a></li>
-								</c:if>
-							</c:forEach> 
-							<c:if test="${currentPage >= maxPage}">
-								<li>▶</li>
-							 </c:if> 
-							<c:if test="${currentPage < maxPage}">
-								<c:url var="plistEND" value="/orderList">
-									<c:param name="page" value="${currentPage+1}" />
-								</c:url>
-								<li><a href="${plistEND}">▶</a></li>
-							</c:if>
-	                    </ul>
-	                </div>
-                </c:if>
+                 <div class="regis_page">
+					<c:if test="${startPage != 1 }">
+						<a href="${path}/managerOL?page=${startPage-1}"> ◀ </a>
+					</c:if>
+					<c:forEach var="p" begin="${startPage}" end="${endPage}" step="1">
+						<c:if test="${p eq currentPage}">
+							<font color="#6A60A9" size="4"><b> ${p} </b></font>
+						</c:if>
+						<c:if test="${p ne currentPage}">
+							<c:url var="adminDiaryChk" value="managerOL">
+								<c:param name="page" value="${p}" />
+							</c:url>
+							<a href="${adminDiaryChk}" class="aLink"><b>[${p}]</b></a>
+						</c:if>
+					</c:forEach>
+					<c:if test="${endPage < pageCnt }">
+						<a href="<%=request.getContextPath() %>/managerOL?page=${endPage+1}"> ▶ </a>
+					</c:if>
+				</div>
             </article>
         </section>
     </div>

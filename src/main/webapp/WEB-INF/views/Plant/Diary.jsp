@@ -78,7 +78,7 @@
 	                              dnotice += "<div class = 'ddiary' id='dno_"+item.diary_no+"'>";
 	                              dnotice += "<table class='tdiary' style ='table-layout : fixed'><tr class='ttr idtr'>";
 	                              dnotice += "<td class='writeid idtd' colspan='2'>"+item.user_id+"</td></tr>";
-	                              dnotice += "<tr class='ttr imgtr'><td class='diaryimg' colspan='2'><a href='detaildiary?diary_no="+item.diary_no+"'><img src='"+item.diaryImgVO[0].diary_img_src+"' class='diaryimg'></a></td></tr>";
+	                              dnotice += "<tr class='ttr imgtr'><td class='diaryimg' colspan='2'><a href='detaildiary?diary_no="+item.diary_no+"'><img src='"+data.img[i]+"' class='diaryimg'></a></td></tr>";
 	                              dnotice += "<tr class='ttr liketr'>"
 	                              var loop_flag = false;
 	                              for(var j=0; j<likeList.length; j++){

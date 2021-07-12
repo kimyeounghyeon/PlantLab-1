@@ -5,6 +5,23 @@
 		
 	</resultMap>
 	
+	<!--회원별 리뷰 개수 조회 -->
+	<select id="listCountRv" parameterType="Review" resultType="int">
+		SELECT count(*) FROM rv_tb 
+		<where>
+	        <if test="user_no != 0">
+	        	user_no = #{user_no}
+	        </if>
+        </where>
+	</select>
+	
+	<!-- 검색 -->
+	<select id="selectSearch" parameterType="string" resultType="arraylist" resultMap="ReviewMap">
+		SELECT * FROM rv_tb
+		WHERE rv_no LIKE '%'|| #{keyword} ||'%' 
+		ORDER BY rv_no desc
+	</select>
+	
 	<!-- 리뷰 전체 불러오기 -->
 	<select id="selectList" resultType="arraylist" parameterType="int" resultMap="ReviewMap">
 		SELECT r.*,u.user_name,p.buy_no FROM rv_tb r
@@ -20,7 +37,7 @@
 	<select id="selectRvList" resultType="arraylist" parameterType="Review" resultMap="ReviewMap">
 		SELECT * FROM rv_tb
         <where>
-        	<if test="user_no != null">
+        	<if test="user_no != 0">
 		    	user_no = #{user_no}	
         	</if>
         </where>

@@ -34,7 +34,7 @@
 	<!-- 글 리스트 -->
  	<select id="listDiary" resultMap="diaryMainVO">
  	<![CDATA[
-      select f.diary_no, f.user_id, f.diary_content, s.diary_img_num as s_diary_img_num, s.diary_img_src as s_diary_img_src, f.diary_date, f.like_cnt from 
+      select f.diary_no, f.user_id, f.diary_content, s.diary_no as s_diary_no, s.diary_img_num as s_diary_img_num, s.diary_img_src as s_diary_img_src, f.diary_date, f.like_cnt from 
     (
     select a.*, (select count(*) as like_cnt from like_tb where diary_no=a.diary_no) as like_cnt, b.user_id, b.user_name
     from (select * from diary_tb) a 
@@ -181,9 +181,9 @@
  	</select>
  	
  	<!-- 이미지 테이블 조회 -->
- 	<!-- <select id="diaryImg" parameterType="int" resultType="DiaryImgVO">
+ 	<select id="diaryImg" parameterType="int" resultType="DiaryImgVO">
  		select * from diary_img_tb where diary_no = #{diary_no}
- 	</select> -->
+ 	</select> 
 	
 	<!-- 좋아요 리스트 -->
 	<select id="likeList" parameterType="LikeVO" resultType="int">
@@ -213,7 +213,7 @@
  	</insert>
  	
  	<!-- 이미지 등록 -->
- 	<insert id="writeImg" parameterType="DiaryImgVO" flushCache="true" statementType="PREPARED">
+ 	<insert id="writeImg" parameterType="list" flushCache="true" statementType="PREPARED">
  		insert into Diary_Img_TB values(#{diary_no}, img_SEQ.nextVal, #{diary_img_src})
  	</insert>
  	
@@ -223,7 +223,7 @@
  	</update>
  	
  	<!-- 이미지 수정 -->
- 	<update id="modifyImg" parameterType="DiaryImgVO" flushCache="true" statementType="PREPARED">
+ 	<update id="modifyImg" parameterType="list" flushCache="true" statementType="PREPARED">
  		update diary_img_tb set diary_img_src = #{diary_img_src} where diary_no = #{diary_no}
  	</update>
  	
@@ -236,6 +236,11 @@
  	<delete id="deleteDiary" parameterType="DiaryVO" flushCache="true" statementType="PREPARED">
  		delete from diary_tb where diary_no = #{diary_no}
  	</delete>
+ 	
+ 	<!-- 이미지 삭제 -->
+ 	<delete id="deleteImg" parameterType="int" flushCache="true" statementType="PREPARED">
+		delete from diary_img_tb where diary_img_num = #{diary_img_num}
+	</delete>
  
  	<select id="detailWriter" parameterType="int" resultType="int">
  		select diary_write from diary_tb where diary_no = #{diary_no}

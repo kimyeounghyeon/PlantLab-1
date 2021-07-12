@@ -6,11 +6,8 @@
 
 
 <footer>
-<br>
-<br>
-<br>
-<br>
 <hr>
+<br>
 <br>
 <br>
 		<table class="tablet" border="0">
@@ -18,7 +15,7 @@
 				<td class="subname"><img id="chi"src="${path}/resources/img/muirim.png">[무이림]<br><br></td>
 			
 				<td class="end" rowspan="3">
-				<a href="#">1:1 상담 신청&nbsp;&nbsp;</a>/<a href="${path}/mypage">고객센터</a>
+				<a href="http://pf.kakao.com/_XJWxns" onclick="void chatChannel();" target='_blank'> 1:1 상담 신청&nbsp;&nbsp;</a>/<a href="${path}/mypage">고객센터</a>
 				<br>문의는1:1상담을 이용해주세요.
 				</td>
 			
@@ -35,4 +32,10 @@
 <br>
 <br>
 </footer>
-
+	<script type="text/javascript">
+		function chatChannel() {
+			Kakao.Channel.chat({
+				channelPublicId : '_XJWxns',
+			})
+		}
+	</script>

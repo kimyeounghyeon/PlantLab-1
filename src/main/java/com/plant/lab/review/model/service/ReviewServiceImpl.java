@@ -21,6 +21,11 @@ public class ReviewServiceImpl implements ReviewService{
 	private ProductDAO proDao;
 	
 	@Override
+	public int listCountRv(Review review) {
+		return reviewDao.listCountRv(review);
+	}
+	
+	@Override
 	public List<Review> searchList(int pro_no) {
 		return reviewDao.searchList(pro_no);
 	}
@@ -34,6 +39,12 @@ public class ReviewServiceImpl implements ReviewService{
 	public List<Review> selectRvList(Review review) {
 		return reviewDao.selectRvList(review);
 	}
+	
+	@Override
+	public List<Review> selectSearch(String keyword){
+		return reviewDao.selectSearch(keyword);
+	}
+	
 
 	@Override
 	public List<Review> selectImgList(Review review){
