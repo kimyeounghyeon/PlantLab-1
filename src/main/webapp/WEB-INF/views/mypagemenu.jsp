@@ -208,11 +208,7 @@
 						관리</a></li>
 				<li><a class="linkmenu" href="${path}/onedayAdmin" id="hi">클래스
 						관리</a></li>
-				<li><a class="linkmenu" href="${path}/inquery">문의 관리</a></li>
-				<li><a class="linkmenu" href="${path}/reviewList">후기 관리</a></li>
-				<li><a class="linkmenu" href="${path}/userList">회원 관리</a></li>
-				<li><a class="linkmenu" href="${path}/onedayAdmin"
-					style="border-left: none;">클래스 관리</a></li>
+				
 			</ul>
 
 		</div>
