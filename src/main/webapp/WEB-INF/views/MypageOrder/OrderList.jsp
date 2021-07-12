@@ -70,11 +70,11 @@
 		                            
 		                            <c:choose>
 		                            <c:when  test="${vo.reserv_no ==0 }">
-		                             <button type="button" class="proBtn" id="reivewB">리뷰작성하기</button>
+		                             <button type="button" class="proBtn" id="reivewB">리뷰작성</button>
 		                            
 		                            </c:when>
 		                            <c:when test="${vo.reserv_no !=0 }">
-		                             <button type="button" class="proBtn" id="oneCancel">예약 취소하기</button>
+		                             <button type="button" class="proBtn" id="oneCancel">예약 취소</button>
 		                            </c:when>
 		                            </c:choose>
 		                            

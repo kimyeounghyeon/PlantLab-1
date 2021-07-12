@@ -102,6 +102,7 @@
     cursor: pointer;
     margin-top: 50px;
     color: black;
+    font-size: 14pt;
 }
 
 #cancel {
@@ -112,6 +113,7 @@
 	margin-right: 580px;
 	margin-bottom: 10px;
 	cursor: pointer;
+	 font-size: 14pt;
 }
 
 .rh {
@@ -130,6 +132,7 @@
 	clear: both;
 	text-align: left;
 	margin-bottom: 20px;
+	 font-size: 12pt;
 
 }
 
@@ -141,14 +144,5 @@
     cursor: pointer;
     margin-top: 50px;
     color: black;
+    font-size: 12pt;
 }
-/* .showhide{
-	margin-top:50px;
-	width:1250px;
-	clear:both;
-	float:left;
-	border: 1px solid #a6a6a6;
-	border-radius: 30px;
-	height: auto;
-	
-} */

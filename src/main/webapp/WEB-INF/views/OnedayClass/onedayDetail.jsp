@@ -17,16 +17,10 @@
 <meta charset="UTF-8">
 <title>classDtail</title>
 </head>
-
 <body>
 	<jsp:include page="../header.jsp"></jsp:include>
 	<div id="fullmainD">
-		<div id="main">
-
-
-
-
-
+		<div id="mainD">
 			<h3 class="subtitle">Class Info</h3>
 
 
@@ -53,7 +47,7 @@
 		<br> <br> <br> <br> <strong><em
 			class="infodetail">과정 소개</em></strong>
 		<hr>
-		<br> ${fn:replace(oneVo.oneday_content,replaceChar , "<br/>")} <br>
+		<br><div style="font-size: 12pt;"> ${fn:replace(oneVo.oneday_content,replaceChar , "<br/>")}</div> <br>
 		<br> <br> <strong><em class="infodetail">수업 장소</em></strong>
 		<hr>
 		<br>
@@ -62,7 +56,7 @@
 
 	</div>
 
-
+<div></div>
 	<script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=bf32a1f590525c78d662c84a7e2fd217&libraries=services,clusterer,drawing"></script>
 	<script type="text/javascript">
@@ -118,7 +112,7 @@
 						});
 	</script>
 
-	<jsp:include page="../footer.jsp"></jsp:include>
 
+	<jsp:include page="../footer.jsp"></jsp:include>
 </body>
 </html>

@@ -75,18 +75,21 @@ public class OnedayController {
 		PrintWriter out;
 
 		MemberVO member = (MemberVO) session.getAttribute("loginMember"); // 로그인된 사람만 들어오기
-		if (member == null) {
+		/* if (member == null) { */
+		if(member == null || member.getUserId() == "" ) {
 			log.info("C: 회원이 아닌 접근 ID - ");
 			try {
-				out = response.getWriter();
-				mv.setViewName("redirect:logIn");
-				out.println("<script>alert('로그인 해주세요'); </script>");
-				out.println("<script> history.back(-1);</script>"); // redirect 불가능 로그인안하면 back
-				out.flush();
-
+			out = response.getWriter();
+			out.println("<script>alert('로그인 해주세요'); </script>");
+			out.flush();
+			
+			mv.setViewName("logIn");
+			return mv;
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+		}else {
+			
 
 		}
 		OnedayVo one = new OnedayVo();
@@ -171,18 +174,21 @@ public class OnedayController {
 		MemberVO member = (MemberVO) session.getAttribute("loginMember");
 		oneVo.setUser_no(member.getUserNo());
 		System.out.println(member.getUserNo() + "ssssssssssssssss");
-		if (oneVo.getUser_no() == 0) {
+		/* if (oneVo.getUser_no() == 0) { */
+		if(member == null || member.getUserId() == "" ) {
 			response.setContentType("text/html; charset=euc-kr");
 			PrintWriter out;
 			try {
 				out = response.getWriter();
 				out.println("<script> alert('로그인을 해주세요.');</script>");
-				out.println("<script> history.back(-1);</script>"); // redirect 불가능
 				out.flush();
+			mv.setViewName("logIn");
+			return mv;
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-		}
+		}else {
+				}
 		System.out.println("oneVo 값" + oneVo);
 		List<OnedayVo> one = oService.onedayMy(oneVo);
 		System.out.println(one);
@@ -204,7 +210,7 @@ public class OnedayController {
 	@RequestMapping(value = "onedayCancle", method = RequestMethod.GET) // 클래스 예약 취소 delete 세션필요
 	@ResponseBody
 	public void onedayCancle(ModelAndView mv, HttpServletResponse response, HttpSession session,
-			@RequestParam(name = "reserv_no") int reserv_no ) {
+			@RequestParam(name = "reserv_no" , required = false) int reserv_no ) {
 		MemberVO member = (MemberVO) session.getAttribute("loginMember"); // 로그인된 사람만 들어오기
 		log.info("valueArr값은" + reserv_no); // 들어온 값 확인
 
@@ -272,6 +278,7 @@ public class OnedayController {
 				OnedayVo oneVo = new OnedayVo();
 				System.out.println("ob값은" + ob);
 				oneVo.setOneday_no(Integer.parseInt(ob.toString()));
+				System.out.println("::::::"+oneVo.getOneday_no());
 				oService.onedaydelete(oneVo);
 				System.out.println(ob + "삭제완료");
 			}

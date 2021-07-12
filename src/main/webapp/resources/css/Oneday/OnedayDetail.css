@@ -2,7 +2,6 @@
 
 * {
 	font-family: 'Jeju Myeongjo';
-	font-size: 13pt;
 	color: #1e1e1e;
 	line-height: 30px;
 }
@@ -15,12 +14,13 @@
 	clear: both;
 }
 
-#main {
+#mainD {
 	display: inline-block;
 	text-align: center;
 	width: 1250px;
 	margin: 0 auto;
 	padding: 0;
+	clear: both;
 }
 
 .subtitle {
@@ -56,6 +56,7 @@
 }
 
 #classContent {
+	font-size: 13pt;
 	line-height:50px;
 	vertical-align: middle;
 	text-align: center;
@@ -72,6 +73,7 @@
 	text-align:center;
 	vertical-align: middle;
 	z-index: 1;
+	font-size: 13pt;
 }
 
 #oneDate {

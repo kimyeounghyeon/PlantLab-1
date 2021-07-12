@@ -2,9 +2,23 @@
 
 * {
 	font-family: 'Jeju Myeongjo';
-	font-size: 13pt;
 	color: #1e1e1e;
 	line-height: 30px;
+}
+#fullmainD {
+	text-align: center;
+	width: 1280px;
+	margin: 0 auto;
+	padding: 0;
+	clear: both;
+}
+
+#main {
+	display: inline-block;
+	text-align: center;
+	width: 1250px;
+	margin: 0 auto;
+	padding: 0;
 }
 
 .bgdiv {
@@ -43,11 +57,13 @@
 }
 
 .ocontext {
-	width: 600px;
-	float: right;
+	text-align:left;
+	width: 500px;
+	margin-left:150px;
+	margin-bottom: 150px;
+	float:left;
 	margin-top: 100px;
-	margin-bottom: 120px;
-	font-size: 23pt;
+	font-size: 26pt;
 	font-weight: 500;
 	display: inline;
 	font-family: 'Unna', serif;
@@ -56,18 +72,20 @@
 #omb {
 	float: right;
 	width: 100px;
-	margin-right: 500px;
+	margin-right: 450px;
 	cursor: pointer;
 	height: 50px;
 	background-color: EAEBE7;
 	z-index: 1;
 	display: inline;
+	
 }
 
 #Mbtn {
-	border: 1px solid black;
+	border: 2px solid #625b54;
 	text-align: center;
 	padding: 3px;
+	font-size: 12pt;
 }
 
 #Mbtn:hover {
