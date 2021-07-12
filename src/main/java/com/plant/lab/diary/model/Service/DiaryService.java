@@ -24,7 +24,7 @@ public interface DiaryService {
 	public int getlistCount(int diary_write);
 	public int getListCountAll();
 	
-//	public List<DiaryImgVO> diaryImg(int diary_no);
+	public List<DiaryImgVO> diaryImg (int diary_no);
 	
 	// 좋아요
 	public List<Integer> likeList(LikeVO lvo);

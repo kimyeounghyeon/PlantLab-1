@@ -43,6 +43,17 @@ public class DiaryServiceImpl implements DiaryService {
 		return list;
 	}
 	
+	@Override
+	public List<DiaryImgVO> diaryImg(int diary_no) {
+		List<DiaryImgVO> list = null;
+		try {
+			list = dDao.diaryImg(diary_no);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
 	
 	// 검색
 	// 아이디 검색
@@ -66,6 +77,7 @@ public class DiaryServiceImpl implements DiaryService {
 		}
 		return list;
 	}
+	
 	// 내용 검색
 	@Override
 	public List<DiaryVO> searchContent(String keyword) {
@@ -77,6 +89,7 @@ public class DiaryServiceImpl implements DiaryService {
 		} 
 		 return list;
 	}
+	
 	@Override
 	public List<DiaryVO> searchContent(int startPage, int limit, String keyword) {
 		List<DiaryVO> list = null;
@@ -87,6 +100,7 @@ public class DiaryServiceImpl implements DiaryService {
 		} 
 		 return list;
 	}
+	
 	// 검색 글 갯수
 	@Override
 	public int getSearchIdListCount(String keyword) {
@@ -98,6 +112,7 @@ public class DiaryServiceImpl implements DiaryService {
 		}
 		return result;
 	}
+	
 	@Override
 	public int getSearchContentListCount(String keyword) {
 		int result= -1;

@@ -34,7 +34,7 @@
 	<!-- 글 리스트 -->
  	<select id="listDiary" resultMap="diaryMainVO">
  	<![CDATA[
-      select f.diary_no, f.user_id, f.diary_content, s.diary_img_num as s_diary_img_num, s.diary_img_src as s_diary_img_src, f.diary_date, f.like_cnt from 
+      select f.diary_no, f.user_id, f.diary_content, s.diary_no as s_diary_no, s.diary_img_num as s_diary_img_num, s.diary_img_src as s_diary_img_src, f.diary_date, f.like_cnt from 
     (
     select a.*, (select count(*) as like_cnt from like_tb where diary_no=a.diary_no) as like_cnt, b.user_id, b.user_name
     from (select * from diary_tb) a 
@@ -181,9 +181,9 @@
  	</select>
  	
  	<!-- 이미지 테이블 조회 -->
- 	<!-- <select id="diaryImg" parameterType="int" resultType="DiaryImgVO">
+ 	<select id="diaryImg" parameterType="int" resultType="DiaryImgVO">
  		select * from diary_img_tb where diary_no = #{diary_no}
- 	</select> -->
+ 	</select> 
 	
 	<!-- 좋아요 리스트 -->
 	<select id="likeList" parameterType="LikeVO" resultType="int">

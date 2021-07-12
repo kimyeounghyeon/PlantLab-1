@@ -76,18 +76,28 @@ public class PlantHomeController {
 		response.setCharacterEncoding("UTF-8");
 
 		LikeVO sessionVO = new LikeVO();
+		List<String> img = new ArrayList<String>();
 		MemberVO member = (MemberVO) session.getAttribute("loginMember");
 		sessionVO.setUser_no(member.getUserNo());
-
 		List<DiaryVO> listDiary = dService.listDiary();
 		System.out.println("listDiary의 결과는 ~ " + listDiary);
+		
+		try {
+		for(int i=0; i<listDiary.size(); i++) {
+			img.add(listDiary.get(i).getDiaryImgVO().get(0).getDiary_img_src());
+		}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
 		List<Integer> likeList = dService.likeList(sessionVO);
-
+		
 		
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("listDiary", listDiary);
 		map.put("likeList", likeList);
+		map.put("img", img);
 
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		String jsonOutput = gson.toJson(map);

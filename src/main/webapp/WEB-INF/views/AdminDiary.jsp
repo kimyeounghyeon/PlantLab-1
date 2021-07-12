@@ -88,7 +88,7 @@
 					<c:param name="page" value="${p}" />
 					<c:param name="keyword" value="${keyword}" />
 				</c:url>
-				<a href="${adminDiaryChk}" class="aLink"><b>[${p}]</b></a>
+				<a href="${adminDiaryChk}" class="aLink"><b>${p}</b></a>
 			</c:if>
 		</c:forEach>
 		<c:if test="${endPage < pageCnt }">

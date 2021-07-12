@@ -27,10 +27,10 @@ public class DiaryDao {
 		return sqlSession.selectList("Diary.detailDiary", diary_no);
 	}
 	
-//	// 이미지 테이블 조회
-//	public List<DiaryImgVO> diaryImg(int diary_no) {
-//		return sqlSession.selectList("Diary.diaryImg", diary_no);
-//	}
+	// 이미지 테이블 조회
+	public List<DiaryImgVO> diaryImg(int diary_no) {
+		return sqlSession.selectList("Diary.diaryImg", diary_no);
+	}
 	
 	// 아이디로 게시글 검색
 	public List<DiaryVO> searchId(String keyword) {
