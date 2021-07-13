@@ -14,55 +14,172 @@
 	type="text/css" />
 <link href="${path}/resources/css/header.css" rel="stylesheet" />
 <link href="${path}/resources/css/footer.css" rel="stylesheet" />
-<link href="${path}/resources/css/Noticeupdate.css" rel="stylesheet" />
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/earlyaccess/jejumyeongjo.css" />
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<style>
 
+* {
+	font-family: 'Jeju Myeongjo';
+}
+
+a {
+	text-decoration: none;
+	color: black;
+}
+
+.aside1 {
+	float: left;
+	width: 120px;
+	height: 250px;
+	position: relative;
+	top: 25.5px;
+	margin-right: 15px;
+}
+
+.aside1 hr {
+	border: solid 1px #625b54;
+	margin-top: -5px;
+}
+
+ul.cateList {
+	list-style: none;
+	padding: 0px;
+	text-align: left;
+}
+
+ul.cateList li a:hover {
+	font-weight: bold;
+	color: #ADBA85;
+}
+
+.aside1 h3, .aside2 h3 {
+	text-align: center;
+}
+
+ul.cateList li, ul.recentList li {
+	margin: 20px 10px;
+}
+
+#content {
+	clear: both;
+	width: 1250px;
+	margin: auto;
+	overflow: hidden;
+	margin-bottom: 100px;
+}
+
+#main_section {
+	clear: both;
+}
+
+.main_header {
+	position: relative;
+	text-align: left;
+	margin-left: 300px;
+}
+
+
+.dtdiarytb {
+	border: 1px solid #e2e2e2;
+	margin: auto;
+
+	border-collapse: collapse;
+	border-left: none;
+	border-right: none;
+	height: 400px;
+	border-bottom: none;
+}
+
+.tbtitle{border:none;
+
+font-size: 17px;}
+
+.titler{	border:1px solid #e2e2e2;
+height:50px;
+border-left:none;
+border-right:none;
+}
+textarea{border:none;}
+
+.bor{	border-bottom: 1px solid #e2e2e2;
+text-align:left;
+vertical-align:top;
+
+}
+#wbtn {
+background-color: #625b54;
+	color: white;
+	border: 2px solid #625b54;
+	width: 100px;
+	cursor: pointer;
+	height: 45px;
+	
+	
+	z-index: 1;
+	border: 1px solid #ccc;
+	
+
+}
+
+#wbtn:hover {
+	background-color: white;
+		margin-right: 141px;
+}
+.mar{text-align: center;}
+
+</style>
 
 
 </head>
 <body>
 <body><jsp:include page="../header.jsp"></jsp:include>
 	<jsp:include page="../mypagemenu.jsp"></jsp:include>
-	<nav class="tbb">
-		<table >
-			<tr>
-				<td>카테고리</td>
-			</tr>
-			<tr>
-				<td><hr></td>
-			</tr>
-			<tr class="cateList">
-				<td><a href="${path}/inquery">1:1 문의하기</a></td>
-			</tr>
-			<tr class="cateList">
-				<td><a href="${path}/nlist">공지사항</a></td>
-			</tr>
-			<tr class="cateList">
-				<td><a href="${path}/flist">자주 묻는 질문</a></td>
-			</tr>
-		</table>
-	</nav>
+	
+	<div id="content" class="contents">
 
-	<c:if test="${empty loginMember.userName}">
-		<div id="mem">회원이 아닙니다.</div>
-	</c:if>
-	<!-- 요기 이미지라두 넣고싶다.. -->
+
+		<section id="main_section">
+
+
+			<article class="aside1" style="margin-top: -20px;">
+				<h3>카테고리</h3>
+				<hr>
+				<ul class="cateList">
+					<li><a href="${path}/inquery">1:1 문의하기</a></li>
+					<li><a href="${path}/nlist">공지사항</a></li>
+					<li><a href="${path}/flist">자주 묻는 질문</a></li>
+				</ul>
+			</article>
+
+			<div class="main_header">
+				<h3 class="title">수정하기</h3>
+			</div>
+
+			<c:if test="${!empty loginMember}">
+			
+			
+			
 
 <c:if test="${loginMember.grade==1}">
-<table class="fom">
-<tr><td class="wr">수정하기</td></tr>
-<tr><td><form name="update" method="POST" action="${path}/nnupdate">
+
+
+
+
+<table class="dtdiarytb">
+
+<tr class="titler"><td><form name="update" method="POST" action="${path}/nnupdate">
 <input type="hidden" name="notice_no" value="${data.notice_no}">
 <input type="hidden" name="user_no" value="${loginMember.grade}">
-<div><input name="notice_title" size="81" value="${data.notice_title}" type="text"/></div></td></tr>
-<tr><td><textarea name="notice_content" id="notice_content" rows="8"
-							cols="80">${data.notice_content}</textarea></td></tr>
-<tr><td class="wbtn"><button class="btnsave" type="submit">수정</button></td></tr>
+<div><input class="tbtitle" name="notice_title" size="81" value="${data.notice_title}" type="text"/></div></td></tr>
+<tr class="bor"><td><textarea name="notice_content" id="notice_content" rows="15"
+							cols="100">${data.notice_content}</textarea></td></tr>
+<tr><td class="mar"><button class="btnsave" id="wbtn" type="submit">수정</button></td></tr>
 </form></table>
 
 </c:if>
+
+</c:if></section></div>
 	<jsp:include page="../footer.jsp"></jsp:include>
 </body>
 
