@@ -73,40 +73,37 @@ ul.cateList li, ul.recentList li {
 	clear: both;
 }
 
+#edit {
+	margin-left: 20px
+}
+
 .main_header {
+
 	position: relative;
 	text-align: left;
 	margin-left: 300px;
 }
 
 .wbtn {
-background-color: #625b54;
+	background-color: #625b54;
 	color: white;
 	border: 2px solid #625b54;
 	width: 100px;
 	cursor: pointer;
 	height: 45px;
-	
-	
 	z-index: 1;
-	border: 1px solid #ccc;
-	
-
-}
-
-.wbtn:hover {
-	background-color: white;
-		margin-right: 141px;
 }
 
 .dtdiarytb {
 	border: 1px solid #e2e2e2;
 	margin: auto;
-	width: 800px;
+	margin-left:300px;
+
 	border-collapse: collapse;
 	border-left: none;
 	border-right: none;
-	height: 400px;
+	height: 350px;
+	width:750px;
 	border-bottom: none;
 }
 
@@ -131,30 +128,57 @@ background-color: #625b54;
 
 .ddelete {
 	float: right;
-
+	padding-top:10px;
 }
 
-.bor{	border-bottom: 1px solid #e2e2e2;
-text-align:left;
-vertical-align:top;
+.bor {
+	border-bottom: 1px solid #e2e2e2;
+	text-align: left;
+	vertical-align: top;
+}
+.ed{margin-right:100px;}
+.dtdiary {
 
+	height: 50px;
 }
 
-
-.dtdiary{height : 50px;}
-
-.da{vertical-align: top;}
-.mar{height:50px;
-text-align: center;
-
+.da {
+	vertical-align: top;
+	margin:100px;
 }
 
-.nbor{
-border-bottom: none;}
+.mar {
+	height: 50px;
+	text-align: center;
+}
 
+.nbor {
+	border-bottom: none;
+}
 
+#texthe {
+	font-size: 20px;
+}
 
-#texthe{font-size:20px;}
+.bbor {border:none;
+   }
+   
+   
+  .bbor::-webkit-scrollbar {
+  width: 6px;
+}
+.bbor::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+.bbor::-webkit-scrollbar-thumb {
+  border-radius: 3px;
+  background-color: #BDBDBD;
+}
+.bbor::-webkit-scrollbar-button {
+  width: 0;
+  height: 0;
+}
+   
 </style>
 
 </head>
@@ -178,55 +202,57 @@ border-bottom: none;}
 			</article>
 
 			<div class="main_header">
-				<h2 class="title">공지 사항</h2>
+				<h3 class="title">공지 사항</h3>
 			</div>
 
 			<c:if test="${!empty loginMember}">
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
+
+
+
+
+
+
+
+
+
+
 				<table class="dtdiarytb">
 
 					<tr class="admdtr">
 						<td class="dtdiary" id="texthe" colspan="3">${read.notice_title}</td>
 					</tr>
-					
-					
-					
+
+
+
 					<tr class="dtdiary">
-						<td class="da">${read.notice_date}</td>
+						<td class="da">${read.notice_date}
 						<c:if test="${loginMember.grade==1}">
 
-							<td class="dtwriteid dtidtd"><input class="dtbtn ddelete"
+							<input class="dtbtn ddelete"
 								type="button" value="수정" id=edit
-								onclick="nupdate(${read.notice_no})" /></td>
-								
-								
-								
-							<td class="dtwriteid dtidtd" id="del"><input
-								class="dtbtn ddelete" type="button" value="삭제"
-								onclick="ndelete(${read.notice_no})"></td>
-						</c:if>
+								onclick="nupdate(${read.notice_no})" /><input type="button"
+								class="dtbtn ddelete" value="삭제"
+								onclick="ndelete(${read.notice_no})"></c:if></td>
+						
 					</tr>
-					
-					
-					
+
+
+
 
 					<tr class="bor">
-						<td class="bbor" colspan="3">${read.notice_content}</td>
+						<td>
+						
+						<textarea  class="bbor" cols="100" rows="15"><c:out value="${read.notice_content}" /></textarea></td>
 					</tr>
-					
-					
-					<tr class="nbor" >
+
+
+					<tr class="nbor">
 						<td colspan="3" class="mar"><div class="mmar">
-						<button type="button" class="wbtn" onclick="location.href='nwrite'">목록으로<br>돌아가기</button></div></td>
+								<button type="button" class="wbtn"
+									onclick="location.href='nlist'">
+									목록으로<br>돌아가기
+								</button>
+							</div></td>
 					</tr>
 
 				</table>

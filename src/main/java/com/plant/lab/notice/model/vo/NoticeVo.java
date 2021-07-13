@@ -1,5 +1,7 @@
 package com.plant.lab.notice.model.vo;
 
+import java.sql.Date;
+
 import org.springframework.stereotype.Component;
 
 @Component
@@ -8,7 +10,7 @@ public class NoticeVo {
 	private int user_no;
 	private String notice_title;
 	private String notice_content;
-	private String notice_date;
+	private Date notice_date;
 	private int grade;
 	
 	
@@ -83,14 +85,14 @@ public class NoticeVo {
 
 
 
-	public String getNotice_date() {
+	public Date getNotice_date() {
 		return notice_date;
 	}
 
 
 
 
-	public void setNotice_date(String notice_date) {
+	public void setNotice_date(Date notice_date) {
 		this.notice_date = notice_date;
 	}
 
