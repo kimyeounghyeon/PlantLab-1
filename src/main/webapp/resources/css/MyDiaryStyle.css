@@ -63,15 +63,23 @@ display: none;
 	width: 100px;
 	cursor: pointer;
     height: 45px;
-    background-color: white;
-	z-index: 1;
-	border : 1px solid #ccc;
 	margin-right: 125px;
+	border : 1px solid #ccc;
+	background-color : white;
+	cursor : pointer;
+	color : #625b54;
+	border-radius:3px;
+	font-weight : bold;
+	padding : 7px 14px 7px 14px;
 }
 
 .deleteMyDiary:hover {
+	border : none;
+	background-color : #625b54;
+	cursor : pointer;
 	color : white;
-	background-color #625b54;
+	border-radius:3px;
+	padding : 7px 14px 7px 14px;
 }
 
 #goMyList {
@@ -80,15 +88,23 @@ display: none;
 	cursor: pointer;
     height: 45px;
     z-index: 1;
-	background-color : white;
-	border : 1px solid #ccc;
 	margin-right : 10px;
+	border : 1px solid #ccc;
+	background-color : white;
+	cursor : pointer;
+	color : #625b54;
+	border-radius:3px;
+	font-weight : bold;
+	padding : 7px 14px 7px 14px;
 }
 
 #goMyList:hover {
-	background-image: linear-gradient(to right, white 0%, #625b54 51%, #625b54 100%);
+	border : none;
+	background-color : #625b54;
+	cursor : pointer;
 	color : white;
-	background-position: right center;
+	border-radius:3px;
+	padding : 7px 14px 7px 14px;
 }
 
 

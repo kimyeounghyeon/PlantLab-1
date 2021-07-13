@@ -43,7 +43,7 @@
 						</c:if>
 				</div>
 			</div>
-				<textarea name="modifytext" rows="30" cols="80" id="modifytext" g>${detailDiary[0].diary_content }</textarea>
+				<textarea name="modifytext" rows="30" cols="80" id="modifytext">${detailDiary[0].diary_content }</textarea>
 				<br>
 				<br>
 				<br>
@@ -102,7 +102,7 @@
 					},
 					error : function(data){ 
 			               alert("로그인 후 이용해주세요");
-			               location.href="login";			
+			               location.href="login";
 			               }
 			});
 		});

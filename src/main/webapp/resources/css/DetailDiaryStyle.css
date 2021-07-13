@@ -1,6 +1,7 @@
 @charset "UTF-8";
 .dback {
 	clear : both;
+	margin-bottom : 200px;
 }
 .dtliketdcnt {
 	border-left : none;
@@ -146,6 +147,10 @@
 .modifycomment {
 	border : 1px solid gray;
 	width : 85%;
+}
+
+.w3-btn-floating:hover{
+	cursor: pointer;
 }
 
 
