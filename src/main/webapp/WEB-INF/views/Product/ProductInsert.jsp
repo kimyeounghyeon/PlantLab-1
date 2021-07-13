@@ -232,7 +232,8 @@
 	});
 	
 	//상세삭제
-	delProD.click(function(){
+
+	$(document).on('click','.delProD',function(){
 		id = $(this).attr('id');
 		console.log("id:::"+id);
 		
@@ -250,8 +251,11 @@
 	           
                var html = "";
                $.each(data, function(i, item){
-            	    html += "<img src='"+item+"' style=\"width:50px\" id=\"img+${status.index}\">";
-            	    html += "<button type=\"button\" class=\"delProD\" id=\"${status.index}\">삭제</button>";
+            	  /*  setTimeout(function(){
+						location.reload();
+					},500); // 3000밀리초 = 3초 */
+            	    html += "<img src='"+item+"' style=\"width:50px\" id=\"img"+i+"\">";
+            	    html += "<button type=\"button\" class=\"delProD\" id=\""+i+"\">삭제</button>";
            			html += "<br>";
                });
                
