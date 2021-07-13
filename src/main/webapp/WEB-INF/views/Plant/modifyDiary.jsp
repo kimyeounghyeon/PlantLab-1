@@ -39,14 +39,13 @@
 								<input type="hidden" id="imgNum${status.index}" name="din" value="${fi.diary_img_num}">
 								&nbsp; <button type="button" class="delImg" id="${status.index}">삭제</button>
 								</div>
-								<br>
 								</c:forEach>
-								<br>
 							</c:forEach>
 						</c:if>
 				</div>
 			</div>
 			<div class="modTextDiv">
+				<br><br>
 				<textarea name="modifytext" rows="30" cols="80" id="modifytext">${detailDiary[0].diary_content }</textarea>
 				</div>
 				<br>
