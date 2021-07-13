@@ -39,6 +39,7 @@
 								<input type="hidden" id="imgNum${status.index}" name="din" value="${fi.diary_img_num}">
 								&nbsp; <button type="button" class="delImg" id="${status.index}">삭제</button>
 								</div>
+						<br>
 								</c:forEach>
 							</c:forEach>
 						</c:if>
@@ -113,9 +114,9 @@
 
 		$("#fileAdd").click(function() {
 							cnt += 1;
-							var html = "<br><label class=\"labels\" for=\""+cnt+"\">파일 추가</label>";
-							html += "<input multiple=\"multiple\" id=\""+cnt+"\" type=\"file\" name=\"diary_img_srcs\" />";
-							html += "<input class=\"upload-name\" id=\"in"+cnt+"\" value=\"파일선택\"><br>";
+							var html = "<br><label class=\"labels\" for=\"file"+cnt+"\">파일 추가</label>";
+							html += "<input multiple=\"multiple\" id=\"file"+cnt+"\" type=\"file\" name=\"diary_img_srcs\" />";
+							html += "<input class=\"upload-name\" id=\"infile"+cnt+"\" value=\"파일선택\"><br>";
 							$(".fileList").append(html);
 
 							$(".labels").click(function() {

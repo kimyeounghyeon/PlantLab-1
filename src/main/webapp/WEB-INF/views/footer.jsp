@@ -6,6 +6,8 @@
 
 
 <footer>
+<br>
+<br>
 <hr>
 <br>
 <br>
