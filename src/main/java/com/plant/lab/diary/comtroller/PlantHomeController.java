@@ -80,7 +80,6 @@ public class PlantHomeController {
 		MemberVO member = (MemberVO) session.getAttribute("loginMember");
 		sessionVO.setUser_no(member.getUserNo());
 		List<DiaryVO> listDiary = dService.listDiary();
-		System.out.println("listDiary의 결과는 ~ " + listDiary);
 		
 		try {
 		for(int i=0; i<listDiary.size(); i++) {
@@ -197,16 +196,36 @@ public class PlantHomeController {
 		List<Integer> likeList = dService.likeList(sessionVO);
 		List<DiaryVO> SearchId = new ArrayList<DiaryVO>();
 		List<DiaryVO> SearchContent = new ArrayList<DiaryVO>();
+		List<String> img = new ArrayList<String>();
+
 		
 		SearchId = dService.searchId(keyword);
 		SearchContent = dService.searchContent(keyword);
 
-		
+		if(selectVal.equals("id")) {
+			try {
+				for(int i=0; i<SearchId.size(); i++) {
+					img.add(SearchId.get(i).getDiaryImgVO().get(0).getDiary_img_src());
+				}
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		} else if(selectVal.equals("content")) {
+			try {
+			for(int i=0; i<SearchContent.size(); i++) {
+				img.add(SearchContent.get(i).getDiaryImgVO().get(0).getDiary_img_src());
+				}
+			}catch(Exception e) {
+			e.printStackTrace();
+			}
+		} 
+			
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("SearchId", SearchId);
 		map.put("SearchContent", SearchContent);
 		map.put("likeList", likeList);
+		map.put("imgList", img);
 		
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		String jsonOutput = gson.toJson(map);
@@ -337,13 +356,26 @@ public class PlantHomeController {
 	}
 	
 	//이미지 삭제
-	@RequestMapping(value="/deleteimg.do") 
-		public void deleteImg(HttpServletResponse response, HttpSession session, DiaryVO vo, @RequestParam(name = "diary_img_num") int diary_img_num) {
+	@ResponseBody
+	@RequestMapping(value="/deleteimg.do", method=RequestMethod.POST) 
+		public void deleteImg(HttpServletRequest request, HttpServletResponse response, HttpSession session,  @RequestParam(name="diary_img_num") int diary_img_num, @RequestParam(name="diary_no") int diary_no) throws IOException {
 			System.out.println("이미지 삭제 페이지 입장!");
 			System.out.println("이미지 번호~" + diary_img_num);
 			int result = -1;
 			result = dService.deleteImg(diary_img_num);
 			System.out.println("result번호는 " + result);
+			
+			List<DiaryVO> detailList = dService.detailDiary(diary_no);
+			List<String> imgList = new ArrayList<String>();
+
+			try {
+				for(int i=0; i<detailList.size(); i++) {
+					imgList.add(detailList.get(i).getDiaryImgVO().get(i).getDiary_img_src());
+				}
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+
 		}
 	
 	

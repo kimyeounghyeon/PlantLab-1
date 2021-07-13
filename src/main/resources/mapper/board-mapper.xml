@@ -62,39 +62,34 @@
  	</select>
  	
 	<!-- 관리자 / diary 아이디를 통한 게시글 검색 -->
- 	<select id="searchId" parameterType="String" resultType="DiaryVO">
+ 	<select id="searchId" parameterType="String" resultMap="diaryMainVO">
  	 	<![CDATA[
-		select diaryall.*, liketb.like_cnt from 
-	    (
-	    select udt.*, dit.diary_img_num, dit.diary_img_src from 
-	        (select dt.*, ut.user_id, ut.user_name from diary_tb dt left outer join user_tb ut on dt.diary_write = ut.user_no) udt 
-	    left outer join 
-	        diary_img_tb dit 
-	    on dit.diary_no = udt.diary_no 
-	    ) diaryall
-		left join 
-		    (select diary_no, count(*) as like_cnt from like_tb group by diary_no) liketb
-		on diaryall.diary_no = liketb.diary_no 
-		where diaryall.user_id LIKE '%'||#{keyword}||'%'
-		order by diaryall.diary_date desc
+      select f.diary_no, f.user_id, f.diary_content, s.diary_no as s_diary_no, s.diary_img_num as s_diary_img_num, s.diary_img_src as s_diary_img_src, f.diary_date, f.like_cnt from 
+    (
+    select a.*, (select count(*) as like_cnt from like_tb where diary_no=a.diary_no) as like_cnt, b.user_id, b.user_name
+    from (select * from diary_tb) a 
+    left outer join user_tb b 
+    on a.diary_write = b.user_no 
+    where b.user_id LIKE '%'||#{keyword}||'%'
+    ) f 
+    LEFT OUTER JOIN diary_img_tb s
+    on f.diary_no = s.diary_no order by f.diary_date desc
 	]]>
  	</select>
  	
 	<!-- 관리자 / diary 내용을 통한 게시글 검색 -->
- 	<select id="searchContent" parameterType="String" resultType="DiaryVO">
+ 	<select id="searchContent" parameterType="String" resultMap="diaryMainVO">
  	 	<![CDATA[
-		select diaryall.*, liketb.like_cnt from 
-	    (
-	    select udt.*, dit.diary_img_num, dit.diary_img_src from 
-	        (select dt.*, ut.user_id, ut.user_name from diary_tb dt left outer join user_tb ut on dt.diary_write = ut.user_no) udt 
-	    left outer join 
-	        diary_img_tb dit 
-	    on dit.diary_no = udt.diary_no 
-	    ) diaryall
-		left join 
-		    (select diary_no, count(*) as like_cnt from like_tb group by diary_no) liketb
-		on diaryall.diary_no = liketb.diary_no where diaryall.diary_content LIKE '%'||#{keyword}||'%'
-		order by diaryall.diary_date desc
+      select f.diary_no, f.user_id, f.diary_content, s.diary_no as s_diary_no, s.diary_img_num as s_diary_img_num, s.diary_img_src as s_diary_img_src, f.diary_date, f.like_cnt from 
+    (
+    select a.*, (select count(*) as like_cnt from like_tb where diary_no=a.diary_no) as like_cnt, b.user_id, b.user_name
+    from (select * from diary_tb) a 
+    left outer join user_tb b 
+    on a.diary_write = b.user_no 
+    where a.diary_content LIKE '%'||#{keyword}||'%'
+    ) f 
+    LEFT OUTER JOIN diary_img_tb s
+    on f.diary_no = s.diary_no order by f.diary_date desc
 	]]>
  	</select>
  	

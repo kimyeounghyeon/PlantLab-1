@@ -25,21 +25,24 @@
 
 			<form action="modifydiary.do" method="POST"
 				enctype="multipart/form-data" id="modifyFrm">
-				<input type="hidden" name="diary_no"
-					value="${detailDiary[0].diary_no }">
+				<input type="hidden" name="diary_no" value="${detailDiary[0].diary_no }">
 				<div class="file">
 					<button type="button" id="fileAdd">이미지 추가</button>
 					<div class="fileList">
 						<c:if test="${not empty detailDiary}">
-							<c:forEach var="vo" items="${detailDiary}" varStatus="status">
-								<img src="${vo.diaryImgVO[0].diary_img_src}" style="width: 50px" id="img${status.index}">
-								<input type="hidden" id="imgNum${status.index}" name="diary_img_num" value="${vo.diaryImgVO[0].diary_img_num}">
+							<c:forEach var="vo" items="${detailDiary}" >
+								<c:forEach var="fi" items="${vo.diaryImgVO }" begin="0" varStatus="status" >
+						<div class="imgMoDiv${status.index}">
+								<img src="${fi.diary_img_src}" style="width: 50px" id="img${status.index}">
+								<input type="hidden" id="imgNum${status.index}" name="din" value="${fi.diary_img_num}">
 								<button type="button" class="delImg" id="${status.index}">삭제</button>
+								</div>
+								</c:forEach>
 								<br>
 							</c:forEach>
 						</c:if>
-					</div>
 				</div>
+			</div>
 				<textarea name="modifytext" rows="30" cols="80" id="modifytext" g>${detailDiary[0].diary_content }</textarea>
 				<br>
 				<br>
@@ -52,29 +55,35 @@
 	<script>
 		//이미지 업로드
 		var cnt = 0;
-		var id = '';
+		var index = '';
 		var src = '';
-		var diary_img_num = $("input[name='diary_img_num']").val();
+		var diary_img_num = $("input[name='din']").val();
+		var diary_no = $("input[name='diary_no']").val();
 		console.log(diary_img_num + "다이어리 이미지 번호");
+		console.log("다이어리NO :: " + $("input[name='diary_no']").val()); 
 		
 		$(".delImg").click(function(){
-			id = $(this).attr('id');
-			console.log("id:::"+id);
+			index = $(this).attr('id');
+			console.log("index:::"+index);
 			
-			src = $('#img'+id).attr("src");
+			src = $('#img'+index).attr("src");
 			console.log("src:::"+src);
 			$.ajax({
 				url : "deleteimg.do",
 				type : "post",
-				data : { data_img_num : diary_img_num },
-				success : function(){
-					 var fileList = $('.fileList');
-			           fileList.empty();
+				data : { diary_img_num : diary_img_num,
+						 diary_no : diary_no
+					},
+				success : function(data){
+						 var fileList = $("#"+index).parents(".imgMoDiv"+index);
+			          	 fileList.empty();
 			           
 		               var html = "";
 		               $.each(data, function(i, item){
-		            	    html += "<img src='"+item+"' style=\"width:50px\" id=\"img+${status.index}\">";
+		            	    html += "<div class='imgMoDiv${status.index}'>";
+		            	    html += "<img src='"+data.diaryImgVO[i].diary_img_src+"' style=\"width:50px\" id=\"img+${status.index}\">dddd";
 		            	    html += "<button type=\"button\" class=\"delProD\" id=\"${status.index}\">삭제</button>";
+		            	    html += "</div>";
 		           			html += "<br>";
 		               });
 		               
