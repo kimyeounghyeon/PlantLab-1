@@ -19,50 +19,6 @@
 * {
 	font-family: 'Jeju Myeongjo';
 }
-.tbb {
-font-weight:bold;
-	width: 150px;
-	height: 250px;
-	position: relative;
-	margin-left:50px;
-	color: black;
-	float: left;
-}
-.tablearticle {
-	position: relative;
-	float: right;
-	border-collapse: collapse;
-	border-top: 1px solid #ffffff;
-	height: 200px;
-}
-
-.tablearticle table {
-	width: 500px;
-	position: relative;
-}
-
-.paging {
-	width: 50px;<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:set var="path" value="${pageContext.request.contextPath}" />
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<link href="${path}/resources/css/login.css" rel="stylesheet"
-	type="text/css" />
-<link href="${path}/resources/css/header.css" rel="stylesheet" />
-<link href="${path}/resources/css/footer.css" rel="stylesheet" />
-
-<link rel="stylesheet"
-	href="https://fonts.googleapis.com/earlyaccess/jejumyeongjo.css" />
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<style>
-* {
-	font-family: 'Jeju Myeongjo';
-}
 
 a {
 	text-decoration: none;
