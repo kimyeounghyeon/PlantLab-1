@@ -19,12 +19,10 @@
 * {
 	font-family: 'Jeju Myeongjo';
 }
-
 a {
 	text-decoration: none;
 	color: black;
 }
-
 .aside1 {
 	float: left;
 	width: 120px;
@@ -33,31 +31,25 @@ a {
 	top: 25.5px;
 	margin-right: 15px;
 }
-
 .aside1 hr {
 	border: solid 1px #625b54;
 	margin-top: -5px;
 }
-
 ul.cateList {
 	list-style: none;
 	padding: 0px;
 	text-align: left;
 }
-
 ul.cateList li a:hover {
 	font-weight: bold;
 	color: #ADBA85;
 }
-
 .aside1 h3, .aside2 h3 {
 	text-align: center;
 }
-
 ul.cateList li, ul.recentList li {
 	margin: 20px 10px;
 }
-
 #content {
 	clear: both;
 	width: 1250px;
@@ -65,16 +57,13 @@ ul.cateList li, ul.recentList li {
 	overflow: hidden;
 	margin-bottom: 100px;
 }
-
 #main_section {
 	clear: both;
 }
-
 .main_header {
 	position: relative;
 	margin-left: 600px;
 }
-
 .tablearticle {
 	position: relative;
 	float: right;
@@ -82,12 +71,10 @@ ul.cateList li, ul.recentList li {
 	border-top: 1px solid #ffffff;
 	height: 200px;
 }
-
 .tablearticle table {
 	width: 500px;
 	position: relative;
 }
-
 .paging {
 	width: 50px;
 	height: 15px;
@@ -95,18 +82,15 @@ ul.cateList li, ul.recentList li {
 	margin-left: auto;
 	margin-right: auto;
 }
-
 .fnadiv {
 	clear: both;
 }
-
 .maintb {
 	margin-left: auto;
 	margin-right: auto;
 	width: 70%;
 	border-collapse: collapse;
 }
-
 .wbtn {
 	float: right;
 	width: 100px;
@@ -120,13 +104,11 @@ ul.cateList li, ul.recentList li {
 	display: inline;
 	margin-right: 124px;
 }
-
 .wbtn:hover {
 	background-color: #625b54;
 	color: white;
 	border: 1px solid #625b54;
 }
-
 #del {
 	float: right;
 	width: 60px;
@@ -136,34 +118,28 @@ ul.cateList li, ul.recentList li {
 	z-index: 1;
 	border: 1px solid #ccc;
 }
-
 #del:hover {
 	background-color: #625b54;
 	color: white;
 	border: 1px solid #625b54;
 }
-
 #fnaq {
 	width: 750px;
 	font-size: 20px;
 	font-weight: bold;
 }
-
 .udbtn {
 	background: none;
 	border: none;
 	color: #625854;
 }
-
 #trunder {
 	border-bottom: 1px solid #625854;
 	height: 100px;
 }
-
 #trtop {
 	border-top: 0.4px solid #625854;
 }
-
 .fmargin {
 	padding-top: 10px;
 	padding-bottom: 30px;
@@ -200,15 +176,25 @@ ul.cateList li, ul.recentList li {
 				<h2 class="title">자주 묻는 질문</h2>
 			</div>
 
-
-
-
 			<c:if test="${empty loginMember.userName}">
 
 				<div id="mem">회원이 아닙니다.</div>
 			</c:if>
 
 			<c:if test="${!empty loginMember}">
+			
+			
+				<c:if test="${empty viewAll}">
+		
+			
+				<br> 저장된 글이 없습니다.<br>
+				<br>
+		</c:if>
+			
+			
+			
+			
+			
 				<c:if test="${1==loginMember.grade}">
 					<button class="wbtn" type="button" onclick="location.href='fwrite'">글쓰기</button>
 				</c:if>
@@ -272,10 +258,8 @@ ul.cateList li, ul.recentList li {
 </body>
 <script type="text/javascript">
 	$("form").on("submit", function() {
-
 		var fna_no = $(this).find('[name=number]').val();
 	});
-
 	function fupdate(fna_no) {
 		location.href = "fupdate?fna_no=" + fna_no
 	}

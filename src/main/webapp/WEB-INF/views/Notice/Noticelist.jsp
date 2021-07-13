@@ -1,7 +1,7 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 
 
@@ -22,18 +22,13 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style>
 @charset "UTF-8";
-
 * {
 	font-family: 'Jeju Myeongjo';
 }
-
 a {
 	text-decoration: none;
 	color: black;
 }
-
-
-
 .aside1 {
 	float: left;
 	width: 120px;
@@ -43,31 +38,25 @@ a {
 	margin-right: 15px;
 	
 }
-
 .aside1 hr {
 	border: solid 1px #625b54;
 	margin-top: -5px;
 }
-
 ul.cateList {
 	list-style: none;
 	padding: 0px;
 	text-align: left;
 }
-
 ul.cateList li a:hover {
 	font-weight: bold;
 	color: #ADBA85;
 }
-
 .aside1 h3, .aside2 h3 {
 	text-align: center;
 }
-
 ul.cateList li, ul.recentList li {
 	margin: 20px 10px;
 }
-
 #content{
 	clear : both;
 	width : 1250px;
@@ -75,18 +64,13 @@ ul.cateList li, ul.recentList li {
 	  overflow:hidden;
 	  		margin-bottom:100px;
 }
-
 #main_section{
     clear: both;
 }
-
 .main_header{
 position:relative;
 margin-left:600px;
-
 }
-
-
 .wbtn{
  float: right;
 	width: 100px;
@@ -118,20 +102,15 @@ display:inline;
     position: relative;
 display: inline-table;
 }
-
-
 .admdtr{
 	border : 1px solid gray;
 }
-
 .admdtd {
 	text-align : center;
 }
-
 .admdNum {
 	width : 80px;
 }
-
 .admdContent {
 	width : 720px;
 	height : 60px;
@@ -139,16 +118,12 @@ display: inline-table;
 	overflow : hidden;
 	text-overflow: ellipsis;
 }
-
 .admdDate {
 	width : 150px;
 }
-
 .admdth {
 	border-bottom : 1px solid #ccc;
 }
-
-
 .admdcontentmove {
 	width : 820x;
 	height : 20px;
@@ -157,6 +132,7 @@ display: inline-table;
 	text-overflow: ellipsis;
 	line-height : 20px;
 	margin-right: 5px;
+	text-align:center;
 }</style>
 </head>
 <body>
@@ -194,11 +170,11 @@ display: inline-table;
 			</c:if>
 
 
+			
+		
 
 
 			<c:if test="${!empty loginMember}">
-
-		
 
 			<div class="adFrmDiv">
 			<c:if test="${1==loginMember.grade}">
@@ -213,32 +189,38 @@ display: inline-table;
 <table class="admdTable">
 							<tr class="admdtr">
 								<th class="admdth admdNum">글번호</th>
-								<th class="admdth admdContent">제목</th>
+								<th class="admdth admdContent" id="mmm">제목</th>
 								<th class="admdth admdDate">작성일</th>
 
 							</tr>
+								
+				<c:if test="${empty list}">
+		
+			<tr>
+				<td colspan="3"> 저장된 글이 없습니다.<br>
+				<br></td>
+	</tr>	</c:if>
 							<c:if test="${not empty list}">
 							<c:forEach var="f" items="${list}"  varStatus="status">
 								<tr class="admdtr">
 
 									<td class="admdtd admdNum">${f.notice_no}</td>
-									<td class="admdtd admdContent"><div class="admdcontentmove"></div><a
-										href="${path}/nread?notice_no=${f.notice_no}">${f.notice_title}</a></td>
+									<td class="admdtd admdContent"><div class="admdcontentmove"><a
+										href="${path}/nread?notice_no=${f.notice_no}">${f.notice_title}</a></div></td>
 
-									<td class="admdtd admdDate">${f.notice_date}</td>
+										<td class="admdtd admdDate">${f.notice_date}</td>
+								
 								</tr>
 
 							</c:forEach></c:if>
 							<tr>
 								
 							</tr>
-						</table>
-
-			</c:if>
-		</section>
+						</table></c:if>
+		
+	</section>
 	</div>
 	<jsp:include page="../footer.jsp"></jsp:include>
 
 </body>
 </html>
-
