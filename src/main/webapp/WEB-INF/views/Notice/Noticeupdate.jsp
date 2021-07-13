@@ -64,15 +64,13 @@ ul.cateList li, ul.recentList li {
 .main_header {
 	position: relative;
 	text-align: left;
-	margin-left: 310px;
+	margin-left: 275px;
 }
 .dtdiarytb {
 	border: 1px solid #e2e2e2;
 	margin: auto;
 	border-collapse: collapse;
-	border-left: none;
-	border-right: none;
-	height: 400px;
+
 	border-bottom: none;
 }
 .tbtitle {
@@ -86,8 +84,11 @@ ul.cateList li, ul.recentList li {
 	border-right: none;
 }
 textarea {
+
 	border: none;
 	margin:10px;
+	font-size:15px;
+		line-height:25px;
 }
 .bor {
 	border-bottom: 1px solid #e2e2e2;
@@ -184,7 +185,7 @@ background-color: #625b54;
 						</tr>
 						<tr>
 							<td class="mar"><button class="btnsave" id="wbtn"
-									type="submit">수정</button></td>
+									 onclick ="nupdate(${read.notice_no})">수정</button></td>
 						</tr>
 					
 					</table>
@@ -196,5 +197,14 @@ background-color: #625b54;
 	</div>
 	<jsp:include page="../footer.jsp"></jsp:include>
 </body>
-
+<script>
+ function nupdate(notice_no){
+	var chek = confirm("수정하시겠습니까?");
+	if(chek){location.href="ndelete?notice_no="+notice_no
+			alert("수정 되었습니다.")};
+	
+}
+	
+	
+</script>
 </html>

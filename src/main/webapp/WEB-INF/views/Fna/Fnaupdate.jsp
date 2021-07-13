@@ -16,63 +16,196 @@
 
 
 <style>
-.fupdiv{
-claer : both;
+* {
+	font-family: 'Jeju Myeongjo';
 }
-.btnsave{
-  background: #625b54;
-  color : white;
-  border : none;
-  margin-left : 710px;
-  width :75px;
-  height : 28px;
+
+a {
+	text-decoration: none;
+	color: black;
+}
+
+.aside1 {
+	float: left;
+	width: 120px;
+	height: 250px;
+	position: relative;
+	top: 25.5px;
+	margin-right: 15px;
+}
+
+.aside1 hr {
+	border: solid 1px #625b54;
+	margin-top: -5px;
+}
+
+ul.cateList {
+	list-style: none;
+	padding: 0px;
+	text-align: left;
+}
+
+ul.cateList li a:hover {
+	font-weight: bold;
+	color: #ADBA85;
+}
+
+.aside1 h3, .aside2 h3 {
+	text-align: center;
+}
+
+ul.cateList li, ul.recentList li {
+	margin: 20px 10px;
+}
+
+#content {
+	clear: both;
+	width: 1250px;
+	margin: auto;
+	overflow: hidden;
+	margin-bottom: 100px;
+}
+
+#main_section {
+	clear: both;
+}
+
+.main_header {
+	position: relative;
+	text-align: left;
+	margin-left: 275px;
+}
+
+.dtdiarytb {
+		border: 1px solid #e2e2e2;
+	margin: auto;
+	border-collapse: collapse;
+	border-left: none;
+	border-right: none;
+	height: 400px;
+	border-bottom: none;
+}
+
+.tbtitle {
+	border: none;
+	font-size: 17px;
+}
+
+.titler {
+	border: 1px solid #e2e2e2;
+	height: 50px;
+	border-left: none;
+	border-right: none;
+}
+
+textarea {
+	border: none;
+	margin: 10px;
+	font-size: 15px;
+	line-height: 25px;
+}
+
+.bor {
+	border-bottom: 1px solid #e2e2e2;
+	text-align: left;
+	vertical-align: top;
+}
+
+#wbtn {
+	background-color: #625b54;
+	color: white;
+	border: 2px solid #625b54;
+	width: 100px;
+	cursor: pointer;
+	height: 45px;
+	z-index: 1;
+}
+
+.bbor {
+	border: none;
+}
+
+.bbor::-webkit-scrollbar {
+	width: 6px;
+}
+
+.bbor::-webkit-scrollbar-track {
+	background-color: transparent;
+}
+
+.bbor::-webkit-scrollbar-thumb {
+	border-radius: 3px;
+	background-color: #BDBDBD;
+}
+
+.bbor::-webkit-scrollbar-button {
+	width: 0;
+	height: 0;
+}
+
+.mar {
+	text-align: center;
+	border:none;
 }
 </style>
 </head>
-<body>
+
 <body><jsp:include page="../header.jsp"></jsp:include>
-<div class="fupdiv">
-<h3 align ="center" >자주묻는 질문</h3>
-	<nav class="tbb">
-		<table>
-			<tr>
-				<td>카테고리</td>
-			</tr>
-			<tr>
-				<td><hr></td>
-			</tr>
-			<tr class="cateList">
-				<td><a href="${path}/inquery">1:1 문의하기</a></td>
-			</tr>
-			<tr class="cateList">
-				<td><a href="${path}/nlist.do">공지사항</a></td>
-			</tr>
-			<tr class="cateList">
-				<td><a href="${path}/flist">자주 묻는 질문</a></td>
-			</tr>
-		</table>
-	</nav>
+	<jsp:include page="../mypagemenu.jsp"></jsp:include>
 
-		<table class="fom">
-		<form name="fupdate" method="POST" action="${path}/fupdate">
-			<tr>
-				<td class="wr">수정하기</td>
-			</tr>
-			<tr>
-				<input type="hidden" name="fna_no" value="${data.fna_no}">
-				<input type="hidden" name="user_no" value="${loginMember.grade}">
-				<td><textarea name="fna_title" id="fna_title" rows="8" cols="80"
-							placeholder=" 질문을 입력해주세요.">${data.fna_title}</textarea></td>
-			</tr>
-			<tr>
-				<td><textarea name="fna_content" id="fna_content"
-						rows="8" cols="80">${data.fna_content}</textarea></td>
-			</tr>
-		</table>
-				<button class="btnsave" type="submit">수정완료</button>
-		</form>
+	<div id="content" class="contents">
 
-</div>
+
+		<section id="main_section">
+
+
+			<article class="aside1" style="margin-top: -20px;">
+				<h3>카테고리</h3>
+				<hr>
+				<ul class="cateList">
+					<li><a href="${path}/inquery">1:1 문의하기</a></li>
+					<li><a href="${path}/nlist">공지사항</a></li>
+					<li><a href="${path}/flist">자주 묻는 질문</a></li>
+				</ul>
+			</article>
+
+
+			<div class="main_header">
+				<h3 class="title">Qna수정</h3>
+			</div>
+
+
+			<c:if test="${!empty loginMember}">
+
+
+
+
+				<c:if test="${loginMember.grade==1}">
+
+
+<form name="fupdate" method="POST" action="${path}/fupdate">
+<table class="dtdiarytb">
+<tr class="titler">
+<td>
+<input type="hidden" name="fna_no" value="${data.fna_no}" /> 
+<input type="hidden" name="user_no"	value="${loginMember.grade}" />
+<div>Q.
+<textarea class="tbtitle" name="fna_title" rows="5" 
+cols="85">${data.fna_title}</textarea>
+									</div></td>
+							</tr>
+							<tr class="titler">
+								<td>A.<textarea name="fna_content" id="fna_content" rows="7"
+										class="bbor" cols="80">${data.fna_content}</textarea></td>
+							</tr>
+
+						<tr ><td class="mar"><button class="wbtn" id="wbtn"  type="submit">수정완료</button></td>
+					</tr>	</table>
+					</form>
+				</c:if>
+			</c:if>
+		</section>
+	</div>
 	<jsp:include page="../footer.jsp"></jsp:include>
 </body>
 

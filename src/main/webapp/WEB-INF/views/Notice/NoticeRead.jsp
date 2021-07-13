@@ -90,11 +90,13 @@ ul.cateList li, ul.recentList li {
 	height: 350px;
 	width:750px;
 	border-bottom: none;
+	overflow:auto;
 }
 .dtdiarytb .admdtr {
 	border: 1px solid #e2e2e2;
 	border-left: none;
 	border-right: none;
+	
 }
 .dtbtn {
 	border: none;
@@ -127,16 +129,22 @@ ul.cateList li, ul.recentList li {
 .mar {
 	height: 50px;
 	text-align: center;
+	
 }
 .nbor {
 	border-bottom: none;
+	
 }
 #texthe {
 	font-size: 20px;
 }
 .bbor {border:none;
+font-size:15px;
+
    }
-   
+   textarea{-webkit-box-shadow: 0px 12px 12px -7px rgba(204,204,204,1);
+-moz-box-shadow: 0px 12px 12px -7px rgba(204,204,204,1);
+box-shadow: 0px 12px 12px -7px rgba(204,204,204,1);}
    
   .bbor::-webkit-scrollbar {
   width: 6px;
@@ -153,6 +161,7 @@ ul.cateList li, ul.recentList li {
   height: 0;
 }
    
+
 </style>
 
 </head>
@@ -190,15 +199,15 @@ ul.cateList li, ul.recentList li {
 
 
 
-				<table class="dtdiarytb">
+				<table class="dtdiarytb" >
 
-					<tr class="admdtr">
+					<tr class="admdtr"id="shadow" >
 						<td class="dtdiary" id="texthe" colspan="3">${read.notice_title}</td>
 					</tr>
 
 
 
-					<tr class="dtdiary">
+					<tr class="dtdiary"  >
 						<td class="da">${read.notice_date}
 						<c:if test="${loginMember.grade==1}">
 
@@ -220,7 +229,7 @@ ul.cateList li, ul.recentList li {
 					</tr>
 
 
-					<tr class="nbor">
+					<tr class="nbor" >
 						<td colspan="3" class="mar"><div class="mmar">
 								<button type="button" class="wbtn"
 									onclick="location.href='nlist'">

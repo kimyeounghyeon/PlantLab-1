@@ -65,6 +65,7 @@ ul.cateList li, ul.recentList li {
 	margin-left: 600px;
 }
 .tablearticle {
+
 	position: relative;
 	float: right;
 	border-collapse: collapse;
@@ -72,6 +73,7 @@ ul.cateList li, ul.recentList li {
 	height: 200px;
 }
 .tablearticle table {
+
 	width: 500px;
 	position: relative;
 }
@@ -85,11 +87,14 @@ ul.cateList li, ul.recentList li {
 .fnadiv {
 	clear: both;
 }
-.maintb {
+.maintb {-webkit-box-shadow: 30px 31px 9px -18px rgba(232,232,232,1);
+-moz-box-shadow: 30px 31px 9px -18px rgba(232,232,232,1);
+box-shadow: 30px 31px 9px -18px rgba(232,232,232,1);
 	margin-left: auto;
 	margin-right: auto;
 	width: 70%;
 	border-collapse: collapse;
+	
 }
 .wbtn {
 	float: right;
@@ -125,8 +130,8 @@ ul.cateList li, ul.recentList li {
 }
 #fnaq {
 	width: 750px;
-	font-size: 20px;
-	font-weight: bold;
+	font-size: 17px;
+	
 }
 .udbtn {
 	background: none;
@@ -134,10 +139,16 @@ ul.cateList li, ul.recentList li {
 	color: #625854;
 }
 #trunder {
+-webkit-box-shadow: inset 28px 17px 8px -28px rgba(204,204,204,1);
+-moz-box-shadow: inset 28px 17px 8px -28px rgba(204,204,204,1);
+box-shadow: inset 28px 17px 8px -28px rgba(204,204,204,1);
 	border-bottom: 1px solid #625854;
 	height: 100px;
 }
 #trtop {
+-webkit-box-shadow: inset 27px 27px 8px -28px rgba(204,204,204,1);
+-moz-box-shadow: inset 27px 27px 8px -28px rgba(204,204,204,1);
+box-shadow: inset 27px 27px 8px -28px rgba(204,204,204,1);	
 	border-top: 0.4px solid #625854;
 }
 .fmargin {
@@ -203,7 +214,7 @@ ul.cateList li, ul.recentList li {
 				<table class="maintb">
 					<c:forEach var="f" items="${viewAll}">
 						<tr id="trtop">
-							<td class="fmargin" id="fnaq">Q .${f.fna_title}</td>
+							<td class="fmargin" id="fnaq">&nbsp;&nbsp;&nbspQ .${f.fna_title}</td>
 							<c:if test="${1==loginMember.grade}">
 								<td class="fmargin">
 									<form name="form2" action="fupdate" method="GET">
@@ -222,11 +233,12 @@ ul.cateList li, ul.recentList li {
 							</c:if>
 						</tr>
 						<tr id="trunder">
-							<td colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;${f.fna_content}</td>
+							<td colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;A. ${f.fna_content}</td>
 						</tr>
-
+<br>
 					</c:forEach>
 				</table>
+				
 				<br>
 				<br>
 				<div class="paging">
