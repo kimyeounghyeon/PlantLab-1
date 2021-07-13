@@ -16,13 +16,15 @@
 <link href="${path}/resources/css/ModifyDiaryStyle.css" rel="stylesheet" />
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="${path }/resources/ckeditor/ckeditor.js"></script>
+<style>
+
+</style>
 </head>
 <body>
 	<jsp:include page="../header.jsp"></jsp:include>
 	<div class="mdbgdiv">
 		<h3 class="subtitle">Modify diary</h3>
 		<div class="modifycontent">
-
 			<form action="modifydiary.do" method="POST"
 				enctype="multipart/form-data" id="modifyFrm">
 				<input type="hidden" name="diary_no" value="${detailDiary[0].diary_no }">
@@ -35,15 +37,18 @@
 								<div class="imgMoDiv${status.index}">
 								<img src="${fi.diary_img_src}" style="width: 50px" id="img${status.index}">
 								<input type="hidden" id="imgNum${status.index}" name="din" value="${fi.diary_img_num}">
-								<button type="button" class="delImg" id="${status.index}">삭제</button>
+								&nbsp; <button type="button" class="delImg" id="${status.index}">삭제</button>
 								</div>
+								<br>
 								</c:forEach>
 								<br>
 							</c:forEach>
 						</c:if>
 				</div>
 			</div>
+			<div class="modTextDiv">
 				<textarea name="modifytext" rows="30" cols="80" id="modifytext">${detailDiary[0].diary_content }</textarea>
+				</div>
 				<br>
 				<br>
 				<br>

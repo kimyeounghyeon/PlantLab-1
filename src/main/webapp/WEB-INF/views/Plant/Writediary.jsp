@@ -13,6 +13,7 @@
 <link href="${path}/resources/css/footer.css" rel="stylesheet" />
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src = "${path }/resources/ckeditor/ckeditor.js"></script>
+
 </head>
 <body>
 <jsp:include page="../header.jsp"></jsp:include>
@@ -25,6 +26,7 @@
           <div class="fileList">
                     		
            </div>
+           <br>
            </div>
            <br><br><br><br>
            <div class="textAreaDiv">

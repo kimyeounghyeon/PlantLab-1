@@ -113,8 +113,8 @@
 					
                     dnotice += "</td></tr>";
                     if(item.diaryImgVO.length>1){
-                    dnotice += "<a class='w3-btn-floating' style='position:fixed; top:600px; left:270px;' onclick='plusDivs(-1)'> ❮ </a>";
-                    dnotice += "<a class='w3-btn-floating' style='position:fixed; top:600px; right:270px;' onclick='plusDivs(1)'> ❯ </a>";
+                    dnotice += "<a class='w3-btn-floating' style='position:absolute; top:600px; left:550px;' onclick='plusDivs(-1)'> ❮ </a>";
+                    dnotice += "<a class='w3-btn-floating' style='position:absolute; top:600px; right:550px;' onclick='plusDivs(1)'> ❯ </a>";
                     }
                     dnotice += "<tr class='dttr dtliketr'>"
                     var loop_flag = false;

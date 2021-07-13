@@ -45,6 +45,10 @@
 	padding : 7px 14px 7px 14px;
 }
 
+.textAreaDiv{
+		clear: both;
+	}
+
 .files{
     width: 80%;
 }
@@ -107,8 +111,9 @@
 
 .fileList{
 	float:left;
-	margin-top : 25px;
+	margin-top: -10px;
 	margin-left: 10px;
+	margin-bottom: 30px;
 }
 
 .btn{
