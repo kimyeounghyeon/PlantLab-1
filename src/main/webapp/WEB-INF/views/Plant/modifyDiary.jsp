@@ -101,8 +101,9 @@
 		               fileList.append(html);
 					},
 					error : function(data){ 
-						console.log("에러야 에러");
-					}
+			               alert("로그인 후 이용해주세요");
+			               location.href="login";			
+			               }
 			});
 		});
 
