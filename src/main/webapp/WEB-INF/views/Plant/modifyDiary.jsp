@@ -97,7 +97,7 @@
 		            	   console.log("item" + item);
 		            	    html += "<div class='imgMoDiv${status.index}'>";
  		            	    html += "<img src='"+item+"' style=\"width:50px\" id=\"img"+i+"\">";
-		            	    html += "<input type='text' id='imgNum"+i+"' name='din' value='"+imgNum[i]+"'>";
+		            	    html += "<input type='hidden' id='imgNum"+i+"' name='din' value='"+imgNum[i]+"'>";
  		            	    html += "<button type=\"button\" class=\"delImg\" id=\""+i+"\">삭제</button>";
 		            	    html += "</div>";
 		           			html += "<br>";  
