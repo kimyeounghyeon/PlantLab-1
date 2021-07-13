@@ -79,8 +79,8 @@
 	                           $.each(listDiary, function(i, item){
 	                              dnotice += "<div class = 'ddiary' id='dno_"+item.diary_no+"'>";
 	                              dnotice += "<table class='tdiary' style ='table-layout : fixed'><tr class='ttr idtr'>";
-	                              dnotice += "<td class='writeid idtd' colspan='2'>"+item.user_id+"</td></tr>";
-	                              dnotice += "<tr class='ttr imgtr'><td class='diaryimg' colspan='2'><a href='detaildiary?diary_no="+item.diary_no+"'><img src='"+data.img[i]+"' class='diaryimg'></a></td></tr>";
+	                              dnotice += "<td class='writeid idtd' colspan='6'>"+item.user_id+"</td></tr>";
+	                              dnotice += "<tr class='ttr imgtr'><td class='diaryimg' colspan='6'><a href='detaildiary?diary_no="+item.diary_no+"'><img src='"+data.img[i]+"' class='diaryimg'></a></td></tr>";
 	                              dnotice += "<tr class='ttr liketr'>"
 	                              var loop_flag = false;
 	                              for(var j=0; j<likeList.length; j++){
@@ -94,8 +94,8 @@
 	                              } else {
 	                                 dnotice += "<td class='liketd unlike dno_"+item.diary_no+"'><img src='${path }/resources/img/좋아요누르기전그레이.png' class='like'>";
 	                              }
-	                              dnotice += "<td class='liketdcnt'>좋아요 "+item.like_cnt+"개</td></tr>";
-	                              dnotice += "<tr class='ttr contexttr'><td class='dcontent' colspan='2'><div class='alinkdiv'><a href='detaildiary?diary_no="+item.diary_no+"'>"+item.diary_content+"</a></div></td></tr></table></div>";
+	                              dnotice += "<td class='liketdcnt' colspan='5'>좋아요 "+item.like_cnt+"개</td></tr>";
+	                              dnotice += "<tr class='ttr contexttr'><td class='dcontent' colspan='6'><div class='alinkdiv'><a href='detaildiary?diary_no="+item.diary_no+"'>"+item.diary_content+"</a></div></td></tr></table></div>";
 	                           });
 	                       }
 	                       $(".dback").append(dnotice);
@@ -207,8 +207,8 @@
 								  $.each(idSearch, function(i, item){
 		                              dnotice += "<div class = 'ddiary' id='dno_"+item.diary_no+"'>";
 		                              dnotice += "<table class='tdiary' style ='table-layout : fixed'><tr class='ttr idtr'>";
-		                              dnotice += "<td class='writeid idtd' colspan='2'>"+item.user_id+"</td></tr>";
-		                              dnotice += "<tr class='ttr imgtr'><td class='diaryimg' colspan='2'><a href='detaildiary?diary_no="+item.diary_no+"'><img src='"+item.diaryImgVO[0].diary_img_src+"' class='diaryimg'></a></td></tr>";
+		                              dnotice += "<td class='writeid idtd' colspan='6'>"+item.user_id+"</td></tr>";
+		                              dnotice += "<tr class='ttr imgtr'><td class='diaryimg' colspan='6'><a href='detaildiary?diary_no="+item.diary_no+"'><img src='"+item.diaryImgVO[0].diary_img_src+"' class='diaryimg'></a></td></tr>";
 		                              dnotice += "<tr class='ttr liketr'>"
 		                              var loop_flag = false;
 		                              for(var j=0; j<likeList.length; j++){
@@ -222,8 +222,8 @@
 		                              } else {
 		                                 dnotice += "<td class='liketd unlike dno_"+item.diary_no+"'><img src='${path }/resources/img/좋아요누르기전그레이.png' class='like'>";
 		                              }
-		                              dnotice += "<td class='liketdcnt'>좋아요 "+item.like_cnt+"개</td></tr>";
-		                              dnotice += "<tr class='ttr contexttr'><td class='dcontent' colspan='2'><div class='alinkdiv'><a href='detaildiary?diary_no="+item.diary_no+"'>"+item.diary_content+"</a></div></td></tr></table></div>";
+		                              dnotice += "<td class='liketdcnt' colspan='5'>좋아요 "+item.like_cnt+"개</td></tr>";
+		                              dnotice += "<tr class='ttr contexttr'><td class='dcontent' colspan='6'><div class='alinkdiv'><a href='detaildiary?diary_no="+item.diary_no+"'>"+item.diary_content+"</a></div></td></tr></table></div>";
 		                           });
 								  thisDiv.append(dnotice);
 								} else if(searchBox =="id" && idSearch.length==0) {
@@ -237,8 +237,8 @@
 								  $.each(contentSearch, function(i, item){
 		                              dnotice += "<div class = 'ddiary' id='dno_"+item.diary_no+"'>";
 		                              dnotice += "<table class='tdiary' style ='table-layout : fixed'><tr class='ttr idtr'>";
-		                              dnotice += "<td class='writeid idtd' colspan='2'>"+item.user_id+"</td></tr>";
-		                              dnotice += "<tr class='ttr imgtr'><td class='diaryimg' colspan='2'><a href='detaildiary?diary_no="+item.diary_no+"'><img src='"+item.diaryImgVO[0].diary_img_src+"' class='diaryimg'></a></td></tr>";
+		                              dnotice += "<td class='writeid idtd' colspan='6'>"+item.user_id+"</td></tr>";
+		                              dnotice += "<tr class='ttr imgtr'><td class='diaryimg' colspan='6'><a href='detaildiary?diary_no="+item.diary_no+"'><img src='"+item.diaryImgVO[0].diary_img_src+"' class='diaryimg'></a></td></tr>";
 		                              dnotice += "<tr class='ttr liketr'>"
 		                              var loop_flag = false;
 		                              for(var j=0; j<likeList.length; j++){
@@ -252,8 +252,8 @@
 		                              } else {
 		                                 dnotice += "<td class='liketd unlike dno_"+item.diary_no+"'><img src='${path }/resources/img/좋아요누르기전그레이.png' class='like'>";
 		                              }
-		                              dnotice += "<td class='liketdcnt'>좋아요 "+item.like_cnt+"개</td></tr>";
-		                              dnotice += "<tr class='ttr contexttr'><td class='dcontent' colspan='2'><div class='alinkdiv'><a href='detaildiary?diary_no="+item.diary_no+"'>"+item.diary_content+"</a></div></td></tr></table></div>";
+		                              dnotice += "<td class='liketdcnt' colspan='5'>좋아요 "+item.like_cnt+"개</td></tr>";
+		                              dnotice += "<tr class='ttr contexttr'><td class='dcontent' colspan='6'><div class='alinkdiv'><a href='detaildiary?diary_no="+item.diary_no+"'>"+item.diary_content+"</a></div></td></tr></table></div>";
 		                           });
 								  thisDiv.append(dnotice);
 							} else {

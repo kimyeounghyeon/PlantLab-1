@@ -77,8 +77,15 @@ padding-left : 400px;
 <br><br>
 <div class="location" id="second">무이림 지원 커뮤니티에서 질문에 대한 <br> 답변을 얻으실 수 있습니다.</div>
 <br><br>
-<div class="location"><a href="${path}/">지금 시작 하기 > </a></div>
+<div class="location"><a href="http://pf.kakao.com/_XJWxns" onclick="void chatChannel();" target='_blank'>지금 시작 하기 > </a></div>
 </div>
 <jsp:include page="../footer.jsp"></jsp:include>
 </body>
+	<script type="text/javascript">
+		function chatChannel() {
+			Kakao.Channel.chat({
+				channelPublicId : '_XJWxns',
+			})
+		}
+	</script>
 </html>

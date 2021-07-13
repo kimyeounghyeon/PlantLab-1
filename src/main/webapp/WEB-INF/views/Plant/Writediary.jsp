@@ -8,9 +8,9 @@
 <meta charset="UTF-8">
 <title>無以林 Write Diary</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/jejumyeongjo.css"/>
+<link href="${path}/resources/css/WriteDiaryStyle.css" rel="stylesheet" />
 <link href="${path}/resources/css/header.css" rel="stylesheet" />
 <link href="${path}/resources/css/footer.css" rel="stylesheet" />
-<link href="${path}/resources/css/WriteDiaryStyle.css" rel="stylesheet" />
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src = "${path }/resources/ckeditor/ckeditor.js"></script>
 </head>
@@ -26,12 +26,14 @@
                     		
            </div>
            </div>
+           <br><br><br><br>
+           <div class="textAreaDiv">
     <textarea name="writetext" rows="30" cols="80" id="writetext" placeholder="내용을 입력하세요" >
 	</textarea>
-<%-- 	<input type="hidden" class="writeDno" value="${diary_no }">
- --%>	<br><br><br><br>
- 
+	</div>
+	<br><br><br>
 		<button type="button" id="dwritebtn">등록하기</button>
+		<br><br><br>
 	</form>
 	</div>
 </div>
