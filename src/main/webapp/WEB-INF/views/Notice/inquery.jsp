@@ -12,6 +12,35 @@
 <link href="${path}/resources/css/footer.css" rel="stylesheet" />
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style>
+
+.aside1 {
+	float: left;
+	width: 120px;
+	height: 250px;
+	position: relative;
+	top: 25.5px;
+	margin-right: 15px;
+}
+
+.aside1 hr {
+	border: solid 1px #625b54;
+	margin-top: -5px;
+}
+
+ul.cateList {
+	list-style: none;
+	padding: 0px;
+	text-align: left;
+}
+
+ul.cateList li a:hover {
+	font-weight: bold;
+	color: #ADBA85;
+}
+
+ul.cateList li, ul.recentList li {
+	margin: 20px 10px;
+}
 .fnadiv{
 clear : both;
 }
@@ -21,15 +50,10 @@ font-size:20px;
 #second{
 font-size:15px;
 }
-.tbb {
-font-weight:bold;
-	width: 150px;
-	height: 250px;
-	position: relative;
-	margin-left:50px;
-	color: black;
-	float: left;
+.aside1 h3, .aside2 h3 {
+	text-align: center;
 }
+
 .location{
 padding-left : 400px;
 }
@@ -39,27 +63,16 @@ padding-left : 400px;
 <jsp:include page="../header.jsp"></jsp:include>
 <jsp:include page="../mypagemenu.jsp"></jsp:include>
 <div class="fnadiv">
+<article class="aside1" style="margin-top: -20px;">
+				<h3>카테고리</h3>
+				<hr>
+				<ul class="cateList">
+					<li><a href="${path}/inquery">1:1 문의하기</a></li>
+					<li><a href="${path}/nlist">공지사항</a></li>
+					<li><a href="${path}/flist">자주 묻는 질문</a></li>
+				</ul>
+			</article>
 <h2 class="location">1:1 문의하기</h2>
-	<nav class="tbb">
-		<table>
-			<tr>
-				<td>카테고리</td>
-			</tr>
-			<tr>
-				<td><hr></td>
-			</tr>
-
-			<tr class="cateList">
-				<td><a href="${path}/inquery">1:1 문의하기</a></td>
-			</tr>
-			<tr class="cateList">
-				<td><a href="${path}/nlist.do">공지사항</a></td>
-			</tr>
-			<tr class="cateList">
-				<td><a href="${path}/flist">자주 묻는 질문</a></td>
-			</tr>
-		</table>
-	</nav>
 <div class="location" id="first">질문이 있으십니까?</div>
 <br><br>
 <div class="location" id="second">무이림 지원 커뮤니티에서 질문에 대한 <br> 답변을 얻으실 수 있습니다.</div>

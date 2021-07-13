@@ -226,7 +226,7 @@ border-bottom: none;}
 					
 					<tr class="nbor" >
 						<td colspan="3" class="mar"><div class="mmar">
-						<button type="button" class="wbtn" onclick="location.href='nwrite'">목록으로 돌아가기</button></div></td>
+						<button type="button" class="wbtn" onclick="location.href='nwrite'">목록으로<br>돌아가기</button></div></td>
 					</tr>
 
 				</table>
