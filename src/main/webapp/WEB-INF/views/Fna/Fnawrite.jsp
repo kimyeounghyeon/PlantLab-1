@@ -108,7 +108,7 @@ textarea {
 	vertical-align: top;
 }
 
-#wbtn {
+.wbtn {
 	background-color: #625b54;
 	color: white;
 	border: 2px solid #625b54;
