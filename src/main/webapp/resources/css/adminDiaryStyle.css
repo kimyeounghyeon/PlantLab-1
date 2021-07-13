@@ -70,10 +70,23 @@ a:visit{
 	width: 100px;
 	cursor: pointer;
     height: 45px;
-    background-color: white;
-	z-index: 1;
-	border : 1px solid #ccc;
 	margin-right: 125px;
+	border : 1px solid #ccc;
+	background-color : white;
+	cursor : pointer;
+	color : #625b54;
+	border-radius:3px;
+	font-weight : bold;
+	padding : 7px 14px 7px 14px;
+}
+
+.deleteAdminDiary:hover {
+	border : none;
+	background-color : #625b54;
+	cursor : pointer;
+	color : white;
+	border-radius:3px;
+	padding : 7px 14px 7px 14px;
 }
 
 #goList {
@@ -82,10 +95,24 @@ a:visit{
 	cursor: pointer;
     height: 45px;
     z-index: 1;
-	background-color : white;
-	border : 1px solid #ccc;
 	margin-right : 10px;
+	border : 1px solid #ccc;
+	background-color : white;
+	cursor : pointer;
+	color : #625b54;
+	border-radius:3px;
+	font-weight : bold;
+	padding : 7px 14px 7px 14px;
 	}
+	
+#goList:hover {
+	border : none;
+	background-color : #625b54;
+	cursor : pointer;
+	color : white;
+	border-radius:3px;
+	padding : 7px 14px 7px 14px;
+}
 
 .admdTable {
 	clear : both;
