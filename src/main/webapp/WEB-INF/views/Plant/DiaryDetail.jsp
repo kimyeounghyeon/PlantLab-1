@@ -191,7 +191,8 @@
  			
 					},
 				error : function() {
-					alert("잘못 된 접근입니다.");
+		               alert("로그인 후 이용해주세요");
+		               location.href="login";
 				}
 
 			});
@@ -212,7 +213,8 @@
 					thisNextJQ.html("좋아요 "+data+"개");
 					},
 				error : function() {
-					alert("잘못 된 접근입니다.");
+		               alert("로그인 후 이용해주세요");
+		               location.href="login";
 				},
 			});
 		} 
@@ -246,8 +248,8 @@
 				$(".writecomment").val("");
 			},
 			error : function(data) {
-				console.log("댓글 등록 실패~" + data);
-
+	               alert("로그인 후 이용해주세요");
+	               location.href="login";
 			}
 		});
 	});
@@ -391,7 +393,7 @@
 				location.href="diary";
 			},
 			error : function(){
-				alert("글 삭제에 실패했습니다. <br> 관리자에게 문의해주시기 바랍니다.");
+				alert("글 삭제에 실패했습니다. 관리자에게 문의해주시기 바랍니다.");
 			}
 
 		});

@@ -32,7 +32,7 @@
 						<c:if test="${not empty detailDiary}">
 							<c:forEach var="vo" items="${detailDiary}" >
 								<c:forEach var="fi" items="${vo.diaryImgVO }" begin="0" varStatus="status" >
-						<div class="imgMoDiv${status.index}">
+								<div class="imgMoDiv${status.index}">
 								<img src="${fi.diary_img_src}" style="width: 50px" id="img${status.index}">
 								<input type="hidden" id="imgNum${status.index}" name="din" value="${fi.diary_img_num}">
 								<button type="button" class="delImg" id="${status.index}">삭제</button>
@@ -57,41 +57,53 @@
 		var cnt = 0;
 		var index = '';
 		var src = '';
-		var diary_img_num = $("input[name='din']").val();
 		var diary_no = $("input[name='diary_no']").val();
-		console.log(diary_img_num + "다이어리 이미지 번호");
-		console.log("다이어리NO :: " + $("input[name='diary_no']").val()); 
 		
-		$(".delImg").click(function(){
+		$(document).on('click', '.delImg', function(){
 			index = $(this).attr('id');
 			console.log("index:::"+index);
 			
 			src = $('#img'+index).attr("src");
 			console.log("src:::"+src);
+			
+			var dnum = $("#imgNum"+index).val();
+			console.log("dnum"+dnum);
+			
 			$.ajax({
 				url : "deleteimg.do",
 				type : "post",
-				data : { diary_img_num : diary_img_num,
+				data : { diary_img_num : dnum,
 						 diary_no : diary_no
 					},
+				dataType : "json",
 				success : function(data){
-						 var fileList = $("#"+index).parents(".imgMoDiv"+index);
-			          	 fileList.empty();
+						 var imgList = data.imgList;
+						 var imgNum = data.imgNum;
+						 var inum = $("input[name='din']").val();
+/* 						 var fileList = $("#"+index).parents(".imgMoDiv"+index);
+*/
+						var fileList = $('.fileList');
+							fileList.empty();
+							
+			          	 
 			           
 		               var html = "";
-		               $.each(data, function(i, item){
+		               $.each(imgList, function(i, item){
+		            	   console.log("item" + item);
 		            	    html += "<div class='imgMoDiv${status.index}'>";
-		            	    html += "<img src='"+data.diaryImgVO[i].diary_img_src+"' style=\"width:50px\" id=\"img+${status.index}\">dddd";
-		            	    html += "<button type=\"button\" class=\"delProD\" id=\"${status.index}\">삭제</button>";
+ 		            	    html += "<img src='"+item+"' style=\"width:50px\" id=\"img"+i+"\">";
+		            	    html += "<input type='text' id='imgNum"+i+"' name='din' value='"+imgNum[i]+"'>";
+ 		            	    html += "<button type=\"button\" class=\"delImg\" id=\""+i+"\">삭제</button>";
 		            	    html += "</div>";
-		           			html += "<br>";
-		               });
+		           			html += "<br>";  
+ 		               });
 		               
 		               fileList.append(html);
 					},
 					error : function(data){ 
-						console.log("에러야 에러");
-					}
+			               alert("로그인 후 이용해주세요");
+			               location.href="login";			
+			               }
 			});
 		});
 

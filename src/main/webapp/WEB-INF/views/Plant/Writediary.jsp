@@ -43,7 +43,6 @@
 	var id = 0;
 	
 	$("#fileAdd").click(function(){
-		console.log("하이");
 		cnt += 1;
 		var html = "<br><label class=\"labels\" for=\""+cnt+"\">파일 추가</label>";
 		html += "<input multiple=\"multiple\" id=\""+cnt+"\" type=\"file\" name=\"diary_img_srcs\" />";

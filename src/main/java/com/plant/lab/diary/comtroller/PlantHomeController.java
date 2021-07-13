@@ -366,17 +366,39 @@ public class PlantHomeController {
 			System.out.println("result번호는 " + result);
 			
 			List<DiaryVO> detailList = dService.detailDiary(diary_no);
+			System.out.println("detailList는 " + detailList);
+			
 			List<String> imgList = new ArrayList<String>();
+			List<Integer> imgNum = new ArrayList<Integer>();
 
 			try {
 				for(int i=0; i<detailList.size(); i++) {
-					imgList.add(detailList.get(i).getDiaryImgVO().get(i).getDiary_img_src());
+					for(int j=0; j<detailList.get(i).getDiaryImgVO().size(); j++) {
+					imgList.add(detailList.get(i).getDiaryImgVO().get(j).getDiary_img_src());
+					imgNum.add(detailList.get(i).getDiaryImgVO().get(j).getDiary_img_num());
+					System.out.println("imgList는 " + detailList.get(i).getDiaryImgVO().get(j).getDiary_img_src());
+					System.out.println("imgNum는 " + detailList.get(i).getDiaryImgVO().get(j).getDiary_img_num());
+					}
 				}
 			} catch(Exception e) {
 				e.printStackTrace();
 			}
+			
+			Map<String, Object> map = new HashMap<String, Object>();
+//			map.put("detailList", detailList);
+			map.put("imgList", imgList);
+			map.put("imgNum", imgNum);
 
-		}
+			Gson gson = new GsonBuilder().setPrettyPrinting().create();
+			String jsonOutput = gson.toJson(map);
+
+			try {
+				response.getWriter().write(jsonOutput);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+	}
+
 	
 	
 
