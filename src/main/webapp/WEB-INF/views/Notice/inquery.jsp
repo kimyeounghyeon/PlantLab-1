@@ -42,7 +42,6 @@ ul.cateList li, ul.recentList li {
 	margin: 20px 10px;
 }
 .fnadiv{
-
 clear : both;
 }
 #first{
@@ -54,7 +53,7 @@ font-size:15px;
 .aside1 h3, .aside2 h3 {
 	text-align: center;
 }
-.mar{margin:30px;}
+
 .location{
 padding-left : 400px;
 }
@@ -73,13 +72,12 @@ padding-left : 400px;
 					<li><a href="${path}/flist">자주 묻는 질문</a></li>
 				</ul>
 			</article>
-			<div class="mar">
 <h2 class="location">1:1 문의하기</h2>
 <div class="location" id="first">질문이 있으십니까?</div>
 <br><br>
 <div class="location" id="second">무이림 지원 커뮤니티에서 질문에 대한 <br> 답변을 얻으실 수 있습니다.</div>
 <br><br>
-<div class="location"><a href="${path}/">지금 시작 하기 > </a></div></div>
+<div class="location"><a href="${path}/">지금 시작 하기 > </a></div>
 </div>
 <jsp:include page="../footer.jsp"></jsp:include>
 </body>

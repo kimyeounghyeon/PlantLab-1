@@ -200,25 +200,15 @@ ul.cateList li, ul.recentList li {
 				<h2 class="title">자주 묻는 질문</h2>
 			</div>
 
+
+
+
 			<c:if test="${empty loginMember.userName}">
 
 				<div id="mem">회원이 아닙니다.</div>
 			</c:if>
 
 			<c:if test="${!empty loginMember}">
-			
-			
-				<c:if test="${empty viewAll}">
-		
-			
-				<br> 저장된 글이 없습니다.<br>
-				<br>
-		</c:if>
-			
-			
-			
-			
-			
 				<c:if test="${1==loginMember.grade}">
 					<button class="wbtn" type="button" onclick="location.href='fwrite'">글쓰기</button>
 				</c:if>

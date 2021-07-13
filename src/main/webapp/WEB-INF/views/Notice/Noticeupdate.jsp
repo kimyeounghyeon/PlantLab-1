@@ -18,6 +18,7 @@
 	href="https://fonts.googleapis.com/earlyaccess/jejumyeongjo.css" />
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style>
+
 * {
 	font-family: 'Jeju Myeongjo';
 }
@@ -75,12 +76,14 @@ ul.cateList li, ul.recentList li {
 .main_header {
 	position: relative;
 	text-align: left;
-	margin-left: 310px;
+	margin-left: 300px;
 }
+
 
 .dtdiarytb {
 	border: 1px solid #e2e2e2;
 	margin: auto;
+
 	border-collapse: collapse;
 	border-left: none;
 	border-right: none;
@@ -88,29 +91,22 @@ ul.cateList li, ul.recentList li {
 	border-bottom: none;
 }
 
-.tbtitle {
-	border: none;
-	font-size: 17px;
-}
+.tbtitle{border:none;
 
-.titler {
-	border: 1px solid #e2e2e2;
-	height: 50px;
-	border-left: none;
-	border-right: none;
-}
+font-size: 17px;}
 
-textarea {
-	border: none;
-	margin:10px;
+.titler{	border:1px solid #e2e2e2;
+height:50px;
+border-left:none;
+border-right:none;
 }
+textarea{border:none;}
 
-.bor {
-	border-bottom: 1px solid #e2e2e2;
-	text-align: left;
-	vertical-align: top;
+.bor{	border-bottom: 1px solid #e2e2e2;
+text-align:left;
+vertical-align:top;
+
 }
-
 #wbtn {
 background-color: #625b54;
 	color: white;
@@ -121,41 +117,25 @@ background-color: #625b54;
 	
 	
 	z-index: 1;
+	border: 1px solid #ccc;
 	
-	
 
 }
-.bbor {border:none;
-   }
-   
-   
-  .bbor::-webkit-scrollbar {
-  width: 6px;
-}
-.bbor::-webkit-scrollbar-track {
-  background-color: transparent;
-}
-.bbor::-webkit-scrollbar-thumb {
-  border-radius: 3px;
-  background-color: #BDBDBD;
-}
-.bbor::-webkit-scrollbar-button {
-  width: 0;
-  height: 0;
-}
 
-
-.mar {
-	text-align: center;
+#wbtn:hover {
+	background-color: white;
+		margin-right: 141px;
 }
+.mar{text-align: center;}
+
 </style>
 
 
 </head>
-
+<body>
 <body><jsp:include page="../header.jsp"></jsp:include>
 	<jsp:include page="../mypagemenu.jsp"></jsp:include>
-
+	
 	<div id="content" class="contents">
 
 
@@ -177,43 +157,29 @@ background-color: #625b54;
 			</div>
 
 			<c:if test="${!empty loginMember}">
+			
+			
+			
+
+<c:if test="${loginMember.grade==1}">
 
 
 
 
-				<c:if test="${loginMember.grade==1}">
+<table class="dtdiarytb">
 
+<tr class="titler"><td><form name="update" method="POST" action="${path}/nnupdate">
+<input type="hidden" name="notice_no" value="${data.notice_no}">
+<input type="hidden" name="user_no" value="${loginMember.grade}">
+<div><input class="tbtitle" name="notice_title" size="81" value="${data.notice_title}" type="text"/></div></td></tr>
+<tr class="bor"><td><textarea name="notice_content" id="notice_content" rows="15"
+							cols="100">${data.notice_content}</textarea></td></tr>
+<tr><td class="mar"><button class="btnsave" id="wbtn" type="submit">수정</button></td></tr>
+</form></table>
 
+</c:if>
 
-<form name="update" method="POST"action="${path}/nnupdate">
-					<table class="dtdiarytb">
-
-						<tr class="titler">
-							<td>
-									<input type="hidden" name="notice_no" value="${data.notice_no}">
-									<input type="hidden" name="user_no"
-										value="${loginMember.grade}">
-									<div>
-										<input class="tbtitle" name="notice_title" size="81"
-											value="${data.notice_title}" type="text" />
-									</div></td>
-						</tr>
-						<tr class="bor">
-							<td><textarea name="notice_content" id="notice_content" class="bbor"
-									rows="15" cols="100">${data.notice_content}</textarea></td>
-						</tr>
-						<tr>
-							<td class="mar"><button class="btnsave" id="wbtn"
-									type="submit">수정</button></td>
-						</tr>
-					
-					</table>
-	</form>
-				</c:if>
-
-			</c:if>
-		</section>
-	</div>
+</c:if></section></div>
 	<jsp:include page="../footer.jsp"></jsp:include>
 </body>
 

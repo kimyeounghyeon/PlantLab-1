@@ -2,7 +2,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 
 
@@ -158,8 +157,6 @@ display: inline-table;
 	text-overflow: ellipsis;
 	line-height : 20px;
 	margin-right: 5px;
-
-	text-align:center;
 }</style>
 </head>
 <body>
@@ -197,11 +194,11 @@ display: inline-table;
 			</c:if>
 
 
-			
-		
 
 
 			<c:if test="${!empty loginMember}">
+
+		
 
 			<div class="adFrmDiv">
 			<c:if test="${1==loginMember.grade}">
@@ -216,38 +213,32 @@ display: inline-table;
 <table class="admdTable">
 							<tr class="admdtr">
 								<th class="admdth admdNum">글번호</th>
-								<th class="admdth admdContent" id="mmm">제목</th>
+								<th class="admdth admdContent">제목</th>
 								<th class="admdth admdDate">작성일</th>
 
 							</tr>
-								
-				<c:if test="${empty list}">
-		
-			<tr>
-				<td colspan="3"> 저장된 글이 없습니다.<br>
-				<br></td>
-	</tr>	</c:if>
 							<c:if test="${not empty list}">
 							<c:forEach var="f" items="${list}"  varStatus="status">
 								<tr class="admdtr">
 
 									<td class="admdtd admdNum">${f.notice_no}</td>
-									<td class="admdtd admdContent"><div class="admdcontentmove"><a
-										href="${path}/nread?notice_no=${f.notice_no}">${f.notice_title}</a></div></td>
+									<td class="admdtd admdContent"><div class="admdcontentmove"></div><a
+										href="${path}/nread?notice_no=${f.notice_no}">${f.notice_title}</a></td>
 
-										<td class="admdtd admdDate">${f.notice_date}</td>
-								
+									<td class="admdtd admdDate">${f.notice_date}</td>
 								</tr>
 
 							</c:forEach></c:if>
 							<tr>
 								
 							</tr>
-						</table></c:if>
-		
-	</section>
+						</table>
+
+			</c:if>
+		</section>
 	</div>
 	<jsp:include page="../footer.jsp"></jsp:include>
 
 </body>
 </html>
+
