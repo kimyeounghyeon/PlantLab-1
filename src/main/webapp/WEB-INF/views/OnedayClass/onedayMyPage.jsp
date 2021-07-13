@@ -29,7 +29,12 @@
 		<h2 class="title" style="margin: 20 0; height: 100px; padding-top: 20px;">클래스 내역</h2>
 		</div>
 		<!-- 예약된 클래스가 없을 경우  -->
+		<c:if test="${empty one}">
+		<div style="height:100px; text-align: center; ">
 		${nullMsg}
+		</div>
+		</c:if>
+		
 		<c:forEach var="one" items="${one}" varStatus="status">
 			<table class="orderList">
 				<tr>

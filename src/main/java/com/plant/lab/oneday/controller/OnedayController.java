@@ -116,11 +116,13 @@ public class OnedayController {
 	@RequestMapping(value = "/onedayReserve", method = RequestMethod.POST) // 클래스 예약 rs에 insert 세션필요
 	public ModelAndView onedayReserve(ModelAndView mv, @RequestParam(name = "onedayNo") int oneday_no,
 			HttpServletRequest request, HttpSession session, @ModelAttribute("user") MemberVO user) {
+		MemberVO member = (MemberVO) session.getAttribute("loginMember");
 		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!" + oneday_no);
 		OnedayVo one = new OnedayVo();
 		one.setOneday_no(oneday_no);
 		OnedayVo oneVo = oService.onedayselect(one); // selectone 메소드 실행
 		//mv.addObject("OneR", oneday_no);
+		mv.addObject("user",member);
 		mv.addObject("OneR", oneVo);
 		mv.setViewName("OnedayClass/onedayReserve");
 		return mv;
@@ -141,6 +143,7 @@ public class OnedayController {
 		MemberVO member = (MemberVO) session.getAttribute("loginMember");
 		System.out.println("oneday_no:" + onedayNo);
 		System.out.println("member.getUserNo()입니다.~~~" + member.getUserNo());
+		System.out.println(member);
 		oneVo.setUser_no(member.getUserNo());
 		oneVo.setOneday_no(onedayNo);
 		
@@ -192,8 +195,8 @@ public class OnedayController {
 		System.out.println("oneVo 값" + oneVo);
 		List<OnedayVo> one = oService.onedayMy(oneVo);
 		System.out.println(one);
+		mv.addObject("nullMsg", "예약된 클래스가 없습니다.");
 		if (one == null) {
-			mv.addObject("nullMsg", "예약한 클래스가 없습니다.");
 			mv.setViewName("OnedayClass/onedayMyPage");
 		} else {
 

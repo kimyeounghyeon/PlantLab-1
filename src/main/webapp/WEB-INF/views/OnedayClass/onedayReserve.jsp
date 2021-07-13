@@ -24,9 +24,8 @@
 </head>
 <body>
 	<jsp:include page="../header.jsp"></jsp:include>
-
-
 	<div id="fullmainR">
+	
 		<div id="mainR">
 
 			<form action="onedayReserveRS" method="post">
@@ -40,10 +39,10 @@
 				<input type="hidden" name="onedayNo" value="${OneR.oneday_no}">   <!-- oneday  no -->
 				<!-- insert하기 위한 oneday_no box -->
 				<p class="onedayinput" id="orn">Name</p>
-				<input type="text" class="onedaybox" id="oneName" name="oneName">
+				<input type="text" class="onedaybox" id="oneName" name="oneName" value="${user.userName}" >
 				<!-- value값 넣기 -->
 				<span class="onedayinput">Phone number</span> <input type="text"
-					class="onedaybox" id="onePhone" name="onePhone">
+					class="onedaybox" id="onePhone" name="onePhone" value="${user.phone}" >
 				<span class="onedayinput">Date</span> <input type="text"
 					class="onedaybox" id="rd" name="reservDate">
 					 <span class="onedayinput">Request</span>
@@ -53,12 +52,13 @@
 				
 			</form>
 			
-			
+		
 	<div class="showhide">		
-			<span id="refund" onclick="openClose1();">환불 사항  </span>
-			<hr class="rh">
-			<div id="refundT" >
-[국내 환불규정] <br>
+			<span id="refund" onclick="openClose1();">환불 사항▲   </span>
+<div id="refundT" >
+<hr class="rh">
+[국내 환불규정] 
+<br>
 
 &emsp; - 신청 마감 4일 이전 취소시 : 전액 환불 <br>
 
@@ -88,11 +88,11 @@
 <br>
 
 <div class="showhide">
-<span id="cancel" onclick="openClose2();">취소 사항   </span>
+<span id="cancel" onclick="openClose2();">취소 사항▼     </span>
 
-<hr class="rh">
 
 <div id="cancelT" >
+<hr class="rh">
 [취소 방법] <br>
 &emsp; 1. 해당 프립을 결제한 계정으로 로그인 <br>
 
@@ -109,7 +109,8 @@
 
 <script type="text/javascript">
 console.log("${OneR.oneday_start}");
-
+console.log("${user.userName}");
+console.log("${user.phone}");
 $(function(){								//공백체크
 $("#onedayp").click(function(){
   if($("#oneName").val().length ==0 ) {alert("이름을 입력해주세요"); $("#oneName").focus();	return false;}
@@ -152,15 +153,19 @@ document.addEventListener('DOMContentLoaded', function() {
 function openClose1() {
     if(document.getElementById('refundT').style.display === 'block') {
       document.getElementById('refundT').style.display = 'none';
+      document.getElementById('refund').innerText= '환불 사항▼ ';
     } else {
       document.getElementById('refundT').style.display = 'block';
+      document.getElementById('refund').innerText= '환불 사항▲ ';
     }
   }
 function openClose2() {
     if(document.getElementById('cancelT').style.display === 'block') {
       document.getElementById('cancelT').style.display = 'none';
+      document.getElementById('cancel').innerText= '취소 사항▼ ';
     } else {
       document.getElementById('cancelT').style.display = 'block';
+      document.getElementById('cancel').innerText= '취소 사항▲ ';
     }
   }
 

@@ -23,7 +23,7 @@
 	<div id="fullmain">
 		<div id="main">	
 		<div class="bgdiv">
-		<h3 class="subtitle">oneday class</h3>
+		<h2 id="subtitle" style="color: black; font-size: 26px;">oneday class</h2>
 		<p id="p">
 			과도한 스트레스에 지친 현대인들이 자연을 알아가는 시간 <br> 원예 활동을 통해 일상에 꽃을 피워보세요
 		</p>

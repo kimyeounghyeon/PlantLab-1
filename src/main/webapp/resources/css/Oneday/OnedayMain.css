@@ -27,7 +27,8 @@
 	margin: auto;
 }
 
-.subtitle {
+#subtitle {
+	color:black;
 	margin-top: 0;
 	font-size: 20pt;
 	text-align: center;

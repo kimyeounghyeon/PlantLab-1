@@ -89,6 +89,7 @@
 }
 
 #onedayp:hover {
+	border: 1px solid #625b54;
 	background-color: #625b54;
 	color: white;
 }
@@ -118,13 +119,10 @@
 
 .rh {
 	clear: both;
-	border: 0px;
-	height: 1px;
-	background-color: #a6a6a6;
-	margin-bottom: 60px;
+	border: 1px solid #635147;
+	background-color: #635147;
+	margin-bottom: 30px;
 	width: 1250px;
-	margin-left: 0 auto;
-	margin-right: 0 auto;
 }
 
 #refundT {
@@ -132,7 +130,7 @@
 	clear: both;
 	text-align: left;
 	margin-bottom: 20px;
-	 font-size: 12pt;
+	font-size: 12pt;
 
 }
 
@@ -145,4 +143,5 @@
     margin-top: 50px;
     color: black;
     font-size: 12pt;
+    display: none;
 }

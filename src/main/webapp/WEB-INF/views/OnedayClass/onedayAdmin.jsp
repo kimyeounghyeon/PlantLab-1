@@ -12,6 +12,7 @@
 <link href="${path}/resources/css/Oneday/OnedayAdmin.css" rel="stylesheet" />
 <link href="${path}/resources/css/header.css" rel="stylesheet" />
 <link href="${path}/resources/css/footer.css" rel="stylesheet" />
+<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
@@ -28,11 +29,20 @@
 					<c:forEach var="o" items="${one}" varStatus="status">
 
 						<div class="onediv">
-							<label class="checkContain"> 
-							<input type="checkbox"
-								name="test_check" value="${o.oneday_no}"> <span
+						
+						
+					<!-- 	<input type="checkbox" id="cbtest" />
+    						<label for="cbtest" class="check-box"></label> 
+    						 -->
+    						 <div class="container">
+							<label class="checkContain">   
+							<input type="checkbox" id="cbtest"	name="test_check" value="${o.oneday_no}"> <span
 								class="checkmark"></span>
-							</label> <a href="${path}/onedayupdate?onedayNo=${o.oneday_no }">
+							</label> 
+							</div>
+							
+							
+							<a href="${path}/onedayupdate?onedayNo=${o.oneday_no }">
 								<table class="onecontent">
 									<tr class="on omgtr">
 										<td class="oneimg" id=${status.index } colspan="2"><img
