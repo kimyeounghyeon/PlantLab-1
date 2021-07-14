@@ -83,7 +83,7 @@
 
 						<h3 class="join_title">
 							<label for="email">인증번호입력</label> <input
-								class="mail_check_button" type="button" value="인증번호버튼">
+								class="mail_check_button btn" type="button" value="인증번호버튼">
 						</h3>
 						<span class="mail_check_wrop" id="mail_check_input_box_false"><input
 							class="mail_check_input" id="emailint2" disabled="disabled"
@@ -107,7 +107,7 @@
 					<!-- address -->
 					<div>
 						<h3 class="join_title">
-							<label for="address">우편번호</label> <input class="add_chk_re"
+							<label for="address">우편번호</label> <input class="add_chk_re btn"
 								type="button" value="우편번호찾기" id="add"
 								onclick="execDaumPostcode();">
 						</h3>
@@ -132,9 +132,9 @@
 					<button type="submit" value="회원가입" id="btn">회원가입</button>
 				</form>
 			</div>			
-			<jsp:include page="footer.jsp"></jsp:include>
 		</div>
 	</div>
+			<jsp:include page="footer.jsp"></jsp:include>
 
 
 

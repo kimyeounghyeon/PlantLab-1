@@ -4,13 +4,18 @@ h1{
 }
 .joindiv {
 	clear: both;
+	width:1250px;
+	margin:auto;
 }
 
 .content {
-	position: absolute;
-	left: 50%;
-	transform: translate(-50%);
+	margin:auto;
+	width:1250px;
+}
+
+.content form{
 	width: 460px;
+	margin:auto;
 }
 
 h3 {
@@ -106,8 +111,23 @@ h3 {
 	display: none;
 }
 /* 버튼 */
+
 .btn_area {
 	margin: 30px 0 91px;
+}
+
+.btn{
+	cursor: pointer;
+	background-color: white;
+	border : 1px solid #ccc;
+	color : #625b54;
+	font-weight: 500;
+	box-shadow: 1px 1px 1px #ccc;
+}
+
+.btn:hover{
+	background-color : #625b54;
+	color : white;
 }
 
 #btn {
@@ -117,7 +137,16 @@ h3 {
 	cursor: pointer;
 	font-size: 15px;
 	font-weight: 500;
+	background-color: white;
+	border : 1px solid #ccc;
+	font-weight : bold;
+	color : #625b54;
+	padding : 7px 14px 7px 14px;
+}
 
+#btn:hover{
+	 background-color : #625b54;
+	color : white;
 }
 
 .correct{
