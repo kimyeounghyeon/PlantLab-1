@@ -143,7 +143,7 @@
 					async:false,
 					success : function(data) {
 						console.log('return reserv_no value는  : ' + data);
-						alert("삭제되었습니다.");
+						alert("예약된 클래스를 삭제하시겠습니까?.");
 					var can=	$("#oneCancel").text("취소 요청중");
 					var day =10;
 					function setCookie(cookiee , can , day)
