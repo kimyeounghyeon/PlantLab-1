@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>無以林 fna</title>
 <link href="${path}/resources/css/login.css" rel="stylesheet"
 	type="text/css" />
 <link href="${path}/resources/css/header.css" rel="stylesheet" />

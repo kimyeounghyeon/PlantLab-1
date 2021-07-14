@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page trimDirectiveWhitespaces="true" %>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
@@ -8,7 +9,7 @@
 <meta charset="UTF-8">
 
 
-<title>읽기에욤</title>
+<title>無以林 notice detail</title>
 <link href="${path}/resources/css/login.css" rel="stylesheet"
 	type="text/css" />
 <link href="${path}/resources/css/header.css" rel="stylesheet" />
@@ -33,6 +34,7 @@ a {
 	position: relative;
 	top: 25.5px;
 	margin-right: 15px;
+	
 }
 .aside1 hr {
 	border: solid 1px #625b54;
@@ -146,21 +148,7 @@ font-size:15px;
 -moz-box-shadow: 0px 12px 12px -7px rgba(204,204,204,1);
 box-shadow: 0px 12px 12px -7px rgba(204,204,204,1);}
    
-  .bbor::-webkit-scrollbar {
-  width: 6px;
-}
-.bbor::-webkit-scrollbar-track {
-  background-color: transparent;
-}
-.bbor::-webkit-scrollbar-thumb {
-  border-radius: 3px;
-  background-color: #BDBDBD;
-}
-.bbor::-webkit-scrollbar-button {
-  width: 0;
-  height: 0;
-}
-   
+
 
 </style>
 
@@ -223,9 +211,7 @@ box-shadow: 0px 12px 12px -7px rgba(204,204,204,1);}
 
 
 					<tr class="bor">
-						<td>
-						
-						<textarea  class="bbor" cols="100" rows="15"><c:out value="${read.notice_content}" /></textarea></td>
+						<td class="bbor" style="white-space:pre;">${read.notice_content}</td>
 					</tr>
 
 

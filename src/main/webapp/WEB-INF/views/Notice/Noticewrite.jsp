@@ -16,7 +16,7 @@
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/earlyaccess/jejumyeongjo.css" />
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<title>게시글작성이래용</title>
+<title>無以林 notice write</title>
 
 <style type="text/css">
 * {

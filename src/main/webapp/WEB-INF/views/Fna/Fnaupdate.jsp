@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>업데이트래용</title>
+<title>無以林 fna update</title>
 
 <link href="${path}/resources/css/header.css" rel="stylesheet" />
 <link href="${path}/resources/css/footer.css" rel="stylesheet" />
