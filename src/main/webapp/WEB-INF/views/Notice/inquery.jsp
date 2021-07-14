@@ -13,6 +13,25 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style>
 
+* {
+	font-family: 'Jeju Myeongjo';
+}
+a {
+	text-decoration: none;
+	color: black;
+}
+
+#content {
+	clear: both;
+	width: 1250px;
+	margin: auto;
+	overflow: hidden;
+	margin-bottom: 100px;
+}
+#main_section {
+	clear: both;
+}
+
 .aside1 {
 	float: left;
 	width: 120px;
@@ -62,6 +81,11 @@ padding-left : 400px;
 <body>
 <jsp:include page="../header.jsp"></jsp:include>
 <jsp:include page="../mypagemenu.jsp"></jsp:include>
+
+<div id="content" class="contents">
+
+
+		<section id="main_section">
 <div class="fnadiv">
 <article class="aside1" style="margin-top: -20px;">
 				<h3>카테고리</h3>
@@ -78,7 +102,7 @@ padding-left : 400px;
 <div class="location" id="second">무이림 지원 커뮤니티에서 질문에 대한 <br> 답변을 얻으실 수 있습니다.</div>
 <br><br>
 <div class="location"><a href="http://pf.kakao.com/_XJWxns" onclick="void chatChannel();" target='_blank'>지금 시작 하기 > </a></div>
-</div>
+</div></section></div>
 <jsp:include page="../footer.jsp"></jsp:include>
 </body>
 	<script type="text/javascript">
