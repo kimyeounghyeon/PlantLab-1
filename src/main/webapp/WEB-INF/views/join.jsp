@@ -131,7 +131,8 @@
 					<!-- 가입 버튼  -->
 					<button type="submit" value="회원가입" id="btn">회원가입</button>
 				</form>
-			</div>
+			</div>			
+			<jsp:include page="footer.jsp"></jsp:include>
 		</div>
 	</div>
 
@@ -139,7 +140,7 @@
 
 
 
-	<%-- <jsp:include page="footer.jsp"></jsp:include>  --%>
+	
 
 	<script
 		src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
