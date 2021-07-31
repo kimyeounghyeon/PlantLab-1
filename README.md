@@ -49,7 +49,10 @@ API|Ck-Editor, FullCalendar, I'm port, Kakao Map, Kakao, Daum 우편번호, Open
 </br>
 * [Store] 상품 상세페이지</br>
 * [Store] 최근본 상품
-
+---
+![ezgif-3-3a0eacfa234d](https://user-images.githubusercontent.com/82923914/127735134-f5efb360-f8a2-4a81-ad3d-e19f1d623468.gif)
+* [카트] 상품 추가</br>
+* [카트] 상품 삭제</br>
 ### 6. 1:1 채팅
 
 
