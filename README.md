@@ -1,6 +1,6 @@
-# 🌿PlantLab
- Team name: 無以林 (무이림)</br>
- Team members: 김영현, 배유림, 이경은, 이예림, 오유진, 전계원</br></br>
+# 🌿無以林 (무이림)
+ Team name:  PlantLab</br>
+ Team members:  김영현, 배유림, 이경은, 이예림, 오유진, 전계원</br></br>
 # 프로젝트 소개
 * 개요</br>
 코로나 장기화로 인한 실외 활동이 줄어 무기력증이나 스트레스, 우울증을 해소하기 위해 반려 식물을 가꾸어 정서적인 교감을 나누며  식물 커뮤니티를 형성해 언택트 소통기능 제공
@@ -15,8 +15,12 @@ FrontEnd|HTML5, JavaScript, CSS3, JQuery
 BackEnd|Java 1.8, Spring, Mybatis
 IDE|Spring Tool Suite 3
 DateBase|Oracle(XE)
-API|Ck-Editor, FullCalendar, I'm port, Kakao Map, Kakao, Daum 우편번호, OpenWeather, Naver login, Cloudinary
+API|Ck-Editor, FullCalendar, I'm port, Kakao Map, Kakao, Daum 우편번호, OpenWeather, Naver Login, Cloudinary
 
+
+</br></br>
+# 프로젝트 역할
+**이예림:** DB설계및 구축,  DB보고서,  Data Crawling,  원데이 클래스(사용자, 관리자, 달력, 지도),  메인페이지 Header
 
 </br></br>
 # 주요 기능
@@ -30,7 +34,7 @@ API|Ck-Editor, FullCalendar, I'm port, Kakao Map, Kakao, Daum 우편번호, Open
 ---
 ![3](https://user-images.githubusercontent.com/79447729/127704117-bb2e8441-30e1-47e2-b8b6-b80e92783a3e.gif)
 </br>
-* [클래스 상세페이지] Kakao Map api로 장소 지도로 확인 가능</br>  
+* [클래스 상세페이지] Kakao Map api로 장소 지도 확인 가능</br>  
 * [클래스 예약 페이지] FullCalendar api 달력으로 예약일 선택</br>  
 * 원데이 클래스 구매</br> </br> 
 ---
