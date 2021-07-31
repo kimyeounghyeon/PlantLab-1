@@ -21,7 +21,7 @@ API|Ck-Editor, FullCalendar, I'm port, Kakao Map, Kakao, Daum 우편번호, Open
 </br></br>
 # 프로젝트 역할
 **이예림:** DB설계및 구축,  DB보고서,  Data Crawling,  원데이 클래스(사용자, 관리자, 달력, 지도),  메인페이지 Header
-
+**배유림:** 회의록, 메인 페이지, 쇼핑몰(상품 리스트, 장바구니, 구매목록, 리뷰) 페이지, 쇼핑몰 관리 페이지
 </br></br>
 # 주요 기능
 ### 1. 회원가입
@@ -53,6 +53,10 @@ API|Ck-Editor, FullCalendar, I'm port, Kakao Map, Kakao, Daum 우편번호, Open
 ![ezgif-3-3a0eacfa234d](https://user-images.githubusercontent.com/82923914/127735134-f5efb360-f8a2-4a81-ad3d-e19f1d623468.gif)
 * [카트] 상품 추가</br>
 * [카트] 상품 삭제</br>
+---
+![ezgif-3-cd8936019090](https://user-images.githubusercontent.com/82923914/127735246-8d48ad67-ae1c-4c84-9d6c-1c6352f929a8.gif)
+* [상품 구매] 상품 구매</br>
+* [마이 페이지] 구매 상품 상세내역</br>
 ### 6. 1:1 채팅
 
 
