@@ -45,6 +45,10 @@ API|Ck-Editor, FullCalendar, I'm port, Kakao Map, Kakao, Daum 우편번호, Open
 *  예약한 클래스 취소하기</br> 
 
 ### 5. 쇼핑
+![ezgif-3-72617f0ef3c0](https://user-images.githubusercontent.com/82923914/127735057-1397a47b-2e24-4a16-a9d8-938ac259494b.gif)
+</br>
+* [Store] 상품 상세페이지</br>
+* [Store] 최근본 상품
 
 ### 6. 1:1 채팅
 
