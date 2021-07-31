@@ -54,7 +54,7 @@ API|Ck-Editor, FullCalendar, I'm port, Kakao Map, Kakao, Daum 우편번호, Open
 * [카트] 상품 추가</br>
 * [카트] 상품 삭제</br>
 ---
-![ezgif-3-cd8936019090](https://user-images.githubusercontent.com/82923914/127735246-8d48ad67-ae1c-4c84-9d6c-1c6352f929a8.gif)
+![ezgif-3-af7fc4b6e094](https://user-images.githubusercontent.com/82923914/127735317-f329db9e-8c40-4d7e-b766-266380685e55.gif)
 * [상품 구매] 상품 구매</br>
 * [마이 페이지] 구매 상품 상세내역</br>
 ### 6. 1:1 채팅
