@@ -31,6 +31,8 @@ API|Ck-Editor, FullCalendar, I'm port, Kakao Map, Kakao, Daum 우편번호, Open
 ### 2. 미션
 
 ### 3. 다이어리
+<br>
+* [다이어리] 게시판 기능 집합 
 
 ### 4. 원데이 클래스
 ---
